@@ -17,6 +17,6 @@ Flat Class Icons and Santa Texture Pack are the textures that is used in this UI
 
 You can check their work here:
 
-Flat Player Icons
+![Flat Player Icons](http://www.wowinterface.com/downloads/info24101-FlatPlayerIcons.html)
 
-Santa Texture Pack
+![Santa Texture Pack](http://www.wowinterface.com/downloads/info18608-SantaUITextures.html)
