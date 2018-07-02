@@ -3,7 +3,7 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2HA68SU9NYVGU)
 
-![AbyssUI](https://media.forgecdn.net/attachments/thumbnails/231/864/310/172/capturar.jpg)
+![AbyssUI](http://cdn-wow.mmoui.com/preview/pvw69927.jpg)
 
 It change some parts of the interface to make the Blizzard UI more clean, minimalist and a bit of dark.
 
