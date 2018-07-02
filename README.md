@@ -5,18 +5,18 @@
 
 It change some parts of the interface to make more clean, minimalist and a bit of dark.
 
- 
+### Make Sure to backup your Interface Folder
 
 #### This interface use texture packs, and you need those for the UI work with property. This AddOn already come with those textures in his folder (Interface) and you just need to extract and put it in wow folder: C:\World of Warcraft\
 
 #### (DO NOT PUT IN ADDONS FOLDER YOU JUST NEED TO EXTRACT IN THE WOW FOLDER: C:\World of Warcraft\)
 
- 
+  
 
 Flat Class Icons and Santa Texture Pack are the textures that is used in this UI. 
 
 You can check their work here:
 
-![Flat Player Icons](http://www.wowinterface.com/downloads/info24101-FlatPlayerIcons.html)
+[Flat Player Icons](http://www.wowinterface.com/downloads/info24101-FlatPlayerIcons.html)
 
-![Santa Texture Pack](http://www.wowinterface.com/downloads/info18608-SantaUITextures.html)
+[Santa Texture Pack](http://www.wowinterface.com/downloads/info18608-SantaUITextures.html)
