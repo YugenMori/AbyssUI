@@ -16,7 +16,7 @@ How to Install?
 3- Then copy the AddOn Interface folder to WoW folder.
 
 
-### Make Sure to backup your Interface Folder
+##### Make Sure to backup your Interface Folder
 
 #### This interface use texture packs, and you need those for the UI work with property. This AddOn already come with those textures in his folder (Interface) and you just need to extract and put it in WoW folder: C:\World of Warcraft\
 
