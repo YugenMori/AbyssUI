@@ -7,13 +7,21 @@
 
 It change some parts of the interface to make the Blizzard UI more clean, minimalist and a bit of dark.
 
+How to Install?
+
+1- Extract the compact folder, and you will notice a folder named Interface;
+
+2- In WoW folder make a backup of your old Interface folder (eg. rename to Interface.old);
+
+3- Then copy the AddOn Interface folder to WoW folder.
+
+
 ### Make Sure to backup your Interface Folder
 
-#### This interface use texture packs, and you need those for the UI work with property. This AddOn already come with those textures in his folder (Interface) and you just need to extract and put it in wow folder: C:\World of Warcraft\
+#### This interface use texture packs, and you need those for the UI work with property. This AddOn already come with those textures in his folder (Interface) and you just need to extract and put it in WoW folder: C:\World of Warcraft\
 
-#### (DO NOT PUT IN ADDONS FOLDER YOU JUST NEED TO EXTRACT IN THE WOW FOLDER: C:\World of Warcraft\)
+#### (DO NOT PUT IN ADDONS FOLDER YOU JUST NEED TO EXTRACT THE COMPACT FILE IN THE WOW FOLDER: C:\World of Warcraft\)
 
-  
 
 Flat Class Icons and Santa Texture Pack are the textures that is used in this UI. 
 
