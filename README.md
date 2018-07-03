@@ -20,7 +20,7 @@ How to Install?
 
 #### This interface use texture packs, and you need those for the UI work with property. This AddOn already come with those textures in his folder (Interface) and you just need to extract and put it in WoW folder: C:\World of Warcraft\
 
-#### (DO NOT PUT IN ADDONS FOLDER YOU JUST NEED TO EXTRACT THE COMPACT FILE IN THE WOW FOLDER: C:\World of Warcraft\)
+#### (DO NOT PUT ALL THIS FILE IN ADDONS FOLDER, WILL NOT WORK)
 
 
 Flat Class Icons and Santa Texture Pack are the textures that is used in this UI. 
