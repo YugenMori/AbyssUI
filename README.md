@@ -11,9 +11,9 @@ How to Install?
 
 1- Extract the compact folder, and you will notice a folder named Interface;
 
-2- In WoW folder make a backup of your old Interface folder (eg. rename to Interface.old);
+2- In WoW folder make a backup of your old Interface folder (e.g rename to Interface.old);
 
-3- Then copy the AddOn Interface folder to WoW folder.
+3- Then copy the AbyssUI Interface folder to WoW folder.
 
 
 ##### Make Sure to backup your Interface Folder
