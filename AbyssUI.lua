@@ -1,160 +1,539 @@
 --------------------------------------------------------------------------------
--- Author: SirMarklan
+-- Author: Abyss_Samurai
 --
--- BFA Version
+-- Battle for Azeroth
 --
 -- Hope you like my addOn ^^
 --
--- Minimalist UI for World of Warcraft
+-- Dark Minimalist UI for World of Warcraft
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------
--- DarkerUI Core (Need Texture Pack eg. Santa Texture Pack) --
+-- DarkerUI Core (Need Texture Pack e.g Santa Texture Pack) --
 --------------------------------------------------------------
 
-local frame=CreateFrame("Frame")
+local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
-
 frame:SetScript("OnEvent", function(self, event, addon)
-	if (addon == "Blizzard_TimeManager") then
-		for i, v in pairs({PlayerFrameTexture, TargetFrameTextureFrameTexture,
-			PetFrameTexture, PartyMemberFrame1Texture, PartyMemberFrame2Texture,
-			PartyMemberFrame3Texture, PartyMemberFrame4Texture,
-			PartyMemberFrame1PetFrameTexture, PartyMemberFrame2PetFrameTexture,
-			PartyMemberFrame3PetFrameTexture, PartyMemberFrame4PetFrameTexture,
-			FocusFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
-			FocusFrameToTTextureFrameTexture, BonusActionBarFrameTexture0,
-			BonusActionBarFrameTexture1, BonusActionBarFrameTexture2,
-			BonusActionBarFrameTexture3, BonusActionBarFrameTexture4,
-			MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2,
-			MainMenuBarTexture3, MainMenuMaxLevelBar0, MainMenuMaxLevelBar1,
-			MainMenuMaxLevelBar2,	MainMenuMaxLevelBar3, MinimapBorder,
-			CastingBarFrameBorder, FocusFrameSpellBarBorder,
-			TargetFrameSpellBarBorder, MiniMapTrackingButtonBorder,
-			MiniMapLFGFrameBorder, MiniMapBattlefieldBorder,
-			MiniMapMailBorder, MinimapBorderTop,
-			select(1, TimeManagerClockButton:GetRegions())
-		}) do
+	if (addon == "AbyssUI") then
+		for i, v in pairs({	PlayerFrameTexture,
+			TargetFrameTextureFrameTexture,
+			PetFrameTexture,
+			PartyMemberFrame1Texture,
+			PartyMemberFrame2Texture,
+			PartyMemberFrame3Texture,
+			PartyMemberFrame4Texture,
+			PartyMemberFrame1PetFrameTexture,
+			PartyMemberFrame2PetFrameTexture,
+			PartyMemberFrame3PetFrameTexture,
+			PartyMemberFrame4PetFrameTexture,
+			FocusFrameTextureFrameTexture,
+			TargetFrameToTTextureFrameTexture,
+			FocusFrameToTTextureFrameTexture,
+			BonusActionBarFrameTexture0,
+			BonusActionBarFrameTexture1,
+			BonusActionBarFrameTexture2,
+			BonusActionBarFrameTexture3,
+			BonusActionBarFrameTexture4,
+			MainMenuBarTexture0,
+			MainMenuBarTexture1,
+			MainMenuBarTexture2,
+			MainMenuBarTexture3,
+			MainMenuMaxLevelBar0,
+			MainMenuMaxLevelBar1,
+			MainMenuMaxLevelBar2,
+			MainMenuMaxLevelBar3,
+			MinimapBorder,
+			CastingBarFrameBorder,
+			FocusFrameSpellBarBorder,
+			TargetFrameSpellBarBorder,
+			MiniMapTrackingButtonBorder,
+			MiniMapLFGFrameBorder,
+			MiniMapBattlefieldBorder,
+			MiniMapMailBorder,
+			MinimapBorderTop,	}) do
 			v:SetVertexColor(.35, .35, .35)
 		end
-
-		for i,v in pairs({ select(2, TimeManagerClockButton:GetRegions()) }) do
-			v:SetVertexColor(1, 1, 1)
-		end
-
 		self:UnregisterEvent("ADDON_LOADED")
 		frame:SetScript("OnEvent", nil)
 	end
 end)
 
---[[ Old Interface (Need to keep until BFA Launch)
-for i, v in pairs({ MainMenuBarLeftEndCap, MainMenuBarRightEndCap }) do
-	v:SetVertexColor(.5, .5, .5)
-end
-]]
 
--- New Interface (Action Bar)
-for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
-	MainMenuBarArtFrame.RightEndCap,
-	MainMenuBarArtFrameBackground.BackgroundSmall,
-	MainMenuBarArtFrameBackground.BackgroundLarge,
-}) do
-	v:SetVertexColor(.5, .5, .5)
-end
+------------------------- New Darker Parts -------------------------
+
+-- New Interface Action Bar
+local NewFrames = CreateFrame("Frame")
+NewFrames:RegisterEvent("ADDON_LOADED")
+NewFrames:SetScript("OnEvent", function(self, event, addon)
+	if (addon == "AbyssUI") then
+		for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
+			MainMenuBarArtFrame.RightEndCap,
+			MainMenuBarArtFrameBackground.BackgroundSmall,
+			MainMenuBarArtFrameBackground.BackgroundLarge, }) do
+			v:SetVertexColor(.5, .5, .5)
+		end
+		-- CharacterFrame
+		for i, v in pairs({ CharacterFrameRightBorder,
+			CharacterFrameLeftBorder,
+			CharacterFrameTopBorder,
+			CharacterFrameBottomBorder,
+			CharacterFramePortraitFrame,
+			CharacterFrameTopRightCorner,
+			CharacterFrameBotLeftCorner,
+			CharacterFrameBotRightCorner,
+			CharacterFrameInsetInsetLeftBorder,
+			CharacterFrameInsetInsetBottomBorder,
+			CharacterFrameInsetInsetBotLeftCorner,
+			CharacterFrameInsetInsetBotRightCorner,
+			CharacterFrameInsetRightInsetBottomBorder,
+			CharacterFrameInsetRightInsetLeftBorder,
+			CharacterFrameInsetRightInsetBotRightCorner,
+			CharacterFrameInsetRightInsetBotLeftCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- SpellBook
+		for i, v in pairs({ SpellBookFrameTopBorder,
+			SpellBookFrameRightBorder,
+			SpellBookFrameLeftBorder,
+			SpellBookFrameBottomBorder,
+			SpellBookFramePortraitFrame,
+			SpellBookFrameTopRightCorner,
+			SpellBookFrameBotLeftCorner,
+			SpellBookFrameBotRightCorner,
+			SpellBookFrameInsetInsetBottomBorder,
+			SpellBookFrameInsetInsetRightBorder,
+			SpellBookFrameInsetInsetBotRightCorner,
+			SpellBookFrameInsetInsetBotLeftCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- PvE
+		for i, v in pairs({ PVEFrameTopBorder,
+			PVEFrameRightBorder,
+			PVEFrameLeftBorder,
+			PVEFrameBottomBorder,
+			PVEFramePortraitFrame,
+			PVEFrameTopRightCorner,
+			PVEFrameBotLeftCorner,
+			PVEFrameBotRightCorner,
+			LFDParentFrameBtnCornerRight,
+			PVEFrameLeftInsetInsetBottomBorder,
+			PVEFrameLeftInsetInsetBotLeftCorner,
+			LFDParentFrameButtonBottomBorder,
+			RaidFinderFrameBtnCornerRight,
+			RaidFinderFrameButtonBottomBorder,
+			LFDParentFrameInsetInsetBottomBorder,
+			RaidFinderFrameBottomInsetInsetBottomBorder,
+			LFGListFrameInsetBottomBorder,
+			LFDParentFrameInsetInsetBotLeftCorner,
+			LFGListFrameInsetBotLeftCorner,
+			RaidFinderFrameBottomInsetInsetBotLeftCorner,	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Friends
+		for i, v in pairs({ FriendsFrameTopBorder,
+			FriendsFrameRightBorder,
+			FriendsFrameLeftBorder,
+			FriendsFrameBottomBorder,
+			FriendsFramePortraitFrame,
+			FriendsFrameTopRightCorner,
+			FriendsFrameBtnCornerLeft,
+			FriendsFrameBtnCornerRight,	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Map
+		for i, v in pairs({ WorldMapFrameTopBorder,
+			WorldMapFrameRightBorder,
+			WorldMapFrameLeftBorder,
+			WorldMapFrameBottomBorder,
+			WorldMapFramePortraitFrame,
+			WorldMapFrameTopRightCorner,
+			WorldMapFrameBotLeftCorner,
+			WorldMapFrameBotRightCorner,
+			WorldMapFrame.BorderFrame.ButtonFrameEdge, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Channels
+		for i, v in pairs({ ChannelFrameTopBorder,
+			ChannelFrameRightBorder,
+			ChannelFrameLeftBorder,
+			ChannelFrameBottomBorder,
+			ChannelFramePortraitFrame,
+			ChannelFrameTopRightCorner,
+			ChannelFrameBtnCornerLeft,
+			ChannelFrameBtnCornerRight,
+			ChannelFrameBotLeftCorner,
+			ChannelFrameBotRightCorner,	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Chat
+		for i, v in pairs({ ChatFrame1EditBoxLeft,
+			ChatFrame1EditBoxRight,
+			ChatFrame1EditBoxMid,
+			ChatFrame2EditBoxLeft,
+			ChatFrame2EditBoxRight,
+			ChatFrame2EditBoxMid,
+			ChatFrame3EditBoxLeft,
+			ChatFrame3EditBoxRight,
+			ChatFrame3EditBoxMid,
+			ChatFrame4EditBoxLeft,
+			ChatFrame4EditBoxRight,
+			ChatFrame4EditBoxMid,
+			ChatFrame5EditBoxLeft,
+			ChatFrame5EditBoxRight,
+			ChatFrame5EditBoxMid,
+			ChatFrame6EditBoxLeft,
+			ChatFrame6EditBoxRight,
+			ChatFrame6EditBoxMid,
+			ChatFrame7EditBoxLeft,
+			ChatFrame7EditBoxRight,
+			ChatFrame7EditBoxMid,	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- StatusBarBorder (ExpBar)
+		for i, v in pairs({ StatusTrackingBarManager.SingleBarLarge,
+			StatusTrackingBarManager.SingleBarSmall,
+			StatusTrackingBarManager.SingleBarLargeUpper,
+			StatusTrackingBarManager.SingleBarSmallUpper,	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- MailBorder
+		for i, v in pairs({ MailFrameTopBorder,
+			MailFrameRightBorder,
+			MailFrameBottomBorder,
+			MailFrameLeftBorder,
+			MailFramePortraitFrame,
+			MailFrameTopRightCorner,
+			MailFrameBtnCornerLeft,
+			MailFrameBtnCornerRight,
+			MailFrameBotLeftCorner,
+			MailFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Merchant Frame
+		for i, v in pairs({ MerchantFrameTopBorder,
+			MerchantFrameRightBorder,
+			MerchantFrameBottomBorder,
+			MerchantFrameLeftBorder,
+			MerchantFramePortraitFrame,
+			MerchantFrameTopRightCorner,
+			MerchantFrameBtnCornerLeft,
+			MerchantFrameBtnCornerRight,
+			MerchantFrameBotLeftCorner,
+			MerchantFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Gossip Frame (e.g NPC dialog frame and interactions)
+		for i, v in pairs({ GossipFrameTopBorder,
+			GossipFrameRightBorder,
+			GossipFrameBottomBorder,
+			GossipFrameLeftBorder,
+			GossipFramePortraitFrame,
+			GossipFrameTopRightCorner,
+			GossipFrameBtnCornerLeft,
+			GossipFrameBtnCornerRight,
+			GossipFrameBotLeftCorner,
+			GossipFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Bank Frame
+		for i, v in pairs({ BankFrameTopBorder,
+			BankFrameRightBorder,
+			BankFrameBottomBorder,
+			BankFrameLeftBorder,
+			BankFramePortraitFrame,
+			BankFrameTopRightCorner,
+			BankFrameBtnCornerLeft,
+			BankFrameBtnCornerRight,
+			BankFrameBotLeftCorner,
+			BankFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Quest Frame
+		for i, v in pairs({ QuestFrameTopBorder,
+			QuestFrameRightBorder,
+			QuestFrameBottomBorder,
+			QuestFrameLeftBorder,
+			QuestFramePortraitFrame,
+			QuestFrameTopRightCorner,
+			QuestFrameBtnCornerLeft,
+			QuestFrameBtnCornerRight,
+			QuestFrameBotLeftCorner,
+			QuestFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Taxi Frame
+		for i, v in pairs({ TaxiFrame.TopBorder,
+			TaxiFrame.RightBorder,
+			TaxiFrame.BottomBorder,
+			TaxiFrame.LeftBorder,
+			TaxiFrame.TopRightCorner,
+			TaxiFrame.TopLeftCorner,
+			TaxiFrame.BtnCornerLeft,
+			TaxiFrame.BtnCornerRight,
+			TaxiFrame.BotLeftCorner,
+			TaxiFrame.BotRightCorner,
+			TaxiFrame.InsetBorderBottom,
+			TaxiFrame.InsetBorderBottomLeft,
+			TaxiFrame.InsetBorderLeft, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+		-- Micro Menu and Bag Bar
+		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	-- End
+	self:UnregisterEvent("ADDON_LOADED")
+	NewFrames:SetScript("OnEvent", nil)
+	end
+end)
+----------------------------------------------------
 
 
--- More/New Darker Parts
---[
+-------------- Frames that need a load to work properly --------------
+-- Specialization
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+		if name == "Blizzard_TalentUI" then
+			for i, v in pairs({ PlayerTalentFrameTopBorder,
+				PlayerTalentFrameRightBorder,
+				PlayerTalentFrameLeftBorder,
+				PlayerTalentFrameBottomBorder,
+				PlayerTalentFramePortraitFrame,
+				PlayerTalentFrameTopRightCorner,
+				PlayerTalentFrameBtnCornerLeft,
+				PlayerTalentFrameBtnCornerRight,
+				PlayerTalentFrameBotLeftCorner,
+				PlayerTalentFrameBotRightCorner,
+				PlayerTalentFrameButtonBottomBorder,
+				PlayerTalentFrameInsetInsetBottomBorder, }) do
+				v:SetVertexColor(.4, .4, .4)
+			end
+		end
+end)
+-- Collections
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Collections" then
+		for i, v in pairs({ CollectionsJournalTopBorder,
+			CollectionsJournalRightBorder,
+			CollectionsJournalLeftBorder,
+			CollectionsJounalBottomBorder,
+			CollectionsJournalPortraitFrame,
+			CollectionsJournalTopRightCorner,
+			CollectionsJournalBotLeftCorner,
+			CollectionsJournalBotRightCorner,
+			CollectionsJournalParentFrameBtnCornerRight,
+			CollectionsJournalBottomBorder,
+		 	MountJournalInsetBottomBorder,
+			MountJournalInsetBotLeftCorner,
+			MountJournalInsetBotRightCorner,
+			PetJournalLeftInsetInsetBottomBorder,
+			PetJournalRightInsetInsetBottomBorder,
+			PetJournalLeftInsetInsetBotLeftCorner,
+		 	PetJournalLeftInsetInsetBotRightCorner,
+			PetJournalRightInsetInsetBotLeftCorner,
+			PetJournalRightInsetInsetBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Azerite (needs review)
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_AzeriteUI" then
+		for i, v in pairs({ AzeriteEmpoweredItemUITopBorder,
+			AzeriteEmpoweredItemUIRightBorder,
+			AzeriteEmpoweredItemUIBottomBorder,
+			AzeriteEmpoweredItemUILeftBorder,
+			AzeriteEmpoweredItemUIPortraitFrame,
+			AzeriteEmpoweredItemUIBotLeftCorner,
+			AzeriteEmpoweredItemUIBotRightCorner,
+			AzeriteEmpoweredItemUIBotTopRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Honor Extra
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_PVPUI" then
+		for i, v in pairs({ HonorFrameInsetBottomBorder,
+		HonorFrameInsetBotLeftCorner,
+		HonorFrameInsetBotRightCorner,
+		HonorFrameInsetLeftBorder,
+		PVPQueueFrameInsetBottomBorder,
+		PVPQueueFrameInsetBotLeftCorner,
+		PVPQueueFrameInsetBotRightCorner,
+		ConquestFrameInsetBottomBorder,
+		ConquestFrameInsetLeftBorder,
+		ConquestFrameInsetBotLeftCorner,
+		ConquestFrameInsetBotRightCorner,
+		LFGListFrameInsetLeftBorder,
+	 	LFGListFrameInsetBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- AdvGuide
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_EncounterJournal" then
+		for i, v in pairs({ EncounterJournalTopBorder,
+			EncounterJournalRightBorder,
+			EncounterJournalLeftBorder,
+			EncounterJournalBottomBorder,
+			EncounterJournalPortraitFrame,
+			EncounterJournalTopRightCorner,
+			EncounterJournalBtnCornerLeft,
+			EncounterJournalBtnCornerRight,
+			EncounterJournalBotLeftCorner,
+			EncounterJournalBotRightCorner,
+		 	EncounterJournalInsetInsetBottomBorder, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Communities
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Communities" then
+		for i, v in pairs({ CommunitiesFrameTopBorder,
+			CommunitiesFrameRightBorder,
+			CommunitiesFrameBottomBorder,
+			CommunitiesFrameLeftBorder,
+			CommunitiesFrameTopRightCorner,
+			CommunitiesFrameBotRightCorner,
+			CommunitiesFrameBotLeftCorner,
+			CommunitiesFrameBtnCornerLeft,
+			CommunitiesFramePortraitFrame,
+			CommunitiesFrameBtnCornerRight,
+		 	CommunitiesFrameButtonBottomBorder,
+			CommunitiesFrameInsetInsetLeftBorder,
+		 	CommunitiesFrameInsetInsetBottomBorder,
+			CommunitiesFrame.PortraitOverlay.PortraitFrame,
+		 	CommunitiesFrameCommunitiesListInsetLeftBorder,
+		 	CommunitiesFrameCommunitiesListInsetBottomBorder,
+			CommunitiesFrameInsetBottomBorder,
+		 	CommunitiesFrameCommunitiesListInsetBotLeftCorner,
+			CommunitiesFrameCommunitiesListInsetBotRightCorner,
+			CommunitiesFrameInsetBotLeftCorner,
+			CommunitiesFrameInsetBotRightCorner,
+			CommunitiesFrame.ChatEditBox.Mid,
+			CommunitiesFrame.ChatEditBox.Right,
+		 	CommunitiesFrame.ChatEditBox.Left,
+			CommunitiesFrame.GuildBenefitsFrame.InsetBorderLeft,
+		 	CommunitiesFrame.GuildBenefitsFrame.InsetBorderBottomLeft,
+			CommunitiesFrame.GuildBenefitsFrame.InsetBorderBottomLeft2,
+			CommunitiesFrame.GuildBenefitsFrame.InsetBorderBottomRight,
+			CommunitiesFrameGuildDetailsFrame.InsetBorderLeft,
+			CommunitiesFrameGuildDetailsFrame.InsetBorderBottomLeft,
+			CommunitiesFrameGuildDetailsFrame.InsetBorderBottomLeft2,
+			CommunitiesFrameGuildDetailsFrame.InsetBorderBottomRight, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Macro
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_MacroUI" then
+		for i, v in pairs({ MacroFrameTopBorder,
+			MacroFrameRightBorder,
+			MacroFrameBottomBorder,
+			MacroFrameLeftBorder,
+			MacroFramePortraitFrame,
+			MacroFrameBtnCornerLeft,
+			MacroFrameBtnCornerRight,
+			MacroFrameBotLeftCorner,
+			MacroFrameBotRightCorner,
+		 	MacroFrameButtonBottomBorder,
+			MacroFrameInsetInsetBottomBorder,
+			MacroFrameTopRightCorner, }) do
+			v: SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Auction House (needs review)
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_AuctionUI" then
+		for i, v in pairs({ AuctionFrameTop, AuctionFrameTopLeft, AuctionFrameTopRight,
+			AuctionFrameBot, AuctionFrameBotLeft, AuctionFrameBotRight, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Flight Map needs review
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_FlightMap" then
+		for i, v in pairs({ FlightMapFrameTopBorder, FlightMapFrameRightBorder,
+			FlightMapFrameBottomBorder, FlightMapFrameLeftBorder,
+			FlightMapFramePortraitFrame, FlightMapFrameTopRightCorner,
+			FlightMapFrameBtnCornerLeft, FlightMapFrameBtnCornerRight,
+			FlightMapFrameBotLeftCorner, FlightMapFrameBotRightCorner	}) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Trade Skill Frame (needs review)
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_TradeSkillUI" then
+		for i, v in pairs({ TradeSkillFrameTopBorder, TradeSkillFrameRightBorder,
+			TradeSkillFrameBottomBorder, TradeSkillFrameLeftBorder,
+			TradeSkillFramePortraitFrame, TradeSkillFrameTopRightCorner,
+			TradeSkillFrameBtnCornerLeft, TradeSkillFrameBtnCornerRight,
+			TradeSkillFrameBotLeftCorner, TradeSkillFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Inspect Frame needs review
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_InspectUI" then
+		for i, v in pairs({ InspectFrameTopBorder, InspectFrameRightBorder,
+			InspectFrameBottomBorder, InspectFrameLeftBorder,
+			InspectFramePortraitFrame, InspectFrameTopRightCorner,
+			InspectFrameBtnCornerLeft, InspectFrameBtnCornerRight,
+			InspectFrameBotLeftCorner, InspectFrameBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
 
--- CharacterFrame
-for i, v in pairs({ CharacterFrameRightBorder, CharacterFrameLeftBorder,
-	CharacterFrameTopBorder, CharacterFrameBottomBorder,
-	CharacterFramePortraitFrame, CharacterFrameTopRightCorner,
-	CharacterFrameBotLeftCorner, CharacterFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- SpellBook
-for i, v in pairs({ SpellBookFrameTopBorder, SpellBookFrameRightBorder,
-	SpellBookFrameLeftBorder, SpellBookFrameBottomBorder,
-	SpellBookFramePortraitFrame, SpellBookFrameTopRightCorner,
-	SpellBookFrameBotLeftCorner, SpellBookFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- PvE
-for i, v in pairs({ PVEFrameTopBorder, PVEFrameRightBorder, PVEFrameLeftBorder,
-	PVEFrameBottomBorder, PVEFramePortraitFrame, PVEFrameTopRightCorner,
-	PVEFrameBotLeftCorner, PVEFrameBotRightCorner, LFDParentFrameBtnCornerRight,
-}) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Friends
-for i, v in pairs({ FriendsFrameTopBorder, FriendsFrameRightBorder,
-	FriendsFrameLeftBorder, FriendsFrameBottomBorder, FriendsFramePortraitFrame,
-	FriendsFrameTopRightCorner, FriendsFrameBtnCornerLeft,
-	FriendsFrameBtnCornerRight, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Map
-for i, v in pairs({ WorldMapFrameTopBorder, WorldMapFrameRightBorder,
-	WorldMapFrameLeftBorder,WorldMapFrameBottomBorder, WorldMapFramePortraitFrame,
-	WorldMapFrameTopRightCorner, WorldMapFrameBotLeftCorner,
-	WorldMapFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Channels
-for i, v in pairs({ ChannelFrameTopBorder, ChannelFrameRightBorder,
-	ChannelFrameLeftBorder, ChannelFrameBottomBorder,
-	ChannelFramePortraitFrame, ChannelFrameTopRightCorner,
-	ChannelFrameBtnCornerLeft, ChannelFrameBtnCornerRight,
-	ChannelFrameBotLeftCorner, ChannelFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Chat
-for i, v in pairs({ ChatFrame1EditBoxLeft, ChatFrame1EditBoxRight,
-ChatFrame1EditBoxMid, ChatFrame2EditBoxLeft, ChatFrame2EditBoxRight,
-ChatFrame2EditBoxMid, ChatFrame3EditBoxLeft, ChatFrame3EditBoxRight,
-ChatFrame3EditBoxMid, ChatFrame4EditBoxLeft, ChatFrame4EditBoxRight,
-ChatFrame4EditBoxMid, ChatFrame5EditBoxLeft, ChatFrame5EditBoxRight,
-ChatFrame5EditBoxMid, ChatFrame6EditBoxLeft, ChatFrame6EditBoxRight,
-ChatFrame6EditBoxMid, ChatFrame7EditBoxLeft, ChatFrame7EditBoxRight,
-ChatFrame7EditBoxMid, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Specialization (need review)
-for i, v in pairs({ PlayerTalentFrameTopBorder, PlayerTalentFrameRightBorder,
-	PlayerTalentFrameLeftBorder, PlayerTalentFrameBottomBorder,
-	PlayerTalentFramePortraitFrame, PlayerTalentFrameTopRightCorner,
-	PlayerTalentFrameBtnCornerLeft, PlayerTalentFrameBtnCornerRight,
-	PlayerTalentFrameBg, PlayerTalentFrameBotLeftCorner,
-	PlayerTalentFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Collections (need review)
-for i, v in pairs({ CollectionsJounalTopBorder, CollectionsJounalRightBorder,
-	CollectionsJounalLeftBorder, CollectionsJounalBottomBorder,
-	CollectionsJounalPortraitFrame, CollectionsJounalTopRightCorner,
-	CollectionsJounalBotLeftCorner, CollectionsJounalBotRightCorner,
-	CollectionsJounalParentFrameBtnCornerRight, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- AdvGuide (need review)
-for i, v in pairs({ EncounterJournalTopBorder, EncounterJournalRightBorder,
-	EncounterJournalLeftBorder, EncounterJournalBottomBorder,
-	EncounterJournalPortraitFrame, EncounterJournalTopRightCorner,
-	EncounterJournalBtnCornerLeft, EncounterJournalBtnCornerRight,
-	EncounterJournalBotLeftCorner, EncounterJournalBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Communities (need review)
-for i, v in pairs({ CommunitiesFrameTopBorder, CommunitiesFrameRightBorder,
-	CommunitiesFrameBottomBorder, CommunitiesFrameLeftBorder,
-	CommunitiesFrameTopRightCorner, CommunitiesFrameBotRightCorner,
-	CommunitiesFrameBotLeftCorner, CommunitiesFrameBtnCornerLeft,
-	CommunitiesFramePortrait, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
 
-
+------ Need Review (Not Working or Blizzard doesn't allow changes for now)------
+--[[
+-- Wardrobe Frame aka Transmogrify (needs review)
+for i, v in pairs({ WardrobeFrameTopBorder, WardrobeFrameRightBorder,
+	WardrobeFrameBottomBorder, WardrobeFrameLeftBorder,
+	WardrobeFramePortraitFrame,	WardrobeFrameTopRightCorner,
+	WardrobeFrameBtnCornerLeft,	WardrobeFrameBtnCornerRight,
+	WardrobeFrameBotLeftCorner,	WardrobeFrameBotRightCorner, }) do
+	v:SetVertexColor(.4, .4, .4)
+end
+-- Class Trainer Frame aka Flight Master and others (needs review)
+for i, v in pairs({ ClassTrainerFrameTopBorder, ClassTrainerFrameRightBorder,
+	ClassTrainerFrameBottomBorder, ClassTrainerFrameLeftBorder,
+	ClassTrainerFramePortraitFrame, ClassTrainerFrameTopRightCorner,
+	ClassTrainerFrameBtnCornerLeft, ClassTrainerFrameBtnCornerRight,
+	ClassTrainerFrameBotLeftCorner, ClassTrainerFrameBotRightCorner, }) do
+	v:SetVertexColor(.4, .4, .4)
+end
 --]]
 
 
@@ -162,7 +541,7 @@ end
 -- Class Icons (Need Flat Icons or some Texture Pack) --
 --------------------------------------------------------
 
-hooksecurefunc("UnitFramePortrait_Update",function(self)
+hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
 		if UnitIsPlayer(self.unit) then
 			local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
@@ -175,7 +554,7 @@ hooksecurefunc("UnitFramePortrait_Update",function(self)
 		end
 	end
 end)
-
+----------------------------------------------------
 
 ----------------------
 -- Class HP Colours --
@@ -195,7 +574,7 @@ hooksecurefunc("UnitFrameHealthBar_Update", colour)
 hooksecurefunc("HealthBar_OnValueChanged", function(self)
 	colour(self, self.unit)
 end)
-
+----------------------------------------------------
 
 ------------------------------------
 -- Class colours on players names --
@@ -223,7 +602,7 @@ frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({TargetFrameNameBackground, FocusFrameNameBackground}) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
-
+----------------------------------------------------
 
 -----------------------
 -- Text round values --
@@ -239,43 +618,45 @@ hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
 	FocusFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("focus")))
 	--FocusFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("focus")))
 end)
+----------------------------------------------------
 
+--------------
+-- Cast Bar --
+--------------
 
---[[ Gryphons hide
+-- Timer
+CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
+CastingBarFrame.timer:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+CastingBarFrame.timer:SetPoint("TOP", CastingBarFrame, "BOTTOM", 0, 0)
+CastingBarFrame.update = .1
 
-MainMenuBarLeftEndCap:Hide()
-MainMenuBarRightEndCap:Hide()
-]]
-
-
----------------------
--- Cast timer text --
----------------------
-
-CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil);
-CastingBarFrame.timer:SetFont(STANDARD_TEXT_FONT,12,"OUTLINE");
-CastingBarFrame.timer:SetPoint("TOP", CastingBarFrame, "BOTTOM", 0, 0);
-CastingBarFrame.update = .1;
-
-hooksecurefunc("CastingBarFrame_OnUpdate", function(self, elapsed)
-	if not self.timer then return end
-	if self.update and self.update < elapsed then
-		if self.casting then
-			self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
-		elseif self.channeling then
-			self.timer:SetText(format("%.1f", max(self.value, 0)))
-		else
-			self.timer:SetText("")
-		end
-		self.update = .1
-	else
-		self.update = self.update - elapsed
-	end
+CastingBarFrame:HookScript("OnUpdate", function(self, elapsed)
+    if not self.timer then return end
+    if self.update and self.update < elapsed then
+        if self.casting then
+            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
+        elseif self.channeling then
+            self.timer:SetText(format("%.1f", max(self.value, 0)))
+        else
+            self.timer:SetText("")
+        end
+        self.update = .1
+    else
+        self.update = self.update - elapsed
+    end
 end)
+
+-- Target Cast Top Frame
+--[[ Not Used because being messy in boss encounters
+TargetFrameSpellBar:ClearAllPoints()
+TargetFrameSpellBar:SetPoint("BOTTOM", TargetFrame, "TOP", -35, 0)
+TargetFrameSpellBar.SetPoint = function() end
+----------------------------------------------------
+--]]
 
 
 -----------------------------------
--- Minimap plus things (tweaks) --
+-- Minimap plus things (tweaks) ---
 -----------------------------------
 
 MinimapZoomIn:Hide()
@@ -290,7 +671,7 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
 end)
 MiniMapTracking:ClearAllPoints()
 MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
-
+----------------------------------------------------
 
 --------------------------------------------
 -- Disable spam healing over player frame --
@@ -301,93 +682,88 @@ PlayerHitIndicator.SetText = function() end
 
 PetHitIndicator:SetText(nil)
 PetHitIndicator.SetText = function() end
+----------------------------------------------------
 
+--------------------------------------------------------------------------
+-- Chat Hide Button
+-- Thanks to Syncrow for this script (maybe include some modifications) --
+--------------------------------------------------------------------------
 
-----------------------
--- Chat Hide Button --
-----------------------
-
-local f = CreateFrame("Button",nil,UIParent)
-f:SetSize(30,30)
-f.t=f:CreateTexture(nil,"BORDER")
-f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-f.t:SetAllPoints(f)
-f:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM",0,-35)
-f:Show()
+local ChatHideFrame = CreateFrame("Button", nil, UIParent)
+ChatHideFrame:SetSize(30, 30)
+ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
+ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+ChatHideFrame.t:SetAllPoints(ChatHideFrame)
+ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM",0,-35)
+ChatHideFrame:Show()
 
 local ChatHide = false
 
-f:SetScript("OnMouseDown", function(self, Button)
+ChatHideFrame:SetScript("OnMouseDown", function(self, Button)
 	if ChatHide == false then
 		if Button == "LeftButton" then
-			f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
+			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
 		end
 	elseif ChatHide == true then
 		if Button == "LeftButton" then
-			f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
+			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
 		end
 	end
 end)
 
-f:SetScript("OnMouseUp", function(self, Button)
+ChatHideFrame:SetScript("OnMouseUp", function(self, Button)
 	if ChatHide == false then
 		if Button == "LeftButton" then
-			f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
 		end
 	elseif ChatHide == true then
 		if Button == "LeftButton" then
-			f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
 		end
 	end
 end)
 
-f:SetScript("OnClick", function(self, Button)
+ChatHideFrame:SetScript("OnClick", function(self, Button)
 	if ChatHide == false then
-		f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+		ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
 		QuickJoinToastButton:Hide()
 		GeneralDockManager:Hide()
 		ChatFrameMenuButton:Hide()
 		ChatFrameChannelButton:Hide()
+		--ChatFrameToggleVoiceDeafenButton.Icon:Hide()
+		--ChatFrameToggleVoiceMuteButton.Icon:Hide()
 		ChatFrame1EditBox:Hide()
-		ChatFrame2EditBox:SetAlpha(0.0)
-		ChatFrame3EditBox:SetAlpha(0.0)
-		ChatFrame4EditBox:SetAlpha(0.0)
-		ChatFrame5EditBox:SetAlpha(0.0)
-		ChatFrame6EditBox:SetAlpha(0.0)
-		ChatFrame7EditBox:SetAlpha(0.0)
 
-		for i=1, NUM_CHAT_WINDOWS do
+		for i = 1, NUM_CHAT_WINDOWS do
 			_G["ChatFrame"..i..""]:SetAlpha(0)
 			_G["ChatFrame"..i.."ButtonFrame"]:Hide()
+			_G["ChatFrame"..i.."EditBox"]:SetAlpha(0)
 		end
 		ChatHide = true
 	elseif ChatHide == true then
-		f.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+		ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
 		QuickJoinToastButton:Show()
 		GeneralDockManager:Show()
 		ChatFrameMenuButton:Show()
 		ChatFrameChannelButton:Show()
+		--ChatFrameToggleVoiceDeafenButton.Icon:Show()
+		--ChatFrameToggleVoiceMuteButton.Icon:Show()
 		ChatFrame1EditBox:Show()
-		ChatFrame2EditBox:SetAlpha(1.0)
-		ChatFrame3EditBox:SetAlpha(1.0)
-		ChatFrame4EditBox:SetAlpha(1.0)
-		ChatFrame5EditBox:SetAlpha(1.0)
-		ChatFrame6EditBox:SetAlpha(1.0)
-		ChatFrame7EditBox:SetAlpha(1.0)
 
-		for i=1, NUM_CHAT_WINDOWS do
+		for i = 1 , NUM_CHAT_WINDOWS do
 			_G["ChatFrame"..i..""]:SetAlpha(1)
 			_G["ChatFrame"..i.."ButtonFrame"]:Show()
+			_G["ChatFrame"..i.."EditBox"]:SetAlpha(1)
 		end
 		ChatHide = false
 	end
 end)
+----------------------------------------------------
 
-
-------------------------------------------------------------------------------------------------
--- Tooltip Class Color
--- Thanks to Phanx for this script all credits for her/him (maybe include some modifications) --
-------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- Tooltip Class Color Name
+-- Thanks to Phanx for this script (maybe include some modifications) --
+------------------------------------------------------------------------
 
 GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 	--print("OnTooltipSetUnit")
@@ -405,23 +781,79 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 		end
 	end
 end)
+----------------------------------------------------
+
+----------------------------------
+-- Tooltip Faction Color Change --
+----------------------------------
+
+GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
+	local _, factionGroup
+	-- Horde
+		if UnitFactionGroup("player") == "Horde" then
+			if GameTooltipTextLeft3:GetText() == "Horde" then
+				GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
+			elseif GameTooltipTextLeft4:GetText() == "Horde"then
+				GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+			elseif GameTooltipTextLeft3:GetText() == "Alliance"then
+				GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
+			elseif GameTooltipTextLeft4:GetText() == "Alliance"then
+				GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+			else
+				GameTooltipTextLeft3:SetTextColor(255, 255, 255)
+				GameTooltipTextLeft4:SetTextColor(255, 255, 255)
+			end
+		end
+  -- Alliance
+	if UnitFactionGroup("player") == "Alliance" then
+		if GameTooltipTextLeft3:GetText() == "Alliance" then
+			GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
+		elseif GameTooltipTextLeft4:GetText() == "Alliance"then
+			GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+		elseif GameTooltipTextLeft3:GetText() == "Horde"then
+			GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
+		elseif GameTooltipTextLeft4:GetText() == "Horde"then
+			GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+		else
+			GameTooltipTextLeft3:SetTextColor(255, 255, 255)
+			GameTooltipTextLeft4:SetTextColor(255, 255, 255)
+		end
+	end
+end)
+----------------------------------------------------
+
+-----------------------------
+-- Tooltip Dark background --
+-----------------------------
+
+local TooltipBackground = GameTooltip:CreateTexture(nil, "BACKGROUND", nil, 1)
+TooltipBackground:SetPoint("TOPLEFT", 3, -3)
+TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
+TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
+TooltipBackground:SetAlpha(.05, .05, .05)
+----------------------------------------------------
+
+--------------------------------
+-- Tooltip Class Color Health --
+--------------------------------
+
+GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+	local _, unit = GameTooltip:GetUnit()
+	if UnitIsPlayer(unit) then
+		local _, class = UnitClass(unit)
+		local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+		if color then
+			GameTooltipStatusBar:SetStatusBarColor(color.r, color.g, color.b)
+		end
+	end
+end)
+----------------------------------------------------
 
 
-------------------------------------------------------------------------------------------------
--- Tooltip Dark background
--- Thanks to Gello for this script all credits for her/him (maybe include some modifications) --
-------------------------------------------------------------------------------------------------
-
-local TooltipBackground = GameTooltip:CreateTexture(nil,"BACKGROUND",nil,1)
-TooltipBackground:SetPoint("TOPLEFT",3,-3)
-TooltipBackground:SetPoint("BOTTOMRIGHT",-3,3)
-TooltipBackground:SetColorTexture(0.08,0.08,0.08)
-
-
--------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------
 -- StatsFrame
--- Thanks to Syiana for this script all credits for her/him (maybe include some modifications) --
--------------------------------------------------------------------------------------------------
+-- Thanks to Syiana for this script (maybe include some modifications) --
+-------------------------------------------------------------------------
 
 local StatsFrame = CreateFrame('Frame', 'Stats', UIParent)
 
@@ -434,7 +866,7 @@ if movable == false then
 	StatsFrame:SetPoint('BOTTOMLEFT', UIParent, "BOTTOMLEFT", 10, 10)
 end
 
-local CF=CreateFrame("Frame")
+local CF = CreateFrame("Frame")
 CF:RegisterEvent("PLAYER_LOGIN")
 CF:SetScript("OnEvent", function(self, event)
 
@@ -536,7 +968,7 @@ CF:SetScript("OnEvent", function(self, event)
 
 	local lastUpdate = 0
 
-	local function update(self,elapsed)
+	local function update(self, elapsed)
 		lastUpdate = lastUpdate + elapsed
 		if lastUpdate > 1 then
 			lastUpdate = 0
@@ -549,85 +981,258 @@ CF:SetScript("OnEvent", function(self, event)
 			self:SetHeight(StatsFrame.text:GetStringHeight())
 		end
 	end
-
 	StatsFrame:SetScript("OnUpdate", update)
-
 end)
+----------------------------------------------------
 
+-----------------------
+-- UI Scale Elements --
+-----------------------
 
---------------------------
--- Save and Extra Stuff --
---------------------------
-
--- AbyssUIFirstFrame
-AbyssUIFirstFrame = CreateFrame("Frame",nil,UIParent);
-AbyssUIFirstFrame:Hide();
-AbyssUIFirstFrame:SetWidth(400);
-AbyssUIFirstFrame:SetHeight(140);
-AbyssUIFirstFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 200);
-AbyssUIFirstFrame:EnableMouse(true);
-AbyssUIFirstFrame:SetFrameStrata("BACKGROUND");
-AbyssUIFirstFrame.text = AbyssUIFirstFrame.text or AbyssUIFirstFrame:CreateFontString(nil,"ARTWORK","QuestFont_Shadow_Huge");
-AbyssUIFirstFrame.text:SetAllPoints(true);
-AbyssUIFirstFrame.text:SetJustifyH("CENTER");
-AbyssUIFirstFrame.text:SetJustifyV("CENTER");
-AbyssUIFirstFrame.text:SetText(" Thanks for using AbyssUI!\n The Dark Blizzard UI revamp.\nCheck my other addons:\n EasyLeave, EasyConfirm and HideonCombat. ");
-----------------------------------------------------
-LeaveBorder = AbyssUIFirstFrame:CreateTexture(nil,"BACKGROUND");
-LeaveBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background");
-LeaveBorder:SetPoint("TOPLEFT", -3, 3);
-LeaveBorder:SetPoint("BOTTOMRIGHT", 3, -3);
-LeaveBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6);
-----------------------------------------------------
-BorderBody = AbyssUIFirstFrame:CreateTexture(nil,"ARTWORK");
-BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background");
-BorderBody:SetAllPoints(AbyssUIFirstFrame);
-BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7);
-----------------------------------------------------
-Texture = AbyssUIFirstFrame:CreateTexture(nil,"BACKGROUND");
-Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background");
-Texture:SetAllPoints(AbyssUIFirstFrame);
-AbyssUIFirstFrame.texture = Texture
-----------------------------------------------------
-FrameButton = CreateFrame("Button","FrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate");
-FrameButton:SetHeight(24);
-FrameButton:SetWidth(70);
-FrameButton:SetPoint("BOTTOM", AbyssUIFirstFrame, "BOTTOM", 0, 10);
-FrameButton:SetText("Close");
-FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background");
-----------------------------------------------------
-BorderButton = FrameButton:CreateTexture(nil,"ARTWORK");
-BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background");
-BorderButton:SetAllPoints(FrameButton);
-BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7);
-FrameButton:SetScript("OnClick", function()
-	AbyssUIFirstFrame:Hide();
+local ScaleElements = CreateFrame("Frame")
+ScaleElements:RegisterEvent("ADDON_LOADED")
+ScaleElements:RegisterEvent("PLAYER_LOGOUT")
+ScaleElements:SetScript("OnEvent", function(self, event, arg1)
+	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
+		CastingBarFrame:SetScale(1.05)
+		else return nil
+	end
 end)
+----------------------------------------------------
 
-function AbyssUIStart()
-	AbyssUIFirstFrame:Show();
+
+--------------------------------------------------------------------------
+-- Tooltip Instant Fade
+-- Thanks to sacrife for this script (maybe include some modifications) --
+--------------------------------------------------------------------------
+
+GameTooltip.FadeOut = function(self)
+	GameTooltip:Hide()
 end
 
+local hasUnit
+local updateFrame = CreateFrame("Frame")
+updateFrame:SetScript("OnUpdate", function(self)
+	local _, unit = GameTooltip:GetUnit()
+	if hasUnit and not unit then
+		GameTooltip:Hide()
+		hasUnit = nil
+	elseif unit then
+		hasUnit = true
+	end
+end)
+----------------------------------------------------
 
--------------------------- Save --------------------------
+
+------- Scripts that need to be tested/fixed or are not used (not trash) -------
+--[[
+-- Gryphons hide
+MainMenuBarLeftEndCap:Hide()
+MainMenuBarRightEndCap:Hide()
+--]]
+
+--[[
+if not AbyssUI.modifyUnitTooltips then
+	return
+end
+--]]
+
+
+--[[
+--------------------------
+-- Tooltip Faction Icon --
+--------------------------
+
+-- Faction Frame
+FactionFrameIcon = CreateFrame("Button","FrameButton", GameTooltip, "UIPanelButtonTemplate")
+FactionFrameIcon:SetHeight(20)
+FactionFrameIcon:SetWidth(20)
+FactionFrameIcon:SetPoint("BOTTOM", GameTooltip, "BOTTOMRIGHT", -13, 3.8)
+FactionFrameIcon:Hide()
+
+GameTooltip:HookScript("OnUpdate", function(GameTooltip)
+	if GameTooltipTextLeft3:GetText() == "Horde" or GameTooltipTextLeft4:GetText() == "Horde" then
+		FactionFrameIcon:SetNormalTexture("Interface\\ICONS\\pvpcurrency-honor-horde")
+		FactionFrameIcon:Show()
+	elseif GameTooltipTextLeft3:GetText() == "Alliance" or GameTooltipTextLeft4:GetText() == "Alliance" then
+		FactionFrameIcon:SetNormalTexture("Interface\\ICONS\\pvpcurrency-honor-alliance")
+		FactionFrameIcon:Show()
+	else
+		FactionFrameIcon:Hide()
+	end
+end)
+----------------------------------------------------
+--]]
+
+
+--[[
+-----------------------
+-- Tooltip Spec Icon --
+-----------------------
+
+-- Spec Frame
+SpecializationFrameIcon = CreateFrame("Button","FrameButton", GameTooltip, "UIPanelButtonTemplate")
+SpecializationFrameIcon:SetHeight(20)
+SpecializationFrameIcon:SetWidth(20)
+SpecializationFrameIcon:SetPoint("BOTTOM", GameTooltip, "BOTTOMRIGHT", -35, 3.8)
+SpecializationFrameIcon:Hide()
+
+local unit = GameTooltip:GetUnit()
+local currentSpec = GetSpecialization(unit)
+local currentSpecName = GetSpecializationInfo(currentSpec)
+function SpecializationIconFunction()
+	-- Druid
+	if currentSpecName == "Balance" and UnitIsPlayer(unit) and UnitClass(unit) == "Druid" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\talentspec_druid_balance")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Feral" and UnitIsPlayer(unit) and UnitClass(unit) == "Druid" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\talentspec_druid_feral_cat")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Guardian" and UnitIsPlayer(unit) and UnitClass(unit) == "Druid" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\talentspec_druid_feral_bear")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Restoration" and UnitIsPlayer(unit) and UnitClass(unit) == "Druid" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\talentspec_druid_restoration")
+		SpecializationFrameIcon:Show()
+	-- Hunter
+	-- Mage
+	elseif currentSpecName == "Arcane" and UnitIsPlayer(unit) and UnitClass(unit) == "Mage" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_shaman_improvedstormstrike")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Fire" and UnitIsPlayer(unit) and UnitClass(unit) == "Mage" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_nature_lightning")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Frost" and UnitIsPlayer(unit) and UnitClass(unit) == "Mage" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_nature_healingwavelesser")
+		SpecializationFrameIcon:Show()
+	-- Paladin
+	-- Priest
+	-- Rogue
+	-- Shaman
+	elseif currentSpecName == "Enhancement" and UnitIsPlayer(unit) and UnitClass(unit) == "Shaman" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_shaman_improvedstormstrike")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Elemental" and UnitIsPlayer(unit) and UnitClass(unit) == "Shaman" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_nature_lightning")
+		SpecializationFrameIcon:Show()
+	elseif currentSpecName == "Restoration" and UnitIsPlayer(unit) and UnitClass(unit) == "Shaman" then
+		SpecializationFrameIcon:SetNormalTexture("Interface\\ICONS\\spell_nature_healingwavelesser")
+		SpecializationFrameIcon:Show()
+	-- Warlock
+	-- Warrior
+	-- Monk
+	-- Death Knight
+	-- Demon Hunter
+	else SpecializationFrameIcon:Hide()
+	end
+end
+
+GameTooltip:HookScript("OnUpdate", function(GameTooltip)
+	SpecializationIconFunction()
+end)
+----------------------------------------------------
+--]]
+
+
+-------------------------- Save and Extra Stuff --------------------------
+
+-- AbyssUIFirstFrame
+AbyssUIFirstFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUIFirstFrame:Hide()
+AbyssUIFirstFrame:SetWidth(400)
+AbyssUIFirstFrame:SetHeight(140)
+AbyssUIFirstFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 200)
+AbyssUIFirstFrame:EnableMouse(true)
+AbyssUIFirstFrame:SetFrameStrata("BACKGROUND")
+AbyssUIFirstFrame.text = AbyssUIFirstFrame.text or AbyssUIFirstFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+AbyssUIFirstFrame.text:SetScale(1.5)
+AbyssUIFirstFrame.text:SetAllPoints(true)
+AbyssUIFirstFrame.text:SetJustifyH("CENTER")
+AbyssUIFirstFrame.text:SetJustifyV("CENTER")
+AbyssUIFirstFrame.text:SetText("Thanks for using |cff0d75d4AbyssUI!|r\nThe |cff5f545eDark|r Blizzard UI revamp.\nCheck my other addons:\nEasyLeave, EasyConfirm and HideonCombat.")
+----------------------------------------------------
+local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
+AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
+AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
+AbyssUIBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUIFirstFrame:CreateTexture(nil, "ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUIFirstFrame)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUIFirstFrame)
+AbyssUIFirstFrame.texture = Texture
+----------------------------------------------------
+local FrameButton = CreateFrame("Button", "FrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate")
+FrameButton:SetHeight(24)
+FrameButton:SetWidth(70)
+FrameButton:SetPoint("BOTTOM", AbyssUIFirstFrame, "BOTTOM", 0, 10)
+FrameButton:SetText("Close")
+FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButton:CreateTexture(nil, "ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButton)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButton:SetScript("OnClick", function()
+	AbyssUIFirstFrame:Hide()
+end)
+----------------------------------------------------
+
+
+-- Start Function
+function AbyssUIStart()
+	AbyssUIFirstFrame:Show()
+end
+----------------------------------------------------
+
+
+-- DailyInfo Function
+C_WowTokenPublic.UpdateMarketPrice()
+function AbyssUIDailyInfo()
+	print("\n|cffcc0000<< AbyssUI Daily Info >>|r")
+	if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
+		print("|cffcc0000Token Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+	else
+		print("|cffcc0000Token Price:|r Not available right now!")
+	end
+	print("|cffcc0000Date:|r " .. date("|cffffcc00%m/%d/%y|r %H:%M:%S"))
+	print("|cffcc0000Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
+	--print("|cffcc0000Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+	print("|cffcc0000WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+end
+----------------------------------------------------
+
+
+--------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")
 AbyssUISave:RegisterEvent("PLAYER_LOGOUT")
 AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
 	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
 		if ( AbyssUICount == nil ) then
-			AbyssUICount = 0;
+			AbyssUICount = 0
 		end
 		if ( AbyssUIProfile == nil ) then
-			AbyssUICount = AbyssUICount + 1;
-			AbyssUIStart();
+			AbyssUICount = AbyssUICount + 1
+				AbyssUIStart()
 		else
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
-			print("Thanks for using AbyssUI! " .. name .. " you leave for " .. SecondsToTime(elapsed));
-			AbyssUIFirstFrame:Hide();
+			C_Timer.After(4, function()
+				print("Thanks for using |cff0d75d4AbyssUI!|r The |cff5f545eDark|r Blizzard UI revamp.")
+			end)
+			C_Timer.After(5, function()
+				AbyssUIDailyInfo()
+				print("|cffcc0000Time since last login: |r" .. name .. " you leave for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
+			end)
+			AbyssUIFirstFrame:Hide()
 		end
 	elseif ( event == "PLAYER_LOGOUT" ) then
-		AbyssUIProfile = time();
+		AbyssUIProfile = time()
 	end
 end)
 
