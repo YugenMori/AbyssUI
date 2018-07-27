@@ -73,7 +73,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			MainMenuBarArtFrameBackground.BackgroundLarge, }) do
 			v:SetVertexColor(.5, .5, .5)
 		end
-		-- CharacterFrame
+		-- Character
 		for i, v in pairs({ CharacterFrameRightBorder,
 			CharacterFrameLeftBorder,
 			CharacterFrameTopBorder,
@@ -190,14 +190,14 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			ChatFrame7EditBoxMid,	}) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- StatusBarBorder (ExpBar)
+		-- StatusBar (ExpBar)
 		for i, v in pairs({ StatusTrackingBarManager.SingleBarLarge,
 			StatusTrackingBarManager.SingleBarSmall,
 			StatusTrackingBarManager.SingleBarLargeUpper,
 			StatusTrackingBarManager.SingleBarSmallUpper,	}) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- MailBorder
+		-- Mail
 		for i, v in pairs({ MailFrameTopBorder,
 			MailFrameRightBorder,
 			MailFrameBottomBorder,
@@ -210,7 +210,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			MailFrameBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- Merchant Frame
+		-- Merchant
 		for i, v in pairs({ MerchantFrameTopBorder,
 			MerchantFrameRightBorder,
 			MerchantFrameBottomBorder,
@@ -223,7 +223,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			MerchantFrameBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- Gossip Frame (e.g NPC dialog frame and interactions)
+		-- Gossip (e.g NPC dialog frame and interactions)
 		for i, v in pairs({ GossipFrameTopBorder,
 			GossipFrameRightBorder,
 			GossipFrameBottomBorder,
@@ -236,7 +236,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			GossipFrameBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- Bank Frame
+		-- Bank
 		for i, v in pairs({ BankFrameTopBorder,
 			BankFrameRightBorder,
 			BankFrameBottomBorder,
@@ -249,7 +249,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			BankFrameBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- Quest Frame
+		-- Quest
 		for i, v in pairs({ QuestFrameTopBorder,
 			QuestFrameRightBorder,
 			QuestFrameBottomBorder,
@@ -262,7 +262,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			QuestFrameBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
-		-- Taxi Frame
+		-- Taxi
 		for i, v in pairs({ TaxiFrame.TopBorder,
 			TaxiFrame.RightBorder,
 			TaxiFrame.BottomBorder,
@@ -275,7 +275,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			TaxiFrame.BotRightCorner,
 			TaxiFrame.InsetBorderBottom,
 			TaxiFrame.InsetBorderBottomLeft,
-			TaxiFrame.InsetBorderLeft, }) do
+			TaxiFrame.InsetBorderLeft,
+		 	TaxiFrame.InsetBorderBottomRight, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
 		-- Micro Menu and Bag Bar
@@ -335,29 +336,20 @@ f:SetScript("OnEvent", function(self, event, name)
 			PetJournalLeftInsetInsetBotLeftCorner,
 		 	PetJournalLeftInsetInsetBotRightCorner,
 			PetJournalRightInsetInsetBotLeftCorner,
-			PetJournalRightInsetInsetBotRightCorner, }) do
+			PetJournalRightInsetInsetBotRightCorner,
+		 	ToyBoxInsetBottomBorder,
+			ToyBoxInsetLeftBorder,
+			ToyBoxInsetBotLeftCorner,
+			ToyBoxInsetBotRightCorner,
+			HeirloomsJournalInsetBottomBorder,
+			HeirloomsJournalInsetLeftBorder,
+			HeirloomsJournalInsetBotLeftCorner,
+			HeirloomsJournalInsetBotRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
 	end
 end)
--- Azerite (needs review)
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_AzeriteUI" then
-		for i, v in pairs({ AzeriteEmpoweredItemUITopBorder,
-			AzeriteEmpoweredItemUIRightBorder,
-			AzeriteEmpoweredItemUIBottomBorder,
-			AzeriteEmpoweredItemUILeftBorder,
-			AzeriteEmpoweredItemUIPortraitFrame,
-			AzeriteEmpoweredItemUIBotLeftCorner,
-			AzeriteEmpoweredItemUIBotRightCorner,
-			AzeriteEmpoweredItemUIBotTopRightCorner, }) do
-			v:SetVertexColor(.4, .4, .4)
-		end
-	end
-end)
--- Honor Extra
+-- Honor (Extra from PVE)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -379,7 +371,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- AdvGuide
+-- AdventureGuide
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -461,7 +453,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- Auction House (needs review)
+-- AuctionHouse
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -472,68 +464,141 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- Flight Map needs review
+-- FlightMap
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_FlightMap" then
-		for i, v in pairs({ FlightMapFrameTopBorder, FlightMapFrameRightBorder,
-			FlightMapFrameBottomBorder, FlightMapFrameLeftBorder,
-			FlightMapFramePortraitFrame, FlightMapFrameTopRightCorner,
-			FlightMapFrameBtnCornerLeft, FlightMapFrameBtnCornerRight,
-			FlightMapFrameBotLeftCorner, FlightMapFrameBotRightCorner	}) do
+		for i, v in pairs({ FlightMapFrameTopBorder,
+			FlightMapFrameRightBorder,
+			FlightMapFrameBottomBorder,
+			FlightMapFrameLeftBorder,
+			FlightMapFramePortraitFrame,
+			FlightMapFrameTopRightCorner,
+			FlightMapFrameBtnCornerLeft,
+			FlightMapFrameBtnCornerRight,
+			FlightMapFrameBotLeftCorner,
+			FlightMapFrameBotRightCorner,	}) do
 			v:SetVertexColor(.4, .4, .4)
 		end
 	end
 end)
--- Trade Skill Frame (needs review)
+-- TradeSkill
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TradeSkillUI" then
-		for i, v in pairs({ TradeSkillFrameTopBorder, TradeSkillFrameRightBorder,
-			TradeSkillFrameBottomBorder, TradeSkillFrameLeftBorder,
-			TradeSkillFramePortraitFrame, TradeSkillFrameTopRightCorner,
-			TradeSkillFrameBtnCornerLeft, TradeSkillFrameBtnCornerRight,
-			TradeSkillFrameBotLeftCorner, TradeSkillFrameBotRightCorner, }) do
+		for i, v in pairs({ TradeSkillFrameTopBorder,
+			TradeSkillFrameRightBorder,
+			TradeSkillFrameBottomBorder,
+			TradeSkillFrameLeftBorder,
+			TradeSkillFramePortraitFrame,
+			TradeSkillFrameTopRightCorner,
+			TradeSkillFrameBtnCornerLeft,
+			TradeSkillFrameBtnCornerRight,
+			TradeSkillFrameBotLeftCorner,
+			TradeSkillFrameBotRightCorner,
+		 	TradeSkillFrameInsetBottomBorder,
+			TradeSkillFrameInsetBotLeftCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
 	end
 end)
--- Inspect Frame needs review
+-- Inspect
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_InspectUI" then
-		for i, v in pairs({ InspectFrameTopBorder, InspectFrameRightBorder,
-			InspectFrameBottomBorder, InspectFrameLeftBorder,
-			InspectFramePortraitFrame, InspectFrameTopRightCorner,
-			InspectFrameBtnCornerLeft, InspectFrameBtnCornerRight,
-			InspectFrameBotLeftCorner, InspectFrameBotRightCorner, }) do
+		for i, v in pairs({ InspectFrameTopBorder,
+			InspectFrameRightBorder,
+			InspectFrameBottomBorder,
+			InspectFrameLeftBorder,
+			InspectFramePortraitFrame,
+			InspectFrameTopRightCorner,
+			InspectFrameBtnCornerLeft,
+			InspectFrameBtnCornerRight,
+			InspectFrameBotLeftCorner,
+			InspectFrameBotRightCorner,
+		 	InspectFrameInsetInsetBottomBorder,
+			InspectFrameInsetInsetBotLeftCorner,
+			InspectFrameInsetInsetBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- Wardrobe Frame aka Transmogrify (Some parts missing)
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Collections" or name == "Blizzard_Wardrobe" then
+		for i, v in pairs({ WardrobeFrameTopBorder,
+			WardrobeFrameRightBorder,
+			WardrobeFrameBottomBorder,
+			WardrobeFrameLeftBorder,
+			WardrobeFramePortraitFrame,
+			WardrobeFrameTopRightCorner,
+			WardrobeFrameBtnCornerLeft,
+			WardrobeFrameBtnCornerRight,
+			WardrobeFrameBotLeftCorner,
+			WardrobeFrameBotRightCorner,
+		 	WardrobeTransmogFrameInsetBottomBorder,
+			WardrobeTransmogFrameInsetBotLeftCorner,
+		  WardrobeTransmogFrameInsetBotRightCorner,
+			WardrobeCollectionFrameInsetLeftBorder,
+			WardrobeCollectionFrameInsetBottomBorder,
+			WardrobeCollectionFrameInsetBotLeftCorner,
+			WardrobeCollectionFrameInsetBotRightCorner, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+-- ClassTrainer/FlightMaster
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_TrainerUI" then
+		for i, v in pairs({ ClassTrainerFrameTopBorder,
+			ClassTrainerFrameRightBorder,
+			ClassTrainerFrameBottomBorder,
+			ClassTrainerFrameLeftBorder,
+			ClassTrainerFramePortraitFrame,
+			ClassTrainerFrameTopRightCorner,
+			ClassTrainerFrameBtnCornerLeft,
+			ClassTrainerFrameBtnCornerRight,
+			ClassTrainerFrameBotLeftCorner,
+			ClassTrainerFrameBotRightCorner,
+		 	ClassTrainerFrameButtonBottomBorder,
+			ClassTrainerFrameBottomInsetInsetBottomBorder, }) do
+			v:SetVertexColor(.4, .4, .4)
+		end
+	end
+end)
+----------------------------------------------------
+
+
+----------------------------- Needs Review -----------------------------
+--[[
+------------------------------------------------------------------------
+
+-- Azerite (needs review)
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_AzeriteUI" then
+		for i, v in pairs({ AzeriteEmpoweredItemUITopBorder,
+			AzeriteEmpoweredItemUIRightBorder,
+			AzeriteEmpoweredItemUIBottomBorder,
+			AzeriteEmpoweredItemUILeftBorder,
+			AzeriteEmpoweredItemUIPortraitFrame,
+			AzeriteEmpoweredItemUIBotLeftCorner,
+			AzeriteEmpoweredItemUIBotRightCorner,
+			AzeriteEmpoweredItemUIBotTopRightCorner, }) do
 			v:SetVertexColor(.4, .4, .4)
 		end
 	end
 end)
 
-
------- Need Review (Not Working or Blizzard doesn't allow changes for now)------
---[[
--- Wardrobe Frame aka Transmogrify (needs review)
-for i, v in pairs({ WardrobeFrameTopBorder, WardrobeFrameRightBorder,
-	WardrobeFrameBottomBorder, WardrobeFrameLeftBorder,
-	WardrobeFramePortraitFrame,	WardrobeFrameTopRightCorner,
-	WardrobeFrameBtnCornerLeft,	WardrobeFrameBtnCornerRight,
-	WardrobeFrameBotLeftCorner,	WardrobeFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
--- Class Trainer Frame aka Flight Master and others (needs review)
-for i, v in pairs({ ClassTrainerFrameTopBorder, ClassTrainerFrameRightBorder,
-	ClassTrainerFrameBottomBorder, ClassTrainerFrameLeftBorder,
-	ClassTrainerFramePortraitFrame, ClassTrainerFrameTopRightCorner,
-	ClassTrainerFrameBtnCornerLeft, ClassTrainerFrameBtnCornerRight,
-	ClassTrainerFrameBotLeftCorner, ClassTrainerFrameBotRightCorner, }) do
-	v:SetVertexColor(.4, .4, .4)
-end
+------------------------------------------------------------------------
 --]]
 
 
