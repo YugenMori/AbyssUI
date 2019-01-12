@@ -199,18 +199,18 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- SpellBook
-		for i, v in pairs({ SpellBookFrameTopBorder,
-			SpellBookFrameRightBorder,
-			SpellBookFrameLeftBorder,
-			SpellBookFrameBottomBorder,
-			SpellBookFramePortraitFrame,
-			SpellBookFrameTopRightCorner,
-			SpellBookFrameBotLeftCorner,
-			SpellBookFrameBotRightCorner,
-			SpellBookFrameInsetInsetBottomBorder,
-			SpellBookFrameInsetInsetRightBorder,
-			SpellBookFrameInsetInsetBotRightCorner,
-			SpellBookFrameInsetInsetBotLeftCorner, }) do
+		for i, v in pairs({ SpellBookFrame.NineSlice.TopEdge,
+			SpellBookFrame.NineSlice.RightEdge,
+			SpellBookFrame.NineSlice.LeftEdge,
+			SpellBookFrame.NineSlice.TopEdge,
+			SpellBookFrame.NineSlice.BottomEdge,
+			SpellBookFrame.NineSlice.PortraitFrame,
+			SpellBookFrame.NineSlice.TopRightCorner,
+			SpellBookFrame.NineSlice.TopLeftCorner,
+			SpellBookFrame.NineSlice.BottomLeftCorner,
+			SpellBookFrame.NineSlice.BottomRightCorner,
+		 	SpellBookFrameInset.NineSlice.BottomEdge,
+			SpellBookFrameInset.NineSlice.BottomLeftCorner,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -251,27 +251,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- PvE
-		for i, v in pairs({ PVEFrameTopBorder,
-			PVEFrameRightBorder,
-			PVEFrameLeftBorder,
-			PVEFrameBottomBorder,
-			PVEFramePortraitFrame,
-			PVEFrameTopRightCorner,
-			PVEFrameBotLeftCorner,
-			PVEFrameBotRightCorner,
-			LFDParentFrameBtnCornerRight,
-			PVEFrameLeftInsetInsetBottomBorder,
-			PVEFrameLeftInsetInsetBotLeftCorner,
-			LFDParentFrameButtonBottomBorder,
-			RaidFinderFrameBtnCornerRight,
-			RaidFinderFrameButtonBottomBorder,
-			LFDParentFrameInsetInsetBottomBorder,
-			RaidFinderFrameBottomInsetInsetBottomBorder,
-			LFGListFrameInsetBottomBorder,
-			LFDParentFrameInsetInsetBotLeftCorner,
-			LFGListFrameInsetBotLeftCorner,
-			RaidFinderFrameBottomInsetInsetBotLeftCorner,	}) do
+		-- PvE/Pvp
+		for i, v in pairs({ PVEFrame.NineSlice.TopEdge,
+		PVEFrame.NineSlice.TopRightCorner,
+		PVEFrame.NineSlice.RightEdge,
+		PVEFrame.NineSlice.BottomRightCorner,
+		PVEFrame.NineSlice.BottomEdge,
+		PVEFrame.NineSlice.BottomLeftCorner,
+		PVEFrame.NineSlice.LeftEdge,
+		PVEFrame.NineSlice.TopLeftCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
