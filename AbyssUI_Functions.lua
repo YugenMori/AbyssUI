@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- Author: Abyss_Samurai
+-- Author: Yugen
 --
 -- Battle for Azeroth
 --
@@ -301,15 +301,16 @@ end)
 
 GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 	local _, factionGroup
+	local englishFaction, localizedFaction = UnitFactionGroup("player")
 	-- Horde
-		if UnitFactionGroup("player") == "Horde" then
-			if GameTooltipTextLeft3:GetText() == "Horde" then
+		if englishFaction == "Horde" then
+			if GameTooltipTextLeft3:GetText() == "Horde" or GameTooltipTextLeft3:GetText() == "Horda" then
 				GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-			elseif GameTooltipTextLeft4:GetText() == "Horde"then
+			elseif GameTooltipTextLeft4:GetText() == "Horde" or GameTooltipTextLeft4:GetText() == "Horda" then
 				GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-			elseif GameTooltipTextLeft3:GetText() == "Alliance"then
+			elseif GameTooltipTextLeft3:GetText() == "Alliance" or GameTooltipTextLeft3:GetText() == "Aliança" then
 				GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-			elseif GameTooltipTextLeft4:GetText() == "Alliance"then
+			elseif GameTooltipTextLeft4:GetText() == "Alliance" or GameTooltipTextLeft4:GetText() == "Aliança" then
 				GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
 			else
 				GameTooltipTextLeft3:SetTextColor(255, 255, 255)
@@ -317,14 +318,14 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 			end
 		end
   -- Alliance
-	if UnitFactionGroup("player") == "Alliance" then
-		if GameTooltipTextLeft3:GetText() == "Alliance" then
+	if englishFaction == "Alliance" then
+		if GameTooltipTextLeft3:GetText() == "Alliance" or GameTooltipTextLeft3:GetText() == "Aliança" then
 			GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-		elseif GameTooltipTextLeft4:GetText() == "Alliance"then
+		elseif GameTooltipTextLeft4:GetText() == "Alliance" or GameTooltipTextLeft4:GetText() == "Aliança" then
 			GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-		elseif GameTooltipTextLeft3:GetText() == "Horde"then
+		elseif GameTooltipTextLeft3:GetText() == "Horde" or GameTooltipTextLeft3:GetText() == "Horda" then
 			GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-		elseif GameTooltipTextLeft4:GetText() == "Horde"then
+		elseif GameTooltipTextLeft4:GetText() == "Horde" or GameTooltipTextLeft4:GetText() == "Horda" then
 			GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
 		else
 			GameTooltipTextLeft3:SetTextColor(255, 255, 255)
@@ -494,6 +495,14 @@ CF:SetScript("OnEvent", function(self, event)
 	end
 	StatsFrame:SetScript("OnUpdate", update)
 end)
+-- Hide
+function AbyssUI_StatsFrames1Hide()
+	StatsFrame:Hide()
+end
+-- Show
+function AbyssUI_StatsFrames1Show()
+	StatsFrame:Show()
+end
 ----------------------------------------------------
 
 -----------------------
@@ -550,30 +559,32 @@ g:SetScript("OnEvent", function()
             end
         end
     end
-
-    if(CanMerchantRepair()) then
-        local cost = GetRepairAllCost()
-        if cost > 0 then
-            local money = GetMoney()
-            if IsInGuild() then
+		if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
+	    if( CanMerchantRepair() ) then
+	        local cost = GetRepairAllCost()
+	        if cost > 0 then
+	            local money = GetMoney()
+	            if IsInGuild() then
                 local guildMoney = GetGuildBankWithdrawMoney()
                 if guildMoney > GetGuildBankMoney() then
-                    guildMoney = GetGuildBankMoney()
+                  guildMoney = GetGuildBankMoney()
                 end
                 if guildMoney > cost and CanGuildBankRepair() then
-                    RepairAllItems(1)
-                    print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
-                    return
+                  RepairAllItems(1)
+                  print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
+                  return
                 end
-            end
-            if money > cost then
+	            end
+	            if money > cost then
                 RepairAllItems()
                 print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
-            else
+	            else
                 print("Not enough gold for repair.")
-            end
-        end
-    end
+	            end
+        	end
+    	end
+			else return nil
+		end
 end)
 ----------------------------------------------------
 
@@ -586,21 +597,25 @@ frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 
 local function eventHandler(self, event, ...)
-	if UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") then
-		TargetFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-	elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
-		TargetFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
-	end
-	if UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") then
-		FocusFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-	elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
-		FocusFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
+		if UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") then
+			TargetFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
+		elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
+			TargetFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+		end
+		if UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") then
+			FocusFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
+		elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
+			FocusFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+		end
+	else
+		return nil
 	end
 end
 
 frame:SetScript("OnEvent", eventHandler)
 
-for _, BarTextures in pairs({TargetFrameNameBackground, FocusFrameNameBackground}) do
+for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 
@@ -627,6 +642,7 @@ end)
 -- Percent at target health --
 ------------------------------
 
+--[[ NEED REVIEW
 FrameList = {"Target", "Focus"}
 function UpdateHealthValues(...)
 for i = 1, select("#", unpack(FrameList)) do
@@ -643,6 +659,30 @@ end
 
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", UpdateHealthValues)
 ----------------------------------------------------
+--]]
+
+-- AFK Camera
+local AbyssUI_AFKCamera = CreateFrame("FRAME")
+AbyssUI_AFKCamera:RegisterEvent("PLAYER_FLAGS_CHANGED")
+AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
+	local inInstance, instanceType = IsInInstance()
+	if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
+		local isAFK = UnitIsAFK("player")
+		if isAFK == true and inInstance ~= true then
+			AbyssUI_UpdateAFKCameraData()
+			UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
+		elseif isAFK == false and inInstance ~= true then
+			AbyssUI_AFKCameraFrame:Hide()
+		elseif isAFK == true and inInstance == true then
+			AbyssUI_AFKCameraFrame:Hide()
+		elseif isAFK == false and inInstance == true then
+			AbyssUI_AFKCameraFrame:Hide()
+		else
+			AbyssUI_AFKCameraFrame:Hide()
+		end
+	end
+end)
 
 -- Start Function
 function AbyssUIStart()
@@ -667,5 +707,19 @@ function AbyssUIDailyInfo()
 	print("|cffa5f6f3AbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
 end
 ----------------------------------------------------
+
+
+-- Update Function Exemple
+--[[
+local f = CreateFrame("Frame");
+function f:onUpdate(sinceLastUpdate)
+	self.sinceLastUpdate = (self.sinceLastUpdate or 0) + sinceLastUpdate;
+	if ( self.sinceLastUpdate >= 5 ) then -- in seconds
+		-- do stuff here
+		self.sinceLastUpdate = 0;
+	end
+end
+f:SetScript("OnUpdate",f.onUpdate)
+--]]
 
 -- End
