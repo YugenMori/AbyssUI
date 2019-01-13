@@ -301,14 +301,17 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Friends
-		for i, v in pairs({ FriendsFrameTopBorder,
-			FriendsFrameRightBorder,
-			FriendsFrameLeftBorder,
-			FriendsFrameBottomBorder,
-			FriendsFramePortraitFrame,
-			FriendsFrameTopRightCorner,
-			FriendsFrameBtnCornerLeft,
-			FriendsFrameBtnCornerRight,	}) do
+		for i, v in pairs({ FriendsFrame.NineSlice.TopEdge,
+			FriendsFrame.NineSlice.TopEdge,
+			FriendsFrame.NineSlice.TopRightCorner,
+			FriendsFrame.NineSlice.RightEdge,
+			FriendsFrame.NineSlice.BottomRightCorner,
+			FriendsFrame.NineSlice.BottomEdge,
+			FriendsFrame.NineSlice.BottomLeftCorner,
+			FriendsFrame.NineSlice.LeftEdge,
+			FriendsFrame.NineSlice.TopLeftCorner,
+			FriendsFrameInset.NineSlice.BottomEdge,
+			FriendsFrameInset.NineSlice.BottomLeftCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -350,15 +353,16 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Map
-		for i, v in pairs({ WorldMapFrameTopBorder,
-			WorldMapFrameRightBorder,
-			WorldMapFrameLeftBorder,
-			WorldMapFrameBottomBorder,
-			WorldMapFramePortraitFrame,
-			WorldMapFrameTopRightCorner,
-			WorldMapFrameBotLeftCorner,
-			WorldMapFrameBotRightCorner,
-			WorldMapFrame.BorderFrame.ButtonFrameEdge, }) do
+		for i, v in pairs({ WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopRightCorner,
+			WorldMapFrame.BorderFrame.NineSlice.RightEdge,
+			WorldMapFrame.BorderFrame.NineSlice.BottomRightCorner,
+			WorldMapFrame.BorderFrame.NineSlice.BottomEdge,
+			WorldMapFrame.BorderFrame.NineSlice.BottomLeftCorner,
+			WorldMapFrame.BorderFrame.NineSlice.LeftEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopLeftCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -400,16 +404,23 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Channels
-		for i, v in pairs({ ChannelFrameTopBorder,
-			ChannelFrameRightBorder,
-			ChannelFrameLeftBorder,
-			ChannelFrameBottomBorder,
-			ChannelFramePortraitFrame,
-			ChannelFrameTopRightCorner,
-			ChannelFrameBtnCornerLeft,
-			ChannelFrameBtnCornerRight,
-			ChannelFrameBotLeftCorner,
-			ChannelFrameBotRightCorner,	}) do
+		for i, v in pairs({ ChannelFrame.NineSlice.TopEdge,
+			ChannelFrame.NineSlice.TopEdge,
+			ChannelFrame.NineSlice.TopRightCorner,
+			ChannelFrame.NineSlice.RightEdge,
+			ChannelFrame.NineSlice.BottomRightCorner,
+			ChannelFrame.NineSlice.BottomEdge,
+			ChannelFrame.NineSlice.BottomLeftCorner,
+			ChannelFrame.NineSlice.LeftEdge,
+			ChannelFrame.NineSlice.TopLeftCorner,
+			ChannelFrame.LeftInset.NineSlice.BottomEdge,
+			ChannelFrame.LeftInset.NineSlice.BottomLeftCorner,
+			ChannelFrame.LeftInset.NineSlice.BottomRightCorner,
+			ChannelFrame.RightInset.NineSlice.BottomEdge,
+			ChannelFrame.RightInset.NineSlice.BottomLeftCorner,
+			ChannelFrame.RightInset.NineSlice.BottomRightCorner,
+			ChannelFrameInset.NineSlice.BottomEdge,
+			ChannelFrameInset.NineSlice.BottomLeftCorner,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
