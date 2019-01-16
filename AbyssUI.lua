@@ -569,16 +569,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Mail
-		for i, v in pairs({ MailFrameTopBorder,
-			MailFrameRightBorder,
-			MailFrameBottomBorder,
-			MailFrameLeftBorder,
-			MailFramePortraitFrame,
-			MailFrameTopRightCorner,
-			MailFrameBtnCornerLeft,
-			MailFrameBtnCornerRight,
-			MailFrameBotLeftCorner,
-			MailFrameBotRightCorner, }) do
+		for i, v in pairs({ MailFrame.NineSlice.TopEdge,
+			MailFrame.NineSlice.TopRightCorner,
+			MailFrame.NineSlice.RightEdge,
+			MailFrame.NineSlice.BottomRightCorner,
+			MailFrame.NineSlice.BottomEdge,
+			MailFrame.NineSlice.BottomLeftCorner,
+			MailFrame.NineSlice.LeftEdge,
+			MailFrame.NineSlice.TopLeftCorner,
+			MailFrameInset.NineSlice.BottomEdge,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -620,16 +619,14 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Merchant
-		for i, v in pairs({ MerchantFrameTopBorder,
-			MerchantFrameRightBorder,
-			MerchantFrameBottomBorder,
-			MerchantFrameLeftBorder,
-			MerchantFramePortraitFrame,
-			MerchantFrameTopRightCorner,
-			MerchantFrameBtnCornerLeft,
-			MerchantFrameBtnCornerRight,
-			MerchantFrameBotLeftCorner,
-			MerchantFrameBotRightCorner, }) do
+		for i, v in pairs({ MerchantFrame.NineSlice.TopEdge,
+			MerchantFrame.NineSlice.RightEdge,
+			MerchantFrame.NineSlice.BottomEdge,
+			MerchantFrame.NineSlice.LeftEdge,
+			MerchantFrame.NineSlice.TopRightCorner,
+			MerchantFrame.NineSlice.TopLeftCorner,
+			MerchantFrame.NineSlice.BottomLeftCorner,
+			MerchantFrame.NineSlice.BottomRightCorner,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -671,16 +668,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Gossip (e.g NPC dialog frame and interactions)
-		for i, v in pairs({ GossipFrameTopBorder,
-			GossipFrameRightBorder,
-			GossipFrameBottomBorder,
-			GossipFrameLeftBorder,
-			GossipFramePortraitFrame,
-			GossipFrameTopRightCorner,
-			GossipFrameBtnCornerLeft,
-			GossipFrameBtnCornerRight,
-			GossipFrameBotLeftCorner,
-			GossipFrameBotRightCorner, }) do
+		for i, v in pairs({ GossipFrame.NineSlice.TopEdge,
+			GossipFrame.NineSlice.RightEdge,
+			GossipFrame.NineSlice.BottomEdge,
+			GossipFrame.NineSlice.LeftEdge,
+			GossipFrame.NineSlice.TopRightCorner,
+			GossipFrame.NineSlice.TopLeftCorner,
+			GossipFrame.NineSlice.BottomLeftCorner,
+			GossipFrame.NineSlice.BottomRightCorner,
+		 	GossipFrameInset.NineSlice.BottomEdge,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -722,16 +718,14 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Bank
-		for i, v in pairs({ BankFrameTopBorder,
-			BankFrameRightBorder,
-			BankFrameBottomBorder,
-			BankFrameLeftBorder,
-			BankFramePortraitFrame,
-			BankFrameTopRightCorner,
-			BankFrameBtnCornerLeft,
-			BankFrameBtnCornerRight,
-			BankFrameBotLeftCorner,
-			BankFrameBotRightCorner, }) do
+		for i, v in pairs({ BankFrame.NineSlice.TopEdge,
+			BankFrame.NineSlice.RightEdge,
+			BankFrame.NineSlice.BottomEdge,
+			BankFrame.NineSlice.LeftEdge,
+			BankFrame.NineSlice.TopRightCorner,
+			BankFrame.NineSlice.TopLeftCorner,
+			BankFrame.NineSlice.BottomLeftCorner,
+			BankFrame.NineSlice.BottomRightCorner,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -773,16 +767,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Quest
-		for i, v in pairs({ QuestFrameTopBorder,
-			QuestFrameRightBorder,
-			QuestFrameBottomBorder,
-			QuestFrameLeftBorder,
-			QuestFramePortraitFrame,
-			QuestFrameTopRightCorner,
-			QuestFrameBtnCornerLeft,
-			QuestFrameBtnCornerRight,
-			QuestFrameBotLeftCorner,
-			QuestFrameBotRightCorner, }) do
+		for i, v in pairs({ QuestFrame.NineSlice.TopEdge,
+			QuestFrame.NineSlice.RightEdge,
+			QuestFrame.NineSlice.BottomEdge,
+			QuestFrame.NineSlice.LeftEdge,
+			QuestFrame.NineSlice.TopRightCorner,
+			QuestFrame.NineSlice.TopLeftCorner,
+			QuestFrame.NineSlice.BottomLeftCorner,
+			QuestFrame.NineSlice.BottomRightCorner,
+			QuestFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
