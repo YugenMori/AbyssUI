@@ -27,7 +27,7 @@ local function InitSettings()
      InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
 
      AbyssUI_Config.childpanel2 = CreateFrame( "Frame", "$ConfigChild_PortraitColorization", AbyssUI_Config.panel)
-     AbyssUI_Config.childpanel2.name = "Portrait/Colorization"
+     AbyssUI_Config.childpanel2.name = "Themes/Colorization"
      AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
      InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
 
@@ -306,18 +306,30 @@ local function InitSettings()
       C_WowTokenPublic.UpdateMarketPrice()
       AbyssUIDailyInfo()
     end)
+    ----------------------
+    -- Clear Action Bar --
+    ----------------------
+    local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(24)
+    FrameButton:SetWidth(140)
+    FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -130)
+    FrameButton:SetText("Clear Action Bar")
+    FrameButton:SetScript("OnClick", function()
+      for i = 1, 120 do
+        PickupAction(i) ClearCursor()
+      end
+    end)
     ------------
     -- Reload --
     ------------
     local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
     FrameButton:SetHeight(24)
     FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -130)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -170)
     FrameButton:SetText("Reload UI")
     FrameButton:SetScript("OnClick", function()
       ReloadUI()
     end)
-
 
 ------------------------------- Miscellaneous -------------------------------
 
@@ -430,7 +442,7 @@ local function InitSettings()
     -- Action Cam --
     ----------------
     local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 10, -170)
+    AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
     AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor\nMode")
     AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
     AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
@@ -460,27 +472,13 @@ local function InitSettings()
     -- Auto Repair/Sell Gray --
     ---------------------------
     local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 10, -200)
+    AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 180, -110)
     AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Itens")
     AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair itens"
     AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
     -- OnClick Function
     AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
       AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
-    end)
-
-    ----------------------
-    -- Clear Action Bar --
-    ----------------------
-    local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.childpanel3, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(24)
-    FrameButton:SetWidth(150)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", 0, -80)
-    FrameButton:SetText("Clear All Skills (Action Bar)")
-    FrameButton:SetScript("OnClick", function()
-      for i = 1, 120 do
-        PickupAction(i) ClearCursor()
-      end
     end)
 
   ---------------------------- AbyssUI Stylization ----------------------------
