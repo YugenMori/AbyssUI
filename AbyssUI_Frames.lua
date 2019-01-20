@@ -225,6 +225,8 @@ LevelUp_PlayerLevel:SetScale(8)
 LevelUp_PlayerLevel.text = LevelUp_PlayerLevel.text or LevelUp_PlayerLevel:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 LevelUp_PlayerLevel.text:SetPoint("CENTER", 0, -10)
 LevelUp_PlayerLevel.text:SetText(level)
+LevelUp_PlayerLevel.text:SetWidth(GetScreenWidth())
+LevelUp_PlayerLevel.text:SetHeight(GetScreenHeight()/4)
 -- Player Nome
 local LevelUp_PlayerName = CreateFrame("Frame", nil, AbyssUI_LevelUpFrame)
 LevelUp_PlayerName:SetAllPoints(AbyssUI_LevelUpFrame)
@@ -232,6 +234,8 @@ LevelUp_PlayerName:SetScale(8)
 LevelUp_PlayerName.text = LevelUp_PlayerName.text or LevelUp_PlayerName:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 LevelUp_PlayerName.text:SetPoint("CENTER", 0, 10)
 LevelUp_PlayerName.text:SetText(playerName)
+LevelUp_PlayerName.text:SetWidth(GetScreenWidth())
+LevelUp_PlayerName.text:SetHeight(GetScreenHeight()/4)
 
 function AbyssUI_UpdateYouDiedLevelUpData()
 	-- Get
