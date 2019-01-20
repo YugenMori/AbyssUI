@@ -133,14 +133,16 @@ AbyssUI_YouDiedFrame.text:SetAllPoints(true)
 AbyssUI_YouDiedFrame.text:SetJustifyH("CENTER")
 AbyssUI_YouDiedFrame.text:SetJustifyV("CENTER")
 AbyssUI_YouDiedFrame.text:SetText("|cff8b0000YOU DIED|r")
+AbyssUI_YouDiedFrame.text:SetWidth(GetScreenWidth())
+AbyssUI_YouDiedFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_DEAD" ) then
 			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
-			C_Timer.After(2, function()
-				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
-			end)
+				C_Timer.After(2, function()
+					UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
+				end)
 		else
 			return nil
 		end
@@ -179,6 +181,8 @@ AbyssUI_LevelUpFrame.text:SetAllPoints(true)
 AbyssUI_LevelUpFrame.text:SetJustifyH("CENTER")
 AbyssUI_LevelUpFrame.text:SetJustifyV("CENTER")
 AbyssUI_LevelUpFrame.text:SetText("|cfff2dc7fLevel Up|r")
+AbyssUI_LevelUpFrame.text:SetWidth(GetScreenWidth())
+AbyssUI_LevelUpFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_LevelUpFrame:Hide()
 AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
@@ -287,6 +291,134 @@ FrameButton:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 
+-- AbyssUI_ReloadFrame
+AbyssUI_ReloadFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ReloadFrame:Hide()
+AbyssUI_ReloadFrame:SetWidth(400)
+AbyssUI_ReloadFrame:SetHeight(150)
+AbyssUI_ReloadFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, -100)
+AbyssUI_ReloadFrame:EnableMouse(true)
+AbyssUI_ReloadFrame:SetClampedToScreen(true)
+AbyssUI_ReloadFrame:SetMovable(true)
+AbyssUI_ReloadFrame:RegisterForDrag("LeftButton")
+AbyssUI_ReloadFrame:SetScript("OnDragStart", AbyssUI_ReloadFrame.StartMoving)
+AbyssUI_ReloadFrame:SetScript("OnDragStop", function(self)
+  self:StopMovingOrSizing()
+end)
+
+AbyssUI_ReloadFrame:SetFrameStrata("Dialog")
+AbyssUI_ReloadFrame.text = AbyssUI_ReloadFrame.text or AbyssUI_ReloadFrame:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
+AbyssUI_ReloadFrame.text:SetScale(1.5)
+AbyssUI_ReloadFrame.text:SetAllPoints(true)
+AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
+AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
+AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\nClick the |cffffcc00'Confirm'|r button to Reload.\nYou still can make changes (do before you confirm).")
+----------------------------------------------------
+local Border = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
+Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Border:SetPoint("TOPLEFT", -3, 3)
+Border:SetPoint("BOTTOMRIGHT", 3, -3)
+Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil,"ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUI_ReloadFrame)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUI_ReloadFrame)
+AbyssUI_ReloadFrame.texture = Texture
+----------------------------------------------------
+local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
+FrameButtonConfirm:SetHeight(24)
+FrameButtonConfirm:SetWidth(70)
+FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrame, "BOTTOM", 0, 10)
+FrameButtonConfirm:SetText("Confirm")
+FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonConfirm)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonConfirm:SetScript("OnClick", function()
+	AbyssUI_ReloadFrame:Hide()
+	ReloadUI()
+end)
+----------------------------------------------------
+
+-- AbyssUI_ActionBarCleaner
+AbyssUI_ActionBarCleaner = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ActionBarCleaner:Hide()
+AbyssUI_ActionBarCleaner:SetWidth(400)
+AbyssUI_ActionBarCleaner:SetHeight(150)
+AbyssUI_ActionBarCleaner:SetPoint("CENTER", "UIParent", "CENTER", 0, -100)
+AbyssUI_ActionBarCleaner:EnableMouse(true)
+AbyssUI_ActionBarCleaner:SetClampedToScreen(true)
+AbyssUI_ActionBarCleaner:SetMovable(true)
+AbyssUI_ActionBarCleaner:RegisterForDrag("LeftButton")
+AbyssUI_ActionBarCleaner:SetScript("OnDragStart", AbyssUI_ActionBarCleaner.StartMoving)
+AbyssUI_ActionBarCleaner:SetScript("OnDragStop", function(self)
+  self:StopMovingOrSizing()
+end)
+
+AbyssUI_ActionBarCleaner:SetFrameStrata("Dialog")
+AbyssUI_ActionBarCleaner.text = AbyssUI_ActionBarCleaner.text or AbyssUI_ActionBarCleaner:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
+AbyssUI_ActionBarCleaner.text:SetScale(1.5)
+AbyssUI_ActionBarCleaner.text:SetAllPoints(true)
+AbyssUI_ActionBarCleaner.text:SetJustifyH("CENTER")
+AbyssUI_ActionBarCleaner.text:SetJustifyV("CENTER")
+AbyssUI_ActionBarCleaner.text:SetText("Wait!\nThis will clean all your skills/spells from Actions Bars.")
+----------------------------------------------------
+local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil,"BACKGROUND")
+Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Border:SetPoint("TOPLEFT", -3, 3)
+Border:SetPoint("BOTTOMRIGHT", 3, -3)
+Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUI_ActionBarCleaner:CreateTexture(nil,"ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUI_ActionBarCleaner)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUI_ActionBarCleaner:CreateTexture(nil,"BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUI_ActionBarCleaner)
+AbyssUI_ActionBarCleaner.texture = Texture
+----------------------------------------------------
+local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+FrameButtonConfirm:SetHeight(24)
+FrameButtonConfirm:SetWidth(70)
+FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", -50, 10)
+FrameButtonConfirm:SetText("Confirm")
+FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local FrameButtonCancel = CreateFrame("Button","FrameButton", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+FrameButtonCancel:SetHeight(24)
+FrameButtonCancel:SetWidth(70)
+FrameButtonCancel:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", 50, 10)
+FrameButtonCancel:SetText("Cancel")
+FrameButtonCancel:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonConfirm)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonConfirm:SetScript("OnClick", function()
+	for i = 1, 120 do
+		PickupAction(i) ClearCursor()
+	end
+	AbyssUI_ActionBarCleaner:Hide()
+end)
+----------------------------------------------------
+local BorderButton = FrameButtonCancel:CreateTexture(nil,"ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonCancel)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonCancel:SetScript("OnClick", function()
+	AbyssUI_ActionBarCleaner:Hide()
+end)
+----------------------------------------------------
 
 --------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")

@@ -47,6 +47,16 @@ local function InitSettings()
     Frame:SetPoint("CENTER")
     Frame:SetText("Abyss|cff0d75d4UI|r")
 
+    -- SubTittle
+    local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
+    Frame:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -80)
+    Frame:SetHeight(24)
+    Frame:SetWidth(200)
+    Frame:SetScale(1.1)
+    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    Frame:SetPoint("CENTER")
+    Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you liked, share with your friends, or make a donation. Helps a lot!\nThis is a Minimalist UI that make changes directly to the WoW frames,\n using almost nothing more than the Blizzard use of CPU/RAM.\n\nCheck the options by clicking in the (+) button")
+
     -- Panel 01
     local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
     Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
@@ -300,7 +310,7 @@ local function InitSettings()
     local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
     FrameButton:SetHeight(24)
     FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -90)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
     FrameButton:SetText("AbyssUI DailyInfo")
     FrameButton:SetScript("OnClick", function()
       C_WowTokenPublic.UpdateMarketPrice()
@@ -312,12 +322,10 @@ local function InitSettings()
     local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
     FrameButton:SetHeight(24)
     FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -130)
+    FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -200)
     FrameButton:SetText("Clear Action Bar")
     FrameButton:SetScript("OnClick", function()
-      for i = 1, 120 do
-        PickupAction(i) ClearCursor()
-      end
+      AbyssUI_ActionBarCleaner:Show()
     end)
     ------------
     -- Reload --
@@ -325,7 +333,7 @@ local function InitSettings()
     local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
     FrameButton:SetHeight(24)
     FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -170)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
     FrameButton:SetText("Reload UI")
     FrameButton:SetScript("OnClick", function()
       ReloadUI()
@@ -486,7 +494,6 @@ local function InitSettings()
   ---------------------------
   -- Player Portrait Style --
   ---------------------------
-
   -- AbyssUIClassCircles01_CheckButton
   local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
@@ -1077,66 +1084,8 @@ local function InitSettings()
       AbyssUIVertexColorFrames16_CheckButton:SetChecked(nil)
     end
   end)
-
   -- End
 end
-
-
--- AbyssUI_ReloadFrame
-AbyssUI_ReloadFrame = CreateFrame("Frame", nil, UIParent)
-AbyssUI_ReloadFrame:Hide()
-AbyssUI_ReloadFrame:SetWidth(400)
-AbyssUI_ReloadFrame:SetHeight(150)
-AbyssUI_ReloadFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, -100)
-AbyssUI_ReloadFrame:EnableMouse(true)
-AbyssUI_ReloadFrame:SetClampedToScreen(true)
-AbyssUI_ReloadFrame:SetMovable(true)
-AbyssUI_ReloadFrame:RegisterForDrag("LeftButton")
-AbyssUI_ReloadFrame:SetScript("OnDragStart", AbyssUI_ReloadFrame.StartMoving)
-AbyssUI_ReloadFrame:SetScript("OnDragStop", function(self)
-  self:StopMovingOrSizing()
-end)
-
-AbyssUI_ReloadFrame:SetFrameStrata("Dialog")
-AbyssUI_ReloadFrame.text = AbyssUI_ReloadFrame.text or AbyssUI_ReloadFrame:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
-AbyssUI_ReloadFrame.text:SetScale(1.5)
-AbyssUI_ReloadFrame.text:SetAllPoints(true)
-AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
-AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
-AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\nClick the |cffffcc00'Confirm'|r button to Reload.\nYou still can make changes (do before you confirm).")
-----------------------------------------------------
-local Border = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
-Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-Border:SetPoint("TOPLEFT", -3, 3)
-Border:SetPoint("BOTTOMRIGHT", 3, -3)
-Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
-----------------------------------------------------
-local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil,"ARTWORK")
-BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-BorderBody:SetAllPoints(AbyssUI_ReloadFrame)
-BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-----------------------------------------------------
-local Texture = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
-Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-Texture:SetAllPoints(AbyssUI_ReloadFrame)
-AbyssUI_ReloadFrame.texture = Texture
-----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(70)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrame, "BOTTOM", 0, 10)
-FrameButtonConfirm:SetText("Confirm")
-FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-----------------------------------------------------
-local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
-BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-BorderButton:SetAllPoints(FrameButtonConfirm)
-BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-FrameButtonConfirm:SetScript("OnClick", function()
-	AbyssUI_ReloadFrame:Hide()
-	ReloadUI()
-end)
-----------------------------------------------------
 
 --------------------------------- Save ---------------------------------
 --This starts things off and once we're far enough into the game
