@@ -817,20 +817,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Taxi
-		for i, v in pairs({ TaxiFrame.TopBorder,
-			TaxiFrame.RightBorder,
-			TaxiFrame.BottomBorder,
-			TaxiFrame.LeftBorder,
-			TaxiFrame.TopRightCorner,
-			TaxiFrame.TopLeftCorner,
-			TaxiFrame.BtnCornerLeft,
-			TaxiFrame.BtnCornerRight,
-			TaxiFrame.BotLeftCorner,
-			TaxiFrame.BotRightCorner,
-			TaxiFrame.InsetBorderBottom,
-			TaxiFrame.InsetBorderBottomLeft,
-			TaxiFrame.InsetBorderLeft,
-		 	TaxiFrame.InsetBorderBottomRight, }) do
+		for i, v in pairs({ TaxiFrame.NineSlice.TopEdge,
+			TaxiFrame.NineSlice.RightEdge,
+			TaxiFrame.NineSlice.BottomEdge,
+			TaxiFrame.NineSlice.LeftEdge,
+			TaxiFrame.NineSlice.TopRightCorner,
+			TaxiFrame.NineSlice.TopLeftCorner,
+			TaxiFrame.NineSlice.BottomLeftCorner,
+			TaxiFrame.NineSlice.BottomRightCorner,
+			TaxiFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -958,18 +953,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- DressUP
-		for i, v in pairs({ DressUpFrameTopBorder,
-			DressUpFrameRightBorder,
-			DressUpFrameBottomBorder,
-			DressUpFrameLeftBorder,
-			DressUpFramePortraitFrame,
-			DressUpFrameTopRightCorner,
-			DressUpFrameBtnCornerLeft,
-			DressUpFrameBtnCornerRight,
-			DressUpFrameBotLeftCorner,
-			DressUpFrameBotRightCorner,
-		 	DressUpFrameButtonBottomBorder,
-		 	DressUpFrameInsetInsetBottomBorder, }) do
+		for i, v in pairs({ DressUpFrame.NineSlice.TopEdge,
+			DressUpFrame.NineSlice.RightEdge,
+			DressUpFrame.NineSlice.BottomEdge,
+			DressUpFrame.NineSlice.LeftEdge,
+			DressUpFrame.NineSlice.TopRightCorner,
+			DressUpFrame.NineSlice.TopLeftCorner,
+			DressUpFrame.NineSlice.BottomLeftCorner,
+			DressUpFrame.NineSlice.BottomRightCorner,
+			DressUpFrameInset.NineSlice.BottomEdge, }) do
 			MaximizeMinimizeFrame:SetAlpha(0.3)
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
@@ -1012,15 +1004,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- WorldStateScoreFrame
-		for i, v in pairs({ WorldStateScoreFrameTopBorder,
-			WorldStateScoreFrameTopRightCorner,
-			WorldStateScoreFrameRightBorder,
-		 	WorldStateScoreFrameBotRightCorner,
-			WorldStateScoreFrameBottomBorder,
-		 	WorldStateScoreFrameBotLeftBorder,
-			WorldStateScoreFrameLeftBorder,
-			WorldStateScoreFrameTopLeftCorner,
-			WorldStateScoreFrameBotLeftCorner, }) do
+		for i, v in pairs({ WorldStateScoreFrame.NineSlice.TopEdge,
+			WorldStateScoreFrame.NineSlice.RightEdge,
+			WorldStateScoreFrame.NineSlice.BottomEdge,
+			WorldStateScoreFrame.NineSlice.LeftEdge,
+			WorldStateScoreFrame.NineSlice.TopRightCorner,
+			WorldStateScoreFrame.NineSlice.TopLeftCorner,
+			WorldStateScoreFrame.NineSlice.BottomLeftCorner,
+			WorldStateScoreFrame.NineSlice.BottomRightCorner,
+			WorldStateScoreFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1075,18 +1067,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 		if name == "Blizzard_TalentUI" then
-			for i, v in pairs({ PlayerTalentFrameTopBorder,
-				PlayerTalentFrameRightBorder,
-				PlayerTalentFrameLeftBorder,
-				PlayerTalentFrameBottomBorder,
-				PlayerTalentFramePortraitFrame,
-				PlayerTalentFrameTopRightCorner,
-				PlayerTalentFrameBtnCornerLeft,
-				PlayerTalentFrameBtnCornerRight,
-				PlayerTalentFrameBotLeftCorner,
-				PlayerTalentFrameBotRightCorner,
-				PlayerTalentFrameButtonBottomBorder,
-				PlayerTalentFrameInsetInsetBottomBorder, }) do
+			for i, v in pairs({ PlayerTalentFrame.NineSlice.TopEdge,
+				PlayerTalentFrame.NineSlice.RightEdge,
+				PlayerTalentFrame.NineSlice.BottomEdge,
+				PlayerTalentFrame.NineSlice.LeftEdge,
+				PlayerTalentFrame.NineSlice.TopRightCorner,
+				PlayerTalentFrame.NineSlice.TopLeftCorner,
+				PlayerTalentFrame.NineSlice.BottomLeftCorner,
+				PlayerTalentFrame.NineSlice.BottomRightCorner,
+				PlayerTalentFrameInset.NineSlice.BottomEdge, }) do
 				if AbyssUIAddonSettings ~= nil then
 					if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 						v:SetVertexColor(1, 1, 1)
@@ -1129,7 +1118,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			end
 		end
 end)
--- Collections
+-- Collections [Need Review]
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -1203,7 +1192,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- Honor (Extra from PVE)
+-- Honor (Extra from PVE) [Need Review]
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -1268,17 +1257,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_EncounterJournal" then
-		for i, v in pairs({ EncounterJournalTopBorder,
-			EncounterJournalRightBorder,
-			EncounterJournalLeftBorder,
-			EncounterJournalBottomBorder,
-			EncounterJournalPortraitFrame,
-			EncounterJournalTopRightCorner,
-			EncounterJournalBtnCornerLeft,
-			EncounterJournalBtnCornerRight,
-			EncounterJournalBotLeftCorner,
-			EncounterJournalBotRightCorner,
-		 	EncounterJournalInsetInsetBottomBorder, }) do
+		for i, v in pairs({ EncounterJournal.NineSlice.TopEdge,
+			EncounterJournal.NineSlice.RightEdge,
+			EncounterJournal.NineSlice.BottomEdge,
+			EncounterJournal.NineSlice.LeftEdge,
+			EncounterJournal.NineSlice.TopRightCorner,
+			EncounterJournal.NineSlice.TopLeftCorner,
+			EncounterJournal.NineSlice.BottomLeftCorner,
+			EncounterJournal.NineSlice.BottomRightCorner,
+			EncounterJournalInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1321,7 +1308,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- Communities
+-- Communities [Need Review]
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -1407,18 +1394,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_MacroUI" then
-		for i, v in pairs({ MacroFrameTopBorder,
-			MacroFrameRightBorder,
-			MacroFrameBottomBorder,
-			MacroFrameLeftBorder,
-			MacroFramePortraitFrame,
-			MacroFrameBtnCornerLeft,
-			MacroFrameBtnCornerRight,
-			MacroFrameBotLeftCorner,
-			MacroFrameBotRightCorner,
-		 	MacroFrameButtonBottomBorder,
-			MacroFrameInsetInsetBottomBorder,
-			MacroFrameTopRightCorner, }) do
+		for i, v in pairs({ MacroFrame.NineSlice.TopEdge,
+			MacroFrame.NineSlice.RightEdge,
+			MacroFrame.NineSlice.BottomEdge,
+			MacroFrame.NineSlice.LeftEdge,
+			MacroFrame.NineSlice.TopRightCorner,
+			MacroFrame.NineSlice.TopLeftCorner,
+			MacroFrame.NineSlice.BottomLeftCorner,
+			MacroFrame.NineSlice.BottomRightCorner,
+			MacroFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1461,7 +1445,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- AuctionHouse
+-- AuctionHouse [Need Review]
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -1515,16 +1499,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_FlightMap" then
-		for i, v in pairs({ FlightMapFrameTopBorder,
-			FlightMapFrameRightBorder,
-			FlightMapFrameBottomBorder,
-			FlightMapFrameLeftBorder,
-			FlightMapFramePortraitFrame,
-			FlightMapFrameTopRightCorner,
-			FlightMapFrameBtnCornerLeft,
-			FlightMapFrameBtnCornerRight,
-			FlightMapFrameBotLeftCorner,
-			FlightMapFrameBotRightCorner,	}) do
+		for i, v in pairs({ FlightMapFrame.NineSlice.TopEdge,
+			FlightMapFrame.NineSlice.RightEdge,
+			FlightMapFrame.NineSlice.BottomEdge,
+			FlightMapFrame.NineSlice.LeftEdge,
+			FlightMapFrame.NineSlice.TopRightCorner,
+			FlightMapFrame.NineSlice.TopLeftCorner,
+			FlightMapFrame.NineSlice.BottomLeftCorner,
+			FlightMapFrame.NineSlice.BottomRightCorner,
+			FlightMapFrameInset.NineSlice.BottomEdge,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1572,18 +1555,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TradeSkillUI" then
-		for i, v in pairs({ TradeSkillFrameTopBorder,
-			TradeSkillFrameRightBorder,
-			TradeSkillFrameBottomBorder,
-			TradeSkillFrameLeftBorder,
-			TradeSkillFramePortraitFrame,
-			TradeSkillFrameTopRightCorner,
-			TradeSkillFrameBtnCornerLeft,
-			TradeSkillFrameBtnCornerRight,
-			TradeSkillFrameBotLeftCorner,
-			TradeSkillFrameBotRightCorner,
-		 	TradeSkillFrameInsetBottomBorder,
-			TradeSkillFrameInsetBotLeftCorner, }) do
+		for i, v in pairs({ TradeSkillFrame.NineSlice.TopEdge,
+			TradeSkillFrame.NineSlice.RightEdge,
+			TradeSkillFrame.NineSlice.BottomEdge,
+			TradeSkillFrame.NineSlice.LeftEdge,
+			TradeSkillFrame.NineSlice.TopRightCorner,
+			TradeSkillFrame.NineSlice.TopLeftCorner,
+			TradeSkillFrame.NineSlice.BottomLeftCorner,
+			TradeSkillFrame.NineSlice.BottomRightCorner,
+			TradeSkillFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1631,19 +1611,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_InspectUI" then
-		for i, v in pairs({ InspectFrameTopBorder,
-			InspectFrameRightBorder,
-			InspectFrameBottomBorder,
-			InspectFrameLeftBorder,
-			InspectFramePortraitFrame,
-			InspectFrameTopRightCorner,
-			InspectFrameBtnCornerLeft,
-			InspectFrameBtnCornerRight,
-			InspectFrameBotLeftCorner,
-			InspectFrameBotRightCorner,
-		 	InspectFrameInsetInsetBottomBorder,
-			InspectFrameInsetInsetBotLeftCorner,
-			InspectFrameInsetInsetBotRightCorner, }) do
+		for i, v in pairs({ InspectFrame.NineSlice.TopEdge,
+			InspectFrame.NineSlice.RightEdge,
+			InspectFrame.NineSlice.BottomEdge,
+			InspectFrame.NineSlice.LeftEdge,
+			InspectFrame.NineSlice.TopRightCorner,
+			InspectFrame.NineSlice.TopLeftCorner,
+			InspectFrame.NineSlice.BottomLeftCorner,
+			InspectFrame.NineSlice.BottomRightCorner,
+			InspectFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1686,28 +1662,20 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
--- Wardrobe/Transmogrify (Some parts missing)
+-- Wardrobe/Transmogrify
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Collections" or name == "Blizzard_Wardrobe" then
-		for i, v in pairs({ WardrobeFrameTopBorder,
-			WardrobeFrameRightBorder,
-			WardrobeFrameBottomBorder,
-			WardrobeFrameLeftBorder,
-			WardrobeFramePortraitFrame,
-			WardrobeFrameTopRightCorner,
-			WardrobeFrameBtnCornerLeft,
-			WardrobeFrameBtnCornerRight,
-			WardrobeFrameBotLeftCorner,
-			WardrobeFrameBotRightCorner,
-		 	WardrobeTransmogFrameInsetBottomBorder,
-			WardrobeTransmogFrameInsetBotLeftCorner,
-		  WardrobeTransmogFrameInsetBotRightCorner,
-			WardrobeCollectionFrameInsetLeftBorder,
-			WardrobeCollectionFrameInsetBottomBorder,
-			WardrobeCollectionFrameInsetBotLeftCorner,
-			WardrobeCollectionFrameInsetBotRightCorner, }) do
+		for i, v in pairs({ WardrobeFrame.NineSlice.TopEdge,
+			WardrobeFrame.NineSlice.RightEdge,
+			WardrobeFrame.NineSlice.BottomEdge,
+			WardrobeFrame.NineSlice.LeftEdge,
+			WardrobeFrame.NineSlice.TopRightCorner,
+			WardrobeFrame.NineSlice.TopLeftCorner,
+			WardrobeFrame.NineSlice.BottomLeftCorner,
+			WardrobeFrame.NineSlice.BottomRightCorner,
+			WardrobeFrameInset.NineSlice.BottomEdge,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1755,18 +1723,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TrainerUI" then
-		for i, v in pairs({ ClassTrainerFrameTopBorder,
-			ClassTrainerFrameRightBorder,
-			ClassTrainerFrameBottomBorder,
-			ClassTrainerFrameLeftBorder,
-			ClassTrainerFramePortraitFrame,
-			ClassTrainerFrameTopRightCorner,
-			ClassTrainerFrameBtnCornerLeft,
-			ClassTrainerFrameBtnCornerRight,
-			ClassTrainerFrameBotLeftCorner,
-			ClassTrainerFrameBotRightCorner,
-		 	ClassTrainerFrameButtonBottomBorder,
-			ClassTrainerFrameBottomInsetInsetBottomBorder, }) do
+		for i, v in pairs({ ClassTrainerFrame.NineSlice.TopEdge,
+			ClassTrainerFrame.NineSlice.RightEdge,
+			ClassTrainerFrame.NineSlice.BottomEdge,
+			ClassTrainerFrame.NineSlice.LeftEdge,
+			ClassTrainerFrame.NineSlice.TopRightCorner,
+			ClassTrainerFrame.NineSlice.TopLeftCorner,
+			ClassTrainerFrame.NineSlice.BottomLeftCorner,
+			ClassTrainerFrame.NineSlice.BottomRightCorner,
+			ClassTrainerFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1875,15 +1840,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AzeriteUI" then
-		for i, v in pairs({ AzeriteEmpoweredItemUITopBorder,
-			AzeriteEmpoweredItemUIRightBorder,
-			AzeriteEmpoweredItemUIBottomBorder,
-			AzeriteEmpoweredItemUILeftBorder,
-			AzeriteEmpoweredItemUIPortraitFrame,
-			AzeriteEmpoweredItemUIBotLeftCorner,
-			AzeriteEmpoweredItemUIBotRightCorner,
-			AzeriteEmpoweredItemUIBotTopRightCorner,
-		 	AzeriteEmpoweredItemUITopRightCorner, }) do
+		for i, v in pairs({ AzeriteEmpoweredItemUI.NineSlice.TopEdge,
+			AzeriteEmpoweredItemUI.NineSlice.RightEdge,
+			AzeriteEmpoweredItemUI.NineSlice.BottomEdge,
+			AzeriteEmpoweredItemUI.NineSlice.LeftEdge,
+			AzeriteEmpoweredItemUI.NineSlice.TopRightCorner,
+			AzeriteEmpoweredItemUI.NineSlice.TopLeftCorner,
+			AzeriteEmpoweredItemUI.NineSlice.BottomLeftCorner,
+			AzeriteEmpoweredItemUI.NineSlice.BottomRightCorner,
+			AzeriteEmpoweredItemUIInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1931,18 +1896,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AlliedRacesUI" then
-		for i, v in pairs({ AlliedRacesFrameTopBorder,
-			AlliedRacesFrameRightBorder,
-			AlliedRacesFrameBottomBorder,
-			AlliedRacesFrameLeftBorder,
-			AlliedRacesFramePortraitFrame,
-			AlliedRacesFrameBotLeftCorner,
-			AlliedRacesFrameBotRightCorner,
-			AlliedRacesFrameBotTopRightCorner,
-		 	AlliedRacesFrameTopRightCorner,
-		 	AlliedRacesFrameBtnCornerLeft,
-		 	AlliedRacesFrameBtnCornerRight,
-			AlliedRacesFrameButtonBottomBorder, }) do
+		for i, v in pairs({ AlliedRacesFrame.NineSlice.TopEdge,
+			AlliedRacesFrame.NineSlice.RightEdge,
+			AlliedRacesFrame.NineSlice.BottomEdge,
+			AlliedRacesFrame.NineSlice.LeftEdge,
+			AlliedRacesFrame.NineSlice.TopRightCorner,
+			AlliedRacesFrame.NineSlice.TopLeftCorner,
+			AlliedRacesFrame.NineSlice.BottomLeftCorner,
+			AlliedRacesFrame.NineSlice.BottomRightCorner,
+			AlliedRacesFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1990,16 +1952,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_IslandsQueueUI" then
-		for i, v in pairs({ IslandsQueueFrameTopBorder,
-			IslandsQueueFrameRightBorder,
-			IslandsQueueFrameBottomBorder,
-			IslandsQueueFrameLeftBorder,
-			IslandsQueueFramePortraitFrame,
-			IslandsQueueFrameTopRightCorner,
-			IslandsQueueFrameBtnCornerLeft,
-			IslandsQueueFrameBtnCornerRight,
-			IslandsQueueFrameBotLeftCorner,
-			IslandsQueueFrameBotRightCorner,
+		for i, v in pairs({ IslandsQueueFrame.NineSlice.TopEdge,
+			IslandsQueueFrame.NineSlice.RightEdge,
+			IslandsQueueFrame.NineSlice.BottomEdge,
+			IslandsQueueFrame.NineSlice.LeftEdge,
+			IslandsQueueFrame.NineSlice.TopRightCorner,
+			IslandsQueueFrame.NineSlice.TopLeftCorner,
+			IslandsQueueFrame.NineSlice.BottomLeftCorner,
+			IslandsQueueFrame.NineSlice.BottomRightCorner,
+			IslandsQueueFrameInset.NineSlice.BottomEdge,
 		 	IslandsQueueFrame.ArtOverlayFrame.PortraitFrame, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
@@ -2048,16 +2009,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_GarrisonUI" then
-		for i, v in pairs({ GarrisonCapacitiveDisplayFrameTopBorder,
-			GarrisonCapacitiveDisplayFrameRightBorder,
-			GarrisonCapacitiveDisplayFrameBottomBorder,
-			GarrisonCapacitiveDisplayFrameLeftBorder,
-			GarrisonCapacitiveDisplayFramePortraitFrame,
-			GarrisonCapacitiveDisplayFrameTopRightCorner,
-			GarrisonCapacitiveDisplayFrameBtnCornerLeft,
-			GarrisonCapacitiveDisplayFrameBtnCornerRight,
-			GarrisonCapacitiveDisplayFrameBotLeftCorner,
-			GarrisonCapacitiveDisplayFrameBotRightCorner, }) do
+		for i, v in pairs({ GarrisonCapacitiveDisplayFrame.NineSlice.TopEdge,
+			GarrisonCapacitiveDisplayFrame.NineSlice.RightEdge,
+			GarrisonCapacitiveDisplayFrame.NineSlice.BottomEdge,
+			GarrisonCapacitiveDisplayFrame.NineSlice.LeftEdge,
+			GarrisonCapacitiveDisplayFrame.NineSlice.TopRightCorner,
+			GarrisonCapacitiveDisplayFrame.NineSlice.TopLeftCorner,
+			GarrisonCapacitiveDisplayFrame.NineSlice.BottomLeftCorner,
+			GarrisonCapacitiveDisplayFrame.NineSlice.BottomRightCorner,
+			GarrisonCapacitiveDisplayFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -2105,18 +2065,15 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Calendar" then
-		for i, v in pairs({ CalendarFrameTopLeftTexture,
-			CalendarFrameTopMiddleTexture,
-			CalendarFrameTopRightTexture,
-		 	CalendarFrameRightTopTexture,
-			CalendarFrameRightMiddleTexture,
-			CalendarFrameRightBottomTexture,
-			CalendarFrameBottomRightTexture,
-			CalendarFrameBottomMiddleTexture,
-			CalendarFrameBottomLeftTexture,
-			CalendarFrameLeftBottomTexture,
-			CalendarFrameLeftMiddleTexture,
-			CalendarFrameLeftTopTexture, }) do
+		for i, v in pairs({ CalendarFrame.NineSlice.TopEdge,
+			CalendarFrame.NineSlice.RightEdge,
+			CalendarFrame.NineSlice.BottomEdge,
+			CalendarFrame.NineSlice.LeftEdge,
+			CalendarFrame.NineSlice.TopRightCorner,
+			CalendarFrame.NineSlice.TopLeftCorner,
+			CalendarFrame.NineSlice.BottomLeftCorner,
+			CalendarFrame.NineSlice.BottomRightCorner,
+			CalendarFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
