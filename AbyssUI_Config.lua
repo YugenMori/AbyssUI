@@ -309,7 +309,7 @@ local function InitSettings()
  local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
  KeepUnitDark_CheckButton:SetPoint("CENTER", -290, -80)
  KeepUnitDark_CheckButton.Text:SetText("Keep UnitFrame Dark")
- KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep Unit Frames Dark (e.g. Player Frame, Target Frame.)"
+ KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep Unit Frames Dark (Player Frame, Target Frame, Boss, etc...)."
  KeepUnitDark_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitDark)
  -- OnClick Function
  KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
