@@ -67,17 +67,7 @@ local function InitSettings()
     Frame:SetPoint("CENTER")
     Frame:SetText("Hide Elements")
 
-    --[[
-    -- Panel 02
-    local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel3)
-    Frame:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", 0, -120)
-    Frame:SetWidth(120)
-    Frame:SetHeight(24)
-    Frame:SetScale(1.5)
-    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    Frame:SetPoint("CENTER")
-    Frame:SetText("Extras")
-    --]]
+    -- Panel 02 (old)
 
     -- Panel 03
     local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel3)
@@ -108,6 +98,16 @@ local function InitSettings()
     Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     Frame:SetPoint("CENTER")
     Frame:SetText("Frame Colorization")
+
+    -- Panel 06
+    local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel2)
+    Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "CENTER", -160, -20)
+    Frame:SetWidth(120)
+    Frame:SetHeight(24)
+    Frame:SetScale(1.5)
+    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    Frame:SetPoint("CENTER")
+    Frame:SetText("Extras")
 
     ------------------------------ Hide Elements  ------------------------------
     ---------------------
@@ -302,6 +302,32 @@ local function InitSettings()
  YouDiedLevelUpFrame_CheckButton:SetScript("OnClick", function(self)
    AbyssUIAddonSettings.HideYouDiedLevelUpFrame = self:GetChecked()
  end)
+----------------------------------- Extras  -----------------------------------
+ -------------------------
+ -- Keep UnitFrame Dark --
+ -------------------------
+ local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+ KeepUnitDark_CheckButton:SetPoint("CENTER", -290, -80)
+ KeepUnitDark_CheckButton.Text:SetText("Keep UnitFrame Dark")
+ KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep Unit Frames Dark (e.g. Player Frame, Target Frame.)"
+ KeepUnitDark_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitDark)
+ -- OnClick Function
+ KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
+   AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
+   AbyssUI_ReloadFrame:Show()
+ end)
+ -- After Login/Reload
+ KeepUnitDark_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+ KeepUnitDark_CheckButton:SetScript("OnEvent", function(self, event, ...)
+ if ( event == "PLAYER_ENTERING_WORLD" ) then
+   if AbyssUIAddonSettings.KeepUnitDark == true then
+     AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
+   else
+     KeepUnitDark_CheckButton:SetChecked(nil)
+   end
+ end
+end)
+
 --------------------------------- Buttons ---------------------------------
 
     -----------------------

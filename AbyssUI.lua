@@ -103,7 +103,6 @@ DarkException:RegisterEvent("ADDON_LOADED")
 DarkException:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "AbyssUI") then
 		for i, v in pairs({
-			--if AbyssUIAddonSettings ~= nil then
 			PlayerFrameTexture,
 			TargetFrameTextureFrameTexture,
 			PetFrameTexture,
@@ -118,8 +117,14 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 			FocusFrameTextureFrameTexture,
 			TargetFrameToTTextureFrameTexture,
 			FocusFrameToTTextureFrameTexture, }) do
-				v:SetVertexColor(.35, .35, .35)
+			if AbyssUIAddonSettings ~= nil then
+				if AbyssUIAddonSettings.KeepUnitDark == true then
+					v:SetVertexColor(.35, .35, .35)
+				end
+			else
+				return nil
 			end
+		end
 	self:UnregisterEvent("ADDON_LOADED")
 	DarkException:SetScript("OnEvent", nil)
 	end
