@@ -1775,15 +1775,14 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AzeriteUI" then
-		for i, v in pairs({ AzeriteEmpoweredItemUI.NineSlice.TopEdge,
-			AzeriteEmpoweredItemUI.NineSlice.RightEdge,
-			AzeriteEmpoweredItemUI.NineSlice.BottomEdge,
-			AzeriteEmpoweredItemUI.NineSlice.LeftEdge,
-			AzeriteEmpoweredItemUI.NineSlice.TopRightCorner,
-			AzeriteEmpoweredItemUI.NineSlice.TopLeftCorner,
-			AzeriteEmpoweredItemUI.NineSlice.BottomLeftCorner,
-			AzeriteEmpoweredItemUI.NineSlice.BottomRightCorner,
-			AzeriteEmpoweredItemUIInset.NineSlice.BottomEdge, }) do
+		for i, v in pairs({ AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopEdge,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.RightEdge,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomEdge,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.LeftEdge,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopRightCorner,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopLeftCorner,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomLeftCorner,
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
