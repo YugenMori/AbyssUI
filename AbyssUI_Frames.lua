@@ -424,6 +424,77 @@ FrameButtonCancel:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 
+-- AbyssUI_ActionBarInfo
+AbyssUI_ActionBarInfo = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ActionBarInfo:Hide()
+AbyssUI_ActionBarInfo:SetWidth(500)
+AbyssUI_ActionBarInfo:SetHeight(160)
+AbyssUI_ActionBarInfo:SetPoint("CENTER", "UIParent", "CENTER", 0, -100)
+AbyssUI_ActionBarInfo:EnableMouse(true)
+AbyssUI_ActionBarInfo:SetClampedToScreen(true)
+AbyssUI_ActionBarInfo:SetMovable(true)
+AbyssUI_ActionBarInfo:RegisterForDrag("LeftButton")
+AbyssUI_ActionBarInfo:SetScript("OnDragStart", AbyssUI_ActionBarInfo.StartMoving)
+AbyssUI_ActionBarInfo:SetScript("OnDragStop", function(self)
+  self:StopMovingOrSizing()
+end)
+
+AbyssUI_ActionBarInfo:SetFrameStrata("Dialog")
+AbyssUI_ActionBarInfo.text = AbyssUI_ActionBarInfo.text or AbyssUI_ActionBarInfo:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
+AbyssUI_ActionBarInfo.text:SetScale(1.5)
+AbyssUI_ActionBarInfo.text:SetAllPoints(true)
+AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
+AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
+AbyssUI_ActionBarInfo.text:SetText("You need to activate the small version of Main Bar\nTo do this: Esc>Interface>ActionBar\nMark: 'Bottom Left Bar' and 'Right Bar'. Unmark 'Bottom Right Bar' if it's marked then Reload UI")
+----------------------------------------------------
+local Border = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
+Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Border:SetPoint("TOPLEFT", -3, 3)
+Border:SetPoint("BOTTOMRIGHT", 3, -3)
+Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUI_ActionBarInfo:CreateTexture(nil,"ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUI_ActionBarInfo)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUI_ActionBarInfo)
+AbyssUI_ActionBarInfo.texture = Texture
+----------------------------------------------------
+local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ActionBarInfo, "UIPanelButtonTemplate")
+FrameButtonConfirm:SetHeight(24)
+FrameButtonConfirm:SetWidth(70)
+FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", -50, 10)
+FrameButtonConfirm:SetText("Confirm")
+FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonConfirm)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonConfirm:SetScript("OnClick", function()
+	AbyssUI_ActionBarInfo:Hide()
+end)
+----------------------------------------------------
+local FrameButtonReset = CreateFrame("Button","FrameButton", AbyssUI_ActionBarInfo, "UIPanelButtonTemplate")
+FrameButtonReset:SetHeight(24)
+FrameButtonReset:SetWidth(70)
+FrameButtonReset:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", 50, 10)
+FrameButtonReset:SetText("Reload")
+FrameButtonReset:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButtonReset:CreateTexture(nil,"ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonReset)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonReset:SetScript("OnClick", function()
+	AbyssUI_ActionBarInfo:Hide()
+	ReloadUI()
+end)
+----------------------------------------------------
+
 --------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")

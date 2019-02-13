@@ -514,9 +514,44 @@ end)
     AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
       AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
     end)
-
+    --------------------------------------
+    -- Stack Action Bar (3rd ActionBar) --
+    --------------------------------------
+    local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+    AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
+    AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
+    AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizard Main Bar"
+    AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
+    -- Main Function and Button
+    local function AbyssUI_AddactionBar()
+           for i = 2, 12 do
+               local n = "MultiBarRightButton"
+               local btn = _G[n..i]
+               btn:ClearAllPoints()
+               btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
+           end
+           MultiBarRight:ClearAllPoints()
+           MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 140)
+           MultiBarRight:SetScale(1)
+       end
+    -- OnClick Function
+    AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
+      AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
+      AbyssUI_AddactionBar()
+      AbyssUI_ActionBarInfo:Show()
+      end)
+      -- After Login/Reload
+    AbyssUINewActionBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+    AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
+      if ( event == "PLAYER_ENTERING_WORLD" ) then
+        if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
+          C_Timer.After(0.5, function()
+            AbyssUI_AddactionBar()
+          end)
+        end
+      end
+    end)
   ---------------------------- AbyssUI Stylization ----------------------------
-
   ---------------------------
   -- Player Portrait Style --
   ---------------------------
