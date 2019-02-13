@@ -445,7 +445,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("You need to activate the small version of Main Bar\nTo do this: Esc>Interface>ActionBar\nMark: 'Bottom Left Bar' and 'Right Bar'. Unmark 'Bottom Right Bar' if it's marked then Reload UI")
+AbyssUI_ActionBarInfo.text:SetText("You need to activate the small version of MainBar\nTo do this: Esc>Interface>ActionBar\nMark: 'Bottom Left Bar' and 'Right Bar'. Unmark 'Bottom Right Bar' if it's marked, then Reload UI.")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -467,7 +467,7 @@ local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ActionBar
 FrameButtonConfirm:SetHeight(24)
 FrameButtonConfirm:SetWidth(70)
 FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", -50, 10)
-FrameButtonConfirm:SetText("Confirm")
+FrameButtonConfirm:SetText("Close")
 FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
 local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
@@ -482,7 +482,7 @@ local FrameButtonReset = CreateFrame("Button","FrameButton", AbyssUI_ActionBarIn
 FrameButtonReset:SetHeight(24)
 FrameButtonReset:SetWidth(70)
 FrameButtonReset:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", 50, 10)
-FrameButtonReset:SetText("Reload")
+FrameButtonReset:SetText("Reload UI")
 FrameButtonReset:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
 local BorderButton = FrameButtonReset:CreateTexture(nil,"ARTWORK")
