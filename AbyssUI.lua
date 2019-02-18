@@ -1894,7 +1894,6 @@ f:SetScript("OnEvent", function(self, event, name)
 			IslandsQueueFrame.NineSlice.TopLeftCorner,
 			IslandsQueueFrame.NineSlice.BottomLeftCorner,
 			IslandsQueueFrame.NineSlice.BottomRightCorner,
-			IslandsQueueFrameInset.NineSlice.BottomEdge,
 		 	IslandsQueueFrame.ArtOverlayFrame.PortraitFrame, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then

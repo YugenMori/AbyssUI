@@ -306,9 +306,9 @@ local function InitSettings()
  -- Hide Macro Labels --
  -----------------------
  local HideMacroLabels_CheckButton = CreateFrame("CheckButton", "$parentHideMacroLabels_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
- HideMacroLabels_CheckButton:SetPoint("TOPLEFT", 10, -230)
+ HideMacroLabels_CheckButton:SetPoint("TOPLEFT", 10, -260)
  HideMacroLabels_CheckButton.Text:SetText("Hide Macro Labels")
- HideMacroLabels_CheckButton.tooltip = "Hide the fps/ms frame (Bottom left frame)"
+ HideMacroLabels_CheckButton.tooltip = "Hide Macro Labels from Action Bar"
  HideMacroLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideMacroLabels)
  -- OnClick Function
  HideMacroLabels_CheckButton:SetScript("OnClick", function(self)
@@ -319,7 +319,7 @@ local function InitSettings()
         _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(0)
         _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(0)
         _G["MultiBarRightButton"..i.."Name"]:SetAlpha(0)
-        _G["MultibarLeftButton"..i.."Name"]:SetAlpha(0)
+        --_G["MultibarLeftButton"..i.."Name"]:SetAlpha(0)
       end
     else
       for i = 1, 12 do
@@ -327,7 +327,7 @@ local function InitSettings()
         _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(1)
         _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(1)
         _G["MultiBarRightButton"..i.."Name"]:SetAlpha(1)
-        _G["MultibarLeftButton"..i.."Name"]:SetAlpha(1)
+      --_G["MultibarLeftButton"..i.."Name"]:SetAlpha(1)
       end
     end
  end)
@@ -341,15 +341,7 @@ local function InitSettings()
        _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(0)
        _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(0)
        _G["MultiBarRightButton"..i.."Name"]:SetAlpha(0)
-       _G["MultibarLeftButton"..i.."Name"]:SetAlpha(0)
-     end
-   else
-     for i = 1, 12 do
-       _G["ActionButton"..i.."Name"]:SetAlpha(1)
-       _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(1)
-       _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(1)
-       _G["MultiBarRightButton"..i.."Name"]:SetAlpha(1)
-       _G["MultibarLeftButton"..i.."Name"]:SetAlpha(1)
+       --_G["MultibarLeftButton"..i.."Name"]:SetAlpha(0)
      end
    end
  end
@@ -357,10 +349,10 @@ end)
 ------------------
 -- Hide Hotkeys --
 ------------------
-local HideHotkeysLabels_CheckButton = CreateFrame("CheckButton", "$parentHideMacroLabels_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-HideHotkeysLabels_CheckButton:SetPoint("TOPLEFT", 10, -260)
-HideHotkeysLabels_CheckButton.Text:SetText("Hide Macro Labels")
-HideHotkeysLabels_CheckButton.tooltip = "Hide the fps/ms frame (Bottom left frame)"
+local HideHotkeysLabels_CheckButton = CreateFrame("CheckButton", "$parentHideHotkeysLabels_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+HideHotkeysLabels_CheckButton:SetPoint("TOPLEFT", 10, -290)
+HideHotkeysLabels_CheckButton.Text:SetText("Hide Hotkeys Labels")
+HideHotkeysLabels_CheckButton.tooltip = "Hide Hotkeys Labels from Action Bar"
 HideHotkeysLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideHotkeysLabels)
 -- OnClick Function
 HideHotkeysLabels_CheckButton:SetScript("OnClick", function(self)
@@ -371,7 +363,7 @@ HideHotkeysLabels_CheckButton:SetScript("OnClick", function(self)
        _G["MultiBarBottomRightButton"..i.."HotKey"]:SetAlpha(0)
        _G["MultiBarBottomLeftButton"..i.."HotKey"]:SetAlpha(0)
        _G["MultiBarRightButton"..i.."HotKey"]:SetAlpha(0)
-       _G["MultibarLeftButton"..i.."HotKey"]:SetAlpha(0)
+       --_G["MultibarLeftButton"..i.."HotKey"]:SetAlpha(0)
      end
    else
      for i = 1, 12 do
@@ -379,7 +371,7 @@ HideHotkeysLabels_CheckButton:SetScript("OnClick", function(self)
        _G["MultiBarBottomRightButton"..i.."HotKey"]:SetAlpha(1)
        _G["MultiBarBottomLeftButton"..i.."HotKey"]:SetAlpha(1)
        _G["MultiBarRightButton"..i.."HotKey"]:SetAlpha(1)
-       _G["MultibarLeftButton"..i.."HotKey"]:SetAlpha(1)
+     --_G["MultibarLeftButton"..i.."HotKey"]:SetAlpha(1)
      end
    end
 end)
@@ -389,19 +381,11 @@ HideHotkeysLabels_CheckButton:SetScript("OnEvent", function(self, event, ...)
 if ( event == "PLAYER_ENTERING_WORLD" ) then
   if AbyssUIAddonSettings.HideHotkeysLabels == true then
     for i = 1, 12 do
-      _G["ActionButton"..i.."Name"]:SetAlpha(0)
-      _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(0)
-      _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(0)
-      _G["MultiBarRightButton"..i.."Name"]:SetAlpha(0)
-      _G["MultibarLeftButton"..i.."Name"]:SetAlpha(0)
-    end
-  else
-    for i = 1, 12 do
-      _G["ActionButton"..i.."Name"]:SetAlpha(1)
-      _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(1)
-      _G["MultiBarBottomLeftButton"..i.."Name"]:SetAlpha(1)
-      _G["MultiBarRightButton"..i.."Name"]:SetAlpha(1)
-      _G["MultibarLeftButton"..i.."Name"]:SetAlpha(1)
+      _G["ActionButton"..i.."HotKey"]:SetAlpha(0)
+      _G["MultiBarBottomRightButton"..i.."HotKey"]:SetAlpha(0)
+      _G["MultiBarBottomLeftButton"..i.."HotKey"]:SetAlpha(0)
+      _G["MultiBarRightButton"..i.."HotKey"]:SetAlpha(0)
+      --_G["MultibarLeftButton"..i.."HotKey"]:SetAlpha(0)
     end
   end
 end
