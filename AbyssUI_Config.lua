@@ -110,158 +110,158 @@ local function InitSettings()
     Frame:SetText("Extras")
 
     ------------------------------ Hide Elements  ------------------------------
-    ---------------------
-    -- MicroMenu/Bags  --
-    ---------------------
-    local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-    MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
-    MicroMenu_CheckButton.Text:SetText("Hide MicroMenu")
-    MicroMenu_CheckButton.tooltip = "Hide the ActionBar MicroMenu (Bags Bar)"
-    MicroMenu_CheckButton:SetChecked(AbyssUIAddonSettings.HideMicroMenu)
-    -- OnClick Function
-    MicroMenu_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
-      if AbyssUIAddonSettings.HideMicroMenu == true then
-        HideMicroMenu_Function()
-      else
-        ShowMicroMenu_Function()
-      end
-    end)
-    -- After Login/Reload
-    MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if AbyssUIAddonSettings.HideMicroMenu == true then
-        HideMicroMenu_Function()
-      else
-        ShowMicroMenu_Function()
-      end
+  ---------------------
+  -- MicroMenu/Bags  --
+  ---------------------
+  local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+  MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
+  MicroMenu_CheckButton.Text:SetText("Hide MicroMenu")
+  MicroMenu_CheckButton.tooltip = "Hide the ActionBar MicroMenu (Bags Bar)"
+  MicroMenu_CheckButton:SetChecked(AbyssUIAddonSettings.HideMicroMenu)
+  -- OnClick Function
+  MicroMenu_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
+    if AbyssUIAddonSettings.HideMicroMenu == true then
+      HideMicroMenu_Function()
+    else
+      ShowMicroMenu_Function()
     end
   end)
-  --  Hide
-  function HideMicroMenu_Function()
-  	for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-  		MicroButtonAndBagsBar,
+  -- After Login/Reload
+  MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideMicroMenu == true then
+      HideMicroMenu_Function()
+    else
+      ShowMicroMenu_Function()
+    end
+  end
+end)
+--  Hide
+function HideMicroMenu_Function()
+	for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+		MicroButtonAndBagsBar,
+    MainMenuBarPerformanceBar,
+    MainMenuMicroButton,
+		EJMicroButton,
+    CollectionsMicroButton,
+    LFDMicroButton,
+    GuildMicroButton,
+    QuestLogMicroButton,
+    TalentMicroButton,
+    SpellbookMicroButton,
+		CharacterMicroButton, }) do
+		v:Hide()
+    AchievementMicroButton:SetAlpha(0)
+    StoreMicroButton:SetAlpha(0)
+	end
+end
+-- Show
+function ShowMicroMenu_Function()
+		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+			MicroButtonAndBagsBar,
       MainMenuBarPerformanceBar,
       MainMenuMicroButton,
-  		EJMicroButton,
+			EJMicroButton,
       CollectionsMicroButton,
       LFDMicroButton,
       GuildMicroButton,
       QuestLogMicroButton,
       TalentMicroButton,
       SpellbookMicroButton,
-  		CharacterMicroButton, }) do
-  		v:Hide()
-      AchievementMicroButton:SetAlpha(0)
-      StoreMicroButton:SetAlpha(0)
-  	end
+			CharacterMicroButton, }) do
+			v:Show()
+      AchievementMicroButton:SetAlpha(1)
+      StoreMicroButton:SetAlpha(1)
   end
-  -- Show
-  function ShowMicroMenu_Function()
-  		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-  			MicroButtonAndBagsBar,
-        MainMenuBarPerformanceBar,
-        MainMenuMicroButton,
-  			EJMicroButton,
-        CollectionsMicroButton,
-        LFDMicroButton,
-        GuildMicroButton,
-        QuestLogMicroButton,
-        TalentMicroButton,
-        SpellbookMicroButton,
-  			CharacterMicroButton, }) do
-  			v:Show()
-        AchievementMicroButton:SetAlpha(1)
-        StoreMicroButton:SetAlpha(1)
+end
+  ---------------------
+  -- Gryphons Option --
+  ---------------------
+  local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+  Gryphons_CheckButton:SetPoint("TOPLEFT", 10, -110)
+  Gryphons_CheckButton.Text:SetText("Hide Gryphons")
+  Gryphons_CheckButton.tooltip = "Hide the ActionBar Gryphons"
+  Gryphons_CheckButton:SetChecked(AbyssUIAddonSettings.HideGryphons)
+  -- OnClick Function
+  Gryphons_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.HideGryphons = self:GetChecked()
+    if AbyssUIAddonSettings.HideGryphons == true then
+      MainMenuBarArtFrame.RightEndCap:Hide()
+      MainMenuBarArtFrame.LeftEndCap:Hide()
+    else
+      MainMenuBarArtFrame.RightEndCap:Show()
+      MainMenuBarArtFrame.LeftEndCap:Show()
+    end
+  end)
+  -- After Login/Reload
+  Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideGryphons == true then
+      MainMenuBarArtFrame.RightEndCap:Hide()
+      MainMenuBarArtFrame.LeftEndCap:Hide()
+    else
+      MainMenuBarArtFrame.RightEndCap:Show()
+      MainMenuBarArtFrame.LeftEndCap:Show()
     end
   end
-    ---------------------
-    -- Gryphons Option --
-    ---------------------
-    local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-    Gryphons_CheckButton:SetPoint("TOPLEFT", 10, -110)
-    Gryphons_CheckButton.Text:SetText("Hide Gryphons")
-    Gryphons_CheckButton.tooltip = "Hide the ActionBar Gryphons"
-    Gryphons_CheckButton:SetChecked(AbyssUIAddonSettings.HideGryphons)
-    -- OnClick Function
-    Gryphons_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-      if AbyssUIAddonSettings.HideGryphons == true then
-        MainMenuBarArtFrame.RightEndCap:Hide()
-        MainMenuBarArtFrame.LeftEndCap:Hide()
-      else
-        MainMenuBarArtFrame.RightEndCap:Show()
-        MainMenuBarArtFrame.LeftEndCap:Show()
-      end
-    end)
-    -- After Login/Reload
-    Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if AbyssUIAddonSettings.HideGryphons == true then
-        MainMenuBarArtFrame.RightEndCap:Hide()
-        MainMenuBarArtFrame.LeftEndCap:Hide()
-      else
-        MainMenuBarArtFrame.RightEndCap:Show()
-        MainMenuBarArtFrame.LeftEndCap:Show()
-      end
+end)
+  -- Minimap
+  local Minimap_CheckButton = CreateFrame("CheckButton", "$parentMinimap_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+  Minimap_CheckButton:SetPoint("TOPLEFT", 10, -140)
+  Minimap_CheckButton.Text:SetText("Hide Minimap")
+  Minimap_CheckButton.tooltip = "Hide the Game Minimap"
+  Minimap_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimap)
+  -- OnClick Function
+  Minimap_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.HideMinimap = self:GetChecked()
+    if AbyssUIAddonSettings.HideMinimap == true then
+      MinimapCluster:Hide()
+    else
+      MinimapCluster:Show()
     end
   end)
-    -- Minimap
-    local Minimap_CheckButton = CreateFrame("CheckButton", "$parentMinimap_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-    Minimap_CheckButton:SetPoint("TOPLEFT", 10, -140)
-    Minimap_CheckButton.Text:SetText("Hide Minimap")
-    Minimap_CheckButton.tooltip = "Hide the Game Minimap"
-    Minimap_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimap)
-    -- OnClick Function
-    Minimap_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.HideMinimap = self:GetChecked()
-      if AbyssUIAddonSettings.HideMinimap == true then
-        MinimapCluster:Hide()
-      else
-        MinimapCluster:Show()
-      end
-    end)
-    -- After Login/Reload
-    Minimap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    Minimap_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if AbyssUIAddonSettings.HideMinimap == true then
-        MinimapCluster:Hide()
-      else
-        MinimapCluster:Show()
-      end
+  -- After Login/Reload
+  Minimap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  Minimap_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideMinimap == true then
+      MinimapCluster:Hide()
+    else
+      MinimapCluster:Show()
+    end
+  end
+end)
+  -----------------------
+  -- Objective Tracker --
+  -----------------------
+  local ObjTracker_CheckButton = CreateFrame("CheckButton", "$parentObjTracker_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+  ObjTracker_CheckButton:SetPoint("TOPLEFT", 10, -170)
+  ObjTracker_CheckButton.Text:SetText("Hide Objective Tracker")
+  ObjTracker_CheckButton.tooltip = "Hide the Objective Tracker (Quest Frame)"
+  ObjTracker_CheckButton:SetChecked(AbyssUIAddonSettings.HideObjectiveTracker)
+  -- OnClick Function
+  ObjTracker_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
+    if AbyssUIAddonSettings.HideObjectiveTracker == true then
+      ObjectiveTrackerFrame:Hide()
+    else
+      ObjectiveTrackerFrame:Show()
     end
   end)
-    -----------------------
-    -- Objective Tracker --
-    -----------------------
-    local ObjTracker_CheckButton = CreateFrame("CheckButton", "$parentObjTracker_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-    ObjTracker_CheckButton:SetPoint("TOPLEFT", 10, -170)
-    ObjTracker_CheckButton.Text:SetText("Hide Objective Tracker")
-    ObjTracker_CheckButton.tooltip = "Hide the Objective Tracker (Quest Frame)"
-    ObjTracker_CheckButton:SetChecked(AbyssUIAddonSettings.HideObjectiveTracker)
-    -- OnClick Function
-    ObjTracker_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
-      if AbyssUIAddonSettings.HideObjectiveTracker == true then
-        ObjectiveTrackerFrame:Hide()
-      else
-        ObjectiveTrackerFrame:Show()
-      end
-    end)
-    -- After Login/Reload
-    ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if AbyssUIAddonSettings.HideObjectiveTracker == true then
-        ObjectiveTrackerFrame:Hide()
-      else
-        ObjectiveTrackerFrame:Show()
-      end
+  -- After Login/Reload
+  ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideObjectiveTracker == true then
+      ObjectiveTrackerFrame:Hide()
+    else
+      ObjectiveTrackerFrame:Show()
     end
-  end)
+  end
+end)
    ------------------
    -- FPS/MS Frame --
    ------------------
@@ -390,6 +390,33 @@ if ( event == "PLAYER_ENTERING_WORLD" ) then
   end
 end
 end)
+--------------------
+-- Hide StanceBar --
+--------------------
+local HideStanceBar_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
+HideStanceBar_CheckButton:SetPoint("TOPLEFT", 10, -320)
+HideStanceBar_CheckButton.Text:SetText("Hide Stance Bar")
+HideStanceBar_CheckButton.tooltip = "Hide the Stance Bar (Druid forms, Rogue stealth, etc)"
+HideStanceBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideStanceBar)
+-- OnClick Function
+HideStanceBar_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
+   if ( AbyssUIAddonSettings.HideStanceBar == true ) then
+     StanceBarFrame:ClearAllPoints()
+     StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+   end
+end)
+-- After Login/Reload
+HideStanceBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideStanceBar == true then
+      C_Timer.After(0.5, function()
+        StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+      end)
+    end
+  end
+end)
 ----------------------------------- Extras  -----------------------------------
  -------------------------
  -- Keep UnitFrame Dark --
@@ -415,230 +442,231 @@ end)
    end
  end
 end)
-
 --------------------------------- Buttons ---------------------------------
-
-    -----------------------
-    -- AbyssUI DailyInfo --
-    -----------------------
-    local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(24)
-    FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
-    FrameButton:SetText("AbyssUI DailyInfo")
-    FrameButton:SetScript("OnClick", function()
-      C_WowTokenPublic.UpdateMarketPrice()
-      AbyssUIDailyInfo()
-    end)
-    ----------------------
-    -- Clear Action Bar --
-    ----------------------
-    local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(24)
-    FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -200)
-    FrameButton:SetText("Clear Action Bar")
-    FrameButton:SetScript("OnClick", function()
-      AbyssUI_ActionBarCleaner:Show()
-    end)
-    ------------
-    -- Reload --
-    ------------
-    local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(24)
-    FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
-    FrameButton:SetText("Reload UI")
-    FrameButton:SetScript("OnClick", function()
-      ReloadUI()
-    end)
-
+  -----------------------
+  -- AbyssUI DailyInfo --
+  -----------------------
+  local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+  FrameButton:SetHeight(24)
+  FrameButton:SetWidth(140)
+  FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
+  FrameButton:SetText("AbyssUI DailyInfo")
+  FrameButton:SetScript("OnClick", function()
+    C_WowTokenPublic.UpdateMarketPrice()
+    AbyssUIDailyInfo()
+  end)
+  ----------------------
+  -- Clear Action Bar --
+  ----------------------
+  local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+  FrameButton:SetHeight(24)
+  FrameButton:SetWidth(140)
+  FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -200)
+  FrameButton:SetText("Clear Action Bar")
+  FrameButton:SetScript("OnClick", function()
+    AbyssUI_ActionBarCleaner:Show()
+  end)
+  ------------
+  -- Reload --
+  ------------
+  local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+  FrameButton:SetHeight(24)
+  FrameButton:SetWidth(140)
+  FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
+  FrameButton:SetText("Reload UI")
+  FrameButton:SetScript("OnClick", function()
+    ReloadUI()
+  end)
 ------------------------------- Miscellaneous -------------------------------
-
-    ------------------
-    -- Camera Pitch --
-    ------------------
-    -- Camera Pitch Function Option 50%
-    local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    CameraSmooth50_CheckButton:SetPoint("TOPLEFT", 10, -80)
-    CameraSmooth50_CheckButton.Text:SetText("Smooth Camera\n   (50% Slower)")
-    CameraSmooth50_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
-    CameraSmooth50_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth50)
-    -- OnClick Function
-    CameraSmooth50_CheckButton:SetScript("OnClick", function(self)
-      if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
-        AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 = self:GetChecked()
-        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 == true then
-          ConsoleExec( "cameraYawMoveSpeed 50" )
-          ConsoleExec( "cameraPitchMoveSpeed 50" )
-        else
-          ConsoleExec( "cameraYawMoveSpeed 100" )
-          ConsoleExec( "cameraPitchMoveSpeed 100" )
-          if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
-            AbyssUI_ReloadFrame:Show()
-          end
-        end
-      else
-        CameraSmooth50_CheckButton:SetChecked(nil)
-      end
-    end)
-    -- After Login/Reload
-    CameraSmooth50_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    CameraSmooth50_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
+  ------------------
+  -- Camera Pitch --
+  ------------------
+  -- Camera Pitch Function Option 50%
+  local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  CameraSmooth50_CheckButton:SetPoint("TOPLEFT", 10, -80)
+  CameraSmooth50_CheckButton.Text:SetText("Smooth Camera\n   (50% Slower)")
+  CameraSmooth50_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
+  CameraSmooth50_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth50)
+  -- OnClick Function
+  CameraSmooth50_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
+      AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 = self:GetChecked()
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 == true then
         ConsoleExec( "cameraYawMoveSpeed 50" )
         ConsoleExec( "cameraPitchMoveSpeed 50" )
+      else
+        ConsoleExec( "cameraYawMoveSpeed 100" )
+        ConsoleExec( "cameraPitchMoveSpeed 100" )
+        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
+          AbyssUI_ReloadFrame:Show()
+        end
       end
+    else
+      CameraSmooth50_CheckButton:SetChecked(nil)
     end
   end)
-    -- Camera Pitch Function Option 70%
-    local CameraSmooth70_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth70_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    CameraSmooth70_CheckButton:SetPoint("TOPLEFT", 10, -110)
-    CameraSmooth70_CheckButton.Text:SetText("Smooth Camera\n   (70% Slower)")
-    CameraSmooth70_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
-    CameraSmooth70_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth70)
-    -- OnClick Function
-    CameraSmooth70_CheckButton:SetScript("OnClick", function(self)
-      if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
-        AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 = self:GetChecked()
-        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 == true then
-          ConsoleExec( "cameraYawMoveSpeed 30" )
-          ConsoleExec( "cameraPitchMoveSpeed 30" )
-        else
-          ConsoleExec( "cameraYawMoveSpeed 100" )
-          ConsoleExec( "cameraPitchMoveSpeed 100" )
-          if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
-            AbyssUI_ReloadFrame:Show()
-          end
-        end
-      else
-        CameraSmooth70_CheckButton:SetChecked(nil)
-      end
-    end)
-    -- After Login/Reload
-    CameraSmooth70_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    CameraSmooth70_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
+  -- After Login/Reload
+  CameraSmooth50_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  CameraSmooth50_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 == true then
+      ConsoleExec( "cameraYawMoveSpeed 50" )
+      ConsoleExec( "cameraPitchMoveSpeed 50" )
+    end
+  end
+end)
+  -- Camera Pitch Function Option 70%
+  local CameraSmooth70_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth70_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  CameraSmooth70_CheckButton:SetPoint("TOPLEFT", 10, -110)
+  CameraSmooth70_CheckButton.Text:SetText("Smooth Camera\n   (70% Slower)")
+  CameraSmooth70_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
+  CameraSmooth70_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth70)
+  -- OnClick Function
+  CameraSmooth70_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
+      AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 = self:GetChecked()
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 == true then
         ConsoleExec( "cameraYawMoveSpeed 30" )
         ConsoleExec( "cameraPitchMoveSpeed 30" )
+      else
+        ConsoleExec( "cameraYawMoveSpeed 100" )
+        ConsoleExec( "cameraPitchMoveSpeed 100" )
+        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
+          AbyssUI_ReloadFrame:Show()
+        end
       end
+    else
+      CameraSmooth70_CheckButton:SetChecked(nil)
     end
   end)
-    -- Camera Pitch Function Option 90%
-    local CameraSmooth90_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth90_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    CameraSmooth90_CheckButton:SetPoint("TOPLEFT", 10, -140)
-    CameraSmooth90_CheckButton.Text:SetText("Smooth Camera\n   (90% Slower)")
-    CameraSmooth90_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
-    CameraSmooth90_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth90)
-    -- OnClick Function
-    CameraSmooth90_CheckButton:SetScript("OnClick", function(self)
-      if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
-        AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 = self:GetChecked()
-        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 == true then
-          ConsoleExec( "cameraYawMoveSpeed 10" )
-          ConsoleExec( "cameraPitchMoveSpeed 10" )
-        else
-          ConsoleExec( "cameraYawMoveSpeed 100" )
-          ConsoleExec( "cameraPitchMoveSpeed 100" )
-          if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
-            AbyssUI_ReloadFrame:Show()
-          end
-        end
-      else
-        CameraSmooth90_CheckButton:SetChecked(nil)
-      end
-    end)
-    -- After Login/Reload
-    CameraSmooth90_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    CameraSmooth90_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if ( event == "PLAYER_ENTERING_WORLD" ) then
+  -- After Login/Reload
+  CameraSmooth70_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  CameraSmooth70_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 == true then
+      ConsoleExec( "cameraYawMoveSpeed 30" )
+      ConsoleExec( "cameraPitchMoveSpeed 30" )
+    end
+  end
+end)
+  -- Camera Pitch Function Option 90%
+  local CameraSmooth90_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth90_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  CameraSmooth90_CheckButton:SetPoint("TOPLEFT", 10, -140)
+  CameraSmooth90_CheckButton.Text:SetText("Smooth Camera\n   (90% Slower)")
+  CameraSmooth90_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
+  CameraSmooth90_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth90)
+  -- OnClick Function
+  CameraSmooth90_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
+      AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 = self:GetChecked()
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 == true then
         ConsoleExec( "cameraYawMoveSpeed 10" )
         ConsoleExec( "cameraPitchMoveSpeed 10" )
+      else
+        ConsoleExec( "cameraYawMoveSpeed 100" )
+        ConsoleExec( "cameraPitchMoveSpeed 100" )
+        if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
+          AbyssUI_ReloadFrame:Show()
+        end
+      end
+    else
+      CameraSmooth90_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  CameraSmooth90_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  CameraSmooth90_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 == true then
+      ConsoleExec( "cameraYawMoveSpeed 10" )
+      ConsoleExec( "cameraPitchMoveSpeed 10" )
+    end
+  end
+end)
+  ----------------
+  -- Action Cam --
+  ----------------
+  local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
+  AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor\nMode")
+  AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
+  AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
+  -- OnClick Function
+  AbyssUIActionCam_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionActionCam = self:GetChecked()
+  end)
+  -- Update
+  AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_ENABLED")
+  AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_DISABLED")
+  AbyssUIActionCam_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    local IsMouseLooking = IsMouselooking()
+    if ( event == "PLAYER_REGEN_DISABLED" and IsMouseLooking == false ) then
+      if AbyssUIAddonSettings.ExtraFunctionActionCam == true then
+        MouselookStart()
+      else
+        MouselookStop()
+      end
+    end
+  --[[
+    if ( event == "PLAYER_REGEN_ENABLED" ) then
+      MouselookStop()
+    end
+  --]]
+end)
+  ---------------------------
+  -- Auto Repair/Sell Gray --
+  ---------------------------
+  local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 180, -110)
+  AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Itens")
+  AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair itens"
+  AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
+  -- OnClick Function
+  AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
+  end)
+  --------------------------------------
+  -- Stack Action Bar (3rd ActionBar) --
+  --------------------------------------
+  local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
+  AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
+  AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizard Main Bar"
+  AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
+  -- Main Function and Button
+  local function AbyssUI_AddactionBar()
+         for i = 2, 12 do
+             local n = "MultiBarRightButton"
+             local btn = _G[n..i]
+             btn:ClearAllPoints()
+             btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
+         end
+         --MultiBar
+         MultiBarRight:ClearAllPoints()
+         MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, 150)
+         --StanceBar
+         StanceBarFrame:ClearAllPoints()
+         StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+         --VehicleBar
+         MainMenuBarVehicleLeaveButton:ClearAllPoints()
+         MainMenuBarVehicleLeaveButton:SetPoint("LEFT", MainMenuBar, "BOTTOMLEFT", -80, 80)
+     end
+  -- OnClick Function
+  AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
+    AbyssUI_AddactionBar()
+    AbyssUI_ActionBarInfo:Show()
+  end)
+  -- After Login/Reload
+  AbyssUINewActionBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  AbyssUINewActionBar_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
+  AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
+      if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
+        AbyssUI_AddactionBar()
       end
     end
   end)
-    ----------------
-    -- Action Cam --
-    ----------------
-    local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
-    AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor\nMode")
-    AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
-    AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
-    -- OnClick Function
-    AbyssUIActionCam_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.ExtraFunctionActionCam = self:GetChecked()
-    end)
-    -- Update
-    AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_ENABLED")
-    AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_DISABLED")
-    AbyssUIActionCam_CheckButton:SetScript("OnEvent", function(self, event, ...)
-      local IsMouseLooking = IsMouselooking()
-      if ( event == "PLAYER_REGEN_DISABLED" and IsMouseLooking == false ) then
-        if AbyssUIAddonSettings.ExtraFunctionActionCam == true then
-          MouselookStart()
-        else
-          MouselookStop()
-        end
-      end
-    --[[
-      if ( event == "PLAYER_REGEN_ENABLED" ) then
-        MouselookStop()
-      end
-    --]]
-  end)
-    ---------------------------
-    -- Auto Repair/Sell Gray --
-    ---------------------------
-    local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 180, -110)
-    AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Itens")
-    AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair itens"
-    AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
-    -- OnClick Function
-    AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
-    end)
-    --------------------------------------
-    -- Stack Action Bar (3rd ActionBar) --
-    --------------------------------------
-    local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-    AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
-    AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
-    AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizard Main Bar"
-    AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
-    -- Main Function and Button
-    local function AbyssUI_AddactionBar()
-           for i = 2, 12 do
-               local n = "MultiBarRightButton"
-               local btn = _G[n..i]
-               btn:ClearAllPoints()
-               btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
-           end
-           MultiBarRight:ClearAllPoints()
-           MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 140)
-           MultiBarRight:SetScale(1)
-       end
-    -- OnClick Function
-    AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
-      AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
-      AbyssUI_AddactionBar()
-      AbyssUI_ActionBarInfo:Show()
-      end)
-      -- After Login/Reload
-    AbyssUINewActionBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-    AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
-      if ( event == "PLAYER_ENTERING_WORLD" ) then
-        if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-          C_Timer.After(0.5, function()
-            AbyssUI_AddactionBar()
-          end)
-        end
-      end
-    end)
   ---------------------------- AbyssUI Stylization ----------------------------
   ---------------------------
   -- Player Portrait Style --
@@ -764,11 +792,9 @@ end)
       AbyssUIClassCircles08_CheckButton:SetChecked(nil)
     end
   end)
-
   ------------------------
   -- Frame Colorization --
   ------------------------
-
   -- AbyssUIVertexColorFrames01_CheckButton
   local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames01_CheckButton:SetPoint("TOPRIGHT", -220, -80)
