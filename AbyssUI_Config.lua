@@ -647,12 +647,14 @@ end)
          MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, 150)
          --StanceBar
          StanceBarFrame:ClearAllPoints()
+         --StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 30, 45)
          StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
          --VehicleBar
          MainMenuBarVehicleLeaveButton:ClearAllPoints()
-         MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -300, 60)
+         MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 60)
          --PetBar
          PetActionBarFrame:ClearAllPoints()
+         PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
          PetActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
      end
   -- OnClick Function

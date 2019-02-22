@@ -1498,8 +1498,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			TradeSkillFrame.NineSlice.TopRightCorner,
 			TradeSkillFrame.NineSlice.TopLeftCorner,
 			TradeSkillFrame.NineSlice.BottomLeftCorner,
-			TradeSkillFrame.NineSlice.BottomRightCorner,
-			TradeSkillFrameInset.NineSlice.BottomEdge, }) do
+			TradeSkillFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
