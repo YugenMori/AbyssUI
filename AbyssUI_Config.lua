@@ -402,8 +402,9 @@ HideStanceBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideStanceBar)
 HideStanceBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
    if ( AbyssUIAddonSettings.HideStanceBar == true ) then
-     StanceBarFrame:ClearAllPoints()
-     StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+     StanceBarFrame:Hide()
+   else
+     StanceBarFrame:Show()
    end
 end)
 -- After Login/Reload
@@ -412,7 +413,7 @@ HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.HideStanceBar == true then
       C_Timer.After(0.5, function()
-        StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+        StanceBarFrame:Hide()
       end)
     end
   end
@@ -646,10 +647,13 @@ end)
          MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, 150)
          --StanceBar
          StanceBarFrame:ClearAllPoints()
-         StanceBarFrame:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMRIGHT", -20, -180)
+         StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
          --VehicleBar
          MainMenuBarVehicleLeaveButton:ClearAllPoints()
-         MainMenuBarVehicleLeaveButton:SetPoint("LEFT", MainMenuBar, "BOTTOMLEFT", -80, 80)
+         MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -300, 60)
+         --PetBar
+         PetActionBarFrame:ClearAllPoints()
+         PetActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
      end
   -- OnClick Function
   AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
@@ -663,7 +667,9 @@ end)
   AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
       if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-        AbyssUI_AddactionBar()
+        C_Timer.After(0.5, function()
+          AbyssUI_AddactionBar()
+        end)
       end
     end
   end)
