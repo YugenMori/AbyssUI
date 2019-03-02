@@ -86,7 +86,7 @@ frame1:SetScript("OnEvent", function(self, event, addon)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
 				else
-					v:SetVertexColor(.35, .35, .35)
+					v:SetVertexColor(.3, .3, .3)
 				end
 			else
 				return nil
@@ -119,7 +119,7 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 			FocusFrameToTTextureFrameTexture, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.KeepUnitDark == true then
-					v:SetVertexColor(.35, .35, .35)
+					v:SetVertexColor(.2, .2, .2)
 				end
 			else
 				return nil

@@ -39,7 +39,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
 		if UnitIsPlayer(self.unit) then
 			local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
-			if t and AbyssUIAddonSettings.UIClassCircles01 ~= true and AbyssUIAddonSettings.UIClassCircles02 ~= true and AbyssUIAddonSettings.UIClassCircles03 ~= true and AbyssUIAddonSettings.UIClassCircles04 ~= true and AbyssUIAddonSettings.UIClassCircles05 ~= true and AbyssUIAddonSettings.UIClassCircles06 ~= true and AbyssUIAddonSettings.UIClassCircles07 ~= true and AbyssUIAddonSettings.UIClassCircles08 ~= true then
+			if t and AbyssUIAddonSettings.UIClassCircles01 ~= true and AbyssUIAddonSettings.UIClassCircles02 ~= true and AbyssUIAddonSettings.UIClassCircles03 ~= true and AbyssUIAddonSettings.UIClassCircles04 ~= true and AbyssUIAddonSettings.UIClassCircles05 ~= true and AbyssUIAddonSettings.UIClassCircles06 ~= true and AbyssUIAddonSettings.UIClassCircles07 ~= true and AbyssUIAddonSettings.UIClassCircles08 ~= true and AbyssUIAddonSettings.UIClassCircles09 ~= true and AbyssUIAddonSettings.UIClassCircles10 ~= true and AbyssUIAddonSettings.UIClassCircles11 ~= true and AbyssUIAddonSettings.UIClassCircles12 ~= true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_BRIGHT_CLASS_COLOR")
 				self.portrait:SetTexCoord(unpack(t))
 			else
@@ -65,6 +65,18 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles08 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_MUTED_CLASS_COLOR")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles09 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_PSYCHEDELIC")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles10 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_PSYCHEDELIC_V2")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles11 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_DARK_GRAYSCALE")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles12 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_ARTISTIC")
 				self.portrait:SetTexCoord(unpack(t))
 			else
 				return nil
