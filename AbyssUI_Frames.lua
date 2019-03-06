@@ -19,7 +19,7 @@ AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
 AbyssUI_AFKCameraFrame.text:SetJustifyH("CENTER")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("CENTER")
-AbyssUI_AFKCameraFrame.text:SetText("|cff0d75d4AbyssUI|r\nThe |cff5f545eDark|r Blizzard UI revamp.\nMove to leave AFK Mode ('W', 'D', 'A' or 'S').")
+AbyssUI_AFKCameraFrame.text:SetText("|cff0d75d4AbyssUI|r\nThe |cff5f545eDark|r Blizzard UI revamp.\nMove to leave AFK Mode.")
 AbyssUI_AFKCameraFrame:Hide()
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
@@ -118,7 +118,7 @@ function AbyssUI_UpdateAFKCameraData()
 	PlayerInfo_Class1.text:SetText(playerClass)
 	ExtraInfo_Clock1.text:SetText(dataTime)
 end
-
+--------------------------------------------
 -- YouDied Frame
 local AbyssUI_YouDiedFrame = CreateFrame("Frame", nil, UIParent)
 AbyssUI_YouDiedFrame:RegisterEvent("PLAYER_DEAD")
