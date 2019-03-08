@@ -19,7 +19,7 @@ AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
 AbyssUI_AFKCameraFrame.text:SetJustifyH("CENTER")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("CENTER")
-AbyssUI_AFKCameraFrame.text:SetText("|cff0d75d4AbyssUI|r\nThe |cff5f545eDark|r Blizzard UI revamp.\nMove to leave AFK Mode.")
+AbyssUI_AFKCameraFrame.text:SetText("|cff0d75d4AbyssUI|r the |cff5f545eDark|r Blizzard UI revamp\nMove to leave AFK Mode")
 AbyssUI_AFKCameraFrame:Hide()
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
@@ -192,7 +192,7 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 				UIFrameFadeIn(AbyssUI_LevelUpFrame, 2, 0, 1)
 			end)
 			C_Timer.After(2, function()
-				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 1, 0)
+				UIFrameFadeOut(AbyssUI_LevelUpFrame, 4, 1, 0)
 			end)
 		else
 			return nil

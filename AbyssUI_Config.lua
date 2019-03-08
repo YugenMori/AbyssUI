@@ -425,12 +425,16 @@ end)
  local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
  KeepUnitDark_CheckButton:SetPoint("CENTER", -290, -80)
  KeepUnitDark_CheckButton.Text:SetText("Keep UnitFrame Dark")
- KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep Unit Frames Dark (Player Frame, Target Frame, Boss, etc...)."
+ KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame Dark (Player Frame, Boss, etc)."
  KeepUnitDark_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitDark)
  -- OnClick Function
  KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
-   AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
-   AbyssUI_ReloadFrame:Show()
+   if AbyssUIAddonSettings.KeepUnitBlizzard == false then
+     AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
+     AbyssUI_ReloadFrame:Show()
+   else
+     KeepUnitDark_CheckButton:SetChecked(nil)
+   end
  end)
  -- After Login/Reload
  KeepUnitDark_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -442,6 +446,34 @@ end)
      KeepUnitDark_CheckButton:SetChecked(nil)
    end
  end
+end)
+----------------------------------
+-- Keep UnitFrame Blizzard Like --
+----------------------------------
+local KeepUnitBlizzard_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitBlizzard_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+KeepUnitBlizzard_CheckButton:SetPoint("CENTER", -290, -110)
+KeepUnitBlizzard_CheckButton.Text:SetText("Keep UnitFrame Blizzard Like")
+KeepUnitBlizzard_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame Blizzard like (Player Frame, Boss, etc). "
+KeepUnitBlizzard_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitBlizzard)
+-- OnClick Function
+KeepUnitBlizzard_CheckButton:SetScript("OnClick", function(self)
+  if AbyssUIAddonSettings.KeepUnitDark == false then
+    AbyssUIAddonSettings.KeepUnitBlizzard = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  else
+    KeepUnitBlizzard_CheckButton:SetChecked(nil)
+  end
+end)
+-- After Login/Reload
+  KeepUnitBlizzard_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  KeepUnitBlizzard_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.KeepUnitBlizzard == true then
+      AbyssUIAddonSettings.KeepUnitBlizzard = self:GetChecked()
+    else
+      KeepUnitBlizzard_CheckButton:SetChecked(nil)
+    end
+  end
 end)
 --------------------------------- Buttons ---------------------------------
   -----------------------
