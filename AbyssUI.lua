@@ -119,7 +119,7 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 			FocusFrameToTTextureFrameTexture, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.KeepUnitDark == true then
-					v:SetVertexColor(.2, .2, .2)
+					v:SetVertexColor(.3, .3, .3)
 				elseif AbyssUIAddonSettings.KeepUnitBlizzard == true then
 					v:SetVertexColor(1, 1, 1)
 				else
