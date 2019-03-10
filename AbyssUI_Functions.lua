@@ -620,7 +620,6 @@ end)
 ------------------------------
 -- Percent at target health --
 ------------------------------
---[[ NEED REVIEW
 local FrameList = {"Target", "Focus"}
 function AbyssUI_UpdateHealthValues(...)
 for i = 1, select("#", unpack(FrameList)) do
@@ -634,10 +633,8 @@ for i = 1, select("#", unpack(FrameList)) do
 		end
 	end
 end
-
-hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", UpdateHealthValues)
+hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateHealthValues)
 ----------------------------------------------------
---]]
 
 -- AFK Camera
 local AbyssUI_AFKCamera = CreateFrame("FRAME")
