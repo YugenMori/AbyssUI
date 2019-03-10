@@ -56,7 +56,7 @@ frame1:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -86,7 +86,7 @@ frame1:SetScript("OnEvent", function(self, event, addon)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
 				else
-					v:SetVertexColor(.3, .3, .3)
+					v:SetVertexColor(.5, .5, .5)
 				end
 			else
 				return nil
@@ -119,7 +119,7 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 			FocusFrameToTTextureFrameTexture, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.KeepUnitDark == true then
-					v:SetVertexColor(.3, .3, .3)
+					v:SetVertexColor(.4, .4, .4)
 				elseif AbyssUIAddonSettings.KeepUnitBlizzard == true then
 					v:SetVertexColor(1, 1, 1)
 				else
@@ -146,7 +146,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -196,7 +196,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -249,7 +249,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -298,7 +298,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -350,7 +350,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -401,7 +401,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -459,7 +459,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -521,7 +521,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -566,7 +566,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -616,7 +616,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -665,7 +665,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -715,7 +715,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -764,7 +764,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -814,7 +814,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -865,7 +865,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -908,7 +908,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -952,7 +952,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1003,7 +1003,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1053,7 +1053,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1102,7 +1102,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1166,7 +1166,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1215,7 +1215,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1276,7 +1276,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 						v:SetVertexColor(1, 1, 1)
 					elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-						v:SetVertexColor(.01, .01, .01)
+						v:SetVertexColor(.2, .2, .2)
 					elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 						v:SetVertexColor(182/255, 42/255, 37/255)
 					elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1336,7 +1336,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1392,7 +1392,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1450,7 +1450,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1506,7 +1506,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1555,7 +1555,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1610,7 +1610,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1665,7 +1665,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1721,7 +1721,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1776,7 +1776,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1832,7 +1832,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1893,7 +1893,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -1948,7 +1948,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2004,7 +2004,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2060,7 +2060,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2116,7 +2116,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2175,7 +2175,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2230,7 +2230,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2285,7 +2285,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
@@ -2339,7 +2339,7 @@ f:SetScript("OnEvent", function(self, event, name)
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.01, .01, .01)
+					v:SetVertexColor(.2, .2, .2)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
 					v:SetVertexColor(182/255, 42/255, 37/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then

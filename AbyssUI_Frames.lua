@@ -350,7 +350,6 @@ FrameButtonConfirm:SetScript("OnClick", function()
 	ReloadUI()
 end)
 ----------------------------------------------------
-
 -- AbyssUI_ActionBarCleaner
 AbyssUI_ActionBarCleaner = CreateFrame("Frame", nil, UIParent)
 AbyssUI_ActionBarCleaner:Hide()
@@ -365,7 +364,6 @@ AbyssUI_ActionBarCleaner:SetScript("OnDragStart", AbyssUI_ActionBarCleaner.Start
 AbyssUI_ActionBarCleaner:SetScript("OnDragStop", function(self)
   self:StopMovingOrSizing()
 end)
-
 AbyssUI_ActionBarCleaner:SetFrameStrata("Dialog")
 AbyssUI_ActionBarCleaner.text = AbyssUI_ActionBarCleaner.text or AbyssUI_ActionBarCleaner:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
 AbyssUI_ActionBarCleaner.text:SetScale(1.5)
@@ -423,7 +421,6 @@ FrameButtonCancel:SetScript("OnClick", function()
 	AbyssUI_ActionBarCleaner:Hide()
 end)
 ----------------------------------------------------
-
 -- AbyssUI_ActionBarInfo
 AbyssUI_ActionBarInfo = CreateFrame("Frame", nil, UIParent)
 AbyssUI_ActionBarInfo:Hide()
@@ -438,7 +435,6 @@ AbyssUI_ActionBarInfo:SetScript("OnDragStart", AbyssUI_ActionBarInfo.StartMoving
 AbyssUI_ActionBarInfo:SetScript("OnDragStop", function(self)
   self:StopMovingOrSizing()
 end)
-
 AbyssUI_ActionBarInfo:SetFrameStrata("Dialog")
 AbyssUI_ActionBarInfo.text = AbyssUI_ActionBarInfo.text or AbyssUI_ActionBarInfo:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
 AbyssUI_ActionBarInfo.text:SetScale(1.5)
@@ -493,8 +489,7 @@ FrameButtonReset:SetScript("OnClick", function()
 	AbyssUI_ActionBarInfo:Hide()
 	ReloadUI()
 end)
-----------------------------------------------------
-
+-- End
 --------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")
@@ -522,5 +517,4 @@ AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
 		AbyssUIProfile = time()
 	end
 end)
-
 -- End
