@@ -402,11 +402,11 @@ KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep Uni
 KeepUnitDark_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitDark)
 -- OnClick Function
 KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
- if AbyssUIAddonSettings.KeepUnitBlizzard ~= false then
+ if AbyssUIAddonSettings.KeepUnitBlizzard == true then
+   KeepUnitDark_CheckButton:SetChecked(nil)
+ else
    AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
    AbyssUI_ReloadFrame:Show()
- else
-   KeepUnitDark_CheckButton:SetChecked(nil)
  end
 end)
  -- After Login/Reload
@@ -428,11 +428,11 @@ KeepUnitBlizzard_CheckButton.tooltip = "Even if you change theme, this will keep
 KeepUnitBlizzard_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitBlizzard)
 -- OnClick Function
 KeepUnitBlizzard_CheckButton:SetScript("OnClick", function(self)
-  if AbyssUIAddonSettings.KeepUnitDark ~= false then
+  if AbyssUIAddonSettings.KeepUnitDark == true then
+    KeepUnitBlizzard_CheckButton:SetChecked(nil)
+  else
     AbyssUIAddonSettings.KeepUnitBlizzard = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
-  else
-    KeepUnitBlizzard_CheckButton:SetChecked(nil)
   end
 end)
 -- After Login/Reload
