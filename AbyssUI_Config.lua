@@ -1173,8 +1173,8 @@ end)
 -- AbyssUIVertexColorFrames12_CheckButton
 local AbyssUIVertexColorFrames12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames12_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 AbyssUIVertexColorFrames12_CheckButton:SetPoint("TOPRIGHT", -50, -230)
-AbyssUIVertexColorFrames12_CheckButton.Text:SetText("Priest")
-AbyssUIVertexColorFrames12_CheckButton.tooltip = "Priest Class Frame Colorization (Same as Blizzard Default)"
+AbyssUIVertexColorFrames12_CheckButton.Text:SetText("Priest (Shadow)")
+AbyssUIVertexColorFrames12_CheckButton.tooltip = "Priest Class Frame Colorization"
 AbyssUIVertexColorFrames12_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames12)
 -- OnClick Function
 AbyssUIVertexColorFrames12_CheckButton:SetScript("OnClick", function(self)
