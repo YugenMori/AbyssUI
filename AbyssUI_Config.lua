@@ -635,6 +635,9 @@ local function AbyssUI_AddactionBar()
   MultiBarRight:ClearAllPoints()
   MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 35, 145)
   MultiBarRight.SetPoint = function() end
+  MultiBarLeft:ClearAllPoints()
+  MultiBarLeft:SetPoint("TOPRIGHT", VerticalMultibarContainer, "RIGHT", -2, 200)
+  MultiBarLeft.SetPoint = function() end
   --StanceBar
   StanceBarFrame:ClearAllPoints()
   --StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 30, 45)
