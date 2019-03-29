@@ -20,11 +20,11 @@ for _, Bar in pairs({ "Action",
 	"MultiBarBottomRight",
 	"MultiBarLeft",
 	"MultiBarRight",
-	"Stance",
-	"PetAction", }) do
+	"PetAction",
+	"Buff", }) do
 for i = 1, 12 do
 	local Button = Bar.."Button"..i
-		if _G[Button] then _G[Button.."Icon"]:SetTexCoord(0.06, 0.94, 0.06, 0.94)
+		if _G[Button] then _G[Button.."Icon"]:SetTexCoord(0.05, 0.90, 0.05, 0.90)
 		end
 	end
 end
