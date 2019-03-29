@@ -623,33 +623,34 @@ AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
 AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
 AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizard Main Bar"
 AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
--- Main Function and Button
+-- Main Function and Button (Thanks to Ansi for part of this)
 local function AbyssUI_AddactionBar()
-       for i = 2, 12 do
-           local n = "MultiBarRightButton"
-           local btn = _G[n..i]
-           btn:ClearAllPoints()
-           btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
-       end
-       --MultiBar
-       MultiBarRight:ClearAllPoints()
-       MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, 150)
-       --StanceBar
-       StanceBarFrame:ClearAllPoints()
-       --StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 30, 45)
-       StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
-       --VehicleBar
-       MainMenuBarVehicleLeaveButton:ClearAllPoints()
-       MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 60)
-       --PetBar
-       PetActionBarFrame:ClearAllPoints()
-       PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
-       PetActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
-       --ExtraBar
-       ExtraActionBarFrame:ClearAllPoints()
-       ExtraActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
-       ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
-   end
+  for i = 2, 12 do
+     local n = "MultiBarRightButton"
+     local btn = _G[n..i]
+     btn:ClearAllPoints()
+     btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
+  end
+  --MultiBar
+  MultiBarRight:ClearAllPoints()
+  MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 35, 145)
+  MultiBarRight.SetPoint = function() end
+  --StanceBar
+  StanceBarFrame:ClearAllPoints()
+  --StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 30, 45)
+  StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
+  --VehicleBar
+  MainMenuBarVehicleLeaveButton:ClearAllPoints()
+  MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 60)
+  --PetBar
+  PetActionBarFrame:ClearAllPoints()
+  PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
+  PetActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
+  --ExtraBar
+  ExtraActionBarFrame:ClearAllPoints()
+  ExtraActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
+  ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
+end
 -- OnClick Function
 AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
@@ -668,7 +669,33 @@ AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
-  ---------------------------- AbyssUI Stylization ----------------------------
+-- MultiBar stop resetting (Thanks to Sasenna for this)
+local _G = _G
+MainMenuBar:SetScale(0.75)
+--VehicleMenuBar:SetScale(0.75)
+local function init()
+    local mbr = _G['MultiBarRight']
+        mbr:SetClampedToScreen(false)
+        mbr:SetMovable(1)
+        mbr:SetUserPlaced(true)
+        mbr:ClearAllPoints()
+        mbr.ClearAllPoints = function() end
+        mbr:SetPoint("RIGHT", -28, -4)
+        mbr:SetScale(0.68)
+        mbr.SetPoint = function() end
+    end
+
+    local f = CreateFrame("Frame")
+
+    f:SetScript("OnEvent", function(self, event)
+    if(event=="PLAYER_LOGIN") then
+        init()
+    end
+end)
+f:RegisterEvent("PLAYER_LOGIN")
+--End
+
+----------------------------- AbyssUI Stylization ------------------------------
 -- Player Portrait Style --
 -- AbyssUIClassCircles01_CheckButton
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
