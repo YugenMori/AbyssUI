@@ -24,7 +24,7 @@ for _, Bar in pairs({ "Action",
 	"Buff", }) do
 for i = 1, 12 do
 	local Button = Bar.."Button"..i
-		if _G[Button] then _G[Button.."Icon"]:SetTexCoord(0.05, 0.90, 0.05, 0.90)
+		if _G[Button] then _G[Button.."Icon"]:SetTexCoord(0.05, 0.95, 0.05, 0.95)
 		end
 	end
 end

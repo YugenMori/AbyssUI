@@ -621,7 +621,7 @@ end)
 local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
 AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
-AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizard Main Bar"
+AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizzard Main Bar"
 AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
 -- Main Function and Button (Thanks to Ansi for part of this)
 local _G = _G
@@ -639,7 +639,7 @@ local function AbyssUI_AddactionBar()
   --MultiBar
   MultiBarRight:ClearAllPoints()
   MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 35, 145)
-  --MultiBarLeft.SetPoint = function() end
+  --MultiBarRight.SetPoint = function() end
   MultiBarLeft:ClearAllPoints()
   MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", -2, -100)
   MultiBarLeft.SetPoint = function() end
