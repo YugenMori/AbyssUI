@@ -665,6 +665,26 @@ function AbyssUIStart()
 end
 ----------------------------------------------------
 
+-- ActionBarScale and Minimap tests
+local frame = CreateFrame("Frame", nil, UIParent)
+MinimapCluster:EnableMouse( false )
+MinimapCluster:SetParent( frame )
+MinimapCluster:SetFrameStrata( frame:GetFrameStrata() )
+MinimapCluster:SetFrameLevel( frame:GetFrameLevel()+1 )
+
+MinimapCluster:SetMovable( true )
+MinimapCluster:StartMoving()
+MinimapCluster:StopMovingOrSizing()
+
+hooksecurefunc(MultiBarRight, "SetScale", function(self, scale)
+	if scale < 1 then self:SetScale(1) end
+end)
+
+hooksecurefunc(MultiBarLeft, "SetScale", function(self, scale)
+	if scale < 1 then self:SetScale(1) end
+end)
+----------------------------------------------------
+
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
 function AbyssUIDailyInfo()

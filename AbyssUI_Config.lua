@@ -638,11 +638,9 @@ local function AbyssUI_AddactionBar()
   end
   --MultiBar
   MultiBarRight:ClearAllPoints()
-  MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 35, 145)
-  --MultiBarRight.SetPoint = function() end
+  MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 135)
   MultiBarLeft:ClearAllPoints()
   MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", -2, -100)
-  MultiBarLeft.SetPoint = function() end
   --StanceBar
   StanceBarFrame:ClearAllPoints()
   StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
@@ -658,14 +656,6 @@ local function AbyssUI_AddactionBar()
   ExtraActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
   ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
 end
--- Stop Resetting
-local f = CreateFrame("Frame")
-f:SetScript("OnEvent", function(self, event)
-  if ( event == "PLAYER_LOGIN" ) then
-    AbyssUI_AddactionBar()
-  end
-end)
-f:RegisterEvent("PLAYER_LOGIN")
 -- OnClick Function
 AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
@@ -680,6 +670,8 @@ AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
       C_Timer.After(0.5, function()
         AbyssUI_AddactionBar()
+        --MultiBarRight.SetPoint = function() end
+        --MultiBarLeft.SetPoint = function() end
       end)
     end
   end
