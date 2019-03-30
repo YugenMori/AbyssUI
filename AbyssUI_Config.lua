@@ -620,27 +620,36 @@ end)
 -- Stack Action Bar (3rd ActionBar) --
 local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
-AbyssUINewActionBar_CheckButton.Text:SetText("3rd ActionBar (Beta)")
-AbyssUINewActionBar_CheckButton.tooltip = "This add a third bar for the small version of Blizzard Main Bar"
+AbyssUINewActionBar_CheckButton.Text:SetText("AbyssUI ActionBar (Beta)")
+AbyssUINewActionBar_CheckButton.tooltip = "Adds 1 to 2 new action bar for the small version of Blizzard Main Bar"
 AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
 -- Main Function and Button (Thanks to Ansi for part of this)
 local _G = _G
 local function AbyssUI_AddactionBar()
   for i = 2, 12 do
      local n = "MultiBarRightButton"
+     local m = "MultiBarLeftButton"
      local btn = _G[n..i]
+     local btm = _G[m..i]
      btn:SetClampedToScreen(false)
      btn:SetMovable(1)
      btn:SetUserPlaced(true)
      btn:ClearAllPoints()
      btn.ClearAllPoints = function() end
      btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
+     btm:SetClampedToScreen(false)
+     btm:SetMovable(1)
+     btm:SetUserPlaced(true)
+     btm:ClearAllPoints()
+     btm.ClearAllPoints = function() end
+     btm:SetPoint("LEFT", m..i - 1, "RIGHT", 6, 0)
   end
-  --MultiBar
+  --MultiBarRight
   MultiBarRight:ClearAllPoints()
   MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 135)
+  --MultiBarLeft
   MultiBarLeft:ClearAllPoints()
-  MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", -2, -100)
+  MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
   --StanceBar
   StanceBarFrame:ClearAllPoints()
   StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
@@ -649,13 +658,17 @@ local function AbyssUI_AddactionBar()
   MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 60)
   --PetBar
   PetActionBarFrame:ClearAllPoints()
-  PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
-  PetActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
+  PetActionBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", -30, 5)
+  PetActionBarFrame:SetScale(0.90)
+  PetActionBarFrame.SetPoint = function() end
   --ExtraBar
   ExtraActionBarFrame:ClearAllPoints()
   ExtraActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
   ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
+  --CastBar
+
 end
+
 -- OnClick Function
 AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
@@ -668,9 +681,25 @@ AbyssUINewActionBar_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
     if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-      C_Timer.After(0.5, function()
+      C_Timer.After(0.1, function()
         AbyssUI_AddactionBar()
-        --MultiBarRight.SetPoint = function() end
+      end)
+    end
+  end
+end)
+-- MultiBar and general bars Event Handler
+MultiBarLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
+MultiBarLeft:RegisterEvent("ACTIONBAR_UPDATE_STATE")
+MultiBarLeft:RegisterEvent("PLAYER_REGEN_DISABLED")
+MultiBarLeft:RegisterEvent("PLAYER_REGEN_ENABLED")
+MultiBarLeft:RegisterEvent("VEHICLE_UPDATE")
+MultiBarLeft:RegisterEvent("PLAYER_LOGIN")
+MultiBarLeft:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_STATE" or event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" or event == "VEHICLE_UPDATE" or event == "PLAYER_LOGIN" ) then
+    if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
+      C_Timer.After(0.1, function()
+        MultiBarLeft:ClearAllPoints()
+        MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
         --MultiBarLeft.SetPoint = function() end
       end)
     end

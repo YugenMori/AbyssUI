@@ -441,7 +441,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("You need to activate the small version of MainBar\nTo do this: Esc>Interface>ActionBar\nMark: 'Bottom Left Bar' and 'Right Bar'. Unmark 'Bottom Right Bar' if it's marked, then Reload UI.")
+AbyssUI_ActionBarInfo.text:SetText("This option is for the small version of Blizzard MainBar\nTo do this go to: Esc> Interface> ActionBar\nMark: Bottom Left Bar, Right Bar 1 (3x12) or Right Bar 1 and 2 (4x12)\n|cff0d75d44x12 it's glitch right now, but it fix itself during combat/reload|r")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")

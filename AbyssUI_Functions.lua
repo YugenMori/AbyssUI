@@ -361,10 +361,21 @@ local movable = false
 local frame_anchor = "TOP"
 local pos_x = -250
 local pos_y = -6
-if movable == false then
-	StatsFrame:ClearAllPoints()
-	StatsFrame:SetPoint('BOTTOMLEFT', UIParent, "BOTTOMLEFT", 10, 10)
-end
+local hasActionBar = PetHasActionBar()
+StatsFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+StatsFrame:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
+StatsFrame:SetScript("OnEvent", function(self, event, ...)
+	if ( event == "PLAYER_ENTERING_WORLD" or event == "PET_BAR_UPDATE_COOLDOWN" ) then
+		if movable == false then
+			StatsFrame:ClearAllPoints()
+			if hasActionBar == true then
+				StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 10, -10)
+			else
+				StatsFrame:SetPoint('BOTTOMLEFT', UIParent, "BOTTOMLEFT", 10, 10)
+			end
+		end
+	end
+end)
 
 local CF = CreateFrame("Frame")
 CF:RegisterEvent("PLAYER_LOGIN")
