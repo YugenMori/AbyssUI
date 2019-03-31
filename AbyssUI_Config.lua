@@ -666,7 +666,7 @@ local function AbyssUI_AddactionBar()
   PetActionBarFrame.SetPoint = function() end
   --ExtraBar
   ExtraActionBarFrame:ClearAllPoints()
-  ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+  ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 80)
   ExtraActionBarFrame.SetPoint = function() end
 end
 
