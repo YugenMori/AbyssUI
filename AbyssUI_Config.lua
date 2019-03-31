@@ -650,12 +650,15 @@ local function AbyssUI_AddactionBar()
   --MultiBarLeft
   MultiBarLeft:ClearAllPoints()
   MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
+  --MultiBarLeft.SetPoint = function() end
   --StanceBar
   StanceBarFrame:ClearAllPoints()
-  StanceBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 30, -180)
+  StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
+  StanceBarFrame.SetPoint = function() end
   --VehicleBar
   MainMenuBarVehicleLeaveButton:ClearAllPoints()
-  MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 60)
+  MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 80)
+  MainMenuBarVehicleLeaveButton.SetPoint = function() end
   --PetBar
   PetActionBarFrame:ClearAllPoints()
   PetActionBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", -30, 5)
@@ -663,10 +666,8 @@ local function AbyssUI_AddactionBar()
   PetActionBarFrame.SetPoint = function() end
   --ExtraBar
   ExtraActionBarFrame:ClearAllPoints()
-  ExtraActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 36, 137)
-  ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 160)
-  --CastBar
-
+  ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
+  ExtraActionBarFrame.SetPoint = function() end
 end
 
 -- OnClick Function
@@ -687,6 +688,7 @@ AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
+--Temporary solution (super glitch)
 -- MultiBar and general bars Event Handler
 MultiBarLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
 MultiBarLeft:RegisterEvent("ACTIONBAR_UPDATE_STATE")
@@ -700,7 +702,6 @@ MultiBarLeft:SetScript("OnEvent", function(self, event, ...)
       C_Timer.After(0.1, function()
         MultiBarLeft:ClearAllPoints()
         MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
-        --MultiBarLeft.SetPoint = function() end
       end)
     end
   end
