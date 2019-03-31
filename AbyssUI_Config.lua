@@ -648,8 +648,9 @@ local function AbyssUI_AddactionBar()
   MultiBarRight:ClearAllPoints()
   MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 135)
   --MultiBarLeft
-  MultiBarLeft:ClearAllPoints()
-  MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
+  MultiBarLeft.ClearAllPoints = function() end
+  MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
+  MultiBarLeft.SetPoint = function() end
   --PetBar
   PetActionBarFrame.ClearAllPoints = function() end
   PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
@@ -681,23 +682,6 @@ AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
       C_Timer.After(0.5, function()
         AbyssUI_AddactionBar()
-      end)
-    end
-  end
-end)
---Temporary solution (super glitch 4rd bar)
-MultiBarLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
-MultiBarLeft:RegisterEvent("ACTIONBAR_UPDATE_STATE")
-MultiBarLeft:RegisterEvent("PLAYER_REGEN_DISABLED")
-MultiBarLeft:RegisterEvent("PLAYER_REGEN_ENABLED")
-MultiBarLeft:RegisterEvent("VEHICLE_UPDATE")
-MultiBarLeft:RegisterEvent("PLAYER_LOGIN")
-MultiBarLeft:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_STATE" or event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" or event == "VEHICLE_UPDATE" or event == "PLAYER_LOGIN" ) then
-    if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-      C_Timer.After(0.5, function()
-        MultiBarLeft:ClearAllPoints()
-        MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
       end)
     end
   end
