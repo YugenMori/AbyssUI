@@ -620,7 +620,7 @@ end)
 -- Stack Action Bar (3rd ActionBar) --
 local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
-AbyssUINewActionBar_CheckButton.Text:SetText("AbyssUI ActionBar (Beta)")
+AbyssUINewActionBar_CheckButton.Text:SetText("Abyss|cff0d75d4UI|r ActionBar")
 AbyssUINewActionBar_CheckButton.tooltip = "Adds 1 to 2 new action bar for the small version of Blizzard Main Bar"
 AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
 -- Main Function and Button (Thanks to Ansi for part of this)
