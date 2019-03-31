@@ -644,6 +644,8 @@ local function AbyssUI_AddactionBar()
      btm.ClearAllPoints = function() end
      btm:SetPoint("LEFT", m..i - 1, "RIGHT", 6, 0)
   end
+end
+local function AbyssUI_AddactionBarExtras()
   --MultiBarRight
   MultiBarRight:ClearAllPoints()
   MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 135)
@@ -658,22 +660,21 @@ local function AbyssUI_AddactionBar()
   --VehicleBar
   MainMenuBarVehicleLeaveButton:ClearAllPoints()
   MainMenuBarVehicleLeaveButton:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 80)
-  MainMenuBarVehicleLeaveButton.SetPoint = function() end
+  --MainMenuBarVehicleLeaveButton.SetPoint = function() end
   --PetBar
-  PetActionBarFrame:ClearAllPoints()
-  PetActionBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", -30, 5)
+  PetActionBarFrame.ClearAllPoints = function() end
+  PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
   PetActionBarFrame:SetScale(0.90)
   PetActionBarFrame.SetPoint = function() end
+  --TO DO MAINMENU EM TODOS ELES + CLEARALLPOINTS PETBAR LIKE
   --ExtraBar
   ExtraActionBarFrame:ClearAllPoints()
   ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -350, 80)
   ExtraActionBarFrame.SetPoint = function() end
 end
-
 -- OnClick Function
 AbyssUINewActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.AbyssUI_ActionRight = self:GetChecked()
-  AbyssUI_AddactionBar()
   AbyssUI_ActionBarInfo:Show()
 end)
 -- After Login/Reload
@@ -682,13 +683,13 @@ AbyssUINewActionBar_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
     if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-      C_Timer.After(0.1, function()
+      C_Timer.After(0.5, function()
         AbyssUI_AddactionBar()
       end)
     end
   end
 end)
---Temporary solution (super glitch)
+--Temporary solution (super glitch 4rd bar)
 -- MultiBar and general bars Event Handler
 MultiBarLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
 MultiBarLeft:RegisterEvent("ACTIONBAR_UPDATE_STATE")
@@ -699,7 +700,8 @@ MultiBarLeft:RegisterEvent("PLAYER_LOGIN")
 MultiBarLeft:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_STATE" or event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" or event == "VEHICLE_UPDATE" or event == "PLAYER_LOGIN" ) then
     if AbyssUIAddonSettings.AbyssUI_ActionRight == true then
-      C_Timer.After(0.1, function()
+      C_Timer.After(0.5, function()
+        AbyssUI_AddactionBarExtras()
         MultiBarLeft:ClearAllPoints()
         MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 180)
       end)
@@ -1364,7 +1366,7 @@ f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
     if not AbyssUIAddonSettings then
-    AbyssUIAddonSettings = {}
+      AbyssUIAddonSettings = {}
     end
     -- Now we have SavedVarialbe loaded, create the interface options frame
     InitSettings()
