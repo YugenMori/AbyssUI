@@ -367,7 +367,7 @@ StatsFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" or event == "PET_BAR_UPDATE_COOLDOWN" ) then
 		if movable == false then
 			StatsFrame:ClearAllPoints()
-			StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 10, -10)
+			StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 5, -5)
 		end
 	end
 end)

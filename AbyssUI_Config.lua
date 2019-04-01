@@ -6,7 +6,6 @@
 --
 -- Dark Minimalist UI for World of Warcraft
 --
--- Thank you so much Fizzlemizz for helping me with this Panel
 --------------------------------------------------------------------------------
 local addonName, addonTable = ...
 
@@ -617,36 +616,37 @@ AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSel
 AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
 end)
--- Stack Action Bar (3rd ActionBar) --
+-- AbyssUI Action Bar --
 local AbyssUINewActionBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar_CheckButton:SetPoint("TOPLEFT", 180, -140)
 AbyssUINewActionBar_CheckButton.Text:SetText("Abyss|cff0d75d4UI|r ActionBar")
 AbyssUINewActionBar_CheckButton.tooltip = "Adds 1 to 2 new action bar for the small version of Blizzard Main Bar"
 AbyssUINewActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUI_ActionRight)
--- Main Function and Button (Thanks to Ansi for part of this)
+-- Main Function and Button
 local _G = _G
 local function AbyssUI_AddactionBar()
   for i = 2, 12 do
-     local n = "MultiBarRightButton"
-     local m = "MultiBarLeftButton"
-     local btn = _G[n..i]
-     local btm = _G[m..i]
-     btn:SetClampedToScreen(false)
-     btn:SetMovable(1)
-     btn:SetUserPlaced(true)
-     btn:ClearAllPoints()
-     btn.ClearAllPoints = function() end
-     btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
-     btm:SetClampedToScreen(false)
-     btm:SetMovable(1)
-     btm:SetUserPlaced(true)
-     btm:ClearAllPoints()
-     btm.ClearAllPoints = function() end
-     btm:SetPoint("LEFT", m..i - 1, "RIGHT", 6, 0)
+   local n = "MultiBarRightButton"
+   local m = "MultiBarLeftButton"
+   local btn = _G[n..i]
+   local btm = _G[m..i]
+   btn:SetClampedToScreen(false)
+   btn:SetMovable(1)
+   btn:SetUserPlaced(true)
+   btn:ClearAllPoints()
+   btn.ClearAllPoints = function() end
+   btn:SetPoint("LEFT", n..i - 1, "RIGHT", 6, 0)
+   btm:SetClampedToScreen(false)
+   btm:SetMovable(1)
+   btm:SetUserPlaced(true)
+   btm:ClearAllPoints()
+   btm.ClearAllPoints = function() end
+   btm:SetPoint("LEFT", m..i - 1, "RIGHT", 6, 0)
   end
   --MultiBarRight
-  MultiBarRight:ClearAllPoints()
-  MultiBarRight:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 5, 135)
+  MultiBarRight.ClearAllPoints = function() end
+  MultiBarRight:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMLEFT", 46, 135)
+  MultiBarRight.SetPoint = function() end
   --MultiBarLeft
   MultiBarLeft.ClearAllPoints = function() end
   MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
