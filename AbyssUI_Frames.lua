@@ -441,7 +441,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("This option is for the small version of Blizzard MainBar\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 (for 3x12) or Right Bar 1 and 2 (for 4x12)\n|cff0d75d43x12/4x12 sometimes reset it own position (rare to happen), reload the UI and it will be fixed|r")
+AbyssUI_ActionBarInfo.text:SetText("This option is for the small version of Blizzard MainBar\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 (for 3x12) or Right Bar 1 and 2 (for 4x12)\n|cff0d75d43x12 sometimes reset it own position, reload the UI and it will be fixed (4x12 is recommended, little less glitch)|r")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
