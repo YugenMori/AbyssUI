@@ -114,13 +114,13 @@ Frame:SetText("Extras")
 -- AbyssUI Action Bar --
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -80)
-AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar")
+AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (Beta - risk of glitches)")
 AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds 1 new action bar above the small version of Blizzard Main Bar"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
 
 local AbyssUINewActionBar4x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar4x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar4x12_CheckButton:SetPoint("TOPLEFT", 10, -110)
-AbyssUINewActionBar4x12_CheckButton.Text:SetText("4x12 ActionBar")
+AbyssUINewActionBar4x12_CheckButton.Text:SetText("4x12 ActionBar (Beta - risk of glitches)")
 AbyssUINewActionBar4x12_CheckButton.tooltip = "Adds 1 new action bar above 3rd bar for the small version of Blizzard Main Bar"
 AbyssUINewActionBar4x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar4x12)
 -- OnClick Function
@@ -372,7 +372,7 @@ end)
 local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
 FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame")
-FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (Bottom left frame)"
+FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (Top left frame)"
 FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
 -- OnClick Function
 FPSMSFrame_CheckButton:SetScript("OnClick", function(self)
