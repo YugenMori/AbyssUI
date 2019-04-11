@@ -739,6 +739,37 @@ AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSel
 AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
 end)
+-- Auto Gamma Day/Night
+local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 180, -140)
+AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma (Day/Night)")
+AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day/night (Default gamma 1.0)"
+AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
+-- OnClick Function
+AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
+local localtime = time()
+  if ( localtime >= 6 and localtime > 18 ) then
+    ConsoleExec( "Gamma 1.2" )
+  else
+    ConsoleExec( "Gamma 1.0" )
+  end
+end)
+-- After Login/Reload
+AbyssUIAutoGamma_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
+      local localtime = time()
+        if ( localtime >= 6 and localtime > 18 ) then
+          ConsoleExec( "Gamma 1.2" )
+        else
+          ConsoleExec( "Gamma 1.0" )
+        end
+    else ConsoleExec( "Gamma 1.0" )
+    end
+  end
+end)
 --End
 ----------------------------- AbyssUI Stylization ------------------------------
 -- Player Portrait Style --
