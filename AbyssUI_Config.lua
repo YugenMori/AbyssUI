@@ -751,6 +751,8 @@ AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
 local localtime = time()
   if ( localtime >= 6 and localtime > 18 ) then
     ConsoleExec( "Gamma 1.2" )
+  elseif ( localtime > 18 ) then
+    ConsoleExec( "Gamma 1.0" )
   else
     ConsoleExec( "Gamma 1.0" )
   end
@@ -760,13 +762,13 @@ AbyssUIAutoGamma_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
-      local localtime = time()
-        if ( localtime >= 6 and localtime > 18 ) then
-          ConsoleExec( "Gamma 1.2" )
-        else
-          ConsoleExec( "Gamma 1.0" )
-        end
-    else ConsoleExec( "Gamma 1.0" )
+    local localtime = time()
+    if ( localtime >= 6 and localtime > 18 ) then
+      ConsoleExec( "Gamma 1.2" )
+    elseif ( localtime > 18 ) then
+      ConsoleExec( "Gamma 1.0" )
+    else
+      ConsoleExec( "Gamma 1.0" )
     end
   end
 end)
@@ -1418,6 +1420,39 @@ AbyssUIVertexColorFrames16_CheckButton:SetScript("OnClick", function(self)
     AbyssUIVertexColorFrames16_CheckButton:SetChecked(nil)
   end
 end)
+
+
+-- Choose a Color (Color Picker)
+local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("TOPRIGHT", -150, -320)
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Choose a Color")
+AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose the color of frames (Color Picker)"
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFramesColorPicker)
+-- OnClick Function
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(self)
+  if AbyssUIAddonSettings.UIVertexColorFrames01 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames02 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames03 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames04 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames05 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames06 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames07 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames08 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames09 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames10 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames11 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+    AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
+    AbyssUI_ShowColorPicker()
+  else
+    AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(nil)
+  end
+end)
+
 -- End
 end
 --------------------------------- Save ---------------------------------
