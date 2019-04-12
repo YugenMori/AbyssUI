@@ -691,6 +691,35 @@ hooksecurefunc(MultiBarLeft, "SetScale", function(self, scale)
 end)
 ----------------------------------------------------
 
+-- Color Picker
+function AbyssUI_ShowColorPicker(r, g, b, a, myColorCallback)
+ ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a
+ ColorPickerFrame.previousValues = {r, g, b, a}
+ ColorPickerFrame.func =
+	function ()
+	--Get Color From ColorPickerFrame
+	local r, g, b, a = ColorPickerFrame:GetColorRGB()
+	end
+ ColorPickerFrame:SetColorRGB(r, g, b, a)
+ ColorPickerFrame:Hide()
+ ColorPickerFrame:Show()
+end
+
+local function myColorCallback(restore)
+ local newR, newG, newB, newA
+ if restore then
+  -- The user bailed, we extract the old color from the table created by ShowColorPicker.
+  newR, newG, newB, newA = unpack(restore)
+ else
+  -- Something changed
+  newA, newR, newG, newB = OpacitySliderFrame:GetValue(), ColorPickerFrame:GetColorRGB()
+ end
+ -- Update our internal storage.
+ r, g, b, a = newR, newG, newB, newA
+ -- And update any UI elements that use this color...
+end
+----------------------------------------------------
+
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
 function AbyssUIDailyInfo()

@@ -175,6 +175,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					v:SetVertexColor(r, g, b, a, myColorCallback)
 				else
 					v:SetVertexColor(.5, .5, .5)
 				end
