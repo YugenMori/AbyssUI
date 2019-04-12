@@ -748,11 +748,9 @@ AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGa
 -- OnClick Function
 AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
-local localtime = time()
-  if ( localtime >= 6 and localtime > 18 ) then
+  local time = GetGameTime()
+  if ( time >= 6 and time <= 18 ) then
     ConsoleExec( "Gamma 1.2" )
-  elseif ( localtime > 18 ) then
-    ConsoleExec( "Gamma 1.0" )
   else
     ConsoleExec( "Gamma 1.0" )
   end
@@ -762,13 +760,12 @@ AbyssUIAutoGamma_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
-    local localtime = time()
-    if ( localtime >= 6 and localtime > 18 ) then
-      ConsoleExec( "Gamma 1.2" )
-    elseif ( localtime > 18 ) then
-      ConsoleExec( "Gamma 1.0" )
-    else
-      ConsoleExec( "Gamma 1.0" )
+      local time = GetGameTime()
+      if ( time >= 6 and time <= 18 ) then
+        ConsoleExec( "Gamma 1.2" )
+      else
+        ConsoleExec( "Gamma 1.0" )
+      end
     end
   end
 end)
