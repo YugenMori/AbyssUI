@@ -85,6 +85,9 @@ frame1:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)	
 				else
 					v:SetVertexColor(.5, .5, .5)
 				end
@@ -176,7 +179,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					v:SetVertexColor(r, g, b, a, myColorCallback)
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.5, .5, .5)
 				end
@@ -185,7 +189,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Character
-		for i, v in pairs({ 	CharacterFrame.NineSlice.RightEdge,
+		for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
 			CharacterFrame.NineSlice.LeftEdge,
 			CharacterFrame.NineSlice.TopEdge,
 			CharacterFrame.NineSlice.BottomEdge,
@@ -227,6 +231,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -280,6 +287,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -329,6 +339,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -381,6 +394,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -432,6 +448,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -490,6 +509,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -552,6 +574,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -597,6 +622,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -647,6 +675,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -696,6 +727,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -746,6 +780,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -795,6 +832,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -845,6 +885,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -887,6 +930,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -931,6 +977,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -982,6 +1031,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1032,6 +1084,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1081,6 +1136,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1145,6 +1203,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1194,6 +1255,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1255,6 +1319,9 @@ f:SetScript("OnEvent", function(self, event, name)
 						v:SetVertexColor(135/255, 135/255, 237/255)
 					elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 						v:SetVertexColor(199/255, 156/255, 110/255)
+					elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 					else
 						v:SetVertexColor(.4, .4, .4)
 					end
@@ -1315,6 +1382,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1371,6 +1441,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1429,6 +1502,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1485,6 +1561,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1534,6 +1613,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1589,6 +1671,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1644,6 +1729,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1700,6 +1788,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1755,6 +1846,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1811,6 +1905,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1872,6 +1969,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1927,6 +2027,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1983,6 +2086,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2039,6 +2145,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2095,6 +2204,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2154,6 +2266,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2209,6 +2324,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2264,6 +2382,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2318,6 +2439,9 @@ f:SetScript("OnEvent", function(self, event, name)
 					v:SetVertexColor(135/255, 135/255, 237/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -2373,6 +2497,9 @@ for i, v in pairs({ TaxiFrame.NineSlice.TopEdge,
 			v:SetVertexColor(135/255, 135/255, 237/255)
 		elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 			v:SetVertexColor(199/255, 156/255, 110/255)
+		elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 		else
 			v:SetVertexColor(.4, .4, .4)
 		end

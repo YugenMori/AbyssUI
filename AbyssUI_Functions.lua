@@ -6,11 +6,9 @@
 --
 -- Dark Minimalist UI for World of Warcraft
 --------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+----------------------------------------------------
 -- Action Bar Icon Border Remove
--- Thanks to Spyrö for this script (maybe include some modifications) --
-------------------------------------------------------------------------
+-- Many thanks to Spyrö for part of this
 hooksecurefunc("ActionButton_ShowGrid", function(Button)
 	_G[Button:GetName().."NormalTexture"]:SetVertexColor(.4, .4, .4)
 end)
@@ -28,10 +26,8 @@ for i = 1, 12 do
 		end
 	end
 end
-
---------------------------------------------------------
--- Class Icons (Need Flat Icons or some Texture Pack) --
---------------------------------------------------------
+----------------------------------------------------
+-- Class Icons (Need the texture pack)
 hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
 		if UnitIsPlayer(self.unit) then
@@ -83,10 +79,8 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 		end
 	end
 end)
-
-----------------------
--- Class HP Colours --
-----------------------
+----------------------------------------------------
+-- Class HP Colours
 local function colour(statusbar, unit)
 	local _, class, c
 	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
@@ -101,11 +95,8 @@ hooksecurefunc("UnitFrameHealthBar_Update", colour)
 hooksecurefunc("HealthBar_OnValueChanged", function(self)
 	colour(self, self.unit)
 end)
-
-
-------------------------------------
--- Class colours on players names --
-------------------------------------
+----------------------------------------------------
+-- Class colours on players names
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -128,10 +119,8 @@ frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({TargetFrameNameBackground, FocusFrameNameBackground}) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
-
------------------------
--- Text round values --
------------------------
+----------------------------------------------------
+-- Text round values
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
 	PlayerFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("player")))
 	--PlayerFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("player")))
@@ -142,10 +131,8 @@ hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
 	FocusFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("focus")))
 	--FocusFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("focus")))
 end)
-
---------------
--- Cast Bar --
---------------
+----------------------------------------------------
+-- Cast Bar
 -- Timer
 CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
 CastingBarFrame.timer:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
@@ -167,10 +154,8 @@ CastingBarFrame:HookScript("OnUpdate", function(self, elapsed)
         self.update = self.update - elapsed
     end
 end)
-
----------------------
--- Minimap Tweaks ---
----------------------
+----------------------------------------------------
+-- Minimap Tweaks
 MinimapZoomIn:Hide()
 MinimapZoomOut:Hide()
 Minimap:EnableMouseWheel(true)
@@ -183,22 +168,16 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
 end)
 MiniMapTracking:ClearAllPoints()
 MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
-
-
---------------------------------------------
--- Disable spam healing over player frame --
---------------------------------------------
+----------------------------------------------------
+-- Disable spam healing over player frame
 PlayerHitIndicator:SetText(nil)
 PlayerHitIndicator.SetText = function() end
 
 PetHitIndicator:SetText(nil)
 PetHitIndicator.SetText = function() end
-
-
---------------------------------------------------------------------------
+----------------------------------------------------
 -- Chat Hide Button
--- Thanks to Syncrow for this script (maybe include some modifications) --
---------------------------------------------------------------------------
+-- Thanks to Syncrow for part of this 
 local ChatHideFrame = CreateFrame("Button", nil, UIParent)
 ChatHideFrame:SetSize(30, 30)
 ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
@@ -268,11 +247,9 @@ ChatHideFrame:SetScript("OnClick", function(self, Button)
 		ChatHide = false
 	end
 end)
-
-------------------------------------------------------------------------
+----------------------------------------------------
 -- Tooltip Class Color Name
--- Thanks to Phanx for this script (maybe include some modifications) --
-------------------------------------------------------------------------
+-- Many thanks to Phanx for part of this 
 GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 	--print("OnTooltipSetUnit")
 	local _, unit = GameTooltip:GetUnit()
@@ -289,10 +266,8 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 		end
 	end
 end)
-
-----------------------------------
--- Tooltip Faction Color Change --
-----------------------------------
+----------------------------------------------------
+-- Tooltip Faction Color Change
 GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 	local _, factionGroup
 	local englishFaction, localizedFaction = UnitFactionGroup("player")
@@ -327,19 +302,15 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 		end
 	end
 end)
-
------------------------------
--- Tooltip Dark background --
------------------------------
+----------------------------------------------------
+-- Tooltip Dark background
 local TooltipBackground = GameTooltip:CreateTexture(nil, "BACKGROUND", nil, 1)
 TooltipBackground:SetPoint("TOPLEFT", 3, -3)
 TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
 TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
 TooltipBackground:SetAlpha(.05, .05, .05)
-
---------------------------------
--- Tooltip Class Color Health --
---------------------------------
+----------------------------------------------------
+-- Tooltip Class Color Health
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	local _, unit = GameTooltip:GetUnit()
 	if UnitIsPlayer(unit) then
@@ -350,11 +321,9 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 		end
 	end
 end)
-
--------------------------------------------------------------------------
+----------------------------------------------------
 -- StatsFrame
--- Thanks to Syiana for this script (maybe include some modifications) --
--------------------------------------------------------------------------
+-- Many thanks to Syiana for part of this
 local StatsFrame = CreateFrame('Frame', 'Stats', UIParent)
 
 local movable = false
@@ -497,10 +466,8 @@ end
 function AbyssUI_StatsFrames1Show()
 	StatsFrame:Show()
 end
-
------------------------
--- UI Scale Elements --
------------------------
+----------------------------------------------------
+-- UI Scale Elements
 local ScaleElements = CreateFrame("Frame")
 ScaleElements:RegisterEvent("ADDON_LOADED")
 ScaleElements:RegisterEvent("PLAYER_LOGOUT")
@@ -510,11 +477,9 @@ ScaleElements:SetScript("OnEvent", function(self, event, arg1)
 		else return nil
 	end
 end)
-
 --------------------------------------------------------------------------
 -- Tooltip Instant Fade
--- Thanks to sacrife for this script (maybe include some modifications) --
---------------------------------------------------------------------------
+-- Many thanks to sacrife for part of this
 GameTooltip.FadeOut = function(self)
 	GameTooltip:Hide()
 end
@@ -530,10 +495,8 @@ updateFrame:SetScript("OnUpdate", function(self)
 		hasUnit = true
 	end
 end)
-
----------------------------
--- Auto Repair/Sell Grey --
----------------------------
+----------------------------------------------------
+-- Auto Repair/Sell Grey
 local g = CreateFrame("Frame")
 g:RegisterEvent("MERCHANT_SHOW")
 
@@ -574,10 +537,8 @@ g:SetScript("OnEvent", function()
 			else return nil
 		end
 end)
-
-----------------------------------------
--- Target Mob(Enemy) Health Bar Color --
-----------------------------------------
+----------------------------------------------------
+-- Target Mob(Enemy) Health Bar Color
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
@@ -604,7 +565,7 @@ frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
-
+----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
 	if UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") then
@@ -622,10 +583,8 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 		return nil
 	end
 end)
-
-------------------------------
--- Percent at target health --
-------------------------------
+----------------------------------------------------
+-- Percent at target health 
 local FrameList = {"Target", "Focus"}
 function AbyssUI_UpdateHealthValues(...)
 for i = 1, select("#", unpack(FrameList)) do
@@ -641,7 +600,6 @@ for i = 1, select("#", unpack(FrameList)) do
 end
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateHealthValues)
 ----------------------------------------------------
-
 -- AFK Camera
 local AbyssUI_AFKCamera = CreateFrame("FRAME")
 AbyssUI_AFKCamera:RegisterEvent("PLAYER_FLAGS_CHANGED")
@@ -664,13 +622,11 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 		end
 	end
 end)
-
 -- Start Function
 function AbyssUIStart()
 	AbyssUIFirstFrame:Show()
 end
 ----------------------------------------------------
-
 -- ActionBarScale and Minimap tests
 local frame = CreateFrame("Frame", nil, UIParent)
 MinimapCluster:EnableMouse( false )
@@ -690,36 +646,47 @@ hooksecurefunc(MultiBarLeft, "SetScale", function(self, scale)
 	if scale < 1 then self:SetScale(1) end
 end)
 ----------------------------------------------------
-
--- Color Picker
-function AbyssUI_ShowColorPicker(r, g, b, a, myColorCallback)
- ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a
- ColorPickerFrame.previousValues = {r, g, b, a}
- ColorPickerFrame.func =
-	function ()
-	--Get Color From ColorPickerFrame
-	local r, g, b, a = ColorPickerFrame:GetColorRGB()
-	end
- ColorPickerFrame:SetColorRGB(r, g, b, a)
- ColorPickerFrame:Hide()
- ColorPickerFrame:Show()
+-- Color Picker 
+-- Many thanks to Fizz for part of this :thumbsup:
+local character
+local function ColorPicker_Cancelled()
+    local color = ColorPickerFrame.previousValues
+    COLOR_MY_UI[character].Color = color
 end
 
-local function myColorCallback(restore)
- local newR, newG, newB, newA
- if restore then
-  -- The user bailed, we extract the old color from the table created by ShowColorPicker.
-  newR, newG, newB, newA = unpack(restore)
- else
-  -- Something changed
-  newA, newR, newG, newB = OpacitySliderFrame:GetValue(), ColorPickerFrame:GetColorRGB()
- end
- -- Update our internal storage.
- r, g, b, a = newR, newG, newB, newA
- -- And update any UI elements that use this color...
+local function ColorPicker_Changed(self)
+    local r, g, b = ColorPickerFrame:GetColorRGB()
+    local color = { r = r, g = g, b = b }
+    COLOR_MY_UI[character].Color = color
 end
+-- Global Color Function
+function AbyssUI_ShowColorPicker()
+	if ColorPickerFrame:IsShown() then return end
+	ColorPickerFrame.previousValues = COLOR_MY_UI[character].Color
+	ColorPickerFrame.cancelFunc = ColorPicker_Cancelled
+	ColorPickerFrame.opacityFunc = ColorPicker_Changed
+	ColorPickerFrame.func = ColorPicker_Changed
+	ColorPickerFrame:SetColorRGB( COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )
+	ColorPickerFrame:ClearAllPoints()
+	ColorPickerFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", GetCursorPosition())
+	ColorPickerFrame:Show()
+end
+-- Color Save
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+    character = UnitName("player").."-"..GetRealmName()
+    if not COLOR_MY_UI then
+        COLOR_MY_UI = {}
+    end
+    if not COLOR_MY_UI[character] then
+        COLOR_MY_UI[character] = {}
+    end
+    if not COLOR_MY_UI[character].Color then
+        COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
+    end
+end)
 ----------------------------------------------------
-
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
 function AbyssUIDailyInfo()

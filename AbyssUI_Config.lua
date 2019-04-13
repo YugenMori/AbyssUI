@@ -66,7 +66,7 @@ Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Abyss|cff0d75d4UI|r Actionbar")
 -- Panel 02 (HideElements)
-local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel2)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
@@ -84,7 +84,7 @@ Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Miscellaneous")
 -- Panel 04 (Themes)
-local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel4)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel04", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", -150, -20)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
@@ -93,7 +93,7 @@ Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Player Portrait")
 -- Panel 05 (Themes)
-local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel4)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 150, -20)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
@@ -101,8 +101,26 @@ Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Frame Colorization")
+-- Panel 05.01 (Themes)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel051", AbyssUI_Config.childpanel4)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 120, -70)
+Frame:SetWidth(120)
+Frame:SetHeight(24)
+Frame:SetScale(1)
+Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame:SetPoint("CENTER")
+Frame:SetText("- Preset Colors")
+-- Panel 05.02 (Themes)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 120, -50)
+Frame:SetWidth(120)
+Frame:SetHeight(24)
+Frame:SetScale(1)
+Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame:SetPoint("CENTER")
+Frame:SetText("- Choose a Color")
 -- Panel 06 (Themes)
-local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel4)
+local Frame = CreateFrame("Frame","$parentFrameButtonPanel06", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", -160, -20)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
@@ -110,6 +128,35 @@ Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Extras")
+--------------------------------- Buttons ---------------------------------
+-- AbyssUI DailyInfo --
+local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(24)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
+FrameButton:SetText("AbyssUI DailyInfo")
+FrameButton:SetScript("OnClick", function()
+  C_WowTokenPublic.UpdateMarketPrice()
+  AbyssUIDailyInfo()
+end)
+-- Clear Action Bar --
+local FrameButton = CreateFrame("Button","$parentExtraClearActionButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(24)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -200)
+FrameButton:SetText("Clear Action Bar")
+FrameButton:SetScript("OnClick", function()
+  AbyssUI_ActionBarCleaner:Show()
+end)
+-- Reload --
+local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(24)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
+FrameButton:SetText("Reload UI")
+FrameButton:SetScript("OnClick", function()
+  ReloadUI()
+end)
 ----------------------------- AbyssUI Actionbar -------------------------------
 -- AbyssUI Action Bar --
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
@@ -568,35 +615,6 @@ KeepUnitBlizzard_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
---------------------------------- Buttons ---------------------------------
--- AbyssUI DailyInfo --
-local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(140)
-FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
-FrameButton:SetText("AbyssUI DailyInfo")
-FrameButton:SetScript("OnClick", function()
-  C_WowTokenPublic.UpdateMarketPrice()
-  AbyssUIDailyInfo()
-end)
--- Clear Action Bar --
-local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(140)
-FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -200)
-FrameButton:SetText("Clear Action Bar")
-FrameButton:SetScript("OnClick", function()
-  AbyssUI_ActionBarCleaner:Show()
-end)
--- Reload --
-local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(140)
-FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
-FrameButton:SetText("Reload UI")
-FrameButton:SetScript("OnClick", function()
-  ReloadUI()
-end)
 ------------------------------- Miscellaneous -------------------------------
 -- Camera Pitch --
 -- Camera Pitch Function Option 50%
@@ -742,16 +760,16 @@ end)
 -- Auto Gamma Day/Night
 local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 180, -140)
-AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma (Day/Night)")
-AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day/night (Default gamma 1.0)"
+AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma (Day and Night Mode)")
+AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based at the server time"
 AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
 -- OnClick Function
 AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
   local time = GetGameTime()
-  if ( time >= 6 and time <= 18 ) then
+  if ( time >= 6 and time < 18 ) then
     ConsoleExec( "Gamma 1.2" )
-  else
+  elseif ( time >= 18 ) then
     ConsoleExec( "Gamma 1.0" )
   end
 end)
@@ -760,12 +778,14 @@ AbyssUIAutoGamma_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
-      local time = GetGameTime()
-      if ( time >= 6 and time <= 18 ) then
-        ConsoleExec( "Gamma 1.2" )
-      else
-        ConsoleExec( "Gamma 1.0" )
-      end
+      C_Timer.After(0.5, function ()
+        local time = GetGameTime()
+        if ( time >= 6 and time < 18 ) then
+          ConsoleExec( "Gamma 1.2" )
+        elseif ( time >= 18 ) then
+          ConsoleExec( "Gamma 1.0" )
+        end
+      end)  
     end
   end
 end)
@@ -975,7 +995,8 @@ AbyssUIVertexColorFrames01_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames01 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1004,7 +1025,8 @@ AbyssUIVertexColorFrames02_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames02 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1033,7 +1055,8 @@ AbyssUIVertexColorFrames03_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames03 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1062,7 +1085,8 @@ AbyssUIVertexColorFrames04_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames04 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1091,7 +1115,8 @@ AbyssUIVertexColorFrames05_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames05 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1120,7 +1145,8 @@ AbyssUIVertexColorFrames06_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames06 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1149,7 +1175,8 @@ AbyssUIVertexColorFrames07_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames07 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1178,7 +1205,8 @@ AbyssUIVertexColorFrames08_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames08 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1207,7 +1235,8 @@ AbyssUIVertexColorFrames09_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames09 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1236,7 +1265,8 @@ AbyssUIVertexColorFrames10_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames10 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1265,7 +1295,8 @@ AbyssUIVertexColorFrames11_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames11 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1294,7 +1325,8 @@ AbyssUIVertexColorFrames12_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames12 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1323,7 +1355,8 @@ AbyssUIVertexColorFrames13_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames13 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1352,7 +1385,8 @@ AbyssUIVertexColorFrames14_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames14 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1381,7 +1415,8 @@ AbyssUIVertexColorFrames15_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames15 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1410,20 +1445,19 @@ AbyssUIVertexColorFrames16_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
-  AbyssUIAddonSettings.UIVertexColorFrames15 ~= true then
+  AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
+  AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
     AbyssUIAddonSettings.UIVertexColorFrames16 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
     AbyssUIVertexColorFrames16_CheckButton:SetChecked(nil)
   end
 end)
-
-
 -- Choose a Color (Color Picker)
 local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("TOPRIGHT", -150, -320)
-AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Choose a Color")
-AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose the color of frames (Color Picker)"
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 80, -80)
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("|cff0d75d4Select a Color|r")
+AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose a color for the frames (Color Picker)"
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFramesColorPicker)
 -- OnClick Function
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(self)
@@ -1444,12 +1478,11 @@ AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(se
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
-    AbyssUI_ShowColorPicker()
+    AbyssUI_ColorPickerFrame:Show()
   else
     AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(nil)
   end
 end)
-
 -- End
 end
 --------------------------------- Save ---------------------------------
