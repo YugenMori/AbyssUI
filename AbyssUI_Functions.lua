@@ -584,21 +584,48 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 	end
 end)
 ----------------------------------------------------
--- Percent at target health 
-local FrameList = {"Target", "Focus"}
-function AbyssUI_UpdateHealthValues(...)
+-- Percent Health 
+local FrameList = {"Player", "Target", "Focus"}
+local _G = _G
+local function AbyssUI_UpdateHealthValues(...)
 for i = 1, select("#", unpack(FrameList)) do
 	local FrameName = (select(i, unpack(FrameList)))
 	local Health = AbbreviateLargeNumbers(UnitHealth(FrameName))
-	local HealthPercent = (UnitHealth(FrameName)/UnitHealthMax(FrameName))*100
-		if HealthPercent > 0 then
-			_G[FrameName.."FrameHealthBar"].TextString:SetText(Health.." / " .. " ("..format("%.0f", HealthPercent).."%)")
-		else
-			_G[FrameName.."FrameHealthBar"].TextString:SetText("")
+	local checkMaxHealth = UnitHealthMax(FrameName)
+		if checkMaxHealth > 0 then
+			local HealthPercent = ((UnitHealth(FrameName) / UnitHealthMax(FrameName))*100)
+			if HealthPercent > 0 then
+				_G[FrameName.."FrameHealthBar"].TextString:SetText(Health.." / " .. " ("..format("%.0f", HealthPercent).."%)")
+			else
+				_G[FrameName.."FrameHealthBar"].TextString:SetText("")
+			end
+		else 
+			return nil
 		end
 	end
 end
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateHealthValues)
+-- Percent Mana
+local FrameList = {"Player", "Target", "Focus"}
+local _G = _G
+local function AbyssUI_UpdateManaValues(...)
+for i = 1, select("#", unpack(FrameList)) do
+	local FrameName = (select(i, unpack(FrameList)))
+	local Mana = AbbreviateLargeNumbers(UnitPower(FrameName))
+	local checkMaxMana = UnitPowerMax(FrameName)
+		if checkMaxMana > 0 then
+			local ManaPercent = ((UnitPower(FrameName) / UnitPowerMax(FrameName))*100)
+			if ManaPercent > 0 then
+				_G[FrameName.."FrameManaBar"].TextString:SetText(Mana.." / " .. " ("..format("%.0f", ManaPercent).."%)")
+			else
+				_G[FrameName.."FrameManaBar"].TextString:SetText("")
+			end
+		else 
+			return nil
+		end
+	end
+end
+hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateManaValues)
 ----------------------------------------------------
 -- AFK Camera
 local AbyssUI_AFKCamera = CreateFrame("FRAME")
