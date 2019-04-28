@@ -81,7 +81,6 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 end)
 -- 3D Portrait
 -- Many thanks to Fizz for part of this
---[[
 PlayerFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", PlayerFrame)
 PlayerFrame.AbyssUI3D:SetFrameStrata("BACKGROUND")
 PlayerFrame.AbyssUI3D:SetPortraitZoom(1) -- if you just want to see the face.
@@ -96,9 +95,10 @@ TargetFrame.AbyssUI3D:SetPoint("BOTTOMRIGHT", TargetFrame.portrait, -8, 5)
 hooksecurefunc("UnitFramePortrait_Update", function(self)
     if self.AbyssUI3D and AbyssUIAddonSettings.UIClassCircles13 == true then
     	self.AbyssUI3D:SetUnit(self.unit)
+    	PlayerFrame.portrait:Hide()
+    	TargetFrame.portrait:Hide()
     end
 end)
---]]
 -- Class HP Colours
 local function colour(statusbar, unit)
 	local _, class, c
@@ -730,6 +730,44 @@ f:SetScript("OnEvent", function(self, event)
     if not COLOR_MY_UI[character].Color then
         COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
     end
+end)
+----------------------------------------------------
+-- ConfirmPopUps
+local AbyssUI_ConfirmPopUps = CreateFrame("Button", '$AbyssUI_ConfirmPopUps', nil)
+AbyssUI_ConfirmPopUps:RegisterForClicks("AnyDown")
+AbyssUI_ConfirmPopUps:SetScript("OnEvent", function()
+	SetBindingClick("SHIFT-C", AbyssUI_ConfirmPopUps:GetName())
+end)
+AbyssUI_ConfirmPopUps:RegisterEvent("PLAYER_LOGIN")
+AbyssUI_ConfirmPopUps:SetScript("OnClick", function()
+	if ( AbyssUIAddonSettings.ExtraFunctionConfirmPopUps == true ) then
+		StaticPopup1Button1:Click()
+		StaticPopup2Button1:Click()
+		StaticPopup3Button1:Click()
+		StaticPopup4Button1:Click()
+		QuestFrameAcceptButton:Click()
+		QuestFrameCompleteQuestButton:Click()
+		QuestFrameCompleteButton:Click()
+		LFGDungeonReadyDialogEnterDungeonButton:Click()
+		GossipFrameGreetingGoodbyeButton:Click()
+		--PVPReadyDialogEnterBattleButton:Click()
+	else
+		return nil
+	end
+end)
+----------------------------------------------------
+-- Hide ObjectiveTracker in Combat
+local objectiveFrame = CreateFrame("Frame")
+local isDg = IsInLFGDungeon()
+local inInstance, instanceType = IsInInstance()
+objectiveFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+objectiveFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+objectiveFrame:SetScript("OnEvent", function(self, event, ...)
+	if ( event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true or instanceType == "pvp" or instanceType == "arena" ) then
+		ObjectiveTrackerFrame:Hide()
+	else 
+		ObjectiveTrackerFrame:Show()
+	end
 end)
 ----------------------------------------------------
 -- TargetTargetName Frame

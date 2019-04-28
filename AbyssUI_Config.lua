@@ -722,7 +722,7 @@ end)
 -- Action Cam --
 local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
-AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor\nMode")
+AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor Mode")
 AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
 AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
 -- OnClick Function
@@ -760,7 +760,7 @@ end)
 -- Auto Gamma Day/Night
 local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 180, -140)
-AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma (Day and Night Mode)")
+AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma\n(Day and Night Mode)")
 AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based at the server time"
 AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
 -- OnClick Function
@@ -788,6 +788,36 @@ AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
       end)  
     end
   end
+end)
+-- Instance Leave --
+local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_InstanceLeave_CheckButton:SetPoint("TOPLEFT", 400, -80)
+AbyssUI_InstanceLeave_CheckButton.Text:SetText("Instance Leave Frame")
+AbyssUI_InstanceLeave_CheckButton.tooltip = "A dynamic frame that popup when you complete a LFG (dungeon, raid, etc)"
+AbyssUI_InstanceLeave_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInstanceLeave)
+-- OnClick Function
+AbyssUI_InstanceLeave_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionInstanceLeave = self:GetChecked()
+end)
+-- Shift + C to confirm  --
+local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 400, -110)
+AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups")
+AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing\n Shift + C"
+AbyssUI_ConfirmPopUps_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionConfirmPopUps)
+-- OnClick Function
+AbyssUI_ConfirmPopUps_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = self:GetChecked()
+end)
+-- Hide in Combat --
+local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_HideInCombat_CheckButton:SetPoint("TOPLEFT", 400, -140)
+AbyssUI_HideInCombat_CheckButton.Text:SetText("Dynamic ObjectiveTrack Hide")
+AbyssUI_HideInCombat_CheckButton.tooltip = "Hide some parts of the interface when you are in combat or in a PVP instance"
+AbyssUI_HideInCombat_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHideInCombat)
+-- OnClick Function
+AbyssUI_HideInCombat_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionHideInCombat = self:GetChecked()
 end)
 --End
 ----------------------------- AbyssUI Stylization ------------------------------
@@ -1105,10 +1135,9 @@ AbyssUIClassCircles12_CheckButton:SetScript("OnClick", function(self)
   end
 end)
 -- AbyssUIClassCircles13_CheckButton
---[[
 local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles13_CheckButton:SetPoint("TOPLEFT", 10, -260)
-AbyssUIClassCircles13_CheckButton.Text:SetText("3D Portrait")
+AbyssUIClassCircles13_CheckButton.Text:SetText("3D Portrait (Beta)")
 AbyssUIClassCircles13_CheckButton.tooltip = "A 3D version of the Player/Target"
 AbyssUIClassCircles13_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles13)
 -- OnClick Function
@@ -1131,7 +1160,6 @@ AbyssUIClassCircles13_CheckButton:SetScript("OnClick", function(self)
     AbyssUIClassCircles13_CheckButton:SetChecked(nil)
   end
 end)
---]]
 -- Frame Colorization --
 -- AbyssUIVertexColorFrames01_CheckButton
 local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
