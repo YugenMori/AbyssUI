@@ -79,7 +79,26 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 		end
 	end
 end)
-----------------------------------------------------
+-- 3D Portrait
+-- Many thanks to Fizz for part of this
+--[[
+PlayerFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", PlayerFrame)
+PlayerFrame.AbyssUI3D:SetFrameStrata("BACKGROUND")
+PlayerFrame.AbyssUI3D:SetPortraitZoom(1) -- if you just want to see the face.
+PlayerFrame.AbyssUI3D:SetPoint("TOPLEFT", PlayerFrame.portrait, 7, -9) -- attach/size to the portrait (Left/Top moved 10 right, 10 down)
+PlayerFrame.AbyssUI3D:SetPoint("BOTTOMRIGHT", PlayerFrame.portrait, -8, 5)--(Bottom/Right moved 10 left, 6 up)
+-- TargetFrame
+TargetFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", TargetFrame)
+TargetFrame.AbyssUI3D:SetFrameStrata("BACKGROUND")
+TargetFrame.AbyssUI3D:SetPortraitZoom(1) -- Just showing the targets face.
+TargetFrame.AbyssUI3D:SetPoint("TOPLEFT", TargetFrame.portrait, 5, -7.5)
+TargetFrame.AbyssUI3D:SetPoint("BOTTOMRIGHT", TargetFrame.portrait, -8, 5)
+hooksecurefunc("UnitFramePortrait_Update", function(self)
+    if self.AbyssUI3D and AbyssUIAddonSettings.UIClassCircles13 == true then
+    	self.AbyssUI3D:SetUnit(self.unit)
+    end
+end)
+--]]
 -- Class HP Colours
 local function colour(statusbar, unit)
 	local _, class, c
@@ -87,10 +106,9 @@ local function colour(statusbar, unit)
 		_, class = UnitClass(unit)
 		c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 		statusbar:SetStatusBarColor(c.r, c.g, c.b)
-		--PlayerFrameHealthBar:SetStatusBarColor(0,1,0)
+		--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
 	end
 end
-
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
 hooksecurefunc("HealthBar_OnValueChanged", function(self)
 	colour(self, self.unit)
@@ -654,7 +672,7 @@ function AbyssUIStart()
 	AbyssUIFirstFrame:Show()
 end
 ----------------------------------------------------
--- ActionBarScale and Minimap tests
+-- ActionBarScale and Minimap
 local frame = CreateFrame("Frame", nil, UIParent)
 MinimapCluster:EnableMouse( false )
 MinimapCluster:SetParent( frame )
@@ -713,6 +731,31 @@ f:SetScript("OnEvent", function(self, event)
         COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
     end
 end)
+----------------------------------------------------
+-- TargetTargetName Frame
+--[[
+local f = CreateFrame("Frame", nil, UIParent)
+f:SetWidth(50)
+f:SetHeight(50)
+f:SetFrameStrata("Dialog")
+f.text = f.text or f:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
+f.text:SetAllPoints(true)
+f.text:SetJustifyH("CENTER")
+f.text:SetJustifyV("CENTER")
+f.text:SetText("Choose a color by clicking on 'Choose a color', 'Okay' and then reload the UI.")
+f:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+f:SetScript("OnEvent", function(self, event)
+	--local i = random(1, 999)
+	--if ( UnitIsPlayer(mouseover) ) then
+	   --f:SetText(UnitName(playertargettarget))
+	   local name = UnitName("targettarget")
+	   print(name)
+	--else 
+		--f:SetText("No Target")
+	--	print("No Target", i)
+	--end
+end)
+--]]
 ----------------------------------------------------
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
