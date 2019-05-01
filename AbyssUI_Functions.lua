@@ -4,9 +4,8 @@
 --
 -- Hope you like my addOn ^^
 --
--- Dark Minimalist UI for World of Warcraft
+-- Functions for AbyssUI
 --------------------------------------------------------------------------------
-----------------------------------------------------
 -- Action Bar Icon Border Remove
 -- Many thanks to Spyrö for part of this
 hooksecurefunc("ActionButton_ShowGrid", function(Button)
@@ -115,7 +114,7 @@ hooksecurefunc("HealthBar_OnValueChanged", function(self)
 end)
 ----------------------------------------------------
 -- Class colours on players names
-local frame = CreateFrame("FRAME")
+local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
@@ -196,7 +195,7 @@ PetHitIndicator.SetText = function() end
 ----------------------------------------------------
 -- Chat Hide Button
 -- Thanks to Syncrow for part of this 
-local ChatHideFrame = CreateFrame("Button", nil, UIParent)
+local ChatHideFrame = CreateFrame("Button", "$parentChatHideFrame", UIParent)
 ChatHideFrame:SetSize(30, 30)
 ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
 ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
@@ -342,7 +341,7 @@ end)
 ----------------------------------------------------
 -- StatsFrame
 -- Many thanks to Syiana for part of this
-local StatsFrame = CreateFrame('Frame', 'Stats', UIParent)
+local StatsFrame = CreateFrame("Frame", "$parentStatsFrame", UIParent)
 
 local movable = false
 local frame_anchor = "TOP"
@@ -359,7 +358,7 @@ StatsFrame:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
-local CF = CreateFrame("Frame")
+local CF = CreateFrame("Frame", "$parentFrame", nil)
 CF:RegisterEvent("PLAYER_LOGIN")
 CF:SetScript("OnEvent", function(self, event)
 
@@ -486,7 +485,7 @@ function AbyssUI_StatsFrames1Show()
 end
 ----------------------------------------------------
 -- UI Scale Elements
-local ScaleElements = CreateFrame("Frame")
+local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
 ScaleElements:RegisterEvent("ADDON_LOADED")
 ScaleElements:RegisterEvent("PLAYER_LOGOUT")
 ScaleElements:SetScript("OnEvent", function(self, event, arg1)
@@ -503,7 +502,7 @@ GameTooltip.FadeOut = function(self)
 end
 
 local hasUnit
-local updateFrame = CreateFrame("Frame")
+local updateFrame = CreateFrame("Frame", "$parentUpdateFrame", nil)
 updateFrame:SetScript("OnUpdate", function(self)
 	local _, unit = GameTooltip:GetUnit()
 	if hasUnit and not unit then
@@ -515,7 +514,7 @@ updateFrame:SetScript("OnUpdate", function(self)
 end)
 ----------------------------------------------------
 -- Auto Repair/Sell Grey
-local g = CreateFrame("Frame")
+local g = CreateFrame("Frame", "$parentFrame", nil)
 g:RegisterEvent("MERCHANT_SHOW")
 
 g:SetScript("OnEvent", function()
@@ -557,7 +556,7 @@ g:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- Target Mob(Enemy) Health Bar Color
-local frame = CreateFrame("FRAME")
+local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 
@@ -646,7 +645,7 @@ end
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateManaValues)
 ----------------------------------------------------
 -- AFK Camera
-local AbyssUI_AFKCamera = CreateFrame("FRAME")
+local AbyssUI_AFKCamera = CreateFrame("Frame", "$parentAbyssUI_AFKCamera", nil)
 AbyssUI_AFKCamera:RegisterEvent("PLAYER_FLAGS_CHANGED")
 AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
@@ -673,7 +672,7 @@ function AbyssUIStart()
 end
 ----------------------------------------------------
 -- ActionBarScale and Minimap
-local frame = CreateFrame("Frame", nil, UIParent)
+local frame = CreateFrame("Frame", "$parentFrame", UIParent)
 MinimapCluster:EnableMouse( false )
 MinimapCluster:SetParent( frame )
 MinimapCluster:SetFrameStrata( frame:GetFrameStrata() )
@@ -733,7 +732,7 @@ f:SetScript("OnEvent", function(self, event)
 end)
 ----------------------------------------------------
 -- ConfirmPopUps
-local AbyssUI_ConfirmPopUps = CreateFrame("Button", '$AbyssUI_ConfirmPopUps', nil)
+local AbyssUI_ConfirmPopUps = CreateFrame("Button", '$parentAbyssUI_ConfirmPopUps', nil)
 AbyssUI_ConfirmPopUps:RegisterForClicks("AnyDown")
 AbyssUI_ConfirmPopUps:SetScript("OnEvent", function()
 	SetBindingClick("SHIFT-C", AbyssUI_ConfirmPopUps:GetName())
@@ -757,18 +756,73 @@ AbyssUI_ConfirmPopUps:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- Hide ObjectiveTracker in Combat
-local objectiveFrame = CreateFrame("Frame")
-local isDg = IsInLFGDungeon()
-local inInstance, instanceType = IsInInstance()
-objectiveFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
-objectiveFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-objectiveFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true or instanceType == "pvp" or instanceType == "arena" ) then
-		ObjectiveTrackerFrame:Hide()
+-- Regen
+local objectiveFrame1 = CreateFrame("Frame", "$parentObjectiveFrame1", nil)
+objectiveFrame1:RegisterEvent("PLAYER_REGEN_DISABLED")
+objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
+objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
+	local isPVPMap = C_PvP.IsPVPMap()
+	local inInstance, instanceType = IsInInstance()
+	if ( event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
+	elseif ( event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
 	else 
-		ObjectiveTrackerFrame:Show()
+		return nil
 	end
 end)
+-- Entering World / PvP
+local objectiveFrame2 = CreateFrame("Frame", "$parentObjectiveFrame2", nil)
+objectiveFrame2:RegisterEvent("PLAYER_ENTERING_WORLD")
+objectiveFrame2:SetScript("OnEvent", function(self, event, ...)
+	local isPVPMap = C_PvP.IsPVPMap()
+	--local isArena = C_PvP.IsArena() 
+	--local isBattleground = C_PvP.IsBattleground() 
+	--local isRatedMap = C_PvP.IsRatedMap() 
+	--or isArena == true or isBattleground == true or isRatedMap == true
+	if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and (isPVPMap == true)) then
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
+	elseif ( event == "PLAYER_ENTERING_WORLD" and  AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and (isPVPMap == false)) then
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
+	else 
+		return nil
+	end
+end)
+-- Inspect Target
+local AbyssUI_InspectTarget = CreateFrame("Button", '$parentAbyssUI_InspectTarget', nil)
+AbyssUI_InspectTarget:RegisterForClicks("AnyDown")
+AbyssUI_InspectTarget:SetScript("OnEvent", function()
+	SetBindingClick("SHIFT-X", AbyssUI_InspectTarget:GetName())
+end)
+AbyssUI_InspectTarget:RegisterEvent("PLAYER_LOGIN")
+AbyssUI_InspectTarget:SetScript("OnClick", function()
+    if AbyssUIAddonSettings.ExtraFunctionInspectTarget == true then
+    	if ( UnitPlayerControlled("target") and not UnitIsUnit("player", "target") ) then
+			InspectUnit("target")
+		elseif ( UnitPlayerControlled("mouseover") and not UnitIsUnit("player", "mouseover") ) then
+			InspectUnit("mouseover")
+		end
+    else
+      return nil
+    end
+end)
+----------------------------------------------------
+-- DailyInfo Function
+C_WowTokenPublic.UpdateMarketPrice()
+function AbyssUIDailyInfo()
+	print("\n|cffa5f6f3<< AbyssUI Daily Info >>|r")
+	if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
+		print("|cffa5f6f3Token Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+	else
+		print("|cffa5f6f3Token Price:|r Not available right now!")
+	end
+	print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+	print("|cffa5f6f3Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
+	--print("|cffa5f6f3Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+	print("|cffa5f6f3WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+	local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+	print("|cffa5f6f3AbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+end
 ----------------------------------------------------
 -- TargetTargetName Frame
 --[[
@@ -794,22 +848,5 @@ f:SetScript("OnEvent", function(self, event)
 	--end
 end)
 --]]
-----------------------------------------------------
--- DailyInfo Function
-C_WowTokenPublic.UpdateMarketPrice()
-function AbyssUIDailyInfo()
-	print("\n|cffa5f6f3<< AbyssUI Daily Info >>|r")
-	if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
-		print("|cffa5f6f3Token Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
-	else
-		print("|cffa5f6f3Token Price:|r Not available right now!")
-	end
-	print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
-	print("|cffa5f6f3Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
-	--print("|cffa5f6f3Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
-	print("|cffa5f6f3WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
-	local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
-	print("|cffa5f6f3AbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
-end
 ----------------------------------------------------
 -- End

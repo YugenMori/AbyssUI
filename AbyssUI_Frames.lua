@@ -4,11 +4,11 @@
 --
 -- Hope you like my addOn ^^
 --
--- Dark Minimalist UI for World of Warcraft
+-- Frames for AbyssUI
 --------------------------------------------------------------------------------
 
 -- AbyssUI_AFKCameraFrame
-AbyssUI_AFKCameraFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", UIParent)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
 AbyssUI_AFKCameraFrame:SetWidth(GetScreenWidth())
 AbyssUI_AFKCameraFrame:SetHeight(GetScreenHeight())
@@ -41,13 +41,13 @@ AbyssUI_AFKCameraFrame.texture = Texture
 
 -- ModelFrameAFKMode
 -- Model1
-local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
 AbyssUI_ModelFrameAFKMode:SetPoint("TOPLEFT", 0, 0)
 AbyssUI_ModelFrameAFKMode:SetWidth(512)
 AbyssUI_ModelFrameAFKMode:SetHeight(512)
 AbyssUI_ModelFrameAFKMode:SetAlpha(1)
 
-local ModelFrame_Model1 = CreateFrame("PlayerModel", nil, AbyssUI_ModelFrameAFKMode)
+local ModelFrame_Model1 = CreateFrame("PlayerModel", "$parentModelFrame_Model1", AbyssUI_ModelFrameAFKMode)
 ModelFrame_Model1:SetUnit("player")
 ModelFrame_Model1:SetAlpha(1)
 ModelFrame_Model1:SetAllPoints(AbyssUI_ModelFrameAFKMode)
@@ -56,7 +56,7 @@ local x, y, z = ModelFrame_Model1:GetCameraPosition()
 ----------------------------------------------------
 -- PlayerInfoAFKMode
 -- Name
-local PlayerInfo_Name1 = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local PlayerInfo_Name1 = CreateFrame("Frame", "$parentPlayerInfo_Name1", AbyssUI_AFKCameraFrame)
 local playerName = UnitName("player")
 PlayerInfo_Name1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Name1:SetScale(3)
@@ -64,7 +64,7 @@ PlayerInfo_Name1.text = PlayerInfo_Name1.text or PlayerInfo_Name1:CreateFontStri
 PlayerInfo_Name1.text:SetPoint("TOPRIGHT", 0, -10)
 PlayerInfo_Name1.text:SetText(playerName)
 -- Level
-local PlayerInfo_Level1 = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local PlayerInfo_Level1 = CreateFrame("Frame", "$parentPlayerInfo_Level1", AbyssUI_AFKCameraFrame)
 local level = UnitLevel("player")
 PlayerInfo_Level1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Level1:SetScale(3)
@@ -72,7 +72,7 @@ PlayerInfo_Level1.text = PlayerInfo_Level1.text or PlayerInfo_Level1:CreateFontS
 PlayerInfo_Level1.text:SetPoint("TOPRIGHT", 0, -20)
 PlayerInfo_Level1.text:SetText(level)
 -- Race
-local PlayerInfo_Race1 = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local PlayerInfo_Race1 = CreateFrame("Frame", "$parentPlayerInfo_Race1", AbyssUI_AFKCameraFrame)
 local race, raceEn = UnitRace("player")
 PlayerInfo_Race1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Race1:SetScale(3)
@@ -80,7 +80,7 @@ PlayerInfo_Race1.text = PlayerInfo_Race1.text or PlayerInfo_Race1:CreateFontStri
 PlayerInfo_Race1.text:SetPoint("TOPRIGHT", 0, -30)
 PlayerInfo_Race1.text:SetText(raceEn)
 -- Class
-local PlayerInfo_Class1 = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local PlayerInfo_Class1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
 local playerClass, englishClass = UnitClass("player")
 PlayerInfo_Class1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Class1:SetScale(3)
@@ -89,7 +89,7 @@ PlayerInfo_Class1.text:SetPoint("TOPRIGHT", 0, -40)
 PlayerInfo_Class1.text:SetText(playerClass)
 -- ExtraInfoAFKMode
 -- CLock
-local ExtraInfo_Clock1 = CreateFrame("Frame", nil, AbyssUI_AFKCameraFrame)
+local ExtraInfo_Clock1 = CreateFrame("Frame", "$parentExtraInfo_Clock1", AbyssUI_AFKCameraFrame)
 ExtraInfo_Clock1:SetAllPoints(AbyssUI_AFKCameraFrame)
 ExtraInfo_Clock1:SetScale(3)
 ExtraInfo_Clock1.text = ExtraInfo_Clock1.text or ExtraInfo_Clock1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
@@ -120,7 +120,7 @@ function AbyssUI_UpdateAFKCameraData()
 end
 --------------------------------------------
 -- YouDied Frame
-local AbyssUI_YouDiedFrame = CreateFrame("Frame", nil, UIParent)
+local AbyssUI_YouDiedFrame = CreateFrame("Frame", "$parentAbyssUI_YouDiedFrame", UIParent)
 AbyssUI_YouDiedFrame:RegisterEvent("PLAYER_DEAD")
 AbyssUI_YouDiedFrame:SetFrameStrata("HIGH")
 AbyssUI_YouDiedFrame:SetWidth(GetScreenWidth())
@@ -168,7 +168,7 @@ Texture:SetAllPoints(AbyssUI_YouDiedFrame)
 AbyssUI_YouDiedFrame.texture = Texture
 ----------------------------------------------------
 -- LevelUp Frame
-local AbyssUI_LevelUpFrame = CreateFrame("Frame", nil, UIParent)
+local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
 AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetFrameStrata("HIGH")
 AbyssUI_LevelUpFrame:SetWidth(GetScreenWidth())
@@ -219,7 +219,7 @@ Texture:SetAllPoints(AbyssUI_LevelUpFrame)
 AbyssUI_LevelUpFrame.texture = Texture
 ----------------------------------------------------
 -- Player Level
-local LevelUp_PlayerLevel = CreateFrame("Frame", nil, AbyssUI_LevelUpFrame)
+local LevelUp_PlayerLevel = CreateFrame("Frame", "$parentLevelUp_PlayerLevel", AbyssUI_LevelUpFrame)
 LevelUp_PlayerLevel:SetAllPoints(AbyssUI_LevelUpFrame)
 LevelUp_PlayerLevel:SetScale(6)
 LevelUp_PlayerLevel.text = LevelUp_PlayerLevel.text or LevelUp_PlayerLevel:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
@@ -228,7 +228,7 @@ LevelUp_PlayerLevel.text:SetText(level)
 LevelUp_PlayerLevel.text:SetWidth(GetScreenWidth())
 LevelUp_PlayerLevel.text:SetHeight(GetScreenHeight()/4)
 -- Player Nome
-local LevelUp_PlayerName = CreateFrame("Frame", nil, AbyssUI_LevelUpFrame)
+local LevelUp_PlayerName = CreateFrame("Frame", "$parentLevelUp_PlayerName", AbyssUI_LevelUpFrame)
 LevelUp_PlayerName:SetAllPoints(AbyssUI_LevelUpFrame)
 LevelUp_PlayerName:SetScale(6)
 LevelUp_PlayerName.text = LevelUp_PlayerName.text or LevelUp_PlayerName:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
@@ -246,9 +246,8 @@ function AbyssUI_UpdateYouDiedLevelUpData()
 	LevelUp_PlayerName.text:SetText(playerName)
 end
 -------------------------- Save and Extra Stuff --------------------------
-
 -- AbyssUIFirstFrame
-AbyssUIFirstFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
 AbyssUIFirstFrame:Hide()
 AbyssUIFirstFrame:SetWidth(400)
 AbyssUIFirstFrame:SetHeight(140)
@@ -278,7 +277,7 @@ Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUIFirstFrame)
 AbyssUIFirstFrame.texture = Texture
 ----------------------------------------------------
-local FrameButton = CreateFrame("Button", "FrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate")
+local FrameButton = CreateFrame("Button", "$parentFrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate")
 FrameButton:SetHeight(24)
 FrameButton:SetWidth(70)
 FrameButton:SetPoint("BOTTOM", AbyssUIFirstFrame, "BOTTOM", 0, 10)
@@ -294,9 +293,8 @@ FrameButton:SetScript("OnClick", function()
 	ReloadUI()
 end)
 ----------------------------------------------------
-
 -- AbyssUI_ReloadFrame
-AbyssUI_ReloadFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ReloadFrame = CreateFrame("Frame", "$parentAbyssUI_ReloadFrame", UIParent)
 AbyssUI_ReloadFrame:Hide()
 AbyssUI_ReloadFrame:SetWidth(400)
 AbyssUI_ReloadFrame:SetHeight(150)
@@ -317,30 +315,30 @@ AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
 AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
 AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\nClick the |cffffcc00'Confirm'|r button to Reload.\nYou still can make changes (do before you confirm).")
 ----------------------------------------------------
-local Border = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
+local Border = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
-local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil,"ARTWORK")
+local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderBody:SetAllPoints(AbyssUI_ReloadFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
-local Texture = AbyssUI_ReloadFrame:CreateTexture(nil,"BACKGROUND")
+local Texture = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_ReloadFrame)
 AbyssUI_ReloadFrame.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
+local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
 FrameButtonConfirm:SetHeight(24)
 FrameButtonConfirm:SetWidth(70)
 FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrame, "BOTTOM", 0, 10)
 FrameButtonConfirm:SetText("Confirm")
 FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonConfirm:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonConfirm)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -350,7 +348,7 @@ FrameButtonConfirm:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ActionBarCleaner
-AbyssUI_ActionBarCleaner = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ActionBarCleaner = CreateFrame("Frame", "$parentAbyssUI_ActionBarCleaner", UIParent)
 AbyssUI_ActionBarCleaner:Hide()
 AbyssUI_ActionBarCleaner:SetWidth(400)
 AbyssUI_ActionBarCleaner:SetHeight(150)
@@ -371,37 +369,37 @@ AbyssUI_ActionBarCleaner.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarCleaner.text:SetJustifyV("CENTER")
 AbyssUI_ActionBarCleaner.text:SetText("Wait!\nThis will clean all your skills/spells from Actions Bars.")
 ----------------------------------------------------
-local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil,"BACKGROUND")
+local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
-local BorderBody = AbyssUI_ActionBarCleaner:CreateTexture(nil,"ARTWORK")
+local BorderBody = AbyssUI_ActionBarCleaner:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderBody:SetAllPoints(AbyssUI_ActionBarCleaner)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
-local Texture = AbyssUI_ActionBarCleaner:CreateTexture(nil,"BACKGROUND")
+local Texture = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_ActionBarCleaner)
 AbyssUI_ActionBarCleaner.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","FrameButton", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
 FrameButtonConfirm:SetHeight(24)
 FrameButtonConfirm:SetWidth(70)
 FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", -50, 10)
 FrameButtonConfirm:SetText("Confirm")
 FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local FrameButtonCancel = CreateFrame("Button","FrameButton", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+local FrameButtonCancel = CreateFrame("Button","$parentFrameButtonCancel", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
 FrameButtonCancel:SetHeight(24)
 FrameButtonCancel:SetWidth(70)
 FrameButtonCancel:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", 50, 10)
 FrameButtonCancel:SetText("Cancel")
 FrameButtonCancel:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local BorderButton = FrameButtonConfirm:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonConfirm:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonConfirm)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -412,7 +410,7 @@ FrameButtonConfirm:SetScript("OnClick", function()
 	AbyssUI_ActionBarCleaner:Hide()
 end)
 ----------------------------------------------------
-local BorderButton = FrameButtonCancel:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonCancel:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonCancel)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -421,7 +419,7 @@ FrameButtonCancel:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ActionBarInfo
-AbyssUI_ActionBarInfo = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ActionBarInfo = CreateFrame("Frame", "$parentAbyssUI_ActionBarInfo", UIParent)
 AbyssUI_ActionBarInfo:Hide()
 AbyssUI_ActionBarInfo:SetWidth(500)
 AbyssUI_ActionBarInfo:SetHeight(160)
@@ -442,13 +440,13 @@ AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
 AbyssUI_ActionBarInfo.text:SetText("This option is for the small version of Blizzard MainBar\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs when in a 'vehicle' use by your own risk, reload the UI and it will be fixed. Check the comments section for more info.")
 ----------------------------------------------------
-local Border = AbyssUI_ActionBarInfo:CreateTexture(nil,"BACKGROUND")
+local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
-local BorderBody = AbyssUI_ActionBarInfo:CreateTexture(nil,"ARTWORK")
+local BorderBody = AbyssUI_ActionBarInfo:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderBody:SetAllPoints(AbyssUI_ActionBarInfo)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -458,14 +456,14 @@ Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_ActionBarInfo)
 AbyssUI_ActionBarInfo.texture = Texture
 ----------------------------------------------------
-local FrameButtonReset = CreateFrame("Button","FrameButton", AbyssUI_ActionBarInfo, "UIPanelButtonTemplate")
+local FrameButtonReset = CreateFrame("Button","$parentFrameButtonReset", AbyssUI_ActionBarInfo, "UIPanelButtonTemplate")
 FrameButtonReset:SetHeight(24)
 FrameButtonReset:SetWidth(85)
 FrameButtonReset:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", 0, 10)
 FrameButtonReset:SetText("Reload UI")
 FrameButtonReset:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local BorderButton = FrameButtonReset:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonReset:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonReset)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -475,7 +473,7 @@ FrameButtonReset:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ColorPickerFrame
-AbyssUI_ColorPickerFrame = CreateFrame("Frame", nil, UIParent)
+AbyssUI_ColorPickerFrame = CreateFrame("Frame", "$parentAbyssUI_ColorPickerFrame", UIParent)
 AbyssUI_ColorPickerFrame:Hide()
 AbyssUI_ColorPickerFrame:SetWidth(400)
 AbyssUI_ColorPickerFrame:SetHeight(150)
@@ -496,30 +494,30 @@ AbyssUI_ColorPickerFrame.text:SetJustifyH("CENTER")
 AbyssUI_ColorPickerFrame.text:SetJustifyV("CENTER")
 AbyssUI_ColorPickerFrame.text:SetText("Choose a color by clicking on 'Choose a color', 'Okay' and then reload the UI.")
 ----------------------------------------------------
-local Border = AbyssUI_ColorPickerFrame:CreateTexture(nil,"BACKGROUND")
+local Border = AbyssUI_ColorPickerFrame:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
-local BorderBody = AbyssUI_ColorPickerFrame:CreateTexture(nil,"ARTWORK")
+local BorderBody = AbyssUI_ColorPickerFrame:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderBody:SetAllPoints(AbyssUI_ColorPickerFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
-local Texture = AbyssUI_ColorPickerFrame:CreateTexture(nil,"BACKGROUND")
+local Texture = AbyssUI_ColorPickerFrame:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_ColorPickerFrame)
 AbyssUI_ColorPickerFrame.texture = Texture
 ----------------------------------------------------
-local FrameButtonColorPicker = CreateFrame("Button","FrameButton", AbyssUI_ColorPickerFrame, "UIPanelButtonTemplate")
+local FrameButtonColorPicker = CreateFrame("Button","$parentFrameButtonColorPicker", AbyssUI_ColorPickerFrame, "UIPanelButtonTemplate")
 FrameButtonColorPicker:SetHeight(24)
 FrameButtonColorPicker:SetWidth(120)
 FrameButtonColorPicker:SetPoint("BOTTOM", AbyssUI_ColorPickerFrame, "BOTTOM", -50, 10)
 FrameButtonColorPicker:SetText("Choose a Color")
 FrameButtonColorPicker:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local BorderButton = FrameButtonColorPicker:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonColorPicker:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonColorPicker)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -527,14 +525,14 @@ FrameButtonColorPicker:SetScript("OnClick", function()
 	AbyssUI_ShowColorPicker()
 end)
 ----------------------------------------------------
-local FrameButtonReset = CreateFrame("Button","FrameButton", AbyssUI_ColorPickerFrame, "UIPanelButtonTemplate")
+local FrameButtonReset = CreateFrame("Button","$parentFrameButtonReset", AbyssUI_ColorPickerFrame, "UIPanelButtonTemplate")
 FrameButtonReset:SetHeight(24)
 FrameButtonReset:SetWidth(85)
 FrameButtonReset:SetPoint("BOTTOM", AbyssUI_ColorPickerFrame, "BOTTOM", 50, 10)
 FrameButtonReset:SetText("Reload UI")
 FrameButtonReset:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
-local BorderButton = FrameButtonReset:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButtonReset:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButtonReset)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)

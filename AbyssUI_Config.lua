@@ -4,37 +4,36 @@
 --
 -- Hope you like my addOn ^^
 --
--- Dark Minimalist UI for World of Warcraft
---
+-- Configuration page for AbyssUI
 --------------------------------------------------------------------------------
 local addonName, addonTable = ...
 
 local AbyssUI_Config = {}
 
 local function InitSettings()
-AbyssUI_Config.panel = CreateFrame( "Frame", "AbyssUI_Config", InterfaceOptionsFramePanelContainer)
+AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
 -- Register in the Interface Addon Options GUI
 -- Set the name for the Category for the Options Panel
 AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
 -- Add the panel to the Interface Options
 InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
 --Child Panels
-AbyssUI_Config.childpanel1 = CreateFrame( "Frame", "$ConfigChild_HideElements", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel1 = CreateFrame( "Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel1.name = "ActionBar"
 AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
 --
-AbyssUI_Config.childpanel2 = CreateFrame( "Frame", "$ConfigChild_PortraitColorization", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel2 = CreateFrame( "Frame", "$parentConfigChild_PortraitColorization", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel2.name = "Hide Elements"
 AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
 --
-AbyssUI_Config.childpanel3 = CreateFrame( "Frame", "$ConfigChild_Miscellaneous", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel3 = CreateFrame( "Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel3.name = "Miscellaneous"
 AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
 --
-AbyssUI_Config.childpanel4 = CreateFrame( "Frame", "$ConfigChild_Miscellaneous", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel4 = CreateFrame( "Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel4.name = "Themes"
 AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
@@ -186,47 +185,45 @@ AbyssUINewActionBar4x12_CheckButton:SetScript("OnClick", function(self)
 end)
 -- After Login/Reload
 AbyssUINewActionBar3x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-AbyssUINewActionBar3x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
+--AbyssUINewActionBar3x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
-    if  AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true  then
-      -- Main Function 3x12
-      local _G = _G
-      local function AbyssUI_AddactionBar3x12()
-        for i = 2, 12 do
-          local r = "MultiBarRightButton"
-          local btr = _G[r..i]
-          btr:SetClampedToScreen(false)
-          btr:SetMovable(1)
-          btr:SetUserPlaced(true)
-          btr:ClearAllPoints()
-          btr.ClearAllPoints = function() end
-          btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
-        end
-        --MultiBarRight
-        MultiBarRight.ClearAllPoints = function() end
-        MultiBarRight:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMLEFT", 46, 135)
-        MultiBarRight.SetPoint = function() end
-        --PetBar
-        PetActionBarFrame.ClearAllPoints = function() end
-        PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
-        PetActionBarFrame:SetScale(0.90)
-        PetActionBarFrame.SetPoint = function() end
-        --StanceBar
-        StanceBarFrame:ClearAllPoints()
-        StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
-        StanceBarFrame.SetPoint = function() end
-        --ExtraBar
-        ExtraActionBarFrame.ClearAllPoints = function() end
-        ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", MainMenuBar, "BOTTOMRIGHT", 70, 30)
-        ExtraActionBarFrame.SetPoint = function() end
-        --VehicleBar
-        MainMenuBarVehicleLeaveButton.ClearAllPoints = function() end
-        MainMenuBarVehicleLeaveButton:SetPoint("TOPLEFT", MainMenuBar, "TOPLEFT", -70, 70)
-        MainMenuBarVehicleLeaveButton.SetPoint = function() end
+  if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true ) then
+    -- Main Function 3x12
+    local _G = _G
+    local function AbyssUI_AddactionBar3x12()
+      for i = 2, 12 do
+        local r = "MultiBarRightButton"
+        local btr = _G[r..i]
+        btr:SetClampedToScreen(false)
+        btr:SetMovable(1)
+        btr:SetUserPlaced(true)
+        btr:ClearAllPoints()
+        btr.ClearAllPoints = function() end
+        btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
       end
+      --MultiBarRight
+      MultiBarRight.ClearAllPoints = function() end
+      MultiBarRight:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMLEFT", 46, 135)
+      MultiBarRight.SetPoint = function() end
+      --PetBar
+      PetActionBarFrame.ClearAllPoints = function() end
+      PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
+      PetActionBarFrame:SetScale(0.90)
+      PetActionBarFrame.SetPoint = function() end
+      --StanceBar
+      StanceBarFrame:ClearAllPoints()
+      StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
+      StanceBarFrame.SetPoint = function() end
+      --ExtraBar
+      ExtraActionBarFrame.ClearAllPoints = function() end
+      ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", MainMenuBar, "BOTTOMRIGHT", 70, 30)
+      ExtraActionBarFrame.SetPoint = function() end
+      --VehicleBar
+      MainMenuBarVehicleLeaveButton.ClearAllPoints = function() end
+      MainMenuBarVehicleLeaveButton:SetPoint("TOPLEFT", MainMenuBar, "TOPLEFT", -70, 70)
+      MainMenuBarVehicleLeaveButton.SetPoint = function() end
       C_Timer.After(0.25, function()
-        AbyssUI_AddactionBar3x12()
+      AbyssUI_AddactionBar3x12()
         if AbyssUIAddonSettings.AbyssUINewActionBar4x12 ~= true  then
           MultiBarLeft.ClearAllPoints = function() end
           MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", 0, -100)
@@ -239,32 +236,30 @@ AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, .
   end
 end)
 AbyssUINewActionBar4x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-AbyssUINewActionBar4x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
+--AbyssUINewActionBar4x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar4x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" or event == "ACTIONBAR_UPDATE_USABLE" ) then
-    if AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true  then
-      -- Main function 4x12
-      local _G = _G
-      local function AbyssUI_AddactionBar4x12()
-        for i = 2, 12 do
-         local l = "MultiBarLeftButton"
-          local btl = _G[l..i]
-          btl:SetClampedToScreen(false)
-          btl:SetMovable(1)
-          btl:SetUserPlaced(true)
-          btl:ClearAllPoints()
-          btl.ClearAllPoints = function() end
-          btl:SetPoint("LEFT", l..i - 1, "RIGHT", 6, 0)
-        end
-        --MultiBarLeft
-        MultiBarLeft.ClearAllPoints = function() end
-        MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
-        MultiBarLeft.SetPoint = function() end
+  if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true  ) then
+    -- Main function 4x12
+    local _G = _G
+    local function AbyssUI_AddactionBar4x12()
+      for i = 2, 12 do
+       local l = "MultiBarLeftButton"
+        local btl = _G[l..i]
+        btl:SetClampedToScreen(false)
+        btl:SetMovable(1)
+        btl:SetUserPlaced(true)
+        btl:ClearAllPoints()
+        btl.ClearAllPoints = function() end
+        btl:SetPoint("LEFT", l..i - 1, "RIGHT", 6, 0)
       end
-      C_Timer.After(0.5, function()
-        AbyssUI_AddactionBar4x12()
-      end)
+      --MultiBarLeft
+      MultiBarLeft.ClearAllPoints = function() end
+      MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
+      MultiBarLeft.SetPoint = function() end
     end
+    C_Timer.After(0.5, function()
+      AbyssUI_AddactionBar4x12()
+    end)
   end
 end)
 -- End
@@ -279,9 +274,9 @@ MicroMenu_CheckButton:SetChecked(AbyssUIAddonSettings.HideMicroMenu)
 MicroMenu_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
   if AbyssUIAddonSettings.HideMicroMenu == true then
-    HideMicroMenu_Function()
+    AbyssUI_HideMicroMenu_Function()
   else
-    ShowMicroMenu_Function()
+    AbyssUI_ShowMicroMenu_Function()
   end
 end)
 -- After Login/Reload
@@ -289,14 +284,14 @@ MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.HideMicroMenu == true then
-      HideMicroMenu_Function()
+      AbyssUI_HideMicroMenu_Function()
     else
-      ShowMicroMenu_Function()
+      AbyssUI_ShowMicroMenu_Function()
     end
   end
 end)
 --  Hide
-function HideMicroMenu_Function()
+function AbyssUI_HideMicroMenu_Function()
 	for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
 		MicroButtonAndBagsBar,
     MainMenuBarPerformanceBar,
@@ -315,7 +310,7 @@ function HideMicroMenu_Function()
 	end
 end
 -- Show
-function ShowMicroMenu_Function()
+function AbyssUI_ShowMicroMenu_Function()
 		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
 			MicroButtonAndBagsBar,
       MainMenuBarPerformanceBar,
@@ -719,6 +714,17 @@ CameraSmooth90_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
+-- Inspect Target
+local InspectTarget_CheckButton = CreateFrame("CheckButton", "$parentInspectTarget_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+InspectTarget_CheckButton:SetPoint("TOPLEFT", 10, -170)
+InspectTarget_CheckButton.Text:SetText("Inspect Target (Shift + X)")
+InspectTarget_CheckButton.tooltip = "When you have a target or your mouse is over someone character, to inspect this player press the keys Shift + X"
+InspectTarget_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInspectTarget)
+-- OnClick Function
+InspectTarget_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionInspectTarget = self:GetChecked()
+end)
+-- 2nd Column
 -- Action Cam --
 local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
@@ -761,15 +767,16 @@ end)
 local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 180, -140)
 AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma\n(Day and Night Mode)")
-AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based at the server time"
+AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based on the local time"
 AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
 -- OnClick Function
 AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
-  local time = GetGameTime()
-  if ( time >= 6 and time < 18 ) then
+  --local dataTime = GetGameTime()
+  local dataTime = tonumber(date("%H"))
+  if ( dataTime >= 6 and dataTime < 18 ) then
     ConsoleExec( "Gamma 1.2" )
-  elseif ( time >= 18 ) then
+  elseif ( dataTime >= 18 ) then
     ConsoleExec( "Gamma 1.0" )
   end
 end)
@@ -779,18 +786,19 @@ AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
       C_Timer.After(0.5, function ()
-        local time = GetGameTime()
-        if ( time >= 6 and time < 18 ) then
+        local dataTime = tonumber(date("%H"))
+        if ( dataTime >= 6 and dataTime < 18 ) then
           ConsoleExec( "Gamma 1.2" )
-        elseif ( time >= 18 ) then
+        elseif ( dataTime >= 18 ) then
           ConsoleExec( "Gamma 1.0" )
         end
       end)  
     end
   end
 end)
+-- 3rd Column
 -- Instance Leave --
-local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_InstanceLeave_CheckButton:SetPoint("TOPLEFT", 400, -80)
 AbyssUI_InstanceLeave_CheckButton.Text:SetText("Instance Leave Frame")
 AbyssUI_InstanceLeave_CheckButton.tooltip = "A dynamic frame that popup when you complete a LFG (dungeon, raid, etc)"
@@ -800,17 +808,17 @@ AbyssUI_InstanceLeave_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionInstanceLeave = self:GetChecked()
 end)
 -- Shift + C to confirm  --
-local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 400, -110)
-AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups")
-AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing\n Shift + C"
+AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups (Shift + C)")
+AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing the keys Shift + C"
 AbyssUI_ConfirmPopUps_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionConfirmPopUps)
 -- OnClick Function
 AbyssUI_ConfirmPopUps_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = self:GetChecked()
 end)
 -- Hide in Combat --
-local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideInCombat_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_HideInCombat_CheckButton:SetPoint("TOPLEFT", 400, -140)
 AbyssUI_HideInCombat_CheckButton.Text:SetText("Dynamic ObjectiveTrack Hide")
 AbyssUI_HideInCombat_CheckButton.tooltip = "Hide some parts of the interface when you are in combat or in a PVP instance"

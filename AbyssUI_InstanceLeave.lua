@@ -5,21 +5,21 @@
 --
 -- Hope you like my addOn ^^
 --
--- Simple Frame to leave instances
+-- Simple Frame to leave instances for AbyssUI
 --------------------------------------------------------------------------------
 
 -- DynamicFrame --
-local frame = CreateFrame("Frame")
+local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("LFG_COMPLETION_REWARD")
 frame:SetScript("OnEvent", function(self, event)
 	if ( event == "LFG_COMPLETION_REWARD" and AbyssUIAddonSettings.ExtraFunctionInstanceLeave == true ) then
-		AbyssUI_InstanceLeave_DynamicFrame:Show()
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 0, 1)
 	else 
 		return nil
 	end
 end)
 -------------------------- Frames --------------------------
-AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "DragFrame2", UIParent)
+AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_InstanceLeave_DynamicFrame", UIParent)
 AbyssUI_InstanceLeave_DynamicFrame:SetClampedToScreen(true)
 AbyssUI_InstanceLeave_DynamicFrame:SetMovable(true)
 AbyssUI_InstanceLeave_DynamicFrame:EnableMouse(true)
@@ -54,34 +54,33 @@ AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnEvent", function(self, event, ..
     end
   end
 end)
-
 -- Border --
-local LeaveBorder = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil,"BACKGROUND")
+local LeaveBorder = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
 LeaveBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 LeaveBorder:SetPoint("TOPLEFT", -3, 3)
 LeaveBorder:SetPoint("BOTTOMRIGHT", 3, -3)
 LeaveBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 
-local BorderBody = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil,"ARTWORK")
+local BorderBody = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderBody:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 
 -- Texture --
-local Texture = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil,"BACKGROUND")
+local Texture = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 AbyssUI_InstanceLeave_DynamicFrame.texture = Texture
 
 -- Button --
-local FrameButton = CreateFrame("Button","FrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 FrameButton:SetHeight(24)
 FrameButton:SetWidth(70)
 FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", -100, 10)
 FrameButton:SetText("Leave")
 FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
-local BorderButton = FrameButton:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButton:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButton)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -91,22 +90,22 @@ FrameButton:SetScript("OnClick", function()
 	local isComplete = IsLFGComplete()
 	local isPt = IsInGroup()
 	local isLFG = IsPartyLFG()
-	if ( isComplete and isDg and isPt ) then LeaveParty() LeaveBattlefield() AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	elseif ( not isDg and not isLFG and not isPt ) then AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	elseif ( isComplete and not isDg and isPt ) then LeaveParty() LeaveBattlefield() AbyssUI_InstanceLeave_DynamicFrame:Hide()
+	if ( isComplete and isDg and isPt ) then LeaveParty() LeaveBattlefield() UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+	elseif ( not isDg and not isLFG and not isPt ) then UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+	elseif ( isComplete and not isDg and isPt ) then LeaveParty() LeaveBattlefield() UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
 	else
-		AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
 	end
 end)
 
-local FrameButton = CreateFrame("Button","FrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 FrameButton:SetHeight(24)
 FrameButton:SetWidth(70)
 FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 0, 10)
 FrameButton:SetText("Teleport")
 FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
-local BorderButton = FrameButton:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButton:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButton)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -123,14 +122,14 @@ FrameButton:SetScript("OnClick", function()
 	end
 end)
 
-local FrameButton = CreateFrame("Button","FrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 FrameButton:SetHeight(24)
 FrameButton:SetWidth(70)
 FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 100, 10)
 FrameButton:SetText("Close")
 FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
-local BorderButton = FrameButton:CreateTexture(nil,"ARTWORK")
+local BorderButton = FrameButton:CreateTexture(nil, "ARTWORK")
 BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButton)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
@@ -138,22 +137,4 @@ BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 FrameButton:SetScript("OnClick", function()
 	AbyssUI_InstanceLeave_DynamicFrame:Hide()
 end)
-
--------------------------- Save --------------------------
---[[
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("PLAYER_LOGOUT")
-frame:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI_InstanceLeave" ) then
-		if ( AbyssUI_Instance_LeaveCount == nil ) then
-			AbyssUI_Instance_LeaveCount = 0
-		end
-		if ( AbyssUI_Instance_LeaveProfile == nil ) then
-			AbyssUI_Instance_LeaveCount = AbyssUI_Instance_LeaveCount + 1
-		end
-	elseif ( event == "PLAYER_LOGOUT" ) then
-		AbyssUI_Instance_LeaveProfile = time()
-	end
-end)
---]]
+-- End
