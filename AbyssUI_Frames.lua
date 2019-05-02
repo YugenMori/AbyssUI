@@ -114,7 +114,7 @@ function AbyssUI_UpdateAFKCameraData()
 	-- Set
 	PlayerInfo_Name1.text:SetText(playerName)
 	PlayerInfo_Level1.text:SetText(level)
-	PlayerInfo_Race1.text:SetText(raceEn)
+	PlayerInfo_Race1.text:SetText(race)
 	PlayerInfo_Class1.text:SetText(playerClass)
 	ExtraInfo_Clock1.text:SetText(dataTime)
 end

@@ -1142,6 +1142,7 @@ AbyssUIClassCircles12_CheckButton:SetScript("OnClick", function(self)
     AbyssUIClassCircles12_CheckButton:SetChecked(nil)
   end
 end)
+--[[
 -- AbyssUIClassCircles13_CheckButton
 local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles13_CheckButton:SetPoint("TOPLEFT", 10, -260)
@@ -1168,6 +1169,7 @@ AbyssUIClassCircles13_CheckButton:SetScript("OnClick", function(self)
     AbyssUIClassCircles13_CheckButton:SetChecked(nil)
   end
 end)
+--]]
 -- Frame Colorization --
 -- AbyssUIVertexColorFrames01_CheckButton
 local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")

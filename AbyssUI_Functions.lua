@@ -78,6 +78,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 		end
 	end
 end)
+--[[
 -- 3D Portrait
 -- Many thanks to Fizz for part of this
 PlayerFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", PlayerFrame)
@@ -98,6 +99,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
     	TargetFrame.portrait:Hide()
     end
 end)
+--]]
 -- Class HP Colours
 local function colour(statusbar, unit)
 	local _, class, c
@@ -285,36 +287,22 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
 end)
 ----------------------------------------------------
 -- Tooltip Faction Color Change
-GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
-	local _, factionGroup
-	local englishFaction, localizedFaction = UnitFactionGroup("player")
-	-- Horde
-		if englishFaction == "Horde" then
-			if GameTooltipTextLeft3:GetText() == "Horde" or GameTooltipTextLeft3:GetText() == "Horda" then
-				GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-			elseif GameTooltipTextLeft4:GetText() == "Horde" or GameTooltipTextLeft4:GetText() == "Horda" then
-				GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-			elseif GameTooltipTextLeft3:GetText() == "Alliance" or GameTooltipTextLeft3:GetText() == "Aliança" then
-				GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-			elseif GameTooltipTextLeft4:GetText() == "Alliance" or GameTooltipTextLeft4:GetText() == "Aliança" then
-				GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-			else
-				GameTooltipTextLeft3:SetTextColor(255, 255, 255)
-				GameTooltipTextLeft4:SetTextColor(255, 255, 255)
-			end
-		end
-  -- Alliance
-	if englishFaction == "Alliance" then
-		if GameTooltipTextLeft3:GetText() == "Alliance" or GameTooltipTextLeft3:GetText() == "Aliança" then
-			GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-		elseif GameTooltipTextLeft4:GetText() == "Alliance" or GameTooltipTextLeft4:GetText() == "Aliança" then
-			GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-		elseif GameTooltipTextLeft3:GetText() == "Horde" or GameTooltipTextLeft3:GetText() == "Horda" then
-			GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-		elseif GameTooltipTextLeft4:GetText() == "Horde" or GameTooltipTextLeft4:GetText() == "Horda" then
-			GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-		else
-			GameTooltipTextLeft3:SetTextColor(255, 255, 255)
+GameTooltip:HookScript("OnUpdate", function(GameTooltip)
+	local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
+	local gameTooltipText3 = GameTooltipTextLeft3:GetText()
+	local gameTooltipText4 = GameTooltipTextLeft4:GetText()
+	if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" ) then
+		GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
+	elseif ( gameTooltipText3 == localizedFaction and englishFaction == "Alliance" ) then
+		GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
+	elseif ( gameTooltipText4 == localizedFaction and englishFaction == "Horde" ) then
+		GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+	elseif (gameTooltipText4 == localizedFaction and englishFaction == "Alliance" ) then
+		GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+	else 
+		if ( gameTooltipText3 == localizedFaction and (englishFaction == "Horde" or englishFaction == "Alliance" )) then
+			GameTooltipTextLeft3:SetTextColor(255, 255, 255)			
+		else 
 			GameTooltipTextLeft4:SetTextColor(255, 255, 255)
 		end
 	end
@@ -780,12 +768,10 @@ objectiveFrame2:SetScript("OnEvent", function(self, event, ...)
 	--local isBattleground = C_PvP.IsBattleground() 
 	--local isRatedMap = C_PvP.IsRatedMap() 
 	--or isArena == true or isBattleground == true or isRatedMap == true
-	if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and (isPVPMap == true)) then
-		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
-	elseif ( event == "PLAYER_ENTERING_WORLD" and  AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and (isPVPMap == false)) then
-		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
+	if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == true) then
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)		
 	else 
-		return nil
+		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
 	end
 end)
 -- Inspect Target
