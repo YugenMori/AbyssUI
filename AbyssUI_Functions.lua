@@ -195,78 +195,6 @@ PlayerHitIndicator.SetText = function() end
 PetHitIndicator:SetText(nil)
 PetHitIndicator.SetText = function() end
 ----------------------------------------------------
--- Chat Hide Button
--- Thanks to Syncrow for part of this 
-local ChatHideFrame = CreateFrame("Button", "$parentChatHideFrame", UIParent)
-ChatHideFrame:SetSize(30, 30)
-ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
-ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-ChatHideFrame.t:SetAllPoints(ChatHideFrame)
-ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM",0,-35)
-ChatHideFrame:Show()
-
-local ChatHide = false
-
-ChatHideFrame:SetScript("OnMouseDown", function(self, Button)
-	if ChatHide == false then
-		if Button == "LeftButton" then
-			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
-		end
-	elseif ChatHide == true then
-		if Button == "LeftButton" then
-			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
-		end
-	end
-end)
-
-ChatHideFrame:SetScript("OnMouseUp", function(self, Button)
-	if ChatHide == false then
-		if Button == "LeftButton" then
-			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-		end
-	elseif ChatHide == true then
-		if Button == "LeftButton" then
-			ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
-		end
-	end
-end)
-
-ChatHideFrame:SetScript("OnClick", function(self, Button)
-	if ChatHide == false then
-		ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
-		QuickJoinToastButton:Hide()
-		GeneralDockManager:Hide()
-		ChatFrameMenuButton:Hide()
-		ChatFrameChannelButton:Hide()
-		--ChatFrameToggleVoiceDeafenButton.Icon:Hide()
-		--ChatFrameToggleVoiceMuteButton.Icon:Hide()
-		ChatFrame1EditBox:Hide()
-
-		for i = 1, NUM_CHAT_WINDOWS do
-			_G["ChatFrame"..i..""]:SetAlpha(0)
-			_G["ChatFrame"..i.."ButtonFrame"]:Hide()
-			_G["ChatFrame"..i.."EditBox"]:SetAlpha(0)
-		end
-		ChatHide = true
-	elseif ChatHide == true then
-		ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-		QuickJoinToastButton:Show()
-		GeneralDockManager:Show()
-		ChatFrameMenuButton:Show()
-		ChatFrameChannelButton:Show()
-		--ChatFrameToggleVoiceDeafenButton.Icon:Show()
-		--ChatFrameToggleVoiceMuteButton.Icon:Show()
-		ChatFrame1EditBox:Show()
-
-		for i = 1 , NUM_CHAT_WINDOWS do
-			_G["ChatFrame"..i..""]:SetAlpha(1)
-			_G["ChatFrame"..i.."ButtonFrame"]:Show()
-			_G["ChatFrame"..i.."EditBox"]:SetAlpha(1)
-		end
-		ChatHide = false
-	end
-end)
-----------------------------------------------------
 -- Tooltip Class Color Name
 -- Many thanks to Phanx for part of this 
 GameTooltip:HookScript("OnTooltipSetUnit", function(GameTooltip)
@@ -289,22 +217,19 @@ end)
 -- Tooltip Faction Color Change
 GameTooltip:HookScript("OnUpdate", function(GameTooltip)
 	local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
+	local _, unit = GameTooltip:GetUnit()
 	local gameTooltipText3 = GameTooltipTextLeft3:GetText()
 	local gameTooltipText4 = GameTooltipTextLeft4:GetText()
-	if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" ) then
+	if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" and UnitIsPlayer(unit) ) then
 		GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-	elseif ( gameTooltipText3 == localizedFaction and englishFaction == "Alliance" ) then
+	elseif ( gameTooltipText3 == localizedFaction and englishFaction == "Alliance" and UnitIsPlayer(unit) ) then
 		GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-	elseif ( gameTooltipText4 == localizedFaction and englishFaction == "Horde" ) then
+	elseif ( gameTooltipText4 == localizedFaction and englishFaction == "Horde" and UnitIsPlayer(unit) ) then
 		GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-	elseif (gameTooltipText4 == localizedFaction and englishFaction == "Alliance" ) then
+	elseif (gameTooltipText4 == localizedFaction and englishFaction == "Alliance" and UnitIsPlayer(unit) ) then
 		GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
 	else 
-		if ( gameTooltipText3 == localizedFaction and (englishFaction == "Horde" or englishFaction == "Alliance" )) then
-			GameTooltipTextLeft3:SetTextColor(255, 255, 255)			
-		else 
-			GameTooltipTextLeft4:SetTextColor(255, 255, 255)
-		end
+		return nil
 	end
 end)
 ----------------------------------------------------
@@ -744,7 +669,6 @@ AbyssUI_ConfirmPopUps:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- Hide ObjectiveTracker in Combat
--- Regen
 local objectiveFrame1 = CreateFrame("Frame", "$parentObjectiveFrame1", nil)
 objectiveFrame1:RegisterEvent("PLAYER_REGEN_DISABLED")
 objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")

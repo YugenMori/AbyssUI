@@ -139,10 +139,13 @@ AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_DEAD" ) then
-			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
-				C_Timer.After(2, function()
-					UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
-				end)
+			UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 0, 1)
+			C_Timer.After(4, function()
+				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
+			end)
+			C_Timer.After(10, function()
+				AbyssUI_YouDiedFrame:Hide()
+			end)
 		else
 			return nil
 		end
@@ -170,7 +173,7 @@ AbyssUI_YouDiedFrame.texture = Texture
 -- LevelUp Frame
 local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
 AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
-AbyssUI_LevelUpFrame:SetFrameStrata("HIGH")
+AbyssUI_LevelUpFrame:SetFrameStrata("DIALOG")
 AbyssUI_LevelUpFrame:SetWidth(GetScreenWidth())
 AbyssUI_LevelUpFrame:SetHeight(GetScreenHeight()/4)
 AbyssUI_LevelUpFrame:SetClampedToScreen(true)
@@ -189,10 +192,15 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 		if ( event == "PLAYER_LEVEL_UP" ) then
 			C_Timer.After(1, function()
 				AbyssUI_UpdateYouDiedLevelUpData()
-				UIFrameFadeIn(AbyssUI_LevelUpFrame, 2, 0, 1)
 			end)
 			C_Timer.After(2, function()
+				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 0, 1)
+			end)
+			C_Timer.After(4, function()
 				UIFrameFadeOut(AbyssUI_LevelUpFrame, 4, 1, 0)
+			end)
+			C_Timer.After(10, function()
+				AbyssUI_LevelUpFrame:Hide()
 			end)
 		else
 			return nil

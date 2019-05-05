@@ -7,19 +7,7 @@
 --
 -- Simple Frame to leave instances for AbyssUI
 --------------------------------------------------------------------------------
-
--- DynamicFrame --
-local frame = CreateFrame("Frame", "$parentFrame", nil)
-frame:RegisterEvent("LFG_COMPLETION_REWARD")
-frame:SetScript("OnEvent", function(self, event)
-	if ( event == "LFG_COMPLETION_REWARD" and AbyssUIAddonSettings.ExtraFunctionInstanceLeave == true ) then
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 0, 1)
-	else 
-		return nil
-	end
-end)
--------------------------- Frames --------------------------
-AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_InstanceLeave_DynamicFrame", UIParent)
+local AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_InstanceLeave_DynamicFrame", UIParent)
 AbyssUI_InstanceLeave_DynamicFrame:SetClampedToScreen(true)
 AbyssUI_InstanceLeave_DynamicFrame:SetMovable(true)
 AbyssUI_InstanceLeave_DynamicFrame:EnableMouse(true)
@@ -27,7 +15,7 @@ AbyssUI_InstanceLeave_DynamicFrame:SetWidth(360)
 AbyssUI_InstanceLeave_DynamicFrame:SetHeight(120)
 AbyssUI_InstanceLeave_DynamicFrame:RegisterForDrag("LeftButton")
 AbyssUI_InstanceLeave_DynamicFrame:SetFrameLevel(300)
-AbyssUI_InstanceLeave_DynamicFrame:SetFrameStrata("HIGH")
+AbyssUI_InstanceLeave_DynamicFrame:SetFrameStrata("DIALOG")
 AbyssUI_InstanceLeave_DynamicFrame:SetPoint("CENTER", 0, -140)
 AbyssUI_InstanceLeave_DynamicFrame.text = AbyssUI_InstanceLeave_DynamicFrame.text or AbyssUI_InstanceLeave_DynamicFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_InstanceLeave_DynamicFrame.text:SetAllPoints(true)
@@ -90,11 +78,30 @@ FrameButton:SetScript("OnClick", function()
 	local isComplete = IsLFGComplete()
 	local isPt = IsInGroup()
 	local isLFG = IsPartyLFG()
-	if ( isComplete and isDg and isPt ) then LeaveParty() LeaveBattlefield() UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-	elseif ( not isDg and not isLFG and not isPt ) then UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-	elseif ( isComplete and not isDg and isPt ) then LeaveParty() LeaveBattlefield() UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+	if ( isComplete and isDg and isPt ) then 
+		LeaveParty() 
+		LeaveBattlefield() 
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+		C_Timer.After(2, function()
+			AbyssUI_InstanceLeave_DynamicFrame:Hide()
+	    end)
+	elseif ( not isDg and not isLFG and not isPt ) then 
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+		C_Timer.After(2, function()
+			AbyssUI_InstanceLeave_DynamicFrame:Hide()
+	    end)
+	elseif ( isComplete and not isDg and isPt ) then 
+		LeaveParty() 
+		LeaveBattlefield() 
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+		C_Timer.After(2, function()
+			AbyssUI_InstanceLeave_DynamicFrame:Hide()
+	    end)
 	else
 		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+		C_Timer.After(2, function()
+			AbyssUI_InstanceLeave_DynamicFrame:Hide()
+	    end)
 	end
 end)
 
@@ -136,5 +143,16 @@ BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 
 FrameButton:SetScript("OnClick", function()
 	AbyssUI_InstanceLeave_DynamicFrame:Hide()
+end)
+
+-- DynamicFrame --
+local frame = CreateFrame("Frame", "$parentFrame", nil)
+frame:RegisterEvent("LFG_COMPLETION_REWARD")
+frame:SetScript("OnEvent", function(self, event)
+	if ( event == "LFG_COMPLETION_REWARD" and AbyssUIAddonSettings.ExtraFunctionInstanceLeave == true ) then
+		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 0, 1)
+	else 
+		return nil
+	end
 end)
 -- End

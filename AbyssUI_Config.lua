@@ -530,7 +530,7 @@ HideHotkeysLabels_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
--- Hide StanceBar --
+-- Hide StanceBar
 local HideStanceBar_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideStanceBar_CheckButton:SetPoint("TOPLEFT", 10, -320)
 HideStanceBar_CheckButton.Text:SetText("Hide Stance Bar")
@@ -552,6 +552,124 @@ HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if AbyssUIAddonSettings.HideStanceBar == true then
       C_Timer.After(0.5, function()
         StanceBarFrame:Hide()
+      end)
+    end
+  end
+end)
+-- Chat Hide Frame (needs to be here so the hide chat buttons works on this too)
+-- Thanks to Syncrow for part of this 
+local AbyssUI_ChatHideFrame = CreateFrame("Button", "$parentChatHideFrame", UIParent)
+AbyssUI_ChatHideFrame:SetSize(30, 30)
+AbyssUI_ChatHideFrame.t = AbyssUI_ChatHideFrame:CreateTexture(nil, "BORDER")
+AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
+AbyssUI_ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM",0,-35)
+AbyssUI_ChatHideFrame:Show()
+
+local ChatHide = false
+
+AbyssUI_ChatHideFrame:SetScript("OnMouseDown", function(self, Button)
+  if ChatHide == false then
+    if Button == "LeftButton" then
+      AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
+    end
+  elseif ChatHide == true then
+    if Button == "LeftButton" then
+      AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
+    end
+  end
+end)
+
+AbyssUI_ChatHideFrame:SetScript("OnMouseUp", function(self, Button)
+  if ChatHide == false then
+    if Button == "LeftButton" then
+      AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+    end
+  elseif ChatHide == true then
+    if Button == "LeftButton" then
+      AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+    end
+  end
+end)
+
+AbyssUI_ChatHideFrame:SetScript("OnClick", function(self, Button)
+  if ChatHide == false then
+    AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+    QuickJoinToastButton:Hide()
+    GeneralDockManager:Hide()
+    ChatFrameMenuButton:Hide()
+    ChatFrameChannelButton:Hide()
+    --ChatFrameToggleVoiceDeafenButton.Icon:Hide()
+    --ChatFrameToggleVoiceMuteButton.Icon:Hide()
+    ChatFrame1EditBox:Hide()
+
+    for i = 1, NUM_CHAT_WINDOWS do
+      _G["ChatFrame"..i..""]:SetAlpha(0)
+      _G["ChatFrame"..i.."ButtonFrame"]:Hide()
+      _G["ChatFrame"..i.."EditBox"]:SetAlpha(0)
+    end
+    ChatHide = true
+  elseif ChatHide == true then
+    AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+    QuickJoinToastButton:Show()
+    GeneralDockManager:Show()
+    ChatFrameMenuButton:Show()
+    ChatFrameChannelButton:Show()
+    --ChatFrameToggleVoiceDeafenButton.Icon:Show()
+    --ChatFrameToggleVoiceMuteButton.Icon:Show()
+    ChatFrame1EditBox:Show()
+
+    for i = 1 , NUM_CHAT_WINDOWS do
+      _G["ChatFrame"..i..""]:SetAlpha(1)
+      _G["ChatFrame"..i.."ButtonFrame"]:Show()
+      _G["ChatFrame"..i.."EditBox"]:SetAlpha(1)
+    end
+    ChatHide = false
+  end
+end)
+-- Hide Chat Buttons
+local HideChatButtons_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+HideChatButtons_CheckButton:SetPoint("TOPLEFT", 10, -350)
+HideChatButtons_CheckButton.Text:SetText("Hide Chat Buttons")
+HideChatButtons_CheckButton.tooltip = "Hide the Chat buttons (voice, social, etc)"
+HideChatButtons_CheckButton:SetChecked(AbyssUIAddonSettings.HideChatButtons)
+-- OnClick Function
+HideChatButtons_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
+  if ( AbyssUIAddonSettings.HideChatButtons == true ) then
+    QuickJoinToastButton:Hide()
+    GeneralDockManager:SetAlpha(0)
+    ChatFrameMenuButton:Hide()
+    ChatFrameChannelButton:Hide()
+    ChatFrame1ButtonFrame:SetAlpha(0)
+    AbyssUI_ChatHideFrame:Hide()
+    ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
+    ChatFrameToggleVoiceMuteButton:SetAlpha(0)
+  else 
+    QuickJoinToastButton:Show()
+    GeneralDockManager:SetAlpha(1)
+    ChatFrameMenuButton:Show()
+    ChatFrameChannelButton:Show()
+    ChatFrame1ButtonFrame:SetAlpha(1)
+    AbyssUI_ChatHideFrame:Show()
+    ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
+    ChatFrameToggleVoiceMuteButton:SetAlpha(1)
+  end
+end)
+-- After Login/Reload
+HideChatButtons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+HideChatButtons_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.HideChatButtons == true then
+      C_Timer.After(1, function()
+        QuickJoinToastButton:Hide()
+        GeneralDockManager:SetAlpha(0)
+        ChatFrameMenuButton:Hide()
+        ChatFrameChannelButton:Hide()
+        ChatFrame1ButtonFrame:SetAlpha(0)
+        AbyssUI_ChatHideFrame:Hide()
+        ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
+        ChatFrameToggleVoiceMuteButton:SetAlpha(0)
       end)
     end
   end
