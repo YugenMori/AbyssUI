@@ -97,7 +97,7 @@ ExtraInfo_Clock1.text:SetPoint("BOTTOMRIGHT", 0, 0)
 function ExtraInfo_Clock1:onUpdate(sinceLastUpdate)
 	self.sinceLastUpdate = (self.sinceLastUpdate or 0) + sinceLastUpdate
 	if ( self.sinceLastUpdate >= 5 ) then
-		local dataTime = date("%H:%M |cffffcc00%m/%d/%y|r ")
+		local dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
 		ExtraInfo_Clock1.text:SetText(dataTime)
 		self.sinceLastUpdate = 0
 	end
@@ -192,12 +192,10 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 		if ( event == "PLAYER_LEVEL_UP" ) then
 			C_Timer.After(1, function()
 				AbyssUI_UpdateYouDiedLevelUpData()
-			end)
-			C_Timer.After(2, function()
 				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 0, 1)
 			end)
-			C_Timer.After(4, function()
-				UIFrameFadeOut(AbyssUI_LevelUpFrame, 4, 1, 0)
+			C_Timer.After(5, function()
+				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 1, 0)
 			end)
 			C_Timer.After(10, function()
 				AbyssUI_LevelUpFrame:Hide()
@@ -257,8 +255,8 @@ end
 -- AbyssUIFirstFrame
 AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
 AbyssUIFirstFrame:Hide()
-AbyssUIFirstFrame:SetWidth(400)
-AbyssUIFirstFrame:SetHeight(140)
+AbyssUIFirstFrame:SetWidth(350)
+AbyssUIFirstFrame:SetHeight(120)
 AbyssUIFirstFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 200)
 AbyssUIFirstFrame:EnableMouse(true)
 AbyssUIFirstFrame:SetFrameStrata("HIGH")
@@ -267,7 +265,7 @@ AbyssUIFirstFrame.text:SetScale(1.5)
 AbyssUIFirstFrame.text:SetAllPoints(true)
 AbyssUIFirstFrame.text:SetJustifyH("CENTER")
 AbyssUIFirstFrame.text:SetJustifyV("CENTER")
-AbyssUIFirstFrame.text:SetText("Thanks for using |cff0d75d4AbyssUI!|r\nThe |cff5f545eDark|r Blizzard UI revamp.\nCheck my other addons:\nEasyLeave, EasyConfirm and HideonCombat.\n|cffffcc00'Confirm'|r to ReloadUI")
+AbyssUIFirstFrame.text:SetText("Thanks for using |cff0d75d4AbyssUI!|r\nThe |cff5f545eDark|r Blizzard UI revamp.\n|cffffcc00'Confirm'|r to ReloadUI")
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")

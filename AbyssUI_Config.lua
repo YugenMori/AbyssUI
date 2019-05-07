@@ -874,8 +874,8 @@ end)
 -- Auto Repair/Sell Gray --
 local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 180, -110)
-AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Itens")
-AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair itens"
+AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Items")
+AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair items"
 AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
 -- OnClick Function
 AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
