@@ -8,7 +8,7 @@
 --------------------------------------------------------------------------------
 
 -- AbyssUI_AFKCameraFrame
-AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", UIParent)
+local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", UIParent)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
 AbyssUI_AFKCameraFrame:SetWidth(GetScreenWidth())
 AbyssUI_AFKCameraFrame:SetHeight(GetScreenHeight())
@@ -38,7 +38,11 @@ Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_AFKCameraFrame)
 AbyssUI_AFKCameraFrame.texture = Texture
 ----------------------------------------------------
-
+-- AFK Camera Function
+local AbyssUI_AFKCamera = CreateFrame("Frame", "$parentAbyssUI_AFKCamera", nil)
+AbyssUI_AFKCamera:RegisterEvent("PLAYER_FLAGS_CHANGED")
+AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
+----------------------------------------------------
 -- ModelFrameAFKMode
 -- Model1
 local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
@@ -103,14 +107,13 @@ function ExtraInfo_Clock1:onUpdate(sinceLastUpdate)
 	end
 end
 ExtraInfo_Clock1:SetScript("OnUpdate", ExtraInfo_Clock1.onUpdate)
-
-function AbyssUI_UpdateAFKCameraData()
+local function AbyssUI_UpdateAFKCameraData()
 	-- Get
 	playerName = UnitName("player")
 	level = UnitLevel("player")
 	race, raceEn = UnitRace("player")
 	playerClass, englishClass = UnitClass("player")
-	dataTime = date("%H:%M |cffffcc00%m/%d/%y|r ")
+	dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
 	-- Set
 	PlayerInfo_Name1.text:SetText(playerName)
 	PlayerInfo_Level1.text:SetText(level)
@@ -118,6 +121,25 @@ function AbyssUI_UpdateAFKCameraData()
 	PlayerInfo_Class1.text:SetText(playerClass)
 	ExtraInfo_Clock1.text:SetText(dataTime)
 end
+-- AbyssUI_AFKCamera SetScript
+AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
+	local inInstance, instanceType = IsInInstance()
+	if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
+		local isAFK = UnitIsAFK("player")
+		if isAFK == true and inInstance ~= true then
+			AbyssUI_UpdateAFKCameraData()
+			UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
+		elseif isAFK == false and inInstance ~= true then
+			AbyssUI_AFKCameraFrame:Hide()
+		elseif isAFK == true and inInstance == true then
+			AbyssUI_AFKCameraFrame:Hide()
+		elseif isAFK == false and inInstance == true then
+			AbyssUI_AFKCameraFrame:Hide()
+		else
+			AbyssUI_AFKCameraFrame:Hide()
+		end
+	end
+end)
 --------------------------------------------
 -- YouDied Frame
 local AbyssUI_YouDiedFrame = CreateFrame("Frame", "$parentAbyssUI_YouDiedFrame", UIParent)
@@ -139,7 +161,7 @@ AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_DEAD" ) then
-			UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 0, 1)
+			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
 			C_Timer.After(4, function()
 				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
 			end)
@@ -183,30 +205,10 @@ AbyssUI_LevelUpFrame.text:SetScale(6)
 AbyssUI_LevelUpFrame.text:SetAllPoints(true)
 AbyssUI_LevelUpFrame.text:SetJustifyH("CENTER")
 AbyssUI_LevelUpFrame.text:SetJustifyV("CENTER")
-AbyssUI_LevelUpFrame.text:SetText("|cfff2dc7fLevel Up|r")
+AbyssUI_LevelUpFrame.text:SetText("|cfff2dc7fLevel UP|r")
 AbyssUI_LevelUpFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_LevelUpFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_LevelUpFrame:Hide()
-AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
-		if ( event == "PLAYER_LEVEL_UP" ) then
-			C_Timer.After(1, function()
-				AbyssUI_UpdateYouDiedLevelUpData()
-				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 0, 1)
-			end)
-			C_Timer.After(5, function()
-				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 1, 0)
-			end)
-			C_Timer.After(10, function()
-				AbyssUI_LevelUpFrame:Hide()
-			end)
-		else
-			return nil
-		end
-	else
-		return nil
-	end
-end)
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUI_LevelUpFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -242,8 +244,7 @@ LevelUp_PlayerName.text:SetPoint("CENTER", 0, 10)
 LevelUp_PlayerName.text:SetText(playerName)
 LevelUp_PlayerName.text:SetWidth(GetScreenWidth())
 LevelUp_PlayerName.text:SetHeight(GetScreenHeight()/4)
-
-function AbyssUI_UpdateYouDiedLevelUpData()
+local function AbyssUI_UpdateYouDiedLevelUpData()
 	-- Get
 	level = UnitLevel("player")
 	playerName = UnitName("player")
@@ -251,6 +252,27 @@ function AbyssUI_UpdateYouDiedLevelUpData()
 	LevelUp_PlayerLevel.text:SetText(level)
 	LevelUp_PlayerName.text:SetText(playerName)
 end
+-- AbyssUI_LevelUpFrame Set Script
+AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
+	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
+		if ( event == "PLAYER_LEVEL_UP" ) then
+			C_Timer.After(1, function()
+				AbyssUI_UpdateYouDiedLevelUpData()
+				UIFrameFadeIn(AbyssUI_LevelUpFrame, 2, 0, 1)
+			end)
+			C_Timer.After(3, function()
+				UIFrameFadeIn(AbyssUI_LevelUpFrame, 4, 1, 0)
+			end)
+			C_Timer.After(10, function()
+				AbyssUI_LevelUpFrame:Hide()
+			end)
+		else
+			return nil
+		end
+	else
+		return nil
+	end
+end)
 -------------------------- Save and Extra Stuff --------------------------
 -- AbyssUIFirstFrame
 AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)

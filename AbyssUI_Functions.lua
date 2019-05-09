@@ -557,28 +557,6 @@ for i = 1, select("#", unpack(FrameList)) do
 end
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateManaValues)
 ----------------------------------------------------
--- AFK Camera
-local AbyssUI_AFKCamera = CreateFrame("Frame", "$parentAbyssUI_AFKCamera", nil)
-AbyssUI_AFKCamera:RegisterEvent("PLAYER_FLAGS_CHANGED")
-AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
-AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
-	local inInstance, instanceType = IsInInstance()
-	if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
-		local isAFK = UnitIsAFK("player")
-		if isAFK == true and inInstance ~= true then
-			AbyssUI_UpdateAFKCameraData()
-			UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
-		elseif isAFK == false and inInstance ~= true then
-			AbyssUI_AFKCameraFrame:Hide()
-		elseif isAFK == true and inInstance == true then
-			AbyssUI_AFKCameraFrame:Hide()
-		elseif isAFK == false and inInstance == true then
-			AbyssUI_AFKCameraFrame:Hide()
-		else
-			AbyssUI_AFKCameraFrame:Hide()
-		end
-	end
-end)
 -- Start Function
 function AbyssUIStart()
 	AbyssUIFirstFrame:Show()
@@ -726,7 +704,7 @@ function AbyssUIDailyInfo()
 	else
 		print("|cffa5f6f3Token Price:|r Not available right now!")
 	end
-	print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+	print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 	print("|cffa5f6f3Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
 	--print("|cffa5f6f3Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
 	print("|cffa5f6f3WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")

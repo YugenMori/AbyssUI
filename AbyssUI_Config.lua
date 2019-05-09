@@ -185,67 +185,57 @@ AbyssUINewActionBar4x12_CheckButton:SetScript("OnClick", function(self)
 end)
 -- After Login/Reload
 AbyssUINewActionBar3x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
---AbyssUINewActionBar3x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true ) then
+  if ( AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true ) then
     -- Main Function 3x12
     local _G = _G
-    local function AbyssUI_AddactionBar3x12()
       for i = 2, 12 do
         local r = "MultiBarRightButton"
         local btr = _G[r..i]
-        btr:SetClampedToScreen(false)
+        btr:SetClampedToScreen(true)
         btr:SetMovable(1)
         btr:SetUserPlaced(true)
         btr:ClearAllPoints()
         btr.ClearAllPoints = function() end
         btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
       end
-      --MultiBarRight
-      MultiBarRight.ClearAllPoints = function() end
-      MultiBarRight:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMLEFT", 46, 135)
-      MultiBarRight.SetPoint = function() end
-      --PetBar
-      PetActionBarFrame.ClearAllPoints = function() end
-      PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
-      PetActionBarFrame:SetScale(0.90)
-      PetActionBarFrame.SetPoint = function() end
-      --StanceBar
-      StanceBarFrame:ClearAllPoints()
-      StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
-      StanceBarFrame.SetPoint = function() end
-      --ExtraBar
-      ExtraActionBarFrame.ClearAllPoints = function() end
-      ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", MainMenuBar, "BOTTOMRIGHT", 70, 30)
-      ExtraActionBarFrame.SetPoint = function() end
-      --VehicleBar
-      MainMenuBarVehicleLeaveButton.ClearAllPoints = function() end
-      MainMenuBarVehicleLeaveButton:SetPoint("TOPLEFT", MainMenuBar, "TOPLEFT", -70, 70)
-      MainMenuBarVehicleLeaveButton.SetPoint = function() end
-      C_Timer.After(0.25, function()
-      AbyssUI_AddactionBar3x12()
-        if AbyssUIAddonSettings.AbyssUINewActionBar4x12 ~= true  then
-          MultiBarLeft.ClearAllPoints = function() end
-          MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", 0, -100)
-          MultiBarLeft.SetPoint = function() end
-        else
-          return nil
-        end
-      end)
+    --MultiBarRight
+    MultiBarRight.ClearAllPoints = function() end
+    MultiBarRight:SetPoint("TOPRIGHT", MainMenuBar, "BOTTOMLEFT", 46, 135)
+    MultiBarRight.SetPoint = function() end
+    --PetBar
+    PetActionBarFrame.ClearAllPoints = function() end
+    PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
+    PetActionBarFrame:SetScale(0.90)
+    PetActionBarFrame.SetPoint = function() end
+    --StanceBar
+    StanceBarFrame:ClearAllPoints()
+    StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
+    StanceBarFrame.SetPoint = function() end
+    --ExtraBar
+    ExtraActionBarFrame.ClearAllPoints = function() end
+    ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", MainMenuBar, "BOTTOMRIGHT", 70, 30)
+    ExtraActionBarFrame.SetPoint = function() end
+    --VehicleBar
+    MainMenuBarVehicleLeaveButton.ClearAllPoints = function() end
+    MainMenuBarVehicleLeaveButton:SetPoint("TOPLEFT", MainMenuBar, "TOPLEFT", -70, 70)
+    MainMenuBarVehicleLeaveButton.SetPoint = function() end
+    if AbyssUIAddonSettings.AbyssUINewActionBar4x12 ~= true  then
+      MultiBarLeft.ClearAllPoints = function() end
+      MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", 0, -100)
+      MultiBarLeft.SetPoint = function() end
     end
   end
 end)
 AbyssUINewActionBar4x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
---AbyssUINewActionBar4x12_CheckButton:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
 AbyssUINewActionBar4x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true  ) then
+  if ( AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true  ) then
     -- Main function 4x12
     local _G = _G
-    local function AbyssUI_AddactionBar4x12()
       for i = 2, 12 do
        local l = "MultiBarLeftButton"
         local btl = _G[l..i]
-        btl:SetClampedToScreen(false)
+        btl:SetClampedToScreen(true)
         btl:SetMovable(1)
         btl:SetUserPlaced(true)
         btl:ClearAllPoints()
@@ -257,10 +247,6 @@ AbyssUINewActionBar4x12_CheckButton:SetScript("OnEvent", function(self, event, .
       MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
       MultiBarLeft.SetPoint = function() end
     end
-    C_Timer.After(0.5, function()
-      AbyssUI_AddactionBar4x12()
-    end)
-  end
 end)
 -- End
 ------------------------------- Hide Elements ---------------------------------
@@ -270,6 +256,44 @@ MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
 MicroMenu_CheckButton.Text:SetText("Hide MicroMenu")
 MicroMenu_CheckButton.tooltip = "Hide the ActionBar MicroMenu (Bags Bar)"
 MicroMenu_CheckButton:SetChecked(AbyssUIAddonSettings.HideMicroMenu)
+--  Hide
+local function AbyssUI_HideMicroMenu_Function()
+  for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+    MicroButtonAndBagsBar,
+    MainMenuBarPerformanceBar,
+    MainMenuMicroButton,
+    EJMicroButton,
+    CollectionsMicroButton,
+    LFDMicroButton,
+    GuildMicroButton,
+    QuestLogMicroButton,
+    TalentMicroButton,
+    SpellbookMicroButton,
+    CharacterMicroButton, }) do
+    v:Hide()
+    AchievementMicroButton:SetAlpha(0)
+    StoreMicroButton:SetAlpha(0)
+  end
+end
+-- Show
+local function AbyssUI_ShowMicroMenu_Function()
+    for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+      MicroButtonAndBagsBar,
+      MainMenuBarPerformanceBar,
+      MainMenuMicroButton,
+      EJMicroButton,
+      CollectionsMicroButton,
+      LFDMicroButton,
+      GuildMicroButton,
+      QuestLogMicroButton,
+      TalentMicroButton,
+      SpellbookMicroButton,
+      CharacterMicroButton, }) do
+      v:Show()
+      AchievementMicroButton:SetAlpha(1)
+      StoreMicroButton:SetAlpha(1)
+  end
+end
 -- OnClick Function
 MicroMenu_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
@@ -290,44 +314,6 @@ MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
---  Hide
-function AbyssUI_HideMicroMenu_Function()
-	for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-		MicroButtonAndBagsBar,
-    MainMenuBarPerformanceBar,
-    MainMenuMicroButton,
-		EJMicroButton,
-    CollectionsMicroButton,
-    LFDMicroButton,
-    GuildMicroButton,
-    QuestLogMicroButton,
-    TalentMicroButton,
-    SpellbookMicroButton,
-		CharacterMicroButton, }) do
-		v:Hide()
-    AchievementMicroButton:SetAlpha(0)
-    StoreMicroButton:SetAlpha(0)
-	end
-end
--- Show
-function AbyssUI_ShowMicroMenu_Function()
-		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-			MicroButtonAndBagsBar,
-      MainMenuBarPerformanceBar,
-      MainMenuMicroButton,
-			EJMicroButton,
-      CollectionsMicroButton,
-      LFDMicroButton,
-      GuildMicroButton,
-      QuestLogMicroButton,
-      TalentMicroButton,
-      SpellbookMicroButton,
-			CharacterMicroButton, }) do
-			v:Show()
-      AchievementMicroButton:SetAlpha(1)
-      StoreMicroButton:SetAlpha(1)
-  end
-end
 -- Gryphons Option --
 local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 Gryphons_CheckButton:SetPoint("TOPLEFT", 10, -110)
