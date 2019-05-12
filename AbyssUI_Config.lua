@@ -93,7 +93,7 @@ Frame:SetPoint("CENTER")
 Frame:SetText("Player Portrait")
 -- Panel 05 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel4)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 150, -20)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 120, -20)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
 Frame:SetScale(1.5)
@@ -120,7 +120,7 @@ Frame:SetPoint("CENTER")
 Frame:SetText("- Choose a Color")
 -- Panel 06 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel06", AbyssUI_Config.childpanel4)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", -160, -20)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", -180, -35)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
 Frame:SetScale(1.5)
@@ -205,8 +205,8 @@ AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, .
     MultiBarRight.SetPoint = function() end
     --PetBar
     PetActionBarFrame.ClearAllPoints = function() end
-    PetActionBarFrame:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", -500, 30)
-    PetActionBarFrame:SetScale(0.90)
+    PetActionBarFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 0, 45)
+    PetActionBarFrame:SetScale(0.85)
     PetActionBarFrame.SetPoint = function() end
     --StanceBar
     StanceBarFrame:ClearAllPoints()
@@ -953,7 +953,10 @@ AbyssUIClassCircles01_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles01 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -979,7 +982,10 @@ AbyssUIClassCircles02_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles02 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1005,7 +1011,10 @@ AbyssUIClassCircles03_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles03 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1031,7 +1040,10 @@ AbyssUIClassCircles04_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles04 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1057,7 +1069,10 @@ AbyssUIClassCircles05_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles05 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1083,7 +1098,10 @@ AbyssUIClassCircles06_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles06 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1109,7 +1127,10 @@ AbyssUIClassCircles07_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles07 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1135,7 +1156,10 @@ AbyssUIClassCircles08_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles08 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1161,7 +1185,10 @@ AbyssUIClassCircles09_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles09 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1187,7 +1214,10 @@ AbyssUIClassCircles10_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles09 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles10 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1213,7 +1243,10 @@ AbyssUIClassCircles11_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles09 ~= true and 
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles12 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles11 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
@@ -1239,19 +1272,21 @@ AbyssUIClassCircles12_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles09 ~= true and 
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and
-     AbyssUIAddonSettings.UIClassCircles13 ~= true then
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles12 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
     AbyssUIClassCircles12_CheckButton:SetChecked(nil)
   end
 end)
---[[
 -- AbyssUIClassCircles13_CheckButton
 local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles13_CheckButton:SetPoint("TOPLEFT", 10, -260)
-AbyssUIClassCircles13_CheckButton.Text:SetText("3D Portrait (Beta)")
-AbyssUIClassCircles13_CheckButton.tooltip = "A 3D version of the Player/Target"
+AbyssUIClassCircles13_CheckButton.Text:SetText("Minimal_Blue")
+AbyssUIClassCircles13_CheckButton.tooltip = "A minimalist blue version of the UnitPlayerFrame"
 AbyssUIClassCircles13_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles13)
 -- OnClick Function
 AbyssUIClassCircles13_CheckButton:SetScript("OnClick", function(self)
@@ -1266,14 +1301,103 @@ AbyssUIClassCircles13_CheckButton:SetScript("OnClick", function(self)
      AbyssUIAddonSettings.UIClassCircles09 ~= true and 
      AbyssUIAddonSettings.UIClassCircles10 ~= true and 
      AbyssUIAddonSettings.UIClassCircles11 ~= true and
-     AbyssUIAddonSettings.UIClassCircles12 ~= true then
+     AbyssUIAddonSettings.UIClassCircles12 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
     AbyssUIAddonSettings.UIClassCircles13 = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   else
     AbyssUIClassCircles13_CheckButton:SetChecked(nil)
   end
 end)
---]]
+-- AbyssUIClassCircles14_CheckButton
+local AbyssUIClassCircles14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+AbyssUIClassCircles14_CheckButton:SetPoint("TOPLEFT", 180, -260)
+AbyssUIClassCircles14_CheckButton.Text:SetText("Minimal_Red")
+AbyssUIClassCircles14_CheckButton.tooltip = "A minimalist red version of the UnitPlayerFrame"
+AbyssUIClassCircles14_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles14)
+-- OnClick Function
+AbyssUIClassCircles14_CheckButton:SetScript("OnClick", function(self)
+  if AbyssUIAddonSettings.UIClassCircles01 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles02 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles03 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles04 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles05 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles06 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles07 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles08 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles09 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles10 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles11 ~= true and
+     AbyssUIAddonSettings.UIClassCircles12 ~= true and
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
+    AbyssUIAddonSettings.UIClassCircles14 = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  else
+    AbyssUIClassCircles14_CheckButton:SetChecked(nil)
+  end
+end)
+-- AbyssUIClassCircles15_CheckButton
+local AbyssUIClassCircles15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+AbyssUIClassCircles15_CheckButton:SetPoint("TOPLEFT", 10, -290)
+AbyssUIClassCircles15_CheckButton.Text:SetText("Vibrant")
+AbyssUIClassCircles15_CheckButton.tooltip = "A vibrant version of the UnitPlayerFrame"
+AbyssUIClassCircles15_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles15)
+-- OnClick Function
+AbyssUIClassCircles15_CheckButton:SetScript("OnClick", function(self)
+  if AbyssUIAddonSettings.UIClassCircles01 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles02 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles03 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles04 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles05 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles06 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles07 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles08 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles09 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles10 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles11 ~= true and
+     AbyssUIAddonSettings.UIClassCircles12 ~= true and
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles16 ~= true then
+    AbyssUIAddonSettings.UIClassCircles15 = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  else
+    AbyssUIClassCircles15_CheckButton:SetChecked(nil)
+  end
+end)
+-- AbyssUIClassCircles16_CheckButton
+local AbyssUIClassCircles16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+AbyssUIClassCircles16_CheckButton:SetPoint("TOPLEFT", 180, -290)
+AbyssUIClassCircles16_CheckButton.Text:SetText("Retro")
+AbyssUIClassCircles16_CheckButton.tooltip = "A retro version of the UnitPlayerFrame"
+AbyssUIClassCircles16_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles16)
+-- OnClick Function
+AbyssUIClassCircles16_CheckButton:SetScript("OnClick", function(self)
+  if AbyssUIAddonSettings.UIClassCircles01 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles02 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles03 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles04 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles05 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles06 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles07 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles08 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles09 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles10 ~= true and 
+     AbyssUIAddonSettings.UIClassCircles11 ~= true and
+     AbyssUIAddonSettings.UIClassCircles12 ~= true and
+     AbyssUIAddonSettings.UIClassCircles13 ~= true and
+     AbyssUIAddonSettings.UIClassCircles14 ~= true and
+     AbyssUIAddonSettings.UIClassCircles15 ~= true then
+    AbyssUIAddonSettings.UIClassCircles16 = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  else
+    AbyssUIClassCircles16_CheckButton:SetChecked(nil)
+  end
+end)
 -- Frame Colorization --
 -- AbyssUIVertexColorFrames01_CheckButton
 local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")

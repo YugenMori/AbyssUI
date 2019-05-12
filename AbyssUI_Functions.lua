@@ -31,7 +31,22 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
 		if UnitIsPlayer(self.unit) then
 			local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
-			if t and AbyssUIAddonSettings.UIClassCircles01 ~= true and AbyssUIAddonSettings.UIClassCircles02 ~= true and AbyssUIAddonSettings.UIClassCircles03 ~= true and AbyssUIAddonSettings.UIClassCircles04 ~= true and AbyssUIAddonSettings.UIClassCircles05 ~= true and AbyssUIAddonSettings.UIClassCircles06 ~= true and AbyssUIAddonSettings.UIClassCircles07 ~= true and AbyssUIAddonSettings.UIClassCircles08 ~= true and AbyssUIAddonSettings.UIClassCircles09 ~= true and AbyssUIAddonSettings.UIClassCircles10 ~= true and AbyssUIAddonSettings.UIClassCircles11 ~= true and AbyssUIAddonSettings.UIClassCircles12 ~= true then
+			if t and AbyssUIAddonSettings.UIClassCircles01 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles02 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles03 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles04 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles05 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles06 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles07 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles08 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles09 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles10 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles11 ~= true and 
+				AbyssUIAddonSettings.UIClassCircles12 ~= true and
+				AbyssUIAddonSettings.UIClassCircles13 ~= true and
+				AbyssUIAddonSettings.UIClassCircles14 ~= true and
+				AbyssUIAddonSettings.UIClassCircles15 ~= true and
+				AbyssUIAddonSettings.UIClassCircles16 ~= true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_BRIGHT_CLASS_COLOR")
 				self.portrait:SetTexCoord(unpack(t))
 			else
@@ -70,6 +85,18 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 			elseif t and AbyssUIAddonSettings.UIClassCircles12 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_ARTISTIC")
 				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles13 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_MINIMAL_BLUE")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles14 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_MINIMAL_RED")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles15 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_VIBRANT")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles16 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_RETRO")
+				self.portrait:SetTexCoord(unpack(t))
 			else
 				return nil
 			end
@@ -78,28 +105,6 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 		end
 	end
 end)
---[[
--- 3D Portrait
--- Many thanks to Fizz for part of this
-PlayerFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", PlayerFrame)
-PlayerFrame.AbyssUI3D:SetFrameStrata("BACKGROUND")
-PlayerFrame.AbyssUI3D:SetPortraitZoom(1) -- if you just want to see the face.
-PlayerFrame.AbyssUI3D:SetPoint("TOPLEFT", PlayerFrame.portrait, 7, -9) -- attach/size to the portrait (Left/Top moved 10 right, 10 down)
-PlayerFrame.AbyssUI3D:SetPoint("BOTTOMRIGHT", PlayerFrame.portrait, -8, 5)--(Bottom/Right moved 10 left, 6 up)
--- TargetFrame
-TargetFrame.AbyssUI3D = CreateFrame("PlayerModel", "$parent_3DPortrait", TargetFrame)
-TargetFrame.AbyssUI3D:SetFrameStrata("BACKGROUND")
-TargetFrame.AbyssUI3D:SetPortraitZoom(1) -- Just showing the targets face.
-TargetFrame.AbyssUI3D:SetPoint("TOPLEFT", TargetFrame.portrait, 5, -7.5)
-TargetFrame.AbyssUI3D:SetPoint("BOTTOMRIGHT", TargetFrame.portrait, -8, 5)
-hooksecurefunc("UnitFramePortrait_Update", function(self)
-    if self.AbyssUI3D and AbyssUIAddonSettings.UIClassCircles13 == true then
-    	self.AbyssUI3D:SetUnit(self.unit)
-    	PlayerFrame.portrait:Hide()
-    	TargetFrame.portrait:Hide()
-    end
-end)
---]]
 -- Class HP Colours
 local function colour(statusbar, unit)
 	local _, class, c
