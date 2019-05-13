@@ -102,7 +102,7 @@ Frame:SetPoint("CENTER")
 Frame:SetText("Frame Colorization")
 -- Panel 05.01 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel051", AbyssUI_Config.childpanel4)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 120, -70)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 90, -70)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
 Frame:SetScale(1)
@@ -111,7 +111,7 @@ Frame:SetPoint("CENTER")
 Frame:SetText("- Preset Colors")
 -- Panel 05.02 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 120, -50)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 98, -50)
 Frame:SetWidth(120)
 Frame:SetHeight(24)
 Frame:SetScale(1)
@@ -1401,7 +1401,7 @@ end)
 -- Frame Colorization --
 -- AbyssUIVertexColorFrames01_CheckButton
 local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames01_CheckButton:SetPoint("TOPRIGHT", -220, -80)
+AbyssUIVertexColorFrames01_CheckButton:SetPoint("TOPRIGHT", -250, -80)
 AbyssUIVertexColorFrames01_CheckButton.Text:SetText("|cffc0c0c0Blizzard (Default)|r")
 AbyssUIVertexColorFrames01_CheckButton.tooltip = "Blizzard Silver Colorization for Frames"
 AbyssUIVertexColorFrames01_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames01)
@@ -1431,7 +1431,7 @@ AbyssUIVertexColorFrames01_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames02_CheckButton
 local AbyssUIVertexColorFrames02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames02_CheckButton:SetPoint("TOPRIGHT", -50, -80)
+AbyssUIVertexColorFrames02_CheckButton:SetPoint("TOPRIGHT", -80, -80)
 AbyssUIVertexColorFrames02_CheckButton.Text:SetText("|cff636363Blackout|r")
 AbyssUIVertexColorFrames02_CheckButton.tooltip = "A completely Dark Frame Colorization"
 AbyssUIVertexColorFrames02_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames02)
@@ -1461,7 +1461,7 @@ AbyssUIVertexColorFrames02_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames03_CheckButton
 local AbyssUIVertexColorFrames03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames03_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames03_CheckButton:SetPoint("TOPRIGHT", -220, -110)
+AbyssUIVertexColorFrames03_CheckButton:SetPoint("TOPRIGHT", -250, -110)
 AbyssUIVertexColorFrames03_CheckButton.Text:SetText("|cffb62a25Blood|r")
 AbyssUIVertexColorFrames03_CheckButton.tooltip = "A Dark Red Frame Colorization"
 AbyssUIVertexColorFrames03_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames03)
@@ -1491,7 +1491,7 @@ AbyssUIVertexColorFrames03_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames04_CheckButton
 local AbyssUIVertexColorFrames04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames04_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames04_CheckButton:SetPoint("TOPRIGHT", -50, -110)
+AbyssUIVertexColorFrames04_CheckButton:SetPoint("TOPRIGHT", -80, -110)
 AbyssUIVertexColorFrames04_CheckButton.Text:SetText("|cffecc13cGold|r")
 AbyssUIVertexColorFrames04_CheckButton.tooltip = "A Golden Frame Colorization"
 AbyssUIVertexColorFrames04_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames04)
@@ -1521,7 +1521,7 @@ AbyssUIVertexColorFrames04_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames05_CheckButton
 local AbyssUIVertexColorFrames05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames05_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames05_CheckButton:SetPoint("TOPRIGHT", -220, -140)
+AbyssUIVertexColorFrames05_CheckButton:SetPoint("TOPRIGHT", -250, -140)
 AbyssUIVertexColorFrames05_CheckButton.Text:SetText("|cffc41F3BDeath Knight|r")
 AbyssUIVertexColorFrames05_CheckButton.tooltip = "DK Class Frame Colorization"
 AbyssUIVertexColorFrames05_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames05)
@@ -1551,7 +1551,7 @@ AbyssUIVertexColorFrames05_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames06_CheckButton
 local AbyssUIVertexColorFrames06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames06_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames06_CheckButton:SetPoint("TOPRIGHT", -50, -140)
+AbyssUIVertexColorFrames06_CheckButton:SetPoint("TOPRIGHT", -80, -140)
 AbyssUIVertexColorFrames06_CheckButton.Text:SetText("|cffA330C9Demon\nHunter|r")
 AbyssUIVertexColorFrames06_CheckButton.tooltip = "DH Class Frame Colorization"
 AbyssUIVertexColorFrames06_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames06)
@@ -1581,7 +1581,7 @@ AbyssUIVertexColorFrames06_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames07_CheckButton
 local AbyssUIVertexColorFrames07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames07_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames07_CheckButton:SetPoint("TOPRIGHT", -220, -170)
+AbyssUIVertexColorFrames07_CheckButton:SetPoint("TOPRIGHT", -250, -170)
 AbyssUIVertexColorFrames07_CheckButton.Text:SetText("|cffFF7D0ADruid|r")
 AbyssUIVertexColorFrames07_CheckButton.tooltip = "Druid Class Frame Colorization"
 AbyssUIVertexColorFrames07_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames07)
@@ -1611,7 +1611,7 @@ AbyssUIVertexColorFrames07_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames08_CheckButton
 local AbyssUIVertexColorFrames08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames08_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames08_CheckButton:SetPoint("TOPRIGHT", -50, -170)
+AbyssUIVertexColorFrames08_CheckButton:SetPoint("TOPRIGHT", -80, -170)
 AbyssUIVertexColorFrames08_CheckButton.Text:SetText("|cffABD473Hunter|r")
 AbyssUIVertexColorFrames08_CheckButton.tooltip = "Hunter Class Frame Colorization"
 AbyssUIVertexColorFrames08_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames08)
@@ -1641,7 +1641,7 @@ AbyssUIVertexColorFrames08_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames09_CheckButton
 local AbyssUIVertexColorFrames09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames09_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames09_CheckButton:SetPoint("TOPRIGHT", -220, -200)
+AbyssUIVertexColorFrames09_CheckButton:SetPoint("TOPRIGHT", -250, -200)
 AbyssUIVertexColorFrames09_CheckButton.Text:SetText("|cff69CCF0Mage|r")
 AbyssUIVertexColorFrames09_CheckButton.tooltip = "Mage Class Frame Colorization"
 AbyssUIVertexColorFrames09_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames09)
@@ -1671,7 +1671,7 @@ AbyssUIVertexColorFrames09_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames10_CheckButton
 local AbyssUIVertexColorFrames10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames10_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames10_CheckButton:SetPoint("TOPRIGHT", -50, -200)
+AbyssUIVertexColorFrames10_CheckButton:SetPoint("TOPRIGHT", -80, -200)
 AbyssUIVertexColorFrames10_CheckButton.Text:SetText("|cff00FF96Monk|r")
 AbyssUIVertexColorFrames10_CheckButton.tooltip = "Monk Class Frame Colorization"
 AbyssUIVertexColorFrames10_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames10)
@@ -1701,7 +1701,7 @@ AbyssUIVertexColorFrames10_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames11_CheckButton
 local AbyssUIVertexColorFrames11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames11_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames11_CheckButton:SetPoint("TOPRIGHT", -220, -230)
+AbyssUIVertexColorFrames11_CheckButton:SetPoint("TOPRIGHT", -250, -230)
 AbyssUIVertexColorFrames11_CheckButton.Text:SetText("|cffF58CBAPaladin|r")
 AbyssUIVertexColorFrames11_CheckButton.tooltip = "Paladin Class Frame Colorization"
 AbyssUIVertexColorFrames11_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames11)
@@ -1731,7 +1731,7 @@ AbyssUIVertexColorFrames11_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames12_CheckButton
 local AbyssUIVertexColorFrames12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames12_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames12_CheckButton:SetPoint("TOPRIGHT", -50, -230)
+AbyssUIVertexColorFrames12_CheckButton:SetPoint("TOPRIGHT", -80, -230)
 AbyssUIVertexColorFrames12_CheckButton.Text:SetText("Priest")
 AbyssUIVertexColorFrames12_CheckButton.tooltip = "Priest Class Frame Colorization (Shadow Priest)"
 AbyssUIVertexColorFrames12_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames12)
@@ -1761,7 +1761,7 @@ AbyssUIVertexColorFrames12_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames13_CheckButton
 local AbyssUIVertexColorFrames13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames13_CheckButton:SetPoint("TOPRIGHT", -220, -260)
+AbyssUIVertexColorFrames13_CheckButton:SetPoint("TOPRIGHT", -250, -260)
 AbyssUIVertexColorFrames13_CheckButton.Text:SetText("|cffFFF569Rogue|r")
 AbyssUIVertexColorFrames13_CheckButton.tooltip = "Rogue Class Frame Colorization"
 AbyssUIVertexColorFrames13_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames13)
@@ -1791,7 +1791,7 @@ AbyssUIVertexColorFrames13_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames14_CheckButton
 local AbyssUIVertexColorFrames14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames14_CheckButton:SetPoint("TOPRIGHT", -50, -260)
+AbyssUIVertexColorFrames14_CheckButton:SetPoint("TOPRIGHT", -80, -260)
 AbyssUIVertexColorFrames14_CheckButton.Text:SetText("|cff0070DEShaman|r")
 AbyssUIVertexColorFrames14_CheckButton.tooltip = "Shaman Class Frame Colorization"
 AbyssUIVertexColorFrames14_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames14)
@@ -1821,7 +1821,7 @@ AbyssUIVertexColorFrames14_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames15_CheckButton
 local AbyssUIVertexColorFrames15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames15_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames15_CheckButton:SetPoint("TOPRIGHT", -220, -290)
+AbyssUIVertexColorFrames15_CheckButton:SetPoint("TOPRIGHT", -250, -290)
 AbyssUIVertexColorFrames15_CheckButton.Text:SetText("|cff9482C9Warlock|r")
 AbyssUIVertexColorFrames15_CheckButton.tooltip = "Warlock Class Frame Colorization"
 AbyssUIVertexColorFrames15_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames15)
@@ -1851,7 +1851,7 @@ AbyssUIVertexColorFrames15_CheckButton:SetScript("OnClick", function(self)
 end)
 -- AbyssUIVertexColorFrames16_CheckButton
 local AbyssUIVertexColorFrames16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames16_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFrames16_CheckButton:SetPoint("TOPRIGHT", -50, -290)
+AbyssUIVertexColorFrames16_CheckButton:SetPoint("TOPRIGHT", -80, -290)
 AbyssUIVertexColorFrames16_CheckButton.Text:SetText("|cffC79C6EWarrior|r")
 AbyssUIVertexColorFrames16_CheckButton.tooltip = "Warrior Class Frame Colorization"
 AbyssUIVertexColorFrames16_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames16)
@@ -1881,7 +1881,7 @@ AbyssUIVertexColorFrames16_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Choose a Color (Color Picker)
 local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 80, -80)
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 50, -80)
 AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("|cff0d75d4Select a Color|r")
 AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose a color for the frames (Color Picker)"
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFramesColorPicker)
