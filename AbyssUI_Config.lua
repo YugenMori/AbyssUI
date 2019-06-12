@@ -821,8 +821,8 @@ end)
 -- Inspect Target
 local InspectTarget_CheckButton = CreateFrame("CheckButton", "$parentInspectTarget_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 InspectTarget_CheckButton:SetPoint("TOPLEFT", 10, -170)
-InspectTarget_CheckButton.Text:SetText("Inspect Target (Shift + X)")
-InspectTarget_CheckButton.tooltip = "When you have a target or your mouse is over someone character, to inspect this player press the keys Shift + X"
+InspectTarget_CheckButton.Text:SetText("Inspect Target (Shift + ')")
+InspectTarget_CheckButton.tooltip = "When you have a target or your mouse is over someone character, to inspect this player press the keys Shift + '"
 InspectTarget_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInspectTarget)
 -- OnClick Function
 InspectTarget_CheckButton:SetScript("OnClick", function(self)
@@ -914,8 +914,8 @@ end)
 -- Shift + C to confirm  --
 local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 400, -110)
-AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups (Shift + C)")
-AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing the keys Shift + C"
+AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups (Ctrl + ')")
+AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing the keys Ctrl + '"
 AbyssUI_ConfirmPopUps_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionConfirmPopUps)
 -- OnClick Function
 AbyssUI_ConfirmPopUps_CheckButton:SetScript("OnClick", function(self)
