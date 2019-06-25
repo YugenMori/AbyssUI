@@ -223,17 +223,21 @@ end)
 GameTooltip:HookScript("OnUpdate", function(GameTooltip)
 	local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
 	local _, unit = GameTooltip:GetUnit()
-	local gameTooltipText3 = GameTooltipTextLeft3:GetText()
-	local gameTooltipText4 = GameTooltipTextLeft4:GetText()
-	if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" and UnitIsPlayer(unit) ) then
-		GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-	elseif ( gameTooltipText3 == localizedFaction and englishFaction == "Alliance" and UnitIsPlayer(unit) ) then
-		GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-	elseif ( gameTooltipText4 == localizedFaction and englishFaction == "Horde" and UnitIsPlayer(unit) ) then
-		GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-	elseif (gameTooltipText4 == localizedFaction and englishFaction == "Alliance" and UnitIsPlayer(unit) ) then
-		GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-	else 
+	if ( UnitIsPlayer(unit) == true ) then
+		local gameTooltipText3 = GameTooltipTextLeft3:GetText()
+		local gameTooltipText4 = GameTooltipTextLeft4:GetText()
+		if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" ) then
+			GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
+		elseif ( gameTooltipText3 == localizedFaction and englishFaction == "Alliance" ) then
+			GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
+		elseif ( gameTooltipText4 == localizedFaction and englishFaction == "Horde" ) then
+			GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+		elseif (gameTooltipText4 == localizedFaction and englishFaction == "Alliance" ) then
+			GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+		else 
+			return nil
+		end
+	else
 		return nil
 	end
 end)
