@@ -124,20 +124,24 @@ end
 -- AbyssUI_AFKCamera SetScript
 AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 	local inInstance, instanceType = IsInInstance()
-	if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
-		local isAFK = UnitIsAFK("player")
-		if isAFK == true and inInstance ~= true then
-			AbyssUI_UpdateAFKCameraData()
-			UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
-		elseif isAFK == false and inInstance ~= true then
-			AbyssUI_AFKCameraFrame:Hide()
-		elseif isAFK == true and inInstance == true then
-			AbyssUI_AFKCameraFrame:Hide()
-		elseif isAFK == false and inInstance == true then
-			AbyssUI_AFKCameraFrame:Hide()
-		else
-			AbyssUI_AFKCameraFrame:Hide()
+	if ( AbyssUIClassicAddonSettings.AFKCammeraFrame ~= true ) then
+		if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
+			local isAFK = UnitIsAFK("player")
+			if isAFK == true and inInstance ~= true then
+				AbyssUI_UpdateAFKCameraData()
+				UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
+			elseif isAFK == false and inInstance ~= true then
+				AbyssUI_AFKCameraFrame:Hide()
+			elseif isAFK == true and inInstance == true then
+				AbyssUI_AFKCameraFrame:Hide()
+			elseif isAFK == false and inInstance == true then
+				AbyssUI_AFKCameraFrame:Hide()
+			else
+				AbyssUI_AFKCameraFrame:Hide()
+			end
 		end
+	else
+		return nil
 	end
 end)
 --------------------------------------------
