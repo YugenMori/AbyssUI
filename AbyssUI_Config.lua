@@ -661,14 +661,14 @@ HideChatButtons_CheckButton:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- AFKCammeraFrame --
-local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", AbyssUIClassic_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 AFKCammeraFrame_CheckButton:SetPoint("TOPLEFT", 10, -380)
 AFKCammeraFrame_CheckButton.Text:SetText("Hide AFKMode Frame")
 AFKCammeraFrame_CheckButton.tooltip = "Hide the AFKMode when you are AFK"
-AFKCammeraFrame_CheckButton:SetChecked(AbyssUIClassicAddonSettings.AFKCammeraFrame)
+AFKCammeraFrame_CheckButton:SetChecked(AbyssUIAddonSettings.AFKCammeraFrame)
 -- OnClick Function
 AFKCammeraFrame_CheckButton:SetScript("OnClick", function(self)
-AbyssUIClassicAddonSettings.AFKCammeraFrame = self:GetChecked()
+AbyssUIAddonSettings.AFKCammeraFrame = self:GetChecked()
 end)
 -- End
 ----------------------------------- Extras  -----------------------------------

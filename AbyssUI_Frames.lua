@@ -124,7 +124,7 @@ end
 -- AbyssUI_AFKCamera SetScript
 AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 	local inInstance, instanceType = IsInInstance()
-	if ( AbyssUIClassicAddonSettings.AFKCammeraFrame ~= true ) then
+	if ( AbyssUIAddonSettings.AFKCammeraFrame ~= true ) then
 		if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
 			local isAFK = UnitIsAFK("player")
 			if isAFK == true and inInstance ~= true then
