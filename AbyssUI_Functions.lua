@@ -583,6 +583,7 @@ MinimapCluster:SetMovable( true )
 MinimapCluster:StartMoving()
 MinimapCluster:StopMovingOrSizing()
 MinimapCluster:ClearAllPoints()
+-]]
 hooksecurefunc(MultiBarRight, "SetScale", function(self, scale)
 	if scale < 1 then self:SetScale(1) end
 end)
@@ -590,7 +591,6 @@ end)
 hooksecurefunc(MultiBarLeft, "SetScale", function(self, scale)
 	if scale < 1 then self:SetScale(1) end
 end)
---]]
 ----------------------------------------------------
 -- Color Picker 
 -- Many thanks to Fizz for part of this :thumbsup:
