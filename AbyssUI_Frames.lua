@@ -19,6 +19,8 @@ AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
 AbyssUI_AFKCameraFrame.text:SetJustifyH("CENTER")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("CENTER")
+AbyssUI_AFKCameraFrame.text:SetWidth(GetScreenWidth()/4)
+AbyssUI_AFKCameraFrame.text:SetHeight(GetScreenHeight()/2)
 AbyssUI_AFKCameraFrame.text:SetText("|cff0d75d4AbyssUI|r the |cff5f545eDark|r Blizzard UI revamp\nMove to leave AFK Mode")
 AbyssUI_AFKCameraFrame:Hide()
 ----------------------------------------------------
@@ -26,7 +28,7 @@ local AbyssUIBorder = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
 AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
-AbyssUIBorder:SetVertexColor(0.5, 0.5, 0.5, 0.5)
+AbyssUIBorder:SetVertexColor(0.7, 0.7, 0.7, 0.7)
 ----------------------------------------------------
 local BorderBody = AbyssUI_AFKCameraFrame:CreateTexture(nil, "ARTWORK")
 BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -47,8 +49,8 @@ AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
 -- Model1
 local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
 AbyssUI_ModelFrameAFKMode:SetPoint("TOPLEFT", 0, 0)
-AbyssUI_ModelFrameAFKMode:SetWidth(512)
-AbyssUI_ModelFrameAFKMode:SetHeight(512)
+AbyssUI_ModelFrameAFKMode:SetWidth(GetScreenWidth()/4)
+AbyssUI_ModelFrameAFKMode:SetHeight(GetScreenHeight()/2)
 AbyssUI_ModelFrameAFKMode:SetAlpha(1)
 
 local ModelFrame_Model1 = CreateFrame("PlayerModel", "$parentModelFrame_Model1", AbyssUI_ModelFrameAFKMode)
@@ -91,6 +93,30 @@ PlayerInfo_Class1:SetScale(3)
 PlayerInfo_Class1.text = PlayerInfo_Class1.text or PlayerInfo_Class1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Class1.text:SetPoint("TOPRIGHT", 0, -40)
 PlayerInfo_Class1.text:SetText(playerClass)
+-- Faction
+local PlayerInfo_Faction1 = CreateFrame("Frame", "$parentPlayerInfo_Faction1", AbyssUI_AFKCameraFrame)
+local englishFaction, localizedFaction = UnitFactionGroup("player")
+PlayerInfo_Faction1:SetAllPoints(AbyssUI_AFKCameraFrame)
+PlayerInfo_Faction1:SetScale(3)
+PlayerInfo_Faction1.text = PlayerInfo_Faction1.text or PlayerInfo_Faction1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+PlayerInfo_Faction1.text:SetPoint("TOPRIGHT", 0, -50)
+PlayerInfo_Faction1.text:SetText(localizedFaction)
+-- Faction Color
+ if ( englishFaction == "Horde" ) then
+ 	PlayerInfo_Faction1.text:SetVertexColor(196/255, 31/255, 59/255)
+ elseif ( englishFaction == "Alliance" ) then
+ 	PlayerInfo_Faction1.text:SetVertexColor(0/255, 112/255, 222/255)
+ else
+ 	return nil
+ end
+ -- Gold Amount
+local PlayerInfo_GoldAmount1 = CreateFrame("Frame", "$parentPlayerInfo_GoldAmount1", AbyssUI_AFKCameraFrame)
+local money = GetCoinTextureString(GetMoney())
+PlayerInfo_GoldAmount1:SetAllPoints(AbyssUI_AFKCameraFrame)
+PlayerInfo_GoldAmount1:SetScale(2)
+PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmount1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+PlayerInfo_GoldAmount1.text:SetPoint("BOTTOMLEFT", 0, 0)
+PlayerInfo_GoldAmount1.text:SetText(" "..money)
 -- ExtraInfoAFKMode
 -- CLock
 local ExtraInfo_Clock1 = CreateFrame("Frame", "$parentExtraInfo_Clock1", AbyssUI_AFKCameraFrame)
