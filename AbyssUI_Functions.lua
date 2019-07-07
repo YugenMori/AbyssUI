@@ -223,7 +223,7 @@ end)
 GameTooltip:HookScript("OnUpdate", function(GameTooltip)
 	local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
 	local _, unit = GameTooltip:GetUnit()
-	if ( UnitIsPlayer(unit) == true ) then
+	if ( UnitIsPlayer(unit) == true and englishFaction ~= "Neutral" ) then
 		local gameTooltipText3 = GameTooltipTextLeft3:GetText()
 		local gameTooltipText4 = GameTooltipTextLeft4:GetText()
 		if ( gameTooltipText3 == localizedFaction and englishFaction == "Horde" ) then
