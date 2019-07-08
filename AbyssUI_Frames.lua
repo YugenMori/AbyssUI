@@ -219,7 +219,11 @@ ExtraInfo_Clock1.text:SetPoint("BOTTOMRIGHT", 0, 0)
 function ExtraInfo_Clock1:onUpdate(sinceLastUpdate)
 	self.sinceLastUpdate = (self.sinceLastUpdate or 0) + sinceLastUpdate
 	if ( self.sinceLastUpdate >= 5 ) then
-		local dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
+		if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+			local dataTime = date("%H:%M |cffffcc00%m/%d/%y|r ")
+		else
+			local dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
+		end
 		ExtraInfo_Clock1.text:SetText(dataTime)
 		self.sinceLastUpdate = 0
 	end
@@ -231,7 +235,11 @@ local function AbyssUI_UpdateAFKCameraData()
 	level = UnitLevel("player")
 	race, raceEn = UnitRace("player")
 	playerClass, englishClass = UnitClass("player")
-	dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
+	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+	 	dataTime = date("%H:%M |cffffcc00%m/%d/%y|r ")
+	else
+	 	dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
+	end
 	englishFaction, localizedFaction = UnitFactionGroup("player")
 	money = GetCoinTextureString(GetMoney())
 	-- Set

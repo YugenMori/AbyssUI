@@ -715,7 +715,11 @@ function AbyssUIDailyInfo()
 	else
 		print("|cffa5f6f3Token Price:|r Not available right now!")
 	end
-	print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+		print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+	else
+		print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+	end
 	print("|cffa5f6f3Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
 	--print("|cffa5f6f3Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
 	print("|cffa5f6f3WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
