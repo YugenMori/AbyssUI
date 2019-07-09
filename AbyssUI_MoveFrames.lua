@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
--- Author: Yugen, Fizzlemizz
+-- Author: Yugen
 --
--- BFA Version
+-- Battle for Azeroth
 --
 -- Hope you like my addOn ^^
 --
@@ -9,18 +9,13 @@
 --------------------------------------------------------------------------------
 -- Frame Stuff
 local UnLocked
-local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, } -- So we don't create a new table each time
+local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
     local f = v
     f:SetMovable(true) -- only set thes conditions once when you start up
     f:EnableMouse(true)
     f:SetClampedToScreen(true)
     f:RegisterForDrag("LeftButton")
-    --[[
-    if self == MainMenuBar then
-        self:SetUserPlaced(true)
-    end
-    --]]
     f:SetScript("OnDragStart", function(self)
         if not UnLocked then return end -- set the condition that will let dragging run
         self:StartMoving()
@@ -32,16 +27,30 @@ for i , v in pairs (Moveframes) do
     f.Movetex:SetAllPoints() 
 --  f.Movetex:SetTexture(1.0, 0.5, 0) -- SetTexture no longer does colors
     f.Movetex:SetTexture("Interface/BUTTONS/WHITE8X8")
+    local ObName = f:GetName()
+    f.Movetex.text = f.text or f:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	f.Movetex.text:SetAllPoints(true)
+	f.Movetex.text:SetJustifyH("TOP")
+	f.Movetex.text:SetJustifyV("TOP")
+    f.Movetex.text:SetText(ObName)
+	f.Movetex.text:SetFont("Fonts\\FRIZQT__.TTF", 08, "THICKOUTLINE")
     f.Movetex:SetColorTexture(1.0, 0.5, 0)
     f.Movetex:SetAlpha(0.5)
     f.Movetex:Hide() -- and hide it
+    f.Movetex.text:Hide()
 end
  
 local function AbyssUIMoveFrames_Function(show)
     for i , v in pairs (Moveframes) do
         local f = v
         f.Movetex:SetShown(show)
+        f.Movetex.text:SetShown(show)
         UnLocked = show
+	    if ( f == PlayerFrame or f == TargetFrame ) then
+	    	f:RegisterForDrag("LeftButton")
+	    	f:SetScript("OnDragStart", f.StartMoving) 
+	    	f:SetScript("OnDragStop", f.StopMovingOrSizing) 
+		end
     end
 end
 -- Reset
@@ -51,8 +60,10 @@ local function AbyssUIMoveFrames_Reset()
 	    f:ClearAllPoints()
 	    f.ClearAllPoints = function() end
 	end
-	MinimapCluster:SetPoint("TOPRIGHT", "UIParent", "TOPRIGHT", 10, 10)
-	C_Timer.After(1, function()
+	PlayerFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -19, -4)
+	TargetFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -4)
+	MinimapCluster:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 10, 10)
+	C_Timer.After(0.5, function()
 		ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
 	end)
 end

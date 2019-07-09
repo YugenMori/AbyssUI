@@ -718,6 +718,7 @@ AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			C_Timer.After(4, function()
 				print("Thanks for using |cff0d75d4AbyssUI!|r The |cff5f545eDark|r Blizzard UI revamp.")
+				print("Type |cffffcc00/abyssui|r for a list of commands")
 			end)
 			C_Timer.After(5, function()
 				AbyssUIDailyInfo()
