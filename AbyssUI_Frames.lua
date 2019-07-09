@@ -600,7 +600,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("This option is for the small version of Blizzard MainBar\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs sometimes, reload the UI and it will be fixed (mostly of the times).\nCheck the comments section for more info.")
+AbyssUI_ActionBarInfo.text:SetText("Don't work well when in vehicles\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs sometimes, reload the UI and it will be fixed (mostly of the times).")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")

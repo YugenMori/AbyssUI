@@ -161,13 +161,13 @@ end)
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -80)
 AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (Beta - risk of glitches)")
-AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds 1 new action bar above the small version of Blizzard Main Bar"
+AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds 1 new bar above the small version of Blizzard Main Bar"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
 
 local AbyssUINewActionBar4x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar4x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar4x12_CheckButton:SetPoint("TOPLEFT", 10, -110)
 AbyssUINewActionBar4x12_CheckButton.Text:SetText("4x12 ActionBar (Beta - risk of glitches)")
-AbyssUINewActionBar4x12_CheckButton.tooltip = "Adds 1 new action bar above 3rd bar for the small version of Blizzard Main Bar"
+AbyssUINewActionBar4x12_CheckButton.tooltip = "Adds 1 new bar above 3rd bar"
 AbyssUINewActionBar4x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar4x12)
 -- OnClick Function
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
@@ -222,7 +222,7 @@ AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, .
     MainMenuBarVehicleLeaveButton.SetPoint = function() end
     if AbyssUIAddonSettings.AbyssUINewActionBar4x12 ~= true  then
       MultiBarLeft.ClearAllPoints = function() end
-      MultiBarLeft:SetPoint("TOPRIGHT", MinimapCluster, "RIGHT", 0, -100)
+      MultiBarLeft:SetPoint("TOPRIGHT", UIParent, "RIGHT", 0, 180)
       MultiBarLeft.SetPoint = function() end
     end
   end
@@ -244,7 +244,7 @@ AbyssUINewActionBar4x12_CheckButton:SetScript("OnEvent", function(self, event, .
       end
       --MultiBarLeft
       MultiBarLeft.ClearAllPoints = function() end
-      MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 46, 180)
+      MultiBarLeft:SetPoint("TOPLEFT", MainMenuBar, "BOTTOMLEFT", 45, 178)
       MultiBarLeft.SetPoint = function() end
     end
 end)
