@@ -64,6 +64,24 @@ Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
 Frame:SetText("Abyss|cff0d75d4UI|r Actionbar")
+-- Panel01 Title
+local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.childpanel1)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -50)
+Frame:SetHeight(24)
+Frame:SetWidth(70)
+Frame:SetScale(1.5)
+Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame:SetPoint("CENTER")
+Frame:SetText("|cff0d75d4Attention|r")
+-- Panel01 SubTittle
+local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.childpanel1)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -110)
+Frame:SetHeight(24)
+Frame:SetWidth(200)
+Frame:SetScale(1.1)
+Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame:SetPoint("CENTER")
+Frame:SetText("Blizzard action bars are weird and glitchy when you try to change them.\nI highly recommend you to use Bartender4 or Dominos\nif you want to have a 3x12 or more action bar.\nKeep in mind that this is a attempt to make a better action bar.\nUse by your own risk.")
 -- Panel 02 (HideElements)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -159,15 +177,15 @@ end)
 ----------------------------- AbyssUI Actionbar -------------------------------
 -- AbyssUI Action Bar --
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -80)
-AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (Beta - risk of glitches)")
-AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds 1 new bar above the small version of Blizzard Main Bar"
+AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -170)
+AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (alfa - risk of glitches)")
+AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the small version of Blizzard MainBar"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
 
 local AbyssUINewActionBar4x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar4x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-AbyssUINewActionBar4x12_CheckButton:SetPoint("TOPLEFT", 10, -110)
-AbyssUINewActionBar4x12_CheckButton.Text:SetText("4x12 ActionBar (Beta - risk of glitches)")
-AbyssUINewActionBar4x12_CheckButton.tooltip = "Adds 1 new bar above 3rd bar"
+AbyssUINewActionBar4x12_CheckButton:SetPoint("TOPLEFT", 10, -200)
+AbyssUINewActionBar4x12_CheckButton.Text:SetText("4x12 ActionBar (alfa - risk of glitches)")
+AbyssUINewActionBar4x12_CheckButton.tooltip = "Adds a new bar above 3rd bar"
 AbyssUINewActionBar4x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar4x12)
 -- OnClick Function
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
@@ -186,15 +204,15 @@ end)
 -- After Login/Reload
 AbyssUINewActionBar3x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true ) then
+  if ( AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true and event == "PLAYER_ENTERING_WORLD" ) then
     -- Main Function 3x12
     local _G = _G
       for i = 2, 12 do
         local r = "MultiBarRightButton"
         local btr = _G[r..i]
         btr:SetClampedToScreen(true)
-        btr:SetMovable(1)
-        btr:SetUserPlaced(true)
+        btr:SetMovable(true)
+        --btr:SetUserPlaced(true)
         btr:ClearAllPoints()
         btr.ClearAllPoints = function() end
         btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
@@ -229,15 +247,15 @@ AbyssUINewActionBar3x12_CheckButton:SetScript("OnEvent", function(self, event, .
 end)
 AbyssUINewActionBar4x12_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUINewActionBar4x12_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true  ) then
+  if ( AbyssUIAddonSettings.AbyssUINewActionBar4x12 == true and event == "PLAYER_ENTERING_WORLD" ) then
     -- Main function 4x12
     local _G = _G
       for i = 2, 12 do
        local l = "MultiBarLeftButton"
         local btl = _G[l..i]
         btl:SetClampedToScreen(true)
-        btl:SetMovable(1)
-        btl:SetUserPlaced(true)
+        btl:SetMovable(true)
+        --btl:SetUserPlaced(true)
         btl:ClearAllPoints()
         btl.ClearAllPoints = function() end
         btl:SetPoint("LEFT", l..i - 1, "RIGHT", 6, 0)
@@ -528,7 +546,7 @@ HideStanceBar_CheckButton:SetScript("OnClick", function(self)
    if ( AbyssUIAddonSettings.HideStanceBar == true ) then
      StanceBarFrame:Hide()
    else
-     StanceBarFrame:Show()
+     return nil
    end
 end)
 -- After Login/Reload
@@ -537,7 +555,7 @@ HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.HideStanceBar == true then
       C_Timer.After(0.5, function()
-        StanceBarFrame:Hide()
+        StanceBarFrame:SetScript("OnUpdate", function(self) self:Hide() end)
       end)
     end
   end

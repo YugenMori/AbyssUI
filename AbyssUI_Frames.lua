@@ -600,7 +600,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("Don't work well when in vehicles\nGo to: Esc> Interface> ActionBar\nCheck: Bottom Left Bar, Right Bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs sometimes, reload the UI and it will be fixed (mostly of the times).")
+AbyssUI_ActionBarInfo.text:SetText("Go to: Interface> ActionBar and check: bottom beft bar, right bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs sometimes.")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
