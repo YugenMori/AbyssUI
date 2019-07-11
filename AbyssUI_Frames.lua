@@ -328,7 +328,6 @@ AbyssUI_YouDiedFrame.texture = Texture
 ----------------------------------------------------
 -- LevelUp Frame
 local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
-AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetFrameStrata("DIALOG")
 AbyssUI_LevelUpFrame:SetWidth(GetScreenWidth())
 AbyssUI_LevelUpFrame:SetHeight(GetScreenHeight()/4)
@@ -336,10 +335,8 @@ AbyssUI_LevelUpFrame:SetClampedToScreen(true)
 AbyssUI_LevelUpFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
 AbyssUI_LevelUpFrame.text = AbyssUI_LevelUpFrame.text or AbyssUI_LevelUpFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_LevelUpFrame.text:SetScale(6)
-AbyssUI_LevelUpFrame.text:SetAllPoints(true)
-AbyssUI_LevelUpFrame.text:SetJustifyH("CENTER")
-AbyssUI_LevelUpFrame.text:SetJustifyV("CENTER")
-AbyssUI_LevelUpFrame.text:SetText("|cfff2dc7fLevel UP|r")
+AbyssUI_LevelUpFrame.text:SetPoint("CENTER", 0, 10)
+AbyssUI_LevelUpFrame.text:SetText("|cfff2dc7fLevel Up|r")
 AbyssUI_LevelUpFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_LevelUpFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_LevelUpFrame:Hide()
@@ -360,33 +357,23 @@ Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUI_LevelUpFrame)
 AbyssUI_LevelUpFrame.texture = Texture
 ----------------------------------------------------
--- Player Level
-local LevelUp_PlayerLevel = CreateFrame("Frame", "$parentLevelUp_PlayerLevel", AbyssUI_LevelUpFrame)
-LevelUp_PlayerLevel:SetAllPoints(AbyssUI_LevelUpFrame)
-LevelUp_PlayerLevel:SetScale(6)
-LevelUp_PlayerLevel.text = LevelUp_PlayerLevel.text or LevelUp_PlayerLevel:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-LevelUp_PlayerLevel.text:SetPoint("CENTER", 0, -10)
-LevelUp_PlayerLevel.text:SetText(level)
-LevelUp_PlayerLevel.text:SetWidth(GetScreenWidth())
-LevelUp_PlayerLevel.text:SetHeight(GetScreenHeight()/4)
--- Player Nome
-local LevelUp_PlayerName = CreateFrame("Frame", "$parentLevelUp_PlayerName", AbyssUI_LevelUpFrame)
-LevelUp_PlayerName:SetAllPoints(AbyssUI_LevelUpFrame)
-LevelUp_PlayerName:SetScale(6)
-LevelUp_PlayerName.text = LevelUp_PlayerName.text or LevelUp_PlayerName:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-LevelUp_PlayerName.text:SetPoint("CENTER", 0, 10)
-LevelUp_PlayerName.text:SetText(playerName)
-LevelUp_PlayerName.text:SetWidth(GetScreenWidth())
-LevelUp_PlayerName.text:SetHeight(GetScreenHeight()/4)
+-- Player Name/Level
+local LevelUp_PlayerInfo = CreateFrame("Frame", "$parentLevelUp_PlayerLevel", AbyssUI_LevelUpFrame)
+LevelUp_PlayerInfo:SetAllPoints(AbyssUI_LevelUpFrame)
+LevelUp_PlayerInfo:SetScale(6)
+LevelUp_PlayerInfo.text = LevelUp_PlayerInfo.text or LevelUp_PlayerInfo:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+LevelUp_PlayerInfo.text:SetPoint("CENTER", 0, 0)
+LevelUp_PlayerInfo.text:SetText(playerName.." "..level)
+LevelUp_PlayerInfo.text:SetWidth(GetScreenWidth())
+LevelUp_PlayerInfo.text:SetHeight(GetScreenHeight()/4)
 local function AbyssUI_UpdateYouDiedLevelUpData()
 	-- Get
 	level = UnitLevel("player")
 	playerName = UnitName("player")
 	-- Set
-	LevelUp_PlayerLevel.text:SetText(level)
-	LevelUp_PlayerName.text:SetText(playerName)
+	LevelUp_PlayerInfo.text:SetText(playerName.." "..level)
 end
--- AbyssUI_LevelUpFrame Set Script
+AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_LEVEL_UP" ) then

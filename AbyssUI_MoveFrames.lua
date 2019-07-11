@@ -9,7 +9,7 @@
 --------------------------------------------------------------------------------
 -- Frame Stuff
 local UnLocked
-local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, } -- So we don't create a new table each time
+local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
     local f = v
     f:SetMovable(true) -- only set thes conditions once when you start up
@@ -46,7 +46,7 @@ local function AbyssUIMoveFrames_Function(show)
         f.Movetex:SetShown(show)
         f.Movetex.text:SetShown(show)
         UnLocked = show
-	    if ( f == PlayerFrame or f == TargetFrame ) then
+	    if ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
 	    	f:RegisterForDrag("LeftButton")
 	    	f:SetScript("OnDragStart", f.StartMoving) 
 	    	f:SetScript("OnDragStop", f.StopMovingOrSizing) 
@@ -62,6 +62,7 @@ local function AbyssUIMoveFrames_Reset()
 	end
 	PlayerFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -19, -4)
 	TargetFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -4)
+	FocusFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -240)
 	MinimapCluster:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 10, 10)
 	C_Timer.After(0.5, function()
 		ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
