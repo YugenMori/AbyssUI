@@ -709,22 +709,22 @@ end)
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
 function AbyssUIDailyInfo()
-	print("\n|cffa5f6f3<< AbyssUI Daily Info >>|r")
+	print("\n|cfff2dc7f<< AbyssUI Daily Info >>|r")
 	if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
-		print("|cffa5f6f3Token Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+		print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
 	else
-		print("|cffa5f6f3Token Price:|r Not available right now!")
+		print("|cfff2dc7fToken Price:|r Not available right now!")
 	end
 	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
-		print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+		print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
 	else
-		print("|cffa5f6f3Date:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+		print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 	end
-	print("|cffa5f6f3Honor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
-	--print("|cffa5f6f3Location: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
-	print("|cffa5f6f3WoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+	print("|cfff2dc7fHonor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
+	--print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+	print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
 	local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
-	print("|cffa5f6f3AbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+	print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
 end
 ----------------------------------------------------
 -- TargetTargetName Frame
