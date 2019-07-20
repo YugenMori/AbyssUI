@@ -248,8 +248,6 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
 	if TimeSinceLastUpdate >= ONUPDATE_INTERVAL then
 		TimeSinceLastUpdate = 0
-		
-		-- OnTooltipSetUnit
 		local _, unit = GameTooltip:GetUnit()
 		if  UnitIsPlayer(unit) then
 			local _, class = UnitClass(unit)
@@ -290,7 +288,7 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 		end
 	end
 end)
-GameTooltip:SetScript("OnShow", function(self)
+GameTooltip:SetScript("OnLeave", function(self)
 	TimeSinceLastUpdate = 0
 end)
 ----------------------------------------------------
