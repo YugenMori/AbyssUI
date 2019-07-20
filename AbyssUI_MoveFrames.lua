@@ -78,6 +78,7 @@ local function AbyssUIMoveFrames_Slashhandler()
     print("/abyssui |cffffcc00lock|r ~lock UI frames that was changed")
     print("/abyssui |cffffcc00reset|r ~reset UI frames to default positions")
     print("/abyssui |cffffcc00daily|r ~AbyssUI daily info")
+    print("/abyssui |cffffcc00reload|r ~Reload the UI")
 end
 -- Function
 local function AbyssUIMoveFrames_Slash(msg)
@@ -94,6 +95,8 @@ local function AbyssUIMoveFrames_Slash(msg)
           	AbyssUIMoveFrames_Reset()
         elseif (msg == "daily") then
   			AbyssUIDailyInfo()
+        elseif (msg == "reload") then
+  			ReloadUI()
         else
             return nil
         end

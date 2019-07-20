@@ -498,32 +498,32 @@ g:SetScript("OnEvent", function()
             end
         end
     end
-		if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
-	    if( CanMerchantRepair() ) then
-	        local cost = GetRepairAllCost()
-	        if cost > 0 then
-	            local money = GetMoney()
-	            if IsInGuild() then
-                local guildMoney = GetGuildBankWithdrawMoney()
-                if guildMoney > GetGuildBankMoney() then
-                  guildMoney = GetGuildBankMoney()
-                end
-                if guildMoney > cost and CanGuildBankRepair() then
-                  RepairAllItems(1)
-                  print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
-                  return
-                end
-	            end
-	            if money > cost then
-                	RepairAllItems()
-                	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
-	            else
-                	print("Not enough gold for repair.")
-	            end
-        	end
+	if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
+    if( CanMerchantRepair() ) then
+        local cost = GetRepairAllCost()
+        if cost > 0 then
+            local money = GetMoney()
+            if IsInGuild() then
+            local guildMoney = GetGuildBankWithdrawMoney()
+            if guildMoney > GetGuildBankMoney() then
+              guildMoney = GetGuildBankMoney()
+            end
+            if guildMoney > cost and CanGuildBankRepair() then
+              RepairAllItems(1)
+              print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
+              return
+            end
+            end
+            if money > cost then
+            	RepairAllItems()
+            	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
+            else
+            	print("Not enough gold for repair.")
+            end
     	end
-			else return nil
-		end
+	end
+		else return nil
+	end
 end)
 ----------------------------------------------------
 -- Target Mob(Enemy) Health Bar Color
@@ -547,23 +547,22 @@ local function eventHandler(self, event, ...)
 		return nil
 	end
 end
-
 frame:SetScript("OnEvent", eventHandler)
-
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground, }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") then
+	if ( UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") ) then
 		TargetFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
 	elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
 		TargetFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
 	else
 		return nil
 	end
-	if UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") then
+
+	if ( UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") ) then
 		FocusFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
 	elseif not UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") and UnitReaction("player", "focus") == 4 then
 		FocusFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
