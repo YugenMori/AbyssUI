@@ -12,17 +12,19 @@ local UnLocked
 local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
     local f = v
-    f:SetMovable(true) -- only set thes conditions once when you start up
-    f:EnableMouse(true)
-    f:SetClampedToScreen(true)
-    f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function(self)
-        if not UnLocked then return end -- set the condition that will let dragging run
-        self:StartMoving()
-    end)
-    f:SetScript("OnDragStop", function(self)
-        self:StopMovingOrSizing()
-    end)
+    if not ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
+	    f:SetMovable(true) -- only set thes conditions once when you start up
+	    f:EnableMouse(true)
+	    f:SetClampedToScreen(true)
+	    f:RegisterForDrag("LeftButton")
+	    f:SetScript("OnDragStart", function(self)
+	        if not UnLocked then return end -- set the condition that will let dragging run
+	        self:StartMoving()
+	    end)
+	    f:SetScript("OnDragStop", function(self)
+	        self:StopMovingOrSizing()
+	    end)
+	end
     f.Movetex = f:CreateTexture("ARTWORK") -- only create the texture(s) once 
     f.Movetex:SetAllPoints() 
 --  f.Movetex:SetTexture(1.0, 0.5, 0) -- SetTexture no longer does colors
@@ -91,6 +93,7 @@ local function AbyssUIMoveFrames_Slash(msg)
             AbyssUIMoveFrames_Function(true)
         elseif (msg == "lock") then
             AbyssUIMoveFrames_Function(false)
+            print("|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00/reload|r'")
         elseif (msg == "reset") then
           	AbyssUIMoveFrames_Reset()
         elseif (msg == "daily") then

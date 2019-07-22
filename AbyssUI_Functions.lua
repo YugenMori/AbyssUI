@@ -47,12 +47,14 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 				AbyssUIAddonSettings.UIClassCircles14 ~= true and
 				AbyssUIAddonSettings.UIClassCircles15 ~= true and
 				AbyssUIAddonSettings.UIClassCircles16 ~= true then
-				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_BRIGHT_CLASS_COLOR")
-				self.portrait:SetTexCoord(unpack(t))
+				self.portrait:SetTexCoord(0, 1, 0, 1)
 			else
 				self.portrait:SetTexCoord(0, 1, 0, 1)
 			end
-			if t and AbyssUIAddonSettings.UIClassCircles02 == true then
+			if t and AbyssUIAddonSettings.UIClassCircles01 == true then
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_BRIGHT_CLASS_COLOR")
+				self.portrait:SetTexCoord(unpack(t))
+			elseif t and AbyssUIAddonSettings.UIClassCircles02 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_DARK")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles03 == true then

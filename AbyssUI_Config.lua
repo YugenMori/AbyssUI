@@ -975,8 +975,8 @@ end)
 -- AbyssUIClassCircles01_CheckButton
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
-AbyssUIClassCircles01_CheckButton.Text:SetText("Blizzard (Default)")
-AbyssUIClassCircles01_CheckButton.tooltip = "Blizzard Default UnitPlayerFrame"
+AbyssUIClassCircles01_CheckButton.Text:SetText("Bright")
+AbyssUIClassCircles01_CheckButton.tooltip = "A Bright UnitPlayerFrame"
 AbyssUIClassCircles01_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles01)
 -- OnClick Function
 AbyssUIClassCircles01_CheckButton:SetScript("OnClick", function(self)
