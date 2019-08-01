@@ -963,7 +963,7 @@ end)
 local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 180, -170)
 AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Style")
-AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of all UI to the American style"
+AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to the American style"
 AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
 -- OnClick Function
 AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
