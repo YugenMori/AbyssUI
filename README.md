@@ -1,8 +1,6 @@
 # AbyssUI
 ### AbyssUI is a minimalist World of Warcraft interface.
 
-![AbyssUI](http://cdn-wow.mmoui.com/preview/pvw70399.jpg)
-
 It change some parts of the interface to make the Blizzard UI more clean, minimalist and a bit of dark.
 
 How to Install?
@@ -20,11 +18,3 @@ How to Install?
 
 #### (DO NOT PUT ALL THIS FILE IN ADDONS FOLDER, WILL NOT WORK)
 
-
-Flat Class Icons and Santa Texture Pack are the textures that is used in this UI. 
-
-You can check their work here:
-
-[Flat Player Icons](http://www.wowinterface.com/downloads/info24101-FlatPlayerIcons.html)
-
-[Santa Texture Pack](http://www.wowinterface.com/downloads/info18608-SantaUITextures.html)

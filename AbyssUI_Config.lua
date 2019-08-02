@@ -688,6 +688,64 @@ AFKCammeraFrame_CheckButton:SetChecked(AbyssUIAddonSettings.AFKCammeraFrame)
 AFKCammeraFrame_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.AFKCammeraFrame = self:GetChecked()
 end)
+-- Faction/PvP/Prestige icon --
+local FactionPvpIcon_CheckButton = CreateFrame("CheckButton", "$parentFactionPvpIcon_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+FactionPvpIcon_CheckButton:SetPoint("TOPLEFT", 10, -410)
+FactionPvpIcon_CheckButton.Text:SetText("Hide Faction/PvP/Prestige icon")
+FactionPvpIcon_CheckButton.tooltip = "Hide the player frame Faction/PvP/Prestige icon"
+FactionPvpIcon_CheckButton:SetChecked(AbyssUIAddonSettings.FactionPvpIcon)
+-- OnClick Function
+FactionPvpIcon_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.FactionPvpIcon = self:GetChecked()
+    if AbyssUIAddonSettings.FactionPvpIcon == true then
+      PlayerPVPIcon:SetAlpha(0)
+      PlayerPrestigeBadge:SetAlpha(0)
+      PlayerPrestigePortrait:SetAlpha(0)
+      TargetFrameTextureFramePVPIcon:SetAlpha(0)
+      TargetFrameTextureFramePrestigeBadge:SetAlpha(0)
+      TargetFrameTextureFramePrestigePortrait:SetAlpha(0)
+      FocusFrameTextureFramePVPIcon:SetAlpha(0)
+      FocusFrameTextureFramePrestigeBadge:SetAlpha(0)
+      FocusFrameTextureFramePrestigePortrait:SetAlpha(0)
+    else
+      PlayerPVPIcon:SetAlpha(1)
+      PlayerPrestigeBadge:SetAlpha(1)
+      PlayerPrestigePortrait:SetAlpha(1)
+      TargetFrameTextureFramePVPIcon:SetAlpha(1)
+      TargetFrameTextureFramePrestigeBadge:SetAlpha(1)
+      TargetFrameTextureFramePrestigePortrait:SetAlpha(1)
+      FocusFrameTextureFramePVPIcon:SetAlpha(1)
+      FocusFrameTextureFramePrestigeBadge:SetAlpha(1)
+      FocusFrameTextureFramePrestigePortrait:SetAlpha(1)
+    end
+end)
+-- After Login/Reload
+FactionPvpIcon_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+FactionPvpIcon_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.FactionPvpIcon == true then
+      PlayerPVPIcon:SetAlpha(0)
+      PlayerPrestigeBadge:SetAlpha(0)
+      PlayerPrestigePortrait:SetAlpha(0)
+      TargetFrameTextureFramePVPIcon:SetAlpha(0)
+      TargetFrameTextureFramePrestigeBadge:SetAlpha(0)
+      TargetFrameTextureFramePrestigePortrait:SetAlpha(0)
+      FocusFrameTextureFramePVPIcon:SetAlpha(0)
+      FocusFrameTextureFramePrestigeBadge:SetAlpha(0)
+      FocusFrameTextureFramePrestigePortrait:SetAlpha(0)
+    else
+      PlayerPVPIcon:SetAlpha(1)
+      PlayerPrestigeBadge:SetAlpha(1)
+      PlayerPrestigePortrait:SetAlpha(1)
+      TargetFrameTextureFramePVPIcon:SetAlpha(1)
+      TargetFrameTextureFramePrestigeBadge:SetAlpha(1)
+      TargetFrameTextureFramePrestigePortrait:SetAlpha(1)
+      FocusFrameTextureFramePVPIcon:SetAlpha(1)
+      FocusFrameTextureFramePrestigeBadge:SetAlpha(1)
+      FocusFrameTextureFramePrestigePortrait:SetAlpha(1)
+    end
+  end
+end)
 -- End
 ----------------------------------- Extras  -----------------------------------
 -- Keep UnitFrame Dark --
@@ -859,7 +917,7 @@ end)
 -- 2nd Column
 -- Action Cam --
 local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 180, -80)
+AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 200, -80)
 AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor Mode")
 AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
 AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
@@ -887,7 +945,7 @@ AbyssUIActionCam_CheckButton:SetScript("OnEvent", function(self, event, ...)
 end)
 -- Auto Repair/Sell Gray --
 local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 180, -110)
+AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 200, -110)
 AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Items")
 AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair items"
 AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
@@ -897,7 +955,7 @@ AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Auto Gamma Day/Night
 local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 180, -140)
+AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 200, -140)
 AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma\n(Day and Night Mode)")
 AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based on the local time"
 AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
@@ -928,6 +986,16 @@ AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
+-- American Clock Style --
+local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 200, -170)
+AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Style")
+AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to the American style"
+AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
+-- OnClick Function
+AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionAmericanClock = self:GetChecked()
+end)
 -- 3rd Column
 -- Instance Leave --
 local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -939,7 +1007,7 @@ AbyssUI_InstanceLeave_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionI
 AbyssUI_InstanceLeave_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionInstanceLeave = self:GetChecked()
 end)
--- Shift + C to confirm  --
+-- Ctrl + ' to confirm  --
 local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 400, -110)
 AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups (Ctrl + ')")
@@ -959,15 +1027,28 @@ AbyssUI_HideInCombat_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHi
 AbyssUI_HideInCombat_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionHideInCombat = self:GetChecked()
 end)
--- American Clock Style --
-local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 180, -170)
-AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Style")
-AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to the American style"
-AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
+-- Better Fonts --
+local AbyssUI_BetterFonts_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterFonts_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_BetterFonts_CheckButton:SetPoint("TOPLEFT", 400, -170)
+AbyssUI_BetterFonts_CheckButton.Text:SetText("RPG chat fonts")
+AbyssUI_BetterFonts_CheckButton.tooltip = "Change the chat fonts to a RPG like style"
+AbyssUI_BetterFonts_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterFonts)
 -- OnClick Function
-AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
-  AbyssUIAddonSettings.ExtraFunctionAmericanClock = self:GetChecked()
+AbyssUI_BetterFonts_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionBetterFonts = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
+-- After Login/Reload
+AbyssUI_BetterFonts_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_BetterFonts_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if ( AbyssUIAddonSettings.ExtraFunctionBetterFonts == true ) then
+       ChatFrame1:SetFont("Fonts\\MORPHEUS.TTF", 13)
+       ChatFrame1.editBox.header:SetFont("Fonts\\MORPHEUS.TTF",13)
+    else 
+      return nil
+    end
+  end
 end)
 --End
 ----------------------------- AbyssUI Stylization ------------------------------
