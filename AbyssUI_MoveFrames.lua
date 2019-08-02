@@ -81,6 +81,7 @@ local function AbyssUIMoveFrames_Slashhandler()
     print("/abyssui |cffffcc00reset|r ~reset UI frames to default positions")
     print("/abyssui |cffffcc00daily|r ~AbyssUI daily info")
     print("/abyssui |cffffcc00reload|r ~Reload the UI")
+    print("/abyssui |cffffcc00more|r ~For more commands")
 end
 -- Function
 local function AbyssUIMoveFrames_Slash(msg)
@@ -100,6 +101,19 @@ local function AbyssUIMoveFrames_Slash(msg)
   			AbyssUIDailyInfo()
         elseif (msg == "reload") then
   			ReloadUI()
+        elseif (msg == "more") then
+        	print("/abyssui |cffffcc00clc|r ~clear CombatLog entries")
+        	print("/abyssui |cffffcc00gm|r ~open a ticked")
+        	print("/abyssui |cffffcc00rc|r ~ready check")
+        	print("/abyssui |cffffcc00cr|r ~check role poll")
+  		elseif (msg == "clc") then
+  			CombatLogClearEntries()
+  		elseif (msg == "gm") then
+  			ToggleHelpFrame()
+  		elseif (msg == "rc") then
+  			DoReadyCheck()
+  		elseif (msg == "cr") then
+  			InitiateRolePoll()
         else
             return nil
         end
