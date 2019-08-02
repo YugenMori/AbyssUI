@@ -103,7 +103,7 @@ local function AbyssUIMoveFrames_Slash(msg)
   			ReloadUI()
         elseif (msg == "more") then
         	print("/abyssui |cffffcc00clc|r ~clear CombatLog entries")
-        	print("/abyssui |cffffcc00gm|r ~open a ticked")
+        	print("/abyssui |cffffcc00gm|r ~custumer support")
         	print("/abyssui |cffffcc00rc|r ~ready check")
         	print("/abyssui |cffffcc00cr|r ~check role poll")
   		elseif (msg == "clc") then
