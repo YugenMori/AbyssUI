@@ -130,6 +130,16 @@ frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 frame:RegisterEvent("UNIT_FACTION")
 
 local function eventHandler(self, event, ...)
+	--Thanks to Tz for the player background update
+	if PlayerFrame:IsShown() and not PlayerFrame.bg then
+		c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+		local bg = PlayerFrame:CreateTexture()
+		bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+		bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+		bg:SetTexture(TargetFrameNameBackground:GetTexture())
+		bg:SetVertexColor(c.r,c.g,c.b)
+		PlayerFrame.bg = true
+	end
 	if UnitIsPlayer("target") then
 		c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
 		TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
@@ -142,7 +152,7 @@ end
 
 frame:SetScript("OnEvent", eventHandler)
 
-for _, BarTextures in pairs({TargetFrameNameBackground, FocusFrameNameBackground}) do
+for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackground, FocusFrameNameBackground, }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 ----------------------------------------------------
@@ -290,7 +300,7 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 		end
 	end
 end)
-GameTooltip:SetScript("OnLeave", function(self)
+GameTooltip:SetScript("OnShow", function(self)
 	TimeSinceLastUpdate = 0
 end)
 ----------------------------------------------------

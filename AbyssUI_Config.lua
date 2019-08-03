@@ -1031,7 +1031,7 @@ end)
 local AbyssUI_BetterFonts_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterFonts_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_BetterFonts_CheckButton:SetPoint("TOPLEFT", 400, -170)
 AbyssUI_BetterFonts_CheckButton.Text:SetText("RPG chat fonts")
-AbyssUI_BetterFonts_CheckButton.tooltip = "Change the chat fonts to a RPG like style"
+AbyssUI_BetterFonts_CheckButton.tooltip = "Change the chat fonts to a RPG look-alike style"
 AbyssUI_BetterFonts_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterFonts)
 -- OnClick Function
 AbyssUI_BetterFonts_CheckButton:SetScript("OnClick", function(self)
