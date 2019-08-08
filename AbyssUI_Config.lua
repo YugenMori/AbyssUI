@@ -914,6 +914,30 @@ InspectTarget_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInspectTa
 InspectTarget_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.ExtraFunctionInspectTarget = self:GetChecked()
 end)
+-- Spell on KeyUp
+local ActionButtonKeyUP_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+ActionButtonKeyUP_CheckButton:SetPoint("TOPLEFT", 10, -200)
+ActionButtonKeyUP_CheckButton.Text:SetText("ActionButton on KeyUp")
+ActionButtonKeyUP_CheckButton.tooltip = "With this option spells can be cast just when the keybind are released"
+ActionButtonKeyUP_CheckButton:SetChecked(AbyssUIAddonSettings.ActionButtonKeyDown)
+-- OnClick Function
+ActionButtonKeyUP_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ActionButtonKeyDown = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+end)
+-- After Login/Reload
+ActionButtonKeyUP_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+ActionButtonKeyUP_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if AbyssUIAddonSettings.ActionButtonKeyDown == true then
+      SetCVar('ActionButtonUseKeyDown', 0)
+    else
+      SetCVar('ActionButtonUseKeyDown', 1)
+    end
+  else
+    return nil
+  end
+end)
 -- 2nd Column
 -- Action Cam --
 local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -995,6 +1019,34 @@ AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionA
 -- OnClick Function
 AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAmericanClock = self:GetChecked()
+end)
+-- Disable healing spam over player --
+local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 200, -200)
+AbyssUI_DisableHealingSpam_CheckButton.Text:SetText("Disable Portrait Text Spam")
+AbyssUI_DisableHealingSpam_CheckButton.tooltip = "Disable healing/damage spam over player and pet portraits"
+AbyssUI_DisableHealingSpam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam)
+-- OnClick Function
+AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = self:GetChecked()
+  PlayerHitIndicator:SetText(nil)
+  PlayerHitIndicator.SetText = function() end
+
+  PetHitIndicator:SetText(nil)
+  PetHitIndicator.SetText = function() end
+end)
+-- After Login/Reload
+AbyssUI_DisableHealingSpam_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam == true ) then
+      PlayerHitIndicator:SetText(nil)
+      PlayerHitIndicator.SetText = function() end
+
+      PetHitIndicator:SetText(nil)
+      PetHitIndicator.SetText = function() end
+    end
+  end
 end)
 -- 3rd Column
 -- Instance Leave --

@@ -205,13 +205,6 @@ end)
 MiniMapTracking:ClearAllPoints()
 MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 ----------------------------------------------------
--- Disable spam healing over player frame
-PlayerHitIndicator:SetText(nil)
-PlayerHitIndicator.SetText = function() end
-
-PetHitIndicator:SetText(nil)
-PetHitIndicator.SetText = function() end
-----------------------------------------------------
 -- Tooltip Class Color and extras 
 GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 	-- OnTooltipSetUnit
@@ -230,20 +223,18 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 			if ( inGuild ~= nil ) then
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
+					GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+				elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
+					GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+				else 
+					return nil
+				end
 			elseif ( inGuild == nil ) then
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-			else
-				return nil
-			end
-			-- Faction Colors
-			if ( englishFaction ~= "Neutral" ) then
-				if ( inGuild ~= nil and englishFaction == "Horde" ) then
-					GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-				elseif ( inGuild ~= nil and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-				elseif ( inGuild == nil  and englishFaction == "Horde" ) then
+				if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
 					GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-				elseif ( inGuild == nil and englishFaction == "Alliance" ) then
+				elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
 					GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
 				else 
 					return nil
@@ -275,20 +266,18 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 				if ( inGuild ~= nil ) then
 					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+					if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
+						GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
+					elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
+						GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
+					else 
+						return nil
+					end
 				elseif ( inGuild == nil ) then
 					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-				else
-					return nil
-				end
-				-- Faction Colors
-				if ( englishFaction ~= "Neutral" ) then
-					if ( inGuild ~= nil and englishFaction == "Horde" ) then
-						GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-					elseif ( inGuild ~= nil and englishFaction == "Alliance" ) then
-						GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-					elseif ( inGuild == nil  and englishFaction == "Horde" ) then
+					if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
 						GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-					elseif ( inGuild == nil and englishFaction == "Alliance" ) then
+					elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
 						GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
 					else 
 						return nil
