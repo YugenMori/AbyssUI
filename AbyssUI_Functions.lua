@@ -79,7 +79,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_PSYCHEDELIC")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles10 == true then
-				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_PSYCHEDELIC_V2")
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_CLASSIC")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles11 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_DARK_GRAYSCALE")

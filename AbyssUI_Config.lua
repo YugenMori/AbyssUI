@@ -1369,8 +1369,8 @@ end)
 -- AbyssUIClassCircles10_CheckButton
 local AbyssUIClassCircles10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles10_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles10_CheckButton:SetPoint("TOPLEFT", 180, -200)
-AbyssUIClassCircles10_CheckButton.Text:SetText("Psychedelic_V2")
-AbyssUIClassCircles10_CheckButton.tooltip = "A even more Psychedelic version of the UnitPlayerFrame"
+AbyssUIClassCircles10_CheckButton.Text:SetText("Classic")
+AbyssUIClassCircles10_CheckButton.tooltip = "A classic version of the UnitPlayerFrame"
 AbyssUIClassCircles10_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles10)
 -- OnClick Function
 AbyssUIClassCircles10_CheckButton:SetScript("OnClick", function(self)
