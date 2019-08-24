@@ -8,6 +8,7 @@
 -- Simple frame mover for AbyssUI
 --------------------------------------------------------------------------------
 -- Frame Stuff
+-- Thanks to Fizz for part of this
 local UnLocked
 local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do

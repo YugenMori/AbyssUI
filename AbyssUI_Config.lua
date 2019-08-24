@@ -1108,8 +1108,8 @@ end)
 -- AbyssUIClassCircles01_CheckButton
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
-AbyssUIClassCircles01_CheckButton.Text:SetText("Bright")
-AbyssUIClassCircles01_CheckButton.tooltip = "A Bright UnitPlayerFrame"
+AbyssUIClassCircles01_CheckButton.Text:SetText("Artistic")
+AbyssUIClassCircles01_CheckButton.tooltip = "A atelier version of UnitPlayerFrame"
 AbyssUIClassCircles01_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles01)
 -- OnClick Function
 AbyssUIClassCircles01_CheckButton:SetScript("OnClick", function(self)
@@ -1137,8 +1137,8 @@ end)
 -- AbyssUIClassCircles02_CheckButton
 local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles02_CheckButton:SetPoint("TOPLEFT", 10, -110)
-AbyssUIClassCircles02_CheckButton.Text:SetText("Dark")
-AbyssUIClassCircles02_CheckButton.tooltip = "A Dark UnitPlayerFrame"
+AbyssUIClassCircles02_CheckButton.Text:SetText("Bright")
+AbyssUIClassCircles02_CheckButton.tooltip = "A bright version of UnitPlayerFrame"
 AbyssUIClassCircles02_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles02)
 -- OnClick Function
 AbyssUIClassCircles02_CheckButton:SetScript("OnClick", function(self)
@@ -1166,8 +1166,8 @@ end)
 -- AbyssUIClassCircles03_CheckButton
 local AbyssUIClassCircles03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles03_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles03_CheckButton:SetPoint("TOPLEFT", 10, -140)
-AbyssUIClassCircles03_CheckButton.Text:SetText("DarkGray")
-AbyssUIClassCircles03_CheckButton.tooltip = "A Dark Gray UnitPlayerFrame"
+AbyssUIClassCircles03_CheckButton.Text:SetText("Classic")
+AbyssUIClassCircles03_CheckButton.tooltip = "A classic version of UnitPlayerFrame"
 AbyssUIClassCircles03_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles03)
 -- OnClick Function
 AbyssUIClassCircles03_CheckButton:SetScript("OnClick", function(self)
@@ -1195,8 +1195,8 @@ end)
 -- AbyssUIClassCircles04_CheckButton
 local AbyssUIClassCircles04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles04_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles04_CheckButton:SetPoint("TOPLEFT", 10, -170)
-AbyssUIClassCircles04_CheckButton.Text:SetText("Dark_V2")
-AbyssUIClassCircles04_CheckButton.tooltip = "Version 2 of the Dark UnitPlayerFrame"
+AbyssUIClassCircles04_CheckButton.Text:SetText("Crest")
+AbyssUIClassCircles04_CheckButton.tooltip = "A class crest version of UnitPlayerFrame"
 AbyssUIClassCircles04_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles04)
 -- OnClick Function
 AbyssUIClassCircles04_CheckButton:SetScript("OnClick", function(self)
@@ -1224,8 +1224,8 @@ end)
 -- AbyssUIClassCircles05_CheckButton
 local AbyssUIClassCircles05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles05_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles05_CheckButton:SetPoint("TOPLEFT", 180 , -80)
-AbyssUIClassCircles05_CheckButton.Text:SetText("Dark_V2 Small")
-AbyssUIClassCircles05_CheckButton.tooltip = "Smaller version of the Dark(V2) UnitPlayerFrame"
+AbyssUIClassCircles05_CheckButton.Text:SetText("Dark")
+AbyssUIClassCircles05_CheckButton.tooltip = "Dark version of UnitPlayerFrame"
 AbyssUIClassCircles05_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles05)
 -- OnClick Function
 AbyssUIClassCircles05_CheckButton:SetScript("OnClick", function(self)
@@ -1253,8 +1253,8 @@ end)
 -- AbyssUIClassCircles06_CheckButton
 local AbyssUIClassCircles06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles06_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles06_CheckButton:SetPoint("TOPLEFT", 180, -110)
-AbyssUIClassCircles06_CheckButton.Text:SetText("LightGray")
-AbyssUIClassCircles06_CheckButton.tooltip = "A Light Gray UnitPlayerFrame"
+AbyssUIClassCircles06_CheckButton.Text:SetText("Dark_Gray")
+AbyssUIClassCircles06_CheckButton.tooltip = "A dark gray version of UnitPlayerFrame"
 AbyssUIClassCircles06_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles06)
 -- OnClick Function
 AbyssUIClassCircles06_CheckButton:SetScript("OnClick", function(self)
@@ -1282,8 +1282,8 @@ end)
 -- AbyssUIClassCircles07_CheckButton
 local AbyssUIClassCircles07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles07_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles07_CheckButton:SetPoint("TOPLEFT", 180, -140)
-AbyssUIClassCircles07_CheckButton.Text:SetText("MediumGray")
-AbyssUIClassCircles07_CheckButton.tooltip = "A Medium Gray UnitPlayerFrame"
+AbyssUIClassCircles07_CheckButton.Text:SetText("Dark_V2")
+AbyssUIClassCircles07_CheckButton.tooltip = "Version 2 of the dark UnitPlayerFrame"
 AbyssUIClassCircles07_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles07)
 -- OnClick Function
 AbyssUIClassCircles07_CheckButton:SetScript("OnClick", function(self)
@@ -1311,8 +1311,8 @@ end)
 -- AbyssUIClassCircles08_CheckButton
 local AbyssUIClassCircles08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles08_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles08_CheckButton:SetPoint("TOPLEFT", 180, -170)
-AbyssUIClassCircles08_CheckButton.Text:SetText("Muted")
-AbyssUIClassCircles08_CheckButton.tooltip = "A Muted version of the UnitPlayerFrame"
+AbyssUIClassCircles08_CheckButton.Text:SetText("GrayScale")
+AbyssUIClassCircles08_CheckButton.tooltip = "A grayscale version of UnitPlayerFrame"
 AbyssUIClassCircles08_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles08)
 -- OnClick Function
 AbyssUIClassCircles08_CheckButton:SetScript("OnClick", function(self)
@@ -1340,8 +1340,8 @@ end)
 -- AbyssUIClassCircles09_CheckButton
 local AbyssUIClassCircles09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles09_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles09_CheckButton:SetPoint("TOPLEFT", 10, -200)
-AbyssUIClassCircles09_CheckButton.Text:SetText("Psychedelic")
-AbyssUIClassCircles09_CheckButton.tooltip = "A Psychedelic version of the UnitPlayerFrame"
+AbyssUIClassCircles09_CheckButton.Text:SetText("Light_Gray")
+AbyssUIClassCircles09_CheckButton.tooltip = "A light gray version of UnitPlayerFrame"
 AbyssUIClassCircles09_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles09)
 -- OnClick Function
 AbyssUIClassCircles09_CheckButton:SetScript("OnClick", function(self)
@@ -1369,8 +1369,8 @@ end)
 -- AbyssUIClassCircles10_CheckButton
 local AbyssUIClassCircles10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles10_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles10_CheckButton:SetPoint("TOPLEFT", 180, -200)
-AbyssUIClassCircles10_CheckButton.Text:SetText("Classic")
-AbyssUIClassCircles10_CheckButton.tooltip = "A classic version of the UnitPlayerFrame"
+AbyssUIClassCircles10_CheckButton.Text:SetText("Medium_Gray")
+AbyssUIClassCircles10_CheckButton.tooltip = "A medium gray version of UnitPlayerFrame"
 AbyssUIClassCircles10_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles10)
 -- OnClick Function
 AbyssUIClassCircles10_CheckButton:SetScript("OnClick", function(self)
@@ -1398,8 +1398,8 @@ end)
 -- AbyssUIClassCircles11_CheckButton
 local AbyssUIClassCircles11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles11_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles11_CheckButton:SetPoint("TOPLEFT", 10, -230)
-AbyssUIClassCircles11_CheckButton.Text:SetText("GrayScale")
-AbyssUIClassCircles11_CheckButton.tooltip = "A Gray version of the UnitPlayerFrame"
+AbyssUIClassCircles11_CheckButton.Text:SetText("Minimal_Blue")
+AbyssUIClassCircles11_CheckButton.tooltip = "A blue version of UnitPlayerFrame"
 AbyssUIClassCircles11_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles11)
 -- OnClick Function
 AbyssUIClassCircles11_CheckButton:SetScript("OnClick", function(self)
@@ -1427,8 +1427,8 @@ end)
 -- AbyssUIClassCircles12_CheckButton
 local AbyssUIClassCircles12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles12_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles12_CheckButton:SetPoint("TOPLEFT", 180, -230)
-AbyssUIClassCircles12_CheckButton.Text:SetText("Artistic")
-AbyssUIClassCircles12_CheckButton.tooltip = "A atelier version of the UnitPlayerFrame"
+AbyssUIClassCircles12_CheckButton.Text:SetText("Minimal_Red")
+AbyssUIClassCircles12_CheckButton.tooltip = "A red version of UnitPlayerFrame"
 AbyssUIClassCircles12_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles12)
 -- OnClick Function
 AbyssUIClassCircles12_CheckButton:SetScript("OnClick", function(self)
@@ -1456,8 +1456,8 @@ end)
 -- AbyssUIClassCircles13_CheckButton
 local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles13_CheckButton:SetPoint("TOPLEFT", 10, -260)
-AbyssUIClassCircles13_CheckButton.Text:SetText("Minimal_Blue")
-AbyssUIClassCircles13_CheckButton.tooltip = "A minimalist blue version of the UnitPlayerFrame"
+AbyssUIClassCircles13_CheckButton.Text:SetText("Muted")
+AbyssUIClassCircles13_CheckButton.tooltip = "A muted version of UnitPlayerFrame"
 AbyssUIClassCircles13_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles13)
 -- OnClick Function
 AbyssUIClassCircles13_CheckButton:SetScript("OnClick", function(self)
@@ -1485,8 +1485,8 @@ end)
 -- AbyssUIClassCircles14_CheckButton
 local AbyssUIClassCircles14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles14_CheckButton:SetPoint("TOPLEFT", 180, -260)
-AbyssUIClassCircles14_CheckButton.Text:SetText("Minimal_Red")
-AbyssUIClassCircles14_CheckButton.tooltip = "A minimalist red version of the UnitPlayerFrame"
+AbyssUIClassCircles14_CheckButton.Text:SetText("Psychedelic")
+AbyssUIClassCircles14_CheckButton.tooltip = "A psychedelic version of UnitPlayerFrame"
 AbyssUIClassCircles14_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles14)
 -- OnClick Function
 AbyssUIClassCircles14_CheckButton:SetScript("OnClick", function(self)
@@ -1514,8 +1514,8 @@ end)
 -- AbyssUIClassCircles15_CheckButton
 local AbyssUIClassCircles15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles15_CheckButton:SetPoint("TOPLEFT", 10, -290)
-AbyssUIClassCircles15_CheckButton.Text:SetText("Vibrant")
-AbyssUIClassCircles15_CheckButton.tooltip = "A vibrant version of the UnitPlayerFrame"
+AbyssUIClassCircles15_CheckButton.Text:SetText("Retro")
+AbyssUIClassCircles15_CheckButton.tooltip = "A retrowave version of UnitPlayerFrame"
 AbyssUIClassCircles15_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles15)
 -- OnClick Function
 AbyssUIClassCircles15_CheckButton:SetScript("OnClick", function(self)
@@ -1543,8 +1543,8 @@ end)
 -- AbyssUIClassCircles16_CheckButton
 local AbyssUIClassCircles16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles16_CheckButton:SetPoint("TOPLEFT", 180, -290)
-AbyssUIClassCircles16_CheckButton.Text:SetText("Retro")
-AbyssUIClassCircles16_CheckButton.tooltip = "A retro version of the UnitPlayerFrame"
+AbyssUIClassCircles16_CheckButton.Text:SetText("Vibrant")
+AbyssUIClassCircles16_CheckButton.tooltip = "A vibrant version of UnitPlayerFrame"
 AbyssUIClassCircles16_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles16)
 -- OnClick Function
 AbyssUIClassCircles16_CheckButton:SetScript("OnClick", function(self)
