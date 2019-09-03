@@ -800,6 +800,17 @@ KeepUnitBlizzard_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
+-- Minimal ActionBar --
+local MinimalActionBar_CheckButton = CreateFrame("CheckButton", "$parentMinimalActionBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+MinimalActionBar_CheckButton:SetPoint("CENTER", -290, -140)
+MinimalActionBar_CheckButton.Text:SetText("Minimal ActionBar")
+MinimalActionBar_CheckButton.tooltip = "Minimalist ActionBar (hide a lot of things)"
+MinimalActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.MinimalActionBar)
+-- OnClick Function
+MinimalActionBar_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.MinimalActionBar = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
 ------------------------------- Miscellaneous -------------------------------
 -- Camera Pitch --
 -- Camera Pitch Function Option 50%
@@ -937,6 +948,16 @@ ActionButtonKeyUP_CheckButton:SetScript("OnEvent", function(self, event, ...)
   else
     return nil
   end
+end)
+-- Disable healing spam over player --
+local AbyssUI_ShowOnlyNumerics_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowOnlyNumerics_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_ShowOnlyNumerics_CheckButton:SetPoint("TOPLEFT", 10, -230)
+AbyssUI_ShowOnlyNumerics_CheckButton.Text:SetText("Show Only Numerics")
+AbyssUI_ShowOnlyNumerics_CheckButton.tooltip = "Show only numerics values on player health/power frames"
+AbyssUI_ShowOnlyNumerics_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionShowOnlyNumerics)
+-- OnClick Function
+AbyssUI_ShowOnlyNumerics_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionShowOnlyNumerics = self:GetChecked()
 end)
 -- 2nd Column
 -- Action Cam --
@@ -1101,6 +1122,16 @@ AbyssUI_BetterFonts_CheckButton:SetScript("OnEvent", function(self, event, ...)
       return nil
     end
   end
+end)
+-- Screenshot when you level up --
+local AbyssUI_ScreenshotLevelUp_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ScreenshotLevelUp_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_ScreenshotLevelUp_CheckButton:SetPoint("TOPLEFT", 400, -200)
+AbyssUI_ScreenshotLevelUp_CheckButton.Text:SetText("Auto Screenshot")
+AbyssUI_ScreenshotLevelUp_CheckButton.tooltip = "Automatically takes a screenshot when you level up"
+AbyssUI_ScreenshotLevelUp_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp)
+-- OnClick Function
+AbyssUI_ScreenshotLevelUp_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp = self:GetChecked()
 end)
 --End
 ----------------------------- AbyssUI Stylization ------------------------------

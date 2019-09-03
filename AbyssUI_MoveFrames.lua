@@ -10,7 +10,7 @@
 -- Frame Stuff
 -- Thanks to Fizz for part of this
 local UnLocked
-local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
+local Moveframes = { ObjectiveTrackerFrame, MinimapCluster, PlayerFrame, TargetFrame, FocusFrame, PartyMemberFrame1, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
     local f = v
     if not ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
@@ -66,7 +66,8 @@ local function AbyssUIMoveFrames_Reset()
 	PlayerFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -19, -4)
 	TargetFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -4)
 	FocusFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -240)
-	MinimapCluster:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 10, 10)
+	MinimapCluster:SetPoint("TOPRIGHT", nil, "TOPRIGHT", 10, 0)
+    PartyMemberFrame1:SetPoint("TOPLEFT", CompactRaidFrameManager, "TOPRIGHT", 0, 12)
 	C_Timer.After(0.5, function()
 		ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
 	end)

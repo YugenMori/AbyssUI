@@ -216,8 +216,9 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 			local text  = GameTooltipTextLeft1:GetText()
 			local text2 = GameTooltipTextLeft2:GetText()
 			local text3 = GameTooltipTextLeft3:GetText()
-			local inGuild = GetGuildInfo("mouseover")
-			local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
+			local text4 = GameTooltipTextLeft4:GetText()
+			local inGuild = GetGuildInfo(unit)
+			local englishFaction, localizedFaction = UnitFactionGroup(unit)
 			-- Class Color
 			GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 			if ( inGuild ~= nil ) then
@@ -256,11 +257,12 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 			local _, class = UnitClass(unit)
 			local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 			if ( color ~= nil ) then
+				local inGuild = GetGuildInfo(unit)
+				local isPvP = UnitIsPVP(unit)
+				local englishFaction, localizedFaction = UnitFactionGroup(unit)
 				local text  = GameTooltipTextLeft1:GetText()
 				local text2 = GameTooltipTextLeft2:GetText()
 				local text3 = GameTooltipTextLeft3:GetText()
-				local inGuild = GetGuildInfo("mouseover")
-				local englishFaction, localizedFaction = UnitFactionGroup("mouseover")
 				-- Class Color
 				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 				if ( inGuild ~= nil ) then
@@ -469,6 +471,7 @@ end)
 --------------------------------------------------------------------------
 -- Tooltip Instant Fade
 -- Many thanks to sacrife for part of this
+--[[
 GameTooltip.FadeOut = function(self)
 	GameTooltip:Hide()
 end
@@ -484,46 +487,47 @@ updateFrame:SetScript("OnUpdate", function(self)
 		hasUnit = true
 	end
 end)
+--]]
 ----------------------------------------------------
 -- Auto Repair/Sell Grey
-local g = CreateFrame("Frame", "$parentFrame", nil)
-g:RegisterEvent("MERCHANT_SHOW")
-
-g:SetScript("OnEvent", function()
-    local bag, slot
-    for bag = 0, 4 do
-        for slot = 0, GetContainerNumSlots(bag) do
-            local link = GetContainerItemLink(bag, slot)
-            if link and (select(3, GetItemInfo(link)) == 0) then
-                UseContainerItem(bag, slot)
-            end
-        end
-    end
+local AbyssUI_AutoSell = CreateFrame("Frame", "$parentAbyssUI_AutoSell", nil)
+AbyssUI_AutoSell:RegisterEvent("MERCHANT_SHOW")
+AbyssUI_AutoSell:SetScript("OnEvent", function()
 	if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
-    if( CanMerchantRepair() ) then
-        local cost = GetRepairAllCost()
-        if cost > 0 then
-            local money = GetMoney()
-            if IsInGuild() then
-            local guildMoney = GetGuildBankWithdrawMoney()
-            if guildMoney > GetGuildBankMoney() then
-              guildMoney = GetGuildBankMoney()
-            end
-            if guildMoney > cost and CanGuildBankRepair() then
-              RepairAllItems(1)
-              print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
-              return
-            end
-            end
-            if money > cost then
-            	RepairAllItems()
-            	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
-            else
-            	print("Not enough gold for repair.")
-            end
-    	end
-	end
-		else return nil
+	    local bag, slot
+	    for bag = 0, 4 do
+	        for slot = 0, GetContainerNumSlots(bag) do
+	            local link = GetContainerItemLink(bag, slot)
+	            if link and (select(3, GetItemInfo(link)) == 0) then
+	                UseContainerItem(bag, slot)
+	            end
+	        end
+	    end
+	    if( CanMerchantRepair() ) then
+	        local cost = GetRepairAllCost()
+	        if cost > 0 then
+	            local money = GetMoney()
+	            if IsInGuild() then
+	            local guildMoney = GetGuildBankWithdrawMoney()
+	            if guildMoney > GetGuildBankMoney() then
+	              guildMoney = GetGuildBankMoney()
+	            end
+	            if guildMoney > cost and CanGuildBankRepair() then
+	              RepairAllItems(1)
+	              print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
+	              return
+	            end
+	            end
+	            if money > cost then
+	            	RepairAllItems()
+	            	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
+	            else
+	            	print("Not enough gold for repair.")
+	            end
+	    	end
+		end
+	else 
+		return nil
 	end
 end)
 ----------------------------------------------------
@@ -576,19 +580,21 @@ end)
 local FrameList = {"Player", "Target", "Focus"}
 local _G = _G
 local function AbyssUI_UpdateHealthValues(...)
-for i = 1, select("#", unpack(FrameList)) do
-	local FrameName = (select(i, unpack(FrameList)))
-	local Health = AbbreviateLargeNumbers(UnitHealth(FrameName))
-	local checkMaxHealth = UnitHealthMax(FrameName)
-		if checkMaxHealth > 0 then
-			local HealthPercent = ((UnitHealth(FrameName) / UnitHealthMax(FrameName))*100)
-			if HealthPercent > 0 then
-				_G[FrameName.."FrameHealthBar"].TextString:SetText(Health.." / " .. " ("..format("%.0f", HealthPercent).."%)")
-			else
-				_G[FrameName.."FrameHealthBar"].TextString:SetText("")
+if (AbyssUIAddonSettings.ExtraFunctionShowOnlyNumerics ~= true ) then
+	for i = 1, select("#", unpack(FrameList)) do
+		local FrameName = (select(i, unpack(FrameList)))
+		local Health = AbbreviateLargeNumbers(UnitHealth(FrameName))
+		local checkMaxHealth = UnitHealthMax(FrameName)
+			if checkMaxHealth > 0 then
+				local HealthPercent = ((UnitHealth(FrameName) / UnitHealthMax(FrameName))*100)
+				if HealthPercent > 0 then
+					_G[FrameName.."FrameHealthBar"].TextString:SetText(Health.." / " .. " ("..format("%.0f", HealthPercent).."%)")
+				else
+					_G[FrameName.."FrameHealthBar"].TextString:SetText("")
+				end
+			else 
+				return nil
 			end
-		else 
-			return nil
 		end
 	end
 end
@@ -597,19 +603,21 @@ hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", AbyssUI_UpdateHealthV
 local FrameList = {"Player", "Target", "Focus"}
 local _G = _G
 local function AbyssUI_UpdateManaValues(...)
-for i = 1, select("#", unpack(FrameList)) do
-	local FrameName = (select(i, unpack(FrameList)))
-	local Mana = AbbreviateLargeNumbers(UnitPower(FrameName))
-	local checkMaxMana = UnitPowerMax(FrameName)
-		if checkMaxMana > 0 then
-			local ManaPercent = ((UnitPower(FrameName) / UnitPowerMax(FrameName))*100)
-			if ManaPercent > 0 then
-				_G[FrameName.."FrameManaBar"].TextString:SetText(Mana.." / " .. " ("..format("%.0f", ManaPercent).."%)")
-			else
-				_G[FrameName.."FrameManaBar"].TextString:SetText("")
+if (AbyssUIAddonSettings.ExtraFunctionShowOnlyNumerics ~= true ) then
+	for i = 1, select("#", unpack(FrameList)) do
+		local FrameName = (select(i, unpack(FrameList)))
+		local Mana = AbbreviateLargeNumbers(UnitPower(FrameName))
+		local checkMaxMana = UnitPowerMax(FrameName)
+			if checkMaxMana > 0 then
+				local ManaPercent = ((UnitPower(FrameName) / UnitPowerMax(FrameName))*100)
+				if ManaPercent > 0 then
+					_G[FrameName.."FrameManaBar"].TextString:SetText(Mana.." / " .. " ("..format("%.0f", ManaPercent).."%)")
+				else
+					_G[FrameName.."FrameManaBar"].TextString:SetText("")
+				end
+			else 
+				return nil
 			end
-		else 
-			return nil
 		end
 	end
 end
@@ -740,6 +748,72 @@ AbyssUI_InspectTarget:SetScript("OnClick", function()
 		end
     else
       return nil
+    end
+end)
+-- Auto Screenshot
+local AbyssUI_ScreenshotLevelUp = CreateFrame("Button", '$parentAbyssUI_ScreenshotLevelUp', nil)
+AbyssUI_ScreenshotLevelUp:RegisterEvent("PLAYER_LEVEL_UP")
+AbyssUI_ScreenshotLevelUp:SetScript("OnEvent", function(self, event, ...)
+    if AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp == true then
+    	 C_Timer.After(1, function ()
+    	 	Screenshot()
+    	 end)
+    end
+end)
+-- Minimal Action Bar
+local AbyssUI_MinimalActionBar = CreateFrame("Button", '$parentAbyssUI_MinimalActionBar', nil)
+AbyssUI_MinimalActionBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
+    if AbyssUIAddonSettings.MinimalActionBar == true then
+    	C_Timer.After(1, function()
+    		for i, v in pairs ({
+   				MainMenuBarArtFrame.LeftEndCap,
+	    		MainMenuBarArtFrame.RightEndCap,
+	    		MainMenuBarArtFrameBackground,
+	    		StatusTrackingBarManager,
+	    		ActionBarUpButton,
+	    		ActionBarDownButton,
+	    		MainMenuBarArtFrame.PageNumber,
+			    MainMenuMicroButton,
+			    EJMicroButton,
+			    CollectionsMicroButton,
+			    LFDMicroButton,
+			    GuildMicroButton,
+			    QuestLogMicroButton,
+			    TalentMicroButton,
+			    SpellbookMicroButton,
+			    CharacterMicroButton,
+    		}) do
+    			AchievementMicroButton:SetAlpha(0)
+	    		StoreMicroButton:SetAlpha(0)
+    			v:Hide()
+	    	end
+    	end)
+    else
+    	C_Timer.After(1, function()
+    		for i, v in pairs ({
+   				MainMenuBarArtFrame.LeftEndCap,
+	    		MainMenuBarArtFrame.RightEndCap,
+	    		MainMenuBarArtFrameBackground,
+	    		StatusTrackingBarManager,
+	    		ActionBarUpButton,
+	    		ActionBarDownButton,
+	    		MainMenuBarArtFrame.PageNumber,
+			    MainMenuMicroButton,
+			    EJMicroButton,
+			    CollectionsMicroButton,
+			    LFDMicroButton,
+			    GuildMicroButton,
+			    QuestLogMicroButton,
+			    TalentMicroButton,
+			    SpellbookMicroButton,
+			    CharacterMicroButton,
+    		}) do
+    			AchievementMicroButton:SetAlpha(1)
+	    		StoreMicroButton:SetAlpha(1)
+    			v:Show()
+	    	end
+    	end)
     end
 end)
 ----------------------------------------------------
