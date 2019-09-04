@@ -773,7 +773,6 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 		    		MainMenuBarArtFrameBackground,
 		    		MicroButtonAndBagsBar.MicroBagBar,
 		    		MicroButtonAndBagsBar,
-		    		StatusTrackingBarManager,
 		    		ActionBarUpButton,
 		    		ActionBarDownButton,
 		    		MainMenuBarArtFrame.PageNumber,
@@ -789,40 +788,15 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	    		}) do
 	    			AchievementMicroButton:SetAlpha(0)
 		    		StoreMicroButton:SetAlpha(0)
-	    			v:Hide()
+		    		StatusTrackingBarManager:SetAlpha(0)
+	    			v:Hide() 
+
 		    	end
 	    	end)
 	    else
-	     if ( AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
-		    	C_Timer.After(1, function()
-		    		for i, v in pairs ({
-		   				MainMenuBarArtFrame.LeftEndCap,
-			    		MainMenuBarArtFrame.RightEndCap,
-			    		MainMenuBarArtFrameBackground,
-			    		MicroButtonAndBagsBar.MicroBagBar,
-			    		MicroButtonAndBagsBar,
-			    		StatusTrackingBarManager,
-			    		ActionBarUpButton,
-			    		ActionBarDownButton,
-			    		MainMenuBarArtFrame.PageNumber,
-					    MainMenuMicroButton,
-					    EJMicroButton,
-					    CollectionsMicroButton,
-					    LFDMicroButton,
-					    GuildMicroButton,
-					    QuestLogMicroButton,
-					    TalentMicroButton,
-					    SpellbookMicroButton,
-					    CharacterMicroButton,
-		    		}) do
-		    			AchievementMicroButton:SetAlpha(1)
-			    		StoreMicroButton:SetAlpha(1)
-		    			v:Show()
-			    	end
-		    	end)
-		    else 
-		    	return nil
-	    	end
+	    	AchievementMicroButton:SetAlpha(1)
+    		StoreMicroButton:SetAlpha(1)
+    		StatusTrackingBarManager:SetAlpha(1)
 	    end
 	else
 		return nil
