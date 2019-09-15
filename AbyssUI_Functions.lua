@@ -109,12 +109,16 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 end)
 -- Class HP Colours
 local function colour(statusbar, unit)
-	local _, class, c
-	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
-		_, class = UnitClass(unit)
-		c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-		statusbar:SetStatusBarColor(c.r, c.g, c.b)
-		--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
+	if( AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true ) then
+		local _, class, c
+		if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
+			_, class = UnitClass(unit)
+			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+			statusbar:SetStatusBarColor(c.r, c.g, c.b)
+			--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
+		end
+	else 
+		return nil
 	end
 end
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
@@ -131,27 +135,30 @@ frame:RegisterEvent("UNIT_FACTION")
 
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
-	if PlayerFrame:IsShown() and not PlayerFrame.bg then
-		c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-		local bg = PlayerFrame:CreateTexture()
-		bg:SetPoint("TOPLEFT", PlayerFrameBackground)
-		bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
-		bg:SetTexture(TargetFrameNameBackground:GetTexture())
-		bg:SetVertexColor(c.r,c.g,c.b)
-		PlayerFrame.bg = true
-	end
-	if UnitIsPlayer("target") then
-		c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-		TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-	end
-	if UnitIsPlayer("focus") then
-		c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-		FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+	if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
+		if PlayerFrame:IsShown() and not PlayerFrame.bg then
+			c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+			local bg = PlayerFrame:CreateTexture()
+			bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+			bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+			bg:SetTexture(TargetFrameNameBackground:GetTexture())
+			bg:SetVertexColor(c.r,c.g,c.b)
+			PlayerFrame.bg = true
+		end
+		if UnitIsPlayer("target") then
+			c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
+			TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+		end
+		if UnitIsPlayer("focus") then
+			c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
+			FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+		end
+	else
+		return nil
 	end
 end
 
 frame:SetScript("OnEvent", eventHandler)
-
 for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackground, FocusFrameNameBackground, }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
@@ -317,20 +324,17 @@ end)
 -- Many thanks to Syiana for part of this
 local StatsFrame = CreateFrame("Frame", "$parentStatsFrame", UIParent)
 
-local movable = false
+local movable = true
 local frame_anchor = "TOP"
 local pos_x = -250
 local pos_y = -6
-StatsFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-StatsFrame:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
-StatsFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( event == "PLAYER_ENTERING_WORLD" or event == "PET_BAR_UPDATE_COOLDOWN" ) then
-		if movable == false then
-			StatsFrame:ClearAllPoints()
-			StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 5, -5)
-		end
-	end
-end)
+StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 5, -5)
+StatsFrame:SetMovable(true)
+StatsFrame:EnableMouse(true)
+StatsFrame:SetClampedToScreen(true)
+StatsFrame:RegisterForDrag("LeftButton")
+StatsFrame:SetScript("OnDragStart", StatsFrame.StartMoving)
+StatsFrame:SetScript("OnDragStop", StatsFrame.StopMovingOrSizing)
 
 local CF = CreateFrame("Frame", "$parentFrame", nil)
 CF:RegisterEvent("PLAYER_LOGIN")
@@ -743,7 +747,6 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 		    		StoreMicroButton:SetAlpha(0)
 		    		StatusTrackingBarManager:SetAlpha(0)
 	    			v:Hide() 
-
 		    	end
 	    	end)
 	    else

@@ -640,7 +640,7 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("Go to: Interface> ActionBar and check: bottom beft bar, right bar 1 and 2.\nAbyss|cff0d75d4UI|r Actionbar glitchs sometimes.")
+AbyssUI_ActionBarInfo.text:SetText("You need to stay on the small version of blizzard actionbar (Interface->ActionBars).\nThis new bar don't have keybind setup on it, also it can glitchy (rare to happen).")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
