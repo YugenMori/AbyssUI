@@ -141,7 +141,112 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 	end
 end)
 ------------------------- New Darker Parts -------------------------
-
+-- Parts that need to be dark (keep aesthetic)
+local NewPartsDark = CreateFrame("Frame")
+NewPartsDark:RegisterEvent("ADDON_LOADED")
+NewPartsDark:SetScript("OnEvent", function(self, event, addon)
+	if (addon == "AbyssUI") then
+		for i, v in pairs({ 
+			LFGDungeonReadyDialog.Border.TopEdge,
+			LFGDungeonReadyDialog.Border.RightEdge,
+			LFGDungeonReadyDialog.Border.BottomEdge,
+			LFGDungeonReadyDialog.Border.LeftEdge,
+			LFGDungeonReadyDialog.Border.TopRightCorner,
+			LFGDungeonReadyDialog.Border.TopLeftCorner,
+			LFGDungeonReadyDialog.Border.BottomLeftCorner,
+			LFGDungeonReadyDialog.Border.BottomRightCorner,
+			LFGDungeonReadyStatus.Border.TopEdge,
+			LFGDungeonReadyStatus.Border.RightEdge,
+			LFGDungeonReadyStatus.Border.BottomEdge,
+			LFGDungeonReadyStatus.Border.LeftEdge,
+			LFGDungeonReadyStatus.Border.TopRightCorner,
+			LFGDungeonReadyStatus.Border.TopLeftCorner,
+			LFGDungeonReadyStatus.Border.BottomLeftCorner,
+			LFGDungeonReadyStatus.Border.BottomRightCorner,
+			InterfaceOptionsFrame.Border.TopEdge,
+			InterfaceOptionsFrame.Border.RightEdge,
+			InterfaceOptionsFrame.Border.BottomEdge,
+			InterfaceOptionsFrame.Border.LeftEdge,
+			InterfaceOptionsFrame.Border.TopRightCorner,
+			InterfaceOptionsFrame.Border.TopLeftCorner,
+			InterfaceOptionsFrame.Border.BottomLeftCorner,
+			InterfaceOptionsFrame.Border.BottomRightCorner,
+			VideoOptionsFrame.Border.TopEdge,
+			VideoOptionsFrame.Border.RightEdge,
+			VideoOptionsFrame.Border.BottomEdge,
+			VideoOptionsFrame.Border.LeftEdge,
+			VideoOptionsFrame.Border.TopRightCorner,
+			VideoOptionsFrame.Border.TopLeftCorner,
+			VideoOptionsFrame.Border.BottomLeftCorner,
+			VideoOptionsFrame.Border.BottomRightCorner,
+			AddonList.NineSlice.TopEdge,
+			AddonList.NineSlice.RightEdge,
+			AddonList.NineSlice.BottomEdge,
+			AddonList.NineSlice.LeftEdge,
+			AddonList.NineSlice.TopRightCorner,
+			AddonList.NineSlice.TopLeftCorner,
+			AddonList.NineSlice.BottomLeftCorner,
+			AddonList.NineSlice.BottomRightCorner,
+			GameMenuFrame.Border.TopEdge,
+			GameMenuFrame.Border.RightEdge,
+			GameMenuFrame.Border.BottomEdge,
+			GameMenuFrame.Border.LeftEdge,
+			GameMenuFrame.Border.TopRightCorner,
+			GameMenuFrame.Border.TopLeftCorner,
+			GameMenuFrame.Border.BottomLeftCorner,
+			GameMenuFrame.Border.BottomRightCorner,
+			StaticPopup1.Border.TopEdge,
+			StaticPopup1.Border.RightEdge,
+			StaticPopup1.Border.BottomEdge,
+			StaticPopup1.Border.LeftEdge,
+			StaticPopup1.Border.TopRightCorner,
+			StaticPopup1.Border.TopLeftCorner,
+			StaticPopup1.Border.BottomLeftCorner,
+			StaticPopup1.Border.BottomRightCorner,
+			PVPReadyDialog.Border.TopEdge,
+			PVPReadyDialog.Border.RightEdge,
+			PVPReadyDialog.Border.BottomEdge,
+			PVPReadyDialog.Border.LeftEdge,
+			PVPReadyDialog.Border.TopRightCorner,
+			PVPReadyDialog.Border.TopLeftCorner,
+			PVPReadyDialog.Border.BottomLeftCorner,
+			PVPReadyDialog.Border.BottomRightCorner,
+			DropDownList1Backdrop.TopEdge,
+			DropDownList1Backdrop.RightEdge,
+			DropDownList1Backdrop.BottomEdge,
+			DropDownList1Backdrop.LeftEdge,
+			DropDownList1Backdrop.TopRightCorner,
+			DropDownList1Backdrop.TopLeftCorner,
+			DropDownList1Backdrop.BottomLeftCorner,
+			DropDownList1Backdrop.BottomRightCorner,
+			RecruitAFriendRewardsFrame.Border.TopEdge,
+			RecruitAFriendRewardsFrame.Border.RightEdge,
+			RecruitAFriendRewardsFrame.Border.BottomEdge,
+			RecruitAFriendRewardsFrame.Border.LeftEdge,
+			RecruitAFriendRewardsFrame.Border.TopRightCorner,
+			RecruitAFriendRewardsFrame.Border.TopLeftCorner,
+			RecruitAFriendRewardsFrame.Border.BottomLeftCorner,
+			RecruitAFriendRewardsFrame.Border.BottomRightCorner,
+			RecruitAFriendRecruitmentFrame.Border.TopEdge,
+			RecruitAFriendRecruitmentFrame.Border.RightEdge,
+			RecruitAFriendRecruitmentFrame.Border.BottomEdge,
+			RecruitAFriendRecruitmentFrame.Border.LeftEdge,
+			RecruitAFriendRecruitmentFrame.Border.TopRightCorner,
+			RecruitAFriendRecruitmentFrame.Border.TopLeftCorner,
+			RecruitAFriendRecruitmentFrame.Border.BottomLeftCorner,
+			RecruitAFriendRecruitmentFrame.Border.BottomRightCorner,
+			}) do
+			if AbyssUIAddonSettings ~= nil then
+				v:SetVertexColor(.4, .4, .4)
+			else 
+				return nil
+			end
+		end	
+		-- End
+		self:UnregisterEvent("ADDON_LOADED")
+		NewPartsDark:SetScript("OnEvent", nil)
+	end
+end)
 -- New Interface Action Bar
 local NewFrames = CreateFrame("Frame")
 NewFrames:RegisterEvent("ADDON_LOADED")
@@ -203,7 +308,24 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			CharacterFrame.NineSlice.TopRightCorner,
 			CharacterFrame.NineSlice.TopLeftCorner,
 			CharacterFrame.NineSlice.BottomLeftCorner,
-			CharacterFrame.NineSlice.BottomRightCorner, }) do
+			CharacterFrame.NineSlice.BottomRightCorner,
+			TokenFramePopup.Border.TopEdge,
+			TokenFramePopup.Border.RightEdge,
+			TokenFramePopup.Border.BottomEdge,
+			TokenFramePopup.Border.LeftEdge,
+			TokenFramePopup.Border.TopRightCorner,
+			TokenFramePopup.Border.TopLeftCorner,
+			TokenFramePopup.Border.BottomLeftCorner,
+			TokenFramePopup.Border.BottomRightCorner,
+			ReputationDetailFrame.Border.TopEdge,
+			ReputationDetailFrame.Border.RightEdge,
+			ReputationDetailFrame.Border.BottomEdge,
+			ReputationDetailFrame.Border.LeftEdge,
+			ReputationDetailFrame.Border.TopRightCorner,
+			ReputationDetailFrame.Border.TopLeftCorner,
+			ReputationDetailFrame.Border.BottomLeftCorner,
+			ReputationDetailFrame.Border.BottomRightCorner, 
+			 }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -366,7 +488,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			FriendsFrame.NineSlice.LeftEdge,
 			FriendsFrame.NineSlice.TopLeftCorner,
 			FriendsFrameInset.NineSlice.BottomEdge,
-			FriendsFrameInset.NineSlice.BottomLeftCorner, }) do
+			FriendsFrameInset.NineSlice.BottomLeftCorner,
+			FriendsFriendsFrame.Border.TopEdge,
+			FriendsFriendsFrame.Border.RightEdge,
+			FriendsFriendsFrame.Border.BottomEdge,
+			FriendsFriendsFrame.Border.LeftEdge,
+			FriendsFriendsFrame.Border.TopRightCorner,
+			FriendsFriendsFrame.Border.TopLeftCorner,
+			FriendsFriendsFrame.Border.BottomLeftCorner,
+			FriendsFriendsFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -857,7 +987,17 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			QuestFrame.NineSlice.TopLeftCorner,
 			QuestFrame.NineSlice.BottomLeftCorner,
 			QuestFrame.NineSlice.BottomRightCorner,
-			QuestFrameInset.NineSlice.BottomEdge, }) do
+			QuestFrameInset.NineSlice.BottomEdge,
+			QuestLogPopupDetailFrame.NineSlice.TopEdge,
+			QuestLogPopupDetailFrame.NineSlice.RightEdge,
+			QuestLogPopupDetailFrame.NineSlice.BottomEdge,
+			QuestLogPopupDetailFrame.NineSlice.LeftEdge,
+			QuestLogPopupDetailFrame.NineSlice.TopRightCorner,
+			QuestLogPopupDetailFrame.NineSlice.TopLeftCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomLeftCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomRightCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomEdge,
+			 }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1166,58 +1306,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- AddonList
-		for i, v in pairs({	AddonList.NineSlice.TopEdge,
-			AddonList.NineSlice.RightEdge,
-			AddonList.NineSlice.BottomEdge,
-			AddonList.NineSlice.LeftEdge,
-			AddonList.NineSlice.TopRightCorner,
-			AddonList.NineSlice.TopLeftCorner,
-			AddonList.NineSlice.BottomLeftCorner,
-			AddonList.NineSlice.BottomRightCorner, }) do
-			if AbyssUIAddonSettings ~= nil then
-				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-					v:SetVertexColor(1, 1, 1)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.2, .2, .2)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-					v:SetVertexColor(182/255, 42/255, 37/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-					v:SetVertexColor(236/255, 193/255, 60/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-					v:SetVertexColor(196/255, 31/255, 59/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-					v:SetVertexColor(163/255, 48/255, 201/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-					v:SetVertexColor(252/255, 163/255, 85/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-					v:SetVertexColor(190/255, 221/255, 115/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-					v:SetVertexColor(64/255, 220/255, 255/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-					v:SetVertexColor(86/255, 255/255, 184/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-					v:SetVertexColor(255/255, 155/255, 195/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-					v:SetVertexColor(23/255, 28/255, 99/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-					v:SetVertexColor(255/255, 255/255, 0/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-					v:SetVertexColor(0/255, 112/255, 222/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-					v:SetVertexColor(135/255, 135/255, 237/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-					v:SetVertexColor(199/255, 156/255, 110/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				else
-					v:SetVertexColor(.4, .4, .4)
-				end
-			else
-				return nil
-			end
-		end
 		-- ItemTextFrame
 		for i, v in pairs({	ItemTextFrame.NineSlice.TopEdge,
 			ItemTextFrame.NineSlice.RightEdge,
@@ -1322,6 +1410,66 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		-- Guild Register Frame (pt?) & Tabard Frame
+		for i, v in pairs({	GuildRegistrarFrame.NineSlice.TopEdge,
+			GuildRegistrarFrame.NineSlice.RightEdge,
+			GuildRegistrarFrame.NineSlice.BottomEdge,
+			GuildRegistrarFrame.NineSlice.LeftEdge,
+			GuildRegistrarFrame.NineSlice.TopRightCorner,
+			GuildRegistrarFrame.NineSlice.TopLeftCorner,
+			GuildRegistrarFrame.NineSlice.BottomLeftCorner,
+			GuildRegistrarFrame.NineSlice.BottomRightCorner,
+			TabardFrame.NineSlice.TopEdge,
+			TabardFrame.NineSlice.RightEdge,
+			TabardFrame.NineSlice.BottomEdge,
+			TabardFrame.NineSlice.LeftEdge,
+			TabardFrame.NineSlice.TopRightCorner,
+			TabardFrame.NineSlice.TopLeftCorner,
+			TabardFrame.NineSlice.BottomLeftCorner,
+			TabardFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
+					v:SetVertexColor(1, 1, 1)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
+					v:SetVertexColor(.2, .2, .2)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
+					v:SetVertexColor(182/255, 42/255, 37/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
+					v:SetVertexColor(236/255, 193/255, 60/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
+					v:SetVertexColor(196/255, 31/255, 59/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
+					v:SetVertexColor(163/255, 48/255, 201/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
+					v:SetVertexColor(252/255, 163/255, 85/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
+					v:SetVertexColor(190/255, 221/255, 115/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
+					v:SetVertexColor(64/255, 220/255, 255/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
+					v:SetVertexColor(86/255, 255/255, 184/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
+					v:SetVertexColor(255/255, 155/255, 195/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
+					v:SetVertexColor(23/255, 28/255, 99/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
+					v:SetVertexColor(255/255, 255/255, 0/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
+					v:SetVertexColor(0/255, 112/255, 222/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
+					v:SetVertexColor(135/255, 135/255, 237/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
+					v:SetVertexColor(199/255, 156/255, 110/255)
+				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
+				else
+					v:SetVertexColor(.4, .4, .4)
+				end
+			else
+				return nil
+			end
+		end	
 		-- End
 		self:UnregisterEvent("ADDON_LOADED")
 		NewFrames:SetScript("OnEvent", nil)
@@ -1523,7 +1671,15 @@ f:SetScript("OnEvent", function(self, event, name)
 			CommunitiesFrame.NineSlice.BottomLeftCorner,
 			CommunitiesFrame.NineSlice.BottomRightCorner,
 			CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomEdge,
-			CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomEdge, }) do
+			CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.TopEdge,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.RightEdge,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.BottomEdge,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.LeftEdge,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.TopRightCorner,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.TopLeftCorner,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.BottomLeftCorner,
+			CommunitiesFrame.GuildMemberDetailFrame.Border.BottomRightCorner, }) do
 			CommunitiesFrame.MaximizeMinimizeFrame:SetAlpha(0.3)
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
@@ -2508,233 +2664,27 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
------------------------------ Need Review -----------------------------
---[[
--- BlackMarketFrame (Blizzard needs to review, some parts are missing)
+--------------- Parts that need to be dark and load (keep aesthetic) ---------------
+-- KeyBinding
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_BlackMarketUI" then
-		for i, v in pairs({ BlackMarketFrame.TopBorder,
-			BlackMarketFrame.BotLeftCorner,
-			BlackMarketFrame.BotRightCorner,
-			BlackMarketFrame.TopLeftCorner,
-			BlackMarketFrame.TopRightCorner, }) do
+	if name == "Blizzard_BindingUI" then
+		for i, v in pairs({ KeyBindingFrame.BG.TopEdge,
+			KeyBindingFrame.BG.RightEdge,
+			KeyBindingFrame.BG.BottomEdge,
+			KeyBindingFrame.BG.LeftEdge,
+			KeyBindingFrame.BG.TopRightCorner,
+			KeyBindingFrame.BG.TopLeftCorner,
+			KeyBindingFrame.BG.BottomLeftCorner,
+			KeyBindingFrame.BG.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
-				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-					v:SetVertexColor(1, 1, 1)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.2, .2, .2)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-					v:SetVertexColor(182/255, 42/255, 37/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-					v:SetVertexColor(236/255, 193/255, 60/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-					v:SetVertexColor(196/255, 31/255, 59/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-					v:SetVertexColor(163/255, 48/255, 201/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-					v:SetVertexColor(252/255, 163/255, 85/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-					v:SetVertexColor(190/255, 221/255, 115/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-					v:SetVertexColor(64/255, 220/255, 255/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-					v:SetVertexColor(86/255, 255/255, 184/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-					v:SetVertexColor(255/255, 155/255, 195/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-					v:SetVertexColor(23/255, 28/255, 99/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-					v:SetVertexColor(255/255, 255/255, 0/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-					v:SetVertexColor(0/255, 112/255, 222/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-					v:SetVertexColor(135/255, 135/255, 237/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-					v:SetVertexColor(199/255, 156/255, 110/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				else
 					v:SetVertexColor(.4, .4, .4)
-				end
 			else
 				return nil
 			end
 		end
 	end
 end)
---]]
-
--- Taxi [Need Review]
---[[
-for i, v in pairs({ TaxiFrame.NineSlice.TopEdge,
-	TaxiFrame.NineSlice.RightEdge,
-	TaxiFrame.NineSlice.BottomEdge,
-	TaxiFrame.NineSlice.LeftEdge,
-	TaxiFrame.NineSlice.TopRightCorner,
-	TaxiFrame.NineSlice.TopLeftCorner,
-	TaxiFrame.NineSlice.BottomLeftCorner,
-	TaxiFrame.NineSlice.BottomRightCorner,
-	TaxiFrameInset.NineSlice.BottomEdge, }) do
-	if AbyssUIAddonSettings ~= nil then
-		if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-			v:SetVertexColor(1, 1, 1)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-			v:SetVertexColor(.2, .2, .2)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-			v:SetVertexColor(182/255, 42/255, 37/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-			v:SetVertexColor(236/255, 193/255, 60/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-			v:SetVertexColor(196/255, 31/255, 59/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-			v:SetVertexColor(163/255, 48/255, 201/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-			v:SetVertexColor(252/255, 163/255, 85/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-			v:SetVertexColor(190/255, 221/255, 115/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-			v:SetVertexColor(64/255, 220/255, 255/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-			v:SetVertexColor(86/255, 255/255, 184/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-			v:SetVertexColor(255/255, 155/255, 195/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-			v:SetVertexColor(23/255, 28/255, 99/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-			v:SetVertexColor(255/255, 255/255, 0/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-			v:SetVertexColor(0/255, 112/255, 222/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-			v:SetVertexColor(135/255, 135/255, 237/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-			v:SetVertexColor(199/255, 156/255, 110/255)
-		elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-		else
-			v:SetVertexColor(.4, .4, .4)
-		end
-	else
-		return nil
-	end
-end
---]]
-
---[[
--- LookingForGuildFrame
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_LookingForGuildUI" then
-		for i, v in pairs({ LookingForGuildFrame.NineSlice.TopEdge,
-			LookingForGuildFrame.NineSlice.RightEdge,
-			LookingForGuildFrame.NineSlice.BottomEdge,
-			LookingForGuildFrame.NineSlice.LeftEdge,
-			LookingForGuildFrame.NineSlice.TopRightCorner,
-			LookingForGuildFrame.NineSlice.TopLeftCorner,
-			LookingForGuildFrame.NineSlice.BottomLeftCorner,
-			LookingForGuildFrame.NineSlice.BottomRightCorner, }) do
-			if AbyssUIAddonSettings ~= nil then
-				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-					v:SetVertexColor(1, 1, 1)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.2, .2, .2)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-					v:SetVertexColor(182/255, 42/255, 37/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-					v:SetVertexColor(236/255, 193/255, 60/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-					v:SetVertexColor(196/255, 31/255, 59/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-					v:SetVertexColor(163/255, 48/255, 201/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-					v:SetVertexColor(252/255, 163/255, 85/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-					v:SetVertexColor(190/255, 221/255, 115/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-					v:SetVertexColor(64/255, 220/255, 255/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-					v:SetVertexColor(86/255, 255/255, 184/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-					v:SetVertexColor(255/255, 155/255, 195/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-					v:SetVertexColor(23/255, 28/255, 99/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-					v:SetVertexColor(255/255, 255/255, 0/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-					v:SetVertexColor(0/255, 112/255, 222/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-					v:SetVertexColor(135/255, 135/255, 237/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-					v:SetVertexColor(199/255, 156/255, 110/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				else
-					v:SetVertexColor(.4, .4, .4)
-				end
-			else
-				return nil
-			end
-		end
-	end
-end)
--- WorldStateScoreFrame
-		for i, v in pairs({ WorldStateScoreFrame.NineSlice.TopEdge,
-			WorldStateScoreFrame.NineSlice.RightEdge,
-			WorldStateScoreFrame.NineSlice.BottomEdge,
-			WorldStateScoreFrame.NineSlice.LeftEdge,
-			WorldStateScoreFrame.NineSlice.TopRightCorner,
-			WorldStateScoreFrame.NineSlice.TopLeftCorner,
-			WorldStateScoreFrame.NineSlice.BottomLeftCorner,
-			WorldStateScoreFrame.NineSlice.BottomRightCorner,
-			WorldStateScoreFrameInset.NineSlice.BottomEdge, }) do
-			if AbyssUIAddonSettings ~= nil then
-				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-					v:SetVertexColor(1, 1, 1)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.2, .2, .2)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-					v:SetVertexColor(182/255, 42/255, 37/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-					v:SetVertexColor(236/255, 193/255, 60/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-					v:SetVertexColor(196/255, 31/255, 59/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-					v:SetVertexColor(163/255, 48/255, 201/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-					v:SetVertexColor(252/255, 163/255, 85/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-					v:SetVertexColor(190/255, 221/255, 115/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-					v:SetVertexColor(64/255, 220/255, 255/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-					v:SetVertexColor(86/255, 255/255, 184/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-					v:SetVertexColor(255/255, 155/255, 195/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-					v:SetVertexColor(23/255, 28/255, 99/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-					v:SetVertexColor(255/255, 255/255, 0/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-					v:SetVertexColor(0/255, 112/255, 222/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-					v:SetVertexColor(135/255, 135/255, 237/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-					v:SetVertexColor(199/255, 156/255, 110/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				else
-					v:SetVertexColor(.4, .4, .4)
-				end
-			else
-				return nil
-			end
-		end
---]]
-
+----------------------------- Needs Review -----------------------------
 -- End

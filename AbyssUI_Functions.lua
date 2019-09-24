@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------------
 -- Action Bar Icon Border Remove
 -- Many thanks to Spyrö for part of this
+--[[
 hooksecurefunc("ActionButton_ShowGrid", function(Button)
 	_G[Button:GetName().."NormalTexture"]:SetVertexColor(.4, .4, .4)
 end)
@@ -25,6 +26,7 @@ for i = 1, 12 do
 		end
 	end
 end
+--]]
 ----------------------------------------------------
 -- Class Icons (Need the texture pack)
 hooksecurefunc("UnitFramePortrait_Update", function(self)
@@ -164,6 +166,7 @@ for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackgrou
 end
 ----------------------------------------------------
 -- Text round values
+--[[
 hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
 	PlayerFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("player")))
 	--PlayerFramePower.TextString:SetText(AbbreviateLargeNumbers(UnitMana("player")))
@@ -174,6 +177,7 @@ hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
 	FocusFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("focus")))
 	--FocusFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("focus")))
 end)
+--]]
 ----------------------------------------------------
 -- Cast Bar
 -- Timer
@@ -750,9 +754,7 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 		    	end
 	    	end)
 	    else
-	    	AchievementMicroButton:SetAlpha(1)
-    		StoreMicroButton:SetAlpha(1)
-    		StatusTrackingBarManager:SetAlpha(1)
+			return nil
 	    end
 	else
 		return nil

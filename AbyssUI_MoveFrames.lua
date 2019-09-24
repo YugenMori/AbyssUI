@@ -52,7 +52,7 @@ local function AbyssUIMoveFrames_Function(show)
 	    if ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
 	    	f:RegisterForDrag("LeftButton")
 	    	f:SetScript("OnDragStart", f.StartMoving) 
-	    	f:SetScript("OnDragStop", f.StopMovingOrSizing) 
+	    	f:SetScript("OnDragStop", f.StopMovingOrSizing)
 		end
     end
 end
@@ -67,7 +67,7 @@ local function AbyssUIMoveFrames_Reset()
 	TargetFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -4)
 	FocusFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -240)
 	MinimapCluster:SetPoint("TOPRIGHT", nil, "TOPRIGHT", 10, 0)
-    PartyMemberFrame1:SetPoint("TOPLEFT", CompactRaidFrameManager, "TOPRIGHT", 0, 12)
+    PartyMemberFrame1:SetPoint("TOPLEFT", CompactRaidFrameManager, "TOPRIGHT", 0, -20)
 	C_Timer.After(0.5, function()
 		ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
 	end)

@@ -130,7 +130,7 @@ f:SetScript("OnEvent", function(self, event, ...)
 			b:SetSize(40*UIParent:GetScale(), 40*UIParent:GetScale())
 			b:SetAttribute("action", id)
 			b:SetID(id)
-			b:SetPoint("CENTER", _G["MultiBarBottomRightButton"..(id-12)], "CENTER", -545, 90)
+			b:SetPoint("CENTER", _G["MultiBarBottomRightButton"..(id-12)], "CENTER", -543, 90)
 			b:Show()
 		end
 	 --PetBar
