@@ -235,6 +235,14 @@ NewPartsDark:SetScript("OnEvent", function(self, event, addon)
 			RecruitAFriendRecruitmentFrame.Border.TopLeftCorner,
 			RecruitAFriendRecruitmentFrame.Border.BottomLeftCorner,
 			RecruitAFriendRecruitmentFrame.Border.BottomRightCorner,
+			PetBattleQueueReadyFrame.Border.TopEdge,
+			PetBattleQueueReadyFrame.Border.RightEdge,
+			PetBattleQueueReadyFrame.Border.BottomEdge,
+			PetBattleQueueReadyFrame.Border.LeftEdge,
+			PetBattleQueueReadyFrame.Border.TopRightCorner,
+			PetBattleQueueReadyFrame.Border.TopLeftCorner,
+			PetBattleQueueReadyFrame.Border.BottomLeftCorner,
+			PetBattleQueueReadyFrame.Border.BottomRightCorner,
 			}) do
 			if AbyssUIAddonSettings ~= nil then
 				v:SetVertexColor(.4, .4, .4)
@@ -997,7 +1005,22 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			QuestLogPopupDetailFrame.NineSlice.BottomLeftCorner,
 			QuestLogPopupDetailFrame.NineSlice.BottomRightCorner,
 			QuestLogPopupDetailFrame.NineSlice.BottomEdge,
-			 }) do
+			QuestNPCModelTopBorder,
+			QuestNPCModelRightBorder,
+			QuestNPCModelTopRightCorner,
+			QuestNPCModelBottomRightCorner,
+			QuestNPCModelBottomBorder,
+			QuestNPCModelBottomLeftCorner,
+			QuestNPCModelLeftBorder,
+			QuestNPCModelTopLeftCorner,
+			QuestNPCModelTextTopBorder,
+			QuestNPCModelTextRightBorder,
+			QuestNPCModelTextTopRightCorner,
+			QuestNPCModelTextBottomRightCorner,
+			QuestNPCModelTextBottomBorder,
+			QuestNPCModelTextBottomLeftCorner,
+			QuestNPCModelTextLeftBorder,
+			QuestNPCModelTextTopLeftCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -2444,7 +2467,23 @@ f:SetScript("OnEvent", function(self, event, name)
 			CalendarFrameLeftTopTexture,
 			CalendarFrameLeftBottomTexture,
 			CalendarFrameTopLeftTexture,
-			CalendarFrameTopRightTexture, }) do
+			CalendarFrameTopRightTexture,
+			CalendarCreateEventFrame.Border.TopEdge,
+			CalendarCreateEventFrame.Border.RightEdge,
+			CalendarCreateEventFrame.Border.BottomEdge,
+			CalendarCreateEventFrame.Border.LeftEdge,
+			CalendarCreateEventFrame.Border.TopRightCorner,
+			CalendarCreateEventFrame.Border.TopLeftCorner,
+			CalendarCreateEventFrame.Border.BottomLeftCorner,
+			CalendarCreateEventFrame.Border.BottomRightCorner,
+			CalendarViewHolidayFrame.Border.TopEdge,
+			CalendarViewHolidayFrame.Border.RightEdge,
+			CalendarViewHolidayFrame.Border.BottomEdge,
+			CalendarViewHolidayFrame.Border.LeftEdge,
+			CalendarViewHolidayFrame.Border.TopRightCorner,
+			CalendarViewHolidayFrame.Border.TopLeftCorner,
+			CalendarViewHolidayFrame.Border.BottomLeftCorner,
+			CalendarViewHolidayFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)

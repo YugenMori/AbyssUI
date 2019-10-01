@@ -54,7 +54,32 @@ Frame:SetWidth(200)
 Frame:SetScale(1.1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you liked, share with your friends, or make a donation. Helps a lot!\nThis is a Minimalist UI that make changes directly to the WoW frames,\n using almost nothing more than the Blizzard use of CPU/RAM.\n\nCheck the options by clicking in the (+) button")
+Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon, consider sharing with your friends\n or even making a donation. It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\nusing nearly the same amount of CPU/RAM as the Blizzard default UI.\n\nCheck the options by clicking in the (+) button")
+--Special Thanks
+local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
+Frame:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 50)
+Frame:SetHeight(24)
+Frame:SetWidth(200)
+Frame:SetScale(1)
+Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame:SetPoint("LEFT")
+Frame:SetText("|cff0d75d4Special Thanks|r")
+local Frame1 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
+Frame1:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 30)
+Frame1:SetHeight(24)
+Frame1:SetWidth(200)
+Frame1:SetScale(1)
+Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame1:SetPoint("LEFT")
+Frame1:SetText("|cfff2dc7fFizzlemizz|r for helping me with programming questions.")
+local Frame2 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
+Frame2:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 10)
+Frame2:SetHeight(24)
+Frame2:SetWidth(200)
+Frame2:SetScale(1)
+Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame2:SetPoint("LEFT")
+Frame2:SetText("|cfff2dc7fFry|r for helping me with grammatical errors.")
 -- Panel 01 (ActionBar)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
@@ -66,7 +91,7 @@ Frame:SetPoint("CENTER")
 Frame:SetText("Abyss|cff0d75d4UI|r Actionbar")
 -- Panel01 Title
 local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.childpanel1)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -50)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -35)
 Frame:SetHeight(24)
 Frame:SetWidth(70)
 Frame:SetScale(1.5)
@@ -75,13 +100,13 @@ Frame:SetPoint("CENTER")
 Frame:SetText("|cff0d75d4Attention|r")
 -- Panel01 SubTittle
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.childpanel1)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -110)
+Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -85)
 Frame:SetHeight(24)
 Frame:SetWidth(200)
 Frame:SetScale(1.1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("I highly recommend the use of Bartender4 or Dominos,\nif you want to have a customizable action bar (keybinds).\nKeep in mind that this is a attempt to make a better action bar.")
+Frame:SetText("If you prefer a customizable actionbar, I highly recommend installing either\nBartender4 or Dominos. You can continue to use my settings if you prefer,\nbut the options are much more limited.")
 -- Panel 02 (HideElements)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -177,7 +202,7 @@ end)
 ----------------------------- AbyssUI Actionbar -------------------------------
 -- AbyssUI Action Bar --
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -170)
+AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -140)
 AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar")
 AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the Blizzard MainActionBar (you need to use the small actionbar for this)"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
@@ -188,7 +213,7 @@ AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Minimal ActionBar --
 local MinimalActionBar_CheckButton = CreateFrame("CheckButton", "$parentMinimalActionBar_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-MinimalActionBar_CheckButton:SetPoint("TOPLEFT", 10, -200)
+MinimalActionBar_CheckButton:SetPoint("TOPLEFT", 10, -170)
 MinimalActionBar_CheckButton.Text:SetText("Minimal ActionBar")
 MinimalActionBar_CheckButton.tooltip = "Minimalist actionbar, hide all the textures"
 MinimalActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.MinimalActionBar)
@@ -887,7 +912,7 @@ end)
 local AbyssUI_HideBackgroundClassColor_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideBackgroundClassColor_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_HideBackgroundClassColor_CheckButton:SetPoint("TOPLEFT", 10, -230)
 AbyssUI_HideBackgroundClassColor_CheckButton.Text:SetText("Default Background")
-AbyssUI_HideBackgroundClassColor_CheckButton.tooltip = "Remove the class color background behind the player names"
+AbyssUI_HideBackgroundClassColor_CheckButton.tooltip = "Remove the class color background behind the player names to default values (Transparent Name needs to be unchecked)"
 AbyssUI_HideBackgroundClassColor_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor)
 -- OnClick Function
 AbyssUI_HideBackgroundClassColor_CheckButton:SetScript("OnClick", function(self)
@@ -1004,6 +1029,17 @@ AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnEvent", function(self, event
     end
   end
 end)
+-- Transparent Background Name --
+local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_TransparentName_CheckButton:SetPoint("TOPLEFT", 200, -230)
+AbyssUI_TransparentName_CheckButton.Text:SetText("Transparent Name")
+AbyssUI_TransparentName_CheckButton.tooltip = "Remove any color in the target name background"
+AbyssUI_TransparentName_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionTransparentName)
+-- OnClick Function
+AbyssUI_TransparentName_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionTransparentName = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
 -- 3rd Column
 -- Instance Leave --
 local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -1075,7 +1111,7 @@ end)
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
 AbyssUIClassCircles01_CheckButton.Text:SetText("Artistic")
-AbyssUIClassCircles01_CheckButton.tooltip = "A atelier version of UnitPlayerFrame"
+AbyssUIClassCircles01_CheckButton.tooltip = "A artistic version of UnitPlayerFrame"
 AbyssUIClassCircles01_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles01)
 -- OnClick Function
 AbyssUIClassCircles01_CheckButton:SetScript("OnClick", function(self)
@@ -1161,8 +1197,8 @@ end)
 -- AbyssUIClassCircles04_CheckButton
 local AbyssUIClassCircles04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles04_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles04_CheckButton:SetPoint("TOPLEFT", 10, -170)
-AbyssUIClassCircles04_CheckButton.Text:SetText("Crest")
-AbyssUIClassCircles04_CheckButton.tooltip = "A class crest version of UnitPlayerFrame"
+AbyssUIClassCircles04_CheckButton.Text:SetText("Artistic_V2")
+AbyssUIClassCircles04_CheckButton.tooltip = "Version two of artistic UnitPlayerFrame"
 AbyssUIClassCircles04_CheckButton:SetChecked(AbyssUIAddonSettings.UIClassCircles04)
 -- OnClick Function
 AbyssUIClassCircles04_CheckButton:SetScript("OnClick", function(self)

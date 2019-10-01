@@ -54,7 +54,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 				self.portrait:SetTexCoord(0, 1, 0, 1)
 			end
 			if t and AbyssUIAddonSettings.UIClassCircles01 == true then
-				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_ARTISTIC")
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_ARTISTIC01")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles02 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_BRIGHT")
@@ -63,7 +63,7 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_CLASSIC")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles04 == true then
-				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_CREST")
+				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_ARTISTIC02")
 				self.portrait:SetTexCoord(unpack(t))
 			elseif t and AbyssUIAddonSettings.UIClassCircles05 == true then
 				self.portrait:SetTexture("Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_DARK")
@@ -111,16 +111,16 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 end)
 -- Class HP Colours
 local function colour(statusbar, unit)
-	if( AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true ) then
-		local _, class, c
-		if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
+	local _, class, c
+	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
+		if( AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true ) then
 			_, class = UnitClass(unit)
 			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 			statusbar:SetStatusBarColor(c.r, c.g, c.b)
 			--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
+		else 
+			return nil
 		end
-	else 
-		return nil
 	end
 end
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
@@ -137,26 +137,32 @@ frame:RegisterEvent("UNIT_FACTION")
 
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
-	if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
-		if PlayerFrame:IsShown() and not PlayerFrame.bg then
-			c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-			local bg = PlayerFrame:CreateTexture()
-			bg:SetPoint("TOPLEFT", PlayerFrameBackground)
-			bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
-			bg:SetTexture(TargetFrameNameBackground:GetTexture())
-			bg:SetVertexColor(c.r,c.g,c.b)
-			PlayerFrame.bg = true
-		end
-		if UnitIsPlayer("target") then
-			c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-			TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-		end
-		if UnitIsPlayer("focus") then
-			c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-			FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+	if ( AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true ) then
+		if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
+			if PlayerFrame:IsShown() and not PlayerFrame.bg then
+				c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+				local bg = PlayerFrame:CreateTexture()
+				bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+				bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+				bg:SetTexture(TargetFrameNameBackground:GetTexture())
+				bg:SetVertexColor(c.r,c.g,c.b)
+				PlayerFrame.bg = true
+			end
+			if UnitIsPlayer("target") then
+				c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
+				TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+			end
+			if UnitIsPlayer("focus") then
+				c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
+				FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+			end
+		else
+			return nil
 		end
 	else
-		return nil
+		-- Remove background
+		TargetFrameNameBackground:SetAlpha(0.5)
+		TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
 	end
 end
 
@@ -228,9 +234,10 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 			local text2 = GameTooltipTextLeft2:GetText()
 			local text3 = GameTooltipTextLeft3:GetText()
 			local text4 = GameTooltipTextLeft4:GetText()
-			local inGuild = GetGuildInfo(unit)
 			local englishFaction, localizedFaction = UnitFactionGroup(unit)
+			--local inGuild = GetGuildInfo(unit)
 			-- Class Color
+			--[[
 			GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 			if ( inGuild ~= nil ) then
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
@@ -254,9 +261,39 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 			else
 				return nil
 			end
+			--]]
+			if ( text ~= nil and text2 ~= nil ) then
+				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
+				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
+			end
+			if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
+				if ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Horde" ) then
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 128, 0, 0, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				elseif ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Alliance" ) then
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 10, 56, 153, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				else
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				end
+			end
+			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
+				if ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Horde" ) then
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 128, 0, 0, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+				elseif ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Alliance" ) then
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 10, 56, 153, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+				else 
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+				end
+			end
+			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
+				local text5 = GameTooltipTextLeft5:GetText()
+				if ( text5 ~= nil ) then
+					GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
+				end
+			end
 		end
 	end
 end)
+--[[
 local ONUPDATE_INTERVAL = 0.1
 local TimeSinceLastUpdate = 0
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
@@ -268,12 +305,14 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 			local _, class = UnitClass(unit)
 			local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 			if ( color ~= nil ) then
-				local inGuild = GetGuildInfo(unit)
-				local isPvP = UnitIsPVP(unit)
+				--local inGuild = GetGuildInfo(unit)
+				--local isPvP = UnitIsPVP(unit)
 				local englishFaction, localizedFaction = UnitFactionGroup(unit)
 				local text  = GameTooltipTextLeft1:GetText()
 				local text2 = GameTooltipTextLeft2:GetText()
 				local text3 = GameTooltipTextLeft3:GetText()
+				local text4 = GameTooltipTextLeft4:GetText()
+				local text5 = GameTooltipTextLeft5:GetText()
 				-- Class Color
 				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 				if ( inGuild ~= nil ) then
@@ -298,13 +337,29 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 				else
 					return nil
 				end
+		
+				if ( text ~= nil and text2 ~= nil ) then
+					GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
+					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
+				end
+				if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				end
+				if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+				end
+				if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil and text5 ~= nil ) then
+				GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
+			end
 			end
 		end
 	end
 end)
+
 GameTooltip:SetScript("OnShow", function(self)
 	TimeSinceLastUpdate = 0
 end)
+--]]
 ----------------------------------------------------
 -- Tooltip Background and borders
 local TooltipBackground = GameTooltip:CreateTexture(nil, "BACKGROUND", nil, 1)
