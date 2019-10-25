@@ -6,7 +6,7 @@
 --
 -- Frames for AbyssUI
 --------------------------------------------------------------------------------
-
+local addonName, addonTable = ...
 -- AbyssUI_AFKCameraFrame
 local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", UIParent)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
@@ -191,9 +191,9 @@ PlayerInfo_Faction1.text:SetPoint("TOPRIGHT", 0, -50)
 PlayerInfo_Faction1.text:SetText(localizedFaction)
 -- Faction Color
  if ( englishFaction == "Horde" ) then
- 	PlayerInfo_Faction1.text:SetVertexColor(255/255, 0/255, 0/255)
+ 	PlayerInfo_Faction1.text:SetVertexColor(196/255, 30/255, 59/255)
  elseif ( englishFaction == "Alliance" ) then
- 	PlayerInfo_Faction1.text:SetVertexColor(0/255, 0/255, 255/255)
+ 	PlayerInfo_Faction1.text:SetVertexColor(0/255, 112/255, 222/255)
  elseif ( englishFaction == "Neutral" ) then
 	PlayerInfo_Faction1.text:SetVertexColor(255/255, 255/255, 255/255)
  else
@@ -397,17 +397,30 @@ end)
 -- AbyssUIFirstFrame
 AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
 AbyssUIFirstFrame:Hide()
-AbyssUIFirstFrame:SetWidth(350)
-AbyssUIFirstFrame:SetHeight(120)
-AbyssUIFirstFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 200)
+AbyssUIFirstFrame:SetWidth(GetScreenWidth())
+AbyssUIFirstFrame:SetHeight(GetScreenHeight())
+AbyssUIFirstFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
 AbyssUIFirstFrame:EnableMouse(true)
 AbyssUIFirstFrame:SetFrameStrata("HIGH")
 AbyssUIFirstFrame.text = AbyssUIFirstFrame.text or AbyssUIFirstFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-AbyssUIFirstFrame.text:SetScale(1.5)
+AbyssUIFirstFrame.text:SetScale(5)
 AbyssUIFirstFrame.text:SetAllPoints(true)
 AbyssUIFirstFrame.text:SetJustifyH("CENTER")
 AbyssUIFirstFrame.text:SetJustifyV("CENTER")
-AbyssUIFirstFrame.text:SetText("Thanks for using |cff0d75d4AbyssUI!|r\nThe |cff5f545eDark|r Blizzard UI revamp.\n|cffffcc00'Confirm'|r to ReloadUI")
+AbyssUIFirstFrame.text:SetText("Thank you for choosing Abyss|cff0d75d4UI|r!")
+----------------------------------------------------
+local Subtittle = CreateFrame("Frame", "$parentSubtittle", AbyssUIFirstFrame)
+Subtittle:SetWidth(GetScreenWidth())
+Subtittle:SetHeight(GetScreenHeight())
+Subtittle:SetPoint("CENTER", AbyssUIFirstFrame, "CENTER", 0, -50)
+Subtittle:EnableMouse(false)
+Subtittle:SetFrameStrata("HIGH")
+Subtittle.text = Subtittle.text or Subtittle:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+Subtittle.text:SetScale(3)
+Subtittle.text:SetAllPoints(true)
+Subtittle.text:SetJustifyH("CENTER")
+Subtittle.text:SetJustifyV("CENTER")
+Subtittle.text:SetText("The improved World of Warcraft user interface")
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -425,19 +438,132 @@ Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 Texture:SetAllPoints(AbyssUIFirstFrame)
 AbyssUIFirstFrame.texture = Texture
 ----------------------------------------------------
+local CloseButton = CreateFrame("Button", "$parentFrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate")
+CloseButton:SetHeight(40)
+CloseButton:SetWidth(40)
+CloseButton:SetPoint("TOPRIGHT", AbyssUIFirstFrame, "TOPRIGHT", 0, 0)
+CloseButton:SetText("x")
+CloseButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderCloseButton = CloseButton:CreateTexture(nil, "ARTWORK")
+BorderCloseButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderCloseButton:SetAllPoints(CloseButton)
+BorderCloseButton:SetVertexColor(0.34, 0.34, 0.34, 1)
+CloseButton:SetScript("OnClick", function()
+	AbyssUIFirstFrame:Hide()
+	AbyssUISecondFrame:Show()
+end)
+----------------------------------------------------
 local FrameButton = CreateFrame("Button", "$parentFrameButton", AbyssUIFirstFrame, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(70)
-FrameButton:SetPoint("BOTTOM", AbyssUIFirstFrame, "BOTTOM", 0, 10)
-FrameButton:SetText("Confirm")
+FrameButton:SetHeight(GetScreenHeight())
+FrameButton:SetWidth(GetScreenWidth())
+FrameButton:SetPoint("CENTER", AbyssUIFirstFrame, "CENTER", 0, 0)
 FrameButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+FrameButton:SetAlpha(0)
+FrameButton:SetScript("OnClick", function()
+	UIFrameFadeIn(AbyssUIFirstFrame, 1, 1, 0)
+	C_Timer.After(1, function()
+		AbyssUIFirstFrame:Hide()
+		UIFrameFadeIn(AbyssUISecondFrame, 1, 0, 1)
+	end)
+end)
+----------------------------------------------------
+-- AbyssUISecondFrame
+AbyssUISecondFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
+AbyssUISecondFrame:Hide()
+AbyssUISecondFrame:SetWidth(GetScreenWidth())
+AbyssUISecondFrame:SetHeight(GetScreenHeight())
+AbyssUISecondFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
+AbyssUISecondFrame:EnableMouse(true)
+AbyssUISecondFrame:SetFrameStrata("HIGH")
+AbyssUISecondFrame.text = AbyssUISecondFrame.text or AbyssUISecondFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+AbyssUISecondFrame.text:SetScale(2)
+AbyssUISecondFrame.text:SetAllPoints(true)
+AbyssUISecondFrame.text:SetJustifyH("CENTER")
+AbyssUISecondFrame.text:SetJustifyV("CENTER")
+AbyssUISecondFrame.text:SetText("First we need to save the variables"
+.." of the interface for the first use of AbyssUI.\n\nYou can choose to configure by yourself (Confirm)"
+.." or use the recommended settings (Recommended).\n\nIf you choose to configure,"
+.." the game will reload and then you can go to the configuration panel by typing '/abyssui config'.\n\n"
+.."If you choose the recommended settings, the UI will load the settings that are the mostly"
+.." recommended to use.\nYou always can configure the interface the way you would like by"
+.." typing /abyssui config in the chat.")
+----------------------------------------------------
+local AbyssUIBorder = AbyssUISecondFrame:CreateTexture(nil, "BACKGROUND")
+AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
+AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
+AbyssUIBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUISecondFrame:CreateTexture(nil, "ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUISecondFrame)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUISecondFrame:CreateTexture(nil, "BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUISecondFrame)
+AbyssUISecondFrame.texture = Texture
+----------------------------------------------------
+local CloseButton = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+CloseButton:SetHeight(40)
+CloseButton:SetWidth(40)
+CloseButton:SetPoint("TOPRIGHT", AbyssUISecondFrame, "TOPRIGHT", 0, 0)
+CloseButton:SetText("x")
+CloseButton:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderCloseButton = CloseButton:CreateTexture(nil, "ARTWORK")
+BorderCloseButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderCloseButton:SetAllPoints(CloseButton)
+BorderCloseButton:SetVertexColor(0.34, 0.34, 0.34, 1)
+CloseButton:SetScript("OnClick", function()
+	AbyssUISecondFrame:Hide()
+	ReloadUI()
+end)
+----------------------------------------------------
+local FrameButton = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+FrameButton:SetHeight(40)
+FrameButton:SetWidth(120)
+FrameButton:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", -100, -200)
+FrameButton:SetText("Confirm")
 ----------------------------------------------------
 local BorderButton = FrameButton:CreateTexture(nil, "ARTWORK")
-BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 BorderButton:SetAllPoints(FrameButton)
-BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 FrameButton:SetScript("OnClick", function()
-	AbyssUIFirstFrame:Hide()
+	AbyssUISecondFrame:Hide()
+	ReloadUI()
+end)
+----------------------------------------------------
+local FrameButton2 = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+FrameButton2:SetHeight(40)
+FrameButton2:SetWidth(120)
+FrameButton2:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 100, -200)
+FrameButton2:SetText("Recommended")
+----------------------------------------------------
+local BorderButton = FrameButton2:CreateTexture(nil, "ARTWORK")
+BorderButton:SetAllPoints(FrameButton2)
+FrameButton2:SetScript("OnClick", function()
+	-- Set
+	for i, v in pairs {
+		addonTable.CameraSmooth50,
+		addonTable.InspectTarget,
+		addonTable.AutoSellGray,
+		addonTable.DisableHealingSpam,
+		addonTable.InstanceLeave,
+		addonTable.ConfirmPopUps,
+		addonTable.UnitFrameImproved,
+	} do
+	 	v:SetChecked(true)
+	end
+	-- Get
+	AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 = addonTable.CameraSmooth50:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionInspectTarget = addonTable.InspectTarget:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionSellGray = addonTable.AutoSellGray:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = addonTable.DisableHealingSpam:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionInstanceLeave = addonTable.InstanceLeave:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = addonTable.ConfirmPopUps:GetChecked()
+	AbyssUIAddonSettings.UnitFrameImproved = addonTable.UnitFrameImproved:GetChecked()
+	AbyssUISecondFrame:Hide()
 	ReloadUI()
 end)
 ----------------------------------------------------
@@ -461,7 +587,8 @@ AbyssUI_ReloadFrame.text:SetScale(1.5)
 AbyssUI_ReloadFrame.text:SetAllPoints(true)
 AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
 AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
-AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\nClick the |cffffcc00'Confirm'|r button to Reload.\nYou still can make changes (do before you confirm).")
+AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\n"..
+"Click the |cffffcc00'Confirm'|r button to Reload.\nYou still can make changes (do before you confirm).")
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -515,7 +642,10 @@ AbyssUI_ReloadFrameFadeUI.text:SetScale(1.5)
 AbyssUI_ReloadFrameFadeUI.text:SetAllPoints(true)
 AbyssUI_ReloadFrameFadeUI.text:SetJustifyH("CENTER")
 AbyssUI_ReloadFrameFadeUI.text:SetJustifyV("CENTER")
-AbyssUI_ReloadFrameFadeUI.text:SetText("It will only hide Blizzard frames, addons have their own frames,\n a good addon probably has an option to hide while out of combat.\n I could have added the entire interface to be hidden,\n but that would prevent interaction with some frames (eg auction, loot, quest, frames).")
+AbyssUI_ReloadFrameFadeUI.text:SetText("It will only hide Blizzard frames, addons have their"..
+" own frames,\n a good addon probably has an option to hide while out of combat.\n"..
+" I could have added the entire interface to be hidden,\n but that would prevent"..
+" interaction with some frames (eg auction, loot, quest, frames).")
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrameFadeUI:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -640,7 +770,9 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("You need to stay on the small version of blizzard actionbar (Interface->ActionBars).\nThis new bar don't have keybind setup on it, also it can glitchy (rare to happen).")
+AbyssUI_ActionBarInfo.text:SetText("You need to choose the small version of blizzard actionbar"..
+" (Interface->ActionBars).\nThis new bar don't have keybind setup on it, also it can"..
+" glitchy (rare to happen).")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -757,7 +889,7 @@ AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
 		else
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			C_Timer.After(4, function()
-				print("Thanks for using |cff0d75d4AbyssUI!|r The |cff5f545eDark|r Blizzard UI revamp.")
+				print("Thank you for choosing |cff0d75d4AbyssUI!|r\nThe improved World of Warcraft user interface.")
 			end)
 			C_Timer.After(5, function()
 				AbyssUIDailyInfo()

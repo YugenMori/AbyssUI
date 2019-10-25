@@ -6,29 +6,7 @@
 --
 -- Functions for AbyssUI
 --------------------------------------------------------------------------------
--- Action Bar Icon Border Remove
--- Many thanks to Spyrö for part of this
---[[
-hooksecurefunc("ActionButton_ShowGrid", function(Button)
-	_G[Button:GetName().."NormalTexture"]:SetVertexColor(.4, .4, .4)
-end)
-
-for _, Bar in pairs({ "Action",
-	"MultiBarBottomLeft",
-	"MultiBarBottomRight",
-	"MultiBarLeft",
-	"MultiBarRight",
-	"PetAction",
-	"Buff", }) do
-for i = 1, 12 do
-	local Button = Bar.."Button"..i
-		if _G[Button] then _G[Button.."Icon"]:SetTexCoord(0.05, 0.95, 0.05, 0.95)
-		end
-	end
-end
---]]
-----------------------------------------------------
--- Class Icons (Need the texture pack)
+-- Class Icons
 hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
 		if UnitIsPlayer(self.unit) then
@@ -134,12 +112,11 @@ frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 frame:RegisterEvent("UNIT_FACTION")
-
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
 	if ( AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true ) then
 		if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
-			if PlayerFrame:IsShown() and not PlayerFrame.bg then
+			if ( PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
 				c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 				local bg = PlayerFrame:CreateTexture()
 				bg:SetPoint("TOPLEFT", PlayerFrameBackground)
@@ -163,6 +140,8 @@ local function eventHandler(self, event, ...)
 		-- Remove background
 		TargetFrameNameBackground:SetAlpha(0.5)
 		TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+		FocusFrameNameBackground:SetAlpha(0.5)
+		FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
 	end
 end
 
@@ -171,41 +150,30 @@ for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackgrou
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 ----------------------------------------------------
--- Text round values
---[[
-hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", function()
-	PlayerFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("player")))
-	--PlayerFramePower.TextString:SetText(AbbreviateLargeNumbers(UnitMana("player")))
-
-	TargetFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("target")))
-	--TargetFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("target")))
-
-	FocusFrameHealthBar.TextString:SetText(AbbreviateLargeNumbers(UnitHealth("focus")))
-	--FocusFrameManaBar.TextString:SetText(AbbreviateLargeNumbers(UnitMana("focus")))
-end)
---]]
-----------------------------------------------------
 -- Cast Bar
 -- Timer
 CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
 CastingBarFrame.timer:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
 CastingBarFrame.timer:SetPoint("TOP", CastingBarFrame, "BOTTOM", 0, 0)
 CastingBarFrame.update = .1
-
 CastingBarFrame:HookScript("OnUpdate", function(self, elapsed)
-    if not self.timer then return end
-    if self.update and self.update < elapsed then
-        if self.casting then
-            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
-        elseif self.channeling then
-            self.timer:SetText(format("%.1f", max(self.value, 0)))
-        else
-            self.timer:SetText("")
-        end
-        self.update = .1
-    else
-        self.update = self.update - elapsed
-    end
+	if ( AbyssUIAddonSettings.HideCastTimer ~= true ) then
+	    if not self.timer then return end
+	    if self.update and self.update < elapsed then
+	        if self.casting then
+	            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
+	        elseif self.channeling then
+	            self.timer:SetText(format("%.1f", max(self.value, 0)))
+	        else
+	            self.timer:SetText("")
+	        end
+	        self.update = .1
+	    else
+	        self.update = self.update - elapsed
+	    end
+	else
+		return nil
+	end
 end)
 ----------------------------------------------------
 -- Minimap Tweaks
@@ -235,51 +203,24 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 			local text3 = GameTooltipTextLeft3:GetText()
 			local text4 = GameTooltipTextLeft4:GetText()
 			local englishFaction, localizedFaction = UnitFactionGroup(unit)
-			--local inGuild = GetGuildInfo(unit)
-			-- Class Color
-			--[[
-			GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-			if ( inGuild ~= nil ) then
-				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-				if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
-					GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-				elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-				else 
-					return nil
-				end
-			elseif ( inGuild == nil ) then
-				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-				if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
-					GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-				elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-				else 
-					return nil
-				end
-			else
-				return nil
-			end
-			--]]
 			if ( text ~= nil and text2 ~= nil ) then
 				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
 				if ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Horde" ) then
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 128, 0, 0, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				elseif ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 10, 56, 153, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				else
 					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				end
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
 				if ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Horde" ) then
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 128, 0, 0, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				elseif ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 10, 56, 153, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				else 
 					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				end
@@ -293,73 +234,6 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 		end
 	end
 end)
---[[
-local ONUPDATE_INTERVAL = 0.1
-local TimeSinceLastUpdate = 0
-GameTooltip:HookScript("OnUpdate", function(self, elapsed)
-	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
-	if TimeSinceLastUpdate >= ONUPDATE_INTERVAL then
-		TimeSinceLastUpdate = 0
-		local _, unit = GameTooltip:GetUnit()
-		if  UnitIsPlayer(unit) then
-			local _, class = UnitClass(unit)
-			local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-			if ( color ~= nil ) then
-				--local inGuild = GetGuildInfo(unit)
-				--local isPvP = UnitIsPVP(unit)
-				local englishFaction, localizedFaction = UnitFactionGroup(unit)
-				local text  = GameTooltipTextLeft1:GetText()
-				local text2 = GameTooltipTextLeft2:GetText()
-				local text3 = GameTooltipTextLeft3:GetText()
-				local text4 = GameTooltipTextLeft4:GetText()
-				local text5 = GameTooltipTextLeft5:GetText()
-				-- Class Color
-				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-				if ( inGuild ~= nil ) then
-					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-					if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
-						GameTooltipTextLeft4:SetTextColor(255, 0.1, 0)
-					elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
-						GameTooltipTextLeft4:SetTextColor(0, 0.5, 255)
-					else 
-						return nil
-					end
-				elseif ( inGuild == nil ) then
-					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-					if ( englishFaction ~= "Neutral" and englishFaction == "Horde" ) then
-						GameTooltipTextLeft3:SetTextColor(255, 0.1, 0)
-					elseif ( englishFaction ~= "Neutral" and englishFaction == "Alliance" ) then
-						GameTooltipTextLeft3:SetTextColor(0, 0.5, 255)
-					else 
-						return nil
-					end
-				else
-					return nil
-				end
-		
-				if ( text ~= nil and text2 ~= nil ) then
-					GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-				end
-				if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-				end
-				if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-				end
-				if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil and text5 ~= nil ) then
-				GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
-			end
-			end
-		end
-	end
-end)
-
-GameTooltip:SetScript("OnShow", function(self)
-	TimeSinceLastUpdate = 0
-end)
---]]
 ----------------------------------------------------
 -- Tooltip Background and borders
 local TooltipBackground = GameTooltip:CreateTexture(nil, "BACKGROUND", nil, 1)
@@ -382,7 +256,6 @@ end)
 -- StatsFrame
 -- Many thanks to Syiana for part of this
 local StatsFrame = CreateFrame("Frame", "$parentStatsFrame", UIParent)
-
 local movable = true
 local frame_anchor = "TOP"
 local pos_x = -250
@@ -398,7 +271,6 @@ StatsFrame:SetScript("OnDragStop", StatsFrame.StopMovingOrSizing)
 local CF = CreateFrame("Frame", "$parentFrame", nil)
 CF:RegisterEvent("PLAYER_LOGIN")
 CF:SetScript("OnEvent", function(self, event)
-
 	local color
 	if customColor == false then
 		color = { r = 1, g = 1, b = 1 }
@@ -406,7 +278,6 @@ CF:SetScript("OnEvent", function(self, event)
 		local _, class = UnitClass("player")
 		color = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 	end
-
 	local function numFormat(v)
 		if v > 1E10 then
 			return (floor(v/1E9)).."b"
@@ -424,7 +295,6 @@ CF:SetScript("OnEvent", function(self, event)
 			return v
 		end
 	end
-
 	local function ColorGradient(perc, ...)
 		if (perc > 1) then
 			local r, g, b = select(select('#', ...) - 2, ...) return r, g, b
@@ -439,39 +309,31 @@ CF:SetScript("OnEvent", function(self, event)
 
 		return r1 + (r2-r1)*relperc, g1 + (g2-g1)*relperc, b1 + (b2-b1)*relperc
 	end
-
 	local function RGBGradient(num)
 		local r, g, b = ColorGradient(num, unpack(gradientColor))
 		return r, g, b
 	end
-
 	local function RGBToHex(r, g, b)
 		r = r <= 1 and r >= 0 and r or 0
 		g = g <= 1 and g >= 0 and g or 0
 		b = b <= 1 and b >= 0 and b or 0
 		return string.format('|cff%02x%02x%02x', r*255, g*255, b*255)
 	end
-
 	local function getFPS()
 		return "|c00ffffff" .. floor(GetFramerate()) .. "|r fps"
 	end
-
 	local function getLatencyWorldRaw()
 		return select(4, GetNetStats())
 	end
-
 	local function getLatencyWorld()
 		return "|c00ffffff" .. getLatencyWorldRaw() .. "|r ms"
 	end
-
 	local function getLatencyRaw()
 		return select(3, GetNetStats())
 	end
-
 	local function getLatency()
 		return "|c00ffffff" .. getLatencyRaw() .. "|r ms"
 	end
-
 	local function getTime()
 		if use12 == true then
 			local t = date("%I:%M")
@@ -482,7 +344,6 @@ CF:SetScript("OnEvent", function(self, event)
 			return "|c00ffffff"..t.."|r"
 		end
 	end
-
 	StatsFrame:SetWidth(50)
 	StatsFrame:SetHeight(18)
 
@@ -494,9 +355,7 @@ CF:SetScript("OnEvent", function(self, event)
 		StatsFrame.text:SetShadowColor(0, 0, 0)
 	end
 	StatsFrame.text:SetTextColor(color.r, color.g, color.b)
-
 	local lastUpdate = 0
-
 	local function update(self, elapsed)
 		lastUpdate = lastUpdate + elapsed
 		if lastUpdate > 1 then
@@ -520,37 +379,6 @@ end
 function AbyssUI_StatsFrames1Show()
 	StatsFrame:Show()
 end
-----------------------------------------------------
--- UI Scale Elements
-local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
-ScaleElements:RegisterEvent("ADDON_LOADED")
-ScaleElements:RegisterEvent("PLAYER_LOGOUT")
-ScaleElements:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
-		CastingBarFrame:SetScale(1.05)
-		else return nil
-	end
-end)
---------------------------------------------------------------------------
--- Tooltip Instant Fade
--- Many thanks to sacrife for part of this
---[[
-GameTooltip.FadeOut = function(self)
-	GameTooltip:Hide()
-end
-
-local hasUnit
-local updateFrame = CreateFrame("Frame", "$parentUpdateFrame", nil)
-updateFrame:SetScript("OnUpdate", function(self)
-	local _, unit = GameTooltip:GetUnit()
-	if hasUnit and not unit then
-		GameTooltip:Hide()
-		hasUnit = nil
-	elseif unit then
-		hasUnit = true
-	end
-end)
---]]
 ----------------------------------------------------
 -- Auto Repair/Sell Grey
 local AbyssUI_AutoSell = CreateFrame("Frame", "$parentAbyssUI_AutoSell", nil)
@@ -598,18 +426,41 @@ end)
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
-
 local function eventHandler(self, event, ...)
 	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
-		if UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") then
-			TargetFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-		elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
-			TargetFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+		if ( UnitReaction("player", "target") ~= nil ) then
+			local target = UnitReaction("player", "target")
+			local utarget = UnitIsPlayer("target")
+			if utarget == false and target < 3 then
+				TargetFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
+			elseif ( utarget == false and target == 3 ) then
+				TargetFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
+			elseif ( utarget == false and target == 4 ) then
+				TargetFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
+			elseif ( utarget == false and target > 4 ) then
+				TargetFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
+			else
+				return nil
+			end
+		else 
+			return nil
 		end
-		if UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") then
-			FocusFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-		elseif not UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") and UnitReaction("player", "focus") == 4 then
-			FocusFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+		if ( UnitReaction("player", "focus") ~= nil ) then
+			local focus = UnitReaction("player", "focus")
+			local ufocus = UnitIsPlayer("focus")
+			if ufocus == false and focus < 4 then
+				FocusFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
+			elseif ( ufocus == false and target == 3 ) then
+				FocusFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
+			elseif ( ufocus == false and focus == 4 ) then
+				FocusFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
+			elseif ( ufocus == false and focus > 4 ) then
+				FocusFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
+			else
+				return nil
+			end
+		else 
+			return nil
 		end
 	else
 		return nil
@@ -622,18 +473,37 @@ end
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if ( UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") ) then
-		TargetFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-	elseif not UnitIsEnemy("player", "target") and not UnitIsFriend("player", "target") and not UnitIsPlayer("target") and UnitReaction("player", "target") == 4 then
-		TargetFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
-	else
+	if ( UnitReaction("player", "target") ~= nil ) then
+		local target = UnitReaction("player", "target")
+		local utarget = UnitIsPlayer("target")
+		if utarget == false and target < 3 then
+			TargetFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
+		elseif ( utarget == false and target == 3 ) then
+			TargetFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
+		elseif ( utarget == false and target == 4 ) then
+			TargetFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
+		elseif ( utarget == false and target > 4 ) then
+			TargetFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
+		else
+			return nil
+		end
+	else 
 		return nil
 	end
-
-	if ( UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") ) then
-		FocusFrameHealthBar:SetStatusBarColor(208/255, 23/255, 42/255)
-	elseif not UnitIsEnemy("player", "focus") and not UnitIsFriend("player", "focus") and not UnitIsPlayer("focus") and UnitReaction("player", "focus") == 4 then
-		FocusFrameHealthBar:SetStatusBarColor(244/255, 243/255, 119/255)
+	if ( UnitReaction("player", "focus") ~= nil ) then
+		local focus = UnitReaction("player", "focus")
+		local ufocus = UnitIsPlayer("focus")
+		if ufocus == false and focus < 4 then
+			FocusFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
+		elseif ( ufocus == false and target == 3 ) then
+			FocusFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
+		elseif ( ufocus == false and focus == 4 ) then
+			FocusFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
+		elseif ( ufocus == false and focus > 4 ) then
+			FocusFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
+		else
+			return nil
+		end
 	else 
 		return nil
 	end
@@ -644,13 +514,32 @@ function AbyssUIStart()
 	AbyssUIFirstFrame:Show()
 end
 ----------------------------------------------------
--- ActionBarScale and Minimap
-hooksecurefunc(MultiBarRight, "SetScale", function(self, scale)
-	if scale < 1 then self:SetScale(1) end
+-- UI Scale Elements (On Load)
+local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
+ScaleElements:RegisterEvent("ADDON_LOADED")
+ScaleElements:RegisterEvent("PLAYER_LOGOUT")
+ScaleElements:SetScript("OnEvent", function(self, event, arg1)
+	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
+		CastingBarFrame:SetScale(1.05)
+	else 
+		return nil
+	end
 end)
-
-hooksecurefunc(MultiBarLeft, "SetScale", function(self, scale)
-	if scale < 1 then self:SetScale(1) end
+-- Pixel Perfect
+local PixelPerfect = CreateFrame("Frame", "$parentPixelPerfect", nil)
+PixelPerfect:RegisterEvent("PLAYER_ENTERING_WORLD")
+PixelPerfect:SetScript("OnEvent", function(self, event, arg1)
+if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionPixelPerfect ~= true) then
+		SetCVar("useUiScale", 0)
+		local sv = GetScreenHeight()
+		if ( sv >= 768 ) then 
+			UIParent:SetScale(768/GetScreenHeight())
+		else 
+			return nil
+		end
+	else 
+		return nil
+	end
 end)
 ----------------------------------------------------
 -- Color Picker 
@@ -811,6 +700,22 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	    else
 			return nil
 	    end
+	else
+		return nil
+	end
+end)
+-- Elite Portrait
+local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrait', nil)
+AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
+    if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    	PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
+    	TargetFrameTextureFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-RareMob")
+    	FocusFrameTextureFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-RareMob")
+	elseif ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Elite")
+	    TargetFrameTextureFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Rare")
+	    FocusFrameTextureFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Rare")
 	else
 		return nil
 	end

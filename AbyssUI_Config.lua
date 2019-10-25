@@ -6,9 +6,8 @@
 --
 -- Configuration page for AbyssUI
 --------------------------------------------------------------------------------
-local addonName, addonTable = ...
-
 local AbyssUI_Config = {}
+local addonName, addonTable = ...
 
 local function InitSettings()
 AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
@@ -54,10 +53,14 @@ Frame:SetWidth(200)
 Frame:SetScale(1.1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon, consider sharing with your friends\n or even making a donation. It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\nusing nearly the same amount of CPU/RAM as the Blizzard default UI.\n\nCheck the options by clicking in the (+) button")
+Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,"..
+" consider sharing with your friends\n or even making a donation."..
+" It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,"..
+"\nusing nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
+"Check the options by clicking in the (+) button")
 --Special Thanks
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
-Frame:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 50)
+Frame:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 70)
 Frame:SetHeight(24)
 Frame:SetWidth(200)
 Frame:SetScale(1)
@@ -65,7 +68,7 @@ Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("LEFT")
 Frame:SetText("|cff0d75d4Special Thanks|r")
 local Frame1 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
-Frame1:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 30)
+Frame1:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 50)
 Frame1:SetHeight(24)
 Frame1:SetWidth(200)
 Frame1:SetScale(1)
@@ -73,13 +76,22 @@ Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame1:SetPoint("LEFT")
 Frame1:SetText("|cfff2dc7fFizzlemizz|r for helping me with programming questions.")
 local Frame2 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
-Frame2:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 10)
+Frame2:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 30)
 Frame2:SetHeight(24)
 Frame2:SetWidth(200)
 Frame2:SetScale(1)
 Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame2:SetPoint("LEFT")
 Frame2:SetText("|cfff2dc7fFry|r for helping me with grammatical errors.")
+local Frame3 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
+Frame3:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 10)
+Frame3:SetHeight(24)
+Frame3:SetWidth(200)
+Frame3:SetScale(1)
+Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+Frame3:SetPoint("LEFT")
+Frame3:SetText("|cfff2dc7fKawF|r by UnitFrame Improved, so I could create a really nice"..
+" UnitFrame for AbyssUI.")
 -- Panel 01 (ActionBar)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
@@ -106,7 +118,9 @@ Frame:SetWidth(200)
 Frame:SetScale(1.1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("If you prefer a customizable actionbar, I highly recommend installing either\nBartender4 or Dominos. You can continue to use my settings if you prefer,\nbut the options are much more limited.")
+Frame:SetText("If you prefer a customizable actionbar,"..
+" I highly recommend installing either\nBartender4 or Dominos."..
+" You can continue to use my settings if you prefer,\nbut the options are much more limited.")
 -- Panel 02 (HideElements)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -204,7 +218,8 @@ end)
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -140)
 AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar")
-AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the Blizzard MainActionBar (you need to use the small actionbar for this)"
+AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the Blizzard MainActionBar"..
+" (you need to use the small actionbar for this)"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
 -- OnClick Function
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
@@ -400,7 +415,8 @@ end)
 local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 YouDiedLevelUpFrame_CheckButton:SetPoint("TOPLEFT", 10, -230)
 YouDiedLevelUpFrame_CheckButton.Text:SetText("Hide YouDied/LevelUp Frame")
-YouDiedLevelUpFrame_CheckButton.tooltip = "Hide the 'You Died' and 'Level Up' frame when you die/level in the game"
+YouDiedLevelUpFrame_CheckButton.tooltip = "Hide the 'You Died' and 'Level Up' frame when you"..
+" die/level in the game"
 YouDiedLevelUpFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideYouDiedLevelUpFrame)
 -- OnClick Function
 YouDiedLevelUpFrame_CheckButton:SetScript("OnClick", function(self)
@@ -656,7 +672,7 @@ FactionPvpIcon_CheckButton:SetChecked(AbyssUIAddonSettings.FactionPvpIcon)
 -- OnClick Function
 FactionPvpIcon_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.FactionPvpIcon = self:GetChecked()
-    if AbyssUIAddonSettings.FactionPvpIcon == true then
+    if ( AbyssUIAddonSettings.FactionPvpIcon == true ) then
       PlayerPVPIcon:SetAlpha(0)
       PlayerPrestigeBadge:SetAlpha(0)
       PlayerPrestigePortrait:SetAlpha(0)
@@ -705,13 +721,25 @@ FactionPvpIcon_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
+-- 2nd Collum
+-- Hide Cast Timer
+local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
+HideCastTimer_CheckButton.Text:SetText("Hide CastBar Timer")
+HideCastTimer_CheckButton.tooltip = "Hide the timer below CastBar"
+HideCastTimer_CheckButton:SetChecked(AbyssUIAddonSettings.HideCastTimer)
+-- OnClick Function
+HideCastTimer_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.HideCastTimer = self:GetChecked()
+end)
 -- End
 ----------------------------------- Extras  -----------------------------------
 -- Keep UnitFrame Dark --
 local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 KeepUnitDark_CheckButton:SetPoint("CENTER", -290, -80)
 KeepUnitDark_CheckButton.Text:SetText("Keep UnitFrame Dark")
-KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame Dark (Player Frame, Boss, etc)."
+KeepUnitDark_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame Dark"..
+" (Player Frame, Boss, etc)."
 KeepUnitDark_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitDark)
 -- OnClick Function
 KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
@@ -737,7 +765,8 @@ end)
 local KeepUnitBlizzard_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitBlizzard_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 KeepUnitBlizzard_CheckButton:SetPoint("CENTER", -290, -110)
 KeepUnitBlizzard_CheckButton.Text:SetText("Keep UnitFrame Blizzard Like")
-KeepUnitBlizzard_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame Blizzard like (Player Frame, Boss, etc). "
+KeepUnitBlizzard_CheckButton.tooltip = "Even if you change theme, this will keep UnitFrame"..
+" Blizzard like (Player Frame, Boss, etc)."
 KeepUnitBlizzard_CheckButton:SetChecked(AbyssUIAddonSettings.KeepUnitBlizzard)
 -- OnClick Function
 KeepUnitBlizzard_CheckButton:SetScript("OnClick", function(self)
@@ -762,13 +791,37 @@ end)
 -- Fade UI --
 local FadeUI_CheckButton = CreateFrame("CheckButton", "$parentFadeUI_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 FadeUI_CheckButton:SetPoint("CENTER", -290, -140)
-FadeUI_CheckButton.Text:SetText("|cfff2dc7fFade UI|r")
+FadeUI_CheckButton.Text:SetText("Fade UI")
 FadeUI_CheckButton.tooltip = "Fade the UI when you are out of combat ('ATL-CTRL-P' to show frames)"
 FadeUI_CheckButton:SetChecked(AbyssUIAddonSettings.FadeUI)
 -- OnClick Function
 FadeUI_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.FadeUI = self:GetChecked()
   AbyssUI_ReloadFrameFadeUI:Show()
+end)
+-- Elite Portrait --
+local ElitePortrait_CheckButton = CreateFrame("CheckButton", "$parentElitePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+ElitePortrait_CheckButton:SetPoint("CENTER", -290, -170)
+ElitePortrait_CheckButton.Text:SetText("Elite Portrait")
+ElitePortrait_CheckButton.tooltip = "Add a elite texture to the portraits (high recommended the use of this option with portrait class icons)"
+ElitePortrait_CheckButton:SetChecked(AbyssUIAddonSettings.ElitePortrait)
+-- OnClick Function
+ElitePortrait_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ElitePortrait = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
+-- UnitFrame Improved --
+local UnitFrameImproved_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+UnitFrameImproved_CheckButton:SetPoint("CENTER", -290, -200)
+UnitFrameImproved_CheckButton.Text:SetText("|cfff2dc7fUnitFrame Improved|r")
+UnitFrameImproved_CheckButton.tooltip = "This is a improved version of unitframes,"..
+" it changes those frames to a more beautiful and complete version (recommended use)"
+UnitFrameImproved_CheckButton:SetChecked(AbyssUIAddonSettings.UnitFrameImproved)
+addonTable.UnitFrameImproved = UnitFrameImproved_CheckButton
+-- OnClick Function
+UnitFrameImproved_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.UnitFrameImproved = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
 end)
 ------------------------------- Miscellaneous -------------------------------
 -- Camera Pitch --
@@ -778,6 +831,7 @@ CameraSmooth50_CheckButton:SetPoint("TOPLEFT", 10, -80)
 CameraSmooth50_CheckButton.Text:SetText("Smooth Camera\n   (50% Slower)")
 CameraSmooth50_CheckButton.tooltip = "Makes the Camera turns in a more smooth way"
 CameraSmooth50_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionCameraSmooth50)
+addonTable.CameraSmooth50 = CameraSmooth50_CheckButton
 -- OnClick Function
 CameraSmooth50_CheckButton:SetScript("OnClick", function(self)
   if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
@@ -878,8 +932,10 @@ end)
 local InspectTarget_CheckButton = CreateFrame("CheckButton", "$parentInspectTarget_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 InspectTarget_CheckButton:SetPoint("TOPLEFT", 10, -170)
 InspectTarget_CheckButton.Text:SetText("Inspect Target (Shift + ')")
-InspectTarget_CheckButton.tooltip = "When you have a target or your mouse is over someone character, to inspect this player press the keys Shift + '"
+InspectTarget_CheckButton.tooltip = "When you have a target or your mouse is over someone character,"..
+" to inspect this player press the keys Shift + '"
 InspectTarget_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInspectTarget)
+addonTable.InspectTarget = InspectTarget_CheckButton
 -- OnClick Function
 InspectTarget_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.ExtraFunctionInspectTarget = self:GetChecked()
@@ -888,7 +944,8 @@ end)
 local ActionButtonKeyUP_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 ActionButtonKeyUP_CheckButton:SetPoint("TOPLEFT", 10, -200)
 ActionButtonKeyUP_CheckButton.Text:SetText("ActionButton on KeyUp")
-ActionButtonKeyUP_CheckButton.tooltip = "With this option spells can be cast just when the keybind are released"
+ActionButtonKeyUP_CheckButton.tooltip = "With this option spells can be cast just when the"..
+" keybind are released"
 ActionButtonKeyUP_CheckButton:SetChecked(AbyssUIAddonSettings.ActionButtonKeyDown)
 -- OnClick Function
 ActionButtonKeyUP_CheckButton:SetScript("OnClick", function(self)
@@ -912,7 +969,8 @@ end)
 local AbyssUI_HideBackgroundClassColor_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideBackgroundClassColor_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_HideBackgroundClassColor_CheckButton:SetPoint("TOPLEFT", 10, -230)
 AbyssUI_HideBackgroundClassColor_CheckButton.Text:SetText("Default Background")
-AbyssUI_HideBackgroundClassColor_CheckButton.tooltip = "Remove the class color background behind the player names to default values (Transparent Name needs to be unchecked)"
+AbyssUI_HideBackgroundClassColor_CheckButton.tooltip = "Remove the class color background behind"..
+" the player names to default values (Transparent Name needs to be unchecked)"
 AbyssUI_HideBackgroundClassColor_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor)
 -- OnClick Function
 AbyssUI_HideBackgroundClassColor_CheckButton:SetScript("OnClick", function(self)
@@ -924,7 +982,8 @@ end)
 local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 200, -80)
 AbyssUIActionCam_CheckButton.Text:SetText("Combat Cursor Mode")
-AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in combat (right-click to show cursor)"
+AbyssUIActionCam_CheckButton.tooltip = "Makes the camera turns with your mouse when in"..
+" combat (right-click to show cursor)"
 AbyssUIActionCam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionActionCam)
 -- OnClick Function
 AbyssUIActionCam_CheckButton:SetScript("OnClick", function(self)
@@ -952,8 +1011,10 @@ end)
 local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 200, -110)
 AbyssUIAutoSellGray_CheckButton.Text:SetText("Auto Repair\nSell Gray Items")
-AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray and repair items"
+AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray"..
+" and repair items"
 AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
+addonTable.AutoSellGray = AbyssUIAutoSellGray_CheckButton
 -- OnClick Function
 AbyssUIAutoSellGray_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
@@ -962,7 +1023,8 @@ end)
 local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 200, -140)
 AbyssUIAutoGamma_CheckButton.Text:SetText("Auto Gamma\n(Day and Night Mode)")
-AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to 1.2 (brighter) and to 1.0 (default) at night based on the local time"
+AbyssUIAutoGamma_CheckButton.tooltip = "Automatically change the gamma when is day to"..
+" 1.2 (brighter) and to 1.0 (default) at night based on the local time"
 AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGamma)
 -- OnClick Function
 AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
@@ -995,7 +1057,8 @@ end)
 local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 200, -170)
 AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Style")
-AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to the American style"
+AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to"..
+" the American style"
 AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
 -- OnClick Function
 AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
@@ -1005,8 +1068,10 @@ end)
 local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 200, -200)
 AbyssUI_DisableHealingSpam_CheckButton.Text:SetText("Disable Portrait Text Spam")
-AbyssUI_DisableHealingSpam_CheckButton.tooltip = "Disable healing/damage spam over player and pet portraits"
+AbyssUI_DisableHealingSpam_CheckButton.tooltip = "Disable healing/damage spam over player"..
+" and pet portraits"
 AbyssUI_DisableHealingSpam_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam)
+addonTable.DisableHealingSpam = AbyssUI_DisableHealingSpam_CheckButton
 -- OnClick Function
 AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = self:GetChecked()
@@ -1045,8 +1110,10 @@ end)
 local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_InstanceLeave_CheckButton:SetPoint("TOPLEFT", 400, -80)
 AbyssUI_InstanceLeave_CheckButton.Text:SetText("Instance Leave Frame")
-AbyssUI_InstanceLeave_CheckButton.tooltip = "A dynamic frame that popup when you complete a LFG (dungeon, raid, etc)"
+AbyssUI_InstanceLeave_CheckButton.tooltip = "A dynamic frame that pop-up when you"..
+" complete a LFG (dungeon, raid, etc)"
 AbyssUI_InstanceLeave_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionInstanceLeave)
+addonTable.InstanceLeave = AbyssUI_InstanceLeave_CheckButton
 -- OnClick Function
 AbyssUI_InstanceLeave_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionInstanceLeave = self:GetChecked()
@@ -1055,8 +1122,10 @@ end)
 local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 400, -110)
 AbyssUI_ConfirmPopUps_CheckButton.Text:SetText("Confirm Pop-Ups (Ctrl + ')")
-AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost any pop-ups (release, quests, stacks, etc) pressing the keys Ctrl + '"
+AbyssUI_ConfirmPopUps_CheckButton.tooltip = "When this is active you can confirm almost"..
+" any pop-ups (release, quests, stacks, etc) pressing the keys Ctrl + '"
 AbyssUI_ConfirmPopUps_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionConfirmPopUps)
+addonTable.ConfirmPopUps = AbyssUI_ConfirmPopUps_CheckButton
 -- OnClick Function
 AbyssUI_ConfirmPopUps_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = self:GetChecked()
@@ -1065,7 +1134,8 @@ end)
 local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideInCombat_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_HideInCombat_CheckButton:SetPoint("TOPLEFT", 400, -140)
 AbyssUI_HideInCombat_CheckButton.Text:SetText("Dynamic ObjectiveTrack Hide")
-AbyssUI_HideInCombat_CheckButton.tooltip = "Hide some parts of the interface when you are in combat or in a PVP instance"
+AbyssUI_HideInCombat_CheckButton.tooltip = "Hide some parts of the interface when you"..
+" are in combat or in a PVP instance"
 AbyssUI_HideInCombat_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHideInCombat)
 -- OnClick Function
 AbyssUI_HideInCombat_CheckButton:SetScript("OnClick", function(self)
@@ -1103,6 +1173,20 @@ AbyssUI_ScreenshotLevelUp_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunct
 -- OnClick Function
 AbyssUI_ScreenshotLevelUp_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp = self:GetChecked()
+end)
+-- Disable PixelPerfect --
+local AbyssUI_PixelPerfect_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_PixelPerfect_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_PixelPerfect_CheckButton:SetPoint("TOPLEFT", 400, -230)
+AbyssUI_PixelPerfect_CheckButton.Text:SetText("|cfff2dc7fDisable PixelPerfect|r")
+AbyssUI_PixelPerfect_CheckButton.tooltip = "|cfff00000Attention|r\nPixelPerfect auto scale the UI"..
+" to better fit your game screen size, keeping frames in place and fixing any crop or"..
+" inconsistency that may occur (I don't recommend checking this option, unless you really"..
+" need to scale the UI by yourself)"
+AbyssUI_PixelPerfect_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionPixelPerfect)
+-- OnClick Function
+AbyssUI_PixelPerfect_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionPixelPerfect = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
 end)
 --End
 ----------------------------- AbyssUI Stylization ------------------------------
