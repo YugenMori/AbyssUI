@@ -1174,15 +1174,16 @@ AbyssUI_ScreenshotLevelUp_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunct
 AbyssUI_ScreenshotLevelUp_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp = self:GetChecked()
 end)
--- Disable PixelPerfect --
+-- PixelPerfect --
 local AbyssUI_PixelPerfect_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_PixelPerfect_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_PixelPerfect_CheckButton:SetPoint("TOPLEFT", 400, -230)
-AbyssUI_PixelPerfect_CheckButton.Text:SetText("|cfff2dc7fDisable PixelPerfect|r")
+AbyssUI_PixelPerfect_CheckButton.Text:SetText("|cfff2dc7fPixelPerfect|r")
 AbyssUI_PixelPerfect_CheckButton.tooltip = "|cfff00000Attention|r\nPixelPerfect auto scale the UI"..
 " to better fit your game screen size, keeping frames in place and fixing any crop or"..
-" inconsistency that may occur (I don't recommend checking this option, unless you really"..
+" inconsistency that may occur (I highly recommend checking this option, unless you really"..
 " need to scale the UI by yourself)"
 AbyssUI_PixelPerfect_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionPixelPerfect)
+addonTable.PixelPerfect = AbyssUI_PixelPerfect_CheckButton
 -- OnClick Function
 AbyssUI_PixelPerfect_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionPixelPerfect = self:GetChecked()
