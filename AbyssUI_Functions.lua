@@ -724,22 +724,25 @@ end)
 -- DailyInfo Function
 C_WowTokenPublic.UpdateMarketPrice()
 function AbyssUIDailyInfo()
-	print("\n|cfff2dc7f<< AbyssUI Daily Info >>|r")
-	if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
-		print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
-	else
-		print("|cfff2dc7fToken Price:|r Not available right now!")
-	end
-	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
-		print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
-	else
-		print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
-	end
-	print("|cfff2dc7fHonor Level: |r|cffffcc00" .. UnitHonorLevel("player") .. "|r")
-	--print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
-	print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
-	local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
-	print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+	C_Timer.After(0.5, function ()
+		local HonorLevel = UnitHonorLevel("player")
+		local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+		print("\n|cfff2dc7f<< AbyssUI Daily Info >>|r")
+		if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
+			print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+		else
+			print("|cfff2dc7fToken Price:|r Not available right now!")
+		end
+		if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+			print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+		else
+			print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+		end
+		print("|cfff2dc7fHonor Level: |r|cffffcc00" .. HonorLevel .. "|r")
+		--print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+		print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+		print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+	end)
 end
 ----------------------------------------------------
 -- End

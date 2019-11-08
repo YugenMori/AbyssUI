@@ -406,7 +406,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					RaidFinderFrameBottomInset.NineSlice.BottomLeftCorner,
 					RaidFinderFrameBottomInset.NineSlice.BottomRightCorner,
 					LFGListFrame.CategorySelection.Inset.NineSlice.BottomLeftCorner,
-					LFGListFrame.CategorySelection.Inset.NineSlice.BottomRightCorner, }) do
+					LFGListFrame.CategorySelection.Inset.NineSlice.BottomRightCorner,
+					LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomLeftCorner,
+					LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomRightCorner, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -829,7 +831,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					MerchantMoneyInset.NineSlice.BottomLeftCorner,
 					MerchantMoneyInset.NineSlice.BottomRightCorner,
 					MerchantExtraCurrencyInset.NineSlice.BottomLeftCorner,
-					MerchantExtraCurrencyInset.NineSlice.BottomRightCorner, }) do
+					MerchantExtraCurrencyInset.NineSlice.BottomRightCorner,
+					MerchantFrameInset.NineSlice.BottomLeftCorner,
+					MerchantFrameInset.NineSlice.BottomRightCorner, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -2180,9 +2184,13 @@ f:SetScript("OnEvent", function(self, event, name)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
+				--WardrobeCollectionFrame.SetTransmogFrame.NineSlice.BottomLeftCorner,
+				--WardrobeCollectionFrame.SetTransmogFrame.NineSlice.BottomRightCorner,
 				for i, v in pairs({
 					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomLeftCorner,
-					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomRightCorner, }) do
+					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomRightCorner,
+					WardrobeTransmogFrame.Inset.NineSlice.BottomLeftCorner,
+					WardrobeTransmogFrame.Inset.NineSlice.BottomRightCorner, }) do
 					v:SetAlpha(0)
 				end
 			else

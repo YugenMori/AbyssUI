@@ -924,12 +924,15 @@ AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
 		else
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			C_Timer.After(4, function()
-				print("Thank you for choosing |cff0d75d4AbyssUI!|r\nThe improved World of Warcraft user interface.")
+				print("Thank you for choosing |cff0d75d4AbyssUI|r")
+				print("The improved World of Warcraft user interface.")
 			end)
 			C_Timer.After(5, function()
 				AbyssUIDailyInfo()
-				print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
-				print("Type |cffffcc00/abyssui|r for a list of commands")
+				C_Timer.After(1, function() 
+					print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
+					print("Type |cffffcc00/abyssui|r for a list of commands")
+				end)
 			end)
 			AbyssUIFirstFrame:Hide()
 		end
