@@ -25,44 +25,34 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- FrameScale
 		local function UnitFramesImproved_SetFrameScale(scale)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				if not InCombatLockdown() then 
-					-- Scale the main frames
-					PlayerFrame:SetScale(scale);
-					TargetFrame:SetScale(scale);
-					if (FocusFrame) then -- Support WoW Classic by checking for FocusFrame
-						FocusFrame:SetScale(scale);
-					end
-					
-					-- Scale sub-frames
-					ComboFrame:SetScale(scale); -- Still needed
-
-					characterSettings["FrameScale"] = scale;
+			if not InCombatLockdown() then 
+				-- Scale the main frames
+				PlayerFrame:SetScale(scale);
+				TargetFrame:SetScale(scale);
+				if (FocusFrame) then -- Support WoW Classic by checking for FocusFrame
+					FocusFrame:SetScale(scale);
 				end
-			else
-				return nil
+				
+				-- Scale sub-frames
+				ComboFrame:SetScale(scale); -- Still needed
+
+				characterSettings["FrameScale"] = scale;
 			end
 		end
 		-- Event listener to make sure we've loaded our settings and that we apply them
 		-- ApllySettings
 		local function UnitFramesImproved_ApplySettings(settings)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				UnitFramesImproved_SetFrameScale(settings["FrameScale"])
-			else 
-				return nil
-			end
+			UnitFramesImproved_SetFrameScale(settings["FrameScale"])
 		end
 		-- LoadDefault
 		local function UnitFramesImproved_LoadDefaultSettings()
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if characterSettings == nil then
 				characterSettings = {}
 				characterSettings["FrameScale"] = "1.0";
-				
-				if not TargetFrame:IsUserPlaced() then
-					TargetFrame:SetPoint("TOPLEFT", PlayerFrame, "TOPRIGHT", 36, 0);
-				end
-			else
-				return nil
+			end
+			
+			if not TargetFrame:IsUserPlaced() then
+				TargetFrame:SetPoint("TOPLEFT", PlayerFrame, "TOPRIGHT", 36, 0);
 			end
 		end
 		-- ToT color
@@ -290,8 +280,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						PlayerName,
 						TargetFrameTextureFrameName,
 						FocusFrameTextureFrameName, }) do 
-						v:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
-						v:SetVertexColor(255, 239, 203)
+						v:SetFont("Fonts\\FRIZQT__.TTF", 10, "OUTLINE")
+						--v:SetVertexColor(255, 239, 203)
 					end
 				end
 			else
@@ -427,9 +417,10 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			end
 		end
 		-- Create the addon main instance
-		local UnitFramesImproved = CreateFrame('Button', 'UnitFramesImproved');
-			-- Event listener to make sure we enable the addon at the right time
-		function UnitFramesImproved:PLAYER_ENTERING_WORLD()
+		local UnitFramesImprovedSettings = CreateFrame('Button', 'UnitFramesImproved');
+		-- Event listener to make sure we enable the addon at the right time
+		UnitFramesImprovedSettings:RegisterEvent("PLAYER_ENTERING_WORLD")
+		UnitFramesImprovedSettings:SetScript("OnEvent", function(self, event)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
 				-- Set some default settings
 				if (characterSettings == nil) then
@@ -439,25 +430,24 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			else
 				return nil
 			end
-		end
-		function UnitFramesImproved:VARIABLES_LOADED()
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				-- Set some default settings
-				if (characterSettings == nil) then
-					UnitFramesImproved_LoadDefaultSettings();
-				end
-				if (not (characterSettings["PlayerFrameAnchor"] == nil)) then
-					StaticPopup_Show("LAYOUT_RESETDEFAULT");
-					characterSettings["PlayerFrameX"] = nil;
-					characterSettings["PlayerFrameY"] = nil;
-					characterSettings["PlayerFrameMoved"] = nil;
-					characterSettings["PlayerFrameAnchor"] = nil;
-				end
-				UnitFramesImproved_ApplySettings(characterSettings);
-			else 
-				return nil
+		end)
+		local UnitFramesImprovedApplySettings = CreateFrame('Button', 'UnitFramesImproved');
+		-- Event listener to make sure we enable the addon at the right time
+		UnitFramesImprovedApplySettings:RegisterEvent("VARIABLES_LOADED")
+		UnitFramesImprovedApplySettings:SetScript("OnEvent", function(self, event)
+			-- Set some default settings
+			if ( characterSettings == nil ) then
+				UnitFramesImproved_LoadDefaultSettings();
 			end
-		end
+			if (not (characterSettings["PlayerFrameAnchor"] == nil)) then
+				StaticPopup_Show("LAYOUT_RESETDEFAULT");
+				characterSettings["PlayerFrameX"] = nil;
+				characterSettings["PlayerFrameY"] = nil;
+				characterSettings["PlayerFrameMoved"] = nil;
+				characterSettings["PlayerFrameAnchor"] = nil;
+			end
+			UnitFramesImproved_ApplySettings(characterSettings);
+		end)
 		--StatusBarTextString
 		local function CreateStatusBarText(name, parentName, parent, point, x, y)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
@@ -470,16 +460,18 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			end
 		end
 		-- Bootstrap
+		--[[
 		local function UnitFramesImproved_StartUp(self)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				self:SetScript('OnEvent', function(self, event) self[event](self) end);
-				self:RegisterEvent('PLAYER_ENTERING_WORLD');
+				--self:SetScript('OnEvent', function(self, event) self[event](self) end);
+				--self:RegisterEvent('PLAYER_ENTERING_WORLD');
 				self:RegisterEvent('VARIABLES_LOADED');
 			else
 				return nil
 			end
 		end
-		UnitFramesImproved_StartUp(UnitFramesImproved);
+		--]]
+		--UnitFramesImproved_StartUp(UnitFramesImproved);
 	else
 		return nil
 	end

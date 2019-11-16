@@ -192,8 +192,26 @@ FrameButton:SetWidth(140)
 FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
 FrameButton:SetText("AbyssUI DailyInfo")
 FrameButton:SetScript("OnClick", function()
-  C_WowTokenPublic.UpdateMarketPrice()
-  AbyssUIDailyInfo()
+C_WowTokenPublic.UpdateMarketPrice()
+  C_Timer.After(0.5, function()
+    local HonorLevel = UnitHonorLevel("player")
+    local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+    print("|cfff2dc7f~ AbyssUI Daily Info ~|r")
+    if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
+      print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+    else
+      print("|cfff2dc7fToken Price:|r Not available right now!")
+    end
+    if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+      print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+    else
+      print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+    end
+    print("|cfff2dc7fHonor Level: |r|cffffcc00" .. HonorLevel .. "|r")
+    --print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+    print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+    print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+  end)
 end)
 -- Clear Action Bar --
 local FrameButton = CreateFrame("Button","$parentExtraClearActionButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
@@ -1097,7 +1115,7 @@ end)
 -- Transparent Background Name --
 local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_TransparentName_CheckButton:SetPoint("TOPLEFT", 200, -230)
-AbyssUI_TransparentName_CheckButton.Text:SetText("Transparent Name")
+AbyssUI_TransparentName_CheckButton.Text:SetText("Transparent Name BKGD")
 AbyssUI_TransparentName_CheckButton.tooltip = "Remove any color in the target name background"
 AbyssUI_TransparentName_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionTransparentName)
 -- OnClick Function

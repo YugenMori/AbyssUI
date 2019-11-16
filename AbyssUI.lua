@@ -2184,8 +2184,8 @@ f:SetScript("OnEvent", function(self, event, name)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
-				--WardrobeCollectionFrame.SetTransmogFrame.NineSlice.BottomLeftCorner,
-				--WardrobeCollectionFrame.SetTransmogFrame.NineSlice.BottomRightCorner,
+				--WardrobeCollectionFrame.SetCollectionFrame.LeftInset.NineSlice.BottomLeftCorner,
+				--WardrobeCollectionFrame.SetCollectionFrame.LeftInset.NineSlice.BottomRightCorner,
 				for i, v in pairs({
 					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomLeftCorner,
 					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomRightCorner,
