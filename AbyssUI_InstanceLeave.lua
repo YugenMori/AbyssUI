@@ -25,11 +25,14 @@ AbyssUI_InstanceLeave_DynamicFrame.text:SetText("This instance is completed! Wan
 AbyssUI_InstanceLeave_DynamicFrame.text:SetFont("Fonts\\FRIZQT__.TTF", 16, "THICKOUTLINE")
 AbyssUI_InstanceLeave_DynamicFrame:Hide()
 AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStart", AbyssUI_InstanceLeave_DynamicFrame.StartMoving)
+AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStop", AbyssUI_InstanceLeave_DynamicFrame.StopMovingOrSizing)
+--[[
 AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStop", function(self)
   self:StopMovingOrSizing()
   settings.XPos = self:GetLeft()
   settings.YPos = self:GetBottom()
 end)
+
 
 AbyssUI_InstanceLeave_DynamicFrame:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnEvent", function(self, event, ...)
@@ -42,6 +45,7 @@ AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnEvent", function(self, event, ..
     end
   end
 end)
+--]]
 -- Border --
 local LeaveBorder = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
 LeaveBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")

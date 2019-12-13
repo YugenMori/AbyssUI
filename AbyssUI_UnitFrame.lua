@@ -1,4 +1,4 @@
--- Author: KawF (Author), Yugen (changes in code and textures to fit AbyssUI)
+-- Author: KawF (Author), Yugen (changes, fixes and enchantments)
 --
 -- Battle for Azeroth
 --
@@ -278,10 +278,18 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				if not InCombatLockdown() then
 					for i, v in pairs ({
 						PlayerName,
+						PlayerFrameHealthBarText,
+						PlayerFrameManaBarText,
 						TargetFrameTextureFrameName,
-						FocusFrameTextureFrameName, }) do 
-						v:SetFont("Fonts\\FRIZQT__.TTF", 10, "OUTLINE")
-						--v:SetVertexColor(255, 239, 203)
+						TargetFrameTextureFrameHealthBarText,
+						TargetFrameTextureFrameManaBarText,
+						FocusFrameTextureFrameName,
+						FocusFrameTextureFrameHealthBarText,
+						FocusFrameTextureFrameManaBarText, }) do 
+						v:SetFont("Fonts\\FRIZQT__.TTF", 11)
+						v:SetVertexColor(255/255, 255/255, 255/255)
+						v:SetShadowColor(0, 0, 0)
+						v:SetShadowOffset(1, -1)
 					end
 				end
 			else
@@ -340,16 +348,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		 	if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
 				local factionGroup = UnitFactionGroup(self.unit);
 				local creatureType = UnitCreatureType(self.unit)
-				if ( creatureType == "Humanoid" or UnitIsPlayer(self.unit)) then
-					if ( AbyssUIAddonSettings.FactionPvpIcon ~= true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
-					    TargetFrameTextureFramePrestigeBadge:SetAlpha(0)
-		  				TargetFrameTextureFramePrestigePortrait:SetAlpha(0)
-		  				FocusFrameTextureFramePrestigeBadge:SetAlpha(0)
-		  				FocusFrameTextureFramePrestigePortrait:SetAlpha(0)
-		  			else
-		  				return nil
-		  			end
-					if ( UnitIsPVPFreeForAll(self.unit) ) then
+				if ( creatureType == "Humanoid" or UnitIsPlayer(self.unit) ) then
+					if ( UnitIsPVPFreeForAll(self.unit) and AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
 						self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA");
 						self.pvpIcon:Show();
 					elseif ( factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit) ) then
@@ -366,7 +366,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				end
 				UnitFramesImproved_Style_TargetFrame(self);
 			else
-				return nil
+				self.pvpIcon:Hide();
 			end
 		end
 		-- EnableFrame

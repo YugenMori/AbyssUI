@@ -552,8 +552,8 @@ FrameButton2:SetScript("OnClick", function()
 		addonTable.DisableHealingSpam,
 		addonTable.InstanceLeave,
 		addonTable.ConfirmPopUps,
-		addonTable.PixelPerfect,
 		addonTable.UnitFrameImproved,
+		addonTable.HideUnitImprovedFaction,
 	} do
 	 	v:SetChecked(true)
 	end
@@ -564,8 +564,8 @@ FrameButton2:SetScript("OnClick", function()
 	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = addonTable.DisableHealingSpam:GetChecked()
 	AbyssUIAddonSettings.ExtraFunctionInstanceLeave = addonTable.InstanceLeave:GetChecked()
 	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = addonTable.ConfirmPopUps:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionPixelPerfect = addonTable.PixelPerfect:GetChecked()
 	AbyssUIAddonSettings.UnitFrameImproved = addonTable.UnitFrameImproved:GetChecked()
+	AbyssUIAddonSettings.HideUnitImprovedFaction = addonTable.HideUnitImprovedFaction:GetChecked()
 	AbyssUISecondFrame:Hide()
 	FrameButton2.Glow:Finish()
 	ReloadUI()
