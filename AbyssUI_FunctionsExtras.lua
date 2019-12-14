@@ -156,7 +156,7 @@ f:SetScript("OnEvent", function(self, event, ...)
 end)
 ----------------------------------------------
 -- NamePlate Style 
--- Thanks to SDPhantom for part of this
+-- Thanks to SDPhantom for the mostly part of this
 ----------------------------------------------
 --  Nametag font size
 local function SetFont(obj, optSize)
@@ -232,7 +232,7 @@ hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
 		            	frame.healthBar:SetStatusBarColor(1, 0.64, 0)
 		            elseif healthPercentage < 50 and healthPercentage >= 20 then
 		            	frame.healthBar:SetStatusBarColor(1, 1, 0)
-		            elseif healthPercentage < 20 then
+		            elseif healthPercentage < 21 then
 		                frame.healthBar:SetStatusBarColor(128/255, 128/255, 128/255)
 		            end
 		        end
@@ -242,9 +242,9 @@ hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
 		        if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("player") then
 		            if healthPercentage == 100 then
 		            	frame.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-		            elseif healthPercentage < 100 and healthPercentage > 20 then
+		            elseif healthPercentage < 100 and healthPercentage > 21 then
 		            	frame.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-		            elseif healthPercentage < 20 then
+		            elseif healthPercentage < 21 then
 		                frame.healthBar:SetStatusBarColor(128/255, 128/255, 128/255)
 		            end
 		        end
@@ -404,10 +404,10 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local fontSize = 12
 			local fontFlag = "THINOUTLINE"			-- "THINOUTLINE", "OUTLINE MONOCHROME", "OUTLINE" or nil (no outline)
 
-			local backdropcolor = {26/255, 25/255, 31/255}		-- backdrop color	
+			local backdropcolor = {0/255, 0/255, 0/255}			-- backdrop color	
 			local brdcolor = {0/255, 0/255, 0/255}				-- backdrop border color
 			local infocolor = {41/255, 41/255, 41/255}			-- info panel color
-			local IpanelBGalpha = 0.3							-- info panel background alpha
+			local IpanelBGalpha = 0.5							-- info panel background alpha
 
 			local classColoredBorder = false					-- color border by class
 			local scale = 1
