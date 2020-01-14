@@ -259,113 +259,115 @@ end)
 local ChatBubbleColorization = CreateFrame("CheckButton", "$parentChatBubbleColorization", UIParent, "ChatConfigCheckButtonTemplate")
 ChatBubbleColorization:RegisterEvent("PLAYER_ENTERING_WORLD")
 ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
-if ( event == "PLAYER_ENTERING_WORLD" ) then
-    local reaction = UnitReaction("target", "player")
-    local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
-    local color = CUSTOM_CLASS_COLORS
-    local events = {
-                CHAT_MSG_SAY = 'chatBubbles', 
-                CHAT_MSG_YELL = 'chatBubbles',
-                CHAT_MSG_PARTY = 'chatBubblesParty', 
-                CHAT_MSG_PARTY_LEADER = 'chatBubblesParty',
-                CHAT_MSG_MONSTER_SAY = 'chatBubbles', 
-                CHAT_MSG_MONSTER_YELL = 'chatBubbles', 
-                CHAT_MSG_MONSTER_PARTY = 'chatBubblesParty',
-            }
-     
-        local function SkinFrame(frame)
-        	if ( not frame:IsForbidden() ) then
-	            for i = 1, select('#', frame:GetRegions()) do
-	                local region = select(i, frame:GetRegions())
-	                if (region:GetObjectType() == 'FontString') then
-	                    frame.text = region
-	                else
-	                    region:Hide()
+	if ( AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges ~= true ) then
+		if ( event == "PLAYER_ENTERING_WORLD" ) then
+		    local reaction = UnitReaction("target", "player")
+		    local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
+		    local color = CUSTOM_CLASS_COLORS
+		    local events = {
+		                CHAT_MSG_SAY = 'chatBubbles', 
+		                CHAT_MSG_YELL = 'chatBubbles',
+		                CHAT_MSG_PARTY = 'chatBubblesParty', 
+		                CHAT_MSG_PARTY_LEADER = 'chatBubblesParty',
+		                CHAT_MSG_MONSTER_SAY = 'chatBubbles', 
+		                CHAT_MSG_MONSTER_YELL = 'chatBubbles', 
+		                CHAT_MSG_MONSTER_PARTY = 'chatBubblesParty',
+		            }
+		     
+	        local function SkinFrame(frame)
+	        	if ( not frame:IsForbidden() ) then
+		            for i = 1, select('#', frame:GetRegions()) do
+		                local region = select(i, frame:GetRegions())
+		                if (region:GetObjectType() == 'FontString') then
+		                    frame.text = region
+		                else
+		                    region:Hide()
+		                end
+		            end
+		 
+		            frame.text:SetFontObject('SystemFont_Tiny')
+		            frame.text:SetJustifyH('LEFT')
+		 
+		            frame:ClearAllPoints()
+		            frame:SetPoint('TOPLEFT', frame.text, -10, 25)
+		            frame:SetPoint('BOTTOMRIGHT', frame.text, 10, -10)
+		            frame:SetBackdrop({
+		                bgFile = [[Interface\DialogFrame\UI-DialogBox-Background-Dark]],
+		                edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]],
+		                tile = true, tileSize = 16, edgeSize = 18,
+		                insets = {left = 3, right = 3, top = 3, bottom = 3}
+		            })
+		            frame:SetBackdropColor(0, 0, 0, 1)
+		            local r, g, b = frame.text:GetTextColor()
+		            frame:SetBackdropBorderColor(r, g, b, .8)
+		 
+		            frame.sender = frame:CreateFontString(nil, 'OVERLAY', 'GameFontNormalSmall')
+		            frame.sender:SetPoint('BOTTOMLEFT', frame.text, 'TOPLEFT', 0, 4)
+		            frame.sender:SetJustifyH('LEFT')
+		 
+		            frame:HookScript('OnHide', function() 
+		                frame.inUse = false 
+		            end)
+		        end
+	        end
+	 
+	        local function UpdateFrame(frame, guid, name)
+	        	if ( not frame:IsForbidden() ) then
+		            if (not frame.text) then
+		                SkinFrame(frame) 
+		            end
+		            frame.inUse = true
+		 
+		            local ccolor
+		            if (guid ~= nil and guid ~= '') then
+		                _, ccolor, _, _, _, _ = GetPlayerInfoByGUID(guid)
+		            end
+		 
+		            if (name) then
+		                local color = RAID_CLASS_COLORS[ccolor] or {r = 1, g = 1, b = 0}
+		                frame.sender:SetText(('|cFF%2x%2x%2x%s|r'):format(color.r * 255, color.g * 255, color.b * 255, name))
+		                if frame.text:GetWidth() < frame.sender:GetWidth() then
+		                    frame.text:SetWidth(frame.sender:GetWidth())
+		                end
+		            end
+		        end
+	        end
+	 	
+	        local function FindFrame(msg)
+	            for i = 1, WorldFrame:GetNumChildren() do
+	                local frame = select(i, WorldFrame:GetChildren())
+	                if (not frame:IsForbidden() and not frame:GetName() and not frame.inUse) then
+	                    for i = 1, select('#', frame:GetRegions()) do
+	                        local region = select(i, frame:GetRegions())
+	                        if region:GetObjectType() == 'FontString' and region:GetText() == msg then
+	                            return frame
+	                        end
+	                    end
 	                end
 	            end
-	 
-	            frame.text:SetFontObject('SystemFont_Tiny')
-	            frame.text:SetJustifyH('LEFT')
-	 
-	            frame:ClearAllPoints()
-	            frame:SetPoint('TOPLEFT', frame.text, -10, 25)
-	            frame:SetPoint('BOTTOMRIGHT', frame.text, 10, -10)
-	            frame:SetBackdrop({
-	                bgFile = [[Interface\DialogFrame\UI-DialogBox-Background-Dark]],
-	                edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]],
-	                tile = true, tileSize = 16, edgeSize = 18,
-	                insets = {left = 3, right = 3, top = 3, bottom = 3}
-	            })
-	            frame:SetBackdropColor(0, 0, 0, 1)
-	            local r, g, b = frame.text:GetTextColor()
-	            frame:SetBackdropBorderColor(r, g, b, .8)
-	 
-	            frame.sender = frame:CreateFontString(nil, 'OVERLAY', 'GameFontNormalSmall')
-	            frame.sender:SetPoint('BOTTOMLEFT', frame.text, 'TOPLEFT', 0, 4)
-	            frame.sender:SetJustifyH('LEFT')
-	 
-	            frame:HookScript('OnHide', function() 
-	                frame.inUse = false 
-	            end)
 	        end
-        end
- 
-        local function UpdateFrame(frame, guid, name)
-        	if ( not frame:IsForbidden() ) then
-	            if (not frame.text) then
-	                SkinFrame(frame) 
-	            end
-	            frame.inUse = true
 	 
-	            local ccolor
-	            if (guid ~= nil and guid ~= '') then
-	                _, ccolor, _, _, _, _ = GetPlayerInfoByGUID(guid)
-	            end
-	 
-	            if (name) then
-	                local color = RAID_CLASS_COLORS[ccolor] or {r = 1, g = 1, b = 0}
-	                frame.sender:SetText(('|cFF%2x%2x%2x%s|r'):format(color.r * 255, color.g * 255, color.b * 255, name))
-	                if frame.text:GetWidth() < frame.sender:GetWidth() then
-	                    frame.text:SetWidth(frame.sender:GetWidth())
-	                end
-	            end
+	        local ChatBubbleFrame = CreateFrame('Frame')
+	        for event, cvar in pairs(events) do 
+	            ChatBubbleFrame:RegisterEvent(event) 
 	        end
-        end
- 	
-        local function FindFrame(msg)
-            for i = 1, WorldFrame:GetNumChildren() do
-                local frame = select(i, WorldFrame:GetChildren())
-                if (not frame:IsForbidden() and not frame:GetName() and not frame.inUse) then
-                    for i = 1, select('#', frame:GetRegions()) do
-                        local region = select(i, frame:GetRegions())
-                        if region:GetObjectType() == 'FontString' and region:GetText() == msg then
-                            return frame
-                        end
-                    end
-                end
-            end
-        end
- 
-        local ChatBubbleFrame = CreateFrame('Frame')
-        for event, cvar in pairs(events) do 
-            ChatBubbleFrame:RegisterEvent(event) 
-        end
- 
-        ChatBubbleFrame:SetScript('OnEvent', function(self, event, msg, sender, _, _, _, _, _, _, _, _, _, guid)
-            if (GetCVarBool(events[event])) then
-                ChatBubbleFrame.elapsed = 0
-                ChatBubbleFrame:SetScript('OnUpdate', function(self, elapsed)
-                    self.elapsed = self.elapsed + elapsed
-                    local frame = FindFrame(msg)
-                    if (frame or self.elapsed > 0.3) then
-                        ChatBubbleFrame:SetScript('OnUpdate', nil)
-                        if (frame) then 
-                            UpdateFrame(frame, guid, sender) 
-                        end
-                    end
-                end)
-            end
-        end)
+	 
+	        ChatBubbleFrame:SetScript('OnEvent', function(self, event, msg, sender, _, _, _, _, _, _, _, _, _, guid)
+	            if (GetCVarBool(events[event])) then
+	                ChatBubbleFrame.elapsed = 0
+	                ChatBubbleFrame:SetScript('OnUpdate', function(self, elapsed)
+	                    self.elapsed = self.elapsed + elapsed
+	                    local frame = FindFrame(msg)
+	                    if (frame or self.elapsed > 0.3) then
+	                        ChatBubbleFrame:SetScript('OnUpdate', nil)
+	                        if (frame) then 
+	                            UpdateFrame(frame, guid, sender) 
+	                        end
+	                    end
+	                end)
+	            end
+	        end)
+	    end
 	else
 		return nil
     end

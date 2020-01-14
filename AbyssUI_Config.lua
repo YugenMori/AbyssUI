@@ -405,7 +405,7 @@ ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 end)
--- Disable Nameplate Changes --
+-- Hide FPS/MS Frame --
 local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
 FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame (*)")
@@ -1140,6 +1140,18 @@ addonTable.NameplateChanges = AbyssUI_NameplateChanges_CheckButton
 -- OnClick Function
 AbyssUI_NameplateChanges_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionNameplateChanges = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
+-- Disable ChatBubble Changes --
+local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NameplateChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -230)
+AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("Disable ChatBubble Changes")
+AbyssUI_ChatBubbleChanges_CheckButton.tooltip = "This option will remove any change that was made to the chatbubbles (the frame text above players)"
+AbyssUI_ChatBubbleChanges_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges)
+addonTable.NameplateChanges = AbyssUI_ChatBubbleChanges_CheckButton
+-- OnClick Function
+AbyssUI_ChatBubbleChanges_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
 end)
 --End
