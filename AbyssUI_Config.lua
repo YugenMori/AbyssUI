@@ -1264,9 +1264,21 @@ MinimalActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.MinimalActionBar = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
 end)
+-- Disable UnitFrame Smoke --
+local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 10, -260)
+DisableUnitFrameSmoke_CheckButton.Text:SetText("Disable Smoke Texture")
+DisableUnitFrameSmoke_CheckButton.tooltip = "It will disable the 'smoke' texture around the portrait in "..
+"the UnitFrame Improved version of it"
+DisableUnitFrameSmoke_CheckButton:SetChecked(AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture)
+-- OnClick Function
+DisableUnitFrameSmoke_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
 -- UnitFrame Improved --
 local UnitFrameImproved_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
-UnitFrameImproved_CheckButton:SetPoint("TOPLEFT", 10, -260)
+UnitFrameImproved_CheckButton:SetPoint("TOPLEFT", 10, -290)
 UnitFrameImproved_CheckButton.Text:SetText("|cfff2dc7fUnitFrame Improved|r")
 UnitFrameImproved_CheckButton.tooltip = "This is a improved version of unitframes,"..
 " it changes those frames to a more beautiful and complete version (recommended use)"

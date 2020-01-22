@@ -89,6 +89,27 @@ local function AbyssUIMoveFrames_Slashhandler()
     print("/abyssui |cffffcc00reload|r ~Reload the UI")
     print("/abyssui |cffffcc00more|r ~For more commands")
 end
+-- DailyInfo Function (For Slash)
+local function AbyssUIDailyInfo_Slash()
+C_WowTokenPublic.UpdateMarketPrice()
+    local HonorLevel = UnitHonorLevel("player")
+    local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+    print("|cfff2dc7f~ AbyssUI Daily Info ~|r")
+    if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
+        print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+    else
+        print("|cfff2dc7fToken Price:|r Not available right now!")
+    end
+    if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+        print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+    else
+        print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+    end
+    print("|cfff2dc7fHonor Level: |r|cffffcc00" .. HonorLevel .. "|r")
+    --print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
+    print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+    print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+end
 -- Function
 local function AbyssUIMoveFrames_Slash(msg)
     if ( msg ~= "" ) then
@@ -104,7 +125,7 @@ local function AbyssUIMoveFrames_Slash(msg)
         elseif (msg == "reset") then
           	AbyssUIMoveFrames_Reset()
         elseif (msg == "daily") then
-  			AbyssUIDailyInfo()
+  			AbyssUIDailyInfo_Slash()
         elseif (msg == "reload") then
   			ReloadUI()
         elseif (msg == "more") then
