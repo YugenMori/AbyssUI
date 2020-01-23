@@ -735,6 +735,16 @@ AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
 		return nil
 	end
 end)
+-- Damage Font
+local AbyssUIDamageFont = CreateFrame("Frame")
+AbyssUIDamageFont:RegisterEvent("ADDON_LOADED")
+AbyssUIDamageFont:SetScript("OnEvent", function(self, event, arg1)
+	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" and AbyssUIAddonSettings.ExtraFunctionDamageFont ~= true  ) then
+		DAMAGE_TEXT_FONT = "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
+	else
+		return nil
+	end
+end)
 ----------------------------------------------------
 -- DailyInfo Function
 local AbyssUIDailyInfo = CreateFrame("Frame")
