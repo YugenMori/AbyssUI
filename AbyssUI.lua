@@ -2,8 +2,6 @@
 --
 -- Shadowlands
 --
--- Hope you like my addOn ^^
---
 -- Dark Minimalist UI for World of Warcraft
 --------------------------------------------------------------------------------
 -- DarkerUI Core--

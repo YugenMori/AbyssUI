@@ -2,8 +2,6 @@
 --
 -- Shadowlands
 --
--- Hope you like my addOn ^^
---
 -- Configuration page for AbyssUI
 --------------------------------------------------------------------------------
 local AbyssUI_Config = {}
