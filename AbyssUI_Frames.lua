@@ -2,8 +2,6 @@
 --
 -- Shadowlands
 --
--- Hope you like my addOn ^^
---
 -- Frames for AbyssUI
 --------------------------------------------------------------------------------
 local addonName, addonTable = ...
@@ -888,9 +886,10 @@ AbyssUI_ActionBarInfo.text:SetScale(1.5)
 AbyssUI_ActionBarInfo.text:SetAllPoints(true)
 AbyssUI_ActionBarInfo.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarInfo.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarInfo.text:SetText("You need to choose the small version of blizzard actionbar"..
-" (Interface->ActionBars).\nThis new bar don't have keybind setup on it, also it can"..
-" glitchy (rare to happen).")
+AbyssUI_ActionBarInfo.text:SetText("OUTDATED! Consider using another addon like dominos/bartender")
+--"\nYou need to choose the small version of blizzard actionbar"..
+--" (Interface->ActionBars).\nThis new bar don't have keybind setup on it, also it can"..
+--" glitchy (rare to happen).")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarInfo:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -912,7 +911,7 @@ local FrameButtonReset = CreateFrame("Button","$parentFrameButtonReset", AbyssUI
 FrameButtonReset:SetHeight(24)
 FrameButtonReset:SetWidth(85)
 FrameButtonReset:SetPoint("BOTTOM", AbyssUI_ActionBarInfo, "BOTTOM", 0, 10)
-FrameButtonReset:SetText("Reload UI")
+FrameButtonReset:SetText("Close")
 FrameButtonReset:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 ----------------------------------------------------
 local BorderButton = FrameButtonReset:CreateTexture(nil, "ARTWORK")
@@ -921,7 +920,6 @@ BorderButton:SetAllPoints(FrameButtonReset)
 BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 FrameButtonReset:SetScript("OnClick", function()
 	AbyssUI_ActionBarInfo:Hide()
-	ReloadUI()
 end)
 ----------------------------------------------------
 -- AbyssUI_ColorPickerFrame

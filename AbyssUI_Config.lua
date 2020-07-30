@@ -238,13 +238,14 @@ end)
 -- AbyssUI Action Bar --
 local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
 AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -140)
-AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar")
+AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (outdated, please consider using another addon)")
 AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the Blizzard MainActionBar"..
 " (you need to use the small actionbar for this)"
 AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
 -- OnClick Function
 AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
-  AbyssUIAddonSettings.AbyssUINewActionBar3x12 = self:GetChecked()
+  --AbyssUIAddonSettings.AbyssUINewActionBar3x12 = self:GetChecked()
+   AbyssUINewActionBar3x12_CheckButton:SetChecked(nil)
   AbyssUI_ActionBarInfo:Show()
 end)
 -- End

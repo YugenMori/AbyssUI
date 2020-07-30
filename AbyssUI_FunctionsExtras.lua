@@ -1,9 +1,6 @@
---------------------------------------------------------------------------------
 -- Author: Yugen
 --
 -- Shadowlands
---
--- Hope you like my addOn ^^
 --
 -- Extra functions for AbyssUI
 --------------------------------------------------------------------------------
@@ -107,6 +104,7 @@ FadeUI_MouseOver:SetScript("OnClick", function()
 end)
 ----------------------------------------------
 -- ActionBar
+--[[
 local f = CreateFrame("Frame", nil, UIParent)
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self, event, ...)
@@ -123,7 +121,6 @@ f:SetScript("OnEvent", function(self, event, ...)
 		        btr.ClearAllPoints = function() end
 		        btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
 		      end
-		--]]
 		for id = 13, 24 do
 			local b = CreateFrame("CheckButton", "ExtraBarButton"..( id - 12), UIParent, "ActionBarButtonTemplate")
 		      --MultiBarBottomRightButton
@@ -154,6 +151,7 @@ f:SetScript("OnEvent", function(self, event, ...)
 		return nil
 	end
 end)
+--]]
 ----------------------------------------------
 -- NamePlate Style 
 -- Thanks to SDPhantom for the mostly part of this

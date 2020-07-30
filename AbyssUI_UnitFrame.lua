@@ -2,8 +2,6 @@
 --
 -- Shadowlands
 --
--- Hope you like my addOn ^^
---
 -- UnitFrameImproved for AbyssUI.
 --------------------------------------------------------------------------------
 -- UnitFrameImproved
