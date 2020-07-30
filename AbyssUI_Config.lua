@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Battle for Azeroth
+-- Shadowlands
 --
 -- Hope you like my addOn ^^
 --

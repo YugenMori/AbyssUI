@@ -1,6 +1,6 @@
 -- Author: KawF (Author), Yugen (changes, fixes and enchantments)
 --
--- Battle for Azeroth
+-- Shadowlands
 --
 -- Hope you like my addOn ^^
 --

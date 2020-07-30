@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Author: Yugen
 --
--- BFA Version
+-- Shadowlands
 --
 -- Hope you like my addOn ^^
 --
