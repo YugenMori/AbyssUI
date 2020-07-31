@@ -1528,9 +1528,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
-
-
--- ScrappingMachineFrame
+-- TimeManagerFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)

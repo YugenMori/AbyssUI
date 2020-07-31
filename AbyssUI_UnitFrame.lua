@@ -284,7 +284,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				return nil
 			end
 		end
-		-- Unit Name
+		-- Unit Name --
 		 local function UnitFramesImproved_UnitName_Color(self)
 		 	if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
 				if not InCombatLockdown() then
@@ -297,8 +297,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						TargetFrameTextureFrameManaBarText,
 						FocusFrameTextureFrameName,
 						FocusFrameTextureFrameHealthBarText,
-						FocusFrameTextureFrameManaBarText, }) do 
-						v:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf", 10)
+						FocusFrameTextureFrameManaBarText, }) do
+						v:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf", 9)
 						v:SetVertexColor(255/255, 255/255, 255/255)
 						v:SetShadowColor(0, 0, 0)
 						v:SetShadowOffset(1, -1)
@@ -471,6 +471,10 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					UnitFramesImproved_LoadDefaultSettings()
 				end
 				EnableUnitFramesImproved()
+				-- Make sure player frame is setup
+				C_Timer.After(0.1, function()
+					UnitFramesImproved_UnitName_Color()
+				end)
 			else
 				return nil
 			end
@@ -507,15 +511,18 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		--[[
 		local function UnitFramesImproved_StartUp(self)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				--self:SetScript('OnEvent', function(self, event) self[event](self) end)
-				--self:RegisterEvent('PLAYER_ENTERING_WORLD')
+				self:SetScript('OnEvent', function(self, event) 
+				--self[event](self) 
+			end)
+				self:RegisterEvent('PLAYER_ENTERING_WORLD')
 				self:RegisterEvent('VARIABLES_LOADED')
 			else
 				return nil
 			end
 		end
-		--]]
-		--UnitFramesImproved_StartUp(UnitFramesImproved)
+		
+		--UnitFramesImproved_StartUp(UnitFramesImproved)--]]
+
 	else
 		return nil
 	end
