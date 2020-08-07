@@ -739,7 +739,10 @@ for i, v in pairs({	GuildRegistrarFrame.NineSlice.TopEdge,
 	end
 end	
 -- CastBarBorder
-for i, v in pairs({	CastingBarFrame.Border }) do
+for i, v in pairs({	
+	CastingBarFrame.Border,
+	TargetFrameSpellBar.Border,
+	TargetFrameSpellBar.BorderShield, }) do
 	if AbyssUIAddonSettings ~= nil then
 		AbyssUI_ColorizationFrameFunction(v)
 	else
@@ -838,14 +841,162 @@ for i, v in pairs({
 	StaticPopup1.Border.TopRightCorner,
 	StaticPopup1.Border.TopLeftCorner,
 	StaticPopup1.Border.BottomLeftCorner,
-	StaticPopup1.Border.BottomRightCorner, }) do
+	StaticPopup1.Border.BottomRightCorner,
+	StaticPopup2.Border.TopEdge,
+	StaticPopup2.Border.RightEdge,
+	StaticPopup2.Border.BottomEdge,
+	StaticPopup2.Border.LeftEdge,
+	StaticPopup2.Border.TopRightCorner,
+	StaticPopup2.Border.TopLeftCorner,
+	StaticPopup2.Border.BottomLeftCorner,
+	StaticPopup2.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- TimeTrackerTimer
+for i, v in pairs({	
+	TimerTrackerTimer1StatusBarBorder, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- CharacterSlowFrames
+for i, v in pairs({	
+ 	CharacterWristSlotFrame,
+ 	CharacterTabardSlotFrame,
+ 	CharacterShirtSlotFrame,
+ 	CharacterChestSlotFrame,
+ 	CharacterBackSlotFrame,
+ 	CharacterShoulderSlotFrame,
+ 	CharacterNeckSlotFrame,
+ 	CharacterHeadSlotFrame,
+ 	CharacterHandsSlotFrame,
+ 	CharacterWaistSlotFrame,
+ 	CharacterLegsSlotFrame,
+ 	CharacterFeetSlotFrame,
+ 	CharacterFinger0SlotFrame,
+ 	CharacterFinger1SlotFrame,
+ 	CharacterTrinket0SlotFrame,
+ 	CharacterTrinket1SlotFrame,
+ 	CharacterMainHandSlotFrame,
+ 	CharacterSecondaryHandSlotFrame, }) do
 	if AbyssUIAddonSettings ~= nil then
 		AbyssUI_ColorizationFrameFunction(v)
 	else
 		return nil
 	end
 end	
-
+-- LFDReadyCheckPopup
+for i, v in pairs({ 
+	LFDReadyCheckPopup.Border.TopEdge,
+	LFDReadyCheckPopup.Border.RightEdge,
+	LFDReadyCheckPopup.Border.BottomEdge,
+	LFDReadyCheckPopup.Border.LeftEdge,
+	LFDReadyCheckPopup.Border.TopRightCorner,
+	LFDReadyCheckPopup.Border.TopLeftCorner,
+	LFDReadyCheckPopup.Border.BottomLeftCorner,
+	LFDReadyCheckPopup.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- PVPRoleCheckPopup
+for i, v in pairs({ 
+	PVPRoleCheckPopup.Border.TopEdge,
+	PVPRoleCheckPopup.Border.RightEdge,
+	PVPRoleCheckPopup.Border.BottomEdge,
+	PVPRoleCheckPopup.Border.LeftEdge,
+	PVPRoleCheckPopup.Border.TopRightCorner,
+	PVPRoleCheckPopup.Border.TopLeftCorner,
+	PVPRoleCheckPopup.Border.BottomLeftCorner,
+	PVPRoleCheckPopup.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- Areana/Bg EnemyFrame
+for i, v in pairs({ 
+	ArenaEnemyFrame1Texture,
+	ArenaEnemyFrame2Texture,
+	ArenaEnemyFrame3Texture,
+	ArenaEnemyFrame4Texture,
+	ArenaEnemyFrame5Texture,
+	ArenaEnemyFrame1PetFrameTexture,
+	ArenaEnemyFrame2PetFrameTexture,
+	ArenaEnemyFrame3PetFrameTexture,
+	ArenaEnemyFrame4PetFrameTexture,
+	ArenaEnemyFrame5PetFrameTexture, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- RecruitAFriend
+for i, v in pairs({ 
+	RecruitAFriendRecruitmentFrame.Border.TopEdge,
+	RecruitAFriendRecruitmentFrame.Border.RightEdge,
+	RecruitAFriendRecruitmentFrame.Border.BottomEdge,
+	RecruitAFriendRecruitmentFrame.Border.LeftEdge,
+	RecruitAFriendRecruitmentFrame.Border.TopRightCorner,
+	RecruitAFriendRecruitmentFrame.Border.TopLeftCorner,
+	RecruitAFriendRecruitmentFrame.Border.BottomLeftCorner,
+	RecruitAFriendRecruitmentFrame.Border.BottomRightCorner,
+	RecruitAFriendRewardsFrame.Border.TopEdge,
+	RecruitAFriendRewardsFrame.Border.RightEdge,
+	RecruitAFriendRewardsFrame.Border.BottomEdge,
+	RecruitAFriendRewardsFrame.Border.LeftEdge,
+	RecruitAFriendRewardsFrame.Border.TopRightCorner,
+	RecruitAFriendRewardsFrame.Border.TopLeftCorner,
+	RecruitAFriendRewardsFrame.Border.BottomLeftCorner,
+	RecruitAFriendRewardsFrame.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- LFGDiag
+for i, v in pairs({ 
+	LFGDungeonReadyStatus.Border.TopEdge,
+	LFGDungeonReadyStatus.Border.RightEdge,
+	LFGDungeonReadyStatus.Border.BottomEdge,
+	LFGDungeonReadyStatus.Border.LeftEdge,
+	LFGDungeonReadyStatus.Border.TopRightCorner,
+	LFGDungeonReadyStatus.Border.TopLeftCorner,
+	LFGDungeonReadyStatus.Border.BottomLeftCorner,
+	LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
+-- PVPReadyDialog
+for i, v in pairs({ 
+	PVPReadyDialog.Border.TopEdge,
+	PVPReadyDialog.Border.RightEdge,
+	PVPReadyDialog.Border.BottomEdge,
+	PVPReadyDialog.Border.LeftEdge,
+	PVPReadyDialog.Border.TopRightCorner,
+	PVPReadyDialog.Border.TopLeftCorner,
+	PVPReadyDialog.Border.BottomLeftCorner,
+	PVPReadyDialog.Border.BottomRightCorner, }) do
+	if AbyssUIAddonSettings ~= nil then
+		AbyssUI_ColorizationFrameFunction(v)
+	else
+		return nil
+	end
+end
 
 ----------------------------------------------------------------------
 	-- End
@@ -853,14 +1004,10 @@ end
 	NewFrames:SetScript("OnEvent", nil)
 	end
 end)
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
+
+
 ----------------------------------------------------------------------
 -------------- Frames that need a load to work properly --------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
 ----------------------------------------------------------------------
 -- Specialization
 local f = CreateFrame("Frame")

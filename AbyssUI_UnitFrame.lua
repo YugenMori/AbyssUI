@@ -227,12 +227,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					local textDisplay = GetCVar("statusTextDisplay")
 					if (textDisplay == "NONE") then return end
 					if ( value and valueMax > 0 and ( textDisplay ~= "NUMERIC" or statusFrame.showPercentage ) and not statusFrame.showNumeric) then
-						-- if ( value == 0 and statusFrame.zeroText ) then
-							-- textString:SetText(statusFrame.zeroText)
-							-- statusFrame.isZero = 1
-							-- textString:Show()
-							-- return
-						-- end
+						if ( value == 0 and statusFrame.zeroText ) then
+							textString:SetText(statusFrame.zeroText)
+							statusFrame.isZero = 1
+							textString:Show()
+							return
+						end
 						percent = math.ceil((value / valueMax) * 100) .. "%"
 						if ( textDisplay == "BOTH" and not statusFrame.showPercentage) then
 							valueDisplay = valueDisplay .. " (" .. percent .. ")"
@@ -246,9 +246,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							end
 						end
 					elseif ( value == 0 and statusFrame.zeroText ) then
-						-- textString:SetText(statusFrame.zeroText)
-						-- statusFrame.isZero = 1
-						-- textString:Show()
+						 textString:SetText(statusFrame.zeroText)
+						 statusFrame.isZero = 1
+						 textString:Show()
 						return
 					else
 						statusFrame.isZero = nil
@@ -299,9 +299,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						FocusFrameTextureFrameHealthBarText,
 						FocusFrameTextureFrameManaBarText, }) do
 						v:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf", 9)
-						v:SetVertexColor(255/255, 255/255, 255/255)
+						v:SetVertexColor(211/255, 196/255, 189/255)
 						v:SetShadowColor(0, 0, 0)
-						v:SetShadowOffset(1, -1)
+						v:SetShadowOffset(1, -0.75)
 					end
 				end
 			else

@@ -198,11 +198,11 @@ hooksecurefunc(NamePlateDriverFrame, "OnNamePlateCreated", function(self, base)-
     if ( unit ~= "player" and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
 	    local unitframe = base.UnitFrame
 	    local health = unitframe.healthBar:CreateFontString(nil, "OVERLAY")
-	    health:SetFont("Fonts\\FRIZQT__.TTF", 8)
+	    health:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf", 9)
 	    health:SetPoint("CENTER")
 	    health:SetTextColor(1, 1, 1)
 		health:SetShadowColor(0, 0, 0)
-		health:SetShadowOffset(1, -1)
+		health:SetShadowOffset(1, -0.25)
 	    NamePlateHealthText[unitframe] = health
     else
     	return nil

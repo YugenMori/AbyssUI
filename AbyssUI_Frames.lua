@@ -102,7 +102,7 @@ PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_ILevel1:SetScale(3)
 PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
-PlayerInfo_ILevel1.text:SetText("ILvl: "..floor(overall + 0.5))
+PlayerInfo_ILevel1.text:SetText("ILevel: "..floor(overall + 0.5))
 -- Zone
 local PlayerInfo_CurrentZone1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
 local zoneName = GetZoneText()
@@ -457,16 +457,6 @@ AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_LEVEL_UP" ) then
-			for i, v in pairs({
-				LevelUpDisplaySpellFrame,
-				LevelUpDisplayScenarioFrame,
-				LevelUpDisplay.SpellBuckedFrame,
-				LevelUpDisplayBlackBg,
-				LevelUpDisplay.challengeModeBits,
-				LevelUpDisplayChallengeModeFrame,
-			}) do
-				v:SetAlpha(1)
-			end
 			C_Timer.After(1, function()
 				AbyssUI_UpdateYouDiedLevelUpData()
 				UIFrameFadeIn(AbyssUI_LevelUpFrame, 2, 0, 1)
@@ -486,12 +476,12 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 end)
 -- Hide Blizzard LevelUp Text
 local AbyssUI_HideBlizzardLevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_HideBlizzardLevelUpFrame", AbyssUI_LevelUpFrame)
-AbyssUI_HideBlizzardLevelUpFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_HideBlizzardLevelUpFrame:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_HideBlizzardLevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		for i, v in pairs({
 			LevelUpDisplay,
-		}) do
+			LevelUpDisplaySide,	}) do
 			v:SetAlpha(0)
 		end
 	end
