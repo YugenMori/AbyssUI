@@ -6,7 +6,6 @@
 --------------------------------------------------------------------------------
 local AbyssUI_Config = {}
 local addonName, addonTable = ...
-
 local function InitSettings()
 AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
 -- Register in the Interface Addon Options GUI
@@ -1150,7 +1149,7 @@ AbyssUI_NameplateChanges_CheckButton:SetScript("OnClick", function(self)
   AbyssUI_ReloadFrame:Show()
 end)
 -- Disable ChatBubble --
-local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NameplateChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ChatBubbleChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -230)
 AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("Disable ChatBubble Changes")
 AbyssUI_ChatBubbleChanges_CheckButton.tooltip = "This option will remove any change that was made to the chatbubbles (the frame text above players)"
@@ -1161,7 +1160,7 @@ AbyssUI_ChatBubbleChanges_CheckButton:SetScript("OnClick", function(self)
   AbyssUI_ReloadFrame:Show()
 end)
 -- Disable Damage Font --
-local AbyssUI_DamageFont_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NameplateChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+local AbyssUI_DamageFont_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DamageFont_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_DamageFont_CheckButton:SetPoint("TOPLEFT", 400, -260)
 AbyssUI_DamageFont_CheckButton.Text:SetText("Disable Damage Font (*)")
 AbyssUI_DamageFont_CheckButton.tooltip = "This option will remove any change to the damage font text."..
@@ -1171,6 +1170,19 @@ AbyssUI_DamageFont_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDama
 -- OnClick Function
 AbyssUI_DamageFont_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionDamageFont = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
+-- Disable Global Font --
+local AbyssUI_GlobalFont_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_GlobalFont_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_GlobalFont_CheckButton:SetPoint("TOPLEFT", 400, -290)
+AbyssUI_GlobalFont_CheckButton.Text:SetText("Disable Global Font (*)")
+AbyssUI_GlobalFont_CheckButton.tooltip = "This option will remove any change to the global font text."..
+"\n*You need to restart the game so the default font can be reloaded. You can change it to any font, "..
+"go to Textures->font and replace the file keeping the same name"
+AbyssUI_GlobalFont_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionGlobalFont)
+-- OnClick Function
+AbyssUI_GlobalFont_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionGlobalFont = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
 end)
 --End

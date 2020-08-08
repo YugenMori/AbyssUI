@@ -474,19 +474,6 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 		return nil
 	end
 end)
--- Hide Blizzard LevelUp Text
-local AbyssUI_HideBlizzardLevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_HideBlizzardLevelUpFrame", AbyssUI_LevelUpFrame)
-AbyssUI_HideBlizzardLevelUpFrame:RegisterEvent("PLAYER_LOGIN")
-AbyssUI_HideBlizzardLevelUpFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
-		for i, v in pairs({
-			LevelUpDisplay,
-			LevelUpDisplaySide,	}) do
-			v:SetAlpha(0)
-		end
-	end
-end)
-
 -------------------------- Save and Extra Stuff --------------------------
 -- AbyssUIFirstFrame
 AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)

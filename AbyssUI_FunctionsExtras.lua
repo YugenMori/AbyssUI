@@ -157,15 +157,16 @@ end)
 -- Thanks to SDPhantom for the mostly part of this
 ----------------------------------------------
 --  Nametag font size
+--[[
 local function SetFont(obj, optSize)
 	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
 	    local fontName = obj:GetFont()
 	    obj:SetFont(fontName, optSize, "THINOUTLINE")
 
-	    SetFont(SystemFont_LargeNamePlate, 8)
-		SetFont(SystemFont_NamePlate, 8)
-		SetFont(SystemFont_LargeNamePlateFixed, 8)
-		SetFont(SystemFont_NamePlateFixed, 8)
+	    SetFont(SystemFont_LargeNamePlate, 4)
+		SetFont(SystemFont_NamePlate, 4)
+		SetFont(SystemFont_LargeNamePlateFixed, 4)
+		SetFont(SystemFont_NamePlateFixed, 4)
 		 
 		--  Disable nametag colors
 		DefaultCompactNamePlateFriendlyFrameOptions.colorNameBySelection = false
@@ -175,6 +176,7 @@ local function SetFont(obj, optSize)
 		return nil
 	end
 end
+--]]
 --  Move nametag
 hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
@@ -182,13 +184,21 @@ hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 		PixelUtil.SetPoint(frame.name, "BOTTOM", frame.healthBar, "TOP", 0, 4)--    Set new anchor
 	end
 end)
---  Remove realm names
+-- Nameplate Name Updates
 hooksecurefunc("CompactUnitFrame_UpdateName", function(frame)
 	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-	    if ShouldShowName(frame) then
-	        frame.name:SetVertexColor(1,1,1) -- Fixes tapped mobs permanently setting the nametag gray
-	        frame.name:SetText(GetUnitName(frame.unit))
-	    end
+		local _, class = UnitClass('target')
+		local unitPlayer = UnitIsPlayer("target")
+	 	local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+	    if ( unitPlayer == true ) then
+	   		if ShouldShowName(frame) then
+		        --frame.name:SetVertexColor(1, 1, 1) -- Fixes tapped mobs permanently setting the nametag gray
+		        frame.name:SetText(GetUnitName(frame.unit))
+		        frame.name:SetVertexColor(color.r, color.g, color.b)
+			else 
+				return nil			    
+		    end
+		end
 	end
 end)
 ----------------------------------------------
@@ -198,7 +208,7 @@ hooksecurefunc(NamePlateDriverFrame, "OnNamePlateCreated", function(self, base)-
     if ( unit ~= "player" and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
 	    local unitframe = base.UnitFrame
 	    local health = unitframe.healthBar:CreateFontString(nil, "OVERLAY")
-	    health:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf", 9)
+	    health:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 9)
 	    health:SetPoint("CENTER")
 	    health:SetTextColor(1, 1, 1)
 		health:SetShadowColor(0, 0, 0)
@@ -235,6 +245,7 @@ hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
 		            end
 		        end
 		    end
+		    -- Player Nameplate
 		    local unitPlayer = UnitIsPlayer("player")
 		    if ( unitPlayer == true ) then
 		        if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("player") then
@@ -752,6 +763,62 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		else
 			return nil
 		end
+	end
+end)
+-- FontString
+local AbyssUI_FontString = CreateFrame("Frame", "$parentAbyssUI_FontString", nil)
+AbyssUI_FontString:RegisterEvent("ADDON_LOADED")
+AbyssUI_FontString:RegisterEvent("PLAYER_LOGOUT")
+AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
+	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
+	    local newFont = "Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf"
+	 	local subFont = "Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf"
+	    if ( AbyssUIAddonSettings.ExtraFunctionGlobalFont ~= true ) then
+	    	STANDARD_TEXT_FONT          = newFont
+	    	--DAMAGE_TEXT_FONT          = newFont
+		   	UNIT_NAME_FONT              = subFont
+		    NAMEPLATE_FONT              = subFont
+		    NAMEPLATE_SPELLCAST_FONT    = subFont
+		else
+			return nil
+		end
+	 
+	    local ForcedFontSize = {10, 14, 20, 64, 64}
+	 
+	    local BlizFontObjects = {
+	 
+	        -- Fonts.xml
+	 
+	        -- These five fonts use the fixedSize argument, causing an incorrent font size return, so input our own sizes (ForcedFontSize)
+	        SystemFont_NamePlateCastBar, SystemFont_NamePlateFixed, SystemFont_LargeNamePlateFixed, SystemFont_World, SystemFont_World_ThickOutline,
+	 
+	        SystemFont_Outline_Small, SystemFont_Outline, SystemFont_InverseShadow_Small, SystemFont_Med2, SystemFont_Med3, SystemFont_Shadow_Med3,
+	        SystemFont_Huge1, SystemFont_Huge1_Outline, SystemFont_OutlineThick_Huge2, SystemFont_OutlineThick_Huge4, SystemFont_OutlineThick_WTF,
+	        NumberFont_GameNormal, NumberFont_Shadow_Small, NumberFont_OutlineThick_Mono_Small, NumberFont_Shadow_Med, NumberFont_Normal_Med, 
+	        NumberFont_Outline_Med, NumberFont_Outline_Large, NumberFont_Outline_Huge, Fancy22Font, QuestFont_Huge, QuestFont_Outline_Huge,
+	        QuestFont_Super_Huge, QuestFont_Super_Huge_Outline, SplashHeaderFont, Game11Font, Game12Font, Game13Font, Game13FontShadow,
+	        Game15Font, Game18Font, Game20Font, Game24Font, Game27Font, Game30Font, Game32Font, Game36Font, Game48Font, Game48FontShadow,
+	        Game60Font, Game72Font, Game11Font_o1, Game12Font_o1, Game13Font_o1, Game15Font_o1, QuestFont_Enormous, DestinyFontLarge,
+	        CoreAbilityFont, DestinyFontHuge, QuestFont_Shadow_Small, MailFont_Large, SpellFont_Small, InvoiceFont_Med, InvoiceFont_Small,
+	        Tooltip_Med, Tooltip_Small, AchievementFont_Small, ReputationDetailFont, FriendsFont_Normal, FriendsFont_Small, FriendsFont_Large,
+	        FriendsFont_UserText, GameFont_Gigantic, ChatBubbleFont, Fancy16Font, Fancy18Font, Fancy20Font, Fancy24Font, Fancy27Font, Fancy30Font,
+	        Fancy32Font, Fancy48Font, SystemFont_NamePlate, SystemFont_LargeNamePlate,
+	 
+	        -- SharedFonts.xml
+	 
+	        SystemFont_Tiny2, SystemFont_Tiny, SystemFont_Shadow_Small, SystemFont_Small, SystemFont_Small2, SystemFont_Shadow_Small2, SystemFont_Shadow_Med1_Outline,
+	        SystemFont_Shadow_Med1, QuestFont_Large, SystemFont_Large, SystemFont_Shadow_Large_Outline, SystemFont_Shadow_Med2, SystemFont_Shadow_Large, 
+	        SystemFont_Shadow_Large2, SystemFont_Shadow_Huge1, SystemFont_Huge2, SystemFont_Shadow_Huge2, SystemFont_Shadow_Huge3, SystemFont_Shadow_Outline_Huge3,
+	        SystemFont_Shadow_Outline_Huge2, SystemFont_Med1, SystemFont_WTF2, SystemFont_Outline_WTF2, 
+	        GameTooltipHeader, System_IME,
+	    }
+	 
+	    for i, FontObject in pairs(BlizFontObjects) do
+	        local _, oldSize, oldStyle  = FontObject:GetFont()
+	        FontObject:SetFont(newFont, ForcedFontSize[i] or oldSize, oldStyle)
+	    end
+	 
+	    BlizFontObjects = nil
 	end
 end)
 --End
