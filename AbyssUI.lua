@@ -86,7 +86,7 @@ BasicFrames:SetScript("OnEvent", function(self, event, addon)
 			MiniMapTrackingButtonBorder,
 			MiniMapLFGFrameBorder,
 			MiniMapBattlefieldBorder,
-			MiniMapMailBorder, }) do
+		MiniMapMailBorder, }) do
 			MiniMapWorldMapButton:SetAlpha(0.3)
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
@@ -124,7 +124,7 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 			MiniMapLFGFrameBorder,
 			MiniMapBattlefieldBorder,
 			MiniMapMailBorder,
-			MiniMapBorderTop, }) do
+		MiniMapBorderTop, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.KeepUnitDark == true then
 					v:SetVertexColor(.4, .4, .4)
@@ -135,8 +135,8 @@ DarkException:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 		end
-	self:UnregisterEvent("ADDON_LOADED")
-	DarkException:SetScript("OnEvent", nil)
+		self:UnregisterEvent("ADDON_LOADED")
+		DarkException:SetScript("OnEvent", nil)
 	end
 end)
 -- Alpha extra frames
@@ -157,7 +157,7 @@ SetAlphaFrames:SetScript("OnEvent", function(self, event, addon)
 			RecruitAFriendFrame.RecruitList.ScrollFrameInset.NineSlice.BottomEdge,
 			RecruitAFriendFrame.RewardClaiming.Inset.NineSlice.BottomLeftCorner,
 			RecruitAFriendFrame.RewardClaiming.Inset.NineSlice.BottomRightCorner,
-			RecruitAFriendFrame.RewardClaiming.Inset.NineSlice.BottomEdge, }) do
+		RecruitAFriendFrame.RewardClaiming.Inset.NineSlice.BottomEdge, }) do
 			v:SetAlpha(0)
 		end
 		-- End
@@ -169,839 +169,855 @@ end)
 local NewFrames = CreateFrame("Frame")
 NewFrames:RegisterEvent("ADDON_LOADED")
 NewFrames:SetScript("OnEvent", function(self, event, addon)
-if (addon == "AbyssUI") then
-	for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
-		MainMenuBarArtFrame.RightEndCap,
-		MainMenuBarArtFrameBackground.BackgroundSmall,
+	if (addon == "AbyssUI") then
+		for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
+			MainMenuBarArtFrame.RightEndCap,
+			MainMenuBarArtFrameBackground.BackgroundSmall,
 		MainMenuBarArtFrameBackground.BackgroundLarge, }) do
-		if AbyssUIAddonSettings ~= nil then
-			AbyssUI_ColorizationFrameFunction(v)
-		else
-			return nil
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	end
--- Character
-for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
-	CharacterFrame.NineSlice.LeftEdge,
-	CharacterFrame.NineSlice.TopEdge,
-	CharacterFrame.NineSlice.BottomEdge,
-	CharacterFrame.NineSlice.PortraitFrame,
-	CharacterFrame.NineSlice.TopRightCorner,
-	CharacterFrame.NineSlice.TopLeftCorner,
-	CharacterFrame.NineSlice.BottomLeftCorner,
-	CharacterFrame.NineSlice.BottomRightCorner,
-	CharacterFrameInset.NineSlice.BottomEdge,
-	CharacterFrameInset.NineSlice.BottomLeftCorner,
-	CharacterFrameInset.NineSlice.BottomRightCorner,
-	CharacterFrameInsetRight.NineSlice.BottomEdge,
-	CharacterFrameInsetRight.NineSlice.BottomLeftCorner,
-	CharacterFrameInsetRight.NineSlice.BottomRightCorner,
-	TokenFramePopup.Border.TopEdge,
-	TokenFramePopup.Border.RightEdge,
-	TokenFramePopup.Border.BottomEdge,
-	TokenFramePopup.Border.LeftEdge,
-	TokenFramePopup.Border.TopRightCorner,
-	TokenFramePopup.Border.TopLeftCorner,
-	TokenFramePopup.Border.BottomLeftCorner,
-	TokenFramePopup.Border.BottomRightCorner,
-	ReputationDetailFrame.Border.TopEdge,
-	ReputationDetailFrame.Border.RightEdge,
-	ReputationDetailFrame.Border.BottomEdge,
-	ReputationDetailFrame.Border.LeftEdge,
-	ReputationDetailFrame.Border.TopRightCorner,
-	ReputationDetailFrame.Border.TopLeftCorner,
-	ReputationDetailFrame.Border.BottomLeftCorner,
-	ReputationDetailFrame.Border.BottomRightCorner,
-	ReputationDetailCorner,
-	ReputationDetailDivider, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			CharacterFrameInset.NineSlice,
+		-- Character
+		for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
+			CharacterFrame.NineSlice.LeftEdge,
+			CharacterFrame.NineSlice.TopEdge,
+			CharacterFrame.NineSlice.BottomEdge,
+			CharacterFrame.NineSlice.PortraitFrame,
+			CharacterFrame.NineSlice.TopRightCorner,
+			CharacterFrame.NineSlice.TopLeftCorner,
+			CharacterFrame.NineSlice.BottomLeftCorner,
+			CharacterFrame.NineSlice.BottomRightCorner,
+			CharacterFrameInset.NineSlice.BottomEdge,
 			CharacterFrameInset.NineSlice.BottomLeftCorner,
 			CharacterFrameInset.NineSlice.BottomRightCorner,
-			CharacterFrameInset.NineSlice.BottomEdge,
+			CharacterFrameInsetRight.NineSlice.BottomEdge,
 			CharacterFrameInsetRight.NineSlice.BottomLeftCorner,
 			CharacterFrameInsetRight.NineSlice.BottomRightCorner,
-			CharacterFrameInsetRight.NineSlice.BottomEdge, }) do
-			v:SetAlpha(0)
+			TokenFramePopup.Border.TopEdge,
+			TokenFramePopup.Border.RightEdge,
+			TokenFramePopup.Border.BottomEdge,
+			TokenFramePopup.Border.LeftEdge,
+			TokenFramePopup.Border.TopRightCorner,
+			TokenFramePopup.Border.TopLeftCorner,
+			TokenFramePopup.Border.BottomLeftCorner,
+			TokenFramePopup.Border.BottomRightCorner,
+			ReputationDetailFrame.Border.TopEdge,
+			ReputationDetailFrame.Border.RightEdge,
+			ReputationDetailFrame.Border.BottomEdge,
+			ReputationDetailFrame.Border.LeftEdge,
+			ReputationDetailFrame.Border.TopRightCorner,
+			ReputationDetailFrame.Border.TopLeftCorner,
+			ReputationDetailFrame.Border.BottomLeftCorner,
+			ReputationDetailFrame.Border.BottomRightCorner,
+			ReputationDetailCorner,
+		ReputationDetailDivider, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					CharacterFrameInset.NineSlice,
+					CharacterFrameInset.NineSlice.BottomLeftCorner,
+					CharacterFrameInset.NineSlice.BottomRightCorner,
+					CharacterFrameInset.NineSlice.BottomEdge,
+					CharacterFrameInsetRight.NineSlice.BottomLeftCorner,
+					CharacterFrameInsetRight.NineSlice.BottomRightCorner,
+				CharacterFrameInsetRight.NineSlice.BottomEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- SpellBook
-for i, v in pairs({ SpellBookFrame.NineSlice.TopEdge,
-	SpellBookFrame.NineSlice.RightEdge,
-	SpellBookFrame.NineSlice.LeftEdge,
-	SpellBookFrame.NineSlice.TopEdge,
-	SpellBookFrame.NineSlice.BottomEdge,
-	SpellBookFrame.NineSlice.PortraitFrame,
-	SpellBookFrame.NineSlice.TopRightCorner,
-	SpellBookFrame.NineSlice.TopLeftCorner,
-	SpellBookFrame.NineSlice.BottomLeftCorner,
-	SpellBookFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			SpellBookFrameInset.NineSlice.BottomLeftCorner,
-			SpellBookFrameInset.NineSlice.BottomRightCorner,
-		 	SpellBookFrameInset.NineSlice.BottomEdge, }) do
-			v:SetAlpha(0)
+		-- SpellBook
+		for i, v in pairs({ SpellBookFrame.NineSlice.TopEdge,
+			SpellBookFrame.NineSlice.RightEdge,
+			SpellBookFrame.NineSlice.LeftEdge,
+			SpellBookFrame.NineSlice.TopEdge,
+			SpellBookFrame.NineSlice.BottomEdge,
+			SpellBookFrame.NineSlice.PortraitFrame,
+			SpellBookFrame.NineSlice.TopRightCorner,
+			SpellBookFrame.NineSlice.TopLeftCorner,
+			SpellBookFrame.NineSlice.BottomLeftCorner,
+		SpellBookFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					SpellBookFrameInset.NineSlice.BottomLeftCorner,
+					SpellBookFrameInset.NineSlice.BottomRightCorner,
+				SpellBookFrameInset.NineSlice.BottomEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- PvE/Pvp
-for i, v in pairs({ 
-	PVEFrame.NineSlice.TopEdge,
-	PVEFrame.NineSlice.TopRightCorner,
-	PVEFrame.NineSlice.RightEdge,
-	PVEFrame.NineSlice.LeftEdge,
-	PVEFrame.NineSlice.BottomRightCorner,
-	PVEFrame.NineSlice.BottomEdge,
-	PVEFrame.NineSlice.BottomLeftCorner,
-	PVEFrame.NineSlice.TopLeftCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			PVEFrameLeftInset.NineSlice.BottomLeftCorner,
-			PVEFrameLeftInset.NineSlice.BottomRightCorner,
-			PVEFrameLeftInset.NineSlice.BottomEdge,
-			PVEFrameLeftInset.NineSlice.LeftEdge,
-			LFDParentFrameInset.NineSlice.BottomLeftCorner,
-			LFDParentFrameInset.NineSlice.BottomRightCorner,
-			LFDParentFrameInset.NineSlice.BottomEdge,
-			LFDParentFrameInset.NineSlice.LeftEdge,
-			RaidFinderFrameRoleInset.NineSlice.BottomLeftCorner,
-			RaidFinderFrameRoleInset.NineSlice.BottomRightCorner,
-			RaidFinderFrameRoleInset.NineSlice.BottomEdge,
-			RaidFinderFrameRoleInset.NineSlice.LeftEdge,
-			RaidFinderFrameBottomInset.NineSlice.BottomLeftCorner,
-			RaidFinderFrameBottomInset.NineSlice.BottomRightCorner,
-			RaidFinderFrameBottomInset.NineSlice.BottomEdge,
-			RaidFinderFrameBottomInset.NineSlice.LeftEdge,
-			LFGListFrame.CategorySelection.Inset.NineSlice.BottomLeftCorner,
-			LFGListFrame.CategorySelection.Inset.NineSlice.BottomRightCorner,
-			LFGListFrame.CategorySelection.Inset.NineSlice.BottomEdge,
-			LFGListFrame.CategorySelection.Inset.NineSlice.LeftEdge,
-			LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomLeftCorner,
-			LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomRightCorner,
-			LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomEdge,
-			LFGListFrame.SearchPanel.ResultsInset.NineSlice.Left, }) do
-			v:SetAlpha(0)
+		-- PvE/Pvp
+		for i, v in pairs({ 
+			PVEFrame.NineSlice.TopEdge,
+			PVEFrame.NineSlice.TopRightCorner,
+			PVEFrame.NineSlice.RightEdge,
+			PVEFrame.NineSlice.LeftEdge,
+			PVEFrame.NineSlice.BottomRightCorner,
+			PVEFrame.NineSlice.BottomEdge,
+			PVEFrame.NineSlice.BottomLeftCorner,
+		PVEFrame.NineSlice.TopLeftCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					PVEFrameLeftInset.NineSlice.BottomLeftCorner,
+					PVEFrameLeftInset.NineSlice.BottomRightCorner,
+					PVEFrameLeftInset.NineSlice.BottomEdge,
+					PVEFrameLeftInset.NineSlice.LeftEdge,
+					LFDParentFrameInset.NineSlice.BottomLeftCorner,
+					LFDParentFrameInset.NineSlice.BottomRightCorner,
+					LFDParentFrameInset.NineSlice.BottomEdge,
+					LFDParentFrameInset.NineSlice.LeftEdge,
+					RaidFinderFrameRoleInset.NineSlice.BottomLeftCorner,
+					RaidFinderFrameRoleInset.NineSlice.BottomRightCorner,
+					RaidFinderFrameRoleInset.NineSlice.BottomEdge,
+					RaidFinderFrameRoleInset.NineSlice.LeftEdge,
+					RaidFinderFrameBottomInset.NineSlice.BottomLeftCorner,
+					RaidFinderFrameBottomInset.NineSlice.BottomRightCorner,
+					RaidFinderFrameBottomInset.NineSlice.BottomEdge,
+					RaidFinderFrameBottomInset.NineSlice.LeftEdge,
+					LFGListFrame.CategorySelection.Inset.NineSlice.BottomLeftCorner,
+					LFGListFrame.CategorySelection.Inset.NineSlice.BottomRightCorner,
+					LFGListFrame.CategorySelection.Inset.NineSlice.BottomEdge,
+					LFGListFrame.CategorySelection.Inset.NineSlice.LeftEdge,
+					LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomLeftCorner,
+					LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomRightCorner,
+					LFGListFrame.SearchPanel.ResultsInset.NineSlice.BottomEdge,
+				LFGListFrame.SearchPanel.ResultsInset.NineSlice.Left, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Friends
-for i, v in pairs({ FriendsFrame.NineSlice.TopEdge,
-	FriendsFrame.NineSlice.TopEdge,
-	FriendsFrame.NineSlice.TopRightCorner,
-	FriendsFrame.NineSlice.RightEdge,
-	FriendsFrame.NineSlice.BottomRightCorner,
-	FriendsFrame.NineSlice.BottomEdge,
-	FriendsFrame.NineSlice.BottomLeftCorner,
-	FriendsFrame.NineSlice.LeftEdge,
-	FriendsFrame.NineSlice.TopLeftCorner,
-	FriendsFrameInset.NineSlice.BottomEdge,
-	FriendsFriendsFrame.Border.TopEdge,
-	FriendsFriendsFrame.Border.RightEdge,
-	FriendsFriendsFrame.Border.BottomEdge,
-	FriendsFriendsFrame.Border.LeftEdge,
-	FriendsFriendsFrame.Border.TopRightCorner,
-	FriendsFriendsFrame.Border.TopLeftCorner,
-	FriendsFriendsFrame.Border.BottomLeftCorner,
-	FriendsFriendsFrame.Border.BottomRightCorner,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopEdge,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.RightEdge,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomEdge,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.LeftEdge,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopRightCorner,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopLeftCorner,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomLeftCorner,
-	FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			FriendsFrameInset.NineSlice,
-			FriendsFrameInset.NineSlice.BottomLeftCorner,
-			FriendsFrameInset.NineSlice.BottomRightCorner,
+		-- Friends
+		for i, v in pairs({ FriendsFrame.NineSlice.TopEdge,
+			FriendsFrame.NineSlice.TopEdge,
+			FriendsFrame.NineSlice.TopRightCorner,
+			FriendsFrame.NineSlice.RightEdge,
+			FriendsFrame.NineSlice.BottomRightCorner,
+			FriendsFrame.NineSlice.BottomEdge,
+			FriendsFrame.NineSlice.BottomLeftCorner,
+			FriendsFrame.NineSlice.LeftEdge,
+			FriendsFrame.NineSlice.TopLeftCorner,
 			FriendsFrameInset.NineSlice.BottomEdge,
-			WhoFrameListInset.NineSlice.BottomLeftCorner,
-			WhoFrameListInset.NineSlice.BottomRightCorner,
-			WhoFrameListInset.NineSlice.BottomEdge,
-			WhoFrameListInset.NineSlice.LeftEdge,
-			WhoFrameEditBoxInset.NineSlice.BottomLeftCorner,
-			WhoFrameEditBoxInset.NineSlice.BottomRightCorner,
-			WhoFrameEditBoxInset.NineSlice.BottomEdge, }) do
-			v:SetAlpha(0)
+			FriendsFriendsFrame.Border.TopEdge,
+			FriendsFriendsFrame.Border.RightEdge,
+			FriendsFriendsFrame.Border.BottomEdge,
+			FriendsFriendsFrame.Border.LeftEdge,
+			FriendsFriendsFrame.Border.TopRightCorner,
+			FriendsFriendsFrame.Border.TopLeftCorner,
+			FriendsFriendsFrame.Border.BottomLeftCorner,
+			FriendsFriendsFrame.Border.BottomRightCorner,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopEdge,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.RightEdge,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomEdge,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.LeftEdge,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopRightCorner,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.TopLeftCorner,
+			FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomLeftCorner,
+		FriendsFrameBattlenetFrame.BroadcastFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					FriendsFrameInset.NineSlice,
+					FriendsFrameInset.NineSlice.BottomLeftCorner,
+					FriendsFrameInset.NineSlice.BottomRightCorner,
+					FriendsFrameInset.NineSlice.BottomEdge,
+					WhoFrameListInset.NineSlice.BottomLeftCorner,
+					WhoFrameListInset.NineSlice.BottomRightCorner,
+					WhoFrameListInset.NineSlice.BottomEdge,
+					WhoFrameListInset.NineSlice.LeftEdge,
+					WhoFrameEditBoxInset.NineSlice.BottomLeftCorner,
+					WhoFrameEditBoxInset.NineSlice.BottomRightCorner,
+				WhoFrameEditBoxInset.NineSlice.BottomEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Map
-for i, v in pairs({ WorldMapFrame.BorderFrame.NineSlice.TopEdge,
-	WorldMapFrame.BorderFrame.NineSlice.TopEdge,
-	WorldMapFrame.BorderFrame.NineSlice.TopEdge,
-	WorldMapFrame.BorderFrame.NineSlice.TopRightCorner,
-	WorldMapFrame.BorderFrame.NineSlice.RightEdge,
-	WorldMapFrame.BorderFrame.NineSlice.BottomRightCorner,
-	WorldMapFrame.BorderFrame.NineSlice.BottomEdge,
-	WorldMapFrame.BorderFrame.NineSlice.BottomLeftCorner,
-	WorldMapFrame.BorderFrame.NineSlice.LeftEdge,
-	WorldMapFrame.BorderFrame.NineSlice.TopLeftCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- Channels
-for i, v in pairs({ ChannelFrame.NineSlice.TopEdge,
-	ChannelFrame.NineSlice.TopEdge,
-	ChannelFrame.NineSlice.TopRightCorner,
-	ChannelFrame.NineSlice.RightEdge,
-	ChannelFrame.NineSlice.BottomRightCorner,
-	ChannelFrame.NineSlice.BottomEdge,
-	ChannelFrame.NineSlice.BottomLeftCorner,
-	ChannelFrame.NineSlice.LeftEdge,
-	ChannelFrame.NineSlice.TopLeftCorner,
-	ChannelFrame.LeftInset.NineSlice.BottomEdge,
-	ChannelFrame.LeftInset.NineSlice.BottomLeftCorner,
-	ChannelFrame.LeftInset.NineSlice.BottomRightCorner,
-	ChannelFrame.RightInset.NineSlice.BottomEdge,
-	ChannelFrame.RightInset.NineSlice.BottomLeftCorner,
-	ChannelFrame.RightInset.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			ChannelFrameInset.NineSlice,
-			ChannelFrameInset.NineSlice.BottomLeftCorner,
-			ChannelFrameInset.NineSlice.BottomRightCorner,
-			ChannelFrameInset.NineSlice.BottomEdge,
-			ChannelFrameInset.NineSlice.LeftEdge }) do
-			v:SetAlpha(0)
+		-- Map
+		for i, v in pairs({ WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+			WorldMapFrame.BorderFrame.NineSlice.TopRightCorner,
+			WorldMapFrame.BorderFrame.NineSlice.RightEdge,
+			WorldMapFrame.BorderFrame.NineSlice.BottomRightCorner,
+			WorldMapFrame.BorderFrame.NineSlice.BottomEdge,
+			WorldMapFrame.BorderFrame.NineSlice.BottomLeftCorner,
+			WorldMapFrame.BorderFrame.NineSlice.LeftEdge,
+		WorldMapFrame.BorderFrame.NineSlice.TopLeftCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Chat
-for i, v in pairs({ ChatFrame1EditBoxLeft,
-	ChatFrame1EditBoxRight,
-	ChatFrame1EditBoxMid,
-	ChatFrame2EditBoxLeft,
-	ChatFrame2EditBoxRight,
-	ChatFrame2EditBoxMid,
-	ChatFrame3EditBoxLeft,
-	ChatFrame3EditBoxRight,
-	ChatFrame3EditBoxMid,
-	ChatFrame4EditBoxLeft,
-	ChatFrame4EditBoxRight,
-	ChatFrame4EditBoxMid,
-	ChatFrame5EditBoxLeft,
-	ChatFrame5EditBoxRight,
-	ChatFrame5EditBoxMid,
-	ChatFrame6EditBoxLeft,
-	ChatFrame6EditBoxRight,
-	ChatFrame6EditBoxMid,
-	ChatFrame7EditBoxLeft,
-	ChatFrame7EditBoxRight,
-	ChatFrame7EditBoxMid,	}) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- StatusBar (ExpBar)
-for i, v in pairs({ StatusTrackingBarManager.SingleBarLarge,
-	StatusTrackingBarManager.SingleBarSmall,
-	StatusTrackingBarManager.SingleBarLargeUpper,
-	StatusTrackingBarManager.SingleBarSmallUpper,	}) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- Mail
-for i, v in pairs({ MailFrame.NineSlice.TopEdge,
-	MailFrame.NineSlice.TopRightCorner,
-	MailFrame.NineSlice.RightEdge,
-	MailFrame.NineSlice.BottomRightCorner,
-	MailFrame.NineSlice.BottomEdge,
-	MailFrame.NineSlice.BottomLeftCorner,
-	MailFrame.NineSlice.LeftEdge,
-	MailFrame.NineSlice.TopLeftCorner,
-	MailFrameInset.NineSlice.BottomEdge, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			MailFrameInset.NineSlice,
-			MailFrameInset.NineSlice.BottomLeftCorner,
-			MailFrameInset.NineSlice.BottomRightCorner,
-			SendMailMoneyInset.NineSlice.BottomLeftCorner,
-			SendMailMoneyInset.NineSlice.BottomRightCorner, }) do
-			v:SetAlpha(0)
+		-- Channels
+		for i, v in pairs({ ChannelFrame.NineSlice.TopEdge,
+			ChannelFrame.NineSlice.TopEdge,
+			ChannelFrame.NineSlice.TopRightCorner,
+			ChannelFrame.NineSlice.RightEdge,
+			ChannelFrame.NineSlice.BottomRightCorner,
+			ChannelFrame.NineSlice.BottomEdge,
+			ChannelFrame.NineSlice.BottomLeftCorner,
+			ChannelFrame.NineSlice.LeftEdge,
+			ChannelFrame.NineSlice.TopLeftCorner,
+			ChannelFrame.LeftInset.NineSlice.BottomEdge,
+			ChannelFrame.LeftInset.NineSlice.BottomLeftCorner,
+			ChannelFrame.LeftInset.NineSlice.BottomRightCorner,
+			ChannelFrame.RightInset.NineSlice.BottomEdge,
+			ChannelFrame.RightInset.NineSlice.BottomLeftCorner,
+		ChannelFrame.RightInset.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					ChannelFrameInset.NineSlice,
+					ChannelFrameInset.NineSlice.BottomLeftCorner,
+					ChannelFrameInset.NineSlice.BottomRightCorner,
+					ChannelFrameInset.NineSlice.BottomEdge,
+				ChannelFrameInset.NineSlice.LeftEdge }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Merchant
-for i, v in pairs({ MerchantFrame.NineSlice.TopEdge,
-	MerchantFrame.NineSlice.RightEdge,
-	MerchantFrame.NineSlice.BottomEdge,
-	MerchantFrame.NineSlice.LeftEdge,
-	MerchantFrame.NineSlice.TopRightCorner,
-	MerchantFrame.NineSlice.TopLeftCorner,
-	MerchantFrame.NineSlice.BottomLeftCorner,
-	MerchantFrame.NineSlice.BottomRightCorner,
-	StackSplitFrame.SingleItemSplitBackground, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			MerchantMoneyInset.NineSlice,
-			MerchantMoneyInset.NineSlice.BottomLeftCorner,
-			MerchantMoneyInset.NineSlice.BottomRightCorner,
-			MerchantMoneyInset.NineSlice.BottomEdge,
-			MerchantExtraCurrencyInset.NineSlice,
-			MerchantExtraCurrencyInset.NineSlice.BottomLeftCorner,
-			MerchantExtraCurrencyInset.NineSlice.BottomRightCorner,
-			MerchantExtraCurrencyInset.NineSlice.BottomEdge,
-			MerchantFrameInset.NineSlice,
-			MerchantFrameInset.NineSlice.BottomLeftCorner,
-			MerchantFrameInset.NineSlice.BottomRightCorner,
-			MerchantFrameInset.NineSlice.BottomEdge,
-			MerchantFrameInset.NineSlice.LeftEdge, }) do
-			v:SetAlpha(0)
+		-- Chat
+		for i, v in pairs({ ChatFrame1EditBoxLeft,
+			ChatFrame1EditBoxRight,
+			ChatFrame1EditBoxMid,
+			ChatFrame2EditBoxLeft,
+			ChatFrame2EditBoxRight,
+			ChatFrame2EditBoxMid,
+			ChatFrame3EditBoxLeft,
+			ChatFrame3EditBoxRight,
+			ChatFrame3EditBoxMid,
+			ChatFrame4EditBoxLeft,
+			ChatFrame4EditBoxRight,
+			ChatFrame4EditBoxMid,
+			ChatFrame5EditBoxLeft,
+			ChatFrame5EditBoxRight,
+			ChatFrame5EditBoxMid,
+			ChatFrame6EditBoxLeft,
+			ChatFrame6EditBoxRight,
+			ChatFrame6EditBoxMid,
+			ChatFrame7EditBoxLeft,
+			ChatFrame7EditBoxRight,
+		ChatFrame7EditBoxMid,	}) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Gossip (e.g NPC dialog frame and interactions)
-for i, v in pairs({ GossipFrame.NineSlice.TopEdge,
-	GossipFrame.NineSlice.RightEdge,
-	GossipFrame.NineSlice.BottomEdge,
-	GossipFrame.NineSlice.LeftEdge,
-	GossipFrame.NineSlice.TopRightCorner,
-	GossipFrame.NineSlice.TopLeftCorner,
-	GossipFrame.NineSlice.BottomLeftCorner,
-	GossipFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			GossipFrameInset.NineSlice,
-			GossipFrameInset.NineSlice.BottomLeftCorner,
-			GossipFrameInset.NineSlice.BottomRightCorner,
-		 	GossipFrameInset.NineSlice.BottomEdge,
-		 	GossipFrameInset.NineSlice.LeftEdge, }) do 
-			v:SetAlpha(0)
+		-- StatusBar (ExpBar)
+		for i, v in pairs({ StatusTrackingBarManager.SingleBarLarge,
+			StatusTrackingBarManager.SingleBarSmall,
+			StatusTrackingBarManager.SingleBarLargeUpper,
+		StatusTrackingBarManager.SingleBarSmallUpper,	}) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Bank
-for i, v in pairs({ BankFrame.NineSlice.TopEdge,
-	BankFrame.NineSlice.RightEdge,
-	BankFrame.NineSlice.BottomEdge,
-	BankFrame.NineSlice.LeftEdge,
-	BankFrame.NineSlice.TopRightCorner,
-	BankFrame.NineSlice.TopLeftCorner,
-	BankFrame.NineSlice.BottomLeftCorner,
-	BankFrame.NineSlice.BottomRightCorner,	}) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- Quest
-for i, v in pairs({ QuestFrame.NineSlice.TopEdge,
-	QuestFrame.NineSlice.RightEdge,
-	QuestFrame.NineSlice.BottomEdge,
-	QuestFrame.NineSlice.LeftEdge,
-	QuestFrame.NineSlice.TopRightCorner,
-	QuestFrame.NineSlice.TopLeftCorner,
-	QuestFrame.NineSlice.BottomLeftCorner,
-	QuestFrame.NineSlice.BottomRightCorner,
-	QuestFrameInset.NineSlice.BottomEdge,
-	QuestLogPopupDetailFrame.NineSlice.TopEdge,
-	QuestLogPopupDetailFrame.NineSlice.RightEdge,
-	QuestLogPopupDetailFrame.NineSlice.BottomEdge,
-	QuestLogPopupDetailFrame.NineSlice.LeftEdge,
-	QuestLogPopupDetailFrame.NineSlice.TopRightCorner,
-	QuestLogPopupDetailFrame.NineSlice.TopLeftCorner,
-	QuestLogPopupDetailFrame.NineSlice.BottomLeftCorner,
-	QuestLogPopupDetailFrame.NineSlice.BottomRightCorner,
-	QuestLogPopupDetailFrame.NineSlice.BottomEdge,
-	QuestNPCModelTopBorder,
-	QuestNPCModelRightBorder,
-	QuestNPCModelTopRightCorner,
-	QuestNPCModelBottomRightCorner,
-	QuestNPCModelBottomBorder,
-	QuestNPCModelBottomLeftCorner,
-	QuestNPCModelLeftBorder,
-	QuestNPCModelTopLeftCorner,
-	QuestNPCModelTextTopBorder,
-	QuestNPCModelTextRightBorder,
-	QuestNPCModelTextTopRightCorner,
-	QuestNPCModelTextBottomRightCorner,
-	QuestNPCModelTextBottomBorder,
-	QuestNPCModelTextBottomLeftCorner,
-	QuestNPCModelTextLeftBorder,
-	QuestNPCModelTextTopLeftCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			QuestFrameInset.NineSlice,
-			QuestFrameInset.NineSlice.BottomLeftCorner,
-			QuestFrameInset.NineSlice.BottomRightCorner,
+		-- Mail
+		for i, v in pairs({ MailFrame.NineSlice.TopEdge,
+			MailFrame.NineSlice.TopRightCorner,
+			MailFrame.NineSlice.RightEdge,
+			MailFrame.NineSlice.BottomRightCorner,
+			MailFrame.NineSlice.BottomEdge,
+			MailFrame.NineSlice.BottomLeftCorner,
+			MailFrame.NineSlice.LeftEdge,
+			MailFrame.NineSlice.TopLeftCorner,
+		MailFrameInset.NineSlice.BottomEdge, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					MailFrameInset.NineSlice,
+					MailFrameInset.NineSlice.BottomLeftCorner,
+					MailFrameInset.NineSlice.BottomRightCorner,
+					SendMailMoneyInset.NineSlice.BottomLeftCorner,
+				SendMailMoneyInset.NineSlice.BottomRightCorner, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
+		end
+		-- Merchant
+		for i, v in pairs({ MerchantFrame.NineSlice.TopEdge,
+			MerchantFrame.NineSlice.RightEdge,
+			MerchantFrame.NineSlice.BottomEdge,
+			MerchantFrame.NineSlice.LeftEdge,
+			MerchantFrame.NineSlice.TopRightCorner,
+			MerchantFrame.NineSlice.TopLeftCorner,
+			MerchantFrame.NineSlice.BottomLeftCorner,
+			MerchantFrame.NineSlice.BottomRightCorner,
+		StackSplitFrame.SingleItemSplitBackground, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					MerchantMoneyInset.NineSlice,
+					MerchantMoneyInset.NineSlice.BottomLeftCorner,
+					MerchantMoneyInset.NineSlice.BottomRightCorner,
+					MerchantMoneyInset.NineSlice.BottomEdge,
+					MerchantExtraCurrencyInset.NineSlice,
+					MerchantExtraCurrencyInset.NineSlice.BottomLeftCorner,
+					MerchantExtraCurrencyInset.NineSlice.BottomRightCorner,
+					MerchantExtraCurrencyInset.NineSlice.BottomEdge,
+					MerchantFrameInset.NineSlice,
+					MerchantFrameInset.NineSlice.BottomLeftCorner,
+					MerchantFrameInset.NineSlice.BottomRightCorner,
+					MerchantFrameInset.NineSlice.BottomEdge,
+				MerchantFrameInset.NineSlice.LeftEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
+		end
+		-- Gossip (e.g NPC dialog frame and interactions)
+		for i, v in pairs({ GossipFrame.NineSlice.TopEdge,
+			GossipFrame.NineSlice.RightEdge,
+			GossipFrame.NineSlice.BottomEdge,
+			GossipFrame.NineSlice.LeftEdge,
+			GossipFrame.NineSlice.TopRightCorner,
+			GossipFrame.NineSlice.TopLeftCorner,
+			GossipFrame.NineSlice.BottomLeftCorner,
+		GossipFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					GossipFrameInset.NineSlice,
+					GossipFrameInset.NineSlice.BottomLeftCorner,
+					GossipFrameInset.NineSlice.BottomRightCorner,
+					GossipFrameInset.NineSlice.BottomEdge,
+				GossipFrameInset.NineSlice.LeftEdge, }) do 
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
+		end
+		-- Bank
+		for i, v in pairs({ BankFrame.NineSlice.TopEdge,
+			BankFrame.NineSlice.RightEdge,
+			BankFrame.NineSlice.BottomEdge,
+			BankFrame.NineSlice.LeftEdge,
+			BankFrame.NineSlice.TopRightCorner,
+			BankFrame.NineSlice.TopLeftCorner,
+			BankFrame.NineSlice.BottomLeftCorner,
+		BankFrame.NineSlice.BottomRightCorner,	}) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- Quest
+		for i, v in pairs({ QuestFrame.NineSlice.TopEdge,
+			QuestFrame.NineSlice.RightEdge,
+			QuestFrame.NineSlice.BottomEdge,
+			QuestFrame.NineSlice.LeftEdge,
+			QuestFrame.NineSlice.TopRightCorner,
+			QuestFrame.NineSlice.TopLeftCorner,
+			QuestFrame.NineSlice.BottomLeftCorner,
+			QuestFrame.NineSlice.BottomRightCorner,
 			QuestFrameInset.NineSlice.BottomEdge,
-			QuestFrameInset.NineSlice.LeftEdge, }) do
-			v:SetAlpha(0)
+			QuestLogPopupDetailFrame.NineSlice.TopEdge,
+			QuestLogPopupDetailFrame.NineSlice.RightEdge,
+			QuestLogPopupDetailFrame.NineSlice.BottomEdge,
+			QuestLogPopupDetailFrame.NineSlice.LeftEdge,
+			QuestLogPopupDetailFrame.NineSlice.TopRightCorner,
+			QuestLogPopupDetailFrame.NineSlice.TopLeftCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomLeftCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomRightCorner,
+			QuestLogPopupDetailFrame.NineSlice.BottomEdge,
+			QuestNPCModelTopBorder,
+			QuestNPCModelRightBorder,
+			QuestNPCModelTopRightCorner,
+			QuestNPCModelBottomRightCorner,
+			QuestNPCModelBottomBorder,
+			QuestNPCModelBottomLeftCorner,
+			QuestNPCModelLeftBorder,
+			QuestNPCModelTopLeftCorner,
+			QuestNPCModelTextTopBorder,
+			QuestNPCModelTextRightBorder,
+			QuestNPCModelTextTopRightCorner,
+			QuestNPCModelTextBottomRightCorner,
+			QuestNPCModelTextBottomBorder,
+			QuestNPCModelTextBottomLeftCorner,
+			QuestNPCModelTextLeftBorder,
+		QuestNPCModelTextTopLeftCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					QuestFrameInset.NineSlice,
+					QuestFrameInset.NineSlice.BottomLeftCorner,
+					QuestFrameInset.NineSlice.BottomRightCorner,
+					QuestFrameInset.NineSlice.BottomEdge,
+				QuestFrameInset.NineSlice.LeftEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- Micro Menu and Bag Bar
-for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- StanceBar
-for i, v in pairs({ StanceBarLeft,
-	StanceBarMiddle,
-	StanceBarRight, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- DressUP
-for i, v in pairs({ DressUpFrame.NineSlice.TopEdge,
-	DressUpFrame.NineSlice.RightEdge,
-	DressUpFrame.NineSlice.BottomEdge,
-	DressUpFrame.NineSlice.LeftEdge,
-	DressUpFrame.NineSlice.TopRightCorner,
-	DressUpFrame.NineSlice.TopLeftCorner,
-	DressUpFrame.NineSlice.BottomLeftCorner,
-	DressUpFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			DressUpFrameInset.NineSlice,
-			DressUpFrameInset.NineSlice.BottomLeftCorner,
-			DressUpFrameInset.NineSlice.BottomRightCorner,
-			DressUpFrameInset.NineSlice.BottomEdge,
-			DressUpFrameInset.NineSlice.LeftEdge, }) do
-			v:SetAlpha(0)
+		-- Micro Menu and Bag Bar
+		for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- LootFrame
-for i, v in pairs({ LootFrame.NineSlice.TopEdge,
-	LootFrame.NineSlice.RightEdge,
-	LootFrame.NineSlice.BottomEdge,
-	LootFrame.NineSlice.LeftEdge,
-	LootFrame.NineSlice.TopRightCorner,
-	LootFrame.NineSlice.TopLeftCorner,
-	LootFrame.NineSlice.BottomLeftCorner,
-	LootFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-		LootFrameInset.NineSlice,
-		LootFrameInset.NineSlice.BottomLeftCorner,
-		LootFrameInset.NineSlice.BottomRightCorner,
-		LootFrameInset.NineSlice.BottomEdge,
-		LootFrameInset.NineSlice.LeftEdge, }) do 
-			v:SetAlpha(0)
+		-- StanceBar
+		for i, v in pairs({ StanceBarLeft,
+			StanceBarMiddle,
+		StanceBarRight, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
+		-- DressUP
+		for i, v in pairs({ DressUpFrame.NineSlice.TopEdge,
+			DressUpFrame.NineSlice.RightEdge,
+			DressUpFrame.NineSlice.BottomEdge,
+			DressUpFrame.NineSlice.LeftEdge,
+			DressUpFrame.NineSlice.TopRightCorner,
+			DressUpFrame.NineSlice.TopLeftCorner,
+			DressUpFrame.NineSlice.BottomLeftCorner,
+		DressUpFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					DressUpFrameInset.NineSlice,
+					DressUpFrameInset.NineSlice.BottomLeftCorner,
+					DressUpFrameInset.NineSlice.BottomRightCorner,
+					DressUpFrameInset.NineSlice.BottomEdge,
+				DressUpFrameInset.NineSlice.LeftEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
+		end
+		-- LootFrame
+		for i, v in pairs({ LootFrame.NineSlice.TopEdge,
+			LootFrame.NineSlice.RightEdge,
+			LootFrame.NineSlice.BottomEdge,
+			LootFrame.NineSlice.LeftEdge,
+			LootFrame.NineSlice.TopRightCorner,
+			LootFrame.NineSlice.TopLeftCorner,
+			LootFrame.NineSlice.BottomLeftCorner,
+		LootFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					LootFrameInset.NineSlice,
+					LootFrameInset.NineSlice.BottomLeftCorner,
+					LootFrameInset.NineSlice.BottomRightCorner,
+					LootFrameInset.NineSlice.BottomEdge,
+				LootFrameInset.NineSlice.LeftEdge, }) do 
+					v:SetAlpha(0)
+				end
 
-	else
-		return nil
-	end
-end
--- HelpFrame
-for i, v in pairs({ HelpFrameTopBorder,
-	HelpFrameRightBorder,
-	HelpFrameTopRightCorner,
-	HelpFrameBottomRightCorner,
-	HelpFrameBottomBorder,
-	HelpFrameBottomLeftCorner,
-	HelpFrameLeftBorder,
-	HelpFrameTopLeftCorner,
- 	HelpFrameVertDivTop,
-	HelpFrameVertDivMiddle,
-	HelpFrameVertDivBottom,
-	HelpFrameHeaderTopBorder,
-	HelpFrameHeaderTopRightCorner,
-	HelpFrameHeaderRightBorder,
-	HelpFrameHeaderBottomRightCorner,
-	HelpFrameHeaderBottomBorder,
-	HelpFrameHeaderBottomLeftCorner,
-	HelpFrameHeaderLeftBorder,
-	HelpFrameHeaderTopLeftCorner,
-	HelpFrameLeftInset.NineSlice.LeftEdge,
- 	HelpFrameLeftInset.NineSlice.BottomEdge,
-	HelpBrowser.BrowserInset.NineSlice.BottomEdge,
-	HelpFrameMainInset.NineSlice.BottomEdge,
-	HelpFrame.Header.LeftBG,
-	HelpFrame.Header.RightBG,
-	HelpFrame.Header.CenterBG, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			HelpFrameLeftInset.NineSlice,
-			HelpFrameLeftInset.NineSlice.BottomLeftCorner,
-			HelpFrameLeftInset.NineSlice.BottomRightCorner,
-			HelpFrameLeftInset.NineSlice.BottomEdge,
+			else
+				return nil
+			end
+		end
+		-- HelpFrame
+		for i, v in pairs({ HelpFrameTopBorder,
+			HelpFrameRightBorder,
+			HelpFrameTopRightCorner,
+			HelpFrameBottomRightCorner,
+			HelpFrameBottomBorder,
+			HelpFrameBottomLeftCorner,
+			HelpFrameLeftBorder,
+			HelpFrameTopLeftCorner,
+			HelpFrameVertDivTop,
+			HelpFrameVertDivMiddle,
+			HelpFrameVertDivBottom,
+			HelpFrameHeaderTopBorder,
+			HelpFrameHeaderTopRightCorner,
+			HelpFrameHeaderRightBorder,
+			HelpFrameHeaderBottomRightCorner,
+			HelpFrameHeaderBottomBorder,
+			HelpFrameHeaderBottomLeftCorner,
+			HelpFrameHeaderLeftBorder,
+			HelpFrameHeaderTopLeftCorner,
 			HelpFrameLeftInset.NineSlice.LeftEdge,
-			HelpFrameMainInset.NineSlice.BottomLeftCorner,
-			HelpFrameMainInset.NineSlice.BottomRightCorner, 
+			HelpFrameLeftInset.NineSlice.BottomEdge,
+			HelpBrowser.BrowserInset.NineSlice.BottomEdge,
 			HelpFrameMainInset.NineSlice.BottomEdge,
-			HelpFrameMainInset.NineSlice.LeftEdge,
-			HelpFrameLeftInset.NineSlice.BottomLeftCorner,
-			HelpFrameLeftInset.NineSlice.BottomRightCorner,
-			HelpFrameLeftInset.NineSlice.LeftEdge, }) do
-			v:SetAlpha(0)
+			HelpFrame.Header.LeftBG,
+			HelpFrame.Header.RightBG,
+		HelpFrame.Header.CenterBG, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					HelpFrameLeftInset.NineSlice,
+					HelpFrameLeftInset.NineSlice.BottomLeftCorner,
+					HelpFrameLeftInset.NineSlice.BottomRightCorner,
+					HelpFrameLeftInset.NineSlice.BottomEdge,
+					HelpFrameLeftInset.NineSlice.LeftEdge,
+					HelpFrameMainInset.NineSlice.BottomLeftCorner,
+					HelpFrameMainInset.NineSlice.BottomRightCorner, 
+					HelpFrameMainInset.NineSlice.BottomEdge,
+					HelpFrameMainInset.NineSlice.LeftEdge,
+					HelpFrameLeftInset.NineSlice.BottomLeftCorner,
+					HelpFrameLeftInset.NineSlice.BottomRightCorner,
+				HelpFrameLeftInset.NineSlice.LeftEdge, }) do
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- ItemTextFrame
-for i, v in pairs({	ItemTextFrame.NineSlice.TopEdge,
-	ItemTextFrame.NineSlice.RightEdge,
-	ItemTextFrame.NineSlice.BottomEdge,
-	ItemTextFrame.NineSlice.LeftEdge,
-	ItemTextFrame.NineSlice.TopRightCorner,
-	ItemTextFrame.NineSlice.TopLeftCorner,
-	ItemTextFrame.NineSlice.BottomLeftCorner,
-	ItemTextFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- PetitionFrame
-for i, v in pairs({	PetitionFrame.NineSlice.TopEdge,
-	PetitionFrame.NineSlice.RightEdge,
-	PetitionFrame.NineSlice.BottomEdge,
-	PetitionFrame.NineSlice.LeftEdge,
-	PetitionFrame.NineSlice.TopRightCorner,
-	PetitionFrame.NineSlice.TopLeftCorner,
-	PetitionFrame.NineSlice.BottomLeftCorner,
-	PetitionFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- Guild Register Frame (pt?) & Tabard Frame
-for i, v in pairs({	GuildRegistrarFrame.NineSlice.TopEdge,
-	GuildRegistrarFrame.NineSlice.RightEdge,
-	GuildRegistrarFrame.NineSlice.BottomEdge,
-	GuildRegistrarFrame.NineSlice.LeftEdge,
-	GuildRegistrarFrame.NineSlice.TopRightCorner,
-	GuildRegistrarFrame.NineSlice.TopLeftCorner,
-	GuildRegistrarFrame.NineSlice.BottomLeftCorner,
-	GuildRegistrarFrame.NineSlice.BottomRightCorner,
-	TabardFrame.NineSlice.TopEdge,
-	TabardFrame.NineSlice.RightEdge,
-	TabardFrame.NineSlice.BottomEdge,
-	TabardFrame.NineSlice.LeftEdge,
-	TabardFrame.NineSlice.TopRightCorner,
-	TabardFrame.NineSlice.TopLeftCorner,
-	TabardFrame.NineSlice.BottomLeftCorner,
-	TabardFrame.NineSlice.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end	
--- CastBarBorder
-for i, v in pairs({	
-	CastingBarFrame.Border,
-	TargetFrameSpellBar.Border,
-	TargetFrameSpellBar.BorderShield, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end	
--- GameMenu
-for i, v in pairs({	
-	GameMenuFrame.Border.TopEdge,
-	GameMenuFrame.Border.RightEdge,
-	GameMenuFrame.Border.BottomEdge,
-	GameMenuFrame.Border.LeftEdge,
-	GameMenuFrame.Border.TopRightCorner,
-	GameMenuFrame.Border.TopLeftCorner,
-	GameMenuFrame.Border.BottomLeftCorner,
-	GameMenuFrame.Border.BottomRightCorner,
-	GameMenuFrame.Header.RightBG,
-	GameMenuFrame.Header.CenterBG,
-	GameMenuFrame.Header.LeftBG, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end	
--- VideoOptions (System)
-for i, v in pairs({	
-	VideoOptionsFrame.Border.TopEdge,
-	VideoOptionsFrame.Border.RightEdge,
-	VideoOptionsFrame.Border.BottomEdge,
-	VideoOptionsFrame.Border.LeftEdge,
-	VideoOptionsFrame.Border.TopRightCorner,
-	VideoOptionsFrame.Border.TopLeftCorner,
-	VideoOptionsFrame.Border.BottomLeftCorner,
-	VideoOptionsFrame.Border.BottomRightCorner,
-	VideoOptionsFrame.Header.RightBG,
-	VideoOptionsFrame.Header.CenterBG,
-	VideoOptionsFrame.Header.LeftBG, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end	
--- InterfaceOptions (Interface)
-for i, v in pairs({	
-	InterfaceOptionsFrame.Border.TopEdge,
-	InterfaceOptionsFrame.Border.RightEdge,
-	InterfaceOptionsFrame.Border.BottomEdge,
-	InterfaceOptionsFrame.Border.LeftEdge,
-	InterfaceOptionsFrame.Border.TopRightCorner,
-	InterfaceOptionsFrame.Border.TopLeftCorner,
-	InterfaceOptionsFrame.Border.BottomLeftCorner,
-	InterfaceOptionsFrame.Border.BottomRightCorner,
-	InterfaceOptionsFrame.Header.RightBG,
-	InterfaceOptionsFrame.Header.CenterBG,
-	InterfaceOptionsFrame.Header.LeftBG, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- AddonsList (Addons)
-for i, v in pairs({	
-	AddonList.NineSlice.TopEdge,
-	AddonList.NineSlice.RightEdge,
-	AddonList.NineSlice.BottomEdge,
-	AddonList.NineSlice.LeftEdge,
-	AddonList.NineSlice.TopRightCorner,
-	AddonList.NineSlice.TopLeftCorner,
-	AddonList.NineSlice.BottomLeftCorner,
-	AddonList.NineSlice.BottomRightCorner,
-	AddonList.NineSlice.BottomEdge, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-		for i, v in pairs({
-			AddonListInset.NineSlice,
-			AddonListInset.NineSlice.BottomLeftCorner,
-			AddonListInset.NineSlice.BottomRightCorner,
-			AddonListInset.NineSlice.BottomEdge,
-			AddonListInset.NineSlice.LeftEdge,
-		}) do 
-			v:SetAlpha(0)
+		-- ItemTextFrame
+		for i, v in pairs({	ItemTextFrame.NineSlice.TopEdge,
+			ItemTextFrame.NineSlice.RightEdge,
+			ItemTextFrame.NineSlice.BottomEdge,
+			ItemTextFrame.NineSlice.LeftEdge,
+			ItemTextFrame.NineSlice.TopRightCorner,
+			ItemTextFrame.NineSlice.TopLeftCorner,
+			ItemTextFrame.NineSlice.BottomLeftCorner,
+		ItemTextFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
 		end
-	else
-		return nil
-	end
-end
--- StaticPopUp (LogoutFrame)
-for i, v in pairs({	
-	StaticPopup1.Border.TopEdge,
-	StaticPopup1.Border.RightEdge,
-	StaticPopup1.Border.BottomEdge,
-	StaticPopup1.Border.LeftEdge,
-	StaticPopup1.Border.TopRightCorner,
-	StaticPopup1.Border.TopLeftCorner,
-	StaticPopup1.Border.BottomLeftCorner,
-	StaticPopup1.Border.BottomRightCorner,
-	StaticPopup2.Border.TopEdge,
-	StaticPopup2.Border.RightEdge,
-	StaticPopup2.Border.BottomEdge,
-	StaticPopup2.Border.LeftEdge,
-	StaticPopup2.Border.TopRightCorner,
-	StaticPopup2.Border.TopLeftCorner,
-	StaticPopup2.Border.BottomLeftCorner,
-	StaticPopup2.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- TimeTrackerTimer
-for i, v in pairs({	
-	TimerTrackerTimer1StatusBarBorder, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- CharacterSlowFrames
-for i, v in pairs({	
- 	CharacterWristSlotFrame,
- 	CharacterTabardSlotFrame,
- 	CharacterShirtSlotFrame,
- 	CharacterChestSlotFrame,
- 	CharacterBackSlotFrame,
- 	CharacterShoulderSlotFrame,
- 	CharacterNeckSlotFrame,
- 	CharacterHeadSlotFrame,
- 	CharacterHandsSlotFrame,
- 	CharacterWaistSlotFrame,
- 	CharacterLegsSlotFrame,
- 	CharacterFeetSlotFrame,
- 	CharacterFinger0SlotFrame,
- 	CharacterFinger1SlotFrame,
- 	CharacterTrinket0SlotFrame,
- 	CharacterTrinket1SlotFrame,
- 	CharacterMainHandSlotFrame,
- 	CharacterSecondaryHandSlotFrame, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end	
--- LFDReadyCheckPopup
-for i, v in pairs({ 
-	LFDReadyCheckPopup.Border.TopEdge,
-	LFDReadyCheckPopup.Border.RightEdge,
-	LFDReadyCheckPopup.Border.BottomEdge,
-	LFDReadyCheckPopup.Border.LeftEdge,
-	LFDReadyCheckPopup.Border.TopRightCorner,
-	LFDReadyCheckPopup.Border.TopLeftCorner,
-	LFDReadyCheckPopup.Border.BottomLeftCorner,
-	LFDReadyCheckPopup.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- PVPRoleCheckPopup
-for i, v in pairs({ 
-	PVPRoleCheckPopup.Border.TopEdge,
-	PVPRoleCheckPopup.Border.RightEdge,
-	PVPRoleCheckPopup.Border.BottomEdge,
-	PVPRoleCheckPopup.Border.LeftEdge,
-	PVPRoleCheckPopup.Border.TopRightCorner,
-	PVPRoleCheckPopup.Border.TopLeftCorner,
-	PVPRoleCheckPopup.Border.BottomLeftCorner,
-	PVPRoleCheckPopup.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- Areana/Bg EnemyFrame
-for i, v in pairs({ 
-	ArenaEnemyFrame1Texture,
-	ArenaEnemyFrame2Texture,
-	ArenaEnemyFrame3Texture,
-	ArenaEnemyFrame4Texture,
-	ArenaEnemyFrame5Texture,
-	ArenaEnemyFrame1PetFrameTexture,
-	ArenaEnemyFrame2PetFrameTexture,
-	ArenaEnemyFrame3PetFrameTexture,
-	ArenaEnemyFrame4PetFrameTexture,
-	ArenaEnemyFrame5PetFrameTexture, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- RecruitAFriend
-for i, v in pairs({ 
-	RecruitAFriendRecruitmentFrame.Border.TopEdge,
-	RecruitAFriendRecruitmentFrame.Border.RightEdge,
-	RecruitAFriendRecruitmentFrame.Border.BottomEdge,
-	RecruitAFriendRecruitmentFrame.Border.LeftEdge,
-	RecruitAFriendRecruitmentFrame.Border.TopRightCorner,
-	RecruitAFriendRecruitmentFrame.Border.TopLeftCorner,
-	RecruitAFriendRecruitmentFrame.Border.BottomLeftCorner,
-	RecruitAFriendRecruitmentFrame.Border.BottomRightCorner,
-	RecruitAFriendRewardsFrame.Border.TopEdge,
-	RecruitAFriendRewardsFrame.Border.RightEdge,
-	RecruitAFriendRewardsFrame.Border.BottomEdge,
-	RecruitAFriendRewardsFrame.Border.LeftEdge,
-	RecruitAFriendRewardsFrame.Border.TopRightCorner,
-	RecruitAFriendRewardsFrame.Border.TopLeftCorner,
-	RecruitAFriendRewardsFrame.Border.BottomLeftCorner,
-	RecruitAFriendRewardsFrame.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- LFGDiag
-for i, v in pairs({ 
-	LFGDungeonReadyStatus.Border.TopEdge,
-	LFGDungeonReadyStatus.Border.RightEdge,
-	LFGDungeonReadyStatus.Border.BottomEdge,
-	LFGDungeonReadyStatus.Border.LeftEdge,
-	LFGDungeonReadyStatus.Border.TopRightCorner,
-	LFGDungeonReadyStatus.Border.TopLeftCorner,
-	LFGDungeonReadyStatus.Border.BottomLeftCorner,
-	LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
--- PVPReadyDialog
-for i, v in pairs({ 
-	PVPReadyDialog.Border.TopEdge,
-	PVPReadyDialog.Border.RightEdge,
-	PVPReadyDialog.Border.BottomEdge,
-	PVPReadyDialog.Border.LeftEdge,
-	PVPReadyDialog.Border.TopRightCorner,
-	PVPReadyDialog.Border.TopLeftCorner,
-	PVPReadyDialog.Border.BottomLeftCorner,
-	PVPReadyDialog.Border.BottomRightCorner, }) do
-	if AbyssUIAddonSettings ~= nil then
-		AbyssUI_ColorizationFrameFunction(v)
-	else
-		return nil
-	end
-end
+		-- PetitionFrame
+		for i, v in pairs({	PetitionFrame.NineSlice.TopEdge,
+			PetitionFrame.NineSlice.RightEdge,
+			PetitionFrame.NineSlice.BottomEdge,
+			PetitionFrame.NineSlice.LeftEdge,
+			PetitionFrame.NineSlice.TopRightCorner,
+			PetitionFrame.NineSlice.TopLeftCorner,
+			PetitionFrame.NineSlice.BottomLeftCorner,
+		PetitionFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- Guild Register Frame (pt?) & Tabard Frame
+		for i, v in pairs({	GuildRegistrarFrame.NineSlice.TopEdge,
+			GuildRegistrarFrame.NineSlice.RightEdge,
+			GuildRegistrarFrame.NineSlice.BottomEdge,
+			GuildRegistrarFrame.NineSlice.LeftEdge,
+			GuildRegistrarFrame.NineSlice.TopRightCorner,
+			GuildRegistrarFrame.NineSlice.TopLeftCorner,
+			GuildRegistrarFrame.NineSlice.BottomLeftCorner,
+			GuildRegistrarFrame.NineSlice.BottomRightCorner,
+			TabardFrame.NineSlice.TopEdge,
+			TabardFrame.NineSlice.RightEdge,
+			TabardFrame.NineSlice.BottomEdge,
+			TabardFrame.NineSlice.LeftEdge,
+			TabardFrame.NineSlice.TopRightCorner,
+			TabardFrame.NineSlice.TopLeftCorner,
+			TabardFrame.NineSlice.BottomLeftCorner,
+		TabardFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
+		-- CastBarBorder
+		for i, v in pairs({	
+			CastingBarFrame.Border,
+			TargetFrameSpellBar.Border,
+		TargetFrameSpellBar.BorderShield, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
+		-- GameMenu
+		for i, v in pairs({	
+			GameMenuFrame.Border.TopEdge,
+			GameMenuFrame.Border.RightEdge,
+			GameMenuFrame.Border.BottomEdge,
+			GameMenuFrame.Border.LeftEdge,
+			GameMenuFrame.Border.TopRightCorner,
+			GameMenuFrame.Border.TopLeftCorner,
+			GameMenuFrame.Border.BottomLeftCorner,
+			GameMenuFrame.Border.BottomRightCorner,
+			GameMenuFrame.Header.RightBG,
+			GameMenuFrame.Header.CenterBG,
+		GameMenuFrame.Header.LeftBG, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
+		-- VideoOptions (System)
+		for i, v in pairs({	
+			VideoOptionsFrame.Border.TopEdge,
+			VideoOptionsFrame.Border.RightEdge,
+			VideoOptionsFrame.Border.BottomEdge,
+			VideoOptionsFrame.Border.LeftEdge,
+			VideoOptionsFrame.Border.TopRightCorner,
+			VideoOptionsFrame.Border.TopLeftCorner,
+			VideoOptionsFrame.Border.BottomLeftCorner,
+			VideoOptionsFrame.Border.BottomRightCorner,
+			VideoOptionsFrame.Header.RightBG,
+			VideoOptionsFrame.Header.CenterBG,
+		VideoOptionsFrame.Header.LeftBG, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
+		-- InterfaceOptions (Interface)
+		for i, v in pairs({	
+			InterfaceOptionsFrame.Border.TopEdge,
+			InterfaceOptionsFrame.Border.RightEdge,
+			InterfaceOptionsFrame.Border.BottomEdge,
+			InterfaceOptionsFrame.Border.LeftEdge,
+			InterfaceOptionsFrame.Border.TopRightCorner,
+			InterfaceOptionsFrame.Border.TopLeftCorner,
+			InterfaceOptionsFrame.Border.BottomLeftCorner,
+			InterfaceOptionsFrame.Border.BottomRightCorner,
+			InterfaceOptionsFrame.Header.RightBG,
+			InterfaceOptionsFrame.Header.CenterBG,
+		InterfaceOptionsFrame.Header.LeftBG, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- AddonsList (Addons)
+		for i, v in pairs({	
+			AddonList.NineSlice.TopEdge,
+			AddonList.NineSlice.RightEdge,
+			AddonList.NineSlice.BottomEdge,
+			AddonList.NineSlice.LeftEdge,
+			AddonList.NineSlice.TopRightCorner,
+			AddonList.NineSlice.TopLeftCorner,
+			AddonList.NineSlice.BottomLeftCorner,
+			AddonList.NineSlice.BottomRightCorner,
+		AddonList.NineSlice.BottomEdge, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+				for i, v in pairs({
+					AddonListInset.NineSlice,
+					AddonListInset.NineSlice.BottomLeftCorner,
+					AddonListInset.NineSlice.BottomRightCorner,
+					AddonListInset.NineSlice.BottomEdge,
+					AddonListInset.NineSlice.LeftEdge,
+				}) do 
+					v:SetAlpha(0)
+				end
+			else
+				return nil
+			end
+		end
+		-- StaticPopUp (LogoutFrame)
+		for i, v in pairs({	
+			StaticPopup1.Border.TopEdge,
+			StaticPopup1.Border.RightEdge,
+			StaticPopup1.Border.BottomEdge,
+			StaticPopup1.Border.LeftEdge,
+			StaticPopup1.Border.TopRightCorner,
+			StaticPopup1.Border.TopLeftCorner,
+			StaticPopup1.Border.BottomLeftCorner,
+			StaticPopup1.Border.BottomRightCorner,
+			StaticPopup2.Border.TopEdge,
+			StaticPopup2.Border.RightEdge,
+			StaticPopup2.Border.BottomEdge,
+			StaticPopup2.Border.LeftEdge,
+			StaticPopup2.Border.TopRightCorner,
+			StaticPopup2.Border.TopLeftCorner,
+			StaticPopup2.Border.BottomLeftCorner,
+		StaticPopup2.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- TimeTrackerTimer
+		for i, v in pairs({	
+		TimerTrackerTimer1StatusBarBorder, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- CharacterSlowFrames
+		for i, v in pairs({	
+			CharacterWristSlotFrame,
+			CharacterTabardSlotFrame,
+			CharacterShirtSlotFrame,
+			CharacterChestSlotFrame,
+			CharacterBackSlotFrame,
+			CharacterShoulderSlotFrame,
+			CharacterNeckSlotFrame,
+			CharacterHeadSlotFrame,
+			CharacterHandsSlotFrame,
+			CharacterWaistSlotFrame,
+			CharacterLegsSlotFrame,
+			CharacterFeetSlotFrame,
+			CharacterFinger0SlotFrame,
+			CharacterFinger1SlotFrame,
+			CharacterTrinket0SlotFrame,
+			CharacterTrinket1SlotFrame,
+			CharacterMainHandSlotFrame,
+		CharacterSecondaryHandSlotFrame, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
+		-- LFDReadyCheckPopup
+		for i, v in pairs({ 
+			LFDReadyCheckPopup.Border.TopEdge,
+			LFDReadyCheckPopup.Border.RightEdge,
+			LFDReadyCheckPopup.Border.BottomEdge,
+			LFDReadyCheckPopup.Border.LeftEdge,
+			LFDReadyCheckPopup.Border.TopRightCorner,
+			LFDReadyCheckPopup.Border.TopLeftCorner,
+			LFDReadyCheckPopup.Border.BottomLeftCorner,
+		LFDReadyCheckPopup.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- PVPRoleCheckPopup
+		for i, v in pairs({ 
+			PVPRoleCheckPopup.Border.TopEdge,
+			PVPRoleCheckPopup.Border.RightEdge,
+			PVPRoleCheckPopup.Border.BottomEdge,
+			PVPRoleCheckPopup.Border.LeftEdge,
+			PVPRoleCheckPopup.Border.TopRightCorner,
+			PVPRoleCheckPopup.Border.TopLeftCorner,
+			PVPRoleCheckPopup.Border.BottomLeftCorner,
+		PVPRoleCheckPopup.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- Areana/Bg EnemyFrame
+		for i, v in pairs({ 
+			ArenaEnemyFrame1Texture,
+			ArenaEnemyFrame2Texture,
+			ArenaEnemyFrame3Texture,
+			ArenaEnemyFrame4Texture,
+			ArenaEnemyFrame5Texture,
+			ArenaEnemyFrame1PetFrameTexture,
+			ArenaEnemyFrame2PetFrameTexture,
+			ArenaEnemyFrame3PetFrameTexture,
+			ArenaEnemyFrame4PetFrameTexture,
+		ArenaEnemyFrame5PetFrameTexture, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- RecruitAFriend
+		for i, v in pairs({ 
+			RecruitAFriendRecruitmentFrame.Border.TopEdge,
+			RecruitAFriendRecruitmentFrame.Border.RightEdge,
+			RecruitAFriendRecruitmentFrame.Border.BottomEdge,
+			RecruitAFriendRecruitmentFrame.Border.LeftEdge,
+			RecruitAFriendRecruitmentFrame.Border.TopRightCorner,
+			RecruitAFriendRecruitmentFrame.Border.TopLeftCorner,
+			RecruitAFriendRecruitmentFrame.Border.BottomLeftCorner,
+			RecruitAFriendRecruitmentFrame.Border.BottomRightCorner,
+			RecruitAFriendRewardsFrame.Border.TopEdge,
+			RecruitAFriendRewardsFrame.Border.RightEdge,
+			RecruitAFriendRewardsFrame.Border.BottomEdge,
+			RecruitAFriendRewardsFrame.Border.LeftEdge,
+			RecruitAFriendRewardsFrame.Border.TopRightCorner,
+			RecruitAFriendRewardsFrame.Border.TopLeftCorner,
+			RecruitAFriendRewardsFrame.Border.BottomLeftCorner,
+		RecruitAFriendRewardsFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFGDiag
+		for i, v in pairs({ 
+			LFGDungeonReadyStatus.Border.TopEdge,
+			LFGDungeonReadyStatus.Border.RightEdge,
+			LFGDungeonReadyStatus.Border.BottomEdge,
+			LFGDungeonReadyStatus.Border.LeftEdge,
+			LFGDungeonReadyStatus.Border.TopRightCorner,
+			LFGDungeonReadyStatus.Border.TopLeftCorner,
+			LFGDungeonReadyStatus.Border.BottomLeftCorner,
+		LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- PVPReadyDialog
+		for i, v in pairs({ 
+			PVPReadyDialog.Border.TopEdge,
+			PVPReadyDialog.Border.RightEdge,
+			PVPReadyDialog.Border.BottomEdge,
+			PVPReadyDialog.Border.LeftEdge,
+			PVPReadyDialog.Border.TopRightCorner,
+			PVPReadyDialog.Border.TopLeftCorner,
+			PVPReadyDialog.Border.BottomLeftCorner,
+		PVPReadyDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- DropDownList
+		for i, v in pairs({ 
+			DropDownList1Backdrop.TopEdge,
+			DropDownList1Backdrop.RightEdge,
+			DropDownList1Backdrop.BottomEdge,
+			DropDownList1Backdrop.LeftEdge,
+			DropDownList1Backdrop.TopRightCorner,
+			DropDownList1Backdrop.TopLeftCorner,
+			DropDownList1Backdrop.BottomLeftCorner,
+		DropDownList1Backdrop.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 
-----------------------------------------------------------------------
-	-- End
-	self:UnregisterEvent("ADDON_LOADED")
-	NewFrames:SetScript("OnEvent", nil)
+		----------------------------------------------------------------------
+		-- End
+		self:UnregisterEvent("ADDON_LOADED")
+		NewFrames:SetScript("OnEvent", nil)
 	end
 end)
 
@@ -1021,7 +1037,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			PlayerTalentFrame.NineSlice.TopRightCorner,
 			PlayerTalentFrame.NineSlice.TopLeftCorner,
 			PlayerTalentFrame.NineSlice.BottomLeftCorner,
-			PlayerTalentFrame.NineSlice.BottomRightCorner, }) do
+		PlayerTalentFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
 					v:SetVertexColor(1, 1, 1)
@@ -1056,8 +1072,8 @@ f:SetScript("OnEvent", function(self, event, name)
 				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 					v:SetVertexColor(199/255, 156/255, 110/255)
 				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-				local character = UnitName("player").."-"..GetRealmName()
-				v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
+					local character = UnitName("player").."-"..GetRealmName()
+					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				else
 					v:SetVertexColor(.4, .4, .4)
 				end
@@ -1087,7 +1103,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			CollectionsJournal.NineSlice.BottomLeftCorner,
 			CollectionsJournal.NineSlice.LeftEdge,
 			CollectionsJournal.NineSlice.TopLeftCorner,
-			MountJournal.BottomLeftInset.NineSlice.BottomRightCorner, }) do
+		MountJournal.BottomLeftInset.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1118,7 +1134,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					HeirloomsJournal.iconsFrame.NineSlice.BottomLeftCorner,
 					HeirloomsJournal.iconsFrame.NineSlice.BottomRightCorner,
 					HeirloomsJournal.iconsFrame.NineSlice.BottomEdge,
-					HeirloomsJournal.iconsFrame.NineSlice.LeftEdge,	}) do
+				HeirloomsJournal.iconsFrame.NineSlice.LeftEdge,	}) do
 					v:SetAlpha(0)
 				end
 			end
@@ -1137,7 +1153,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			EncounterJournal.NineSlice.TopRightCorner,
 			EncounterJournal.NineSlice.TopLeftCorner,
 			EncounterJournal.NineSlice.BottomLeftCorner,
-			EncounterJournal.NineSlice.BottomRightCorner, }) do
+		EncounterJournal.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1145,7 +1161,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					EncounterJournalInset.NineSlice.BottomLeftCorner,
 					EncounterJournalInset.NineSlice.BottomRightCorner,
 					EncounterJournalInset.NineSlice.BottomEdge,
-					EncounterJournalInset.NineSlice.LeftEdge, }) do
+				EncounterJournalInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			end
@@ -1174,36 +1190,36 @@ f:SetScript("OnEvent", function(self, event, name)
 			CommunitiesFrame.GuildMemberDetailFrame.Border.TopRightCorner,
 			CommunitiesFrame.GuildMemberDetailFrame.Border.TopLeftCorner,
 			CommunitiesFrame.GuildMemberDetailFrame.Border.BottomLeftCorner,
-			CommunitiesFrame.GuildMemberDetailFrame.Border.BottomRightCorner, }) do
+		CommunitiesFrame.GuildMemberDetailFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
-			for i, v in pairs ({
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomLeftCorner,
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomRightCorner,
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomEdge,
-				CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomLeftCorner,
-				CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomRightCorner,
-				CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
-				ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomLeftCorner,
-				ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomRightCorner,
-				ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomEdge,
-				ClubFinderGuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
-				ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomLeftCorner,
-				ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomRightCorner,
-				ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomLeftCorner,
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomRightCorner,
-				CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomEdge,
-				CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomLeftCorner,
-				CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomRightCorner,
-				CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomEdge,
-				CommunitiesFrameInset.NineSlice,
-				CommunitiesFrameInset.NineSlice.BottomLeftCorner,
-				CommunitiesFrameInset.NineSlice.BottomRightCorner,
-				CommunitiesFrameInset.NineSlice.BottomEdge,
+				for i, v in pairs ({
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomLeftCorner,
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomRightCorner,
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomEdge,
+					CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomLeftCorner,
+					CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomRightCorner,
+					CommunitiesFrame.GuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
+					ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomLeftCorner,
+					ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomRightCorner,
+					ClubFinderGuildFinderFrame.DisabledFrame.NineSlice.BottomEdge,
+					ClubFinderGuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
+					ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomLeftCorner,
+					ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomRightCorner,
+					ClubFinderCommunityAndGuildFinderFrame.InsetFrame.NineSlice.BottomEdge,
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomLeftCorner,
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomRightCorner,
+					CommunitiesFrameCommunitiesList.InsetFrame.NineSlice.BottomEdge,
+					CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomLeftCorner,
+					CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomRightCorner,
+					CommunitiesFrame.MemberList.InsetFrame.NineSlice.BottomEdge,
+					CommunitiesFrameInset.NineSlice,
+					CommunitiesFrameInset.NineSlice.BottomLeftCorner,
+					CommunitiesFrameInset.NineSlice.BottomRightCorner,
+					CommunitiesFrameInset.NineSlice.BottomEdge,
 				CommunitiesFrameInset.NineSlice.LeftEdge, }) do
-				v:SetAlpha(0)
-			end
+					v:SetAlpha(0)
+				end
 			else
 				return nil
 			end
@@ -1222,7 +1238,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			MacroFrame.NineSlice.TopRightCorner,
 			MacroFrame.NineSlice.TopLeftCorner,
 			MacroFrame.NineSlice.BottomLeftCorner,
-			MacroFrame.NineSlice.BottomRightCorner, }) do
+		MacroFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1230,7 +1246,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					MacroFrameInset.NineSlice.BottomLeftCorner,
 					MacroFrameInset.NineSlice.BottomRightCorner,
 					MacroFrameInset.NineSlice.BottomEdge,
-					MacroFrameInset.NineSlice.Left, }) do
+				MacroFrameInset.NineSlice.Left, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1270,7 +1286,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			AuctionHouseFrame.BuyDialog.Border.TopLeftCorner,
 			AuctionHouseFrame.BuyDialog.Border.BottomLeftCorner,
 			AuctionHouseFrame.BuyDialog.Border.BottomRightCorner,
-			AuctionHouseFrame.BuyDialog.Border.BottomEdge, }) do
+		AuctionHouseFrame.BuyDialog.Border.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1301,7 +1317,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					AuctionHouseFrameAuctionsFrame.AllAuctionsList.NineSlice.BottomLeftCorner,
 					AuctionHouseFrameAuctionsFrame.AllAuctionsList.NineSlice.BottomRightCorner,
 					AuctionHouseFrameAuctionsFrame.AllAuctionsList.NineSlice.BottomEdge,
-					AuctionHouseFrameAuctionsFrame.AllAuctionsList.NineSlice.LeftEdge, }) do
+				AuctionHouseFrameAuctionsFrame.AllAuctionsList.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1322,7 +1338,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			FlightMapFrame.BorderFrame.NineSlice.TopRightCorner,
 			FlightMapFrame.BorderFrame.NineSlice.TopLeftCorner,
 			FlightMapFrame.BorderFrame.NineSlice.BottomLeftCorner,
-			FlightMapFrame.BorderFrame.NineSlice.BottomRightCorner,	}) do
+		FlightMapFrame.BorderFrame.NineSlice.BottomRightCorner,	}) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1343,7 +1359,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			TradeSkillFrame.NineSlice.TopRightCorner,
 			TradeSkillFrame.NineSlice.TopLeftCorner,
 			TradeSkillFrame.NineSlice.BottomLeftCorner,
-			TradeSkillFrame.NineSlice.BottomRightCorner, }) do
+		TradeSkillFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1355,7 +1371,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					TradeSkillFrame.DetailsInset.NineSlice,
 					TradeSkillFrame.DetailsInset.NineSlice.BottomLeftCorner,
 					TradeSkillFrame.DetailsInset.NineSlice.BottomRightCorner,
-					TradeSkillFrame.DetailsInset.NineSlice.LeftEdge, }) do
+				TradeSkillFrame.DetailsInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1377,7 +1393,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			InspectFrame.NineSlice.TopLeftCorner,
 			InspectFrame.NineSlice.BottomLeftCorner,
 			InspectFrame.NineSlice.BottomRightCorner,
-			InspectFrameInset.NineSlice.BottomEdge, }) do
+		InspectFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1390,7 +1406,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					InspectModelFrameBorderBottom2,
 					InspectModelFrameBorderLeft,
 					InspectModelFrameBorderRight,
-					InspectModelFrameBorderTop, }) do
+				InspectModelFrameBorderTop, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1411,7 +1427,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			WardrobeFrame.NineSlice.TopRightCorner,
 			WardrobeFrame.NineSlice.TopLeftCorner,
 			WardrobeFrame.NineSlice.BottomLeftCorner,
-			WardrobeFrame.NineSlice.BottomRightCorner, }) do
+		WardrobeFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				--WardrobeCollectionFrame.SetCollectionFrame.LeftInset.NineSlice.BottomLeftCorner,
@@ -1425,7 +1441,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					WardrobeTransmogFrame.Inset.NineSlice.BottomLeftCorner,
 					WardrobeTransmogFrame.Inset.NineSlice.BottomRightCorner,
 					WardrobeTransmogFrame.Inset.NineSlice.BottomEdge,
-					WardrobeTransmogFrame.Inset.NineSlice.LeftEdge, }) do
+				WardrobeTransmogFrame.Inset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1447,7 +1463,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			ClassTrainerFrame.NineSlice.TopLeftCorner,
 			ClassTrainerFrame.NineSlice.BottomLeftCorner,
 			ClassTrainerFrame.NineSlice.BottomRightCorner,
-			ClassTrainerFrameInset.NineSlice.BottomEdge, }) do
+		ClassTrainerFrameInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1455,7 +1471,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					ClassTrainerFrameInset.NineSlice.BottomLeftCorner,
 					ClassTrainerFrameInset.NineSlice.BottomRightCorner,
 					ClassTrainerFrameInset.NineSlice.BottomEdge,
-					ClassTrainerFrameInset.NineSlice.LeftEdge, }) do
+				ClassTrainerFrameInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1470,19 +1486,19 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AchievementUI" then
 		for i, v in pairs({ AchievementFrameHeaderRight,
-	 		AchievementFrameHeaderLeft,
+			AchievementFrameHeaderLeft,
 			AchievementFrameWoodBorderTopLeft,
 			AchievementFrameWoodBorderBottomLeft,
 			AchievementFrameWoodBorderTopRight,
 			AchievementFrameWoodBorderBottomRight,
-		 	AchievementFrameMetalBorderBottom,
+			AchievementFrameMetalBorderBottom,
 			AchievementFrameMetalBorderBottomLeft,
 			AchievementFrameMetalBorderBottomRight,
 			AchievementFrameMetalBorderLeft,
 			AchievementFrameMetalBorderRight,
 			AchievementFrameMetalBorderTop,
 			AchievementFrameMetalBorderTopLeft,
-			AchievementFrameMetalBorderTopRight, }) do
+		AchievementFrameMetalBorderTopRight, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1503,7 +1519,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopRightCorner,
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopLeftCorner,
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomLeftCorner,
-			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomRightCorner, }) do
+		AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1524,7 +1540,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			AlliedRacesFrame.NineSlice.TopRightCorner,
 			AlliedRacesFrame.NineSlice.TopLeftCorner,
 			AlliedRacesFrame.NineSlice.BottomLeftCorner,
-			AlliedRacesFrame.NineSlice.BottomRightCorner, }) do
+		AlliedRacesFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1532,7 +1548,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					AlliedRacesFrameInset.NineSlice.BottomLeftCorner,
 					AlliedRacesFrameInset.NineSlice.BottomRightCorner,
 					AlliedRacesFrameInset.NineSlice.BottomEdge,
-					AlliedRacesFrameInset.NineSlice.LeftEdge, }) do
+				AlliedRacesFrameInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1554,7 +1570,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			IslandsQueueFrame.NineSlice.TopLeftCorner,
 			IslandsQueueFrame.NineSlice.BottomLeftCorner,
 			IslandsQueueFrame.NineSlice.BottomRightCorner,
-		 	IslandsQueueFrame.ArtOverlayFrame.PortraitFrame, }) do
+		IslandsQueueFrame.ArtOverlayFrame.PortraitFrame, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1575,7 +1591,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			GarrisonCapacitiveDisplayFrame.NineSlice.TopRightCorner,
 			GarrisonCapacitiveDisplayFrame.NineSlice.TopLeftCorner,
 			GarrisonCapacitiveDisplayFrame.NineSlice.BottomLeftCorner,
-			GarrisonCapacitiveDisplayFrame.NineSlice.BottomRightCorner, }) do
+		GarrisonCapacitiveDisplayFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1583,7 +1599,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					GarrisonCapacitiveDisplayFrameInset.NineSlice.BottomLeftCorner,
 					GarrisonCapacitiveDisplayFrameInset.NineSlice.BottomRightCorner,
 					GarrisonCapacitiveDisplayFrameInset.NineSlice.BottomEdge,
-					GarrisonCapacitiveDisplayFrameInset.NineSlice.LeftEdge, }) do
+				GarrisonCapacitiveDisplayFrameInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1598,7 +1614,7 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Calendar" then
 		for i, v in pairs({ CalendarFrameTopMiddleTexture,
-	 		CalendarFrameRightTopTexture,
+			CalendarFrameRightTopTexture,
 			CalendarFrameRightMiddleTexture,
 			CalendarFrameRightBottomTexture,
 			CalendarFrameBottomRightTexture,
@@ -1617,6 +1633,9 @@ f:SetScript("OnEvent", function(self, event, name)
 			CalendarCreateEventFrame.Border.TopLeftCorner,
 			CalendarCreateEventFrame.Border.BottomLeftCorner,
 			CalendarCreateEventFrame.Border.BottomRightCorner,
+			CalendarViewHolidayFrame.Header.CenterBG,
+			CalendarViewHolidayFrame.Header.LeftBG,
+			CalendarViewHolidayFrame.Header.RightBG,
 			CalendarViewHolidayFrame.Border.TopEdge,
 			CalendarViewHolidayFrame.Border.RightEdge,
 			CalendarViewHolidayFrame.Border.BottomEdge,
@@ -1624,7 +1643,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			CalendarViewHolidayFrame.Border.TopRightCorner,
 			CalendarViewHolidayFrame.Border.TopLeftCorner,
 			CalendarViewHolidayFrame.Border.BottomLeftCorner,
-			CalendarViewHolidayFrame.Border.BottomRightCorner, }) do
+		CalendarViewHolidayFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1645,7 +1664,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			AzeriteRespecFrame.NineSlice.TopRightCorner,
 			AzeriteRespecFrame.NineSlice.TopLeftCorner,
 			AzeriteRespecFrame.NineSlice.BottomLeftCorner,
-			AzeriteRespecFrame.NineSlice.BottomRightCorner, }) do
+		AzeriteRespecFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1666,7 +1685,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			ScrappingMachineFrame.NineSlice.TopRightCorner,
 			ScrappingMachineFrame.NineSlice.TopLeftCorner,
 			ScrappingMachineFrame.NineSlice.BottomLeftCorner,
-			ScrappingMachineFrame.NineSlice.BottomRightCorner, }) do
+		ScrappingMachineFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1693,7 +1712,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			TimeManagerFrameInset.NineSlice.LeftEdge,
 			TimeManagerFrameInset.NineSlice.TopRightCorner,
 			TimeManagerFrameInset.NineSlice.TopLeftCorner,
-			StopwatchFrameBackgroundLeft, }) do
+		StopwatchFrameBackgroundLeft, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1701,7 +1720,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					TimeManagerFrameInset.NineSlice.BottomLeftCorner,
 					TimeManagerFrameInset.NineSlice.BottomRightCorner,
 					TimeManagerFrameInset.NineSlice.BottomEdge,
-					TimeManagerFrameInset.NineSlice.LeftEdge, }) do
+				TimeManagerFrameInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1722,7 +1741,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			AzeriteEssenceUI.NineSlice.TopRightCorner,
 			AzeriteEssenceUI.NineSlice.TopLeftCorner,
 			AzeriteEssenceUI.NineSlice.BottomLeftCorner,
-			AzeriteEssenceUI.NineSlice.BottomRightCorner, }) do
+		AzeriteEssenceUI.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1752,7 +1771,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			LFGListFrame.CategorySelection.Inset.NineSlice,
 			LFGListFrame.CategorySelection.Inset.NineSlice.BottomLeftCorner,
 			LFGListFrame.CategorySelection.Inset.NineSlice.BottomRightCorner,
-			LFGListFrame.CategorySelection.Inset.NineSlice.BottomEdge, }) do
+		LFGListFrame.CategorySelection.Inset.NineSlice.BottomEdge, }) do
 			v:SetAlpha(0)
 		end
 	end
@@ -1767,7 +1786,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			ChallengesFrameInset.NineSlice.BottomLeftCorner,
 			ChallengesFrameInset.NineSlice.BottomRightCorner,
 			ChallengesFrameInset.NineSlice.BottomEdge,
-			ChallengesFrameInset.NineSlice.LeftEdge, }) do
+		ChallengesFrameInset.NineSlice.LeftEdge, }) do
 			v:SetAlpha(0)
 		end
 	end
@@ -1784,7 +1803,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			ArchaeologyFrame.NineSlice.TopRightCorner,
 			ArchaeologyFrame.NineSlice.TopLeftCorner,
 			ArchaeologyFrame.NineSlice.BottomLeftCorner,
-			ArchaeologyFrame.NineSlice.BottomRightCorner, }) do
+		ArchaeologyFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1792,7 +1811,7 @@ f:SetScript("OnEvent", function(self, event, name)
 					ArchaeologyFrameInset.NineSlice.BottomLeftCorner,
 					ArchaeologyFrameInset.NineSlice.BottomRightCorner,
 					ArchaeologyFrameInset.NineSlice.BottomEdge,
-					ArchaeologyFrameInset.NineSlice.LeftEdge, }) do
+				ArchaeologyFrameInset.NineSlice.LeftEdge, }) do
 					v:SetAlpha(0)
 				end
 			else
@@ -1816,7 +1835,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			KeyBindingFrame.BG.BottomRightCorner,
 			KeyBindingFrame.Header.RightBG,
 			KeyBindingFrame.Header.CenterBG,
-			KeyBindingFrame.Header.LeftBG, }) do
+		KeyBindingFrame.Header.LeftBG, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else

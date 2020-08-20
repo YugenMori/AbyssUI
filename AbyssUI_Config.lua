@@ -520,7 +520,7 @@ HideStanceBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideStanceBar)
 HideStanceBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
    if ( AbyssUIAddonSettings.HideStanceBar == true ) then
-     StanceBarFrame:Hide()
+     StanceBarFrame:SetAlpha(0)
    else
      return nil
    end
@@ -531,7 +531,7 @@ HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if ( event == "PLAYER_ENTERING_WORLD" ) then
     if AbyssUIAddonSettings.HideStanceBar == true then
       C_Timer.After(0.5, function()
-        StanceBarFrame:SetScript("OnUpdate", function(self) self:Hide() end)
+        StanceBarFrame:SetAlpha(0)
       end)
     end
   end
@@ -1322,6 +1322,14 @@ UnitFrameImproved_CheckButton:SetScript("OnClick", function(self)
 end)
 ----------------------------- AbyssUI Stylization ------------------------------
 -- Player Portrait Style --
+local PSINFO_CheckButton = CreateFrame("Frame","$parentPSINFO_CheckButton", AbyssUI_Config.childpanel4)
+PSINFO_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel4, "BOTTOMLEFT", 10, 20)
+PSINFO_CheckButton:SetHeight(24)
+PSINFO_CheckButton:SetWidth(200)
+PSINFO_CheckButton:SetScale(1)
+PSINFO_CheckButton = PSINFO_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+PSINFO_CheckButton:SetPoint("LEFT")
+PSINFO_CheckButton:SetText("Some of this options (Player Portrait) needs the separeted AbyssUI texture pack found in the\n addon page.")
 -- AbyssUIClassCircles01_CheckButton
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)

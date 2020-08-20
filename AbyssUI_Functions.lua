@@ -149,9 +149,13 @@ for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackgrou
 end
 ----------------------------------------------------
 -- Cast Bar
+CastingBarFrame.Text = CastingBarFrame:CreateFontString(nil)
+CastingBarFrame.Text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
+CastingBarFrame.Text:ClearAllPoints()
+CastingBarFrame.Text:SetPoint("CENTER", CastingBarFrame, "CENTER", 0, 2)
 -- Timer
 CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
-CastingBarFrame.timer:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+CastingBarFrame.timer:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
 CastingBarFrame.timer:SetPoint("TOP", CastingBarFrame, "BOTTOM", 0, 0)
 CastingBarFrame.update = .1
 CastingBarFrame:HookScript("OnUpdate", function(self, elapsed)
@@ -206,22 +210,26 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
-				if ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Horde" ) then
+				--[[if ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Horde" ) then
 					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				elseif ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Alliance" ) then
 					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				else
 					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 				end
+				-]]
+				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
-				if ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Horde" ) then
+				--[[if ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Horde" ) then
 					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				elseif ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Alliance" ) then
 					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				else 
 					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 				end
+				--]]
+				GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
 				local text5 = GameTooltipTextLeft5:GetText()
@@ -238,7 +246,7 @@ local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
 TooltipBackground:SetPoint("TOPLEFT", 3, -3)
 TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
 TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
-TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.8)
+TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
 -- Tooltip Class Color Health
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	local _, unit = GameTooltip:GetUnit()
@@ -253,6 +261,7 @@ end)
 ----------------------------------------------------
 -- Tooltip Faction
 -- Only create the texture once.
+--[[
 local TooltipFaction = GameTooltip:CreateTexture(GameTooltip, "BACKGROUND", nil, 1)
 TooltipFaction:SetSize(40, 40)
 TooltipFaction:SetPoint("TOPRIGHT", 0, -5)
@@ -260,22 +269,25 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
     local _, unit = GameTooltip:GetUnit()
     if UnitIsPlayer(unit) then
         local englishFaction, localizedFaction = UnitFactionGroup(unit)
-        if ( englishFaction == "Horde" ) then
-            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\faction\\PVP-Currency-Horde")
-            TooltipFaction:Show()
-        elseif ( englishFaction == "Alliance" ) then
-            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\faction\\PVP-Currency-Alliance")
-            TooltipFaction:Show()
-        elseif ( englishFaction == "Neutral" ) then
-            -- TooltipFaction:SetTexture("")
-            TooltipFaction:Hide()
-        else
-            TooltipFaction:Hide()
-        end
+        if ( UnitExists("target") ) then
+	        if ( englishFaction == "Horde" ) then
+	            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\PVP-Currency-Horde")
+	            TooltipFaction:Show()
+	        elseif ( englishFaction == "Alliance" ) then
+	            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\PVP-Currency-Alliance")
+	            TooltipFaction:Show()
+	        elseif ( englishFaction == "Neutral" ) then
+	            -- TooltipFaction:SetTexture("")
+	            TooltipFaction:Hide()
+	        else
+	            TooltipFaction:Hide()
+	        end
+	      end
     else
         TooltipFaction:Hide()
     end
 end)
+--]]
 -- StatsFrame
 -- Many thanks to Syiana for part of this
 local StatsFrame = CreateFrame("Frame", "$parentStatsFrame", UIParent)
