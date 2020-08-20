@@ -627,26 +627,26 @@ BorderButton:SetAllPoints(FrameButton2)
 FrameButton2:SetScript("OnClick", function()
 	-- Set
 	for i, v in pairs {
-		addonTable.CameraSmooth50,
+		addonTable.HideUnitImprovedFaction,
+		addonTable.InstanceLeave,
 		addonTable.InspectTarget,
+		addonTable.ConfirmPopUps,
 		addonTable.AutoSellGray,
 		addonTable.DisableHealingSpam,
-		addonTable.InstanceLeave,
-		addonTable.ConfirmPopUps,
 		addonTable.UnitFrameImproved,
-		addonTable.HideUnitImprovedFaction,
+		addonTable.ElitePortrait,
 	} do
 		v:SetChecked(true)
 	end
 	-- Get
-	AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 = addonTable.CameraSmooth50:GetChecked()
+	AbyssUIAddonSettings.HideUnitImprovedFaction = addonTable.HideUnitImprovedFaction:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionInstanceLeave = addonTable.InstanceLeave:GetChecked()
 	AbyssUIAddonSettings.ExtraFunctionInspectTarget = addonTable.InspectTarget:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = addonTable.ConfirmPopUps:GetChecked()
 	AbyssUIAddonSettings.ExtraFunctionSellGray = addonTable.AutoSellGray:GetChecked()
 	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = addonTable.DisableHealingSpam:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInstanceLeave = addonTable.InstanceLeave:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = addonTable.ConfirmPopUps:GetChecked()
 	AbyssUIAddonSettings.UnitFrameImproved = addonTable.UnitFrameImproved:GetChecked()
-	AbyssUIAddonSettings.HideUnitImprovedFaction = addonTable.HideUnitImprovedFaction:GetChecked()
+	AbyssUIAddonSettings.ElitePortrait = addonTable.ElitePortrait:GetChecked()
 	AbyssUISecondFrame:Hide()
 	FrameButton2.Glow:Finish()
 	ReloadUI()

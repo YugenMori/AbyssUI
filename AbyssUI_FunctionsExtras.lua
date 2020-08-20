@@ -401,7 +401,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local position_y = -5     
 
 			-- achievement/quest tracker position
-			local moveWatchFrame = true			-- enable/disable positioning, set to false if you are using a different addon to move it
+			local moveWatchFrame = false			-- enable/disable positioning, set to false if you are using a different addon to move it
 			local qparent = UIParent         
 			local qanchor = "TOPRIGHT"  	 
 			local qposition_x = -60           
@@ -648,11 +648,11 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			--MiniMapVoiceChatFrame:Hide()
 			GameTimeFrame:Hide()
 			MinimapZoneTextButton:Hide()
-			MiniMapTracking:Hide()
+			--MiniMapTracking:Hide()
 			MiniMapMailBorder:Hide()
 			MinimapNorthTag:SetAlpha(0)
-			MiniMapInstanceDifficulty:SetAlpha(0)
-			GuildInstanceDifficulty:SetAlpha(0)
+			--MiniMapInstanceDifficulty:SetAlpha(0)
+			--GuildInstanceDifficulty:SetAlpha(0)
 
 			if showclock then
 				LoadAddOn('Blizzard_TimeManager')
@@ -673,6 +673,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			---------------------
 			-- move some stuff --
 			---------------------
+			--[[
 			if moveWatchFrame then
 				ObjectiveTrackerFrame:ClearAllPoints()	
 				ObjectiveTrackerFrame.ClearAllPoints = function() end
@@ -681,7 +682,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				ObjectiveTrackerFrame:SetClampedToScreen(true)
 				ObjectiveTrackerFrame:SetHeight(qheight)
 			end
-
+			--]]
 			MiniMapMailFrame:ClearAllPoints()
 			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
 			MiniMapMailIcon:SetTexture(mailicon)
