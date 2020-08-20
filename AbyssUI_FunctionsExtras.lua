@@ -852,6 +852,43 @@ KillAnouncerFrame.text:SetJustifyH("CENTER")
 KillAnouncerFrame.text:SetJustifyV("CENTER")
 KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -8)
 KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12,"OUTLINE")
+-- Kill SoundList
+local soundIDS = { 
+	24531,  -- RAGNAROS 
+	24530,  -- RAGNAROS2
+	38065,  -- GARROSH 
+	38066,  -- GARROSH2
+	16020,  -- GARROSH3
+	24477,  -- FANDRAL 
+	45791,  -- VULGOR 
+	13324,  -- Telestra 
+	35591,  -- Lei Shen 
+	45438,  -- BLACKHAND
+	45439,  -- BLACKHAND2 
+	21164,  -- Baine
+	43913,  -- Koromar
+	21576,  -- Muradin
+	21574,  -- Muradin2
+	11466,  -- ILLIDAN
+	16148,  -- JARAXXUS
+	109300, -- Bwonsamdi
+	15591,  -- Kologarn
+	86360,  -- Aggramar
+	97406,  -- Mogul_Razdunk
+	16061,  -- Varian
+	8655,   -- Ossirian
+	42069,  -- Gugrokk
+	42070,  -- Gugrokk2
+	43254,  -- Leroy Jenkins
+	50083,  -- Kormrok
+	24226,  -- DAAKARA
+	47404,  -- FRANZOK
+	44525,  -- KARGATH
+}
+local numSounds = #soundIDS
+local function PlaySoundRandom() 
+	PlaySound(soundIDS[random(1, numSounds)], "MASTER")
+end
 -- Kill Announcer
 local KillAnouncer = CreateFrame("FRAME", "$parentKillAnouncer")
 local name = GetUnitName("player")
@@ -863,7 +900,7 @@ KillAnouncer:SetScript("OnEvent", function(self)
 			if ( sourceName == name ) then
 				KillAnouncerFrame:Hide()
 				KillAnouncerFrame.text:SetText("|cfffdffb4"..destName.."|r")
-				PlaySound(12867, "MASTER") -- ALARM_CLOCK_WARNING_2
+				PlaySoundRandom()
 				UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
 	  		end
 	  	end
@@ -872,7 +909,7 @@ KillAnouncer:SetScript("OnEvent", function(self)
 			if ( sourceName == name ) then
 				KillAnouncerFrame:Hide()
 				KillAnouncerFrame.text:SetText("|cfffdffb4"..destName.."|r")
-				PlaySound(12867, "MASTER") -- ALARM_CLOCK_WARNING_2
+				PlaySoundRandom()
 				UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
 	  		end
 	  	end

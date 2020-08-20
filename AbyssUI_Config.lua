@@ -14,8 +14,8 @@ AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
 -- Add the panel to the Interface Options
 InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
 --Child Panels
-AbyssUI_Config.childpanel1 = CreateFrame( "Frame", "$parentConfigChild_ActionBar", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel1.name = "ActionBar"
+AbyssUI_Config.childpanel1 = CreateFrame( "Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel1.name = "Info Panel"
 AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
 --
@@ -96,7 +96,7 @@ Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame3:SetPoint("LEFT")
 Frame3:SetText("|cfff2dc7fKawF|r by UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI.")
--- Panel 01 (ActionBar)
+-- Panel 01 (Info Panel)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
 Frame:SetWidth(120)
@@ -104,27 +104,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Abyss|cff0d75d4UI|r Actionbar")
--- Panel01 Title
-local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.childpanel1)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -35)
-Frame:SetHeight(24)
-Frame:SetWidth(70)
-Frame:SetScale(1.5)
-Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-Frame:SetPoint("CENTER")
-Frame:SetText("|cff0d75d4Attention|r")
--- Panel01 SubTittle
-local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.childpanel1)
-Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -85)
-Frame:SetHeight(24)
-Frame:SetWidth(200)
-Frame:SetScale(1.1)
-Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-Frame:SetPoint("CENTER")
-Frame:SetText("If you prefer a customizable actionbar,"..
-" I highly recommend installing either\nBartender4 or Dominos."..
-" You can continue to use my settings if you prefer,\nbut the options are much more limited.")
+Frame:SetText("Abyss|cff0d75d4UI|r Info Panel")
 -- Panel 02 (HideElements)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -280,20 +260,8 @@ FrameButton:SetText("Reload UI")
 FrameButton:SetScript("OnClick", function()
   ReloadUI()
 end)
------------------------------ AbyssUI Actionbar -------------------------------
--- AbyssUI Action Bar --
-local AbyssUINewActionBar3x12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUINewActionBar3x12_CheckButton", AbyssUI_Config.childpanel1, "ChatConfigCheckButtonTemplate")
-AbyssUINewActionBar3x12_CheckButton:SetPoint("TOPLEFT", 10, -140)
-AbyssUINewActionBar3x12_CheckButton.Text:SetText("3x12 Actionbar (outdated, please consider using another addon)")
-AbyssUINewActionBar3x12_CheckButton.tooltip = "Adds a new bar above the Blizzard MainActionBar"..
-" (you need to use the small actionbar for this)"
-AbyssUINewActionBar3x12_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssUINewActionBar3x12)
--- OnClick Function
-AbyssUINewActionBar3x12_CheckButton:SetScript("OnClick", function(self)
-  --AbyssUIAddonSettings.AbyssUINewActionBar3x12 = self:GetChecked()
-   AbyssUINewActionBar3x12_CheckButton:SetChecked(nil)
-  AbyssUI_ActionBarInfo:Show()
-end)
+----------------------------- AbyssUI Info Panel -------------------------------
+
 -- End
 ------------------------------- Hide Elements ---------------------------------
 local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", AbyssUI_Config.childpanel2)
