@@ -395,7 +395,7 @@ SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
 SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		-- minimap default position - you can move it ingame by holding down ALT!
-		if ( AbyssUIAddonSettings.DisableSquareMinimap ~= true ) then
+		if ( AbyssUIAddonSettings.DisableSquareMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
 			local position = "TOPRIGHT"     	
 			local position_x = -11          		
 			local position_y = -5     
@@ -835,10 +835,10 @@ end)
 local KillAnouncerFrame = CreateFrame("Frame", "$parentKillAnouncerFrame", UIParent)
 KillAnouncerFrame:SetFrameStrata("BACKGROUND")
 KillAnouncerFrame:SetWidth(128)
-KillAnouncerFrame:SetHeight(64)
+KillAnouncerFrame:SetHeight(128)
 KillAnouncerFrame:SetAlpha(.90)
 KillAnouncerFrame:SetClampedToScreen(true)
-KillAnouncerFrame:SetPoint("CENTER", 100, 5)
+KillAnouncerFrame:SetPoint("CENTER", 120, 5)
 KillAnouncerFrame:Hide()
 local t = KillAnouncerFrame:CreateTexture(nil, "BACKGROUND")
 t:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\extra\\bloodtexture")
@@ -850,8 +850,10 @@ KillAnouncerFrame.text:SetScale(1)
 --KillAnouncerFrame.text:SetAllPoints(true)
 KillAnouncerFrame.text:SetJustifyH("CENTER")
 KillAnouncerFrame.text:SetJustifyV("CENTER")
-KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -8)
-KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12,"OUTLINE")
+KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -10)
+KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 14, "THINOUTLINE")
+KillAnouncerFrame.text:SetShadowColor(0/255, 0/255, 0/255)
+KillAnouncerFrame.text:SetShadowOffset(1, -1)
 -- Kill SoundList
 local soundIDS = { 
 	24531,  -- RAGNAROS 
@@ -860,30 +862,38 @@ local soundIDS = {
 	38066,  -- GARROSH2
 	16020,  -- GARROSH3
 	24477,  -- FANDRAL 
-	45791,  -- VULGOR 
 	13324,  -- Telestra 
-	35591,  -- Lei Shen 
-	45438,  -- BLACKHAND
 	45439,  -- BLACKHAND2 
 	21164,  -- Baine
 	43913,  -- Koromar
 	21576,  -- Muradin
 	21574,  -- Muradin2
-	11466,  -- ILLIDAN
-	16148,  -- JARAXXUS
+	16146,  -- JARAXXUS
 	109300, -- Bwonsamdi
 	15591,  -- Kologarn
-	86360,  -- Aggramar
-	97406,  -- Mogul_Razdunk
 	16061,  -- Varian
-	8655,   -- Ossirian
-	42069,  -- Gugrokk
 	42070,  -- Gugrokk2
 	43254,  -- Leroy Jenkins
 	50083,  -- Kormrok
 	24226,  -- DAAKARA
-	47404,  -- FRANZOK
 	44525,  -- KARGATH
+	17067,  -- Valithria
+	48498, 	-- Orc Male
+	14506,  -- Xevozz
+	16695,  -- Dsaurfang 
+	16854,  -- Taldaram
+	16681,  -- Valanar
+	35572, 	-- KAZRAJIN
+	50594,  -- DARKVINDICATOR
+	50593,	-- DARKVINDICATOR2
+	8894, 	-- BLA_NAXX
+	8801,	-- FAER_NAXX
+	10169,	-- Keli
+	12027,	-- Halazzi
+	10334,	-- Garg
+	5831,	-- Herod
+	15740,	-- Thorim
+	10454,  -- Thrall
 }
 local numSounds = #soundIDS
 local function PlaySoundRandom() 
@@ -894,27 +904,39 @@ local KillAnouncer = CreateFrame("FRAME", "$parentKillAnouncer")
 local name = GetUnitName("player")
 KillAnouncer:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 KillAnouncer:SetScript("OnEvent", function(self)
-    local timeStamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, prefixParam1, prefixParam2, dummyparam, suffixParam1, suffixParam2 = CombatLogGetCurrentEventInfo()
-    if ( event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE" ) and suffixParam2 > 0 then
-		if ( suffixParam2 ~= nil ) then
-			if ( sourceName == name ) then
-				KillAnouncerFrame:Hide()
-				KillAnouncerFrame.text:SetText("|cfffdffb4"..destName.."|r")
-				PlaySoundRandom()
-				UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
-	  		end
-	  	end
-  	elseif ( event == "SWING_DAMAGE" ) and prefixParam2 > 0 then
-  		if ( prefixParam2 ~= nil ) then
-			if ( sourceName == name ) then
-				KillAnouncerFrame:Hide()
-				KillAnouncerFrame.text:SetText("|cfffdffb4"..destName.."|r")
-				PlaySoundRandom()
-				UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
-	  		end
-	  	end
-    else
-    	return nil
-    end
+	if ( AbyssUIAddonSettings.DisableKillAnnouncer ~= true ) then
+	    local timeStamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, prefixParam1, prefixParam2, dummyparam, suffixParam1, suffixParam2 = CombatLogGetCurrentEventInfo()
+	    if ( event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE" ) and suffixParam2 > 0 then
+			if ( suffixParam2 ~= nil ) then
+				if ( sourceName == name ) then
+					if string.find( destGUID, "Player-") then
+						KillAnouncerFrame:Hide()
+						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
+						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
+							PlaySoundRandom()
+						end
+						UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
+					end
+		  		end
+		  	end
+	  	elseif ( event == "SWING_DAMAGE" ) and prefixParam2 > 0 then
+	  		if ( prefixParam2 ~= nil ) then
+				if ( sourceName == name ) then
+					if string.find( destGUID, "Player-") then
+						KillAnouncerFrame:Hide()
+						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
+						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
+							PlaySoundRandom()
+						end
+						UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
+					end
+		  		end
+		  	end
+	    else
+	    	return nil
+	    end
+	else
+		return nil
+	end
 end)
 --End

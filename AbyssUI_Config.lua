@@ -60,8 +60,7 @@ Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,".
 " It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
 "Options that have a different text color are recommended.\nThose options are set by default if you choose recommended settings.\n\n"..
-"Check the options by clicking in the (+) button in the left.")
-
+"Check the options by clicking in the (+) button on the left.")
 --Special Thanks
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
 Frame:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 70)
@@ -261,7 +260,152 @@ FrameButton:SetScript("OnClick", function()
   ReloadUI()
 end)
 ----------------------------- AbyssUI Info Panel -------------------------------
-
+--- Images ---
+-- SubText
+local InfoPanelSubText = CreateFrame("Frame","$parentInfoPanelSubText", AbyssUI_Config.childpanel1)
+InfoPanelSubText:SetPoint("TOPLEFT", 20, -60)
+InfoPanelSubText:SetHeight(24)
+InfoPanelSubText:SetWidth(256)
+InfoPanelSubText:SetScale(1)
+InfoPanelSubText = InfoPanelSubText:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+InfoPanelSubText:SetPoint("LEFT")
+InfoPanelSubText:SetText("In this page you can find links to some other AddOns/Packs that make AbyssUI even better.\n" ..
+"These addons are verify to especially work with AbyssUI without any conflict or problem.\n"..
+"Click on the image so you can get the respective link. Don't forget to check then out!")
+--- Frames and Boxes ---
+-- AbyssUI_EditBox_Frame
+local AbyssUI_EditBox_Frame = CreateFrame("Frame", "$parentAbyssUI_EditBox_Frame", AbyssUI_Config.childpanel1)
+AbyssUI_EditBox_Frame:Hide()
+AbyssUI_EditBox_Frame:SetWidth(500)
+AbyssUI_EditBox_Frame:SetHeight(125)
+AbyssUI_EditBox_Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "CENTER", 0, 0)
+AbyssUI_EditBox_Frame:EnableMouse(true)
+AbyssUI_EditBox_Frame:SetClampedToScreen(true)
+AbyssUI_EditBox_Frame:SetMovable(true)
+AbyssUI_EditBox_Frame:RegisterForDrag("LeftButton")
+AbyssUI_EditBox_Frame:SetScript("OnDragStart", AbyssUI_EditBox_Frame.StartMoving)
+AbyssUI_EditBox_Frame:SetScript("OnDragStop", function(self)
+  self:StopMovingOrSizing()
+end)
+AbyssUI_EditBox_Frame:SetFrameStrata("Dialog")
+----------------------------------------------------
+local Border = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
+Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Border:SetPoint("TOPLEFT", -3, 3)
+Border:SetPoint("BOTTOMRIGHT", 3, -3)
+Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
+----------------------------------------------------
+local BorderBody = AbyssUI_EditBox_Frame:CreateTexture(nil, "ARTWORK")
+BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetAllPoints(AbyssUI_EditBox_Frame)
+BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+----------------------------------------------------
+local Texture = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
+Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetAllPoints(AbyssUI_EditBox_Frame)
+AbyssUI_EditBox_Frame.texture = Texture
+----------------------------------------------------
+local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_EditBox_Frame, "UIPanelButtonTemplate")
+FrameButtonConfirm:SetHeight(24)
+FrameButtonConfirm:SetWidth(70)
+FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_EditBox_Frame, "BOTTOM", 0, 0)
+FrameButtonConfirm:SetText("Confirm")
+FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+----------------------------------------------------
+local BorderButton = FrameButtonConfirm:CreateTexture(nil, "ARTWORK")
+BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderButton:SetAllPoints(FrameButtonConfirm)
+BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
+FrameButtonConfirm:SetScript("OnClick", function()
+  AbyssUI_EditBox_Frame:Hide()
+end)
+-- EditBox
+local AbyssUI_EditBox= CreateFrame("EditBox", "$parentEditBox_TexturePack", AbyssUI_EditBox_Frame)
+AbyssUI_EditBox:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12, "THINOUTLINE")
+AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
+AbyssUI_EditBox:SetMultiLine(true)
+AbyssUI_EditBox:SetHeight(24)
+AbyssUI_EditBox:SetWidth(450)
+-- AbyssUI_TexturePack
+local AbyssUI_TexturePack = CreateFrame("Frame", "$parentAbyssUI_TexturePack", AbyssUI_Config.childpanel1)
+AbyssUI_TexturePack:SetFrameStrata("HIGH")
+AbyssUI_TexturePack:SetHeight(256)
+AbyssUI_TexturePack:SetWidth(256)
+AbyssUI_TexturePack:SetPoint("TOP", 0, -120)
+local t = AbyssUI_TexturePack:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\AbyssUITexturePackLogo2x2")
+t:SetAllPoints(AbyssUI_TexturePack)
+-- OnClick
+AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
+    if ( button == 'LeftButton' ) then 
+      AbyssUI_EditBox:SetText("https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html")
+      AbyssUI_EditBox_Frame:Show()
+    end
+end)
+-- Glass
+local Glass = CreateFrame("Frame", "$parentGlass", AbyssUI_Config.childpanel1)
+Glass:SetFrameStrata("HIGH")
+Glass:SetHeight(128)
+Glass:SetWidth(128)
+Glass:SetPoint("BOTTOMLEFT", 20, 20)
+local t = Glass:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Glass")
+t:SetAllPoints(Glass)
+-- OnClick
+Glass:SetScript("OnMouseDown", function (self, button)
+    if ( button == 'LeftButton' ) then
+      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/glass")
+      AbyssUI_EditBox_Frame:Show()
+    end
+end)
+-- Kui Nameplates
+local KuiNameplates = CreateFrame("Frame", "$parentKuiNameplates", AbyssUI_Config.childpanel1)
+KuiNameplates:SetFrameStrata("HIGH")
+KuiNameplates:SetHeight(128)
+KuiNameplates:SetWidth(128)
+KuiNameplates:SetPoint("BOTTOM", -80, 20)
+local t = KuiNameplates:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\KuiNameplates")
+t:SetAllPoints(KuiNameplates)
+-- OnClick
+KuiNameplates:SetScript("OnMouseDown", function (self, button)
+    if ( button == 'LeftButton' ) then
+      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/Kuinameplates")
+      AbyssUI_EditBox_Frame:Show()
+    end
+end)
+-- Bagnon
+local Bagnon = CreateFrame("Frame", "$parentBagnon", AbyssUI_Config.childpanel1)
+Bagnon:SetFrameStrata("HIGH")
+Bagnon:SetHeight(128)
+Bagnon:SetWidth(128)
+Bagnon:SetPoint("BOTTOM", 80, 20)
+local t = Bagnon:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Bagnon")
+t:SetAllPoints(Bagnon)
+-- OnClick
+Bagnon:SetScript("OnMouseDown", function (self, button)
+    if ( button == 'LeftButton' ) then
+      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/Bagnon")
+      AbyssUI_EditBox_Frame:Show()
+    end
+end)
+-- Narcissus
+local Narcissus = CreateFrame("Frame", "$parentNarcissus", AbyssUI_Config.childpanel1)
+Narcissus:SetFrameStrata("HIGH")
+Narcissus:SetHeight(128)
+Narcissus:SetWidth(128)
+Narcissus:SetPoint("BOTTOMRIGHT", -20, 20)
+local t = Narcissus:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Narcissus")
+t:SetAllPoints(Narcissus)
+-- OnClick
+Narcissus:SetScript("OnMouseDown", function (self, button)
+    if ( button == 'LeftButton' ) then
+      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/narcissus")
+      AbyssUI_EditBox_Frame:Show()
+    end
+end)
 -- End
 ------------------------------- Hide Elements ---------------------------------
 local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", AbyssUI_Config.childpanel2)
@@ -376,11 +520,7 @@ Minimap_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimap)
 -- OnClick Function
 Minimap_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideMinimap = self:GetChecked()
-  if AbyssUIAddonSettings.HideMinimap == true then
-    MinimapCluster:Hide()
-  else
-    MinimapCluster:Show()
-  end
+  AbyssUI_ReloadFrame:Show()
 end)
 -- After Login/Reload
 Minimap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1312,6 +1452,27 @@ MinimalActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.MinimalActionBar)
 MinimalActionBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.MinimalActionBar = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
+end)
+-- Disable Kill Announcer --
+local KillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentKillAnnouncer_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+KillAnnouncer_CheckButton:SetPoint("TOPLEFT", 10, -200)
+KillAnnouncer_CheckButton.Text:SetText("Disable Kill Announcer")
+KillAnnouncer_CheckButton.tooltip = "Disable the Kill Announcer frame that show up when you kill someone"
+KillAnnouncer_CheckButton:SetChecked(AbyssUIAddonSettings.DisableKillAnnouncer)
+-- OnClick Function
+KillAnnouncer_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.DisableKillAnnouncer = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
+-- Silence Kill Announcer --
+local SilenceKillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+SilenceKillAnnouncer_CheckButton:SetPoint("TOPLEFT", 10, -230)
+SilenceKillAnnouncer_CheckButton.Text:SetText("Silence Kill Announcer")
+SilenceKillAnnouncer_CheckButton.tooltip = "Remove boss/kill sounds from the Kill Announcer frame"
+SilenceKillAnnouncer_CheckButton:SetChecked(AbyssUIAddonSettings.SilenceKillAnnouncer)
+-- OnClick Function
+SilenceKillAnnouncer_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.SilenceKillAnnouncer = self:GetChecked()
 end)
 --- Frames ---
 -- Elite Portrait --

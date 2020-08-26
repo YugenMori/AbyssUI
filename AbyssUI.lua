@@ -80,6 +80,7 @@ BasicFrames:SetScript("OnEvent", function(self, event, addon)
 			MainMenuMaxLevelBar2,
 			MainMenuMaxLevelBar3,
 			MinimapBorder,
+			MinimapBorderTop,
 			CastingBarFrameBorder,
 			FocusFrameSpellBarBorder,
 			TargetFrameSpellBarBorder,
@@ -966,7 +967,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- LFGDiag
-		for i, v in pairs({ 
+		for i, v in pairs({
+			--LFGDungeonReadyDialog.Border,
 			LFGDungeonReadyStatus.Border.TopEdge,
 			LFGDungeonReadyStatus.Border.RightEdge,
 			LFGDungeonReadyStatus.Border.BottomEdge,
