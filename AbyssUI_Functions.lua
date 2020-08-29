@@ -210,25 +210,9 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
-				--[[if ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Horde" ) then
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-				elseif ( englishFaction ~= "Neutral" and englishFaction == text3 and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-				else
-					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-				end
-				-]]
 				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
-				--[[if ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Horde" ) then
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 196, 30, 59, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-				elseif ( englishFaction ~= "Neutral" and englishFaction == text4 and englishFaction == "Alliance" ) then
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", 0, 112, 222, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-				else 
-					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-				end
-				--]]
 				GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 			end
 			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
@@ -259,35 +243,6 @@ GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	end
 end)
 ----------------------------------------------------
--- Tooltip Faction
--- Only create the texture once.
---[[
-local TooltipFaction = GameTooltip:CreateTexture(GameTooltip, "BACKGROUND", nil, 1)
-TooltipFaction:SetSize(40, 40)
-TooltipFaction:SetPoint("TOPRIGHT", 0, -5)
-GameTooltip:HookScript("OnUpdate", function(self, elapsed)
-    local _, unit = GameTooltip:GetUnit()
-    if UnitIsPlayer(unit) then
-        local englishFaction, localizedFaction = UnitFactionGroup(unit)
-        if ( UnitExists("target") ) then
-	        if ( englishFaction == "Horde" ) then
-	            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\PVP-Currency-Horde")
-	            TooltipFaction:Show()
-	        elseif ( englishFaction == "Alliance" ) then
-	            TooltipFaction:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\PVP-Currency-Alliance")
-	            TooltipFaction:Show()
-	        elseif ( englishFaction == "Neutral" ) then
-	            -- TooltipFaction:SetTexture("")
-	            TooltipFaction:Hide()
-	        else
-	            TooltipFaction:Hide()
-	        end
-	      end
-    else
-        TooltipFaction:Hide()
-    end
-end)
---]]
 -- StatsFrame
 -- Many thanks to Syiana for part of this
 local StatsFrame = CreateFrame("Frame", "$parentStatsFrame", UIParent)
@@ -384,7 +339,7 @@ CF:SetScript("OnEvent", function(self, event)
 
 	StatsFrame.text = StatsFrame:CreateFontString(nil, 'BACKGROUND')
 	StatsFrame.text:SetPoint("BOTTOMLEFT", StatsFrame)
-	StatsFrame.text:SetFont(STANDARD_TEXT_FONT,12,"OUTLINE")
+	StatsFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf", 12)
 	if useShadow then
 		StatsFrame.text:SetShadowOffset(1, -1)
 		StatsFrame.text:SetShadowColor(0, 0, 0)
@@ -573,24 +528,6 @@ ScaleElements:SetScript("OnEvent", function(self, event, arg1)
 		return nil
 	end
 end)
--- Pixel Perfect
---[[
-local PixelPerfect = CreateFrame("Frame", "$parentPixelPerfect", nil)
-PixelPerfect:RegisterEvent("PLAYER_ENTERING_WORLD")
-PixelPerfect:SetScript("OnEvent", function(self, event, arg1)
-if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionPixelPerfect == true) then
-		SetCVar("useUiScale", 0)
-		local sv = GetScreenHeight()
-		if ( sv >= 768 ) then 
-			UIParent:SetScale(768/GetScreenHeight())
-		else 
-			return nil
-		end
-	else 
-		return nil
-	end
-end)
---]]
 ----------------------------------------------------
 -- Color Picker 
 -- Many thanks to Fizz for part of this :thumbsup:
@@ -768,25 +705,6 @@ AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
 	    FocusFrameTextureFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Rare")
 	else
 		return nil
-	end
-end)
--- Damage Font
-local AbyssUIDamageFont = CreateFrame("Frame")
-AbyssUIDamageFont:RegisterEvent("ADDON_LOADED")
-AbyssUIDamageFont:SetScript("OnEvent", function(self, event, arg1)
-	local locale = GetLocale()
-	if ( locale == "zhCN" or locale == "zhTW" or locale == "ruRU" ) then
-		if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" and AbyssUIAddonSettings.ExtraFunctionDamageFont ~= true  ) then
-			DAMAGE_TEXT_FONT = "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf"
-		else
-			return nil
-		end
-	else
-		if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" and AbyssUIAddonSettings.ExtraFunctionDamageFont ~= true  ) then
-			DAMAGE_TEXT_FONT = "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
-		else
-			return nil
-		end
 	end
 end)
 ----------------------------------------------------

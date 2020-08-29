@@ -1274,22 +1274,9 @@ AbyssUI_DamageFont_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionDamageFont = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
 end)
--- Disable Global Font --
-local AbyssUI_GlobalFont_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_GlobalFont_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUI_GlobalFont_CheckButton:SetPoint("TOPLEFT", 400, -170)
-AbyssUI_GlobalFont_CheckButton.Text:SetText("Disable Global Font (*)")
-AbyssUI_GlobalFont_CheckButton.tooltip = "This option will remove any change to the global font text."..
-"\n*You need to restart the game so the default font can be reloaded. You can change it to any font, "..
-"go to Textures->font and replace the file keeping the same name"
-AbyssUI_GlobalFont_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionGlobalFont)
--- OnClick Function
-AbyssUI_GlobalFont_CheckButton:SetScript("OnClick", function(self)
-  AbyssUIAddonSettings.ExtraFunctionGlobalFont = self:GetChecked()
-  AbyssUI_ReloadFrame:Show()
-end)
 -- Disable healing spam over player --
 local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 400, -200)
+AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 400, -170)
 AbyssUI_DisableHealingSpam_CheckButton.Text:SetText("|cfff2dc7fDisable Portrait Text Spam|r")
 AbyssUI_DisableHealingSpam_CheckButton.tooltip = "Disable healing/damage spam over player"..
 " and pet portraits"
@@ -1319,7 +1306,7 @@ AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnEvent", function(self, event
 end)
 -- Disable Square Minimap --
 local DisableSquareMinimap_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-DisableSquareMinimap_CheckButton:SetPoint("TOPLEFT", 400, -230)
+DisableSquareMinimap_CheckButton:SetPoint("TOPLEFT", 400, -200)
 DisableSquareMinimap_CheckButton.Text:SetText("Disable Square Minimap (*)")
 DisableSquareMinimap_CheckButton.tooltip = "This option will get you back to the"..
 " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"
@@ -1331,7 +1318,7 @@ DisableSquareMinimap_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Disable UnitFrame Smoke --
 local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 400, -260)
+DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 400, -230)
 DisableUnitFrameSmoke_CheckButton.Text:SetText("Disable Smoke Texture")
 DisableUnitFrameSmoke_CheckButton.tooltip = "It will disable the 'smoke' texture around the portrait in "..
 "the UnitFrame Improved version of it"
@@ -1343,7 +1330,7 @@ DisableUnitFrameSmoke_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Transparent Background Name --
 local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUI_TransparentName_CheckButton:SetPoint("TOPLEFT", 400, -290)
+AbyssUI_TransparentName_CheckButton:SetPoint("TOPLEFT", 400, -260)
 AbyssUI_TransparentName_CheckButton.Text:SetText("Transparent Name BKGD")
 AbyssUI_TransparentName_CheckButton.tooltip = "Remove any color in the target name background"
 AbyssUI_TransparentName_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionTransparentName)
@@ -1354,7 +1341,7 @@ AbyssUI_TransparentName_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Remove Background class color --
 local AbyssUI_HideBackgroundClassColor_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideBackgroundClassColor_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-AbyssUI_HideBackgroundClassColor_CheckButton:SetPoint("TOPLEFT", 400, -320)
+AbyssUI_HideBackgroundClassColor_CheckButton:SetPoint("TOPLEFT", 400, -290)
 AbyssUI_HideBackgroundClassColor_CheckButton.Text:SetText("Default Background")
 AbyssUI_HideBackgroundClassColor_CheckButton.tooltip = "Remove the class color background behind"..
 " the player names to default values (Transparent Name needs to be unchecked)"

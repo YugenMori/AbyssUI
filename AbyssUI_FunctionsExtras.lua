@@ -154,28 +154,24 @@ end)
 --]]
 ----------------------------------------------
 -- NamePlate Style 
--- Thanks to SDPhantom for the mostly part of this
-----------------------------------------------
---  Nametag font size
 --[[
-local function SetFont(obj, optSize)
-	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-	    local fontName = obj:GetFont()
-	    obj:SetFont(fontName, optSize, "THINOUTLINE")
-
-	    SetFont(SystemFont_LargeNamePlate, 4)
-		SetFont(SystemFont_NamePlate, 4)
-		SetFont(SystemFont_LargeNamePlateFixed, 4)
-		SetFont(SystemFont_NamePlateFixed, 4)
-		 
-		--  Disable nametag colors
-		DefaultCompactNamePlateFriendlyFrameOptions.colorNameBySelection = false
-		DefaultCompactNamePlateEnemyFrameOptions.colorNameBySelection = false
-		DefaultCompactNamePlatePlayerFrameOptions.colorNameBySelection = false
-	else
-		return nil
+-- Nameplate Name Updates
+hooksecurefunc("CompactUnitFrame_UpdateName", function(frame)
+  if ShouldShowName(frame) then
+	local _, class = UnitClass("target")
+	local unitPlayer = UnitIsPlayer("target")
+	local enemy = UnitIsEnemy("player", "target")
+	--local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+	if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("target") then
+		if ( unitPlayer == true and not frame:IsForbidden() and enemy ~= true ) then
+    		if frame.optionTable.colorNameBySelection then
+      			frame.name:SetText(GetUnitName(frame.unit))
+      			frame.name:SetTextColor(1, 1, 1)
+    		end
+  		end
 	end
-end
+  end
+end)
 --]]
 --  Move nametag
 hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
@@ -184,51 +180,20 @@ hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 		PixelUtil.SetPoint(frame.name, "BOTTOM", frame.healthBar, "TOP", 0, 4)
 	end
 end)
--- Nameplate Name Updates
-hooksecurefunc("CompactUnitFrame_UpdateName", function(frame)
-  if ShouldShowName(frame) then
-		local _, class = UnitClass("target")
-		local unitPlayer = UnitIsPlayer("target")
-		local enemy = UnitIsEnemy("player", "target")
-		local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-		if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("target") then
-			if ( unitPlayer == true and not frame:IsForbidden() and enemy ~= true ) then
-        if frame.optionTable.colorNameBySelection then
-          frame.name:SetText(GetUnitName(frame.unit))
-          NamePlate1UnitFrame.name:SetTextColor(color.r, color.g, color.b)
-            if ( NamePlate2UnitFrame ~= nil ) then
-	          	NamePlate2UnitFrame.name:SetTextColor(color.r, color.g, color.b)
-          	elseif ( NamePlate2UnitFrame ~= nil and NamePlate3UnitFrame ~= nil ) then
-	          	NamePlate3UnitFrame.name:SetTextColor(color.r, color.g, color.b)
-          	else
-          		NamePlate1UnitFrame.name:SetTextColor(color.r, color.g, color.b)
-        	end
-        end
-      end
-    end
-  end
-end)
 ----------------------------------------------
--- Nameplate Health Text
-local NamePlateHealthText = {}
-hooksecurefunc(NamePlateDriverFrame, "OnNamePlateCreated", function(self, base)--  Hook Nameplate creation
-	if ( unit ~= "player" and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-		local unitframe = base.UnitFrame
-		local health = unitframe.healthBar:CreateFontString(nil, "OVERLAY")
-		health:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 9)
-		health:SetPoint("CENTER")
-		health:SetTextColor(1, 1, 1)
-		health:SetShadowColor(0, 0, 0)
-		health:SetShadowOffset(1, -0.25)
-		NamePlateHealthText[unitframe] = health
-	else
-		return nil
+-- Nameplate Health Percent
+hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
+	if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
+	if not frame.healthBar.percent then
+		frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
+		frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
+		frame.healthBar.percent:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 10)
+		frame.healthBar.percent:SetShadowColor(0, 0, 0)
+		frame.healthBar.percent:SetShadowOffset(1, -0.25)
 	end
-end)
-hooksecurefunc("CompactUnitFrame_UpdateHealth", function(self)-- This is a shared function with other UnitFrames
-	if ( NamePlateHealthText[self] and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then 
-		NamePlateHealthText[self]:SetText(UnitHealth(self.displayedUnit))
-	end
+	local percentcalc = ceil((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 100)
+	frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
+	--frame.healthBar.percent:Show()
 end)
 -- Nameplate colorization
 hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
@@ -270,6 +235,7 @@ hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
 		return nil
 	end
 end)
+----------------------------------------------------
 -- ChatBubble
 -- Thanks to cokedrivers for this awesome code
 local ChatBubbleColorization = CreateFrame("CheckButton", "$parentChatBubbleColorization", UIParent, "ChatConfigCheckButtonTemplate")
@@ -388,6 +354,7 @@ ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
 		return nil
 	end
 end)
+----------------------------------------------------
 -- New Minimap
 -- Thanks to Dawn for this amazing minimap code
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
@@ -401,22 +368,22 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local position_y = -5     
 
 			-- achievement/quest tracker position
-			local moveWatchFrame = false			-- enable/disable positioning, set to false if you are using a different addon to move it
-			local qparent = UIParent         
+			local moveWatchFrame = false
+			local qparent = UIParent
 			local qanchor = "TOPRIGHT"  	 
 			local qposition_x = -60           
 			local qposition_y = -260         
 			local qheight = 400             
 
-			local useInfoPanel = true		-- enable disable fps/latency and clock
-			local showclock = false			-- ONLY show clock - makes sense to set useInfoPanel to false if you only want to show the clock ^^
-			local AddonNumb = 30			-- maximum number of addons shown in tooltip (will always show set number of top memory usage addons)
+			local useInfoPanel = true		
+			local showclock = false			
+			local AddonNumb = 30			
 
-			local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\minimap\\"	-- don't touch this ...
+			local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\minimap\\"
 			local texture = "Interface\\Buttons\\WHITE8x8"
 			--local backdrop = {bgFile = texture, edgeFile = texture, edgeSize = 1, insets = { left = -1, right = -1, top = -1, bottom = -1}}
 			local backdrop = {edgeFile = texture, edgeSize = 1}
-			
+
 			local mailicon = mediaFolder.."mail"
 			local font = mediaFolder.."npcfont.ttf"
 			local fontSize = 11
@@ -449,7 +416,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			Minimap:SetScale(scale)
 			Minimap:SetFrameLevel(6)
 
-			BorderFrame = CreateFrame("Frame", nil, UIParent)
+			BorderFrame = CreateFrame("Frame", nil, self, BackdropTemplateMixin and "BackdropTemplate")
 			BorderFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -1, -(21*scale))
 			BorderFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 1, (2*scale))
 			BorderFrame:SetBackdrop(backdrop)
@@ -465,7 +432,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			------------------------
 			if useInfoPanel then	
 
-				local FLMframe = CreateFrame("Button", "FLMframe", UIParent)
+				local FLMframe = CreateFrame("Button", nil, self, BackdropTemplateMixin and "BackdropTemplate")
 				FLMframe:SetPoint("TOP", Minimap, "TOP", 0, 1*scale)
 				FLMframe:SetSize((Minimap:GetWidth()+2)*scale, fontSize+6)
 				FLMframe:SetFrameLevel(4)
@@ -670,19 +637,6 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				TimeManagerClockButton:Hide()	
 			end
 
-			---------------------
-			-- move some stuff --
-			---------------------
-			--[[
-			if moveWatchFrame then
-				ObjectiveTrackerFrame:ClearAllPoints()	
-				ObjectiveTrackerFrame.ClearAllPoints = function() end
-				ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
-				ObjectiveTrackerFrame.SetPoint = function() end
-				ObjectiveTrackerFrame:SetClampedToScreen(true)
-				ObjectiveTrackerFrame:SetHeight(qheight)
-			end
-			--]]
 			MiniMapMailFrame:ClearAllPoints()
 			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
 			MiniMapMailIcon:SetTexture(mailicon)
@@ -727,6 +681,19 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			        Minimap:StartMoving()
 			    end
 			end)
+			--]]
+			---------------------
+			-- move some stuff --
+			---------------------
+			--[[
+			if moveWatchFrame then
+				ObjectiveTrackerFrame:ClearAllPoints()	
+				ObjectiveTrackerFrame.ClearAllPoints = function() end
+				ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
+				ObjectiveTrackerFrame.SetPoint = function() end
+				ObjectiveTrackerFrame:SetClampedToScreen(true)
+				ObjectiveTrackerFrame:SetHeight(qheight)
+			end
 			--]]
 			Minimap:SetScript('OnMouseUp', function(self, button)
 				Minimap:StopMovingOrSizing()
@@ -774,24 +741,22 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		end
 	end
 end)
--- FontString
+----------------------------------------------------
+-- Fonts
+local globalFont	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf"
+local subFont 	 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf"
+local damageFont 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
 local AbyssUI_FontString = CreateFrame("Frame", "$parentAbyssUI_FontString", nil)
 AbyssUI_FontString:RegisterEvent("ADDON_LOADED")
 AbyssUI_FontString:RegisterEvent("PLAYER_LOGOUT")
 AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
 	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
-		local globalFont	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf"
-		local subFont 	 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf"
-		local damageFont 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
-		if ( AbyssUIAddonSettings.ExtraFunctionGlobalFont ~= true ) then
-			STANDARD_TEXT_FONT          = globalFont
-			DAMAGE_TEXT_FONT          	= damageFont
-			UNIT_NAME_FONT              = subFont
-			NAMEPLATE_FONT              = subFont
-			NAMEPLATE_SPELLCAST_FONT    = subFont
-		else
-			return nil
-		end
+
+		STANDARD_TEXT_FONT          = globalFont
+		DAMAGE_TEXT_FONT          	= damageFont
+		UNIT_NAME_FONT              = subFont
+		NAMEPLATE_FONT              = subFont
+		NAMEPLATE_SPELLCAST_FONT    = subFont
 		
 		local ForcedFontSize = {10, 14, 20, 64, 64}
 		
@@ -822,7 +787,7 @@ AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
 			SystemFont_Shadow_Outline_Huge2, SystemFont_Med1, SystemFont_WTF2, SystemFont_Outline_WTF2, 
 			GameTooltipHeader, System_IME,
 		}
-		
+
 		for i, FontObject in pairs(BlizFontObjects) do
 			local _, oldSize, oldStyle  = FontObject:GetFont()
 			FontObject:SetFont(globalFont, ForcedFontSize[i] or oldSize, oldStyle)
@@ -831,6 +796,25 @@ AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
 		BlizFontObjects = nil
 	end
 end)
+-- Font Location Check
+local checkFont = "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf"
+local AbyssUI_CheckFont = CreateFrame("Frame")
+AbyssUI_CheckFont:RegisterEvent("ADDON_LOADED")
+AbyssUI_CheckFont:SetScript("OnEvent", function(self, event, arg1)
+	local locale = GetLocale()
+	if ( locale == "zhCN" or locale == "zhTW" or locale == "ruRU" ) then
+		if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" and AbyssUIAddonSettings.ExtraFunctionDamageFont ~= true ) then
+			STANDARD_TEXT_FONT          = checkFont
+			DAMAGE_TEXT_FONT          	= checkFont
+			UNIT_NAME_FONT              = checkFont
+			NAMEPLATE_FONT              = checkFont
+			NAMEPLATE_SPELLCAST_FONT    = checkFont
+		end
+	else
+		return nil
+	end
+end)
+----------------------------------------------------
 -- Kill Announcer Frame
 local KillAnouncerFrame = CreateFrame("Frame", "$parentKillAnouncerFrame", UIParent)
 KillAnouncerFrame:SetFrameStrata("BACKGROUND")
@@ -909,7 +893,7 @@ KillAnouncer:SetScript("OnEvent", function(self)
 	    if ( event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE" ) and suffixParam2 > 0 then
 			if ( suffixParam2 ~= nil ) then
 				if ( sourceName == name ) then
-					if string.find( destGUID, "Player-") then
+					if ( string.find(destGUID, "Player") ) then
 						KillAnouncerFrame:Hide()
 						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
 						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
@@ -922,7 +906,7 @@ KillAnouncer:SetScript("OnEvent", function(self)
 	  	elseif ( event == "SWING_DAMAGE" ) and prefixParam2 > 0 then
 	  		if ( prefixParam2 ~= nil ) then
 				if ( sourceName == name ) then
-					if string.find( destGUID, "Player-") then
+					if ( string.find(destGUID, "Player") ) then
 						KillAnouncerFrame:Hide()
 						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
 						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
@@ -939,4 +923,5 @@ KillAnouncer:SetScript("OnEvent", function(self)
 		return nil
 	end
 end)
+----------------------------------------------------
 --End

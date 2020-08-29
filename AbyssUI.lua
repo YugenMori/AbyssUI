@@ -166,7 +166,50 @@ SetAlphaFrames:SetScript("OnEvent", function(self, event, addon)
 		SetAlphaFrames:SetScript("OnEvent", nil)
 	end
 end)
--- New Interface Action Bar
+-- !Important Entering World
+local NewFrames = CreateFrame("Frame")
+NewFrames:RegisterEvent("PLAYER_ENTERING_WORLD")
+NewFrames:SetScript("OnEvent", function(self, event)
+	if ( event == "PLAYER_ENTERING_WORLD" ) then
+		-- LFGDiag
+		for i, v in pairs({
+			LFGDungeonReadyStatus.Border.TopEdge,
+			LFGDungeonReadyStatus.Border.RightEdge,
+			LFGDungeonReadyStatus.Border.BottomEdge,
+			LFGDungeonReadyStatus.Border.LeftEdge,
+			LFGDungeonReadyStatus.Border.TopRightCorner,
+			LFGDungeonReadyStatus.Border.TopLeftCorner,
+			LFGDungeonReadyStatus.Border.BottomLeftCorner,
+		LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFGDungeonReadyDialog
+		for i, v in pairs({
+			LFGDungeonReadyDialog.Border.TopEdge,
+			LFGDungeonReadyDialog.Border.RightEdge,
+			LFGDungeonReadyDialog.Border.BottomEdge,
+			LFGDungeonReadyDialog.Border.LeftEdge,
+			LFGDungeonReadyDialog.Border.TopRightCorner,
+			LFGDungeonReadyDialog.Border.TopLeftCorner,
+			LFGDungeonReadyDialog.Border.BottomLeftCorner,
+		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+
+	-- End
+	else
+		return nil
+	end
+end)
+-- New Interface
 local NewFrames = CreateFrame("Frame")
 NewFrames:RegisterEvent("ADDON_LOADED")
 NewFrames:SetScript("OnEvent", function(self, event, addon)
@@ -739,6 +782,21 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end	
+		-- GuildInviteFrame
+		for i, v in pairs({	GuildInviteFrame.TopEdge,
+			GuildInviteFrame.RightEdge,
+			GuildInviteFrame.BottomEdge,
+			GuildInviteFrame.LeftEdge,
+			GuildInviteFrame.TopRightCorner,
+			GuildInviteFrame.TopLeftCorner,
+			GuildInviteFrame.BottomLeftCorner,
+		GuildInviteFrame.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end	
 		-- CastBarBorder
 		for i, v in pairs({	
 			CastingBarFrame.Border,
@@ -968,7 +1026,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 		end
 		-- LFGDiag
 		for i, v in pairs({
-			--LFGDungeonReadyDialog.Border,
 			LFGDungeonReadyStatus.Border.TopEdge,
 			LFGDungeonReadyStatus.Border.RightEdge,
 			LFGDungeonReadyStatus.Border.BottomEdge,
@@ -977,6 +1034,70 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			LFGDungeonReadyStatus.Border.TopLeftCorner,
 			LFGDungeonReadyStatus.Border.BottomLeftCorner,
 		LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFGDungeonReadyDialog
+		for i, v in pairs({
+			LFGDungeonReadyDialog.Border.TopEdge,
+			LFGDungeonReadyDialog.Border.RightEdge,
+			LFGDungeonReadyDialog.Border.BottomEdge,
+			LFGDungeonReadyDialog.Border.LeftEdge,
+			LFGDungeonReadyDialog.Border.TopRightCorner,
+			LFGDungeonReadyDialog.Border.TopLeftCorner,
+			LFGDungeonReadyDialog.Border.BottomLeftCorner,
+		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFGListApplicationDialog
+		for i, v in pairs({
+			LFGListApplicationDialog.Border.TopEdge,
+			LFGListApplicationDialog.Border.RightEdge,
+			LFGListApplicationDialog.Border.BottomEdge,
+			LFGListApplicationDialog.Border.LeftEdge,
+			LFGListApplicationDialog.Border.TopRightCorner,
+			LFGListApplicationDialog.Border.TopLeftCorner,
+			LFGListApplicationDialog.Border.BottomLeftCorner,
+		LFGListApplicationDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFGListApplicationDialog
+		for i, v in pairs({
+			LFGListInviteDialog.Border.TopEdge,
+			LFGListInviteDialog.Border.RightEdge,
+			LFGListInviteDialog.Border.BottomEdge,
+			LFGListInviteDialog.Border.LeftEdge,
+			LFGListInviteDialog.Border.TopRightCorner,
+			LFGListInviteDialog.Border.TopLeftCorner,
+			LFGListInviteDialog.Border.BottomLeftCorner,
+		LFGListInviteDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LFDRoleCheckPopup
+		for i, v in pairs({
+			LFDRoleCheckPopup.Border.TopEdge,
+			LFDRoleCheckPopup.Border.RightEdge,
+			LFDRoleCheckPopup.Border.BottomEdge,
+			LFDRoleCheckPopup.Border.LeftEdge,
+			LFDRoleCheckPopup.Border.TopRightCorner,
+			LFDRoleCheckPopup.Border.TopLeftCorner,
+			LFDRoleCheckPopup.Border.BottomLeftCorner,
+		LFDRoleCheckPopup.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1008,7 +1129,15 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			DropDownList1Backdrop.TopRightCorner,
 			DropDownList1Backdrop.TopLeftCorner,
 			DropDownList1Backdrop.BottomLeftCorner,
-		DropDownList1Backdrop.BottomRightCorner, }) do
+			DropDownList1Backdrop.BottomRightCorner,
+			DropDownList2Backdrop.TopEdge,
+			DropDownList2Backdrop.RightEdge,
+			DropDownList2Backdrop.BottomEdge,
+			DropDownList2Backdrop.LeftEdge,
+			DropDownList2Backdrop.TopRightCorner,
+			DropDownList2Backdrop.TopLeftCorner,
+			DropDownList2Backdrop.BottomLeftCorner,
+		DropDownList2Backdrop.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
