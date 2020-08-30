@@ -153,26 +153,7 @@ f:SetScript("OnEvent", function(self, event, ...)
 end)
 --]]
 ----------------------------------------------
--- NamePlate Style 
---[[
--- Nameplate Name Updates
-hooksecurefunc("CompactUnitFrame_UpdateName", function(frame)
-  if ShouldShowName(frame) then
-	local _, class = UnitClass("target")
-	local unitPlayer = UnitIsPlayer("target")
-	local enemy = UnitIsEnemy("player", "target")
-	--local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-	if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("target") then
-		if ( unitPlayer == true and not frame:IsForbidden() and enemy ~= true ) then
-    		if frame.optionTable.colorNameBySelection then
-      			frame.name:SetText(GetUnitName(frame.unit))
-      			frame.name:SetTextColor(1, 1, 1)
-    		end
-  		end
-	end
-  end
-end)
---]]
+-- NamePlate Style
 --  Move nametag
 hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
@@ -191,7 +172,8 @@ hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 		frame.healthBar.percent:SetShadowColor(0, 0, 0)
 		frame.healthBar.percent:SetShadowOffset(1, -0.25)
 	end
-	local percentcalc = ceil((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 100)
+	local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+	if ( percentcalc == 0 ) then return end
 	frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
 	--frame.healthBar.percent:Show()
 end)

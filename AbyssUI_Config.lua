@@ -2446,6 +2446,7 @@ end)
 local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 50, -80)
 AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Select a Color")
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(24/255, 100/255, 220/255)
 AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose a color for the frames (Color Picker)"
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFramesColorPicker)
 -- OnClick Function
