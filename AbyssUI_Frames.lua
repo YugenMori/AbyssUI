@@ -11,9 +11,16 @@ AbyssUI_AFKCameraFrame:SetScale(UIParent:GetScale())
 AbyssUI_AFKCameraFrame:SetAllPoints(UIParent)
 AbyssUI_AFKCameraFrame:SetClampedToScreen(true)
 AbyssUI_AFKCameraFrame:Hide()
+----------------------------------------------------
+local AbyssUIBorder = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
+AbyssUIBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
+AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
+AbyssUIBorder:SetVertexColor(0.9, 0.9, 0.9, 0.9)
+----------------------------------------------------
 -- Text
 AbyssUI_AFKCameraFrame.text = AbyssUI_AFKCameraFrame.text or AbyssUI_AFKCameraFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-AbyssUI_AFKCameraFrame.text:SetScale(2)
+AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
 AbyssUI_AFKCameraFrame.text:SetJustifyH("BOTTOM")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("BOTTOM")
@@ -34,16 +41,21 @@ AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
 -- ModelFrameAFKMode
 -- Model1
 local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
-AbyssUI_ModelFrameAFKMode:SetPoint("BOTTOMRIGHT", 50, 0)
-AbyssUI_ModelFrameAFKMode:SetWidth(GetScreenWidth()/4)
-AbyssUI_ModelFrameAFKMode:SetHeight(GetScreenHeight()/2)
+AbyssUI_ModelFrameAFKMode:SetPoint("BOTTOMRIGHT", 5, 5)
+AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelFrame:GetWidth()*2)
+AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelFrame:GetHeight()*2)
 AbyssUI_ModelFrameAFKMode:SetAlpha(1)
 local ModelFrame_Model1 = CreateFrame("PlayerModel", "$parentModelFrame_Model1", AbyssUI_ModelFrameAFKMode)
 ModelFrame_Model1:SetUnit("player")
 ModelFrame_Model1:SetAlpha(1)
 ModelFrame_Model1:SetAllPoints(AbyssUI_ModelFrameAFKMode)
 ModelFrame_Model1:SetCustomCamera(1)
-local x, y, z = ModelFrame_Model1:GetCameraPosition()
+--local x, y, z = ModelFrame_Model1:GetCameraPosition()
+--[[
+local AnimationsSequence = { 5, 60, 67, 96, }
+local Animations = #AnimationsSequence
+ModelFrame_Model1:SetAnimation(AnimationsSequence[random(1, Animations)])
+--]]
 ----------------------------------------------------
 -- PlayerInfoAFKMode
 -- Name
@@ -71,7 +83,7 @@ PlayerInfo_Class1.text = PlayerInfo_Class1.text or PlayerInfo_Class1:CreateFontS
 PlayerInfo_Class1.text:SetPoint("BOTTOMLEFT", 5, 90)
 PlayerInfo_Class1.text:SetText(playerClass)
 -- Current Specialization
-local PlayerInfo_CurrentSpec1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
+local PlayerInfo_CurrentSpec1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentSpec1", AbyssUI_AFKCameraFrame)
 local currentSpec = GetSpecialization()
 local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
 PlayerInfo_CurrentSpec1:SetAllPoints(AbyssUI_AFKCameraFrame)
@@ -88,7 +100,7 @@ PlayerInfo_Level1.text = PlayerInfo_Level1.text or PlayerInfo_Level1:CreateFontS
 PlayerInfo_Level1.text:SetPoint("BOTTOMLEFT", 5, 70)
 PlayerInfo_Level1.text:SetText("Level: "..level)
 -- Honor Level
-local PlayerInfo_Honor1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
+local PlayerInfo_Honor1 = CreateFrame("Frame", "$parentPlayerInfo_Honor1", AbyssUI_AFKCameraFrame)
 local HonorLevel = UnitHonorLevel("player")
 PlayerInfo_Honor1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Honor1:SetScale(3)
@@ -96,7 +108,7 @@ PlayerInfo_Honor1.text = PlayerInfo_Honor1.text or PlayerInfo_Honor1:CreateFontS
 PlayerInfo_Honor1.text:SetPoint("BOTTOMLEFT", 5, 60)
 PlayerInfo_Honor1.text:SetText("Honor: "..HonorLevel)
 -- Item Level
-local PlayerInfo_ILevel1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
+local PlayerInfo_ILevel1 = CreateFrame("Frame", "$parentPlayerInfo_ILevel1", AbyssUI_AFKCameraFrame)
 local overall, equipped = GetAverageItemLevel()
 PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_ILevel1:SetScale(3)
@@ -104,7 +116,7 @@ PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFo
 PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
 PlayerInfo_ILevel1.text:SetText("ILevel: "..floor(overall + 0.5))
 -- Zone
-local PlayerInfo_CurrentZone1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
+local PlayerInfo_CurrentZone1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentZone1", AbyssUI_AFKCameraFrame)
 local zoneName = GetZoneText()
 PlayerInfo_CurrentZone1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_CurrentZone1:SetScale(3)
@@ -112,28 +124,48 @@ PlayerInfo_CurrentZone1.text = PlayerInfo_CurrentZone1.text or PlayerInfo_Curren
 PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 40)
 PlayerInfo_CurrentZone1.text:SetText(zoneName)
 -- Guild Info
-local PlayerInfo_Guild1 = CreateFrame("Frame", "$parentPlayerInfo_Class1", AbyssUI_AFKCameraFrame)
+local PlayerInfo_Guild1 = CreateFrame("Frame", "$parentPlayerInfo_Guild1", AbyssUI_AFKCameraFrame)
 local guildName, guildRankName, guildRankIndex = GetGuildInfo("player")
 PlayerInfo_Guild1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Guild1:SetScale(3)
 PlayerInfo_Guild1.text = PlayerInfo_Guild1.text or PlayerInfo_Guild1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Guild1.text:SetPoint("BOTTOMLEFT", 5, 30)
 PlayerInfo_Guild1.text:SetText(guildName)
+-- CLock
+local ExtraInfo_Clock1 = CreateFrame("Frame", "$parentExtraInfo_Clock1", AbyssUI_AFKCameraFrame)
+ExtraInfo_Clock1:SetAllPoints(AbyssUI_AFKCameraFrame)
+ExtraInfo_Clock1:SetScale(3)
+ExtraInfo_Clock1.text = ExtraInfo_Clock1.text or ExtraInfo_Clock1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+ExtraInfo_Clock1.text:SetPoint("TOPRIGHT", -5, -1)
+-- Faction
+local englishFaction, localizedFaction = UnitFactionGroup("player")
+local ExtraInfo_Faction1 = CreateFrame("Frame", "$parentExtraInfo_Faction1", AbyssUI_AFKCameraFrame)
+ExtraInfo_Faction1:SetWidth(64)
+ExtraInfo_Faction1:SetHeight(64)
+ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
+ExtraInfo_Faction1:SetScale(3)
+local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
+	if ( englishFaction == "Horde" ) then
+		t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Horde-Logo")
+	else
+		t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Alliance-Logo")
+	end
+t:SetAllPoints(ExtraInfo_Faction1)
+-- Gold Amount
+local PlayerInfo_GoldAmount1 = CreateFrame("Frame", "$parentPlayerInfo_GoldAmount1", AbyssUI_AFKCameraFrame)
+PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_FLAGS_CHANGED")
+PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_ENTERING_WORLD")
+local money = GetCoinTextureString(GetMoney())
+PlayerInfo_GoldAmount1:SetAllPoints(AbyssUI_AFKCameraFrame)
+PlayerInfo_GoldAmount1:SetScale(3)
+PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmount1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+PlayerInfo_GoldAmount1.text:SetPoint("BOTTOMLEFT", 5 , 1)
+PlayerInfo_GoldAmount1.text:SetText("Resources: ".."|cfff2dc7f"..money.."|r")
 -- Class colorization (all player info)
 if ( englishClass == "DEATHKNIGHT" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
-		PlayerInfo_Level1, 
-		PlayerInfo_Race1, 
-		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
-		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
-		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
-		v.text:SetVertexColor(196/255, 30/255, 59/255)
-	end 
-elseif ( englishClass == "DEMONHUNTER" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({
+		AbyssUI_AFKCameraFrame, 
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -142,11 +174,30 @@ elseif ( englishClass == "DEMONHUNTER" ) then
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
-	}) do
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
+		v.text:SetVertexColor(196/255, 30/255, 59/255)
+	end 
+elseif ( englishClass == "DEMONHUNTER" ) then
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame, 
+		PlayerInfo_Name1, 
+		PlayerInfo_Level1, 
+		PlayerInfo_Race1, 
+		PlayerInfo_Class1,
+		PlayerInfo_Honor1,
+		PlayerInfo_ILevel1,
+		PlayerInfo_CurrentSpec1,
+		PlayerInfo_CurrentZone1,
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(163/255, 48/255, 201/255)
 	end 
 elseif ( englishClass == "DRUID" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame, 
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -154,11 +205,15 @@ elseif ( englishClass == "DRUID" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 125/255, 10/255)
 	end 
 elseif ( englishClass == "HUNTER" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -166,11 +221,15 @@ elseif ( englishClass == "HUNTER" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(171/255, 212/255, 115/255)
 	end 
 elseif ( englishClass == "MAGE" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -178,11 +237,15 @@ elseif ( englishClass == "MAGE" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(105/255, 204/255, 240/255)
 	end 
 elseif ( englishClass == "MONK" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -190,11 +253,15 @@ elseif ( englishClass == "MONK" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(0/255, 255/255, 150/255)
 	end 
 elseif ( englishClass == "PALADIN" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -202,11 +269,15 @@ elseif ( englishClass == "PALADIN" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(245/255, 140/255, 186/255)
 	end 
 elseif ( englishClass == "PRIEST" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -214,11 +285,15 @@ elseif ( englishClass == "PRIEST" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 255/255, 255/255)
 	end 
 elseif ( englishClass == "ROGUE" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -226,11 +301,15 @@ elseif ( englishClass == "ROGUE" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 245/255, 105/255)
 	end 
 elseif ( englishClass == "SHAMAN" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -238,11 +317,15 @@ elseif ( englishClass == "SHAMAN" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(0/255, 112/255, 222/255)
 	end 
 elseif ( englishClass == "WARLOCK" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -250,11 +333,15 @@ elseif ( englishClass == "WARLOCK" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(148/255, 130/255, 201/255)
 	end 
 elseif ( englishClass == "WARRIOR" ) then
-	for i, v in pairs({ PlayerInfo_Name1, 
+	for i, v in pairs({ 
+		AbyssUI_AFKCameraFrame,
+		PlayerInfo_Name1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -262,29 +349,14 @@ elseif ( englishClass == "WARRIOR" ) then
 		PlayerInfo_ILevel1,
 		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
-	PlayerInfo_Guild1, }) do
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(199/255, 156/255, 110/255)
 	end 
 else
 	return nil
 end
-----------------------------------------------------
--- Gold Amount
-local PlayerInfo_GoldAmount1 = CreateFrame("Frame", "$parentPlayerInfo_GoldAmount1", AbyssUI_AFKCameraFrame)
-PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_FLAGS_CHANGED")
-PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_ENTERING_WORLD")
-local money = GetCoinTextureString(GetMoney())
-PlayerInfo_GoldAmount1:SetAllPoints(AbyssUI_AFKCameraFrame)
-PlayerInfo_GoldAmount1:SetScale(2)
-PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmount1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-PlayerInfo_GoldAmount1.text:SetPoint("TOPLEFT", 5, -1)
-PlayerInfo_GoldAmount1.text:SetText("Resources: "..money)
--- CLock
-local ExtraInfo_Clock1 = CreateFrame("Frame", "$parentExtraInfo_Clock1", AbyssUI_AFKCameraFrame)
-ExtraInfo_Clock1:SetAllPoints(AbyssUI_AFKCameraFrame)
-ExtraInfo_Clock1:SetScale(3)
-ExtraInfo_Clock1.text = ExtraInfo_Clock1.text or ExtraInfo_Clock1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-ExtraInfo_Clock1.text:SetPoint("TOPRIGHT", -5, -1)
 local function AbyssUI_UpdateAFKCameraData()
 	-- Get
 	playerName = UnitName("player")
@@ -298,9 +370,9 @@ local function AbyssUI_UpdateAFKCameraData()
 	zoneName = GetZoneText()
 	guildName, guildRankName, guildRankIndex = GetGuildInfo("player")
 	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
-		dataTime = date("%H:%M |cffffcc00%m/%d/%y|r ")
+		dataTime = date("%H:%M |cfff2dc7f%m/%d/%y|r ")
 	else
-		dataTime = date("%H:%M |cffffcc00%d/%m/%y|r ")
+		dataTime = date("%H:%M |cfff2dc7f%d/%m/%y|r ")
 	end
 	englishFaction, localizedFaction = UnitFactionGroup("player")
 	money = GetCoinTextureString(GetMoney())
@@ -312,7 +384,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	ExtraInfo_Clock1.text:SetText(dataTime)
 	PlayerInfo_Honor1.text:SetText("Honor: "..HonorLevel)
 	PlayerInfo_ILevel1.text:SetText("ILvl: "..floor(overall + 0.5))
-	PlayerInfo_GoldAmount1.text:SetText("Resources: "..money)
+	PlayerInfo_GoldAmount1.text:SetText("Resources: ".."|cfff2dc7f"..money.."|r")
 	PlayerInfo_CurrentSpec1.text:SetText(currentSpecName)
 	PlayerInfo_CurrentZone1.text:SetText(zoneName)
 	PlayerInfo_Guild1.text:SetText(guildName)
@@ -336,17 +408,29 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 			local isAFK = UnitIsAFK("player")
 			if isAFK == true and inInstance ~= true then
 				UIParent:SetAlpha(0)
+				if AbyssUIAddonSettings.HideMinimap ~= true then
+					MinimapCluster:Hide()
+				end
 				AbyssUI_UpdateAFKCameraData()
 				UIFrameFadeIn(AbyssUI_AFKCameraFrame, 3, 0, 1)
 			elseif isAFK == false and inInstance ~= true then
 				AbyssUI_AFKCameraFrame:Hide()
 				UIParent:SetAlpha(1)
+				if AbyssUIAddonSettings.HideMinimap ~= true then
+					MinimapCluster:Show()
+				end
 			elseif isAFK == true and inInstance == true then
 				AbyssUI_AFKCameraFrame:Hide()
 				UIParent:SetAlpha(1)
+				if AbyssUIAddonSettings.HideMinimap ~= true then
+					MinimapCluster:Show()
+				end
 			elseif isAFK == false and inInstance == true then
 				AbyssUI_AFKCameraFrame:Hide()
 				UIParent:SetAlpha(1)
+				if AbyssUIAddonSettings.HideMinimap ~= true then
+					MinimapCluster:Show()
+				end
 			else
 				AbyssUI_AFKCameraFrame:Hide()
 			end
@@ -359,7 +443,7 @@ end)
 -- YouDied Frame
 local AbyssUI_YouDiedFrame = CreateFrame("Frame", "$parentAbyssUI_YouDiedFrame", UIParent)
 AbyssUI_YouDiedFrame:RegisterEvent("PLAYER_DEAD")
-AbyssUI_YouDiedFrame:SetFrameStrata("HIGH")
+AbyssUI_YouDiedFrame:SetFrameStrata("DIALOG")
 AbyssUI_YouDiedFrame:SetWidth(GetScreenWidth())
 AbyssUI_YouDiedFrame:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:SetClampedToScreen(true)
@@ -376,6 +460,7 @@ AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_DEAD" ) then
+			--AbyssUI_YouDiedFrame.text:SetText("|cff8b0000"..YOU DIED.."|r")
 			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
 			C_Timer.After(4, function()
 				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
@@ -383,8 +468,6 @@ AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 			C_Timer.After(10, function()
 				AbyssUI_YouDiedFrame:Hide()
 			end)
-		else
-			return nil
 		end
 	else
 		return nil
@@ -947,11 +1030,6 @@ AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration ca
 					AbyssUICount = AbyssUICount + 1
 					AbyssUIStart()
 				else
-					--local name, elapsed = UnitName("player"), time() - AbyssUIProfile
-					--C_Timer.After(6, function()
-					--print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
-					--print("Type |cffffcc00/abyssui|r for a list of commands")
-					--end)
 					AbyssUIFirstFrame:Hide()
 				end
 			elseif ( event == "PLAYER_LOGOUT" ) then

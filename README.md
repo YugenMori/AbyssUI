@@ -1,16 +1,9 @@
 # AbyssUI
 ### AbyssUI is a minimalist World of Warcraft interface.
 
-It change some parts of the interface to make the Blizzard UI more clean, minimalist and a bit of dark.
+AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow functionality.
 
-How to Install?
-
-1- Extract the compact folder, and you will notice a folder named Interface;
-
-2- In WoW folder make a backup of your old Interface folder (e.g rename to Interface.old);
-
-3- Then copy the AbyssUI Interface folder to WoW folder.
-
+For a full experience with AbyssUI, download AbyssUI_TexturePack.
 
 ##### Make Sure to backup your Interface Folder
 

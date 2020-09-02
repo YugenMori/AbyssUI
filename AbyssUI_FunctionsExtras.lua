@@ -103,56 +103,6 @@ FadeUI_MouseOver:SetScript("OnClick", function()
 	end
 end)
 ----------------------------------------------
--- ActionBar
---[[
-local f = CreateFrame("Frame", nil, UIParent)
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.AbyssUINewActionBar3x12 == true ) then
-		-- Straig line
-		    local _G = _G
-		      for i = 2, 12 do
-		        local r = "MultiBarBottomRightButton"
-		        local btr = _G[r..i]
-		        btr:SetClampedToScreen(true)
-		        btr:SetMovable(true)
-		        btr:SetUserPlaced(true)
-		        btr:ClearAllPoints()
-		        btr.ClearAllPoints = function() end
-		        btr:SetPoint("LEFT", r..i - 1, "RIGHT", 6, 0)
-		      end
-		for id = 13, 24 do
-			local b = CreateFrame("CheckButton", "ExtraBarButton"..( id - 12), UIParent, "ActionBarButtonTemplate")
-		      --MultiBarBottomRightButton
-			b:SetSize(40*UIParent:GetScale(), 40*UIParent:GetScale())
-			b:SetAttribute("action", id)
-			b:SetID(id)
-			b:SetPoint("CENTER", _G["MultiBarBottomRightButton"..( id - 12)], "CENTER", -543, 90)
-			b:Show()
-		end
-	 --PetBar
-    PetActionBarFrame.ClearAllPoints = function() end
-    PetActionBarFrame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", 0, 45)
-    PetActionBarFrame:SetScale(0.85)
-    PetActionBarFrame.SetPoint = function() end
-    --StanceBar
-    StanceBarFrame:ClearAllPoints()
-    StanceBarFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 100, 0)
-    StanceBarFrame.SetPoint = function() end
-    --ExtraBar
-    ExtraActionBarFrame.ClearAllPoints = function() end
-    ExtraActionBarFrame:SetPoint("BOTTOMRIGHT", MainMenuBar, "BOTTOMRIGHT", 70, 30)
-    ExtraActionBarFrame.SetPoint = function() end
-    --VehicleBar
-    MainMenuBarVehicleLeaveButton.ClearAllPoints = function() end
-    MainMenuBarVehicleLeaveButton:SetPoint("TOPLEFT", MainMenuBar, "TOPLEFT", -70, 70)
-    MainMenuBarVehicleLeaveButton.SetPoint = function() end
-	else
-		return nil
-	end
-end)
---]]
-----------------------------------------------
 -- NamePlate Style
 --  Move nametag
 hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
@@ -338,6 +288,7 @@ ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
 end)
 ----------------------------------------------------
 -- New Minimap
+----------------------------------------------------
 -- Thanks to Dawn for this amazing minimap code
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
 SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -725,6 +676,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 end)
 ----------------------------------------------------
 -- Fonts
+----------------------------------------------------
 local globalFont	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf"
 local subFont 	 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf"
 local damageFont 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
@@ -798,6 +750,7 @@ AbyssUI_CheckFont:SetScript("OnEvent", function(self, event, arg1)
 end)
 ----------------------------------------------------
 -- Kill Announcer Frame
+----------------------------------------------------
 local KillAnouncerFrame = CreateFrame("Frame", "$parentKillAnouncerFrame", UIParent)
 KillAnouncerFrame:SetFrameStrata("BACKGROUND")
 KillAnouncerFrame:SetWidth(128)
@@ -821,7 +774,7 @@ KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\glob
 KillAnouncerFrame.text:SetShadowColor(0/255, 0/255, 0/255)
 KillAnouncerFrame.text:SetShadowOffset(1, -1)
 -- Kill SoundList
-local soundIDS = { 
+local soundIDSHorde = { 
 	24531,  -- RAGNAROS 
 	24530,  -- RAGNAROS2
 	38065,  -- GARROSH 
@@ -832,12 +785,9 @@ local soundIDS = {
 	45439,  -- BLACKHAND2 
 	21164,  -- Baine
 	43913,  -- Koromar
-	21576,  -- Muradin
-	21574,  -- Muradin2
 	16146,  -- JARAXXUS
 	109300, -- Bwonsamdi
 	15591,  -- Kologarn
-	16061,  -- Varian
 	42070,  -- Gugrokk2
 	43254,  -- Leroy Jenkins
 	50083,  -- Kormrok
@@ -861,9 +811,50 @@ local soundIDS = {
 	15740,	-- Thorim
 	10454,  -- Thrall
 }
-local numSounds = #soundIDS
-local function PlaySoundRandom() 
-	PlaySound(soundIDS[random(1, numSounds)], "MASTER")
+local soundIDSAlly = { 
+	24531,  -- RAGNAROS 
+	24530,  -- RAGNAROS2
+	24477,  -- FANDRAL 
+	13324,  -- Telestra 
+	45439,  -- BLACKHAND2 
+	43913,  -- Koromar
+	21576,  -- Muradin
+	21574,  -- Muradin2
+	16146,  -- JARAXXUS
+	109300, -- Bwonsamdi
+	15591,  -- Kologarn
+	16061,  -- Varian
+	42070,  -- Gugrokk2
+	43254,  -- Leroy Jenkins
+	50083,  -- Kormrok
+	24226,  -- DAAKARA
+	44525,  -- KARGATH
+	17067,  -- Valithria
+	14506,  -- Xevozz
+	16854,  -- Taldaram
+	16681,  -- Valanar
+	35572, 	-- KAZRAJIN
+	50594,  -- DARKVINDICATOR
+	50593,	-- DARKVINDICATOR2
+	8894, 	-- BLA_NAXX
+	8801,	-- FAER_NAXX
+	10169,	-- Keli
+	12027,	-- Halazzi
+	10334,	-- Garg
+	5831,	-- Herod
+	15740,	-- Thorim
+}
+local numSoundsHorde = #soundIDSHorde
+local numSoundsAlly  = #soundIDSAlly
+local function PlaySoundRandom()
+local englishFaction, localizedFaction = UnitFactionGroup("player")
+	if ( englishFaction == "Horde") then
+		PlaySound(soundIDSHorde[random(1, numSoundsHorde)], "MASTER")
+	elseif ( englishFaction == "Alliance") then
+		PlaySound(soundIDSAlly[random(1, numSoundsAlly)], "MASTER")
+	else
+		return nil
+	end
 end
 -- Kill Announcer
 local KillAnouncer = CreateFrame("FRAME", "$parentKillAnouncer")
@@ -905,5 +896,17 @@ KillAnouncer:SetScript("OnEvent", function(self)
 		return nil
 	end
 end)
+--[[
+local border = self.Border;
+if border then
+    if ( IsEquippedAction(action) ) then
+        border:SetVertexColor(0, 1.0, 0, 0.35);
+        border:Show();
+    else
+        border:Hide();
+    end
+end
+--]]
+----------------------------------------------------
 ----------------------------------------------------
 --End

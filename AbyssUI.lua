@@ -166,27 +166,34 @@ SetAlphaFrames:SetScript("OnEvent", function(self, event, addon)
 		SetAlphaFrames:SetScript("OnEvent", nil)
 	end
 end)
--- !Important Entering World
+-- New Interface
 local NewFrames = CreateFrame("Frame")
-NewFrames:RegisterEvent("PLAYER_ENTERING_WORLD")
-NewFrames:SetScript("OnEvent", function(self, event)
-	if ( event == "PLAYER_ENTERING_WORLD" ) then
-		-- LFGDiag
-		for i, v in pairs({
-			LFGDungeonReadyStatus.Border.TopEdge,
-			LFGDungeonReadyStatus.Border.RightEdge,
-			LFGDungeonReadyStatus.Border.BottomEdge,
-			LFGDungeonReadyStatus.Border.LeftEdge,
-			LFGDungeonReadyStatus.Border.TopRightCorner,
-			LFGDungeonReadyStatus.Border.TopLeftCorner,
-			LFGDungeonReadyStatus.Border.BottomLeftCorner,
-		LFGDungeonReadyStatus.Border.BottomRightCorner, }) do
+NewFrames:RegisterEvent("ADDON_LOADED")
+NewFrames:SetScript("OnEvent", function(self, event, addon)
+	if (addon == "AbyssUI") then
+		for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
+			MainMenuBarArtFrame.RightEndCap,
+			MainMenuBarArtFrameBackground.BackgroundSmall,
+			MainMenuBarArtFrameBackground.BackgroundLarge,
+			Boss1TargetFrameTextureFrameTexture,
+			Boss2TargetFrameTextureFrameTexture,
+			Boss3TargetFrameTextureFrameTexture,
+			TimerTrackerTimer1,
+			TimerTrackerTimer1StatusBar,
+			TimerTrackerTimer1StatusBarBorder,
+			TimerTrackerTimer2,
+			TimerTrackerTimer2StatusBar,
+			TimerTrackerTimer2StatusBarBorder,
+			MirrorTimer1Border,
+			MirrorTimer2Border, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
 				return nil
 			end
 		end
+		----------------------------------------------------------------------
+		-- !Important 
 		-- LFGDungeonReadyDialog
 		for i, v in pairs({
 			LFGDungeonReadyDialog.Border.TopEdge,
@@ -198,32 +205,14 @@ NewFrames:SetScript("OnEvent", function(self, event)
 			LFGDungeonReadyDialog.Border.BottomLeftCorner,
 		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
-				AbyssUI_ColorizationFrameFunction(v)
+				v:SetAlpha(0)
 			else
 				return nil
 			end
 		end
 
-	-- End
-	else
-		return nil
-	end
-end)
--- New Interface
-local NewFrames = CreateFrame("Frame")
-NewFrames:RegisterEvent("ADDON_LOADED")
-NewFrames:SetScript("OnEvent", function(self, event, addon)
-	if (addon == "AbyssUI") then
-		for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
-			MainMenuBarArtFrame.RightEndCap,
-			MainMenuBarArtFrameBackground.BackgroundSmall,
-		MainMenuBarArtFrameBackground.BackgroundLarge, }) do
-			if AbyssUIAddonSettings ~= nil then
-				AbyssUI_ColorizationFrameFunction(v)
-			else
-				return nil
-			end
-		end
+		-- End
+		----------------------------------------------------------------------
 		-- Character
 		for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
 			CharacterFrame.NineSlice.LeftEdge,
@@ -915,15 +904,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- TimeTrackerTimer
-		for i, v in pairs({	
-		TimerTrackerTimer1StatusBarBorder, }) do
-			if AbyssUIAddonSettings ~= nil then
-				AbyssUI_ColorizationFrameFunction(v)
-			else
-				return nil
-			end
-		end
 		-- CharacterSlowFrames
 		for i, v in pairs({	
 			CharacterWristSlotFrame,
@@ -1040,22 +1020,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- LFGDungeonReadyDialog
-		for i, v in pairs({
-			LFGDungeonReadyDialog.Border.TopEdge,
-			LFGDungeonReadyDialog.Border.RightEdge,
-			LFGDungeonReadyDialog.Border.BottomEdge,
-			LFGDungeonReadyDialog.Border.LeftEdge,
-			LFGDungeonReadyDialog.Border.TopRightCorner,
-			LFGDungeonReadyDialog.Border.TopLeftCorner,
-			LFGDungeonReadyDialog.Border.BottomLeftCorner,
-		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
-			if AbyssUIAddonSettings ~= nil then
-				AbyssUI_ColorizationFrameFunction(v)
-			else
-				return nil
-			end
-		end
 		-- LFGListApplicationDialog
 		for i, v in pairs({
 			LFGListApplicationDialog.Border.TopEdge,
@@ -1138,6 +1102,25 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			DropDownList2Backdrop.TopLeftCorner,
 			DropDownList2Backdrop.BottomLeftCorner,
 		DropDownList2Backdrop.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- ChatConfigFrame
+		for i, v in pairs({ 
+			ChatConfigFrame.Header.CenterBG,
+			ChatConfigFrame.Header.LeftBG,
+			ChatConfigFrame.Header.RightBG,
+			ChatConfigFrame.Border.TopEdge,
+			ChatConfigFrame.Border.RightEdge,
+			ChatConfigFrame.Border.BottomEdge,
+			ChatConfigFrame.Border.LeftEdge,
+			ChatConfigFrame.Border.TopRightCorner,
+			ChatConfigFrame.Border.TopLeftCorner,
+			ChatConfigFrame.Border.BottomLeftCorner,
+		ChatConfigFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1970,6 +1953,27 @@ f:SetScript("OnEvent", function(self, event, name)
 			KeyBindingFrame.Header.RightBG,
 			KeyBindingFrame.Header.CenterBG,
 		KeyBindingFrame.Header.LeftBG, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+-- OrderHallTalent
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_OrderHallUI" then
+		for i, v in pairs({ OrderHallTalentFrame.NineSlice.TopEdge,
+			OrderHallTalentFrame.NineSlice.RightEdge,
+			OrderHallTalentFrame.NineSlice.BottomEdge,
+			OrderHallTalentFrame.NineSlice.LeftEdge,
+			OrderHallTalentFrame.NineSlice.TopRightCorner,
+			OrderHallTalentFrame.NineSlice.TopLeftCorner,
+			OrderHallTalentFrame.NineSlice.BottomLeftCorner,
+			OrderHallTalentFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
