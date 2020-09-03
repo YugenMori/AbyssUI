@@ -389,19 +389,19 @@ Bagnon:SetScript("OnMouseDown", function (self, button)
       AbyssUI_EditBox_Frame:Show()
     end
 end)
--- Narcissus
-local Narcissus = CreateFrame("Frame", "$parentNarcissus", AbyssUI_Config.childpanel1)
-Narcissus:SetFrameStrata("HIGH")
-Narcissus:SetHeight(128)
-Narcissus:SetWidth(128)
-Narcissus:SetPoint("BOTTOMRIGHT", -20, 20)
-local t = Narcissus:CreateTexture(nil, "HIGH")
-t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Narcissus")
-t:SetAllPoints(Narcissus)
+-- DBM
+local DBM = CreateFrame("Frame", "$parentDBM", AbyssUI_Config.childpanel1)
+DBM:SetFrameStrata("HIGH")
+DBM:SetHeight(128)
+DBM:SetWidth(128)
+DBM:SetPoint("BOTTOMRIGHT", -20, 20)
+local t = DBM:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\DBM")
+t:SetAllPoints(DBM)
 -- OnClick
-Narcissus:SetScript("OnMouseDown", function (self, button)
+DBM:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then
-      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/narcissus")
+      AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/deadly-boss-mods")
       AbyssUI_EditBox_Frame:Show()
     end
 end)

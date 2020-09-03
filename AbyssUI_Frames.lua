@@ -68,6 +68,17 @@ PlayerInfo_Name1:SetScale(4)
 PlayerInfo_Name1.text = PlayerInfo_Name1.text or PlayerInfo_Name1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Name1.text:SetPoint("TOP", 0, -1)
 PlayerInfo_Name1.text:SetText(playerName)
+--
+-- Title
+local PlayerInfo_Title1 = CreateFrame("Frame", "$parentPlayerInfo_Title1", AbyssUI_AFKCameraFrame)
+local titleId = GetCurrentTitle() 
+local titleName = GetTitleName(titleId)
+PlayerInfo_Title1:SetAllPoints(AbyssUI_AFKCameraFrame)
+PlayerInfo_Title1:SetScale(2)
+PlayerInfo_Title1.text = PlayerInfo_Title1.text or PlayerInfo_Title1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+PlayerInfo_Title1.text:SetPoint("TOP", 0, -21)
+PlayerInfo_Title1.text:SetText(titleName)
+
 -- Race
 local PlayerInfo_Race1 = CreateFrame("Frame", "$parentPlayerInfo_Race1", AbyssUI_AFKCameraFrame)
 local race, raceEn = UnitRace("player")
@@ -169,7 +180,8 @@ PlayerInfo_GoldAmount1.text:SetText(currency.."|cfff2dc7f"..money.."|r")
 if ( englishClass == "DEATHKNIGHT" ) then
 	for i, v in pairs({
 		AbyssUI_AFKCameraFrame, 
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -185,7 +197,8 @@ if ( englishClass == "DEATHKNIGHT" ) then
 elseif ( englishClass == "DEMONHUNTER" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame, 
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -201,7 +214,8 @@ elseif ( englishClass == "DEMONHUNTER" ) then
 elseif ( englishClass == "DRUID" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame, 
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -217,7 +231,8 @@ elseif ( englishClass == "DRUID" ) then
 elseif ( englishClass == "HUNTER" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -233,7 +248,8 @@ elseif ( englishClass == "HUNTER" ) then
 elseif ( englishClass == "MAGE" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -249,7 +265,8 @@ elseif ( englishClass == "MAGE" ) then
 elseif ( englishClass == "MONK" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -265,7 +282,8 @@ elseif ( englishClass == "MONK" ) then
 elseif ( englishClass == "PALADIN" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -281,7 +299,8 @@ elseif ( englishClass == "PALADIN" ) then
 elseif ( englishClass == "PRIEST" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -297,7 +316,8 @@ elseif ( englishClass == "PRIEST" ) then
 elseif ( englishClass == "ROGUE" ) then
 	for i, v in pairs({
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -313,7 +333,8 @@ elseif ( englishClass == "ROGUE" ) then
 elseif ( englishClass == "SHAMAN" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -329,7 +350,8 @@ elseif ( englishClass == "SHAMAN" ) then
 elseif ( englishClass == "WARLOCK" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -345,7 +367,8 @@ elseif ( englishClass == "WARLOCK" ) then
 elseif ( englishClass == "WARRIOR" ) then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
-		PlayerInfo_Name1, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1,
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
@@ -364,6 +387,8 @@ end
 local function AbyssUI_UpdateAFKCameraData()
 	-- Get
 	playerName = UnitName("player")
+	titleId = GetCurrentTitle() 
+	titleName = GetTitleName(titleId)
 	level = UnitLevel("player")
 	race, raceEn = UnitRace("player")
 	playerClass, englishClass = UnitClass("player")
@@ -382,6 +407,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	money = GetCoinTextureString(GetMoney())
 	-- Set
 	PlayerInfo_Name1.text:SetText(playerName)
+	PlayerInfo_Title1.text:SetText(titleName)
 	PlayerInfo_Level1.text:SetText("Level: "..level)
 	PlayerInfo_Race1.text:SetText(race)
 	PlayerInfo_Class1.text:SetText(playerClass)

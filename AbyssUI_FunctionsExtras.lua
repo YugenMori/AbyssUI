@@ -333,6 +333,13 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local enableCombatFade = true						-- enable/disable fade out in combat
 			local inCombatAlpha = 0.3							-- in combat alpha
 			local outCombatAlpha = 1.0							-- ooc alpha
+			-- Global String
+			local _G = _G
+			local fpsStringLabel 	 = _G["FRAMERATE_LABEL"]
+			local latencyStringLabel = _G["NETWORK_LABEL"]
+			local totalStringLabel   = _G["TOTAL"]
+			local systemStringLabel  = _G["SYSTEMOPTIONS_MENU"]
+			local cleanStringLabel  = _G["BAG_FILTER_CLEANUP"]
 
 			-----------
 			-- style --
@@ -482,9 +489,9 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 					local fpscolor = ColorizeFramerate(GetFramerate())
 					
 					GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
-					GameTooltip:AddDoubleLine("Framerate:", format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
-					GameTooltip:AddDoubleLine("Latency:", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
-					GameTooltip:AddDoubleLine("System Uptime:", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
+					GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
+					GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
+					GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
 					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
 					
 					addons = {}
@@ -514,8 +521,8 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 					
 					local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0) 
 					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-					GameTooltip:AddDoubleLine("Total", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
-					GameTooltip:AddDoubleLine("..with Blizzard", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
+					GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
+					GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
 					GameTooltip:Show()
 				end)
 
@@ -531,7 +538,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 						collectgarbage()
 						UpdateAddOnMemoryUsage()
 						local memAfter = gcinfo()
-						DEFAULT_CHAT_FRAME:AddMessage("Memory cleaned: |cff00FF00"..MemFormat(memBefore - memAfter))
+						DEFAULT_CHAT_FRAME:AddMessage(cleanStringLabel..": |cff00FF00"..MemFormat(memBefore - memAfter))
 					end
 				end)
 				
@@ -764,15 +771,32 @@ t:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\extra\\bloodtexture")
 t:SetAllPoints(KillAnouncerFrame)
 KillAnouncerFrame.texture = t
 -- Text
-KillAnouncerFrame.text = KillAnouncerFrame.text or KillAnouncerFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+local KillAnouncerFrame.text = KillAnouncerFrame.text or KillAnouncerFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 KillAnouncerFrame.text:SetScale(1)
---KillAnouncerFrame.text:SetAllPoints(true)
 KillAnouncerFrame.text:SetJustifyH("CENTER")
 KillAnouncerFrame.text:SetJustifyV("CENTER")
 KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -10)
 KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 14, "THINOUTLINE")
 KillAnouncerFrame.text:SetShadowColor(0/255, 0/255, 0/255)
 KillAnouncerFrame.text:SetShadowOffset(1, -1)
+-- KillAnouncerHeader
+local _G = _G
+local KillText = _G["KILLS"]
+KillAnouncerHeader = CreateFrame("Frame", "$parentKillAnouncerHeader", KillAnouncerFrame)
+KillAnouncerHeader:SetFrameStrata("BACKGROUND")
+KillAnouncerHeader:SetWidth(128)
+KillAnouncerHeader:SetHeight(128)
+KillAnouncerHeader:SetPoint("CENTER", 0, 20)
+-- Text
+KillAnouncerHeader.text = KillAnouncerHeader.text or KillAnouncerHeader:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+KillAnouncerHeader.text:SetScale(1.25)
+KillAnouncerHeader.text:SetJustifyH("CENTER")
+KillAnouncerHeader.text:SetJustifyV("CENTER")
+KillAnouncerHeader.text:SetPoint("CENTER", KillAnouncerHeader, "CENTER", 0, -10)
+KillAnouncerHeader.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 14, "THINOUTLINE")
+KillAnouncerHeader.text:SetShadowColor(0/255, 0/255, 0/255)
+KillAnouncerHeader.text:SetShadowOffset(1, -1)
+KillAnouncerHeader.text:SetText(strupper("|cfffd0101"..KillText.."|r"))
 -- Kill SoundList
 local soundIDSHorde = { 
 	24531,  -- RAGNAROS 
@@ -846,8 +870,8 @@ local soundIDSAlly = {
 }
 local numSoundsHorde = #soundIDSHorde
 local numSoundsAlly  = #soundIDSAlly
-local function PlaySoundRandom()
 local englishFaction, localizedFaction = UnitFactionGroup("player")
+local function PlaySoundRandom()
 	if ( englishFaction == "Horde") then
 		PlaySound(soundIDSHorde[random(1, numSoundsHorde)], "MASTER")
 	elseif ( englishFaction == "Alliance") then
