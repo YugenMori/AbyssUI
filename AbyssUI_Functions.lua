@@ -149,13 +149,17 @@ for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackgrou
 end
 ----------------------------------------------------
 -- Cast Bar
-CastingBarFrame.Text = CastingBarFrame:CreateFontString(nil)
-CastingBarFrame.Text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
-CastingBarFrame.Text:ClearAllPoints()
-CastingBarFrame.Text:SetPoint("CENTER", CastingBarFrame, "CENTER", 0, 2)
+CastingBarFrame.text = CastingBarFrame:CreateFontString(nil)
+CastingBarFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
+CastingBarFrame.text:SetShadowColor(0, 0, 0)
+CastingBarFrame.text:SetShadowOffset(1, -1)
+CastingBarFrame.text:ClearAllPoints()
+CastingBarFrame.text:SetPoint("CENTER", CastingBarFrame, "CENTER", 0, 2)
 -- Timer
 CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
 CastingBarFrame.timer:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
+CastingBarFrame.timer:SetShadowColor(0, 0, 0)
+CastingBarFrame.timer:SetShadowOffset(1, -1)
 CastingBarFrame.timer:SetPoint("TOP", CastingBarFrame, "BOTTOM", 0, 0)
 CastingBarFrame.update = .1
 CastingBarFrame:HookScript("OnUpdate", function(self, elapsed)

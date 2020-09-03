@@ -1,4 +1,4 @@
--- Author: KawF (Original Author), Yugen (changes, fixes and enchantments)
+-- Author: KawF (Original Author), Yugen (changes, fixes and enchantments for AbyssUI)
 --
 -- Shadowlands
 --
@@ -7,7 +7,7 @@
 -- UnitFrameImproved
 local AbyssUI_UnitFrame = CreateFrame("Frame", "$parentAbyssUI_UnitFrame", nil)
 AbyssUI_UnitFrame:RegisterEvent("ADDON_LOADED")
-AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGOUT")
+AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
 		local function tokenize(str)
@@ -380,26 +380,27 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				end
 			end
 			-- CheckFaction
+			--[[
 			local function UnitFramesImproved_TargetFrame_CheckFaction(self)
 				local factionGroup = UnitFactionGroup(self.unit)
 				local creatureType = UnitCreatureType(self.unit)
 				if ( creatureType == "Humanoid" or UnitIsPlayer(self.unit) ) then
 					if ( UnitIsPVPFreeForAll(self.unit) ) then
-						self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
+						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
 						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
 							self.pvpIcon:Show()
 						else
 							self.pvpIcon:Hide()
 						end
 					elseif ( factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit) ) then
-						self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
+						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
 						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
 							self.pvpIcon:Show()
 						else
 							self.pvpIcon:Hide()
 						end
 					elseif ( factionGroup == "Alliance" or factionGroup == "Horde" ) then
-						self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup)
+						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup)
 						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
 							self.pvpIcon:Show()
 						else
@@ -413,6 +414,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				end
 				UnitFramesImproved_Style_TargetFrame(self)
 			end
+			--]]
 			-- EnableFrame
 			local function EnableUnitFramesImproved()
 				-- Generic status text hook
@@ -425,7 +427,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				-- Hook TargetFrame functions
 				hooksecurefunc("TargetFrame_CheckDead", UnitFramesImproved_TargetFrame_Update)
 				hooksecurefunc("TargetFrame_Update", UnitFramesImproved_TargetFrame_Update)
-				hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
+				--hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
 				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
 				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
 				
@@ -481,7 +483,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			end)
 			local UnitFramesImprovedApplySettings = CreateFrame('Button', 'UnitFramesImproved')
 			-- Event listener to make sure we enable the addon at the right time
-			UnitFramesImprovedApplySettings:RegisterEvent("VARIABLES_LOADED")
+			UnitFramesImprovedApplySettings:RegisterEvent("PLAYER_ENTERING_WORLD")
 			UnitFramesImprovedApplySettings:SetScript("OnEvent", function(self, event)
 				-- Set some default settings
 				if ( characterSettings == nil ) then
@@ -520,8 +522,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				return nil
 			end
 		end
-		
-		--UnitFramesImproved_StartUp(UnitFramesImproved)--]]
+		--]]
+		--UnitFramesImproved_StartUp(UnitFramesImproved)
 
 	else
 		return nil

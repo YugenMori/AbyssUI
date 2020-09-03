@@ -181,9 +181,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			TimerTrackerTimer1,
 			TimerTrackerTimer1StatusBar,
 			TimerTrackerTimer1StatusBarBorder,
-			TimerTrackerTimer2,
-			TimerTrackerTimer2StatusBar,
-			TimerTrackerTimer2StatusBarBorder,
 			MirrorTimer1Border,
 			MirrorTimer2Border, }) do
 			if AbyssUIAddonSettings ~= nil then
@@ -1127,7 +1124,22 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-
+		-- CinematicFrameCloseDialog
+		for i, v in pairs({
+			CinematicFrameCloseDialog.Border.TopEdge,
+			CinematicFrameCloseDialog.Border.RightEdge,
+			CinematicFrameCloseDialog.Border.BottomEdge,
+			CinematicFrameCloseDialog.Border.LeftEdge,
+			CinematicFrameCloseDialog.Border.TopRightCorner,
+			CinematicFrameCloseDialog.Border.TopLeftCorner,
+			CinematicFrameCloseDialog.Border.BottomLeftCorner,
+		CinematicFrameCloseDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 		----------------------------------------------------------------------
 		-- End
 		self:UnregisterEvent("ADDON_LOADED")

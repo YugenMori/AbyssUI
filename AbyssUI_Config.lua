@@ -236,7 +236,6 @@ C_WowTokenPublic.UpdateMarketPrice()
       print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
     end
     print("|cfff2dc7fHonor Level: |r|cffffcc00" .. HonorLevel .. "|r")
-    --print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
     print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
     print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
   end)

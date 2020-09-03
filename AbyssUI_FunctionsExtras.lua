@@ -896,16 +896,18 @@ KillAnouncer:SetScript("OnEvent", function(self)
 		return nil
 	end
 end)
+--test stuff
 --[[
-local border = self.Border;
-if border then
-    if ( IsEquippedAction(action) ) then
-        border:SetVertexColor(0, 1.0, 0, 0.35);
-        border:Show();
-    else
-        border:Hide();
-    end
-end
+local _G = _G
+local var  = _G["CURRENCY_THIS_WEEK_WITH_AMOUNT"]
+local var2 = _G["CURRENCY"]
+
+local frame = CreateFrame("Frame", nil)
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:SetScript("OnEvent", function()
+print(var)
+print(var2)
+end)
 --]]
 ----------------------------------------------------
 ----------------------------------------------------

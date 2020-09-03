@@ -5,6 +5,8 @@
 -- Frames for AbyssUI
 --------------------------------------------------------------------------------
 local addonName, addonTable = ...
+local _G = _G
+local move = _G["BINDING_NAME_MOVEFORWARD"]
 local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", WorldFrame)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
 AbyssUI_AFKCameraFrame:SetScale(UIParent:GetScale())
@@ -26,7 +28,7 @@ AbyssUI_AFKCameraFrame.text:SetJustifyH("BOTTOM")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("BOTTOM")
 AbyssUI_AFKCameraFrame.text:SetWidth(GetScreenWidth()/4)
 AbyssUI_AFKCameraFrame.text:SetHeight(GetScreenHeight()/2)
-AbyssUI_AFKCameraFrame.text:SetText("Move to leave AFK Mode")
+AbyssUI_AFKCameraFrame.text:SetText(move)
 -- Texture
 local Texture = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
@@ -152,6 +154,8 @@ local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
 	end
 t:SetAllPoints(ExtraInfo_Faction1)
 -- Gold Amount
+local _G = _G
+local currency = _G["MONEY"]
 local PlayerInfo_GoldAmount1 = CreateFrame("Frame", "$parentPlayerInfo_GoldAmount1", AbyssUI_AFKCameraFrame)
 PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_FLAGS_CHANGED")
 PlayerInfo_GoldAmount1:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -160,7 +164,7 @@ PlayerInfo_GoldAmount1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_GoldAmount1:SetScale(3)
 PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmount1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_GoldAmount1.text:SetPoint("BOTTOMLEFT", 5 , 1)
-PlayerInfo_GoldAmount1.text:SetText("Resources: ".."|cfff2dc7f"..money.."|r")
+PlayerInfo_GoldAmount1.text:SetText(currency.."|cfff2dc7f"..money.."|r")
 -- Class colorization (all player info)
 if ( englishClass == "DEATHKNIGHT" ) then
 	for i, v in pairs({
@@ -384,7 +388,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	ExtraInfo_Clock1.text:SetText(dataTime)
 	PlayerInfo_Honor1.text:SetText("Honor: "..HonorLevel)
 	PlayerInfo_ILevel1.text:SetText("ILvl: "..floor(overall + 0.5))
-	PlayerInfo_GoldAmount1.text:SetText("Resources: ".."|cfff2dc7f"..money.."|r")
+	PlayerInfo_GoldAmount1.text:SetText(currency..": |cfff2dc7f"..money.."|r")
 	PlayerInfo_CurrentSpec1.text:SetText(currentSpecName)
 	PlayerInfo_CurrentZone1.text:SetText(zoneName)
 	PlayerInfo_Guild1.text:SetText(guildName)
@@ -441,6 +445,8 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 end)
 --------------------------------------------
 -- YouDied Frame
+local _G = _G
+local deathrecap = _G["DEAD"]
 local AbyssUI_YouDiedFrame = CreateFrame("Frame", "$parentAbyssUI_YouDiedFrame", UIParent)
 AbyssUI_YouDiedFrame:RegisterEvent("PLAYER_DEAD")
 AbyssUI_YouDiedFrame:SetFrameStrata("DIALOG")
@@ -453,14 +459,14 @@ AbyssUI_YouDiedFrame.text:SetScale(10)
 AbyssUI_YouDiedFrame.text:SetAllPoints(true)
 AbyssUI_YouDiedFrame.text:SetJustifyH("CENTER")
 AbyssUI_YouDiedFrame.text:SetJustifyV("CENTER")
-AbyssUI_YouDiedFrame.text:SetText("|cff8b0000YOU DIED|r")
+AbyssUI_YouDiedFrame.text:SetText(strupper("|cff8b0000"..deathrecap.."|r"))
 AbyssUI_YouDiedFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_YouDiedFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
 		if ( event == "PLAYER_DEAD" ) then
-			--AbyssUI_YouDiedFrame.text:SetText("|cff8b0000"..YOU DIED.."|r")
+			AbyssUI_YouDiedFrame.text:SetText(strupper("|cff8b0000"..deathrecap.."|r"))
 			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
 			C_Timer.After(4, function()
 				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
@@ -491,6 +497,9 @@ Texture:SetAllPoints(AbyssUI_YouDiedFrame)
 AbyssUI_YouDiedFrame.texture = Texture
 ----------------------------------------------------
 -- LevelUp Frame
+local _G = _G
+local levelup_reached = _G["LEVEL_UP_YOU_REACHED"]
+local leveltext 	  = _G["LEVEL"]
 local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
 AbyssUI_LevelUpFrame:SetFrameStrata("DIALOG")
 AbyssUI_LevelUpFrame:SetWidth(GetScreenWidth())
@@ -500,7 +509,7 @@ AbyssUI_LevelUpFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
 AbyssUI_LevelUpFrame.text = AbyssUI_LevelUpFrame.text or AbyssUI_LevelUpFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_LevelUpFrame.text:SetScale(6)
 AbyssUI_LevelUpFrame.text:SetPoint("CENTER", 0, 5)
-AbyssUI_LevelUpFrame.text:SetText("You've Reached")
+AbyssUI_LevelUpFrame.text:SetText(strupper(levelup_reached))
 AbyssUI_LevelUpFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_LevelUpFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_LevelUpFrame:Hide()
@@ -527,14 +536,14 @@ LevelUp_PlayerInfo:SetAllPoints(AbyssUI_LevelUpFrame)
 LevelUp_PlayerInfo:SetScale(8)
 LevelUp_PlayerInfo.text = LevelUp_PlayerInfo.text or LevelUp_PlayerInfo:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 LevelUp_PlayerInfo.text:SetPoint("CENTER", 0, -5)
-LevelUp_PlayerInfo.text:SetText("|cfff2dc7fLevel|r ".."|cfff2dc7f"..level.."|r")
+LevelUp_PlayerInfo.text:SetText(strupper("|cfff2dc7f"..leveltext.."|r ".."|cfff2dc7f"..level.."|r"))
 LevelUp_PlayerInfo.text:SetWidth(GetScreenWidth())
 LevelUp_PlayerInfo.text:SetHeight(GetScreenHeight()/4)
 local function AbyssUI_UpdateYouDiedLevelUpData()
 	-- Get
 	level = UnitLevel("player")
 	-- Set
-	LevelUp_PlayerInfo.text:SetText("|cfff2dc7fLevel|r ".."|cfff2dc7f"..level.."|r")
+	LevelUp_PlayerInfo.text:SetText(strupper("|cfff2dc7f"..leveltext.."|r ".."|cfff2dc7f"..level.."|r"))
 end
 AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
