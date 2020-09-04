@@ -1140,6 +1140,22 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		-- TradeFrame
+		for i, v in pairs({
+			TradeFrame.NineSlice.TopEdge,
+			TradeFrame.NineSlice.RightEdge,
+			TradeFrame.NineSlice.BottomEdge,
+			TradeFrame.NineSlice.LeftEdge,
+			TradeFrame.NineSlice.TopRightCorner,
+			TradeFrame.NineSlice.TopLeftCorner,
+			TradeFrame.NineSlice.BottomLeftCorner,
+		TradeFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 		----------------------------------------------------------------------
 		-- End
 		self:UnregisterEvent("ADDON_LOADED")

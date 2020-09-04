@@ -342,6 +342,26 @@ AbyssUI_TexturePack:SetPoint("TOP", 0, -120)
 local t = AbyssUI_TexturePack:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\AbyssUITexturePackLogo2x2")
 t:SetAllPoints(AbyssUI_TexturePack)
+-- Check Icon
+local CheckIcon_TexturePack = CreateFrame("Frame", "$parentCheckIcon_TexturePack", AbyssUI_TexturePack)
+CheckIcon_TexturePack:SetFrameStrata("HIGH")
+CheckIcon_TexturePack:SetHeight(32)
+CheckIcon_TexturePack:SetWidth(32)
+CheckIcon_TexturePack:SetPoint("TOPRIGHT", 5, 10)
+local t = CheckIcon_TexturePack:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
+t:SetAllPoints(CheckIcon_TexturePack)
+CheckIcon_TexturePack:Hide()
+-- Download Icon
+local DownloadIcon_TexturePack = CreateFrame("Frame", "$parentDownloadIcon_TexturePack", AbyssUI_TexturePack)
+DownloadIcon_TexturePack:SetFrameStrata("HIGH")
+DownloadIcon_TexturePack:SetHeight(128)
+DownloadIcon_TexturePack:SetWidth(128)
+DownloadIcon_TexturePack:SetPoint("TOPRIGHT", 20, 35)
+local t = DownloadIcon_TexturePack:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\downloadIcon")
+t:SetAllPoints(DownloadIcon_TexturePack)
+DownloadIcon_TexturePack:Hide()
 -- OnClick
 AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then 
@@ -358,6 +378,16 @@ Glass:SetPoint("BOTTOMLEFT", 20, 20)
 local t = Glass:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Glass")
 t:SetAllPoints(Glass)
+-- Check Icon
+local CheckIcon_Glass = CreateFrame("Frame", "$parentCheckIcon_Glass", Glass)
+CheckIcon_Glass:SetFrameStrata("HIGH")
+CheckIcon_Glass:SetHeight(32)
+CheckIcon_Glass:SetWidth(32)
+CheckIcon_Glass:SetPoint("TOPRIGHT", 5, 10)
+local t = CheckIcon_Glass:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
+t:SetAllPoints(CheckIcon_Glass)
+CheckIcon_Glass:Hide()
 -- OnClick
 Glass:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then
@@ -374,6 +404,16 @@ KuiNameplates:SetPoint("BOTTOM", -80, 20)
 local t = KuiNameplates:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\KuiNameplates")
 t:SetAllPoints(KuiNameplates)
+-- Check Icon
+local CheckIcon_Kui = CreateFrame("Frame", "$parentCheckIcon_Kui", KuiNameplates)
+CheckIcon_Kui:SetFrameStrata("HIGH")
+CheckIcon_Kui:SetHeight(32)
+CheckIcon_Kui:SetWidth(32)
+CheckIcon_Kui:SetPoint("TOPRIGHT", 5, 10)
+local t = CheckIcon_Kui:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
+t:SetAllPoints(CheckIcon_Kui)
+CheckIcon_Kui:Hide()
 -- OnClick
 KuiNameplates:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then
@@ -390,6 +430,16 @@ Bagnon:SetPoint("BOTTOM", 80, 20)
 local t = Bagnon:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Bagnon")
 t:SetAllPoints(Bagnon)
+-- Check Icon
+local CheckIcon_Bagnon = CreateFrame("Frame", "$parentCheckIcon_Bagnon", Bagnon)
+CheckIcon_Bagnon:SetFrameStrata("HIGH")
+CheckIcon_Bagnon:SetHeight(32)
+CheckIcon_Bagnon:SetWidth(32)
+CheckIcon_Bagnon:SetPoint("TOPRIGHT", 5, 10)
+local t = CheckIcon_Bagnon:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
+t:SetAllPoints(CheckIcon_Bagnon)
+CheckIcon_Bagnon:Hide()
 -- OnClick
 Bagnon:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then
@@ -406,6 +456,16 @@ DBM:SetPoint("BOTTOMRIGHT", -20, 20)
 local t = DBM:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\DBM")
 t:SetAllPoints(DBM)
+-- Check Icon
+local CheckIcon_DBM = CreateFrame("Frame", "$parentCheckIcon_DBM", DBM)
+CheckIcon_DBM:SetFrameStrata("HIGH")
+CheckIcon_DBM:SetHeight(32)
+CheckIcon_DBM:SetWidth(32)
+CheckIcon_DBM:SetPoint("TOPRIGHT", 5, 10)
+local t = CheckIcon_DBM:CreateTexture(nil, "HIGH")
+t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
+t:SetAllPoints(CheckIcon_DBM)
+CheckIcon_DBM:Hide()
 -- OnClick
 DBM:SetScript("OnMouseDown", function (self, button)
     if ( button == 'LeftButton' ) then
@@ -413,6 +473,48 @@ DBM:SetScript("OnMouseDown", function (self, button)
       AbyssUI_EditBox_Frame:Show()
     end
 end)
+-- Check InfoPanel AddOns
+-- Texture Trigger Function
+local function Check_TexturePack()
+  local f = CreateFrame('frame') -- Don't create a new frame for every texture, this is just an example
+  local tx = f:CreateTexture()
+  tx:SetPoint('TOPLEFT', nil, -500, -500) -- The texture has to be "visible", but not necessarily on-screen (you can also set its alpha to 0)
+  tx:SetTexture('Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_RETRO')
+  tx:SetSize(0,0) -- Size must be set after every SetTexture
+  tx:SetAlpha(0)
+  f:SetAllPoints(tx)
+  f:SetScript('OnSizeChanged', function(self, width, height)
+      local size = format('%.0f%.0f', width, height) -- The floating point numbers need to be rounded or checked like "width < 8.1 and width > 7.9"
+      if size == '11' then
+        DownloadIcon_TexturePack:Show()
+      else
+        CheckIcon_TexturePack:Show()
+      end
+  end)
+end
+-- CheckFunction
+local Check = CreateFrame("Frame")
+Check:RegisterEvent("PLAYER_ENTERING_WORLD")
+Check:SetScript("OnEvent", function(self, event, arg1)
+local glass   = IsAddOnLoaded("Glass")
+local kui     = IsAddOnLoaded("Kui_Nameplates")
+local bagnon  = IsAddOnLoaded("Bagnon")
+local dbm     = IsAddOnLoaded("DBM-Core")
+Check_TexturePack()
+    if ( glass == true ) then
+      CheckIcon_Glass:Show()
+    end
+    if ( kui == true ) then
+      CheckIcon_Kui:Show()
+    end
+    if ( bagnon == true ) then
+      CheckIcon_Bagnon:Show()
+    end
+    if ( dbm == true ) then
+      CheckIcon_DBM:Show()
+    end
+end)
+
 -- End
 ------------------------------- Hide Elements ---------------------------------
 local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", AbyssUI_Config.childpanel2)

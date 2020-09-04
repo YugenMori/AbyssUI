@@ -7,6 +7,7 @@
 local addonName, addonTable = ...
 local _G = _G
 local move = _G["BINDING_NAME_MOVEFORWARD"]
+----------------------------------------------------
 local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", WorldFrame)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
 AbyssUI_AFKCameraFrame:SetScale(UIParent:GetScale())
@@ -481,7 +482,7 @@ AbyssUI_YouDiedFrame:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:SetClampedToScreen(true)
 AbyssUI_YouDiedFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
 AbyssUI_YouDiedFrame.text = AbyssUI_YouDiedFrame.text or AbyssUI_YouDiedFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-AbyssUI_YouDiedFrame.text:SetScale(10)
+AbyssUI_YouDiedFrame.text:SetScale(8*2)
 AbyssUI_YouDiedFrame.text:SetAllPoints(true)
 AbyssUI_YouDiedFrame.text:SetJustifyH("CENTER")
 AbyssUI_YouDiedFrame.text:SetJustifyV("CENTER")

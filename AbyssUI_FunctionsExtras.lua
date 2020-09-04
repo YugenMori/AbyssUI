@@ -5,9 +5,9 @@
 -- Extra functions for AbyssUI
 --------------------------------------------------------------
 -- Fade UI
+local _G = _G
 local FadeUIFirstHide = CreateFrame("CheckButton", "$parentFadeUIFirstHide", UIParent, "ChatConfigCheckButtonTemplate")
 FadeUIFirstHide:RegisterEvent("PLAYER_ENTERING_WORLD")
-local _G = _G
 FadeUIFirstHide:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.FadeUI == true ) then
 		C_Timer.After(1, function() 
@@ -775,7 +775,7 @@ KillAnouncerFrame.text = KillAnouncerFrame.text or KillAnouncerFrame:CreateFontS
 KillAnouncerFrame.text:SetScale(1)
 KillAnouncerFrame.text:SetJustifyH("CENTER")
 KillAnouncerFrame.text:SetJustifyV("CENTER")
-KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -10)
+KillAnouncerFrame.text:SetPoint("CENTER", KillAnouncerFrame, "CENTER", 0, -15)
 KillAnouncerFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 14, "THINOUTLINE")
 KillAnouncerFrame.text:SetShadowColor(0/255, 0/255, 0/255)
 KillAnouncerFrame.text:SetShadowOffset(1, -1)
@@ -792,7 +792,7 @@ KillAnouncerHeader.text = KillAnouncerHeader.text or KillAnouncerHeader:CreateFo
 KillAnouncerHeader.text:SetScale(1.25)
 KillAnouncerHeader.text:SetJustifyH("CENTER")
 KillAnouncerHeader.text:SetJustifyV("CENTER")
-KillAnouncerHeader.text:SetPoint("CENTER", KillAnouncerHeader, "CENTER", 0, -10)
+KillAnouncerHeader.text:SetPoint("CENTER", KillAnouncerHeader, "CENTER", 0, -8)
 KillAnouncerHeader.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 14, "THINOUTLINE")
 KillAnouncerHeader.text:SetShadowColor(0/255, 0/255, 0/255)
 KillAnouncerHeader.text:SetShadowOffset(1, -1)
@@ -922,16 +922,7 @@ KillAnouncer:SetScript("OnEvent", function(self)
 end)
 --test stuff
 --[[
-local _G = _G
-local var  = _G["CURRENCY_THIS_WEEK_WITH_AMOUNT"]
-local var2 = _G["CURRENCY"]
 
-local frame = CreateFrame("Frame", nil)
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:SetScript("OnEvent", function()
-print(var)
-print(var2)
-end)
 --]]
 ----------------------------------------------------
 ----------------------------------------------------
