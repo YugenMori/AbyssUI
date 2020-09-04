@@ -3,7 +3,7 @@
 -- Shadowlands
 --
 -- UnitFrameImproved for AbyssUI.
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 -- UnitFrameImproved
 local AbyssUI_UnitFrame = CreateFrame("Frame", "$parentAbyssUI_UnitFrame", nil)
 AbyssUI_UnitFrame:RegisterEvent("ADDON_LOADED")
@@ -379,42 +379,6 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					end
 				end
 			end
-			-- CheckFaction
-			--[[
-			local function UnitFramesImproved_TargetFrame_CheckFaction(self)
-				local factionGroup = UnitFactionGroup(self.unit)
-				local creatureType = UnitCreatureType(self.unit)
-				if ( creatureType == "Humanoid" or UnitIsPlayer(self.unit) ) then
-					if ( UnitIsPVPFreeForAll(self.unit) ) then
-						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
-						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
-							self.pvpIcon:Show()
-						else
-							self.pvpIcon:Hide()
-						end
-					elseif ( factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit) ) then
-						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
-						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
-							self.pvpIcon:Show()
-						else
-							self.pvpIcon:Hide()
-						end
-					elseif ( factionGroup == "Alliance" or factionGroup == "Horde" ) then
-						--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup)
-						if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
-							self.pvpIcon:Show()
-						else
-							self.pvpIcon:Hide()
-						end
-					else
-						self.pvpIcon:Hide()
-					end
-				else
-					self.pvpIcon:Hide()
-				end
-				UnitFramesImproved_Style_TargetFrame(self)
-			end
-			--]]
 			-- EnableFrame
 			local function EnableUnitFramesImproved()
 				-- Generic status text hook
@@ -427,7 +391,6 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				-- Hook TargetFrame functions
 				hooksecurefunc("TargetFrame_CheckDead", UnitFramesImproved_TargetFrame_Update)
 				hooksecurefunc("TargetFrame_Update", UnitFramesImproved_TargetFrame_Update)
-				--hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
 				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
 				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
 				
@@ -509,7 +472,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					return nil
 				end
 			end
-			-- Bootstrap
+		-- Bootstrap
 		--[[
 		local function UnitFramesImproved_StartUp(self)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
@@ -524,9 +487,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		--]]
 		--UnitFramesImproved_StartUp(UnitFramesImproved)
-
 	else
 		return nil
 	end
 end)
-----------------------------------------------------
+--------------------------------------------------------------
+-- End

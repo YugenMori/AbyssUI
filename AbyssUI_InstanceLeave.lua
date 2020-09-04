@@ -3,7 +3,7 @@
 -- Shadowlands
 --
 -- Simple Frame to leave instances for AbyssUI
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 local AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_InstanceLeave_DynamicFrame", UIParent)
 AbyssUI_InstanceLeave_DynamicFrame:SetClampedToScreen(true)
 AbyssUI_InstanceLeave_DynamicFrame:SetMovable(true)

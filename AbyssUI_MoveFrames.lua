@@ -3,7 +3,7 @@
 -- Shadowlands
 --
 -- Simple frame mover for AbyssUI
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 -- Frame Stuff
 -- Thanks to Fizz for part of this
 -- ObjectiveTrackerFrame

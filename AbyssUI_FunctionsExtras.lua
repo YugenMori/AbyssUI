@@ -3,7 +3,7 @@
 -- Shadowlands
 --
 -- Extra functions for AbyssUI
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 -- Fade UI
 local FadeUIFirstHide = CreateFrame("CheckButton", "$parentFadeUIFirstHide", UIParent, "ChatConfigCheckButtonTemplate")
 FadeUIFirstHide:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -771,7 +771,7 @@ t:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\extra\\bloodtexture")
 t:SetAllPoints(KillAnouncerFrame)
 KillAnouncerFrame.texture = t
 -- Text
-local KillAnouncerFrame.text = KillAnouncerFrame.text or KillAnouncerFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+KillAnouncerFrame.text = KillAnouncerFrame.text or KillAnouncerFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 KillAnouncerFrame.text:SetScale(1)
 KillAnouncerFrame.text:SetJustifyH("CENTER")
 KillAnouncerFrame.text:SetJustifyV("CENTER")
@@ -782,7 +782,7 @@ KillAnouncerFrame.text:SetShadowOffset(1, -1)
 -- KillAnouncerHeader
 local _G = _G
 local KillText = _G["KILLS"]
-KillAnouncerHeader = CreateFrame("Frame", "$parentKillAnouncerHeader", KillAnouncerFrame)
+local KillAnouncerHeader = CreateFrame("Frame", "$parentKillAnouncerHeader", KillAnouncerFrame)
 KillAnouncerHeader:SetFrameStrata("BACKGROUND")
 KillAnouncerHeader:SetWidth(128)
 KillAnouncerHeader:SetHeight(128)

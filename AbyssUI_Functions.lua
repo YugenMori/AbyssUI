@@ -3,7 +3,7 @@
 -- Shadowlands
 --
 -- Functions for AbyssUI
---------------------------------------------------------------------------------
+--------------------------------------------------------------
 -- Class Icons
 hooksecurefunc("UnitFramePortrait_Update", function(self)
 	if self.portrait then
@@ -712,7 +712,14 @@ AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 ----------------------------------------------------
+local _G = _G
+local fichaString 			= _G["TOKEN_FILTER_LABEL"]
+local honorString 			= _G["HONOR"]
+local levelString 			= _G["LEVEL"]
+local versionString 		= _G["GAME_VERSION_LABEL"]
+local timeStringLabel 	= _G["TIME_LABEL"]
 -- DailyInfo Function
+----------------------------------------------------
 local AbyssUIDailyInfo = CreateFrame("Frame")
 AbyssUIDailyInfo:RegisterEvent("PLAYER_LOGIN")
 AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
@@ -726,19 +733,19 @@ C_WowTokenPublic.UpdateMarketPrice()
 		local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
 		print("|cfff2dc7f~ AbyssUI Daily Info ~|r")
 		if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
-			print("|cfff2dc7fToken Price: |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
+			print("|cfff2dc7f"..fichaString..": |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
 		else
-			print("|cfff2dc7fToken Price:|r Not available right now!")
+			print("|cfff2dc7f"..fichaString..": |r".."Not available right now!")
 		end
 		if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
-			print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
 		else
-			print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		print("|cfff2dc7fHonor Level: |r|cffffcc00" .. HonorLevel .. "|r")
+		print("|cfff2dc7f"..honorString.." "..levelString..": |r|cffffcc00"..HonorLevel.."|r")
 		--print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
-		print("|cfff2dc7fWoW Version: |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
-		print("|cfff2dc7fAbyssUI Version: |r|cffffcc00" .. AddonVersion .. "|r")
+		print("|cfff2dc7fWoW "..versionString..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+		print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
 		if ( AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
@@ -746,5 +753,8 @@ C_WowTokenPublic.UpdateMarketPrice()
 		end
 	end)
 end)
+--[[
+/run local f = _G["BONUS_ROLL_CURRENT_COUNT"] print(f)
+--]]
 ----------------------------------------------------
 -- End
