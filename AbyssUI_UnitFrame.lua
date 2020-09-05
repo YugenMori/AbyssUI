@@ -7,7 +7,7 @@
 -- UnitFrameImproved
 local AbyssUI_UnitFrame = CreateFrame("Frame", "$parentAbyssUI_UnitFrame", nil)
 AbyssUI_UnitFrame:RegisterEvent("ADDON_LOADED")
-AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGIN")
+AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGOUT")
 AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
 		local function tokenize(str)
@@ -480,7 +480,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			end)
 			local UnitFramesImprovedApplySettings = CreateFrame('Button', 'UnitFramesImproved')
 			-- Event listener to make sure we enable the addon at the right time
-			UnitFramesImprovedApplySettings:RegisterEvent("PLAYER_ENTERING_WORLD")
+			UnitFramesImprovedApplySettings:RegisterEvent("VARIABLES_LOADED")
 			UnitFramesImprovedApplySettings:SetScript("OnEvent", function(self, event)
 				-- Set some default settings
 				if ( characterSettings == nil ) then

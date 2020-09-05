@@ -109,7 +109,8 @@ local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
---frame:RegisterEvent("UNIT_FACTION")
+frame:RegisterEvent("UNIT_FACTION")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
 	if ( AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true ) then

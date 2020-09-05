@@ -190,26 +190,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		----------------------------------------------------------------------
-		-- !Important 
-		-- LFGDungeonReadyDialog
-		for i, v in pairs({
-			LFGDungeonReadyDialog.Border.TopEdge,
-			LFGDungeonReadyDialog.Border.RightEdge,
-			LFGDungeonReadyDialog.Border.BottomEdge,
-			LFGDungeonReadyDialog.Border.LeftEdge,
-			LFGDungeonReadyDialog.Border.TopRightCorner,
-			LFGDungeonReadyDialog.Border.TopLeftCorner,
-			LFGDungeonReadyDialog.Border.BottomLeftCorner,
-		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
-			if AbyssUIAddonSettings ~= nil then
-				v:SetAlpha(0)
-			else
-				return nil
-			end
-		end
-
-		-- End
-		----------------------------------------------------------------------
 		-- Character
 		for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
 			CharacterFrame.NineSlice.LeftEdge,
@@ -943,6 +923,22 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		-- LFDRoleCheckPopup
+		for i, v in pairs({ 
+			LFDRoleCheckPopup.Border.TopEdge,
+			LFDRoleCheckPopup.Border.RightEdge,
+			LFDRoleCheckPopup.Border.BottomEdge,
+			LFDRoleCheckPopup.Border.LeftEdge,
+			LFDRoleCheckPopup.Border.TopRightCorner,
+			LFDRoleCheckPopup.Border.TopLeftCorner,
+			LFDRoleCheckPopup.Border.BottomLeftCorner,
+		LFDRoleCheckPopup.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 		-- PVPRoleCheckPopup
 		for i, v in pairs({ 
 			PVPRoleCheckPopup.Border.TopEdge,
@@ -962,15 +958,35 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 		-- Areana/Bg EnemyFrame
 		for i, v in pairs({ 
 			ArenaEnemyFrame1Texture,
+			ArenaEnemyFrame1CastingBar,
+			ArenaEnemyFrame1DropDown,
+			ArenaEnemyFrame1ClassPortrait,
+			ArenaEnemyFrame1PetFrame,
+			ArenaEnemyFrame1SpecBorder,
 			ArenaEnemyFrame2Texture,
+			ArenaEnemyFrame2CastingBar,
+			ArenaEnemyFrame2DropDown,
+			ArenaEnemyFrame2ClassPortrait,
+			ArenaEnemyFrame2PetFrame,
+			ArenaEnemyFrame2SpecBorder,
 			ArenaEnemyFrame3Texture,
+			ArenaEnemyFrame3CastingBar,
+			ArenaEnemyFrame3DropDown,
+			ArenaEnemyFrame3ClassPortrait,
+			ArenaEnemyFrame3PetFrame,
+			ArenaEnemyFrame3SpecBorder,
 			ArenaEnemyFrame4Texture,
+			ArenaEnemyFrame4CastingBar,
+			ArenaEnemyFrame4DropDown,
+			ArenaEnemyFrame4ClassPortrait,
+			ArenaEnemyFrame4PetFrame,
+			ArenaEnemyFrame4SpecBorder,
 			ArenaEnemyFrame5Texture,
-			ArenaEnemyFrame1PetFrameTexture,
-			ArenaEnemyFrame2PetFrameTexture,
-			ArenaEnemyFrame3PetFrameTexture,
-			ArenaEnemyFrame4PetFrameTexture,
-		ArenaEnemyFrame5PetFrameTexture, }) do
+			ArenaEnemyFrame5CastingBar,
+			ArenaEnemyFrame5DropDown,
+			ArenaEnemyFrame5ClassPortrait,
+			ArenaEnemyFrame5PetFrame,
+			ArenaEnemyFrame5SpecBorder, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1017,6 +1033,22 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		-- LFGInvitePopup
+		for i, v in pairs({ 
+			LFGInvitePopup.Border.TopEdge,
+			LFGInvitePopup.Border.RightEdge,
+			LFGInvitePopup.Border.BottomEdge,
+			LFGInvitePopup.Border.LeftEdge,
+			LFGInvitePopup.Border.TopRightCorner,
+			LFGInvitePopup.Border.TopLeftCorner,
+			LFGInvitePopup.Border.BottomLeftCorner,
+		LFGInvitePopup.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 		-- LFGListApplicationDialog
 		for i, v in pairs({
 			LFGListApplicationDialog.Border.TopEdge,
@@ -1033,7 +1065,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- LFGListApplicationDialog
+		-- LFGListInviteDialog
 		for i, v in pairs({
 			LFGListInviteDialog.Border.TopEdge,
 			LFGListInviteDialog.Border.RightEdge,
@@ -1156,6 +1188,222 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		-- ReportCheatingDialog
+		for i, v in pairs({
+			ReportCheatingDialog.Border.TopEdge,
+			ReportCheatingDialog.Border.RightEdge,
+			ReportCheatingDialog.Border.BottomEdge,
+			ReportCheatingDialog.Border.LeftEdge,
+			ReportCheatingDialog.Border.TopRightCorner,
+			ReportCheatingDialog.Border.TopLeftCorner,
+			ReportCheatingDialog.Border.BottomLeftCorner,
+		ReportCheatingDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- PlayerReportFrame
+		for i, v in pairs({
+			PlayerReportFrame.Border.TopEdge,
+			PlayerReportFrame.Border.RightEdge,
+			PlayerReportFrame.Border.BottomEdge,
+			PlayerReportFrame.Border.LeftEdge,
+			PlayerReportFrame.Border.TopRightCorner,
+			PlayerReportFrame.Border.TopLeftCorner,
+			PlayerReportFrame.Border.BottomLeftCorner,
+		PlayerReportFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- AddFriendFrame
+		for i, v in pairs({
+			AddFriendFrame.Border.TopEdge,
+			AddFriendFrame.Border.RightEdge,
+			AddFriendFrame.Border.BottomEdge,
+			AddFriendFrame.Border.LeftEdge,
+			AddFriendFrame.Border.TopRightCorner,
+			AddFriendFrame.Border.TopLeftCorner,
+			AddFriendFrame.Border.BottomLeftCorner,
+		AddFriendFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- ArenaPrepFrame
+		for i, v in pairs({
+			ArenaPrepFrame1CastingBar,
+			ArenaPrepFrame1DropDown,
+			ArenaPrepFrame1ClassPortrait,
+			ArenaPrepFrame2CastingBar,
+			ArenaPrepFrame2DropDown,
+			ArenaPrepFrame2ClassPortrait,
+			ArenaPrepFrame3CastingBar,
+			ArenaPrepFrame3DropDown,
+			ArenaPrepFrame3ClassPortrait,
+			ArenaPrepFrame4CastingBar,
+			ArenaPrepFrame4DropDown,
+			ArenaPrepFrame4ClassPortrait,
+			ArenaPrepFrame5CastingBar,
+			ArenaPrepFrame5DropDown,
+		ArenaPrepFrame5ClassPortrait, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- AudioOptionsFrame
+		for i, v in pairs({
+			AudioOptionsFrame.Header.CenterBG,
+			AudioOptionsFrame.Header.LeftBG,
+			AudioOptionsFrame.Header.RightBG,
+			AudioOptionsFrame.Border.TopEdge,
+			AudioOptionsFrame.Border.RightEdge,
+			AudioOptionsFrame.Border.BottomEdge,
+			AudioOptionsFrame.Border.LeftEdge,
+			AudioOptionsFrame.Border.TopRightCorner,
+			AudioOptionsFrame.Border.TopLeftCorner,
+			AudioOptionsFrame.Border.BottomLeftCorner,
+		AudioOptionsFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- ClubFinderReportFrame
+		for i, v in pairs({
+			ClubFinderReportFrame.Border.TopEdge,
+			ClubFinderReportFrame.Border.RightEdge,
+			ClubFinderReportFrame.Border.BottomEdge,
+			ClubFinderReportFrame.Border.LeftEdge,
+			ClubFinderReportFrame.Border.TopRightCorner,
+			ClubFinderReportFrame.Border.TopLeftCorner,
+			ClubFinderReportFrame.Border.BottomLeftCorner,
+		ClubFinderReportFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- ColorPickerFrame
+		for i, v in pairs({
+			ColorPickerFrame.Header.CenterBG,
+			ColorPickerFrame.Header.LeftBG,
+			ColorPickerFrame.Header.RightBG,
+			ColorPickerFrame.Border.TopEdge,
+			ColorPickerFrame.Border.RightEdge,
+			ColorPickerFrame.Border.BottomEdge,
+			ColorPickerFrame.Border.LeftEdge,
+			ColorPickerFrame.Border.TopRightCorner,
+			ColorPickerFrame.Border.TopLeftCorner,
+			ColorPickerFrame.Border.BottomLeftCorner,
+		ColorPickerFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- FolderPicker
+		for i, v in pairs({
+			FolderPicker.Header.CenterBG,
+			FolderPicker.Header.LeftBG,
+			FolderPicker.Header.RightBG,
+			FolderPicker.Border.TopEdge,
+			FolderPicker.Border.RightEdge,
+			FolderPicker.Border.BottomEdge,
+			FolderPicker.Border.LeftEdge,
+			FolderPicker.Border.TopRightCorner,
+			FolderPicker.Border.TopLeftCorner,
+			FolderPicker.Border.BottomLeftCorner,
+		FolderPicker.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- LootHistoryFrame
+		for i, v in pairs({
+			LootHistoryFrame.Divider,
+			LootHistoryFrame.BorderRight,
+			LootHistoryFrame.BorderBottom,
+			LootHistoryFrame.BorderLeft,
+			LootHistoryFrame.BorderTopRight,
+			LootHistoryFrame.BorderTopLeft,
+			LootHistoryFrame.BorderBottomLeft,
+		LootHistoryFrame.BorderBottomRight, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- ModelPreviewFrame
+		for i, v in pairs({
+			ModelPreviewFrame.NineSlice.TopEdge,
+			ModelPreviewFrame.NineSlice.RightEdge,
+			ModelPreviewFrame.NineSlice.BottomEdge,
+			ModelPreviewFrame.NineSlice.LeftEdge,
+			ModelPreviewFrame.NineSlice.TopRightCorner,
+			ModelPreviewFrame.NineSlice.TopLeftCorner,
+			ModelPreviewFrame.NineSlice.BottomLeftCorner,
+		ModelPreviewFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- OpacityFrame
+		for i, v in pairs({
+			OpacityFrame.Border.TopEdge,
+			OpacityFrame.Border.RightEdge,
+			OpacityFrame.Border.BottomEdge,
+			OpacityFrame.Border.LeftEdge,
+			OpacityFrame.Border.TopRightCorner,
+			OpacityFrame.Border.TopLeftCorner,
+			OpacityFrame.Border.BottomLeftCorner,
+		OpacityFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- Check Later for other stuff
+
+
+
+		----------------------------------------------------------------------
+		-- Frames that act weird
+		-- LFGDungeonReadyDialog
+		for i, v in pairs({ 
+			LFGDungeonReadyDialog.Border.Bg,
+			LFGDungeonReadyDialog.Border.TopEdge,
+			LFGDungeonReadyDialog.Border.RightEdge,
+			LFGDungeonReadyDialog.Border.BottomEdge,
+			LFGDungeonReadyDialog.Border.LeftEdge,
+			LFGDungeonReadyDialog.Border.TopRightCorner,
+			LFGDungeonReadyDialog.Border.TopLeftCorner,
+			LFGDungeonReadyDialog.Border.BottomLeftCorner,
+		LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				--AbyssUI_ColorizationFrameFunction(v)
+				v:SetAlpha(0)
+			else
+				return nil
+			end
+		end
 		----------------------------------------------------------------------
 		-- End
 		self:UnregisterEvent("ADDON_LOADED")
@@ -1181,44 +1429,7 @@ f:SetScript("OnEvent", function(self, event, name)
 			PlayerTalentFrame.NineSlice.BottomLeftCorner,
 		PlayerTalentFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
-				if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
-					v:SetVertexColor(1, 1, 1)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
-					v:SetVertexColor(.2, .2, .2)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
-					v:SetVertexColor(182/255, 42/255, 37/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
-					v:SetVertexColor(236/255, 193/255, 60/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
-					v:SetVertexColor(196/255, 31/255, 59/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
-					v:SetVertexColor(163/255, 48/255, 201/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
-					v:SetVertexColor(252/255, 163/255, 85/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
-					v:SetVertexColor(190/255, 221/255, 115/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
-					v:SetVertexColor(64/255, 220/255, 255/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
-					v:SetVertexColor(86/255, 255/255, 184/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
-					v:SetVertexColor(255/255, 155/255, 195/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
-					v:SetVertexColor(23/255, 28/255, 99/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
-					v:SetVertexColor(255/255, 255/255, 0/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
-					v:SetVertexColor(0/255, 112/255, 222/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
-					v:SetVertexColor(135/255, 135/255, 237/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
-					v:SetVertexColor(199/255, 156/255, 110/255)
-				elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
-					local character = UnitName("player").."-"..GetRealmName()
-					v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				else
-					v:SetVertexColor(.4, .4, .4)
-				end
+				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
 					PlayerTalentFrameInset.NineSlice,
 					PlayerTalentFrameInset.NineSlice.BottomLeftCorner,

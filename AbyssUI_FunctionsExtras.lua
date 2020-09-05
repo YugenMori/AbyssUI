@@ -339,7 +339,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local latencyStringLabel = _G["NETWORK_LABEL"]
 			local totalStringLabel   = _G["TOTAL"]
 			local systemStringLabel  = _G["SYSTEMOPTIONS_MENU"]
-			local cleanStringLabel  = _G["BAG_FILTER_CLEANUP"]
+			local cleanStringLabel   = _G["BAG_FILTER_CLEANUP"]
 
 			-----------
 			-- style --
@@ -363,7 +363,13 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			if not classColoredBorder then
 				BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 			else
-				BorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
+				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+				else
+					BorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
+				end
 			end	
 			BorderFrame:SetBackdropColor(unpack(backdropcolor))
 			BorderFrame:SetFrameLevel(5)
@@ -380,7 +386,13 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				if not classColoredBorder then
 					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
 				else
-					FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
+					if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+					elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+					else
+						FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
+					end
 				end	
 				FLMframe:SetBackdropColor(unpack(backdropcolor))
 

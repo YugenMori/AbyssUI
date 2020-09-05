@@ -1605,7 +1605,8 @@ PSINFO_CheckButton:SetWidth(200)
 PSINFO_CheckButton:SetScale(1)
 PSINFO_CheckButton = PSINFO_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFO_CheckButton:SetPoint("LEFT")
-PSINFO_CheckButton:SetText("Some of this options needs the AbyssUI_TexturePack. You can find a download link in the addon page.")
+PSINFO_CheckButton:SetText("Some of this options needs the AbyssUI_TexturePack. You can find a download link in the addon\n"
+  .."page. You also can find the link in te 'Info Panel' section.")
 -- AbyssUIClassCircles01_CheckButton
 local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
 AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
