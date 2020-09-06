@@ -128,34 +128,19 @@ hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 	--frame.healthBar.percent:Show()
 end)
 -- Nameplate colorization
-hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
+-- Player
+hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
 	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-		local unitTarget = UnitIsPlayer("target")
-		local reaction = UnitReaction("player", "target") or 4
 		local _, class = UnitClass('player')
 		local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+		local unitIsPlayer = UnitIsPlayer('player')
 		if frame.optionTable.colorNameBySelection and not frame:IsForbidden() then
-			local healthPercentage = ceil((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit) * 100))
-			if ( unitTarget ~= true and reaction < 5 ) then
-				if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("target") then
-					if healthPercentage == 100 then
-						frame.healthBar:SetStatusBarColor(1, 0, 0)
-					elseif healthPercentage < 75 and healthPercentage >= 50 then
-						frame.healthBar:SetStatusBarColor(1, 0.64, 0)
-					elseif healthPercentage < 50 and healthPercentage >= 20 then
-						frame.healthBar:SetStatusBarColor(1, 1, 0)
-					elseif healthPercentage < 21 then
-						frame.healthBar:SetStatusBarColor(128/255, 128/255, 128/255)
-					end
-				end
-			end
-			-- Player Nameplate
-			local unitPlayer = UnitIsPlayer("player")
-			if ( unitPlayer == true ) then
-				if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("player") then
-					if healthPercentage == 100 then
-						frame.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-					elseif healthPercentage < 100 and healthPercentage > 21 then
+			-- Player
+		 	if ( unitIsPlayer == true ) then
+				if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit('player') then
+					local healthPercentage = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+					if ( healthPercentage == 0 ) then return end
+					if healthPercentage <= 100 and healthPercentage > 21 then
 						frame.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 21 then
 						frame.healthBar:SetStatusBarColor(128/255, 128/255, 128/255)
@@ -163,7 +148,35 @@ hooksecurefunc("CompactUnitFrame_UpdateHealth", function(frame)
 				end
 			end
 		end
-	else 
+	else
+		return nil
+	end
+end)
+hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
+	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
+		local unitTarget = UnitIsPlayer("target")
+		local reaction = UnitReaction("player", "target") or 4
+		if frame.optionTable.colorNameBySelection and not frame:IsForbidden() then
+			-- Mobs
+		 	if  ( unitTarget ~= true and reaction < 5 ) then
+				if C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("target") then
+					local healthPercentage = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+					if ( healthPercentage == 0 ) then return end
+					if healthPercentage == 100 then
+						-- do nothing keep frame color
+					elseif healthPercentage < 100 and healthPercentage >= 75 then
+						frame.healthBar:SetStatusBarColor(1, 0, 0)
+					elseif healthPercentage < 75 and healthPercentage >= 50 then
+						frame.healthBar:SetStatusBarColor(255/255, 129/255, 0/255)
+					elseif healthPercentage < 50 and healthPercentage > 21 then
+						frame.healthBar:SetStatusBarColor(255/255, 245/255, 105/255)
+					elseif healthPercentage < 21 then
+						frame.healthBar:SetStatusBarColor(128/255, 128/255, 128/255)
+					end
+				end
+			end
+		end
+	else
 		return nil
 	end
 end)
@@ -363,12 +376,17 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			if not classColoredBorder then
 				BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 			else
-				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
-					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
-				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
-					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+				if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+					if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+						BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+					elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+						BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+					else
+						BorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
+					end
 				else
-					BorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
+					local character = UnitName("player").."-"..GetRealmName()
+					BorderFrame:SetBackdropBorderColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 				end
 			end	
 			BorderFrame:SetBackdropColor(unpack(backdropcolor))
@@ -386,12 +404,17 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				if not classColoredBorder then
 					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
 				else
-					if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
-						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
-					elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
-						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+					if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+						if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+							FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+						elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+							FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+						else
+							FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
+						end
 					else
-						FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
+						local character = UnitName("player").."-"..GetRealmName()
+						FLMframe:SetBackdropBorderColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 					end
 				end	
 				FLMframe:SetBackdropColor(unpack(backdropcolor))
@@ -408,7 +431,12 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				text:SetPoint("CENTER", FLMframe, 4, 0)
 				text:SetFont(font, fontSize, fontFlag)
 				text:SetShadowOffset(1, -1)
-				text:SetTextColor(color.r, color.g, color.b)
+				if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+					text:SetTextColor(color.r, color.g, color.b)
+				else
+					local character = UnitName("player").."-"..GetRealmName()
+					text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )	
+				end
 				
 				--========[ important functions ]========--
 				local function Addoncompare(a, b)
@@ -500,12 +528,20 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 					local latencycolor = ColorizeLatency(select(3, GetNetStats()))
 					local fpscolor = ColorizeFramerate(GetFramerate())
 					
-					GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
-					GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
-					GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
-					GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-					
+					if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+						GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
+						GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
+						GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
+						GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
+						GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+					else
+						local character = UnitName("player").."-"..GetRealmName()
+						GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
+						GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, fpscolor.r, fpscolor.g, fpscolor.b)
+						GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, latencycolor.r, latencycolor.g, latencycolor.b)
+						GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, 1, 1, 1)
+						GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+					end
 					addons = {}
 					total = 0
 					UpdateAddOnMemoryUsage()
@@ -530,12 +566,20 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 							break
 						end		
 					end
-					
+
 					local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0) 
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-					GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
-					GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
-					GameTooltip:Show()
+					if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+						GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+						GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
+						GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
+						GameTooltip:Show()
+					else
+						local character = UnitName("player").."-"..GetRealmName()
+						GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+						GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
+						GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
+						GameTooltip:Show()
+					end
 				end)
 
 				FLMframe:SetScript("OnLeave", function() 

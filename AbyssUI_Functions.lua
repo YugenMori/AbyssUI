@@ -155,7 +155,7 @@ CastingBarFrame.text:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global
 CastingBarFrame.text:SetShadowColor(0, 0, 0)
 CastingBarFrame.text:SetShadowOffset(1, -1)
 CastingBarFrame.text:ClearAllPoints()
-CastingBarFrame.text:SetPoint("CENTER", CastingBarFrame, "CENTER", 0, 2)
+CastingBarFrame.text:SetPoint("CENTER", CastingBarFrame, "CENTER", 0, 0)
 -- Timer
 CastingBarFrame.timer = CastingBarFrame:CreateFontString(nil)
 CastingBarFrame.timer:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12)
@@ -754,8 +754,5 @@ C_WowTokenPublic.UpdateMarketPrice()
 		end
 	end)
 end)
---[[
-/run local f = _G["BONUS_ROLL_CURRENT_COUNT"] print(f)
---]]
 ----------------------------------------------------
 -- End

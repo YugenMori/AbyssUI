@@ -986,6 +986,7 @@ FrameButtonCancel:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ColorPickerFrame
+--[[
 AbyssUI_ColorPickerFrame = CreateFrame("Frame", "$parentAbyssUI_ColorPickerFrame", UIParent)
 AbyssUI_ColorPickerFrame:Hide()
 AbyssUI_ColorPickerFrame:SetWidth(400)
@@ -1053,6 +1054,7 @@ FrameButtonReset:SetScript("OnClick", function()
 	AbyssUI_ColorPickerFrame:Hide()
 	ReloadUI()
 end)
+--]]
 --------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")

@@ -2553,11 +2553,22 @@ AbyssUIVertexColorFrames16_CheckButton:SetScript("OnClick", function(self)
   end
 end)
 -- Choose a Color (Color Picker)
+local AbyssUIVertexColorFramesColorPicker_Button = CreateFrame("Button", "$parentAbyssUIVertexColorFramesColorPicker_Button", AbyssUI_Config.childpanel4, "UIPanelButtonTemplate")
+AbyssUIVertexColorFramesColorPicker_Button:SetPoint("TOPRIGHT", -165, -350)
+AbyssUIVertexColorFramesColorPicker_Button:SetHeight(24)
+AbyssUIVertexColorFramesColorPicker_Button:SetWidth(100)
+AbyssUIVertexColorFramesColorPicker_Button.Text:SetText("Color Picker")
+-- OnClick Function
+AbyssUIVertexColorFramesColorPicker_Button:SetScript("OnClick", function(self)
+  AbyssUI_ShowColorPicker()
+end)
+-- Apply Color
 local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 50, -80)
-AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Select a Color")
-AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(24/255, 100/255, 220/255)
-AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Choose a color for the frames (Color Picker)"
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("TOPRIGHT", -80, -350)
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Apply Color")
+local character = UnitName("player").."-"..GetRealmName()
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
+AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Apply the color you choose from the ColorPicker"
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFramesColorPicker)
 -- OnClick Function
 AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(self)
@@ -2578,7 +2589,7 @@ AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(se
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
-    AbyssUI_ColorPickerFrame:Show()
+    ReloadUI()
   else
     AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(nil)
   end
@@ -2598,6 +2609,5 @@ f:SetScript("OnEvent", function(self, event, ...)
     -- Now we have SavedVarialbe loaded, create the interface options frame
     InitSettings()
 end)
-
 --------------------------------------------------------------
 -- End
