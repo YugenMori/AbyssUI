@@ -727,11 +727,9 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			        Minimap:StartMoving()
 			    end
 			end)
-			--]]
 			---------------------
 			-- move some stuff --
 			---------------------
-			--[[
 			if moveWatchFrame then
 				ObjectiveTrackerFrame:ClearAllPoints()	
 				ObjectiveTrackerFrame.ClearAllPoints = function() end
