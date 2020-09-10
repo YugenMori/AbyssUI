@@ -331,6 +331,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local backdrop = {edgeFile = texture, edgeSize = 1}
 
 			local mailicon = mediaFolder.."mail"
+			local calendaricon = mediaFolder.."calendar"
 			local font = mediaFolder.."npcfont.ttf"
 			local fontSize = 11
 			local fontFlag = "THINOUTLINE"						-- "THINOUTLINE", "OUTLINE MONOCHROME", "OUTLINE" or nil (no outline)
@@ -600,22 +601,27 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				
 			end
 			
-			---------------------
-			-- hide some stuff --
-			---------------------
-			MinimapBackdrop:Hide()
+			-----------------------------------------
+			-- hide some stuff and set positioins --
+			-----------------------------------------
+			-- Hide
 			MinimapBorder:Hide()
 			MinimapBorderTop:Hide()
 			MinimapZoomIn:Hide()
 			MinimapZoomOut:Hide()
-			--MiniMapVoiceChatFrame:Hide()
+			MiniMapTracking:Hide()
 			GameTimeFrame:Hide()
 			MinimapZoneTextButton:Hide()
-			--MiniMapTracking:Hide()
 			MiniMapMailBorder:Hide()
+			-- Sets
 			MinimapNorthTag:SetAlpha(0)
+			MinimapBackdrop:SetFrameLevel(1)
 			--MiniMapInstanceDifficulty:SetAlpha(0)
 			--GuildInstanceDifficulty:SetAlpha(0)
+			-- Extra
+			GarrisonLandingPageMinimapButton:ClearAllPoints()
+			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 0)
+			GarrisonLandingPageMinimapButton:SetFrameLevel(10)
 
 			if showclock then
 				LoadAddOn('Blizzard_TimeManager')
@@ -632,7 +638,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				TimeManagerClockButton:ClearAllPoints()	
 				TimeManagerClockButton:Hide()	
 			end
-
+			-- mail icon
 			MiniMapMailFrame:ClearAllPoints()
 			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
 			MiniMapMailIcon:SetTexture(mailicon)
@@ -645,14 +651,58 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 
 			MiniMapMailFrame:SetFrameLevel(10)
 			MiniMapInstanceDifficulty:SetFrameLevel(10)
+			-- calendar icon
+			local CalendarFrameIcon = CreateFrame("Frame", "$parentCalendarFrameIcon", Minimap)
+			CalendarFrameIcon:SetFrameLevel(10)
+			CalendarFrameIcon:SetWidth(22)
+			CalendarFrameIcon:SetHeight(22)
+			CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
+			CalendarFrameIcon:Hide()
+			local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
+			t:SetTexture(calendaricon)
+			t:SetAllPoints(CalendarFrameIcon)
+			CalendarFrameIcon.texture = t
+			-- OnClick
+			CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
+			    if ( button == 'LeftButton' ) then 
+					if(not CalendarFrame) then
+						LoadAddOn("Blizzard_Calendar")
+					end
+					Calendar_Toggle()
+		    	end
+			end)
 
+			MiniMapInstanceDifficulty:ClearAllPoints()
+			MiniMapInstanceDifficulty:SetParent(Minimap)
+			MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
+			DropDownList1:SetClampedToScreen(true)
+
+			MiniMapMailFrame:SetFrameLevel(10)
+			MiniMapInstanceDifficulty:SetFrameLevel(10)
+
+			-- extra align
 			QueueStatusMinimapButton:SetSize(20, 20)
 			QueueStatusMinimapButton:ClearAllPoints()
 			QueueStatusMinimapButton:SetParent(Minimap)
 			QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 22)
 			QueueStatusMinimapButton:SetFrameLevel(10)
 			QueueStatusMinimapButtonBorder:Hide()
-			
+
+			--------------
+			-- On Hover --
+			--------------
+			Minimap:SetScript("OnEnter", function()
+				if( MouseIsOver(Minimap) ) then
+					CalendarFrameIcon:Show()
+				end
+			end)
+			Minimap:SetScript("OnLeave", function()
+				if( MouseIsOver(Minimap) ) then
+					CalendarFrameIcon:Show()
+				else
+					CalendarFrameIcon:Hide()
+				end
+			end)
 			---------------------
 			-- mousewheel zoom --
 			---------------------
@@ -696,7 +746,10 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				if (button == 'RightButton') then
 					ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
 				elseif (button == 'MiddleButton') then
-					ToggleCalendar()
+					if(not CalendarFrame) then
+						LoadAddOn("Blizzard_Calendar")
+					end
+					Calendar_Toggle()
 				else
 					Minimap_OnClick(self)
 				end

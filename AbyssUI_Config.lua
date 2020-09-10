@@ -6,6 +6,20 @@
 --------------------------------------------------------------
 local AbyssUI_Config = {}
 local addonName, addonTable = ...
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+    character = UnitName("player").."-"..GetRealmName()
+    if not COLOR_MY_UI then
+        COLOR_MY_UI = {}
+    end
+    if not COLOR_MY_UI[character] then
+        COLOR_MY_UI[character] = {}
+    end
+    if not COLOR_MY_UI[character].Color then
+        COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
+    end
+end)
 local function InitSettings()
 AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
 -- Register in the Interface Addon Options GUI
@@ -2589,7 +2603,10 @@ AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(se
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
-    ReloadUI()
+    if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true ) then
+      AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
+      ReloadUI()
+    end
   else
     AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(nil)
   end

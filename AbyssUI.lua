@@ -1380,9 +1380,153 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- Check Later for other stuff
-
-
+		-- RaidBrowserFrame
+				for i, v in pairs({
+			RaidBrowserFrame.NineSlice.TopEdge,
+			RaidBrowserFrame.NineSlice.RightEdge,
+			RaidBrowserFrame.NineSlice.BottomEdge,
+			RaidBrowserFrame.NineSlice.LeftEdge,
+			RaidBrowserFrame.NineSlice.TopRightCorner,
+			RaidBrowserFrame.NineSlice.TopLeftCorner,
+			RaidBrowserFrame.NineSlice.BottomLeftCorner,
+		RaidBrowserFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- RatingMenuFrame
+		for i, v in pairs({
+			RatingMenuFrame.Header.CenterBG,
+			RatingMenuFrame.Header.LeftBG,
+			RatingMenuFrame.Header.RightBG,
+			RatingMenuFrame.Border.TopEdge,
+			RatingMenuFrame.Border.RightEdge,
+			RatingMenuFrame.Border.BottomEdge,
+			RatingMenuFrame.Border.LeftEdge,
+			RatingMenuFrame.Border.TopRightCorner,
+			RatingMenuFrame.Border.TopLeftCorner,
+			RatingMenuFrame.Border.BottomLeftCorner,
+		RatingMenuFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- TicketStatusFrameButton
+		for i, v in pairs({
+			TicketStatusFrameButton.TopEdge,
+			TicketStatusFrameButton.RightEdge,
+			TicketStatusFrameButton.BottomEdge,
+			TicketStatusFrameButton.LeftEdge,
+			TicketStatusFrameButton.TopRightCorner,
+			TicketStatusFrameButton.TopLeftCorner,
+			TicketStatusFrameButton.BottomLeftCorner,
+		TicketStatusFrameButton.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- VoiceChatChannelActivatedNotification
+		for i, v in pairs({
+			VoiceChatChannelActivatedNotification.TopEdge,
+			VoiceChatChannelActivatedNotification.RightEdge,
+			VoiceChatChannelActivatedNotification.BottomEdge,
+			VoiceChatChannelActivatedNotification.LeftEdge,
+			VoiceChatChannelActivatedNotification.TopRightCorner,
+			VoiceChatChannelActivatedNotification.TopLeftCorner,
+			VoiceChatChannelActivatedNotification.BottomLeftCorner,
+		VoiceChatChannelActivatedNotification.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- VoiceChatPromptActivateChannel
+		for i, v in pairs({
+			VoiceChatPromptActivateChannel.TopEdge,
+			VoiceChatPromptActivateChannel.RightEdge,
+			VoiceChatPromptActivateChannel.BottomEdge,
+			VoiceChatPromptActivateChannel.LeftEdge,
+			VoiceChatPromptActivateChannel.TopRightCorner,
+			VoiceChatPromptActivateChannel.TopLeftCorner,
+			VoiceChatPromptActivateChannel.BottomLeftCorner,
+		VoiceChatPromptActivateChannel.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- WardrobeOutfitEditFrame
+		for i, v in pairs({
+			WardrobeOutfitEditFrame.Border.TopEdge,
+			WardrobeOutfitEditFrame.Border.RightEdge,
+			WardrobeOutfitEditFrame.Border.BottomEdge,
+			WardrobeOutfitEditFrame.Border.LeftEdge,
+			WardrobeOutfitEditFrame.Border.TopRightCorner,
+			WardrobeOutfitEditFrame.Border.TopLeftCorner,
+			WardrobeOutfitEditFrame.Border.BottomLeftCorner,
+		WardrobeOutfitEditFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- WardrobeOutfitFrame
+		for i, v in pairs({
+			WardrobeOutfitFrame.Border.TopEdge,
+			WardrobeOutfitFrame.Border.RightEdge,
+			WardrobeOutfitFrame.Border.BottomEdge,
+			WardrobeOutfitFrame.Border.LeftEdge,
+			WardrobeOutfitFrame.Border.TopRightCorner,
+			WardrobeOutfitFrame.Border.TopLeftCorner,
+			WardrobeOutfitFrame.Border.BottomLeftCorner,
+		WardrobeOutfitFrame.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- QuestSessionManager.CheckStopDialog
+		for i, v in pairs({
+			QuestSessionManager.CheckStopDialog.Border.TopEdge,
+			QuestSessionManager.CheckStopDialog.Border.RightEdge,
+			QuestSessionManager.CheckStopDialog.Border.BottomEdge,
+			QuestSessionManager.CheckStopDialog.Border.LeftEdge,
+			QuestSessionManager.CheckStopDialog.Border.TopRightCorner,
+			QuestSessionManager.CheckStopDialog.Border.TopLeftCorner,
+			QuestSessionManager.CheckStopDialog.Border.BottomLeftCorner,
+		QuestSessionManager.CheckStopDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+		-- QuestSessionManager.StartDialog
+		for i, v in pairs({
+			QuestSessionManager.StartDialog.Border.TopEdge,
+			QuestSessionManager.StartDialog.Border.RightEdge,
+			QuestSessionManager.StartDialog.Border.BottomEdge,
+			QuestSessionManager.StartDialog.Border.LeftEdge,
+			QuestSessionManager.StartDialog.Border.TopRightCorner,
+			QuestSessionManager.StartDialog.Border.TopLeftCorner,
+			QuestSessionManager.StartDialog.Border.BottomLeftCorner,
+		QuestSessionManager.StartDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 
 		----------------------------------------------------------------------
 		-- Frames that act weird
@@ -1783,8 +1927,6 @@ f:SetScript("OnEvent", function(self, event, name)
 		WardrobeFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
-				--WardrobeCollectionFrame.SetCollectionFrame.LeftInset.NineSlice.BottomLeftCorner,
-				--WardrobeCollectionFrame.SetCollectionFrame.LeftInset.NineSlice.BottomRightCorner,
 				for i, v in pairs({
 					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomLeftCorner,
 					WardrobeCollectionFrame.ItemsCollectionFrame.NineSlice.BottomRightCorner,
@@ -2221,6 +2363,35 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
-
+-- GarrisonRecruiterFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_GarrisonUI" then
+		for i, v in pairs({
+			GarrisonRecruiterFrame.NineSlice.TopEdge,
+			GarrisonRecruiterFrame.NineSlice.RightEdge,
+			GarrisonRecruiterFrame.NineSlice.BottomEdge,
+			GarrisonRecruiterFrame.NineSlice.LeftEdge,
+			GarrisonRecruiterFrame.NineSlice.TopRightCorner,
+			GarrisonRecruiterFrame.NineSlice.TopLeftCorner,
+			GarrisonRecruiterFrame.NineSlice.BottomLeftCorner,
+			GarrisonRecruiterFrame.NineSlice.BottomRightCorner,
+			GarrisonRecruitSelectFrame.TopBorder,
+			GarrisonRecruitSelectFrame.RightBorder,
+			GarrisonRecruitSelectFrame.TopRightCorner,
+			GarrisonRecruitSelectFrame.BottomRightCorner,
+			GarrisonRecruitSelectFrame.BottomBorder,
+			GarrisonRecruitSelectFrame.BottomLeftCorner,
+			GarrisonRecruitSelectFrame.LeftBorder,
+		GarrisonRecruitSelectFrame.TopLeftCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
 --------------------------------------------------------------
 -- End
