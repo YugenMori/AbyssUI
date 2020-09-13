@@ -464,6 +464,18 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 				AbyssUI_AFKCameraFrame:Hide()
 			end
 		end
+		-- OnClick
+		if ( AbyssUI_AFKCameraFrame:IsShown() ) then
+			AbyssUI_AFKCameraFrame:SetScript("OnMouseDown", function (self, button)
+			    if ( button == 'RightButton' ) then 
+			    	AbyssUI_AFKCameraFrame:Hide()
+					UIParent:SetAlpha(1)
+					if AbyssUIAddonSettings.HideMinimap ~= true then
+						MinimapCluster:Show()
+					end
+			    end
+			end)
+		end
 	else
 		return nil
 	end
@@ -752,18 +764,20 @@ FrameButton2:SetScript("OnClick", function()
 		addonTable.DisableHealingSpam,
 		addonTable.UnitFrameImproved,
 		addonTable.ElitePortrait,
+		addonTable.TooltipOnCursor,
 	} do
 		v:SetChecked(true)
 	end
 	-- Get
-	AbyssUIAddonSettings.HideUnitImprovedFaction = addonTable.HideUnitImprovedFaction:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInstanceLeave = addonTable.InstanceLeave:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInspectTarget = addonTable.InspectTarget:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = addonTable.ConfirmPopUps:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionSellGray = addonTable.AutoSellGray:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = addonTable.DisableHealingSpam:GetChecked()
-	AbyssUIAddonSettings.UnitFrameImproved = addonTable.UnitFrameImproved:GetChecked()
-	AbyssUIAddonSettings.ElitePortrait = addonTable.ElitePortrait:GetChecked()
+	AbyssUIAddonSettings.HideUnitImprovedFaction 			= addonTable.HideUnitImprovedFaction:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		= addonTable.InstanceLeave:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionInspectTarget 		= addonTable.InspectTarget:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		= addonTable.ConfirmPopUps:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionSellGray 				= addonTable.AutoSellGray:GetChecked()
+	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
+	AbyssUIAddonSettings.UnitFrameImproved 					= addonTable.UnitFrameImproved:GetChecked()
+	AbyssUIAddonSettings.ElitePortrait 						= addonTable.ElitePortrait:GetChecked()
+	AbyssUIAddonSettings.TooltipOnCursor 					= addonTable.TooltipOnCursor:GetChecked()
 	AbyssUISecondFrame:Hide()
 	FrameButton2.Glow:Finish()
 	ReloadUI()

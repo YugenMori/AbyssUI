@@ -1575,7 +1575,7 @@ KillAnnouncer_CheckButton:SetScript("OnClick", function(self)
   AbyssUI_ReloadFrame:Show()
 end)
 -- Silence Kill Announcer --
-local SilenceKillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+local SilenceKillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentSilenceKillAnnouncer_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
 SilenceKillAnnouncer_CheckButton:SetPoint("TOPLEFT", 10, -230)
 SilenceKillAnnouncer_CheckButton.Text:SetText("Silence Kill Announcer")
 SilenceKillAnnouncer_CheckButton.tooltip = "Remove boss/kill sounds from the Kill Announcer frame"
@@ -1583,6 +1583,18 @@ SilenceKillAnnouncer_CheckButton:SetChecked(AbyssUIAddonSettings.SilenceKillAnno
 -- OnClick Function
 SilenceKillAnnouncer_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.SilenceKillAnnouncer = self:GetChecked()
+end)
+-- TooltipOnCursor --
+local TooltipOnCursor_CheckButton = CreateFrame("CheckButton", "$parentTooltipOnCursor_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+TooltipOnCursor_CheckButton:SetPoint("TOPLEFT", 10, -260)
+TooltipOnCursor_CheckButton.Text:SetText("|cfff2dc7fTooltip on Cursor|r")
+TooltipOnCursor_CheckButton.tooltip = "Tooltips will appear close to the mouse cursor position"
+TooltipOnCursor_CheckButton:SetChecked(AbyssUIAddonSettings.TooltipOnCursor)
+addonTable.TooltipOnCursor = TooltipOnCursor_CheckButton
+-- OnClick Function
+TooltipOnCursor_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.TooltipOnCursor = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
 end)
 --- Frames ---
 -- Elite Portrait --

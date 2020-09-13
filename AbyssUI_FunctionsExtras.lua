@@ -620,7 +620,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			--GuildInstanceDifficulty:SetAlpha(0)
 			-- Extra
 			GarrisonLandingPageMinimapButton:ClearAllPoints()
-			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 0)
+			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", -5, 0)
 			GarrisonLandingPageMinimapButton:SetFrameLevel(10)
 
 			if showclock then
@@ -1027,10 +1027,23 @@ KillAnouncer:SetScript("OnEvent", function(self)
 		return nil
 	end
 end)
---test stuff
---[[
-
---]]
-----------------------------------------------------
-----------------------------------------------------
+-- Tooltip on cursor
+local function cursorSetPoint(self)
+	local scale = self:GetEffectiveScale()
+	local x, y = GetCursorPosition()
+	self:ClearAllPoints()
+	self:SetPoint("BOTTOMLEFT", UIParent, x / scale + 16, (y / scale - self:GetHeight() - 16))
+end
+local TooltipOnCursor = CreateFrame("Frame", nil)
+TooltipOnCursor:RegisterEvent("PLAYER_ENTERING_WORLD")
+TooltipOnCursor:SetScript("OnEvent", function()
+	if ( AbyssUIAddonSettings.TooltipOnCursor == true ) then
+		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
+			if GetMouseFocus() ~= WorldFrame then return end
+			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+			cursorSetPoint(tooltip)
+			-- tooltip.default = 1
+		end)
+	end
+end)
 --End
