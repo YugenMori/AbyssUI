@@ -79,8 +79,7 @@ local function AbyssUIMoveFrames_Slashhandler()
     print("|cfff2dc7fAbyssUI Command List|r")
     print("|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r")
     print("/abyssui |cffffcc00config|r ~configuration panel")
-    print("/abyssui |cffffcc00unlock|r ~unlock UI frames")
-    print("/abyssui |cffffcc00lock|r ~lock UI frames that was changed")
+    print("/abyssui |cffffcc00setup|r ~show the setup frame")
     print("/abyssui |cffffcc00reset|r ~reset UI frames to default positions")
     print("/abyssui |cffffcc00daily|r ~AbyssUI daily info")
     print("/abyssui |cffffcc00reload|r ~Reload the UI")
@@ -114,11 +113,8 @@ local function AbyssUIMoveFrames_Slash(msg)
             InterfaceOptionsFrame_Show()
             InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
             InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
-        elseif (msg == "unlock") then
-            AbyssUIMoveFrames_Function(true)
-        elseif (msg == "lock") then
-            AbyssUIMoveFrames_Function(false)
-            print("|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00/reload|r'")
+        elseif (msg == "setup") then
+            AbyssUISecondFrame:Show()
         elseif (msg == "reset") then
           	AbyssUIMoveFrames_Reset()
         elseif (msg == "daily") then
@@ -130,6 +126,13 @@ local function AbyssUIMoveFrames_Slash(msg)
         	print("/abyssui |cffffcc00gm|r ~custumer support")
         	print("/abyssui |cffffcc00rc|r ~ready check")
         	print("/abyssui |cffffcc00cr|r ~check role poll")
+            print("/abyssui |cffffcc00unlock|r ~unlock some frames")
+            print("/abyssui |cffffcc00lock|r ~lock unlocked frames")
+        elseif (msg == "unlock") then
+            AbyssUIMoveFrames_Function(true)
+        elseif (msg == "lock") then
+            AbyssUIMoveFrames_Function(false)
+            print("|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00/reload|r'")
   		elseif (msg == "clc") then
   			CombatLogClearEntries()
   		elseif (msg == "gm") then

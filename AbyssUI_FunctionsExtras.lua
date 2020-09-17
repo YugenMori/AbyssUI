@@ -114,18 +114,20 @@ end)
 ----------------------------------------------
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
-	if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
-	if not frame.healthBar.percent then
-		frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
-		frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
-		frame.healthBar.percent:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 10)
-		frame.healthBar.percent:SetShadowColor(0, 0, 0)
-		frame.healthBar.percent:SetShadowOffset(1, -0.25)
+	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
+		if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
+		if not frame.healthBar.percent then
+			frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
+			frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
+			frame.healthBar.percent:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf", 10)
+			frame.healthBar.percent:SetShadowColor(0, 0, 0)
+			frame.healthBar.percent:SetShadowOffset(1, -0.25)
+		end
+		local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+		if ( percentcalc == 0 ) then return end
+		frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
+		--frame.healthBar.percent:Show()
 	end
-	local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
-	if ( percentcalc == 0 ) then return end
-	frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
-	--frame.healthBar.percent:Show()
 end)
 -- Nameplate colorization
 -- Player
@@ -616,6 +618,9 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			-- Sets
 			MinimapNorthTag:SetAlpha(0)
 			MinimapBackdrop:SetFrameLevel(1)
+			Minimap:SetQuestBlobRingAlpha(0)
+			Minimap:SetArchBlobRingScalar(0)
+			Minimap:SetQuestBlobRingScalar(0)
 			--MiniMapInstanceDifficulty:SetAlpha(0)
 			--GuildInstanceDifficulty:SetAlpha(0)
 			-- Extra
@@ -753,7 +758,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				end
 			end)
 			
-			function GetMinimapShape() return 'SQUARE' end
+			local function GetMinimapShape() return 'SQUARE' end
 
 			-------------------------------
 			-- style Battlefield Minimap --
@@ -784,13 +789,17 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 				BBorderFrame:SetFrameLevel(6)		
 			end)
 		else
-			return nil
+			Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\Textures\\minimap\\round")
 		end
 	end
 end)
 ----------------------------------------------------
 -- Fonts
 ----------------------------------------------------
+--Fonts\\FRIZQT__.TTF - Friz Quadrata, used by default for player names and most UI text
+--Fonts\\ARIALN.TTF - Arial Narrow, used by default for chat windows, action button numbers, etc.
+--Fonts\\skurri.ttf - Skurri, used by default for incoming damage/parry/miss/etc indicators on the Player and Pet frames
+--Fonts\\MORPHEUS.ttf - Morpheus, used by default for quest title headers, mail, and readable in-game objects. 
 local globalFont	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf"
 local subFont 	 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\npcfont.ttf"
 local damageFont 	= "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefont.ttf"
@@ -845,7 +854,7 @@ AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
 	end
 end)
 -- Font Location Check
-local checkFont = "Interface\\AddOns\\AbyssUI\\Textures\\font\\damagefontcyrillic.ttf"
+local checkFont = "Fonts\\FRIZQT__.ttf"
 local AbyssUI_CheckFont = CreateFrame("Frame")
 AbyssUI_CheckFont:RegisterEvent("ADDON_LOADED")
 AbyssUI_CheckFont:SetScript("OnEvent", function(self, event, arg1)
@@ -920,7 +929,6 @@ local soundIDSHorde = {
 	109300, -- Bwonsamdi
 	15591,  -- Kologarn
 	42070,  -- Gugrokk2
-	43254,  -- Leroy Jenkins
 	50083,  -- Kormrok
 	24226,  -- DAAKARA
 	44525,  -- KARGATH
@@ -941,13 +949,13 @@ local soundIDSHorde = {
 	5831,	-- Herod
 	15740,	-- Thorim
 	10454,  -- Thrall
+	35591, 	-- LeiShen
 }
 local soundIDSAlly = { 
 	24531,  -- RAGNAROS 
 	24530,  -- RAGNAROS2
-	24477,  -- FANDRAL 
-	13324,  -- Telestra 
-	45439,  -- BLACKHAND2 
+	24477,  -- FANDRAL
+	13324,  -- Telestra
 	43913,  -- Koromar
 	21576,  -- Muradin
 	21574,  -- Muradin2
@@ -955,10 +963,10 @@ local soundIDSAlly = {
 	109300, -- Bwonsamdi
 	15591,  -- Kologarn
 	16061,  -- Varian
+	16062, 	-- Varian2
 	42070,  -- Gugrokk2
 	43254,  -- Leroy Jenkins
 	50083,  -- Kormrok
-	24226,  -- DAAKARA
 	44525,  -- KARGATH
 	17067,  -- Valithria
 	14506,  -- Xevozz
@@ -974,6 +982,7 @@ local soundIDSAlly = {
 	10334,	-- Garg
 	5831,	-- Herod
 	15740,	-- Thorim
+	35591, 	-- LeiShen
 }
 local numSoundsHorde = #soundIDSHorde
 local numSoundsAlly  = #soundIDSAlly

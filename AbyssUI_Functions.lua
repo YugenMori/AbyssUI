@@ -230,6 +230,31 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 	end
 end)
 ----------------------------------------------------
+-- Tooltip
+local UnitColor
+local function UnitColor(unit)
+	local r, g, b
+	if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
+		--Color it gray
+		r, g, b = 0.5, 0.5, 0.5
+	elseif ( UnitIsPlayer(unit) ) then
+		--Try to color it by class.
+		local localizedClass, englishClass = UnitClass(unit)
+		local classColor = RAID_CLASS_COLORS[englishClass]
+		if ( classColor ) then
+			r, g, b = classColor.r, classColor.g, classColor.b
+		else
+			if ( UnitIsFriend("player", unit) ) then
+				r, g, b = 0.0, 1.0, 0.0
+			else
+				r, g, b = 1.0, 0.0, 0.0
+			end
+		end
+	else
+		r, g, b = UnitSelectionColor(unit)
+	end
+	return r, g, b
+end
 -- Tooltip Background and borders
 local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
 TooltipBackground:SetPoint("TOPLEFT", 3, -3)
@@ -238,13 +263,16 @@ TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
 TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
 -- Tooltip Class Color Health
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
-	local _, unit = GameTooltip:GetUnit()
+	local _, unit = self:GetUnit()
+	if unit == nil then return end
 	if UnitIsPlayer(unit) then
 		local _, class = UnitClass(unit)
 		local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
 		if color then
 			GameTooltipStatusBar:SetStatusBarColor(color.r, color.g, color.b)
-		end
+		end		
+	else
+		GameTooltipStatusBar:SetStatusBarColor(UnitColor(unit))
 	end
 end)
 ----------------------------------------------------
@@ -517,11 +545,6 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 	end
 end)
 ----------------------------------------------------
--- Start Function
-function AbyssUIStart()
-	AbyssUIFirstFrame:Show()
-end
-----------------------------------------------------
 -- UI Scale Elements (On Load)
 local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
 ScaleElements:RegisterEvent("ADDON_LOADED")
@@ -619,10 +642,6 @@ local objectiveFrame2 = CreateFrame("Frame", "$parentObjectiveFrame2", nil)
 objectiveFrame2:RegisterEvent("PLAYER_ENTERING_WORLD")
 objectiveFrame2:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
-	--local isArena = C_PvP.IsArena() 
-	--local isBattleground = C_PvP.IsBattleground() 
-	--local isRatedMap = C_PvP.IsRatedMap() 
-	--or isArena == true or isBattleground == true or isRatedMap == true
 	if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == true) then
 		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)		
 	else 
@@ -718,7 +737,7 @@ local fichaString 			= _G["TOKEN_FILTER_LABEL"]
 local honorString 			= _G["HONOR"]
 local levelString 			= _G["LEVEL"]
 local versionString 		= _G["GAME_VERSION_LABEL"]
-local timeStringLabel 	= _G["TIME_LABEL"]
+local timeStringLabel 		= _G["TIME_LABEL"]
 -- DailyInfo Function
 ----------------------------------------------------
 local AbyssUIDailyInfo = CreateFrame("Frame")

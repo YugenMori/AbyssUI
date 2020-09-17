@@ -73,7 +73,7 @@ Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,".
 " consider sharing with your friends\n or even making a donation."..
 " It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
-"Options that have a different text color are recommended.\nThose options are set by default if you choose recommended settings.\n\n"..
+"Options that have a different text color are recommended.\nThose options are set by default if you choose recommended (modern) settings.\n\n"..
 "Check the options by clicking in the (+) button on the left.")
 --Special Thanks
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
@@ -689,6 +689,7 @@ FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame (*)")
 FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (Top left frame)."
 .." *This will only work if you are using the default Blizzard Minimap"
 FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
+addonTable.FPSMSFrame = FPSMSFrame_CheckButton
 -- OnClick Function
 FPSMSFrame_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideFPSMSFrame = self:GetChecked()
@@ -701,6 +702,7 @@ YouDiedLevelUpFrame_CheckButton.Text:SetText("Hide YouDied/LevelUp Frame")
 YouDiedLevelUpFrame_CheckButton.tooltip = "Hide the 'You Died' and 'Level Up' frame when you"..
 " die/level in the game"
 YouDiedLevelUpFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideYouDiedLevelUpFrame)
+addonTable.YouDiedLevelUpFrame = YouDiedLevelUpFrame_CheckButton
 -- OnClick Function
 YouDiedLevelUpFrame_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.HideYouDiedLevelUpFrame = self:GetChecked()
@@ -1026,6 +1028,7 @@ HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
 HideCastTimer_CheckButton.Text:SetText("Hide CastBar Timer")
 HideCastTimer_CheckButton.tooltip = "Hide the timer below CastBar"
 HideCastTimer_CheckButton:SetChecked(AbyssUIAddonSettings.HideCastTimer)
+addonTable.HideCastTimer = HideCastTimer_CheckButton
 -- OnClick Function
 HideCastTimer_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideCastTimer = self:GetChecked()
@@ -1033,9 +1036,10 @@ end)
 -- Hide Group Frame
 local HideGroupFrame_CheckButton = CreateFrame("CheckButton", "$parentHideGroupFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideGroupFrame_CheckButton:SetPoint("TOPRIGHT", -200, -110)
-HideGroupFrame_CheckButton.Text:SetText("Hide GroupFrame")
+HideGroupFrame_CheckButton.Text:SetText("|cfff2dc7fHide GroupFrame|r")
 HideGroupFrame_CheckButton.tooltip = "Hide the GroupFrame on the player portrait"
 HideGroupFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideGroupFrame)
+addonTable.HideGroupFrame = HideGroupFrame_CheckButton
 -- OnClick Function
 HideGroupFrame_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGroupFrame = self:GetChecked()
@@ -1320,10 +1324,11 @@ end)
 -- Hide in Combat --
 local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideInCombat_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_HideInCombat_CheckButton:SetPoint("TOPLEFT", 10, -410)
-AbyssUI_HideInCombat_CheckButton.Text:SetText("Dynamic ObjectiveTrack Hide")
+AbyssUI_HideInCombat_CheckButton.Text:SetText("|cfff2dc7fDynamic ObjectiveTrack Hide|r")
 AbyssUI_HideInCombat_CheckButton.tooltip = "Hide some parts of the interface when you"..
 " are in combat or in a PVP instance"
 AbyssUI_HideInCombat_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionHideInCombat)
+addonTable.HideInCombat = AbyssUI_HideInCombat_CheckButton
 -- OnClick Function
 AbyssUI_HideInCombat_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionHideInCombat = self:GetChecked()
@@ -1379,6 +1384,7 @@ AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -110)
 AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("Disable ChatBubble Changes")
 AbyssUI_ChatBubbleChanges_CheckButton.tooltip = "This option will remove any change that was made to the chatbubbles (the frame text above players)"
 AbyssUI_ChatBubbleChanges_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges)
+addonTable.ChatBubbleChanges = AbyssUI_ChatBubbleChanges_CheckButton
 -- OnClick Function
 AbyssUI_ChatBubbleChanges_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges = self:GetChecked()
@@ -1430,10 +1436,11 @@ end)
 -- Disable Square Minimap --
 local DisableSquareMinimap_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 DisableSquareMinimap_CheckButton:SetPoint("TOPLEFT", 400, -200)
-DisableSquareMinimap_CheckButton.Text:SetText("Disable Square Minimap (*)")
+DisableSquareMinimap_CheckButton.Text:SetText("Disable Square Minimap")
 DisableSquareMinimap_CheckButton.tooltip = "This option will get you back to the"..
-" Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"
+" Blizzard default minimap style (round)."
 DisableSquareMinimap_CheckButton:SetChecked(AbyssUIAddonSettings.DisableSquareMinimap)
+addonTable.DisableSquareMinimap = DisableSquareMinimap_CheckButton
 -- OnClick Function
 DisableSquareMinimap_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.DisableSquareMinimap = self:GetChecked()
@@ -1446,6 +1453,7 @@ DisableUnitFrameSmoke_CheckButton.Text:SetText("Disable Smoke Texture")
 DisableUnitFrameSmoke_CheckButton.tooltip = "It will disable the 'smoke' texture around the portrait in "..
 "the UnitFrame Improved version of it"
 DisableUnitFrameSmoke_CheckButton:SetChecked(AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture)
+addonTable.DisableUnitFrameSmoke = DisableUnitFrameSmoke_CheckButton
 -- OnClick Function
 DisableUnitFrameSmoke_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture = self:GetChecked()
