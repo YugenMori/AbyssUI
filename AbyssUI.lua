@@ -178,11 +178,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			Boss1TargetFrameTextureFrameTexture,
 			Boss2TargetFrameTextureFrameTexture,
 			Boss3TargetFrameTextureFrameTexture,
-			TimerTrackerTimer1,
-			TimerTrackerTimer1StatusBar,
-			TimerTrackerTimer1StatusBarBorder,
 			MirrorTimer1Border,
-			MirrorTimer2Border, }) do
+			MirrorTimer2Border,
+			MirrorTimer3Border, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -1527,10 +1525,26 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-
+		-- MovieFrame.CloseDialog
+		for i, v in pairs({
+			MovieFrame.CloseDialog.Border.TopEdge,
+			MovieFrame.CloseDialog.Border.RightEdge,
+			MovieFrame.CloseDialog.Border.BottomEdge,
+			MovieFrame.CloseDialog.Border.LeftEdge,
+			MovieFrame.CloseDialog.Border.TopRightCorner,
+			MovieFrame.CloseDialog.Border.TopLeftCorner,
+			MovieFrame.CloseDialog.Border.BottomLeftCorner,
+		MovieFrame.CloseDialog.Border.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
 		----------------------------------------------------------------------
 		-- Frames that act weird
 		-- LFGDungeonReadyDialog
+		---[[
 		for i, v in pairs({ 
 			LFGDungeonReadyDialog.Border.Bg,
 			LFGDungeonReadyDialog.Border.TopEdge,
@@ -1548,6 +1562,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+		--]]
 		----------------------------------------------------------------------
 		-- End
 		self:UnregisterEvent("ADDON_LOADED")
@@ -2141,7 +2156,18 @@ f:SetScript("OnEvent", function(self, event, name)
 			CalendarViewHolidayFrame.Border.TopRightCorner,
 			CalendarViewHolidayFrame.Border.TopLeftCorner,
 			CalendarViewHolidayFrame.Border.BottomLeftCorner,
-		CalendarViewHolidayFrame.Border.BottomRightCorner, }) do
+			CalendarViewHolidayFrame.Border.BottomRightCorner,
+			CalendarEventPickerFrame.Header.CenterBG,
+			CalendarEventPickerFrame.Header.LeftBG,
+			CalendarEventPickerFrame.Header.RightBG,
+			CalendarEventPickerFrame.Border.TopEdge,
+			CalendarEventPickerFrame.Border.RightEdge,
+			CalendarEventPickerFrame.Border.BottomEdge,
+			CalendarEventPickerFrame.Border.LeftEdge,
+			CalendarEventPickerFrame.Border.TopRightCorner,
+			CalendarEventPickerFrame.Border.TopLeftCorner,
+			CalendarEventPickerFrame.Border.BottomLeftCorner,
+		CalendarEventPickerFrame.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -2393,5 +2419,28 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
+-- ChromieTimeFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_ChromieTimeUI" then
+		for i, v in pairs({
+			ChromieTimeFrame.NineSlice.TopEdge,
+			ChromieTimeFrame.NineSlice.RightEdge,
+			ChromieTimeFrame.NineSlice.BottomEdge,
+			ChromieTimeFrame.NineSlice.LeftEdge,
+			ChromieTimeFrame.NineSlice.TopRightCorner,
+			ChromieTimeFrame.NineSlice.TopLeftCorner,
+			ChromieTimeFrame.NineSlice.BottomLeftCorner,
+		ChromieTimeFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+
 --------------------------------------------------------------
 -- End

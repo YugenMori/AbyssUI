@@ -4,8 +4,12 @@
 --
 -- Configuration page for AbyssUI
 --------------------------------------------------------------
-local AbyssUI_Config = {}
+-- Init - Tables - Saves
 local addonName, addonTable = ...
+if not AbyssUI_Config then
+  local AbyssUI_Config = {}
+end
+-- Color Init
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
@@ -20,10 +24,70 @@ f:SetScript("OnEvent", function(self, event)
         COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
     end
 end)
+-- Fontfication
+local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local locale = GetLocale()
+local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
+    globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
+    globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    locale == "esES" or locale == "esMX" or locale == "ptBR") then
+    globalFont  = mediaFolder.."global.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
+    damageFont  = mediaFolder.."damagefont.ttf"
+  else
+    globalFont  = fontName
+    subFont   = fontName
+    damageFont  = fontName
+  end
+  return globalFont, subFont, damageFont
+end
+local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- RegionList
+local function AbyssUI_RegionListSize(self, width, height)
+  local regionList = { 
+    self:GetRegions() } 
+  for i, self in ipairs(regionList) do 
+      local regionType = self:GetObjectType() 
+      if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
+          self:SetWidth(width)
+          self:SetHeight(height)
+          break 
+      end  
+  end
+end
+-- FrameSize
+local function AbyssUI_FrameSize(self, width, height)
+  self:SetWidth(width)
+  self:SetHeight(height)
+end
+--------------------------------------------------------------
+--------------------------------------------------------------
+local _G = _G
+local confirmString     = _G["OKAY"]
+local colorString       = _G["COLOR_PICKER"]
+local colorColorString  = _G["COLOR"]
+local applyString       = _G["APPLY"]
+--------------------------------------------------------------
 local function InitSettings()
 AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
 -- Register in the Interface Addon Options GUI
--- Set the name for the Category for the Options Panel
+-- Set the name for the Category for the Options Panel1
 AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
 -- Add the panel to the Interface Options
 InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
@@ -73,7 +137,9 @@ Frame:SetText("Thanks for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,".
 " consider sharing with your friends\n or even making a donation."..
 " It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
-"Options that have a different text color are recommended.\nThose options are set by default if you choose recommended (modern) settings.\n\n"..
+"Options that have a different text color are based on your choice in the setup."..
+"\nThose options are set by default if you choose one of the recommended settings.\n"..
+"(|cff0d75d4Classic|r / |cfff2dc7fModern|r)\n\n"..
 "Check the options by clicking in the (+) button on the left.")
 --Special Thanks
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
@@ -107,7 +173,7 @@ Frame3:SetWidth(200)
 Frame3:SetScale(1)
 Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame3:SetPoint("LEFT")
-Frame3:SetText("|cfff2dc7fKawF|r by UnitFrame Improved, so I could create a really nice"..
+Frame3:SetText("|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI.")
 -- Panel 01 (Info Panel)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
@@ -232,14 +298,51 @@ local fichaString       = _G["TOKEN_FILTER_LABEL"]
 local honorString       = _G["HONOR"]
 local levelString       = _G["LEVEL"]
 local versionString     = _G["GAME_VERSION_LABEL"]
+local latestString      = _G["KBASE_RECENTLY_UPDATED"] 
 local timeStringLabel   = _G["TIME_LABEL"]
 -- AbyssUI DailyInfo --
 ----------------------------------------------------
-local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
+-- AbyssUI Setup --
+local FrameButton = CreateFrame("Button","$parentExtraSetupButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(30)
 FrameButton:SetWidth(140)
 FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -250)
-FrameButton:SetText("AbyssUI DailyInfo")
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("AbyssUI Setup")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
+FrameButton:SetScript("OnClick", function()
+  AbyssUISecondFrame:Show()
+end)
+-- Clear Action Bar --
+local FrameButton = CreateFrame("Button","$parentExtraClearActionButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(30)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -250)
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("Clear Action Bar")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
+FrameButton:SetScript("OnClick", function()
+  AbyssUI_ActionBarCleaner:Show()
+end)
+local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(30)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -250)
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("AbyssUI DailyInfo")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
 FrameButton:SetScript("OnClick", function()
 C_WowTokenPublic.UpdateMarketPrice()
   C_Timer.After(0.5, function()
@@ -262,23 +365,52 @@ C_WowTokenPublic.UpdateMarketPrice()
     print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
   end)
 end)
--- Clear Action Bar --
-local FrameButton = CreateFrame("Button","$parentExtraClearActionButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(140)
-FrameButton:SetPoint("CENTER",  AbyssUI_Config.panel, "TOP", 0, -250)
-FrameButton:SetText("Clear Action Bar")
-FrameButton:SetScript("OnClick", function()
-  AbyssUI_ActionBarCleaner:Show()
-end)
 -- Reload --
 local FrameButton = CreateFrame("Button","$parentExtraReloadInterfaceButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
+FrameButton:SetHeight(30)
 FrameButton:SetWidth(140)
-FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -250)
-FrameButton:SetText("Reload UI")
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -300)
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("Reload UI")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
 FrameButton:SetScript("OnClick", function()
   ReloadUI()
+end)
+-- Twitch --
+local FrameButton = CreateFrame("Button","$parentExtraTwitchButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(30)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -300)
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("Twitch")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
+FrameButton:SetScript("OnClick", function()
+    AbyssUI_EditBox:SetText("https://www.twitch.tv/yugensan")
+    AbyssUI_EditBox_Frame:Show()
+end)
+-- Donate --
+local FrameButton = CreateFrame("Button","$parentExtraDonateButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+FrameButton:SetHeight(30)
+FrameButton:SetWidth(140)
+FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -300)
+FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+FrameButton.text:SetFont(globalFont, 12)
+FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+FrameButton.text:SetText("Donate")
+FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButton.text:SetShadowColor(0, 0, 0)
+FrameButton.text:SetShadowOffset(1, -1)
+FrameButton:SetScript("OnClick", function()
+    AbyssUI_EditBox:SetText("https://www.wowinterface.com/downloads/info24701-AbyssUI.html#donate")
+    AbyssUI_EditBox_Frame:Show()
 end)
 ----------------------------- AbyssUI Info Panel -------------------------------
 --- Images ---
@@ -294,59 +426,6 @@ InfoPanelSubText:SetText("In this page you can find links to some other AddOns/P
 "These addons are verify to especially work with AbyssUI without any conflict or problem.\n"..
 "Click on the image so you can get the respective link. Don't forget to check then out!")
 --- Frames and Boxes ---
--- AbyssUI_EditBox_Frame
-local AbyssUI_EditBox_Frame = CreateFrame("Frame", "$parentAbyssUI_EditBox_Frame", AbyssUI_Config.childpanel1)
-AbyssUI_EditBox_Frame:Hide()
-AbyssUI_EditBox_Frame:SetWidth(500)
-AbyssUI_EditBox_Frame:SetHeight(125)
-AbyssUI_EditBox_Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "CENTER", 0, 0)
-AbyssUI_EditBox_Frame:EnableMouse(true)
-AbyssUI_EditBox_Frame:SetClampedToScreen(true)
-AbyssUI_EditBox_Frame:SetMovable(true)
-AbyssUI_EditBox_Frame:RegisterForDrag("LeftButton")
-AbyssUI_EditBox_Frame:SetScript("OnDragStart", AbyssUI_EditBox_Frame.StartMoving)
-AbyssUI_EditBox_Frame:SetScript("OnDragStop", function(self)
-  self:StopMovingOrSizing()
-end)
-AbyssUI_EditBox_Frame:SetFrameStrata("Dialog")
-----------------------------------------------------
-local Border = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-Border:SetPoint("TOPLEFT", -3, 3)
-Border:SetPoint("BOTTOMRIGHT", 3, -3)
-Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
-----------------------------------------------------
-local BorderBody = AbyssUI_EditBox_Frame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-BorderBody:SetAllPoints(AbyssUI_EditBox_Frame)
-BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-----------------------------------------------------
-local Texture = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-Texture:SetAllPoints(AbyssUI_EditBox_Frame)
-AbyssUI_EditBox_Frame.texture = Texture
-----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_EditBox_Frame, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(70)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_EditBox_Frame, "BOTTOM", 0, 0)
-FrameButtonConfirm:SetText("Confirm")
-FrameButtonConfirm:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-----------------------------------------------------
-local BorderButton = FrameButtonConfirm:CreateTexture(nil, "ARTWORK")
-BorderButton:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-BorderButton:SetAllPoints(FrameButtonConfirm)
-BorderButton:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-FrameButtonConfirm:SetScript("OnClick", function()
-  AbyssUI_EditBox_Frame:Hide()
-end)
--- EditBox
-local AbyssUI_EditBox= CreateFrame("EditBox", "$parentEditBox_TexturePack", AbyssUI_EditBox_Frame)
-AbyssUI_EditBox:SetFont("Interface\\AddOns\\AbyssUI\\Textures\\font\\global.ttf", 12, "THINOUTLINE")
-AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
-AbyssUI_EditBox:SetMultiLine(true)
-AbyssUI_EditBox:SetHeight(24)
-AbyssUI_EditBox:SetWidth(450)
 -- AbyssUI_TexturePack
 local AbyssUI_TexturePack = CreateFrame("Frame", "$parentAbyssUI_TexturePack", AbyssUI_Config.childpanel1)
 AbyssUI_TexturePack:SetFrameStrata("HIGH")
@@ -366,6 +445,19 @@ local t = CheckIcon_TexturePack:CreateTexture(nil, "HIGH")
 t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\checkIcon")
 t:SetAllPoints(CheckIcon_TexturePack)
 CheckIcon_TexturePack:Hide()
+-- Latest update
+local LatestUpdate_TexturePack = CreateFrame("Frame", "$parentLatestUpdate_TexturePack", AbyssUI_TexturePack)
+LatestUpdate_TexturePack:SetFrameStrata("HIGH")
+LatestUpdate_TexturePack:SetPoint("BOTTOM", 0, 0)
+LatestUpdate_TexturePack:SetHeight(32)
+LatestUpdate_TexturePack:SetWidth(128)
+LatestUpdate_TexturePack.text = LatestUpdate_TexturePack.text or LatestUpdate_TexturePack:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+LatestUpdate_TexturePack.text:SetFont(globalFont, 12)
+LatestUpdate_TexturePack.text:SetPoint("CENTER", LatestUpdate_TexturePack, "CENTER", 0, 0)
+LatestUpdate_TexturePack.text:SetText(latestString..": 9.0.1.4 (24/09/2020)")
+LatestUpdate_TexturePack.text:SetTextColor(230/255, 204/255, 128/255)
+LatestUpdate_TexturePack.text:SetShadowColor(0, 0, 0)
+LatestUpdate_TexturePack.text:SetShadowOffset(1, -1)
 -- Download Icon
 local DownloadIcon_TexturePack = CreateFrame("Frame", "$parentDownloadIcon_TexturePack", AbyssUI_TexturePack)
 DownloadIcon_TexturePack:SetFrameStrata("HIGH")
@@ -489,9 +581,13 @@ DBM:SetScript("OnMouseDown", function (self, button)
 end)
 -- Check InfoPanel AddOns
 -- Texture Trigger Function
-local function Check_TexturePack()
-  local f = CreateFrame('frame') -- Don't create a new frame for every texture, this is just an example
+local function AbyssUI_CheckTexturePack()
+  local f  = CreateFrame('frame') -- Don't create a new frame for every texture, this is just an example
   local tx = f:CreateTexture()
+  local c  = CastingBarFrame
+  local c1 = MirrorTimer1StatusBar
+  local c2 = MirrorTimer2StatusBar
+  local c3 = MirrorTimer3StatusBar
   tx:SetPoint('TOPLEFT', nil, -500, -500) -- The texture has to be "visible", but not necessarily on-screen (you can also set its alpha to 0)
   tx:SetTexture('Interface\\TargetingFrame\\UI-CLASSES-CIRCLES_RETRO')
   tx:SetSize(0,0) -- Size must be set after every SetTexture
@@ -501,6 +597,14 @@ local function Check_TexturePack()
       local size = format('%.0f%.0f', width, height) -- The floating point numbers need to be rounded or checked like "width < 8.1 and width > 7.9"
       if size == '11' then
         DownloadIcon_TexturePack:Show()
+        for i, v in pairs({ c, c1, c2, c3 }) do
+          AbyssUI_FrameSize(v, 200, 10)
+          AbyssUI_RegionListSize(v, 200, 10)
+        end
+        c.Icon:SetWidth(22)
+        c.Icon:SetHeight(22)
+        c.Icon:ClearAllPoints()
+        c.Icon:SetPoint("LEFT", c, "LEFT", -25, 1)
       else
         CheckIcon_TexturePack:Show()
       end
@@ -514,7 +618,7 @@ local glass   = IsAddOnLoaded("Glass")
 local kui     = IsAddOnLoaded("Kui_Nameplates")
 local bagnon  = IsAddOnLoaded("Bagnon")
 local dbm     = IsAddOnLoaded("DBM-Core")
-Check_TexturePack()
+AbyssUI_CheckTexturePack()
     if ( glass == true ) then
       CheckIcon_Glass:Show()
     end
@@ -539,7 +643,7 @@ PSINFOHide_CheckButton:SetScale(1)
 PSINFOHide_CheckButton = PSINFOHide_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOHide_CheckButton:SetPoint("LEFT")
 PSINFOHide_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings.")
+  "Options with a different color are recommended settings (based on your choice in the setup).")
 -- MicroMenu/Bags --
 local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
@@ -685,7 +789,7 @@ end)
 -- Hide FPS/MS Frame --
 local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
-FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame (*)")
+FPSMSFrame_CheckButton.Text:SetText("|cff0d75d4Hide FPS/MS Frame (*)|r")
 FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (Top left frame)."
 .." *This will only work if you are using the default Blizzard Minimap"
 FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
@@ -698,7 +802,7 @@ end)
 -- YouDied LevelUp Frame --
 local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 YouDiedLevelUpFrame_CheckButton:SetPoint("TOPLEFT", 10, -230)
-YouDiedLevelUpFrame_CheckButton.Text:SetText("Hide YouDied/LevelUp Frame")
+YouDiedLevelUpFrame_CheckButton.Text:SetText("|cff0d75d4Hide YouDied/LevelUp Frame|r")
 YouDiedLevelUpFrame_CheckButton.tooltip = "Hide the 'You Died' and 'Level Up' frame when you"..
 " die/level in the game"
 YouDiedLevelUpFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideYouDiedLevelUpFrame)
@@ -1025,7 +1129,7 @@ end)
 -- Hide Cast Timer
 local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
-HideCastTimer_CheckButton.Text:SetText("Hide CastBar Timer")
+HideCastTimer_CheckButton.Text:SetText("|cff0d75d4Hide CastBar Timer|r")
 HideCastTimer_CheckButton.tooltip = "Hide the timer below CastBar"
 HideCastTimer_CheckButton:SetChecked(AbyssUIAddonSettings.HideCastTimer)
 addonTable.HideCastTimer = HideCastTimer_CheckButton
@@ -1070,7 +1174,7 @@ PSINFOHide_CheckButton:SetScale(1)
 PSINFOHide_CheckButton = PSINFOHide_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOHide_CheckButton:SetPoint("LEFT")
 PSINFOHide_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings.")
+  "Options with a different color are recommended settings (based on your choice in the setup).")
 --- General ---
 -- Camera Pitch Function Option 50%
 local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -1381,7 +1485,7 @@ end)
 -- Disable ChatBubble --
 local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ChatBubbleChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -110)
-AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("Disable ChatBubble Changes")
+AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("|cff0d75d4Disable ChatBubble Changes|r")
 AbyssUI_ChatBubbleChanges_CheckButton.tooltip = "This option will remove any change that was made to the chatbubbles (the frame text above players)"
 AbyssUI_ChatBubbleChanges_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges)
 addonTable.ChatBubbleChanges = AbyssUI_ChatBubbleChanges_CheckButton
@@ -1436,7 +1540,7 @@ end)
 -- Disable Square Minimap --
 local DisableSquareMinimap_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 DisableSquareMinimap_CheckButton:SetPoint("TOPLEFT", 400, -200)
-DisableSquareMinimap_CheckButton.Text:SetText("Disable Square Minimap")
+DisableSquareMinimap_CheckButton.Text:SetText("|cff0d75d4Disable Square Minimap|r")
 DisableSquareMinimap_CheckButton.tooltip = "This option will get you back to the"..
 " Blizzard default minimap style (round)."
 DisableSquareMinimap_CheckButton:SetChecked(AbyssUIAddonSettings.DisableSquareMinimap)
@@ -1449,7 +1553,7 @@ end)
 -- Disable UnitFrame Smoke --
 local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 400, -230)
-DisableUnitFrameSmoke_CheckButton.Text:SetText("Disable Smoke Texture")
+DisableUnitFrameSmoke_CheckButton.Text:SetText("|cff0d75d4Disable Smoke Texture|r")
 DisableUnitFrameSmoke_CheckButton.tooltip = "It will disable the 'smoke' texture around the portrait in "..
 "the UnitFrame Improved version of it"
 DisableUnitFrameSmoke_CheckButton:SetChecked(AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture)
@@ -1482,6 +1586,18 @@ AbyssUI_HideBackgroundClassColor_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor = self:GetChecked()
   AbyssUI_ReloadFrame:Show()
 end)
+-- Disable font white text --
+local AbyssUI_FontWhiteText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_FontWhiteText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+AbyssUI_FontWhiteText_CheckButton:SetPoint("TOPLEFT", 400, -320)
+AbyssUI_FontWhiteText_CheckButton.Text:SetText("Disable Font White Text")
+AbyssUI_FontWhiteText_CheckButton.tooltip = "Disable the font white text colorization"..
+"back to the default yellow font color"
+AbyssUI_FontWhiteText_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText)
+-- OnClick Function
+AbyssUI_FontWhiteText_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText = self:GetChecked()
+  AbyssUI_ReloadFrame:Show()
+end)
 --End
 ----------------------------------- Tweaks & Extra  -----------------------------------
 -- Read tooltip--
@@ -1493,7 +1609,7 @@ PSINFOTweaks_CheckButton:SetScale(1)
 PSINFOTweaks_CheckButton = PSINFOTweaks_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOTweaks_CheckButton:SetPoint("LEFT")
 PSINFOTweaks_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings.")
+  "Options with a different color are recommended settings (based on your choice in the setup).")
 --- Global ---
 -- Keep UnitFrame Dark --
 local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
@@ -2588,18 +2704,24 @@ AbyssUIVertexColorFrames16_CheckButton:SetScript("OnClick", function(self)
 end)
 -- Choose a Color (Color Picker)
 local AbyssUIVertexColorFramesColorPicker_Button = CreateFrame("Button", "$parentAbyssUIVertexColorFramesColorPicker_Button", AbyssUI_Config.childpanel4, "UIPanelButtonTemplate")
-AbyssUIVertexColorFramesColorPicker_Button:SetPoint("TOPRIGHT", -165, -350)
-AbyssUIVertexColorFramesColorPicker_Button:SetHeight(24)
-AbyssUIVertexColorFramesColorPicker_Button:SetWidth(100)
-AbyssUIVertexColorFramesColorPicker_Button.Text:SetText("Color Picker")
+AbyssUIVertexColorFramesColorPicker_Button:SetPoint("TOPRIGHT", -150, -350)
+AbyssUIVertexColorFramesColorPicker_Button:SetHeight(30)
+AbyssUIVertexColorFramesColorPicker_Button:SetWidth(120)
+AbyssUIVertexColorFramesColorPicker_Button.text = AbyssUIVertexColorFramesColorPicker_Button.text or AbyssUIVertexColorFramesColorPicker_Button:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+AbyssUIVertexColorFramesColorPicker_Button.text:SetFont(globalFont, 12)
+AbyssUIVertexColorFramesColorPicker_Button.text:SetPoint("CENTER", AbyssUIVertexColorFramesColorPicker_Button, "CENTER", 0, 0)
+AbyssUIVertexColorFramesColorPicker_Button.text:SetText(colorString)
+AbyssUIVertexColorFramesColorPicker_Button.text:SetTextColor(229/255, 229/255, 229/255)
+AbyssUIVertexColorFramesColorPicker_Button.text:SetShadowColor(0, 0, 0)
+AbyssUIVertexColorFramesColorPicker_Button.text:SetShadowOffset(1, -1)
 -- OnClick Function
 AbyssUIVertexColorFramesColorPicker_Button:SetScript("OnClick", function(self)
   AbyssUI_ShowColorPicker()
 end)
 -- Apply Color
 local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("TOPRIGHT", -80, -350)
-AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText("Apply Color")
+AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("CENTER", 180, -81)
+AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText(applyString.." "..colorColorString)
 local character = UnitName("player").."-"..GetRealmName()
 AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 AbyssUIVertexColorFramesColorPicker_CheckButton.tooltip = "Apply the color you choose from the ColorPicker"
