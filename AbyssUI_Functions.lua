@@ -838,7 +838,8 @@ local fichaString 			= _G["TOKEN_FILTER_LABEL"]
 local honorString 			= _G["HONOR"]
 local levelString 			= _G["LEVEL"]
 local versionString 		= _G["GAME_VERSION_LABEL"]
-local timeStringLabel 	= _G["TIME_LABEL"]
+local latestString     		= _G["KBASE_RECENTLY_UPDATED"] 
+local timeStringLabel 		= _G["TIME_LABEL"]
 -- DailyInfo Function
 ----------------------------------------------------
 local AbyssUIDailyInfo = CreateFrame("Frame")
@@ -864,9 +865,9 @@ C_WowTokenPublic.UpdateMarketPrice()
 			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
 		print("|cfff2dc7f"..honorString.." "..levelString..": |r|cffffcc00"..HonorLevel.."|r")
-		--print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
 		print("|cfff2dc7fWoW "..versionString..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
 		print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
+   		print("|cfff2dc7f"..latestString.." TexturePack: |r|cffffcc001.0.1.1 (26/09/20)|r")
 		if ( AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")

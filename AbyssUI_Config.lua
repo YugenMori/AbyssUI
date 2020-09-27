@@ -300,7 +300,6 @@ local levelString       = _G["LEVEL"]
 local versionString     = _G["GAME_VERSION_LABEL"]
 local latestString      = _G["KBASE_RECENTLY_UPDATED"] 
 local timeStringLabel   = _G["TIME_LABEL"]
--- AbyssUI DailyInfo --
 ----------------------------------------------------
 -- AbyssUI Setup --
 local FrameButton = CreateFrame("Button","$parentExtraSetupButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
@@ -332,6 +331,7 @@ FrameButton.text:SetShadowOffset(1, -1)
 FrameButton:SetScript("OnClick", function()
   AbyssUI_ActionBarCleaner:Show()
 end)
+-- AbyssUI DailyInfo --
 local FrameButton = CreateFrame("Button","$parentExtraDailyInfoButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
 FrameButton:SetHeight(30)
 FrameButton:SetWidth(140)
@@ -360,9 +360,9 @@ C_WowTokenPublic.UpdateMarketPrice()
       print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
     end
     print("|cfff2dc7f"..honorString.." "..levelString..": |r|cffffcc00"..HonorLevel.."|r")
-    --print("|cfff2dc7fLocation: |r" .. GetMinimapZoneText() .. "|cffffcc00, " .. GetZoneText() .. "|r")
     print("|cfff2dc7fWoW "..versionString..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
     print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
+    print("|cfff2dc7f"..latestString.." TexturePack: |r|cffffcc001.0.1.1 (26/09/20)|r")
   end)
 end)
 -- Reload --
@@ -452,9 +452,9 @@ LatestUpdate_TexturePack:SetPoint("BOTTOM", 0, 0)
 LatestUpdate_TexturePack:SetHeight(32)
 LatestUpdate_TexturePack:SetWidth(128)
 LatestUpdate_TexturePack.text = LatestUpdate_TexturePack.text or LatestUpdate_TexturePack:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-LatestUpdate_TexturePack.text:SetFont(globalFont, 12)
+LatestUpdate_TexturePack.text:SetFont(globalFont, 16)
 LatestUpdate_TexturePack.text:SetPoint("CENTER", LatestUpdate_TexturePack, "CENTER", 0, 0)
-LatestUpdate_TexturePack.text:SetText(latestString..": 9.0.1.4 (24/09/2020)")
+LatestUpdate_TexturePack.text:SetText(latestString..":\n1.0.1.1 (26/09/2020)")
 LatestUpdate_TexturePack.text:SetTextColor(230/255, 204/255, 128/255)
 LatestUpdate_TexturePack.text:SetShadowColor(0, 0, 0)
 LatestUpdate_TexturePack.text:SetShadowOffset(1, -1)

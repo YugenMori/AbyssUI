@@ -669,36 +669,7 @@ AbyssUI_YouDiedFrame.texture = Texture
 -- LevelUp Fixes
 local _G = _G
 local levelupreachedString 	= _G["LEVEL_UP_YOU_REACHED"]
-local levelString 	 				= _G["LEVEL"]
-local congratsString 				= _G["VOICEMACRO_LABEL_CONGRATULATIONS2"]
-local LevelUpText = CreateFrame("Frame", nil, LevelUpDisplayLevelFrame)
-LevelUpText:SetFrameStrata("BACKGROUND")
-LevelUpText:SetWidth(128) -- Set these to whatever height/width is needed 
-LevelUpText:SetHeight(64) -- for your Texture
-LevelUpText:SetPoint("CENTER", LevelUpDisplayLevelFrame, "CENTER", 0, -1)
-LevelUpText.text = LevelUpText.text or LevelUpText:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-LevelUpText.text:SetFont(globalFont, 32)
-LevelUpText.text:SetPoint("CENTER", LevelUpText, "CENTER", 0, -1)
-LevelUpText.text:SetText(strupper(congratsString))
-LevelUpText.text:SetTextColor(230/255, 204/255, 128/255)
-LevelUpText.text:SetShadowColor(0, 0, 0)
-LevelUpText.text:SetShadowOffset(1, -1)
-local f = CreateFrame("Frame", nil)
-f:RegisterEvent("PLAYER_LEVEL_UP")
-f:SetScript("OnEvent", function()
-	if( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
-		for i, v in pairs({
-			LevelUpDisplayLevelFrameBlockText,
-			LevelUpDisplayLevelFrameLevel,
-			LevelUpDisplayLevelFrameTextLine,
-		}) do
-			v:Hide() 
-		end
-		if( LevelUpDisplayLevelFrame.reachedText:IsShown() ) then
-			LevelUpDisplayLevelFrame.reachedText:SetAlpha(0)
-		end
-	end
-end)
+local levelString 	 		= _G["LEVEL"]
 -- LevelUp Frame
 local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
 AbyssUI_LevelUpFrame:SetFrameStrata("DIALOG")
@@ -880,7 +851,10 @@ FrameButtonModern:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 100, -200)
 FrameButtonModern.text = FrameButtonModern.text or FrameButtonModern:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 FrameButtonModern.text:SetFont(globalFont, 18)
 FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
-FrameButtonModern.text:SetText("|cff3e3535Modern|r")
+FrameButtonModern.text:SetText("Modern")
+FrameButtonModern.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButtonModern.text:SetShadowColor(0, 0, 0)
+FrameButtonModern.text:SetShadowOffset(1, -1)
 FrameButtonModern.GlowTexture = FrameButtonModern:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
 FrameButtonModern.GlowTexture:SetAllPoints()
 FrameButtonModern.GlowTexture:Hide()
@@ -955,7 +929,10 @@ FrameButtonClassic:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", -100, -200)
 FrameButtonClassic.text = FrameButtonClassic.text or FrameButtonClassic:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 FrameButtonClassic.text:SetFont(globalFont, 18)
 FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
-FrameButtonClassic.text:SetText("|cff3e3535Classic|r")
+FrameButtonClassic.text:SetText("Classic")
+FrameButtonClassic.text:SetTextColor(229/255, 229/255, 229/255)
+FrameButtonClassic.text:SetShadowColor(0, 0, 0)
+FrameButtonClassic.text:SetShadowOffset(1, -1)
 ----------------------------------------------------
 local BorderButtonClassic = FrameButtonClassic:CreateTexture(nil, "ARTWORK")
 BorderButtonClassic:SetAllPoints(FrameButtonClassic)

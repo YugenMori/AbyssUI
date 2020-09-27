@@ -488,7 +488,7 @@ ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 ----------------------------------------------------
--- New Minimap
+-- Square Minimap
 ----------------------------------------------------
 -- Thanks to Dawn for this amazing minimap code
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
