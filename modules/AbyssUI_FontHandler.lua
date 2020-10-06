@@ -188,6 +188,7 @@ f:SetScript("OnEvent", function(self, event)
   "AddonListCancelButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
+  "GameMenuButtonWhatsNewText",
   "GameMenuButtonOptionsText",
   "GameMenuButtonUIOptionsText",
   "GameMenuButtonKeybindingsText",

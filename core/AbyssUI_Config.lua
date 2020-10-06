@@ -7,7 +7,7 @@
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 local texturepackCheck    = "1.0.1.2"
-local texturepackDate     = "04/10/20"
+local texturepackDate     = "06/10/20"
 if not AbyssUI_Config then
   local AbyssUI_Config = {}
 end
@@ -481,7 +481,7 @@ f:SetScript("OnEvent", function()
       FrameButton.text:SetShadowOffset(1, -1)
     end
   FrameButton:SetScript("OnClick", function()
-      AbyssUI_EditBox:SetText("https://www.wowinterface.com/downloads/info24701-AbyssUI.html#donate")
+      AbyssUI_EditBox:SetText("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
       AbyssUI_EditBox_Frame:Show()
   end)
 end)

@@ -802,6 +802,14 @@ end)
 local checkRune = CreateFrame("Frame", nil)
 checkRune:RegisterEvent("PLAYER_ENTERING_WORLD")
 checkRune:SetScript("OnEvent", function()
+	if ( AbyssUIAddonSettings.DKHordePortrait 		== true or 
+		AbyssUIAddonSettings.DKAllyPortrait 		== true or 
+		AbyssUIAddonSettings.DemonHunterPortrait 	== true ) then
+		PetFrame:SetFrameLevel(4)
+		PlayerFrameAlternateManaBar:SetFrameLevel(4)
+	else
+		return nil
+	end
 	if ( AbyssUIAddonSettings.DKHordePortrait == true ) then
 		RuneFrame:ClearAllPoints()
 		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
