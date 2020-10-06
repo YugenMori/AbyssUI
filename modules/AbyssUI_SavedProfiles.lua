@@ -1,3 +1,4 @@
+--[[
 -- testinf stuff
 AbyssUI_SavedProfiles = LibStub("AceAddon-3.0"):NewAddon("AbyssUI")
 
@@ -26,3 +27,4 @@ function AbyssUI_SavedProfiles:OnInitialize()
     self:RegisterChatCommand("welcomehome", "ChatCommand")	
     WelcomeHome.message = "Welcome Home!"
 end
+--]]

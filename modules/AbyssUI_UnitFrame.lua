@@ -28,7 +28,7 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 	if ( locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
@@ -127,19 +127,31 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	        end
 	        if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
 	          if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame-Elite")
+	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
+  	          elseif ( AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
+	          elseif ( AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
+	          elseif ( AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
+	         	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	          else 
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame")
+	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 	          end
-	          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\UI-Player-Status")
+	          if ( AbyssUIAddonSettings.DKHordePortrait == true ) then
+          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
+	          	PlayerFrameHealthBar:SetWidth(105)
+	          else
+	          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
+	          end
 	          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
 	        else
 	          if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame-Elite")
+	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
 	          else 
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame")
+	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 	          end
-	          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-Player-Status")
+	          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
 	          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
 	        end
 	      else
@@ -207,9 +219,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
 				if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\UI-UnitFrame-Boss")
+					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
 				else
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-UnitFrame-Boss")
+					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
 				end
 				UnitFramesImproved_Style_TargetFrame(self)
 			else 
@@ -395,17 +407,17 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					local texture
 					local classification = UnitClassification(self.unit)
 					if ( classification == "worldboss" or classification == "elite" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame-Elite"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite"
 					elseif ( classification == "rareelite" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame-Rare-Elite"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Rare-Elite"
 					elseif ( classification == "rare" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame-Rare"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Rare"
 					end
 					if ( texture and not forceNormalTexture) then
 						self.borderTexture:SetTexture(texture)
 					else
 						if ( not (classification == "minus") ) then
-							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\UI-TargetingFrame")
+							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 						end
 					end
 					self.nameBackground:Hide()
@@ -417,17 +429,17 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					local texture
 					local classification = UnitClassification(self.unit)
 					if ( classification == "worldboss" or classification == "elite" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame-Elite"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite"
 					elseif ( classification == "rareelite" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame-Rare-Elite"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Elite"
 					elseif ( classification == "rare" ) then
-						texture = "Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame-Rare"
+						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare"
 					end
 					if ( texture and not forceNormalTexture) then
 						self.borderTexture:SetTexture(texture)
 					else
 						if ( not (classification == "minus") ) then
-							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\backup\\UI-TargetingFrame")
+							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 						end
 					end
 					self.nameBackground:Hide()

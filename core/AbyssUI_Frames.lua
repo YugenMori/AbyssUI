@@ -28,7 +28,7 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 	if ( locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
@@ -76,13 +76,20 @@ local function AbyssUI_FrameSize(self, width, height)
 	self:SetWidth(width)
 	self:SetHeight(height)
 end
+-- ApplyFonts
+local function AbyssUI_ApplyFonts(self)
+  self:SetTextColor(45/255, 45/255, 45/255)
+  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetShadowColor(45/255, 45/255, 45/255)
+  self:SetShadowOffset(0.5, 0)
+end
 --------------------------------------------------------------
 --------------------------------------------------------------
 local _G = _G
 local moveString     			= _G["BINDING_NAME_MOVEFORWARD"]
 local cancelString    			= _G["CANCEL"]
 local confirmString   			= _G["OKAY"]
-local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\Textures\\extra\\dialogFrameTexture"
+local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
 local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
 ----------------------------------------------------
 ----------------------------------------------------
@@ -118,24 +125,33 @@ Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_EditBox_Frame)
 AbyssUI_EditBox_Frame.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_EditBox_Frame, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(100)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_EditBox_Frame, "BOTTOM", 0, 0)
-FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonConfirm.text:SetFont(globalFont, 12)
-FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-FrameButtonConfirm.text:SetText(confirmString)
-FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
-FrameButtonConfirm.text:SetShadowOffset(1, -1)
-FrameButtonConfirm:SetScript("OnClick", function()
-  AbyssUI_EditBox_Frame:Hide()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_EditBox_Frame, "UIPanelButtonTemplate")
+	FrameButtonConfirm:SetHeight(24)
+	FrameButtonConfirm:SetWidth(100)
+	FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_EditBox_Frame, "BOTTOM", 0, 0)
+	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButtonConfirm.text:SetFont(globalFont, 14)
+	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
+	FrameButtonConfirm.text:SetText(confirmString)
+		if ( AbyssUIAddonSettings.FontsValue == true ) then
+			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
+		else
+			FrameButtonConfirm.text:SetFont(globalFont, 14)
+			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
+			FrameButtonConfirm.text:SetShadowOffset(1, -1)
+		end
+	FrameButtonConfirm:SetScript("OnClick", function()
+	  AbyssUI_EditBox_Frame:Hide()
+	end)
 end)
 ----------------------------------------------------
 -- EditBox
 AbyssUI_EditBox= CreateFrame("EditBox", "$parentEditBox_TexturePack", AbyssUI_EditBox_Frame)
-AbyssUI_EditBox:SetFont(globalFont, 12, "THINOUTLINE")
+AbyssUI_EditBox:SetFont(globalFont, 14, "THINOUTLINE")
 AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
 AbyssUI_EditBox:SetMultiLine(true)
 AbyssUI_EditBox:SetHeight(24)
@@ -293,9 +309,9 @@ ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
 local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
 	if ( englishFaction == "Horde" ) then
-		t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Horde-Logo")
+		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
 	else
-		t:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\extra\\Alliance-Logo")
+		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
 	end
 t:SetAllPoints(ExtraInfo_Faction1)
 -- Gold Amount
@@ -769,7 +785,7 @@ Subtittle.text:SetJustifyV("CENTER")
 Subtittle.text:SetText("The improved World of Warcraft user interface")
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
-AbyssUIBorder:SetTexture(dialogFrameTexture)
+AbyssUIBorder:SetTexture(dialogFrameTextureBorder)
 AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
 AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
 --AbyssUIBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
@@ -780,7 +796,7 @@ BorderBody:SetAllPoints(AbyssUIFirstFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUIFirstFrame)
 AbyssUIFirstFrame.texture = Texture
 ----------------------------------------------------
@@ -831,7 +847,7 @@ AbyssUISecondFrame.text:SetText("Let's save the variables and prepare the interf
 .."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info.")
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUISecondFrame:CreateTexture(nil, "BACKGROUND")
-AbyssUIBorder:SetTexture(dialogFrameTexture)
+AbyssUIBorder:SetTexture(dialogFrameTextureBorder)
 AbyssUIBorder:SetPoint("TOPLEFT", -3, 3)
 AbyssUIBorder:SetPoint("BOTTOMRIGHT", 3, -3)
 --AbyssUIBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
@@ -842,154 +858,173 @@ BorderBody:SetAllPoints(AbyssUISecondFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUISecondFrame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUISecondFrame)
 AbyssUISecondFrame.texture = Texture
 ----------------------------------------------------
-local FrameButtonModern = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
-FrameButtonModern:SetHeight(40)
-FrameButtonModern:SetWidth(120)
-FrameButtonModern:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 100, -200)
-FrameButtonModern.text = FrameButtonModern.text or FrameButtonModern:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonModern.text:SetFont(globalFont, 18)
-FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
-FrameButtonModern.text:SetText("Modern")
-FrameButtonModern.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonModern.text:SetShadowColor(0, 0, 0)
-FrameButtonModern.text:SetShadowOffset(1, -1)
-FrameButtonModern.GlowTexture = FrameButtonModern:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
-FrameButtonModern.GlowTexture:SetAllPoints()
-FrameButtonModern.GlowTexture:Hide()
-FrameButtonModern.Glow = FrameButtonModern:CreateAnimationGroup()
-FrameButtonModern.Glow:SetLooping("REPEAT")
-local anim = FrameButtonModern.Glow:CreateAnimation("Alpha")
-anim:SetChildKey("GlowTexture")
-anim:SetOrder(1)
-anim:SetFromAlpha(0)
-anim:SetToAlpha(1)
-anim:SetDuration(0.5)
-anim = FrameButtonModern.Glow:CreateAnimation("Alpha")
-anim:SetOrder(2)
-anim:SetChildKey("GlowTexture")
-anim:SetFromAlpha(1)
-anim:SetToAlpha(0)
-anim:SetDuration(0.5)
-FrameButtonModern.Glow:SetScript("OnPlay", function(self)
-	self:GetParent().GlowTexture:Show()
-end)
-FrameButtonModern.Glow:SetScript("OnStop", function(self)
-	self:GetParent().GlowTexture:Hide()
-end)
-if not FrameButtonModern.running then
-	FrameButtonModern.running = true
-	FrameButtonModern.Glow:Play()
-else
-	FrameButtonModern.running = false
-	FrameButtonModern.Glow:Stop()
-end
-----------------------------------------------------
-local BorderButtonModern = FrameButtonModern:CreateTexture(nil, "ARTWORK")
-BorderButtonModern:SetAllPoints(FrameButtonModern)
-FrameButtonModern:SetScript("OnClick", function()
-	-- Set
-	for i, v in pairs {
-		addonTable.HideUnitImprovedFaction,
-		addonTable.HideGroupFrame,
-		addonTable.InstanceLeave,
-		addonTable.InspectTarget,
-		addonTable.ConfirmPopUps,
-		addonTable.AutoSellGray,
-		addonTable.HideInCombat,
-		addonTable.DisableHealingSpam,
-		addonTable.TooltipOnCursor,
-		addonTable.UnitFrameImproved,
-		addonTable.ElitePortrait,
-	} do
-		v:SetChecked(true)
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonModern = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+	FrameButtonModern:SetHeight(40)
+	FrameButtonModern:SetWidth(120)
+	FrameButtonModern:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 100, -200)
+	FrameButtonModern.text = FrameButtonModern.text or FrameButtonModern:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	FrameButtonModern.text:SetFont(globalFont, 18)
+	FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
+	FrameButtonModern.text:SetText("Modern")
+	if ( AbyssUIAddonSettings.FontsValue == true ) then
+		FrameButtonModern.text:SetTextColor(49/255, 49/255, 49/255)
+		FrameButtonModern.text:SetShadowColor(0, 0, 0)
+		FrameButtonModern.text:SetShadowOffset(0.5, 0)
+	else
+		FrameButtonModern.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonModern.text:SetShadowColor(0, 0, 0)
+		FrameButtonModern.text:SetShadowOffset(1, -1)
 	end
-	-- Get
-	AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
-	AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionHideInCombat			   = addonTable.HideInCombat:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
-	AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
-	AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
-	AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
-	AbyssUISecondFrame:Hide()
-	FrameButtonModern.Glow:Finish()
-	ReloadUI()
-end)
-----------------------------------------------------
-local FrameButtonClassic = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
-FrameButtonClassic:SetHeight(40)
-FrameButtonClassic:SetWidth(120)
-FrameButtonClassic:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", -100, -200)
-FrameButtonClassic.text = FrameButtonClassic.text or FrameButtonClassic:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonClassic.text:SetFont(globalFont, 18)
-FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
-FrameButtonClassic.text:SetText("Classic")
-FrameButtonClassic.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonClassic.text:SetShadowColor(0, 0, 0)
-FrameButtonClassic.text:SetShadowOffset(1, -1)
-----------------------------------------------------
-local BorderButtonClassic = FrameButtonClassic:CreateTexture(nil, "ARTWORK")
-BorderButtonClassic:SetAllPoints(FrameButtonClassic)
-FrameButtonClassic:SetScript("OnClick", function()
-	-- Set
-	for i, v in pairs {
-		addonTable.FPSMSFrame,
-		addonTable.YouDiedLevelUpFrame,
-		addonTable.HideUnitImprovedFaction,
-		addonTable.HideCastTimer,
-		addonTable.InstanceLeave,
-		addonTable.InspectTarget,
-		addonTable.ConfirmPopUps,
-		addonTable.AutoSellGray,
-		addonTable.ChatBubbleChanges,
-		addonTable.DisableHealingSpam,
-		addonTable.DisableSquareMinimap,
-		addonTable.DisableUnitFrameSmoke,
-	} do
-		v:SetChecked(true)
+	FrameButtonModern.GlowTexture = FrameButtonModern:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
+	FrameButtonModern.GlowTexture:SetAllPoints()
+	FrameButtonModern.GlowTexture:Hide()
+	FrameButtonModern.Glow = FrameButtonModern:CreateAnimationGroup()
+	FrameButtonModern.Glow:SetLooping("REPEAT")
+	local anim = FrameButtonModern.Glow:CreateAnimation("Alpha")
+	anim:SetChildKey("GlowTexture")
+	anim:SetOrder(1)
+	anim:SetFromAlpha(0)
+	anim:SetToAlpha(1)
+	anim:SetDuration(0.5)
+	anim = FrameButtonModern.Glow:CreateAnimation("Alpha")
+	anim:SetOrder(2)
+	anim:SetChildKey("GlowTexture")
+	anim:SetFromAlpha(1)
+	anim:SetToAlpha(0)
+	anim:SetDuration(0.5)
+	FrameButtonModern.Glow:SetScript("OnPlay", function(self)
+		self:GetParent().GlowTexture:Show()
+	end)
+	FrameButtonModern.Glow:SetScript("OnStop", function(self)
+		self:GetParent().GlowTexture:Hide()
+	end)
+	if not FrameButtonModern.running then
+		FrameButtonModern.running = true
+		FrameButtonModern.Glow:Play()
+	else
+		FrameButtonModern.running = false
+		FrameButtonModern.Glow:Stop()
 	end
-	-- Get
-	AbyssUIAddonSettings.HideFPSMSFrame 					        = addonTable.FPSMSFrame:GetChecked()
-	AbyssUIAddonSettings.HideYouDiedLevelUpFrame 		    	= addonTable.YouDiedLevelUpFrame:GetChecked()
-	AbyssUIAddonSettings.HideUnitImprovedFaction 		    	= addonTable.HideUnitImprovedFaction:GetChecked()
-	AbyssUIAddonSettings.HideCastTimer					        	= addonTable.HideCastTimer:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInstanceLeave    		= addonTable.InstanceLeave:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionInspectTarget 	  	= addonTable.InspectTarget:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 	  	= addonTable.ConfirmPopUps:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges 	= addonTable.ChatBubbleChanges:GetChecked()
-	AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
-	AbyssUIAddonSettings.DisableSquareMinimap				      = addonTable.DisableSquareMinimap:GetChecked()
-	AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
-	AbyssUISecondFrame:Hide()
-	FrameButtonModern.Glow:Finish()
-	ReloadUI()
+	----------------------------------------------------
+	local BorderButtonModern = FrameButtonModern:CreateTexture(nil, "ARTWORK")
+	BorderButtonModern:SetAllPoints(FrameButtonModern)
+	FrameButtonModern:SetScript("OnClick", function()
+		-- Set
+		for i, v in pairs {
+			addonTable.HideUnitImprovedFaction,
+			addonTable.HideGroupFrame,
+			addonTable.InstanceLeave,
+			addonTable.InspectTarget,
+			addonTable.ConfirmPopUps,
+			addonTable.AutoSellGray,
+			addonTable.DisableHealingSpam,
+			addonTable.TooltipOnCursor,
+			addonTable.UnitFrameImproved,
+			addonTable.ElitePortrait,
+		} do
+			v:SetChecked(true)
+		end
+		-- Get
+		AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
+		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
+		AbyssUISecondFrame:Hide()
+		FrameButtonModern.Glow:Finish()
+		ReloadUI()
+	end)
 end)
 ----------------------------------------------------
-local CloseButton = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
-CloseButton:SetHeight(40)
-CloseButton:SetWidth(40)
-CloseButton:SetPoint("TOPRIGHT", AbyssUISecondFrame, "TOPRIGHT", 0, 0)
-CloseButton.text = CloseButton.text or CloseButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-CloseButton.text:SetFont(globalFont, 18)
-CloseButton.text:SetPoint("CENTER", CloseButton, "CENTER", 0, 0)
-CloseButton.text:SetText("x")
-----------------------------------------------------
-local BorderCloseButton = CloseButton:CreateTexture(nil, "ARTWORK")
-BorderCloseButton:SetTexture(dialogFrameTextureBorder)
-BorderCloseButton:SetAllPoints(CloseButton)
-CloseButton:SetScript("OnClick", function()
-	AbyssUISecondFrame:Hide()
-	FrameButtonModern.Glow:Finish()
-	ReloadUI()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonClassic = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+	FrameButtonClassic:SetHeight(40)
+	FrameButtonClassic:SetWidth(120)
+	FrameButtonClassic:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", -100, -200)
+	FrameButtonClassic.text = FrameButtonClassic.text or FrameButtonClassic:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	FrameButtonClassic.text:SetFont(globalFont, 18)
+	FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
+	FrameButtonClassic.text:SetText("Classic")
+	if ( AbyssUIAddonSettings.FontsValue == true ) then
+	  	FrameButtonClassic.text:SetTextColor(49/255, 49/255, 49/255)
+		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
+		FrameButtonClassic.text:SetShadowOffset(0.5, 0)
+	else
+		FrameButtonClassic.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
+		FrameButtonClassic.text:SetShadowOffset(1, -1)
+	end
+
+	----------------------------------------------------
+	local BorderButtonClassic = FrameButtonClassic:CreateTexture(nil, "ARTWORK")
+	BorderButtonClassic:SetAllPoints(FrameButtonClassic)
+	FrameButtonClassic:SetScript("OnClick", function()
+		-- Set
+		for i, v in pairs {
+			addonTable.FPSMSFrame,
+			addonTable.YouDiedLevelUpFrame,
+			addonTable.HideUnitImprovedFaction,
+			addonTable.HideCastTimer,
+			addonTable.InstanceLeave,
+			addonTable.InspectTarget,
+			addonTable.ConfirmPopUps,
+			addonTable.AutoSellGray,
+			addonTable.ChatBubbleChanges,
+			addonTable.DisableHealingSpam,
+			addonTable.DisableSquareMinimap,
+			addonTable.DisableUnitFrameSmoke,
+		} do
+			v:SetChecked(true)
+		end
+		-- Get
+		AbyssUIAddonSettings.HideFPSMSFrame 					        = addonTable.FPSMSFrame:GetChecked()
+		AbyssUIAddonSettings.HideYouDiedLevelUpFrame 		    	= addonTable.YouDiedLevelUpFrame:GetChecked()
+		AbyssUIAddonSettings.HideUnitImprovedFaction 		    	= addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideCastTimer					        	= addonTable.HideCastTimer:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave    		= addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 	  	= addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 	  	= addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges 	= addonTable.ChatBubbleChanges:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.DisableSquareMinimap				      = addonTable.DisableSquareMinimap:GetChecked()
+		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
+		AbyssUISecondFrame:Hide()
+		FrameButtonModern.Glow:Finish()
+		ReloadUI()
+	end)
+	----------------------------------------------------
+	local CloseButton = CreateFrame("Button", "$parentFrameButton", AbyssUISecondFrame, "UIPanelButtonTemplate")
+	CloseButton:SetHeight(40)
+	CloseButton:SetWidth(40)
+	CloseButton:SetPoint("TOPRIGHT", AbyssUISecondFrame, "TOPRIGHT", 0, 0)
+	CloseButton.text = CloseButton.text or CloseButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	CloseButton.text:SetFont(globalFont, 18)
+	CloseButton.text:SetPoint("CENTER", CloseButton, "CENTER", 0, 0)
+	CloseButton.text:SetText("x")
+	----------------------------------------------------
+	local BorderCloseButton = CloseButton:CreateTexture(nil, "ARTWORK")
+	BorderCloseButton:SetTexture(dialogFrameTextureBorder)
+	BorderCloseButton:SetAllPoints(CloseButton)
+	CloseButton:SetScript("OnClick", function()
+		AbyssUISecondFrame:Hide()
+		FrameButtonModern.Glow:Finish()
+		ReloadUI()
+	end)
 end)
 ----------------------------------------------------
 -- AbyssUI_ReloadFrame
@@ -1022,7 +1057,7 @@ Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTextureBorder)
+BorderBody:SetTexture(dialogFrameTexture)
 BorderBody:SetAllPoints(AbyssUI_ReloadFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
@@ -1031,20 +1066,29 @@ Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_ReloadFrame)
 AbyssUI_ReloadFrame.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(100)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrame, "BOTTOM", 0, 10)
-FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonConfirm.text:SetFont(globalFont, 12)
-FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-FrameButtonConfirm.text:SetText(confirmString)
-FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
-FrameButtonConfirm.text:SetShadowOffset(1, -1)
-FrameButtonConfirm:SetScript("OnClick", function()
-	AbyssUI_ReloadFrame:Hide()
-	ReloadUI()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ReloadFrame, "UIPanelButtonTemplate")
+	FrameButtonConfirm:SetHeight(24)
+	FrameButtonConfirm:SetWidth(100)
+	FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrame, "BOTTOM", 0, 10)
+	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButtonConfirm.text:SetFont(globalFont, 14)
+	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
+	FrameButtonConfirm.text:SetText(confirmString)
+		if ( AbyssUIAddonSettings.FontsValue == true ) then
+			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
+		else
+			FrameButtonConfirm.text:SetFont(globalFont, 14)
+			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
+			FrameButtonConfirm.text:SetShadowOffset(1, -1)
+		end
+	FrameButtonConfirm:SetScript("OnClick", function()
+		AbyssUI_ReloadFrame:Hide()
+		ReloadUI()
+	end)
 end)
 ----------------------------------------------------
 -- AbyssUI_ReloadFrameFadeUI
@@ -1088,20 +1132,29 @@ Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_ReloadFrameFadeUI)
 AbyssUI_ReloadFrameFadeUI.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ReloadFrameFadeUI, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(100)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrameFadeUI, "BOTTOM", 0, 10)
-FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonConfirm.text:SetFont(globalFont, 12)
-FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-FrameButtonConfirm.text:SetText(confirmString)
-FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
-FrameButtonConfirm.text:SetShadowOffset(1, -1)
-FrameButtonConfirm:SetScript("OnClick", function()
-	AbyssUI_ReloadFrameFadeUI:Hide()
-	ReloadUI()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ReloadFrameFadeUI, "UIPanelButtonTemplate")
+	FrameButtonConfirm:SetHeight(24)
+	FrameButtonConfirm:SetWidth(100)
+	FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ReloadFrameFadeUI, "BOTTOM", 0, 10)
+	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButtonConfirm.text:SetFont(globalFont, 14)
+	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
+	FrameButtonConfirm.text:SetText(confirmString)
+		if ( AbyssUIAddonSettings.FontsValue == true ) then
+			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
+		else
+			FrameButtonConfirm.text:SetFont(globalFont, 14)
+			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
+			FrameButtonConfirm.text:SetShadowOffset(1, -1)
+		end
+	FrameButtonConfirm:SetScript("OnClick", function()
+		AbyssUI_ReloadFrameFadeUI:Hide()
+		ReloadUI()
+	end)
 end)
 ----------------------------------------------------
 -- AbyssUI_ActionBarCleaner
@@ -1133,7 +1186,7 @@ Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_ActionBarCleaner:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTextureBorder)
+BorderBody:SetTexture(dialogFrameTexture)
 BorderBody:SetAllPoints(AbyssUI_ActionBarCleaner)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
@@ -1142,43 +1195,60 @@ Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_ActionBarCleaner)
 AbyssUI_ActionBarCleaner.texture = Texture
 ----------------------------------------------------
-local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
-FrameButtonConfirm:SetHeight(24)
-FrameButtonConfirm:SetWidth(100)
-FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", -50, 10)
-FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonConfirm.text:SetFont(globalFont, 12)
-FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-FrameButtonConfirm.text:SetText(confirmString)
-FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
-FrameButtonConfirm.text:SetShadowOffset(1, -1)
-FrameButtonConfirm:SetScript("OnClick", function()
-  for i = 1, 120 do
-    PickupAction(i) ClearCursor()
-  end
-  AbyssUI_ActionBarCleaner:Hide()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+	FrameButtonConfirm:SetHeight(24)
+	FrameButtonConfirm:SetWidth(100)
+	FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", -50, 10)
+	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButtonConfirm.text:SetFont(globalFont, 14)
+	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
+	FrameButtonConfirm.text:SetText(confirmString)
+		if ( AbyssUIAddonSettings.FontsValue == true ) then
+			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
+		else
+			FrameButtonConfirm.text:SetFont(globalFont, 14)
+			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
+			FrameButtonConfirm.text:SetShadowOffset(1, -1)
+		end
+	FrameButtonConfirm:SetScript("OnClick", function()
+	  for i = 1, 120 do
+	    PickupAction(i) ClearCursor()
+	  end
+	  AbyssUI_ActionBarCleaner:Hide()
+	end)
 end)
 ----------------------------------------------------
-local FrameButtonCancel = CreateFrame("Button","$parentFrameButtonCancel", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
-FrameButtonCancel:SetHeight(24)
-FrameButtonCancel:SetWidth(100)
-FrameButtonCancel:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", 50, 10)
-FrameButtonCancel.text = FrameButtonCancel.text or FrameButtonCancel:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButtonCancel.text:SetFont(globalFont, 12)
-FrameButtonCancel.text:SetPoint("CENTER", FrameButtonCancel, "CENTER", 0, 0)
-FrameButtonCancel.text:SetText(cancelString)
-FrameButtonCancel.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButtonCancel.text:SetShadowColor(0, 0, 0)
-FrameButtonCancel.text:SetShadowOffset(1, -1)
-FrameButtonCancel:SetScript("OnClick", function()
-	AbyssUI_ActionBarCleaner:Hide()
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonCancel = CreateFrame("Button","$parentFrameButtonCancel", AbyssUI_ActionBarCleaner, "UIPanelButtonTemplate")
+	FrameButtonCancel:SetHeight(24)
+	FrameButtonCancel:SetWidth(100)
+	FrameButtonCancel:SetPoint("BOTTOM", AbyssUI_ActionBarCleaner, "BOTTOM", 50, 10)
+	FrameButtonCancel.text = FrameButtonCancel.text or FrameButtonCancel:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButtonCancel.text:SetFont(globalFont, 14)
+	FrameButtonCancel.text:SetPoint("CENTER", FrameButtonCancel, "CENTER", 0, 0)
+	FrameButtonCancel.text:SetText(cancelString)
+	if ( AbyssUIAddonSettings.FontsValue == true ) then
+		AbyssUI_ApplyFonts(FrameButtonCancel.text)
+	else
+		FrameButtonCancel.text:SetFont(globalFont, 14)
+		FrameButtonCancel.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonCancel.text:SetShadowColor(0, 0, 0)
+		FrameButtonCancel.text:SetShadowOffset(1, -1)
+	end
+	FrameButtonCancel:SetScript("OnClick", function()
+		AbyssUI_ActionBarCleaner:Hide()
+	end)
 end)
 -- Start Function
 local function AbyssUIStart()
 	AbyssUIFirstFrame:Show()
 end
-----------------------------------------------------
 --------------------------------- Save ---------------------------------
 local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")

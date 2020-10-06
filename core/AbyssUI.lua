@@ -1939,7 +1939,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_Collections" or name == "Blizzard_Wardrobe" then
+	if name == "Blizzard_Collections" then
 		for i, v in pairs({ WardrobeFrame.NineSlice.TopEdge,
 			WardrobeFrame.NineSlice.RightEdge,
 			WardrobeFrame.NineSlice.BottomEdge,

@@ -26,7 +26,7 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
   if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
     subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
@@ -60,6 +60,16 @@ local _G = _G
 local leaveString 		= _G["LEAVE_VEHICLE"]
 local teleportString	= _G["QUESTS_LABEL"]
 local closeString 		= _G["CLOSE"]
+local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
+local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
+--------------------------------------------------------------
+-- ApplyFonts
+local function AbyssUI_ApplyFonts(self)
+  self:SetTextColor(45/255, 45/255, 45/255)
+  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetShadowColor(45/255, 45/255, 45/255)
+  self:SetShadowOffset(0.5, 0)
+end
 --------------------------------------------------------------
 local AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_InstanceLeave_DynamicFrame", UIParent)
 AbyssUI_InstanceLeave_DynamicFrame:SetClampedToScreen(true)
@@ -75,7 +85,8 @@ AbyssUI_InstanceLeave_DynamicFrame.text = AbyssUI_InstanceLeave_DynamicFrame.tex
 AbyssUI_InstanceLeave_DynamicFrame.text:SetAllPoints(true)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetJustifyH("CENTER")
 AbyssUI_InstanceLeave_DynamicFrame.text:SetJustifyV("CENTER")
-AbyssUI_InstanceLeave_DynamicFrame.text:SetText("This instance is completed! Want to leave?")
+AbyssUI_InstanceLeave_DynamicFrame.text:SetText("This instance is completed! Want to leave?\n"..
+	"You can also teleport out/in or just close this frame")
 AbyssUI_InstanceLeave_DynamicFrame.text:SetFont(globalFont, 16)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetTextColor(229/255, 229/255, 229/255)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetShadowColor(0, 0, 0)
@@ -86,104 +97,123 @@ AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStop", AbyssUI_InstanceLeave
 
 -- Border --
 local LeaveBorder = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
-LeaveBorder:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+LeaveBorder:SetTexture(dialogFrameTexture)
 LeaveBorder:SetPoint("TOPLEFT", -3, 3)
 LeaveBorder:SetPoint("BOTTOMRIGHT", 3, -3)
-LeaveBorder:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 
 local BorderBody = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+BorderBody:SetTexture(dialogFrameTextureBorder)
 BorderBody:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 
 -- Texture --
 local Texture = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 AbyssUI_InstanceLeave_DynamicFrame.texture = Texture
 
 -- Button --
-local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(100)
-FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", -150, 10)
-FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButton.text:SetFont(globalFont, 12)
-FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
-FrameButton.text:SetText(leaveString)
-FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButton.text:SetShadowColor(0, 0, 0)
-FrameButton.text:SetShadowOffset(1, -1)
-FrameButton:SetScript("OnClick", function()
-	local isDg = IsInLFGDungeon()
-	local isComplete = IsLFGComplete()
-	local isPt = IsInGroup()
-	local isLFG = IsPartyLFG()
-	if ( isComplete and isDg and isPt ) then 
-		LeaveParty() 
-		LeaveBattlefield() 
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-		C_Timer.After(2, function()
-			AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	    end)
-	elseif ( not isDg and not isLFG and not isPt ) then 
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-		C_Timer.After(2, function()
-			AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	    end)
-	elseif ( isComplete and not isDg and isPt ) then 
-		LeaveParty() 
-		LeaveBattlefield() 
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-		C_Timer.After(2, function()
-			AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	    end)
-	else
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
-		C_Timer.After(2, function()
-			AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	    end)
-	end
-end)
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+	FrameButton:SetHeight(24)
+	FrameButton:SetWidth(100)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", -150, 10)
+	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButton.text:SetFont(globalFont, 14)
+	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
+	FrameButton.text:SetText(leaveString)
+		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		  AbyssUI_ApplyFonts(FrameButton.text)
+		else
+		  FrameButton.text:SetFont(globalFont, 14)
+		  FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+		  FrameButton.text:SetShadowColor(0, 0, 0)
+		  FrameButton.text:SetShadowOffset(1, -1)
+		end
+	FrameButton:SetScript("OnClick", function()
+		local isDg = IsInLFGDungeon()
+		local isComplete = IsLFGComplete()
+		local isPt = IsInGroup()
+		local isLFG = IsPartyLFG()
+		if ( isComplete and isDg and isPt ) then 
+			LeaveParty() 
+			LeaveBattlefield() 
+			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+			C_Timer.After(2, function()
+				AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		    end)
+		elseif ( not isDg and not isLFG and not isPt ) then 
+			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+			C_Timer.After(2, function()
+				AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		    end)
+		elseif ( isComplete and not isDg and isPt ) then 
+			LeaveParty() 
+			LeaveBattlefield() 
+			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+			C_Timer.After(2, function()
+				AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		    end)
+		else
+			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
+			C_Timer.After(2, function()
+				AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		    end)
+		end
+	end)
 
-local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(100)
-FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 0, 10)
-FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButton.text:SetFont(globalFont, 12)
-FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
-FrameButton.text:SetText(teleportString)
-FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButton.text:SetShadowColor(0, 0, 0)
-FrameButton.text:SetShadowOffset(1, -1)
-FrameButton:SetScript("OnClick", function()
-	local isDg  = IsInLFGDungeon()
-	local isPt  = IsInGroup()
-	local isLFG = IsPartyLFG()
-	if ( isDg and isLFG and isPt ) then LFGTeleport(isDg)
-	elseif ( isLFG and isPt and not isDg ) then LFGTeleport(isDg)
-	elseif ( not isDg and not isLFG and not isPt ) then AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	else
+
+	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+	FrameButton:SetHeight(24)
+	FrameButton:SetWidth(100)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 0, 10)
+	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButton.text:SetFont(globalFont, 14)
+	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
+	FrameButton.text:SetText(teleportString)
+	    if ( AbyssUIAddonSettings.FontsValue == true ) then
+	      AbyssUI_ApplyFonts(FrameButton.text)
+	    else
+	      FrameButton.text:SetFont(globalFont, 14)
+	      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+	      FrameButton.text:SetShadowColor(0, 0, 0)
+	      FrameButton.text:SetShadowOffset(1, -1)
+	    end
+	FrameButton:SetScript("OnClick", function()
+		local isDg  = IsInLFGDungeon()
+		local isPt  = IsInGroup()
+		local isLFG = IsPartyLFG()
+		if ( isDg and isLFG and isPt ) then LFGTeleport(isDg)
+		elseif ( isLFG and isPt and not isDg ) then LFGTeleport(isDg)
+		elseif ( not isDg and not isLFG and not isPt ) then AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		else
+			AbyssUI_InstanceLeave_DynamicFrame:Hide()
+		end
+	end)
+
+
+	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
+	FrameButton:SetHeight(24)
+	FrameButton:SetWidth(100)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 150, 10)
+	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	--FrameButton.text:SetFont(globalFont, 14)
+	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
+	FrameButton.text:SetText(closeString)
+	    if ( AbyssUIAddonSettings.FontsValue == true ) then
+	      AbyssUI_ApplyFonts(FrameButton.text)
+	    else
+	   	  FrameButton.text:SetFont(globalFont, 14)
+	      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+	      FrameButton.text:SetShadowColor(0, 0, 0)
+	      FrameButton.text:SetShadowOffset(1, -1)
+	    end
+	FrameButton:SetScript("OnClick", function()
 		AbyssUI_InstanceLeave_DynamicFrame:Hide()
-	end
+	end)
 end)
-
-local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
-FrameButton:SetHeight(24)
-FrameButton:SetWidth(100)
-FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 150, 10)
-FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-FrameButton.text:SetFont(globalFont, 12)
-FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
-FrameButton.text:SetText(closeString)
-FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
-FrameButton.text:SetShadowColor(0, 0, 0)
-FrameButton.text:SetShadowOffset(1, -1)
-FrameButton:SetScript("OnClick", function()
-	AbyssUI_InstanceLeave_DynamicFrame:Hide()
-end)
-
 -- DynamicFrame --
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("LFG_COMPLETION_REWARD")

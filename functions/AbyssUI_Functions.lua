@@ -28,7 +28,7 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 	if ( locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
@@ -558,48 +558,16 @@ local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 local function eventHandler(self, event, ...)
-	if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
-		if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
-			if ( UnitReaction("player", "target") ~= nil ) then
-				local target = UnitReaction("player", "target")
-				local utarget = UnitIsPlayer("target")
-				if utarget == false and target < 3 then
-					TargetFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
-				elseif ( utarget == false and target == 3 ) then
-					TargetFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
-				elseif ( utarget == false and target == 4 ) then
-					TargetFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
-				elseif ( utarget == false and target > 4 ) then
-					TargetFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
-				else
-					return nil
-				end
-			else 
-				return nil
-			end
-			if ( UnitReaction("player", "focus") ~= nil ) then
-				local focus = UnitReaction("player", "focus")
-				local ufocus = UnitIsPlayer("focus")
-				if ufocus == false and focus < 4 then
-					FocusFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
-				elseif ( ufocus == false and target == 3 ) then
-					FocusFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
-				elseif ( ufocus == false and focus == 4 ) then
-					FocusFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
-				elseif ( ufocus == false and focus > 4 ) then
-					FocusFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
-				else
-					return nil
-				end
-			else 
-				return nil
-			end
+	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
+		if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+			TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
+			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
 		else
 			return nil
 		end
-	else
-		return nil
-	end
+		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+		FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+	end	
 end
 frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground, }) do
@@ -609,40 +577,10 @@ end
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
 	if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
-		if ( UnitReaction("player", "target") ~= nil ) then
-			local target = UnitReaction("player", "target")
-			local utarget = UnitIsPlayer("target")
-			if utarget == false and target < 3 then
-				TargetFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
-			elseif ( utarget == false and target == 3 ) then
-				TargetFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
-			elseif ( utarget == false and target == 4 ) then
-				TargetFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
-			elseif ( utarget == false and target > 4 ) then
-				TargetFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
-			else
-				return nil
-			end
-		else 
-			return nil
-		end
-		if ( UnitReaction("player", "focus") ~= nil ) then
-			local focus = UnitReaction("player", "focus")
-			local ufocus = UnitIsPlayer("focus")
-			if ufocus == false and focus < 4 then
-				FocusFrameHealthBar:SetStatusBarColor(255/255, 0/255, 0/255)
-			elseif ( ufocus == false and target == 3 ) then
-				FocusFrameHealthBar:SetStatusBarColor(242/255, 96/255, 0/255)
-			elseif ( ufocus == false and focus == 4 ) then
-				FocusFrameHealthBar:SetStatusBarColor(255/255, 255/255, 0/255)
-			elseif ( ufocus == false and focus > 4 ) then
-				FocusFrameHealthBar:SetStatusBarColor(51/255, 255/255, 51/255)
-			else
-				return nil
-			end
-		else 
-			return nil
-		end
+		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))		
+		FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
+		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
+		FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 	else
 		return nil
 	end
@@ -824,12 +762,58 @@ AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
     if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
     	PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
-    	TargetFrameTextureFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-RareMob")
-    	FocusFrameTextureFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-RareMob")
-	elseif ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
-		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Elite")
-	    TargetFrameTextureFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Rare")
-	    FocusFrameTextureFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\UI-TargetingFrame-Rare")
+	else
+		return nil
+	end
+end)
+-- DK Ally Portrait
+local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
+AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
+    if ( AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Alliance")
+	else
+		return nil
+	end
+end)
+-- DK Horde Portrait
+local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
+AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
+    if ( AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Horde")
+    	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-StatusDKH")
+    	PlayerFrameHealthBar:SetWidth(105)
+	else
+		return nil
+	end
+end)
+-- Demon Hunter Portrait
+local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
+AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
+	if ( AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-TargetingFrame-DemonHunter")
+    	PlayerFrameTexture:SetVertexColor(1, 1, 1)
+	else
+		return nil
+	end
+end)
+local checkRune = CreateFrame("Frame", nil)
+checkRune:RegisterEvent("PLAYER_ENTERING_WORLD")
+checkRune:SetScript("OnEvent", function()
+	if ( AbyssUIAddonSettings.DKHordePortrait == true ) then
+		RuneFrame:ClearAllPoints()
+		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
+		RuneFrame:SetFrameLevel(1)
+	elseif ( AbyssUIAddonSettings.DKAllyPortrait == true ) then
+		RuneFrame:ClearAllPoints()
+		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 44, 15)
+		RuneFrame:SetFrameLevel(6)
+	elseif ( AbyssUIAddonSettings.DemonHunterPortrait == true ) then
+		RuneFrame:ClearAllPoints()
+		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
+		RuneFrame:SetFrameLevel(1)
 	else
 		return nil
 	end

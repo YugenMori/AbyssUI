@@ -28,7 +28,7 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 	if ( locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
@@ -77,90 +77,6 @@ local function AbyssUI_FrameSize(self, width, height)
 	self:SetHeight(height)
 end
 --------------------------------------------------------------
---------------------------------------------------------------
--- Fonts
-----------------------------------------------------
-local AbyssUI_FontString = CreateFrame("Frame", "$parentAbyssUI_FontString", nil)
-AbyssUI_FontString:RegisterEvent("ADDON_LOADED")
-AbyssUI_FontString:RegisterEvent("PLAYER_LOGOUT")
-AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
-		STANDARD_TEXT_FONT          = globalFont
-		DAMAGE_TEXT_FONT          	= damageFont
-		UNIT_NAME_FONT              = subFont
-		NAMEPLATE_FONT              = subFont
-		NAMEPLATE_SPELLCAST_FONT    = subFont
-		
-		-- XML changes
-		local ForcedFontSize = {10, 14, 20, 64, 64}
-		local BlizFontObjects = {
-			-- These five fonts use the fixedSize argument, causing an incorrent font size return, so input our own sizes (ForcedFontSize)
-			SystemFont_NamePlateCastBar, SystemFont_NamePlateFixed, SystemFont_LargeNamePlateFixed, SystemFont_World, SystemFont_World_ThickOutline,
-			
-			SystemFont_Outline_Small, SystemFont_Outline, SystemFont_InverseShadow_Small, SystemFont_Med2, SystemFont_Med3, SystemFont_Shadow_Med3,
-			SystemFont_Huge1, SystemFont_Huge1_Outline, SystemFont_OutlineThick_Huge2, SystemFont_OutlineThick_Huge4, SystemFont_OutlineThick_WTF,
-			NumberFont_GameNormal, NumberFont_Shadow_Small, NumberFont_OutlineThick_Mono_Small, NumberFont_Shadow_Med, NumberFont_Normal_Med, 
-			NumberFont_Outline_Med, NumberFont_Outline_Large, NumberFont_Outline_Huge, Fancy22Font, QuestFont_Huge, QuestFont_Outline_Huge,
-			QuestFont_Super_Huge, QuestFont_Super_Huge_Outline, SplashHeaderFont, Game11Font, Game12Font, Game13Font, Game13FontShadow,
-			Game15Font, Game18Font, Game20Font, Game24Font, Game27Font, Game30Font, Game32Font, Game36Font, Game48Font, Game48FontShadow,
-			Game60Font, Game72Font, Game11Font_o1, Game12Font_o1, Game13Font_o1, Game15Font_o1, QuestFont_Enormous, DestinyFontLarge,
-			CoreAbilityFont, DestinyFontHuge, QuestFont_Shadow_Small, MailFont_Large, SpellFont_Small, InvoiceFont_Med, InvoiceFont_Small,
-			Tooltip_Med, Tooltip_Small, AchievementFont_Small, ReputationDetailFont, FriendsFont_Normal, FriendsFont_Small, FriendsFont_Large,
-			FriendsFont_UserText, GameFont_Gigantic, ChatBubbleFont, Fancy16Font, Fancy18Font, Fancy20Font, Fancy24Font, Fancy27Font, Fancy30Font,
-			Fancy32Font, Fancy48Font, SystemFont_NamePlate, SystemFont_LargeNamePlate,
-			
-			-- SharedFonts.xml
-			
-			SystemFont_Tiny2, SystemFont_Tiny, SystemFont_Shadow_Small, SystemFont_Small, SystemFont_Small2, SystemFont_Shadow_Small2, SystemFont_Shadow_Med1_Outline,
-			SystemFont_Shadow_Med1, QuestFont_Large, SystemFont_Large, SystemFont_Shadow_Large_Outline, SystemFont_Shadow_Med2, SystemFont_Shadow_Large, 
-			SystemFont_Shadow_Large2, SystemFont_Shadow_Huge1, SystemFont_Huge2, SystemFont_Shadow_Huge2, SystemFont_Shadow_Huge3, SystemFont_Shadow_Outline_Huge3,
-			SystemFont_Shadow_Outline_Huge2, SystemFont_Med1, SystemFont_WTF2, SystemFont_Outline_WTF2, 
-			GameTooltipHeader, System_IME,
-		}
-
-		for i, FontObject in pairs(BlizFontObjects) do
-			local _, oldSize, oldStyle  = FontObject:GetFont()
-			FontObject:SetFont(globalFont, ForcedFontSize[i] or oldSize, oldStyle)
-		end
-		
-		BlizFontObjects = nil
-	end
-end)
--- Change yellow fonts text color
-local f, _ = CreateFrame("frame")
-f:RegisterEvent("PLAYER_LOGIN")
-f:SetScript("OnEvent", function(self, event)
-  f.yellow = {
-    "AchievementDateFont",
-    "AchievementPointsFont",
-    "AchievementPointsFontSmall",
-    "BossEmoteNormalHuge",
-    "DialogButtonNormalText",
-    "FocusFontSmall",
-    "GameFontNormal",
-    "GameFontNormalHuge",
-    "GameFontNormalLarge",
-    "GameFontNormalMed3",
-    "GameFontNormalSmall",
-    "GameFont_Gigantic",
-    "NumberFontNormalLargeRightYellow",
-    "NumberFontNormalLargeYellow",
-    "NumberFontNormalRightYellow",
-    "NumberFontNormalYellow",
-    "QuestFont_Enormous",
-    "QuestFont_Super_Huge",
-    "QuestFont_Super_Huge_Outline",
-    "QuestTitleFontBlackShadow",
-    "SplashHeaderFont",
-  }
-  if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
-    for _, v in next, f.yellow do 
-      _G[v]:SetTextColor(229/255, 229/255, 229/255)
-    end
-      _G.WorldMapFrame.NavBar.home.text:SetTextColor(229/255, 229/255, 229/255)
-  end
-end)
-----------------------------------------------------
 -- UnitColor
 local UnitColor
 local function UnitColor(unit)
@@ -190,7 +106,6 @@ local function UnitColor(unit)
     return nil
   end
 end
-
 -- Fade UI
 local _G = _G
 local FadeUIFirstHide = CreateFrame("CheckButton", "$parentFadeUIFirstHide", UIParent, "ChatConfigCheckButtonTemplate")
@@ -302,18 +217,18 @@ end)
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-			if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
-			if not frame.healthBar.percent then
-				frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
-				frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
-				frame.healthBar.percent:SetFont(damageFont, 10)
-				frame.healthBar.percent:SetShadowColor(0, 0, 0)
-				frame.healthBar.percent:SetShadowOffset(1, -0.25)
-			end
-			local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
-			if ( percentcalc == 0 ) then return end
-			frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
-			--frame.healthBar.percent:Show()
+		if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
+		if not frame.healthBar.percent then
+			frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
+			frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
+			frame.healthBar.percent:SetFont(damageFont, 10)
+			frame.healthBar.percent:SetShadowColor(0, 0, 0)
+			frame.healthBar.percent:SetShadowOffset(1, -0.25)
+		end
+		local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+		if ( percentcalc == 0 ) then return end
+		frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
+		--frame.healthBar.percent:Show()
 	end
 end)
 -- Nameplate colorization
@@ -329,8 +244,8 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
 				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit('player') then
 					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
 					if ( healthPercentage == 0 ) then return end
-          if ( healthPercentage == 100 ) then
-            self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
+          			if ( healthPercentage == 100 ) then
+            			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 100 and healthPercentage > 21 then
 						self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 21 then
@@ -512,7 +427,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		local showclock = false			
 		local AddonNumb = 30			
 
-		local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\minimap\\"
+		local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\minimap\\"
 		local texture = "Interface\\Buttons\\WHITE8x8"
 		--local backdrop = {bgFile = texture, edgeFile = texture, edgeSize = 1, insets = { left = -1, right = -1, top = -1, bottom = -1}}
 		local backdrop = {edgeFile = texture, edgeSize = 1}
@@ -964,7 +879,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			BBorderFrame:SetFrameLevel(6)		
 		end)
 	else
-		Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\Textures\\minimap\\round")
+		Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\textures\\minimap\\round")
 	end
 end)
 ----------------------------------------------------
@@ -979,7 +894,7 @@ KillAnouncerFrame:SetClampedToScreen(true)
 KillAnouncerFrame:SetPoint("CENTER", 120, 5)
 KillAnouncerFrame:Hide()
 local t = KillAnouncerFrame:CreateTexture(nil, "BACKGROUND")
-t:SetTexture("Interface\\Addons\\AbyssUI\\Textures\\extra\\bloodtexture")
+t:SetTexture("Interface\\Addons\\AbyssUI\\textures\\extra\\bloodtexture")
 t:SetAllPoints(KillAnouncerFrame)
 KillAnouncerFrame.texture = t
 -- Text
@@ -1203,6 +1118,43 @@ f:SetScript("OnEvent", function(self, event, ...)
         TalkingHeadFrameMover()
         self:UnregisterAllEvents()
     end
+end)
+-- FirstPerson Cam
+local AbyssUI_FirstPerson = CreateFrame("Frame", nil)
+AbyssUI_FirstPerson:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_FirstPerson:RegisterEvent("PLAYER_REGEN_DISABLED")
+AbyssUI_FirstPerson:SetScript("OnEvent", function()
+  if ( AbyssUIAddonSettings.FirstPerson == true ) then
+  	SetView(5) -- Reset cam
+  	SetView(5)
+    SetView(3)
+  else
+    return nil
+  end
+end)
+-- Player Classic Name
+local AbyssUI_PlayerClassicName = CreateFrame("Frame", nil)
+AbyssUI_PlayerClassicName:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_PlayerClassicName:SetScript("OnEvent", function()
+	if( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+		for i, v in pairs({
+			PlayerName,
+			TargetFrameTextureFrameName,
+			FocusFrameTextureFrameName,
+			PlayerFrameHealthBarText,
+			PlayerFrameManaBarText,
+			TargetFrameTextureFrameHealthBarText,
+			TargetFrameTextureFrameManaBarText,
+			FocusFrameTextureFrameHealthBarText,
+			FocusFrameTextureFrameManaBarText,
+		}) do
+			v:SetVertexColor(229/255, 229/255, 229/255)
+			v:SetShadowColor(0, 0, 0)
+			v:SetShadowOffset(1, -0.8)
+		end
+	else
+		return nil
+	end
 end)
 ----------------------------------------------------
 --End
