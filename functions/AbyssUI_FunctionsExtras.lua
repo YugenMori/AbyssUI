@@ -108,12 +108,49 @@ local function UnitColor(unit)
 end
 -- Fade UI
 local _G = _G
+-- check hide
+local function checkForWhatToHide(self, event)
+	local inInstance, instanceType = IsInInstance()
+	if ( instanceType == "pvp" or instanceType == "arena" or instanceType == "party" or instanceType == "raid" ) then
+		self:SetAlpha(1)
+	else
+		if( (self:GetAlpha() == 0 or not self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0) ) then
+			--UIFrameFadeIn(self, 1, 0, 1)
+			self:SetAlpha(1)
+		elseif ( (self:GetAlpha() == 1 or self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0) ) then
+			--UIFrameFadeIn(self, 1, 1, 0)
+			self:SetAlpha(0)
+		elseif ( (self:GetAlpha() == 0 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) ) then
+			self:SetAlpha(1)
+		elseif ( (self:GetAlpha() == 0 or not self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) ) then
+			self:SetAlpha(1)
+		elseif ( (self:GetAlpha() == 1 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) and event == "PLAYER_REGEN_ENABLED" ) then
+			self:SetAlpha(0)
+		else
+			return nil
+		end
+		if ( event == "PLAYER_REGEN_ENABLED" ) then
+			self:SetAlpha(0)
+		end
+	end
+end
+local function checkUnitToHide(self)
+	if( self:IsShown() and (not PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 0) ) then
+		--UIFrameFadeIn(self, 1, 0, 1)
+		self:SetAlpha(0)
+	elseif ( not self:IsShown() and (PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 1) ) then
+		self:SetAlpha(1)
+	else
+		return nil
+	end
+end
 local FadeUIFirstHide = CreateFrame("CheckButton", "$parentFadeUIFirstHide", UIParent, "ChatConfigCheckButtonTemplate")
 FadeUIFirstHide:RegisterEvent("PLAYER_ENTERING_WORLD")
 FadeUIFirstHide:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.FadeUI == true ) then
 		C_Timer.After(1, function() 
 			for i, v in pairs ({
+				PlayerFrame,
 				BuffFrame,
 				QuestWatchFrame,
 				GeneralDockManager,
@@ -122,11 +159,18 @@ FadeUIFirstHide:SetScript("OnEvent", function(self, event, ...)
 				MainMenuBar,
 				VerticalMultiBarsContainer,
 				MultiBarLeft,
+				ObjectiveTrackerFrame,
 			}) do
-				UIFrameFadeIn(v, 1, 1, 0)
+				checkForWhatToHide(v, event)
 			end
 			for i=1, 12 do
 				UIFrameFadeIn(_G["ExtraBarButton"..i], 1, 1, 0)			
+			end
+			for i, v in pairs({
+				TargetFrame,
+				FocusFrame,
+			}) do
+				checkUnitToHide(v) 
 			end
 		end)
 	else
@@ -136,10 +180,15 @@ end)
 local FadeUI = CreateFrame("CheckButton", "$parentFadeUI", UIParent, "ChatConfigCheckButtonTemplate")
 FadeUI:RegisterEvent("PLAYER_REGEN_DISABLED")
 FadeUI:RegisterEvent("PLAYER_REGEN_ENABLED")
+FadeUI:RegisterEvent("PLAYER_TARGET_CHANGED")
+FadeUI:RegisterEvent("PLAYER_FOCUS_CHANGED")
+--FadeUI:RegisterEvent("PARTY_MEMBERS_CHANGED")
+FadeUI:RegisterEvent("RAID_ROSTER_UPDATE")
 FadeUI:SetScript("OnEvent", function(self, event, ...)
 	if ( AbyssUIAddonSettings.FadeUI == true ) then
-		if ( event == "PLAYER_REGEN_DISABLED" ) then
+		if ( event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" ) then
 			for i, v in pairs ({
+				PlayerFrame,
 				BuffFrame,
 				QuestWatchFrame,
 				GeneralDockManager,
@@ -148,14 +197,22 @@ FadeUI:SetScript("OnEvent", function(self, event, ...)
 				MainMenuBar,
 				VerticalMultiBarsContainer,
 				MultiBarLeft,
+				ObjectiveTrackerFrame,
 			}) do
-				UIFrameFadeIn(v, 1, 0, 1)
+				checkForWhatToHide(v, event)
 			end
-			for i=1, 12 do
-				UIFrameFadeIn(_G["ExtraBarButton"..i], 1, 0, 1)	
+			--for i=1, 12 do
+				--UIFrameFadeIn(_G["ExtraBarButton"..i], 1, 1, 0)			
+			--end
+			for i, v in pairs({
+				TargetFrame,
+				FocusFrame,
+			}) do
+				checkUnitToHide(v) 
 			end
-		elseif ( event == "PLAYER_REGEN_ENABLED" ) then
+		elseif ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
 			for i, v in pairs ({
+				PlayerFrame,
 				BuffFrame,
 				QuestWatchFrame,
 				GeneralDockManager,
@@ -164,11 +221,36 @@ FadeUI:SetScript("OnEvent", function(self, event, ...)
 				MainMenuBar,
 				VerticalMultiBarsContainer,
 				MultiBarLeft,
+				ObjectiveTrackerFrame,
 			}) do
-				UIFrameFadeIn(v, 1, 1, 0)
+				checkForWhatToHide(v, event)
 			end
-			for i=1, 12 do
-				UIFrameFadeIn(_G["ExtraBarButton"..i], 1, 1, 0)			
+			for i, v in pairs({
+				TargetFrame,
+				FocusFrame,
+			}) do
+				checkUnitToHide(v) 
+			end
+		elseif ( event == "PARTY_MEMBERS_CHANGED" or event == "RAID_ROSTER_UPDATE" ) then
+			for i, v in pairs ({
+				PlayerFrame,
+				BuffFrame,
+				QuestWatchFrame,
+				GeneralDockManager,
+				ChatFrameMenuButton,
+				ChatFrameChannelButton,
+				MainMenuBar,
+				VerticalMultiBarsContainer,
+				MultiBarLeft,
+				ObjectiveTrackerFrame,
+			}) do
+				checkForWhatToHide(v, event)
+			end
+			for i, v in pairs({
+				TargetFrame,
+				FocusFrame,
+			}) do
+				checkUnitToHide(v) 
 			end
 		else
 			return nil
@@ -186,6 +268,7 @@ end)
 FadeUI_MouseOver:SetScript("OnClick", function()
 	if ( AbyssUIAddonSettings.FadeUI == true ) then
 		for i, v in pairs ({
+			PlayerFrame,
 			BuffFrame,
 			QuestWatchFrame,
 			GeneralDockManager,
@@ -194,6 +277,7 @@ FadeUI_MouseOver:SetScript("OnClick", function()
 			MainMenuBar,
 			VerticalMultiBarsContainer,
 			MultiBarLeft,
+			ObjectiveTrackerFrame,
 		}) do
 			UIFrameFadeIn(v, 1, 0, 1)
 		end

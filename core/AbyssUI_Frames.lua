@@ -136,7 +136,7 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
@@ -873,7 +873,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonModern.text:SetFont(globalFont, 18)
 	FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
 	FrameButtonModern.text:SetText("Modern")
-	if ( AbyssUIAddonSettings.FontsValue == true ) then
+	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 		FrameButtonModern.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonModern.text:SetShadowColor(0, 0, 0)
 		FrameButtonModern.text:SetShadowOffset(0.5, 0)
@@ -959,7 +959,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonClassic.text:SetFont(globalFont, 18)
 	FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
 	FrameButtonClassic.text:SetText("Classic")
-	if ( AbyssUIAddonSettings.FontsValue == true ) then
+	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 	  	FrameButtonClassic.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
 		FrameButtonClassic.text:SetShadowOffset(0.5, 0)
@@ -1077,7 +1077,7 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
@@ -1143,7 +1143,7 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
@@ -1206,7 +1206,7 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
@@ -1233,7 +1233,7 @@ f:SetScript("OnEvent", function()
 	--FrameButtonCancel.text:SetFont(globalFont, 14)
 	FrameButtonCancel.text:SetPoint("CENTER", FrameButtonCancel, "CENTER", 0, 0)
 	FrameButtonCancel.text:SetText(cancelString)
-	if ( AbyssUIAddonSettings.FontsValue == true ) then
+	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 		AbyssUI_ApplyFonts(FrameButtonCancel.text)
 	else
 		FrameButtonCancel.text:SetFont(globalFont, 14)

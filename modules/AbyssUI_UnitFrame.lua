@@ -204,7 +204,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.healthbar.TextString:SetPoint("CENTER",-50,6)
 						end
 						self.deadText:SetPoint("CENTER",-50,6)
-						self.nameBackground:Hide()
+						self.nameBackground:SetAlpha(0)
 						self.Background:SetPoint("TOPLEFT",7,-22)
 					end
 					self.healthbar:SetWidth(119)

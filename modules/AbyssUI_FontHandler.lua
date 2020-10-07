@@ -146,8 +146,8 @@ init:RegisterEvent("PLAYER_LOGOUT")
 init:SetScript("OnEvent", function()
   if AbyssUIAddonSettings.FontsValue then
     AbyssUIAddonSettings.FontsValue = AbyssUIAddonSettings.FontsValue
+    AbyssUI_CheckFonts()
   end
-  AbyssUI_CheckFonts()
 end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)

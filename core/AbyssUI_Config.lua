@@ -333,7 +333,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("AbyssUI Setup")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -357,7 +357,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Clear Action Bar")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -381,7 +381,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("AbyssUI DailyInfo")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -423,7 +423,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Reload UI")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -447,7 +447,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Discord")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -472,7 +472,7 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Donate")
-    if ( AbyssUIAddonSettings.FontsValue == true ) then
+    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
@@ -1675,8 +1675,8 @@ end)
 -- Disable font white text --
 local AbyssUI_FontWhiteText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_FontWhiteText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_FontWhiteText_CheckButton:SetPoint("TOPLEFT", 400, -320)
-AbyssUI_FontWhiteText_CheckButton.Text:SetText("Disable White Button Text")
-AbyssUI_FontWhiteText_CheckButton.tooltip = "Disable some buttons white text color back to yellow"
+AbyssUI_FontWhiteText_CheckButton.Text:SetText("Disable Button Color Text")
+AbyssUI_FontWhiteText_CheckButton.tooltip = "Change the button colors back to default yellow"
 AbyssUI_FontWhiteText_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText)
 -- OnClick Function
 AbyssUI_FontWhiteText_CheckButton:SetScript("OnClick", function(self)
@@ -1805,8 +1805,13 @@ FadeUI_CheckButton.tooltip = "Fade the UI when you are out of combat ('ATL-CTRL-
 FadeUI_CheckButton:SetChecked(AbyssUIAddonSettings.FadeUI)
 -- OnClick Function
 FadeUI_CheckButton:SetScript("OnClick", function(self)
-  AbyssUIAddonSettings.FadeUI = self:GetChecked()
-  AbyssUI_ReloadFrameFadeUI:Show()
+  if ( AbyssUIAddonSettings.ExtraFunctionHideInCombat ~= true ) then
+    AbyssUIAddonSettings.FadeUI = self:GetChecked()
+    AbyssUI_ReloadFrameFadeUI:Show()
+  else
+    UIErrorsFrame:AddMessage("Disable 'Dynamic ObjectiveTrack Hide' at Miscellaneous tab first", 1, 0, 0, 3)
+    FadeUI_CheckButton:SetChecked(nil)
+  end
 end)
 -- Minimal ActionBar --
 local MinimalActionBar_CheckButton = CreateFrame("CheckButton", "$parentMinimalActionBar_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
@@ -2906,7 +2911,7 @@ f:SetScript("OnEvent", function()
   --AbyssUIVertexColorFramesColorPicker_Button.text:SetFont(globalFont, 14)
   AbyssUIVertexColorFramesColorPicker_Button.text:SetPoint("CENTER", AbyssUIVertexColorFramesColorPicker_Button, "CENTER", 0, 0)
   AbyssUIVertexColorFramesColorPicker_Button.text:SetText(colorString)
-  if ( AbyssUIAddonSettings.FontsValue == true ) then
+  if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
         AbyssUI_ApplyFonts(AbyssUIVertexColorFramesColorPicker_Button.text)
       else
         AbyssUIVertexColorFramesColorPicker_Button.text:SetFont(globalFont, 14)

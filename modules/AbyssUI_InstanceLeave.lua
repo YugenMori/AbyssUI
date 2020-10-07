@@ -124,7 +124,7 @@ f:SetScript("OnEvent", function()
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
 	FrameButton.text:SetText(leaveString)
-		if ( AbyssUIAddonSettings.FontsValue == true ) then
+		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 		  AbyssUI_ApplyFonts(FrameButton.text)
 		else
 		  FrameButton.text:SetFont(globalFont, 14)
@@ -173,7 +173,7 @@ f:SetScript("OnEvent", function()
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
 	FrameButton.text:SetText(teleportString)
-	    if ( AbyssUIAddonSettings.FontsValue == true ) then
+	    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 	      AbyssUI_ApplyFonts(FrameButton.text)
 	    else
 	      FrameButton.text:SetFont(globalFont, 14)
@@ -202,7 +202,7 @@ f:SetScript("OnEvent", function()
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
 	FrameButton.text:SetText(closeString)
-	    if ( AbyssUIAddonSettings.FontsValue == true ) then
+	    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
 	      AbyssUI_ApplyFonts(FrameButton.text)
 	    else
 	   	  FrameButton.text:SetFont(globalFont, 14)
