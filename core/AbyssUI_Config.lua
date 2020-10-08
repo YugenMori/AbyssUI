@@ -6,11 +6,16 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
-local texturepackCheck    = "1.0.1.2"
-local texturepackDate     = "06/10/20"
-if not AbyssUI_Config then
-  local AbyssUI_Config = {}
-end
+local texturepackCheck    = "1.0.1.3"
+local texturepackDate     = "07/10/20"
+local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
+f:SetSize(50, 50)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event, ...)
+  if not AbyssUI_Config then
+    local AbyssUI_Config = {}
+  end
+end)
 -- Color Init
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
@@ -1678,6 +1683,7 @@ AbyssUI_FontWhiteText_CheckButton:SetPoint("TOPLEFT", 400, -320)
 AbyssUI_FontWhiteText_CheckButton.Text:SetText("Disable Button Color Text")
 AbyssUI_FontWhiteText_CheckButton.tooltip = "Change the button colors back to default yellow"
 AbyssUI_FontWhiteText_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText)
+addonTable.ExtraFunctionDisableFontWhiteText = AbyssUI_FontWhiteText_CheckButton
 -- OnClick Function
 AbyssUI_FontWhiteText_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText = self:GetChecked()

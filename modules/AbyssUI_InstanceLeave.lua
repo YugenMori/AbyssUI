@@ -6,9 +6,17 @@
 --------------------------------------------------------------
 -- Make sure to init everything again
 local addonName, addonTable = ...
-if not AbyssUI_Config then
-  local AbyssUI_Config = {}
-end
+local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
+f:SetSize(50, 50)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event, ...)
+	if not AbyssUI_Config then
+		local AbyssUI_Config = {}
+	end
+	if not AbyssUIAddonSettings then
+		AbyssUIAddonSettings = {}
+	end
+end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)

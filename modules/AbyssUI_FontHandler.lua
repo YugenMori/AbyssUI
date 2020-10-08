@@ -1,8 +1,16 @@
 -- Init - Tables - Saves
 local addonName, addonTable = ...
-if not AbyssUI_Config then
-  local AbyssUI_Config = {}
-end
+local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
+f:SetSize(50, 50)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event, ...)
+  if not AbyssUI_Config then
+    local AbyssUI_Config = {}
+  end
+  if not AbyssUIAddonSettings then
+    AbyssUIAddonSettings = {}
+  end
+end)
 -- Color Init
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
@@ -140,14 +148,31 @@ local function AbyssUI_CheckFonts()
       end
   end)
 end
+local function AbyssUI_CheckButtonRed()
+  local ButtonValue = CreateFrame("CheckButton", "$parentButtonValue", nil, "ChatConfigCheckButtonTemplate")
+  local tx = ButtonValue:CreateTexture()
+  tx:SetPoint('TOPLEFT', nil, -500, -500)
+  tx:SetTexture('Interface\\Glues\\COMMON\\AbyssUICheckButtonsGray')
+  tx:SetSize(0,0) 
+  tx:SetAlpha(0)
+  ButtonValue:SetAllPoints(tx)
+  ButtonValue:SetAlpha(0)
+  ButtonValue:SetScript('OnSizeChanged', function(self, width, height)
+      local size = format('%.0f%.0f', width, height)
+      if size == '11' then  
+        return nil
+      else
+        if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+          AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText = addonTable.HideUnitImprovedFaction:GetChecked()
+        end
+      end
+  end)
+end
 local init = CreateFrame("Frame", nil)
-init:RegisterEvent("ADDON_LOADED")
-init:RegisterEvent("PLAYER_LOGOUT")
+init:RegisterEvent("PLAYER_ENTERING_WORLD")
 init:SetScript("OnEvent", function()
-  if AbyssUIAddonSettings.FontsValue then
-    AbyssUIAddonSettings.FontsValue = AbyssUIAddonSettings.FontsValue
+    AbyssUI_CheckButtonRed()
     AbyssUI_CheckFonts()
-  end
 end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
@@ -182,10 +207,10 @@ f:SetScript("OnEvent", function(self, event)
   "QuestFrameAcceptButtonText",
   "QuestFrameDeclineButtonText",
   "GossipFrameGreetingGoodbyeButtonText",
-  "AddonListEnableAllButtonText",
-  "AddonListDisableAllButtonText",
-  "AddonListOkayButtonText",
-  "AddonListCancelButtonText",
+  --"AddonListEnableAllButtonText",
+  --"AddonListDisableAllButtonText",
+  --"AddonListOkayButtonText",
+  --"AddonListCancelButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
   "GameMenuButtonWhatsNewText",
