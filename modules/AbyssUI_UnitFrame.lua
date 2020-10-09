@@ -397,15 +397,15 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							end				
 						end	
 					end
-				end
-				if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
-					if (not UnitIsUnconscious(self.unit)) then
-						if (self.healthbar.TextString) then
-							self.healthbar.TextString:Hide()
-							self.healthbar.forceHideText = true
+					if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
+						if (not UnitIsUnconscious(self.unit)) then
+							if (self.healthbar.TextString) then
+								self.healthbar.TextString:Hide()
+								self.healthbar.forceHideText = true
+							end
 						end
-					end
-				end		
+					end	
+				end
 			end
 		end
 		-- CheckClassification

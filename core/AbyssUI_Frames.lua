@@ -10,6 +10,7 @@ local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
+	character = UnitName("player").."-"..GetRealmName()
 	if not AbyssUI_Config then
 		local AbyssUI_Config = {}
 	end
@@ -617,7 +618,9 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 				AbyssUI_AFKCameraFrame:Hide()
 				UIParent:SetAlpha(1)
 				if AbyssUIAddonSettings.HideMinimap ~= true then
-					MinimapCluster:Show()
+					if ( not MinimapCluster:IsShown() ) then
+						MinimapCluster:Show()
+					end
 				end
 			else
 				AbyssUI_AFKCameraFrame:Hide()

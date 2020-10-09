@@ -133,18 +133,20 @@ local function checkForWhatToHide(self, event)
 		elseif ( (self:GetAlpha() == 0 or not self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) ) then
 			self:SetAlpha(1)
 		elseif ( (self:GetAlpha() == 1 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) and event == "PLAYER_REGEN_ENABLED" ) then
+			--UIFrameFadeIn(self, 1, 1, 0)
 			self:SetAlpha(0)
 		else
 			return nil
 		end
 		if ( event == "PLAYER_REGEN_ENABLED" ) then
+			--UIFrameFadeIn(self, 1, 1, 0)
 			self:SetAlpha(0)
 		end
 	end
 end
 local function checkUnitToHide(self)
 	if( self:IsShown() and (not PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 0) ) then
-		--UIFrameFadeIn(self, 1, 0, 1)
+		--UIFrameFadeIn(self, 1, 1, 0)
 		self:SetAlpha(0)
 	elseif ( not self:IsShown() and (PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 1) ) then
 		self:SetAlpha(1)
@@ -543,7 +545,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		local outCombatAlpha = 1.0							-- ooc alpha
 		-- Global String
 		local _G = _G
-		local fpsStringLabel 	 = _G["FRAMERATE_LABEL"]
+		local fpsStringLabel 	   = _G["FRAMERATE_LABEL"]
 		local latencyStringLabel = _G["NETWORK_LABEL"]
 		local totalStringLabel   = _G["TOTAL"]
 		local systemStringLabel  = _G["SYSTEMOPTIONS_MENU"]

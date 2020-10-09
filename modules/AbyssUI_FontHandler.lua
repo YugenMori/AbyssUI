@@ -198,6 +198,7 @@ f:SetScript("OnEvent", function(self, event)
   "InterfaceOptionsFrameCancelText",
   "InterfaceOptionsFrameDefaultsText",
   "InterfaceOptionsDisplayPanelResetTutorialsText",
+  "InterfaceOptionsSocialPanelRedockChatText",
   "CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButtonText",
   "VideoOptionsFrameOkayText",
   "VideoOptionsFrameCancelText",
@@ -207,10 +208,10 @@ f:SetScript("OnEvent", function(self, event)
   "QuestFrameAcceptButtonText",
   "QuestFrameDeclineButtonText",
   "GossipFrameGreetingGoodbyeButtonText",
-  --"AddonListEnableAllButtonText",
-  --"AddonListDisableAllButtonText",
-  --"AddonListOkayButtonText",
-  --"AddonListCancelButtonText",
+  "AddonListEnableAllButtonText",
+  "AddonListDisableAllButtonText",
+  "AddonListOkayButtonText",
+  "AddonListCancelButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
   "GameMenuButtonWhatsNewText",
@@ -296,6 +297,7 @@ f:SetScript("OnEvent", function(self, event, name)
         KeyBindingFrame.unbindButton.Text,
         KeyBindingFrame.okayButton.Text,
         KeyBindingFrame.cancelButton.Text,
+        KeyBindingFrame.quickKeybindButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
