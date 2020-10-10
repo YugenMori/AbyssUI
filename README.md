@@ -1,6 +1,6 @@
 # AbyssUI
 ## Patch: 9.0.1 Shadowlands
-### For a full experience with AbyssUI, download [AbyssUI_TexturePack!](https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html).
+### For a full experience with AbyssUI, download [AbyssUI_TexturePack!](https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html)
 
 [![Paypal](https://cdn.discordapp.com/attachments/740267120956276764/763024008039104542/pay-with-paypal_large.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2)[![Discord](https://cdn.discordapp.com/attachments/740267120956276764/763027048033288232/Discord_button.png)](https://discord.gg/WrbyzBm)
 ###### Donating the equivalent of one cup of coffee in your country each month can actually turn a hobby into a job. Check my paypal, thank you very much for your kindness.
@@ -11,12 +11,12 @@
 
 #### Always check the FAQ, change log and the comments section before asking/report something.
 ##### *The interface can support almost any language, including Russian, Chinese and Korean. (v9.0.1.5+)
-![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)
+[![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://www.youtube.com/watch?v=meWuh0gTPmI&feature=youtu.be)
 
 
 #### AbyssUI is lightweight and does not slow down your PC / game. In comparison, the Windows notepad uses about 2MB of RAM, while AbyssUI uses between 400 to 900KB.
 ##### *AbyssUI_TexturePack is recommended for a full experience:
-![AbyssUI_TexturePack](https://cdn.discordapp.com/attachments/740267120956276764/764559549335076864/login.jpg)
+[![AbyssUI_TexturePack](https://cdn.discordapp.com/attachments/740267120956276764/764559549335076864/login.jpg)](https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html%22)
 
 
 #### FAQ
