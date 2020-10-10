@@ -1,0 +1,21 @@
+## Interface: 90001
+## Title: Abyss|cff0d75d4UI|r
+## Version: 9.0.1.7
+## Author: Yugen
+## Notes-enUS: Minimalist UI for World of Warcraft
+## Notes-ptBR: IU Minimalista para World of Warcraft
+## SavedVariablesPerCharacter: AbyssUIProfile, AbyssUIAddonSettings, COLOR_MY_UI
+## OptionalDeps: AbyssUI_TexturePack
+
+core/AbyssUI.lua
+core/AbyssUI_Config.lua
+core/AbyssUI_Frames.lua
+
+functions/AbyssUI_Functions.lua
+functions/AbyssUI_FunctionsExtras.lua
+
+modules/AbyssUI_FontHandler.lua
+modules/AbyssUI_InstanceLeave.lua
+modules/AbyssUI_MoveFrames.lua
+modules/AbyssUI_SavedProfiles.lua
+modules/AbyssUI_UnitFrame.lua

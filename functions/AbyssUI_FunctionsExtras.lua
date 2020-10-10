@@ -10,27 +10,28 @@ local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
+  character = UnitName("player").."-"..GetRealmName()
+  -- Config/Panel
 	if not AbyssUI_Config then
 		local AbyssUI_Config = {}
 	end
+	-- AddonSettings
 	if not AbyssUIAddonSettings then
 		AbyssUIAddonSettings = {}
 	end
-end)
--- Color Init
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_LOGIN")
-f:SetScript("OnEvent", function(self, event)
-    character = UnitName("player").."-"..GetRealmName()
-    if not COLOR_MY_UI then
-        COLOR_MY_UI = {}
-    end
-    if not COLOR_MY_UI[character] then
-        COLOR_MY_UI[character] = {}
-    end
-    if not COLOR_MY_UI[character].Color then
-        COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
-    end
+  if not AbyssUIAddonSettings[character] then
+    AbyssUIAddonSettings[character] = {}
+  end
+	-- Color Init
+  if not COLOR_MY_UI then
+      COLOR_MY_UI = {}
+  end
+  if not COLOR_MY_UI[character] then
+      COLOR_MY_UI[character] = {}
+  end
+  if not COLOR_MY_UI[character].Color then
+      COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
+  end
 end)
 -- Fontfication
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
@@ -66,6 +67,47 @@ local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 	return globalFont, subFont, damageFont
 end
 local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+local function AbyssUI_ColorizationFrameFunction(...)
+	local v = ...
+	if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
+		v:SetVertexColor(1, 1, 1)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames02 == true then
+		v:SetVertexColor(.2, .2, .2)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames03 == true then
+		v:SetVertexColor(182/255, 42/255, 37/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames04 == true then
+		v:SetVertexColor(236/255, 193/255, 60/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames05 == true then
+		v:SetVertexColor(196/255, 31/255, 59/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames06 == true then
+		v:SetVertexColor(163/255, 48/255, 201/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames07 == true then
+		v:SetVertexColor(252/255, 163/255, 85/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames08 == true then
+		v:SetVertexColor(190/255, 221/255, 115/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames09 == true then
+		v:SetVertexColor(64/255, 220/255, 255/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames10 == true then
+		v:SetVertexColor(86/255, 255/255, 184/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames11 == true then
+		v:SetVertexColor(255/255, 155/255, 195/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames12 == true then
+		v:SetVertexColor(23/255, 28/255, 99/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames13 == true then
+		v:SetVertexColor(255/255, 255/255, 0/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames14 == true then
+		v:SetVertexColor(0/255, 112/255, 222/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames15 == true then
+		v:SetVertexColor(135/255, 135/255, 237/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
+		v:SetVertexColor(199/255, 156/255, 110/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
+		local character = UnitName("player").."-"..GetRealmName()
+		v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)	
+	else
+		v:SetVertexColor(.4, .4, .4)
+	end
+end
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
 	local regionList = { 
@@ -499,12 +541,216 @@ end)
 ----------------------------------------------------
 -- Square Minimap
 ----------------------------------------------------
--- Thanks to Dawn for this amazing minimap code
+-- Thanks to Dawn for part of this amazing minimap code
+local function MinimapBehaviours()
+	local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\minimap\\"
+	local mailicon = mediaFolder.."mail"
+	local calendaricon = mediaFolder.."calendar"
+
+	if showclock then
+		LoadAddOn('Blizzard_TimeManager')
+		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
+		clockFrame:Hide()
+		clockTime:Show()
+		clockTime:SetFont(font, fontSize, fontFlag)
+		TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
+	else
+		LoadAddOn('Blizzard_TimeManager')
+		TimeManagerClockButton.Show = TimeManagerClockButton.Hide
+		local region = TimeManagerClockButton:GetRegions()
+		region:Hide()	
+		TimeManagerClockButton:ClearAllPoints()	
+		TimeManagerClockButton:Hide()	
+	end
+
+	MiniMapWorldMapButton:Hide()
+	MiniMapInstanceDifficulty:ClearAllPoints()
+	MiniMapInstanceDifficulty:SetParent(Minimap)
+	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
+	DropDownList1:SetClampedToScreen(true)
+
+	-----------------------------------------
+	-- hide some stuff and set positioins --
+	-----------------------------------------
+	-- Hide
+	MinimapBorderTop:Hide()
+	MinimapZoomIn:Hide()
+	MinimapZoomOut:Hide()
+	MiniMapTracking:Hide()
+	GameTimeFrame:Hide()
+	MiniMapMailBorder:Hide()
+	MinimapNorthTag:SetAlpha(0)
+	Minimap:SetQuestBlobRingAlpha(0)
+	Minimap:SetArchBlobRingScalar(0)
+	Minimap:SetQuestBlobRingScalar(0)
+	--MiniMapInstanceDifficulty:SetAlpha(0)
+	--GuildInstanceDifficulty:SetAlpha(0)
+
+	-- Extra
+	MiniMapInstanceDifficulty:ClearAllPoints()
+	MiniMapInstanceDifficulty:SetParent(Minimap)
+	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
+	DropDownList1:SetClampedToScreen(true)
+
+	--Frame Level
+	MiniMapMailFrame:SetFrameLevel(10)
+	MiniMapInstanceDifficulty:SetFrameLevel(10)
+	GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+
+	-- extra align
+	QueueStatusMinimapButton:SetSize(20, 20)
+	QueueStatusMinimapButton:ClearAllPoints()
+	QueueStatusMinimapButton:SetParent(Minimap)
+	QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 22)
+	QueueStatusMinimapButton:SetFrameLevel(10)
+	QueueStatusMinimapButtonBorder:Hide()
+
+	---------------------
+	-- mousewheel zoom --
+	---------------------
+	Minimap:EnableMouseWheel(true)
+	Minimap:SetScript("OnMouseWheel", function(self, direction)
+		if(direction > 0) then
+			Minimap_ZoomIn()
+		else
+			Minimap_ZoomOut()
+		end
+	end)
+
+	-- mail icon
+	MiniMapMailIcon:SetTexture(mailicon)
+	MiniMapMailFrame:SetFrameLevel(10)
+
+	-- calendar icon
+	local CalendarFrameIcon = CreateFrame("Frame", "$parentCalendarFrameIcon", Minimap)
+	CalendarFrameIcon:SetFrameLevel(10)
+	CalendarFrameIcon:SetWidth(22)
+	CalendarFrameIcon:SetHeight(22)
+	CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
+	CalendarFrameIcon:Hide()
+	local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
+	t:SetTexture(calendaricon)
+	t:SetAllPoints(CalendarFrameIcon)
+	CalendarFrameIcon.texture = t
+	-- OnClick
+	CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
+	    if ( button == 'LeftButton' ) then 
+			if(not CalendarFrame) then
+				LoadAddOn("Blizzard_Calendar")
+			end
+			Calendar_Toggle()
+    	end
+	end)
+	
+	------------------------
+	-- move and clickable --
+	------------------------
+
+	--[[
+	Minimap:SetMovable(true)
+	Minimap:SetUserPlaced(true)
+	Minimap:SetScript("OnMouseDown", function()
+	    if (IsAltKeyDown()) then
+	        Minimap:ClearAllPoints()
+	        Minimap:StartMoving()
+	    end
+	end)
+
+	---------------------
+	-- move some stuff --
+	---------------------
+	if moveWatchFrame then
+		ObjectiveTrackerFrame:ClearAllPoints()	
+		ObjectiveTrackerFrame.ClearAllPoints = function() end
+		ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
+		ObjectiveTrackerFrame.SetPoint = function() end
+		ObjectiveTrackerFrame:SetClampedToScreen(true)
+		ObjectiveTrackerFrame:SetHeight(qheight)
+	end
+	--]]
+
+	-- Check type of minimap
+	if ( AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true ) then
+		-- zone text
+		MinimapZoneText:ClearAllPoints()
+		MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 10, -15)
+		MinimapZoneText:SetFont(globalFont, 14, "THINOUTLINE")
+		-- garrison icon
+		GarrisonLandingPageMinimapButton:ClearAllPoints()
+		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
+		-- mail icon
+		MiniMapMailFrame:ClearAllPoints()
+		MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, -20, -15)
+		-- calendar icon
+		CalendarFrameIcon:ClearAllPoints()
+		CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 0, -18)
+	else
+		-- Hide
+		MinimapBorder:Hide()
+		MinimapZoneTextButton:Hide()
+		MinimapBackdrop:SetFrameLevel(1)
+		-- Garrison Icon
+		GarrisonLandingPageMinimapButton:ClearAllPoints()
+		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
+		GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+		-- mail icon
+		MiniMapMailFrame:ClearAllPoints()
+		MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
+	end
+
+	-- minimap script
+	Minimap:SetScript('OnMouseUp', function(self, button)
+		Minimap:StopMovingOrSizing()
+		if (button == 'RightButton') then
+			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
+			CalendarFrameIcon:Show()
+		elseif (button == 'MiddleButton') then
+			if(not CalendarFrame) then
+				LoadAddOn("Blizzard_Calendar")
+			end
+			Calendar_Toggle()
+		else
+			Minimap_OnClick(self)
+		end
+	end)
+	
+	local function GetMinimapShape() return 'SQUARE' end
+
+	-------------------------------
+	-- style Battlefield Minimap --
+	-------------------------------
+	local function hide(f)
+		f:SetTexture()
+		f.SetTexture = function() end
+	end
+
+	hooksecurefunc("LoadAddOn", function(addon)
+		if addon ~= "Blizzard_BattlefieldMinimap" then return end
+
+		BattlefieldMinimapBackground:Hide()
+		BattlefieldMinimapCorner:Hide()
+		BattlefieldMinimapCloseButton:Hide()
+		BattlefieldMinimapTab:Hide()
+		
+		BBorderFrame = CreateFrame("Frame", nil, BattlefieldMinimap)
+		BBorderFrame:SetPoint("TOPLEFT", BattlefieldMinimap, "TOPLEFT", -1, 1)
+		BBorderFrame:SetPoint("BOTTOMRIGHT", BattlefieldMinimap, "BOTTOMRIGHT", -5, 3)	
+		BBorderFrame:SetBackdrop(backdrop)
+		if not classColoredBorder then
+			BBorderFrame:SetBackdropBorderColor(unpack(brdcolor))
+		else
+			BBorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
+		end	
+		BBorderFrame:SetBackdropColor(unpack(backdropcolor))
+		BBorderFrame:SetFrameLevel(6)		
+	end)
+end
+-- SquareMinimap
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
 SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
 SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 	-- minimap default position - you can move it ingame by holding down ALT!
-	if ( AbyssUIAddonSettings.DisableSquareMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
+	if ( AbyssUIAddonSettings.SquareMinimap == true and AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
 		local position = "TOPRIGHT"     	
 		local position_x = -11          		
 		local position_y = -5     
@@ -588,390 +834,218 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		end	
 		BorderFrame:SetBackdropColor(unpack(backdropcolor))
 		BorderFrame:SetFrameLevel(5)
-		------------------------
-		-- fps latency memory --
-		------------------------
-		if useInfoPanel then	
+		
+	------------------------
+	-- fps latency memory --
+	------------------------
+	if useInfoPanel then	
 
-			local FLMframe = CreateFrame("Button", nil, self, BackdropTemplateMixin and "BackdropTemplate")
-			FLMframe:SetPoint("TOP", Minimap, "TOP", 0, 1*scale)
-			FLMframe:SetSize((Minimap:GetWidth()+2)*scale, fontSize+6)
-			FLMframe:SetFrameLevel(4)
-			FLMframe:SetBackdrop(backdrop)
-			if not classColoredBorder then
-				FLMframe:SetBackdropBorderColor(unpack(brdcolor))
-			else
-				if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-					if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
-						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
-					elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
-						FLMframe:SetBackdropBorderColor(unpack(brdcolor))
-					else
-						FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
-					end
-				else
-					local character = UnitName("player").."-"..GetRealmName()
-					FLMframe:SetBackdropBorderColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-				end
-			end	
-			FLMframe:SetBackdropColor(unpack(backdropcolor))
-
-			local FLMframeT = FLMframe:CreateTexture(nil, "ARTWORK")
-			FLMframeT:SetPoint("TOPLEFT", FLMframe, "TOPLEFT", 1, -1)
-			FLMframeT:SetPoint("BOTTOMRIGHT", FLMframe, "BOTTOMRIGHT", -1, 1)	
-			--FLMframeT:SetTexture(mediaFolder.."dO")
-			FLMframeT:SetTexture(texture)
-			FLMframeT:SetVertexColor(unpack(infocolor))
-			FLMframeT:SetAlpha(IpanelBGalpha)
-
-			local text = FLMframe:CreateFontString(nil, "OVERLAY")
-			text:SetPoint("CENTER", FLMframe, 4, 0)
-			text:SetFont(font, fontSize, fontFlag)
-			text:SetShadowOffset(1, -1)
+		local FLMframe = CreateFrame("Button", nil, MinimapCluster, BackdropTemplateMixin and "BackdropTemplate")
+		FLMframe:SetPoint("TOP", Minimap, "TOP", 0, 1*scale)
+		FLMframe:SetSize((Minimap:GetWidth()+2)*scale, fontSize+6)
+		FLMframe:SetFrameLevel(4)
+		FLMframe:SetBackdrop(backdrop)
+		if not classColoredBorder then
+			FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+		else
 			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-				text:SetTextColor(color.r, color.g, color.b)
+				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
+				else
+					FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
+				end
 			else
 				local character = UnitName("player").."-"..GetRealmName()
-				text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )	
+				FLMframe:SetBackdropBorderColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
+			end
+		end	
+		FLMframe:SetBackdropColor(unpack(backdropcolor))
+
+		local FLMframeT = FLMframe:CreateTexture(nil, "ARTWORK")
+		FLMframeT:SetPoint("TOPLEFT", FLMframe, "TOPLEFT", 1, -1)
+		FLMframeT:SetPoint("BOTTOMRIGHT", FLMframe, "BOTTOMRIGHT", -1, 1)	
+		--FLMframeT:SetTexture(mediaFolder.."dO")
+		FLMframeT:SetTexture(texture)
+		FLMframeT:SetVertexColor(unpack(infocolor))
+		FLMframeT:SetAlpha(IpanelBGalpha)
+
+		local text = FLMframe:CreateFontString(nil, "OVERLAY")
+		text:SetPoint("CENTER", FLMframe, 4, 0)
+		text:SetFont(font, fontSize, fontFlag)
+		text:SetShadowOffset(1, -1)
+		if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+			text:SetTextColor(color.r, color.g, color.b)
+		else
+			local character = UnitName("player").."-"..GetRealmName()
+			text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )	
+		end
+		
+		--========[ important functions ]========--
+		local function Addoncompare(a, b)
+			return a.memory > b.memory
+		end
+
+		local function MemFormat(v)
+			if (v > 1024) then
+				return string.format("%.2f MiB", v / 1024)
+			else
+				return string.format("%.2f KiB", v)
+			end
+		end
+
+		local function ColorGradient(perc, ...)
+			if (perc > 1) then
+				local r, g, b = select(select('#', ...) - 2, ...)
+				return r, g, b
+			elseif (perc < 0) then
+				local r, g, b = ...
+				return r, g, b
 			end
 			
-			--========[ important functions ]========--
-			local function Addoncompare(a, b)
-				return a.memory > b.memory
-			end
+			local num = select('#', ...) / 3
 
-			local function MemFormat(v)
-				if (v > 1024) then
-					return string.format("%.2f MiB", v / 1024)
-				else
-					return string.format("%.2f KiB", v)
-				end
-			end
+			local segment, relperc = math.modf(perc*(num-1))
+			local r1, g1, b1, r2, g2, b2 = select((segment*3)+1, ...)
 
-			local function ColorGradient(perc, ...)
-				if (perc > 1) then
-					local r, g, b = select(select('#', ...) - 2, ...)
-					return r, g, b
-				elseif (perc < 0) then
-					local r, g, b = ...
-					return r, g, b
-				end
-				
-				local num = select('#', ...) / 3
+			return r1 + (r2-r1)*relperc, g1 + (g2-g1)*relperc, b1 + (b2-b1)*relperc
+		end
 
-				local segment, relperc = math.modf(perc*(num-1))
-				local r1, g1, b1, r2, g2, b2 = select((segment*3)+1, ...)
-
-				return r1 + (r2-r1)*relperc, g1 + (g2-g1)*relperc, b1 + (b2-b1)*relperc
-			end
-
-			local function TimeFormat(time)
-				local t = format("%.1ds",floor(mod(time,60)))
+		local function TimeFormat(time)
+			local t = format("%.1ds",floor(mod(time,60)))
+			if (time > 60) then
+				time = floor(time / 60)
+				t = format("%.1dm ",mod(time,60))..t
 				if (time > 60) then
 					time = floor(time / 60)
-					t = format("%.1dm ",mod(time,60))..t
-					if (time > 60) then
-						time = floor(time / 60)
-						t = format("%.1dh ",mod(time,24))..t
-						if (time > 24) then
-							time = floor(time / 24)
-							t = format("%dd ",time)..t
-						end
+					t = format("%.1dh ",mod(time,24))..t
+					if (time > 24) then
+						time = floor(time / 24)
+						t = format("%dd ",time)..t
 					end
 				end
-				return t
 			end
+			return t
+		end
 
-			local function ColorizeLatency(v)
-				if (v < 100) then
-					return {r = 0, g = 1, b = 0}
-				elseif (v < 300) then
-					return {r = 1, g = 1, b = 0}
-				else
-					return {r = 1, g = 0, b = 0}
-				end
+		local function ColorizeLatency(v)
+			if (v < 100) then
+				return {r = 0, g = 1, b = 0}
+			elseif (v < 300) then
+				return {r = 1, g = 1, b = 0}
+			else
+				return {r = 1, g = 0, b = 0}
 			end
+		end
 
-			local function ColorizeFramerate(v)
-				if (v < 10) then
-					return {r = 1, g = 0, b = 0}
-				elseif (v < 30) then
-					return {r = 1, g = 1, b = 0}
-				else
-					return {r = 0, g = 1, b = 0}
+		local function ColorizeFramerate(v)
+			if (v < 10) then
+				return {r = 1, g = 0, b = 0}
+			elseif (v < 30) then
+				return {r = 1, g = 1, b = 0}
+			else
+				return {r = 0, g = 1, b = 0}
+			end
+		end
+		
+		--========[ update ]========--
+		local lastUpdate = 0
+		local updateDelay = 1
+		FLMframe:SetScript("OnUpdate", function(self, elapsed)
+			lastUpdate = lastUpdate + elapsed
+			if (lastUpdate > updateDelay) then
+				lastUpdate = 0
+				local time = date("|c00ffffff%H|r:|c00ffffff%M|r")
+				fps = GetFramerate()
+				fps = "|c00ffffff"..floor(fps+0.5).."|r fps   "
+				lag = select(4, GetNetStats())
+				lag = "|c00ffffff"..lag.."|r ms   "
+				text:SetText(lag..fps..time)
+			end
+		end)
+
+		FLMframe:SetScript("OnEnter", function()
+			GameTooltip:SetOwner(FLMframe)
+			collectgarbage()
+			local memory, i, addons, total, entry, total
+			local latencycolor = ColorizeLatency(select(3, GetNetStats()))
+			local fpscolor = ColorizeFramerate(GetFramerate())
+			
+			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+				GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
+				GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
+				GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
+				GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
+				GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+			else
+				local character = UnitName("player").."-"..GetRealmName()
+				GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
+				GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, fpscolor.r, fpscolor.g, fpscolor.b)
+				GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, latencycolor.r, latencycolor.g, latencycolor.b)
+				GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, 1, 1, 1)
+				GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+			end
+			addons = {}
+			total = 0
+			UpdateAddOnMemoryUsage()
+			for i = 1, GetNumAddOns(), 1 do
+				if GetAddOnMemoryUsage(i) > 0 then
+					memory = GetAddOnMemoryUsage(i)
+					entry = {name = GetAddOnInfo(i), memory = memory}
+					table.insert(addons, entry)
+					total = total + memory
 				end
 			end
 			
-			--========[ update ]========--
-			local lastUpdate = 0
-			local updateDelay = 1
-			FLMframe:SetScript("OnUpdate", function(self, elapsed)
-				lastUpdate = lastUpdate + elapsed
-				if (lastUpdate > updateDelay) then
-					lastUpdate = 0
-					local time = date("|c00ffffff%H|r:|c00ffffff%M|r")
-					fps = GetFramerate()
-					fps = "|c00ffffff"..floor(fps+0.5).."|r fps   "
-					lag = select(4, GetNetStats())
-					lag = "|c00ffffff"..lag.."|r ms   "
-					text:SetText(lag..fps..time)
-				end
-			end)
+			table.sort(addons, Addoncompare)
 
-			FLMframe:SetScript("OnEnter", function()
-				GameTooltip:SetOwner(FLMframe)
-				collectgarbage()
-				local memory, i, addons, total, entry, total
-				local latencycolor = ColorizeLatency(select(3, GetNetStats()))
-				local fpscolor = ColorizeFramerate(GetFramerate())
+			i = 0
+			for _,entry in pairs(addons) do
+				local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0)
+				GameTooltip:AddDoubleLine(entry.name, MemFormat(entry.memory), 1, 1, 1, cr, cg, cb)
 				
-				if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-					GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
-					GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
-					GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
-					GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), color.r, color.g, color.b, 1, 1, 1)
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-				else
-					local character = UnitName("player").."-"..GetRealmName()
-					GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
-					GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, fpscolor.r, fpscolor.g, fpscolor.b)
-					GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, latencycolor.r, latencycolor.g, latencycolor.b)
-					GameTooltip:AddDoubleLine(systemStringLabel..":", TimeFormat(GetTime()), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, 1, 1, 1)
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-				end
-				addons = {}
-				total = 0
+				i = i + 1
+				if i >= AddonNumb then
+					break
+				end		
+			end
+
+			local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0) 
+			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+				GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+				GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
+				GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
+				GameTooltip:Show()
+			else
+				local character = UnitName("player").."-"..GetRealmName()
+				GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
+				GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
+				GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
+				GameTooltip:Show()
+			end
+		end)
+
+		FLMframe:SetScript("OnLeave", function() 
+			GameTooltip:Hide() 
+		end)
+
+		--========[ mem cleanup ]========--
+		FLMframe:SetScript("OnClick", function()
+			if (not IsAltKeyDown()) then
 				UpdateAddOnMemoryUsage()
-				for i = 1, GetNumAddOns(), 1 do
-					if GetAddOnMemoryUsage(i) > 0 then
-						memory = GetAddOnMemoryUsage(i)
-						entry = {name = GetAddOnInfo(i), memory = memory}
-						table.insert(addons, entry)
-						total = total + memory
-					end
-				end
-				
-				table.sort(addons, Addoncompare)
-
-				i = 0
-				for _,entry in pairs(addons) do
-					local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0)
-					GameTooltip:AddDoubleLine(entry.name, MemFormat(entry.memory), 1, 1, 1, cr, cg, cb)
-					
-					i = i + 1
-					if i >= AddonNumb then
-						break
-					end		
-				end
-
-				local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0) 
-				if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-					GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
-					GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
-					GameTooltip:Show()
-				else
-					local character = UnitName("player").."-"..GetRealmName()
-					GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
-					GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
-					GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b, cr, cg, cb)
-					GameTooltip:Show()
-				end
-			end)
-
-			FLMframe:SetScript("OnLeave", function() 
-				GameTooltip:Hide() 
-			end)
-
-			--========[ mem cleanup ]========--
-			FLMframe:SetScript("OnClick", function()
-				if (not IsAltKeyDown()) then
-					UpdateAddOnMemoryUsage()
-					local memBefore = gcinfo()
-					collectgarbage()
-					UpdateAddOnMemoryUsage()
-					local memAfter = gcinfo()
-					DEFAULT_CHAT_FRAME:AddMessage(cleanStringLabel..": |cff00FF00"..MemFormat(memBefore - memAfter))
-				end
-			end)	
-		end
-		
-		-----------------------------------------
-		-- hide some stuff and set positioins --
-		-----------------------------------------
-		-- Hide
-		MinimapBorder:Hide()
-		MinimapBorderTop:Hide()
-		MinimapZoomIn:Hide()
-		MinimapZoomOut:Hide()
-		MiniMapTracking:Hide()
-		GameTimeFrame:Hide()
-		MinimapZoneTextButton:Hide()
-		MiniMapMailBorder:Hide()
-		-- Sets
-		MinimapNorthTag:SetAlpha(0)
-		MinimapBackdrop:SetFrameLevel(1)
-		Minimap:SetQuestBlobRingAlpha(0)
-		Minimap:SetArchBlobRingScalar(0)
-		Minimap:SetQuestBlobRingScalar(0)
-		--MiniMapInstanceDifficulty:SetAlpha(0)
-		--GuildInstanceDifficulty:SetAlpha(0)
-		-- Extra
-		if ( GarrisonLandingPageMinimapButton:IsShown() ) then
-			GarrisonLandingPageMinimapButton:SetAlpha(0)
-		end
-		GarrisonLandingPageMinimapButton:ClearAllPoints()
-		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
-		GarrisonLandingPageMinimapButton:SetFrameLevel(10)
-
-		if showclock then
-			LoadAddOn('Blizzard_TimeManager')
-			local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
-			clockFrame:Hide()
-			clockTime:Show()
-			clockTime:SetFont(font, fontSize, fontFlag)
-			TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
-		else
-			LoadAddOn('Blizzard_TimeManager')
-			TimeManagerClockButton.Show = TimeManagerClockButton.Hide
-			local region = TimeManagerClockButton:GetRegions()
-			region:Hide()	
-			TimeManagerClockButton:ClearAllPoints()	
-			TimeManagerClockButton:Hide()	
-		end
-		-- mail icon
-		MiniMapMailFrame:ClearAllPoints()
-		MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
-		MiniMapMailIcon:SetTexture(mailicon)
-
-		MiniMapWorldMapButton:Hide()
-		MiniMapInstanceDifficulty:ClearAllPoints()
-		MiniMapInstanceDifficulty:SetParent(Minimap)
-		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
-		DropDownList1:SetClampedToScreen(true)
-
-		MiniMapMailFrame:SetFrameLevel(10)
-		MiniMapInstanceDifficulty:SetFrameLevel(10)
-		-- calendar icon
-		local CalendarFrameIcon = CreateFrame("Frame", "$parentCalendarFrameIcon", Minimap)
-		CalendarFrameIcon:SetFrameLevel(10)
-		CalendarFrameIcon:SetWidth(22)
-		CalendarFrameIcon:SetHeight(22)
-		CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
-		CalendarFrameIcon:Hide()
-		local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
-		t:SetTexture(calendaricon)
-		t:SetAllPoints(CalendarFrameIcon)
-		CalendarFrameIcon.texture = t
-		-- OnClick
-		CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
-		    if ( button == 'LeftButton' ) then 
-				if(not CalendarFrame) then
-					LoadAddOn("Blizzard_Calendar")
-				end
-				Calendar_Toggle()
-	    	end
-		end)
-
-		MiniMapInstanceDifficulty:ClearAllPoints()
-		MiniMapInstanceDifficulty:SetParent(Minimap)
-		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
-		DropDownList1:SetClampedToScreen(true)
-
-		MiniMapMailFrame:SetFrameLevel(10)
-		MiniMapInstanceDifficulty:SetFrameLevel(10)
-
-		-- extra align
-		QueueStatusMinimapButton:SetSize(20, 20)
-		QueueStatusMinimapButton:ClearAllPoints()
-		QueueStatusMinimapButton:SetParent(Minimap)
-		QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 22)
-		QueueStatusMinimapButton:SetFrameLevel(10)
-		QueueStatusMinimapButtonBorder:Hide()
-
-		---------------------
-		-- mousewheel zoom --
-		---------------------
-		Minimap:EnableMouseWheel(true)
-		Minimap:SetScript("OnMouseWheel", function(self, direction)
-			if(direction > 0) then
-				Minimap_ZoomIn()
-			else
-				Minimap_ZoomOut()
+				local memBefore = gcinfo()
+				collectgarbage()
+				UpdateAddOnMemoryUsage()
+				local memAfter = gcinfo()
+				DEFAULT_CHAT_FRAME:AddMessage(cleanStringLabel..": |cff00FF00"..MemFormat(memBefore - memAfter))
 			end
-		end)
-		
-		------------------------
-		-- move and clickable --
-		------------------------
-
-		--[[
-		Minimap:SetMovable(true)
-		Minimap:SetUserPlaced(true)
-		Minimap:SetScript("OnMouseDown", function()
-		    if (IsAltKeyDown()) then
-		        Minimap:ClearAllPoints()
-		        Minimap:StartMoving()
-		    end
-		end)
-
-		---------------------
-		-- move some stuff --
-		---------------------
-		if moveWatchFrame then
-			ObjectiveTrackerFrame:ClearAllPoints()	
-			ObjectiveTrackerFrame.ClearAllPoints = function() end
-			ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
-			ObjectiveTrackerFrame.SetPoint = function() end
-			ObjectiveTrackerFrame:SetClampedToScreen(true)
-			ObjectiveTrackerFrame:SetHeight(qheight)
-		end
-		--]]
-		Minimap:SetScript('OnMouseUp', function(self, button)
-			Minimap:StopMovingOrSizing()
-			if (button == 'RightButton') then
-				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-				CalendarFrameIcon:Show()
-			elseif (button == 'MiddleButton') then
-				if(not CalendarFrame) then
-					LoadAddOn("Blizzard_Calendar")
-				end
-				Calendar_Toggle()
-			else
-				Minimap_OnClick(self)
-			end
-		end)
-		
-		local function GetMinimapShape() return 'SQUARE' end
-
-		-------------------------------
-		-- style Battlefield Minimap --
-		-------------------------------
-		local function hide(f)
-			f:SetTexture()
-			f.SetTexture = function() end
-		end
-
-		hooksecurefunc("LoadAddOn", function(addon)
-			if addon ~= "Blizzard_BattlefieldMinimap" then return end
-
-			BattlefieldMinimapBackground:Hide()
-			BattlefieldMinimapCorner:Hide()
-			BattlefieldMinimapCloseButton:Hide()
-			BattlefieldMinimapTab:Hide()
-			
-			BBorderFrame = CreateFrame("Frame", nil, BattlefieldMinimap)
-			BBorderFrame:SetPoint("TOPLEFT", BattlefieldMinimap, "TOPLEFT", -1, 1)
-			BBorderFrame:SetPoint("BOTTOMRIGHT", BattlefieldMinimap, "BOTTOMRIGHT", -5, 3)	
-			BBorderFrame:SetBackdrop(backdrop)
-			if not classColoredBorder then
-				BBorderFrame:SetBackdropBorderColor(unpack(brdcolor))
-			else
-				BBorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
-			end	
-			BBorderFrame:SetBackdropColor(unpack(backdropcolor))
-			BBorderFrame:SetFrameLevel(6)		
-		end)
+		end)	
+	end
+		MinimapBehaviours()
+	elseif ( AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
+		MinimapBehaviours()
+		Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\textures\\minimap\\round")
 	else
 		Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\textures\\minimap\\round")
 	end

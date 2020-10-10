@@ -4,32 +4,34 @@
 --
 -- Simple Frame to leave instances for AbyssUI
 --------------------------------------------------------------
--- Make sure to init everything again
+-- Init - Tables - Saves
 local addonName, addonTable = ...
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
+  character = UnitName("player").."-"..GetRealmName()
+  -- Config/Panel
 	if not AbyssUI_Config then
 		local AbyssUI_Config = {}
 	end
+	-- AddonSettings
 	if not AbyssUIAddonSettings then
 		AbyssUIAddonSettings = {}
 	end
-end)
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_LOGIN")
-f:SetScript("OnEvent", function(self, event)
-    character = UnitName("player").."-"..GetRealmName()
-    if not COLOR_MY_UI then
-        COLOR_MY_UI = {}
-    end
-    if not COLOR_MY_UI[character] then
-        COLOR_MY_UI[character] = {}
-    end
-    if not COLOR_MY_UI[character].Color then
-        COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
-    end
+  if not AbyssUIAddonSettings[character] then
+    AbyssUIAddonSettings[character] = {}
+  end
+	-- Color Init
+  if not COLOR_MY_UI then
+      COLOR_MY_UI = {}
+  end
+  if not COLOR_MY_UI[character] then
+      COLOR_MY_UI[character] = {}
+  end
+  if not COLOR_MY_UI[character].Color then
+      COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
+  end
 end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
