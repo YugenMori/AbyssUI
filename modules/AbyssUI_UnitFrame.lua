@@ -226,7 +226,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if ( AbyssUIAddonSettings.UnitFrameImproved == true and not InCombatLockdown() ) then
 				if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
 				else
@@ -517,7 +517,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", UnitFramesImproved_TextStatusBar_UpdateTextStringWithValues)
 				
 				-- Hook PlayerFrame functions
-	      		hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
+	      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
 				hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
 
 				-- Hook TargetFrame functions
@@ -531,10 +531,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				
 				-- Set up some stylings
 				UnitFramesImproved_Style_PlayerFrame()
-				UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+				if ( not InCombatLockdown() ) then
+					UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
+					UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
+					UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
+					UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+				end
 				UnitFramesImproved_Style_TargetFrame(TargetFrame)
 				UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				UnitFramesImproved_UnitName_Color()

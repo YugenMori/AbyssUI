@@ -178,6 +178,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			Boss1TargetFrameTextureFrameTexture,
 			Boss2TargetFrameTextureFrameTexture,
 			Boss3TargetFrameTextureFrameTexture,
+			Boss4TargetFrameTextureFrameTexture,
 			MirrorTimer1Border,
 			MirrorTimer2Border,
 			MirrorTimer3Border, }) do

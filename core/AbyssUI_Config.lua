@@ -1148,7 +1148,7 @@ end)
 -- AFKCammeraFrame --
 local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 AFKCammeraFrame_CheckButton:SetPoint("TOPLEFT", 10, -380)
-AFKCammeraFrame_CheckButton.Text:SetText("Hide AFKMode Frame")
+AFKCammeraFrame_CheckButton.Text:SetText("Hide AFK Frame")
 AFKCammeraFrame_CheckButton.tooltip = "Hide the AFKMode when you are AFK"
 AFKCammeraFrame_CheckButton:SetChecked(AbyssUIAddonSettings.AFKCammeraFrame)
 -- OnClick Function
@@ -1902,12 +1902,12 @@ local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
   slider:SetMinMaxValues(minVal, maxVal)
   --slider:SetValue(1)
   slider:SetValueStep(valStep)
-  slider.text = _G[name.."Text"]
+  slider.text     = _G[name.."Text"]
   slider.text:SetText(title)
-  slider.textLow = _G[name.."Low"]
+  slider.textLow  = _G[name.."Low"]
   slider.textHigh = _G[name.."High"]
-  slider.textLow:SetText(floor(minVal))
-  slider.textHigh:SetText(floor(maxVal))
+  slider.textLow:SetText(math.floor(minVal))
+  slider.textHigh:SetText(math.floor(maxVal))
   slider.textLow:SetTextColor(0.4,0.4,0.4)
   slider.textHigh:SetTextColor(0.4,0.4,0.4)
   editbox:SetSize(50,30)
@@ -1916,10 +1916,9 @@ local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
   editbox:SetText(slider:GetValue())
   editbox:SetAutoFocus(false)
   slider:SetScript("OnValueChanged", function(self,value)
-    self.editbox:SetText(math.floor(value/valStep)/1000)
+    self.editbox:SetText(math.floor(value/valStep)/100)
   end)
   editbox:SetScript("OnTextChanged", function(self)
-    local val = self:GetText()
     if tonumber(val) then
        self:GetParent():SetValue(val)
     end
@@ -1936,73 +1935,92 @@ local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
 end
 
 -- Minimap
-local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_MinimapSlider", "Minimap", 0, 1, 0.001)
+local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
 AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
 AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
-    MinimapCluster:SetScale(value)
-    AbyssUIAddonSettings[character].Slider.MinimapSlider = value
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      MinimapCluster:SetScale(newValue)
+      AbyssUIAddonSettings[character].Slider.MinimapSlider = newValue
+    end
   end
 end)
 -- Player Frame / Target / Focus
-local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 1, 0.001)
-AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -120)
+local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
+AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
 AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
-    for i, v in pairs({
-      PlayerFrame,
-      TargetFrame,
-      FocusFrame,
-    }) do
-      v:SetScale(value)
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      for i, v in pairs({
+        PlayerFrame,
+        TargetFrame,
+        FocusFrame,
+      }) do
+        v:SetScale(newValue)
+      end
+      AbyssUIAddonSettings[character].Slider.UnitFrameSlider = newValue
     end
-    AbyssUIAddonSettings[character].Slider.UnitFrameSlider = value
   end
 end)
 -- BuffFrame
-local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 1, 0.001)
-AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -150)
+local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
+AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
 AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
-    BuffFrame:SetScale(value)
-    AbyssUIAddonSettings[character].Slider.BuffFrameSlider = value
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      BuffFrame:SetScale(newValue)
+      AbyssUIAddonSettings[character].Slider.BuffFrameSlider = newValue
+    end
   end
 end)
 -- Party Frame
-local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 1, 0.001)
-AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -180)
+local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
+AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
 AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
-    PartyMemberFrame1:SetScale(value)
-    AbyssUIAddonSettings[character].Slider.PartyFrameSlider = value
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      for i, v in pairs({
+        PartyMemberFrame1,
+        PartyMemberFrame2,
+        PartyMemberFrame3,
+        PartyMemberFrame4,
+      }) do
+        v:SetScale(newValue)
+      end
+      AbyssUIAddonSettings[character].Slider.PartyFrameSlider = newValue
+    end
   end
 end)
+-- Raid Frame
+--[[
+local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
+AbyssUI_RaidFrameSlider:SetPoint("TOPLEFT", 20, -200)
+AbyssUI_RaidFrameSlider:HookScript("OnValueChanged", function(self, value)
+  if ( value ~= nil and value > 0 ) then
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      CompactRaidFrameManager:SetScale(newValue)
+      AbyssUIAddonSettings[character].Slider.RaidFrameSlider = newValue
+    end
+  end
+end)
+--]]
 -- Objective Frame
-local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_ObjectiveFrameSlider", "Quest Frame", 0, 1, 0.001)
-AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -210)
+local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
+AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -200)
 AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
-    ObjectiveTrackerFrame:SetScale(value)
-    AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = value
+    local newValue = string.format("%.2f", value)
+    if ( not InCombatLockdown() ) then
+      ObjectiveTrackerFrame:SetScale(newValue)
+      AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
+    end
   end
 end)
--- Save Values
-local AbyssUI_SliderSave = CreateFrame("Frame", nil)
-AbyssUI_SliderSave:RegisterEvent("ADDON_LOADED")
-AbyssUI_SliderSave:SetScript("OnEvent", function()
-  for i, v in pairs({
-    PlayerFrame,
-    TargetFrame,
-    FocusFrame,
-  }) do
-    v:SetScale(AbyssUIAddonSettings[character].Slider.UnitFrameSlider)
-  end
-  MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
-  BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
-  PartyMemberFrame1:SetScale(AbyssUIAddonSettings[character].Slider.PartyFrameSlider)
-  ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
-end)
-
 
 ----------------------------- AbyssUI Stylization ------------------------------
 -- Player Portrait Style --
@@ -3142,7 +3160,38 @@ AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(se
 end)
 -- End
 end
---
+--------------------------------------------------------------
+--------------------------------------------------------------
+-- Slider Save Values
+local function AbyssUI_SliderSaveLoad()
+  for i, v in pairs({
+   PlayerFrame,
+   TargetFrame,
+   FocusFrame,
+  }) do
+    v:SetScale(AbyssUIAddonSettings[character].Slider.UnitFrameSlider)
+  end
+  for i, v in pairs({
+    PartyMemberFrame1,
+    PartyMemberFrame2,
+    PartyMemberFrame3,
+    PartyMemberFrame4,
+  }) do
+    v:SetScale(AbyssUIAddonSettings[character].Slider.PartyFrameSlider)
+  end
+  --
+  MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
+  BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
+  ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
+  --CompactRaidFrameManager:SetScale(AbyssUIAddonSettings[character].Slider.RaidFrameSlider)
+end
+
+local AbyssUI_SliderSaver = CreateFrame("Frame", nil)
+AbyssUI_SliderSaver:RegisterEvent("PLAYER_LOGOUT")
+AbyssUI_SliderSaver:SetScript("OnEvent", function()
+    AbyssUI_SliderSaveLoad()
+end)
+
 local f = CreateFrame("Frame")
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -3164,6 +3213,7 @@ f:SetScript("OnEvent", function(self, event, ...)
         }
     end
     InitSettings()
+    AbyssUI_SliderSaveLoad()
 end)
 --------------------------------------------------------------
 -- End

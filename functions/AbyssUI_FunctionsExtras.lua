@@ -703,7 +703,11 @@ local function MinimapBehaviours()
 		Minimap:StopMovingOrSizing()
 		if (button == 'RightButton') then
 			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-			CalendarFrameIcon:Show()
+			if ( not CalendarFrameIcon:IsShown() ) then
+				CalendarFrameIcon:Show()
+			else
+				CalendarFrameIcon:Hide()
+			end
 		elseif (button == 'MiddleButton') then
 			if(not CalendarFrame) then
 				LoadAddOn("Blizzard_Calendar")

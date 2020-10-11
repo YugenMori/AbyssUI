@@ -287,19 +287,13 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_BindingUI" then
-    f.yellow = {
-      "KeyBindingFrameText",
-    }
     if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
-      for _, v in next, f.yellow do 
-        AbyssUI_ApplyFonts(v)
-      end
       for i, v in pairs ({
         KeyBindingFrame.defaultsButton.Text,
         KeyBindingFrame.unbindButton.Text,
         KeyBindingFrame.okayButton.Text,
         KeyBindingFrame.cancelButton.Text,
-        KeyBindingFrame.quickKeybindButton.Text,
+        --KeyBindingFrame.quickKeybindButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
