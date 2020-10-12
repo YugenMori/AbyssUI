@@ -9,7 +9,7 @@
 
 #### Hi, I'm Yugen (Brazil), I really like to work on this UI (I did spend too much time editing textures tho lol), I hope you like AbyssUI. If you want me to continue share with your friends, and please consider making a donation. This helps a lot and give me energy to make it even better! Thanks for all the support.
 
-#### Always check the FAQ, change log and the comments section before asking/report something.
+#### Always check the FAQ. Bug reports have more visibility on our discord channel.
 ##### *The interface can support almost any language, including Russian, Chinese and Korean. (v9.0.1.5+)
 [![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://www.youtube.com/watch?v=meWuh0gTPmI&feature=youtu.be)
 
