@@ -2,7 +2,7 @@
 ## Patch: 9.0.1 Shadowlands
 ### For a full experience with AbyssUI, download [AbyssUI_TexturePack!](https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html)
 
-[![Paypal](https://cdn.discordapp.com/attachments/740267120956276764/763024008039104542/pay-with-paypal_large.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2) [![Discord](https://cdn.discordapp.com/attachments/740267120956276764/763027048033288232/Discord_button.png)](https://discord.gg/WrbyzBm)
+[![Patreon](https://cdn.discordapp.com/attachments/740267120956276764/764982261229420554/patreon-banner.png)](https://www.patreon.com/abyssui) [![Discord](https://cdn.discordapp.com/attachments/740267120956276764/763027048033288232/Discord_button.png)](https://discord.gg/Y9TYtdk)
 ###### Donating the equivalent of one cup of coffee in your country each month can actually turn a hobby into a job. Check my paypal, thank you very much for your kindness.
 
 #### AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow artwork/functionality.
