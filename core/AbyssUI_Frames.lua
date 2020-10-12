@@ -855,7 +855,7 @@ AbyssUISecondFrame.text:SetJustifyV("CENTER")
 AbyssUISecondFrame.text:SetText("Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, choose the option that best suits your taste.\n\n"
 .."|cfff2dc7fClassic|r: interface model close to the original, with few modifications.\n\n"
-.."|cfff2dc7fRecommended|r: a mix between the other options, with the best of the two.\n\n"
+.."|cfff2dc7f"..recommendedString.."|r: a mix between the other options, with the best of the two.\n\n"
 .."|cfff2dc7fModern|r: a modern interface model, with striking changes to the interface.\n\n"
 .."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info.")
 ----------------------------------------------------

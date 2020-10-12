@@ -169,10 +169,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	    end
 	    -- PlayerArt
 	    local function UnitFramesImproved_PlayerFrame_ToPlayerArt(self)
-	      if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-	        if not InCombatLockdown() then
-	          UnitFramesImproved_Style_PlayerFrame()
-	        end
+	    	if self:IsShown() then
+		      if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+		        if not InCombatLockdown() then
+		          UnitFramesImproved_Style_PlayerFrame()
+		        end
+		      end
 	      else
 	        return nil
 	      end
@@ -219,20 +221,20 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					self.healthbar:SetWidth(119)
 					self.healthbar.lockColor = true
 					--end
-				else
-					return nil
 				end
 			end
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true and not InCombatLockdown() ) then
-				if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
-				else
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
+			if self:IsShown() then
+				if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+					if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
+						self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
+					else
+						self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
+					end
+					UnitFramesImproved_Style_TargetFrame(self)
 				end
-				UnitFramesImproved_Style_TargetFrame(self)
 			else 
 				return nil
 			end
@@ -358,6 +360,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						v:SetShadowColor(0, 0, 0)
 						v:SetShadowOffset(1, -1)					
 					end
+				else
+					UIErrorsFrame:AddMessage("UnitFrameImproved can't load when in combat", 1, 0, 0, 3)
 				end
 			else
 				return nil
@@ -365,48 +369,54 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- TargetUpdate
 		local function UnitFramesImproved_TargetFrame_Update(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				-- Set back color of health bar
-				if ( not UnitPlayerControlled(self.unit) and UnitIsTapDenied(self.unit) ) then
-					-- Gray if npc is tapped by other player
-					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
-				else
-					-- Standard by class etc if not
-					if ( UnitIsPlayer(self.unit) ) then
-						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
-							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-							if ( healthPercentage == 0 ) then return end
-							if healthPercentage == 100 then
-								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-							elseif healthPercentage < 100 and healthPercentage > 21 then
-								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-							elseif healthPercentage < 21 then
-								self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
-							end				
-						end	
+			if self:IsShown() then
+				if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+					-- Set back color of health bar
+					if ( not UnitPlayerControlled(self.unit) and UnitIsTapDenied(self.unit) ) then
+						-- Gray if npc is tapped by other player
+						self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 					else
-						-- Change Color By health
-						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
-							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-							if ( healthPercentage == 0 ) then return end
-							if healthPercentage == 100 then
-								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-							elseif healthPercentage < 100 and healthPercentage > 21 then
-								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-							elseif healthPercentage < 21 then
-								self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
-							end				
-						end	
-					end
-					if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
-						if (not UnitIsUnconscious(self.unit)) then
-							if (self.healthbar.TextString) then
-								self.healthbar.TextString:Hide()
-								self.healthbar.forceHideText = true
+						-- Standard by class etc if not
+						if ( UnitIsPlayer(self.unit) ) then
+							if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
+								local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
+								if ( healthPercentage == 0 ) then return end
+								if healthPercentage == 100 then
+									self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+								elseif healthPercentage < 100 and healthPercentage > 21 then
+									self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+								elseif healthPercentage < 21 then
+									self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
+								end				
+							end	
+						else
+							-- Change Color By health
+							if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
+								local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
+								if ( healthPercentage == 0 ) then return end
+								if healthPercentage == 100 then
+									self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+								elseif healthPercentage < 100 and healthPercentage > 21 then
+									self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+								elseif healthPercentage < 21 then
+									self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
+								end				
+							end	
+						end
+						if ( self ~= Boss2TargetFrame ) then
+							if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
+								if (not UnitIsUnconscious(self.unit)) then
+									if (self.healthbar.TextString ) then
+										self.healthbar.TextString:Hide()
+										self.healthbar.forceHideText = true
+									end
+								end
 							end
 						end
-					end	
+					end
 				end
+			else
+				return nil
 			end
 		end
 		-- CheckClassification
@@ -531,12 +541,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				
 				-- Set up some stylings
 				UnitFramesImproved_Style_PlayerFrame()
-				if ( not InCombatLockdown() ) then
-					UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
-					UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
-					UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
-					UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
-				end
+
+				UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
+				UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
+				UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
+				UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+
 				UnitFramesImproved_Style_TargetFrame(TargetFrame)
 				UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				UnitFramesImproved_UnitName_Color()

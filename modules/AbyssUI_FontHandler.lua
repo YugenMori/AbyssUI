@@ -201,6 +201,8 @@ f:SetScript("OnEvent", function(self, event)
   "InterfaceOptionsDisplayPanelResetTutorialsText",
   "InterfaceOptionsSocialPanelRedockChatText",
   "CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButtonText",
+  "CompactUnitFrameProfilesSaveButtonText",
+  "CompactUnitFrameProfilesDeleteButtonText",
   "VideoOptionsFrameOkayText",
   "VideoOptionsFrameCancelText",
   "VideoOptionsFrameDefaultsText",
@@ -251,6 +253,9 @@ f:SetScript("OnEvent", function(self, event)
   "RaidFrameRaidInfoButtonText",
   "QuickJoinFrameText",
   "StackSplitFrameText",
+  "PetitionFrameSignButtonText",
+  "GuildInviteFrameJoinButtonText",
+  "GuildInviteFrameDeclineButtonText",
 
   }
   if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
@@ -273,6 +278,8 @@ f:SetScript("OnEvent", function(self, event)
       QuestMapFrame.DetailsFrame.AbandonButton.Text,
       QuestMapFrame.DetailsFrame.ShareButton.Text,
       QuestMapFrame.DetailsFrame.TrackButton.Text,
+      ChannelFrame.NewButton.Text,
+      ChannelFrame.SettingsButton.Text,
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)
