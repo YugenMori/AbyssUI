@@ -7,7 +7,7 @@
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 local texturepackCheck    = "1.0.1.4"
-local texturepackDate     = "12/10/20"
+local texturepackDate     = "13/10/20"
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -1456,7 +1456,7 @@ end)
 -- American Clock Style --
 local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
 AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -230)
-AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Style")
+AbyssUI_AmericanClock_CheckButton.Text:SetText("American Date Format")
 AbyssUI_AmericanClock_CheckButton.tooltip = "Change the date format of the whole UI to"..
 " the American style"
 AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)

@@ -210,6 +210,8 @@ f:SetScript("OnEvent", function(self, event)
   "QuestFrameAcceptButtonText",
   "QuestFrameDeclineButtonText",
   "QuestFrameCompleteQuestButtonText",
+  "QuestFrameCompleteButtonText",
+  "QuestFrameGoodbyeButtonText",
   "GossipFrameGreetingGoodbyeButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
@@ -226,6 +228,8 @@ f:SetScript("OnEvent", function(self, event)
   "SendMailMailButtonText",
   "SendMailCancelButtonText",
   "LFDQueueFrameFindGroupButtonText",
+  "LFDRoleCheckPopupAcceptButtonText",
+  "LFDRoleCheckPopupDeclineButtonText",
   "RaidFinderFrameFindRaidButtonText",
   "StaticPopup1Button1Text",
   "StaticPopup1Button2Text",
@@ -249,6 +253,7 @@ f:SetScript("OnEvent", function(self, event)
   "QuickJoinFrameText",
   "StackSplitFrameText",
   "PetitionFrameSignButtonText",
+  "PetitionFrameCancelButtonText",
   "GuildInviteFrameJoinButtonText",
   "GuildInviteFrameDeclineButtonText",
 
@@ -401,6 +406,8 @@ f:SetScript("OnEvent", function(self, event, name)
         CommunitiesFrame.GuildLogButton.Text,
         CommunitiesFrame.GuildMemberDetailFrame.RemoveButton.Text,
         CommunitiesFrame.GuildMemberDetailFrame.GroupInviteButton.Text,
+        CommunitiesFrame.ClubFinderInvitationFrame.ApplyButton.Text,
+        CommunitiesFrame.ClubFinderInvitationFrame.DeclineButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
@@ -414,6 +421,7 @@ f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_TalentUI" then
     f.yellow = {
       "PlayerTalentFrameSpecializationLearnButtonText",
+      "PlayerTalentFrameTalentsPvpTalentFrameTalentListText",
     }
     if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
       for _, v in next, f.yellow do 
