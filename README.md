@@ -2,7 +2,9 @@
 ## Patch: 9.0.1 Shadowlands
 ### For a full experience with AbyssUI, download [AbyssUI_TexturePack!](https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html)
 
-[![Patreon](https://cdn.discordapp.com/attachments/740267120956276764/764982261229420554/patreon-banner.png)](https://www.patreon.com/abyssui) [![Discord](https://cdn.discordapp.com/attachments/740267120956276764/763027048033288232/Discord_button.png)](https://discord.gg/Y9TYtdk)
+[![Discord](https://img.shields.io/static/v1?label=Discord&message=Join&color=7289DA&logo=discord&link=https://discord.gg/Y9TYtdk)](https://discord.gg/Y9TYtdk) [![Patreon](https://img.shields.io/static/v1?label=Patreon&message=Join&color=e64413&logo=patreon&link=https://www.patreon.com/abyssui)](https://www.patreon.com/abyssui)
+[![Github](https://img.shields.io/static/v1?label=Github&message=Follow&color=e64413&logo=git&link=https://github.com/YugenMori/AbyssUI)](https://github.com/YugenMori/AbyssUI)
+[![Paypal](https://img.shields.io/static/v1?label=PayPal&message=Donate&color=0079C1&logo=paypal)](https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2)
 ###### Donating the equivalent of one cup of coffee in your country each month can actually turn a hobby into a job. Check my paypal, thank you very much for your kindness.
 
 #### AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow artwork/functionality.
