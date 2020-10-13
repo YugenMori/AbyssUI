@@ -199,7 +199,6 @@ f:SetScript("OnEvent", function(self, event)
   "InterfaceOptionsFrameCancelText",
   "InterfaceOptionsFrameDefaultsText",
   "InterfaceOptionsDisplayPanelResetTutorialsText",
-  "InterfaceOptionsSocialPanelRedockChatText",
   "CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButtonText",
   "CompactUnitFrameProfilesSaveButtonText",
   "CompactUnitFrameProfilesDeleteButtonText",
@@ -212,10 +211,6 @@ f:SetScript("OnEvent", function(self, event)
   "QuestFrameDeclineButtonText",
   "QuestFrameCompleteQuestButtonText",
   "GossipFrameGreetingGoodbyeButtonText",
-  "AddonListEnableAllButtonText",
-  "AddonListDisableAllButtonText",
-  "AddonListOkayButtonText",
-  "AddonListCancelButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
   "GameMenuButtonWhatsNewText",
@@ -267,6 +262,7 @@ f:SetScript("OnEvent", function(self, event)
       LFGListFrame.CategorySelection.FindGroupButton.Text,
       LFGListFrame.EntryCreation.CancelButton.Text,
       LFGListFrame.EntryCreation.ListGroupButton.Text,
+      InterfaceOptionsSocialPanelRedockChat.Text,
       ScriptErrorsFrame.Close.Text,
       RecruitAFriendFrame.RecruitmentButton.Text,
       FriendsFrameBattlenetFrame.BroadcastFrame.CancelButton.Text,
@@ -280,6 +276,11 @@ f:SetScript("OnEvent", function(self, event)
       QuestMapFrame.DetailsFrame.TrackButton.Text,
       ChannelFrame.NewButton.Text,
       ChannelFrame.SettingsButton.Text,
+      AddonListEnableAllButton.Text,
+      AddonListDisableAllButton.Text,
+      AddonListOkayButton.Text,
+      AddonListCancelButton.Text,
+
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)
@@ -300,7 +301,7 @@ f:SetScript("OnEvent", function(self, event, name)
         KeyBindingFrame.unbindButton.Text,
         KeyBindingFrame.okayButton.Text,
         KeyBindingFrame.cancelButton.Text,
-        --KeyBindingFrame.quickKeybindButton.Text,
+        KeyBindingFrame.quickKeybindButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
@@ -480,6 +481,20 @@ f:SetScript("OnEvent", function(self, event, name)
         AuctionHouseFrame.CommoditiesSellFrame.PostButton.Text,
         AuctionHouseFrame.CommoditiesBuyFrame.BackButton.Text,
         AuctionHouseFrame.CommoditiesBuyFrame.BuyDisplay.BuyButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)  
+-- New Player Experience
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_NewPlayerExperience" then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+      for i, v in pairs ({
+        KeyboardMouseConfirmButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end

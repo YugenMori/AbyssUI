@@ -395,7 +395,7 @@ local movable = true
 local frame_anchor = "TOP"
 local pos_x = -250
 local pos_y = -6
-StatsFrame:SetPoint('TOPLEFT', UIParent, "TOPLEFT", 5, -5)
+StatsFrame:SetPoint('BOTTOMLEFT', UIParent, "BOTTOMLEFT", 5, 5)
 StatsFrame:SetMovable(true)
 StatsFrame:EnableMouse(true)
 StatsFrame:SetClampedToScreen(true)
@@ -504,7 +504,7 @@ CF:SetScript("OnEvent", function(self, event)
 			self:SetHeight(StatsFrame.text:GetStringHeight())
 		end
 	end
-	if ( AbyssUIAddonSettings.DisableSquareMinimap == true ) then
+	if ( AbyssUIAddonSettings.SquareMinimap ~= true ) then
 		StatsFrame:SetScript("OnUpdate", update)
 	else
 		return nil

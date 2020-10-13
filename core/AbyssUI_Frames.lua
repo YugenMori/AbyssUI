@@ -875,6 +875,96 @@ Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUISecondFrame)
 AbyssUISecondFrame.texture = Texture
 ----------------------------------------------------
+-- Recommended
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function() 
+	local FrameButtonRecommended = CreateFrame("Button", "$parentFrameButtonRecommended", AbyssUISecondFrame, "UIPanelButtonTemplate")
+	FrameButtonRecommended:SetHeight(40)
+	FrameButtonRecommended:SetWidth(160)
+	FrameButtonRecommended:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 0, -200)
+	FrameButtonRecommended.text = FrameButtonRecommended.text or FrameButtonRecommended:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	FrameButtonRecommended.text:SetFont(globalFont, 18)
+	FrameButtonRecommended.text:SetPoint("CENTER", FrameButtonRecommended, "CENTER", 0, -2)
+	FrameButtonRecommended.text:SetText(recommendedString)
+	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+		FrameButtonRecommended.text:SetTextColor(49/255, 49/255, 49/255)
+		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
+		FrameButtonRecommended.text:SetShadowOffset(0.5, 0)
+	else
+		FrameButtonRecommended.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
+		FrameButtonRecommended.text:SetShadowOffset(1, -1)
+	end
+	FrameButtonRecommended.GlowTexture = FrameButtonRecommended:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
+	FrameButtonRecommended.GlowTexture:SetAllPoints()
+	FrameButtonRecommended.GlowTexture:Hide()
+	FrameButtonRecommended.Glow = FrameButtonRecommended:CreateAnimationGroup()
+	FrameButtonRecommended.Glow:SetLooping("REPEAT")
+	local anim = FrameButtonRecommended.Glow:CreateAnimation("Alpha")
+	anim:SetChildKey("GlowTexture")
+	anim:SetOrder(1)
+	anim:SetFromAlpha(0)
+	anim:SetToAlpha(1)
+	anim:SetDuration(0.5)
+	anim = FrameButtonRecommended.Glow:CreateAnimation("Alpha")
+	anim:SetOrder(2)
+	anim:SetChildKey("GlowTexture")
+	anim:SetFromAlpha(1)
+	anim:SetToAlpha(0)
+	anim:SetDuration(0.5)
+	FrameButtonRecommended.Glow:SetScript("OnPlay", function(self)
+		self:GetParent().GlowTexture:Show()
+	end)
+	FrameButtonRecommended.Glow:SetScript("OnStop", function(self)
+		self:GetParent().GlowTexture:Hide()
+	end)
+	if not FrameButtonRecommended.running then
+		FrameButtonRecommended.running = true
+		FrameButtonRecommended.Glow:Play()
+	else
+		FrameButtonRecommended.running = false
+		FrameButtonRecommended.Glow:Stop()
+	end
+	if( not FrameButtonRecommended:IsShown() ) then
+		FrameButtonRecommended.Glow:Stop()
+	end
+	----------------------------------------------------
+	local BorderButtonRecommended = FrameButtonRecommended:CreateTexture(nil, "ARTWORK")
+	BorderButtonRecommended:SetAllPoints(FrameButtonRecommended)
+	FrameButtonRecommended:SetScript("OnClick", function()
+		-- Set
+		for i, v in pairs {
+			addonTable.HideUnitImprovedFaction,
+			addonTable.HideGroupFrame,
+			addonTable.InstanceLeave,
+			addonTable.InspectTarget,
+			addonTable.ConfirmPopUps,
+			addonTable.AutoSellGray,
+			addonTable.DisableHealingSpam,
+			addonTable.TooltipOnCursor,
+			addonTable.UnitFrameImproved,
+			addonTable.ElitePortrait,
+		} do
+			v:SetChecked(true)
+		end
+		-- Get
+		AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
+		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
+		AbyssUISecondFrame:Hide()
+		FrameButtonRecommended.Glow:Finish()
+		ReloadUI()
+	end)
+end)
+-- Modern
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function() 
@@ -928,7 +1018,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
 		AbyssUISecondFrame:Hide()
-		FrameButtonModern.Glow:Finish()
 		ReloadUI()
 	end)
 end)
@@ -989,7 +1078,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DisableNewMinimap				      	= addonTable.DisableNewMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
 		AbyssUISecondFrame:Hide()
-		FrameButtonModern.Glow:Finish()
 		ReloadUI()
 	end)
 	----------------------------------------------------
@@ -1007,93 +1095,6 @@ f:SetScript("OnEvent", function()
 	BorderCloseButton:SetAllPoints(CloseButton)
 	CloseButton:SetScript("OnClick", function()
 		AbyssUISecondFrame:Hide()
-		FrameButtonModern.Glow:Finish()
-		ReloadUI()
-	end)
-end)
--- Recommended
-local f = CreateFrame("Frame", nil)
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function() 
-	local FrameButtonRecommended = CreateFrame("Button", "$parentFrameButtonRecommended", AbyssUISecondFrame, "UIPanelButtonTemplate")
-	FrameButtonRecommended:SetHeight(40)
-	FrameButtonRecommended:SetWidth(160)
-	FrameButtonRecommended:SetPoint("CENTER", AbyssUISecondFrame, "CENTER", 0, -200)
-	FrameButtonRecommended.text = FrameButtonRecommended.text or FrameButtonRecommended:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-	FrameButtonRecommended.text:SetFont(globalFont, 18)
-	FrameButtonRecommended.text:SetPoint("CENTER", FrameButtonRecommended, "CENTER", 0, -2)
-	FrameButtonRecommended.text:SetText(recommendedString)
-	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
-		FrameButtonRecommended.text:SetTextColor(49/255, 49/255, 49/255)
-		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
-		FrameButtonRecommended.text:SetShadowOffset(0.5, 0)
-	else
-		FrameButtonRecommended.text:SetTextColor(229/255, 229/255, 229/255)
-		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
-		FrameButtonRecommended.text:SetShadowOffset(1, -1)
-	end
-	FrameButtonRecommended.GlowTexture = FrameButtonRecommended:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
-	FrameButtonRecommended.GlowTexture:SetAllPoints()
-	FrameButtonRecommended.GlowTexture:Hide()
-	FrameButtonRecommended.Glow = FrameButtonRecommended:CreateAnimationGroup()
-	FrameButtonRecommended.Glow:SetLooping("REPEAT")
-	local anim = FrameButtonRecommended.Glow:CreateAnimation("Alpha")
-	anim:SetChildKey("GlowTexture")
-	anim:SetOrder(1)
-	anim:SetFromAlpha(0)
-	anim:SetToAlpha(1)
-	anim:SetDuration(0.5)
-	anim = FrameButtonRecommended.Glow:CreateAnimation("Alpha")
-	anim:SetOrder(2)
-	anim:SetChildKey("GlowTexture")
-	anim:SetFromAlpha(1)
-	anim:SetToAlpha(0)
-	anim:SetDuration(0.5)
-	FrameButtonRecommended.Glow:SetScript("OnPlay", function(self)
-		self:GetParent().GlowTexture:Show()
-	end)
-	FrameButtonRecommended.Glow:SetScript("OnStop", function(self)
-		self:GetParent().GlowTexture:Hide()
-	end)
-	if not FrameButtonRecommended.running then
-		FrameButtonRecommended.running = true
-		FrameButtonRecommended.Glow:Play()
-	else
-		FrameButtonRecommended.running = false
-		FrameButtonRecommended.Glow:Stop()
-	end
-	----------------------------------------------------
-	local BorderButtonRecommended = FrameButtonRecommended:CreateTexture(nil, "ARTWORK")
-	BorderButtonRecommended:SetAllPoints(FrameButtonRecommended)
-	FrameButtonRecommended:SetScript("OnClick", function()
-		-- Set
-		for i, v in pairs {
-			addonTable.HideUnitImprovedFaction,
-			addonTable.HideGroupFrame,
-			addonTable.InstanceLeave,
-			addonTable.InspectTarget,
-			addonTable.ConfirmPopUps,
-			addonTable.AutoSellGray,
-			addonTable.DisableHealingSpam,
-			addonTable.TooltipOnCursor,
-			addonTable.UnitFrameImproved,
-			addonTable.ElitePortrait,
-		} do
-			v:SetChecked(true)
-		end
-		-- Get
-		AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
-		AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
-		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
-		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
-		AbyssUISecondFrame:Hide()
-		FrameButtonRecommended.Glow:Finish()
 		ReloadUI()
 	end)
 end)

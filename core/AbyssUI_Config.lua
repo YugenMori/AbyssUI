@@ -892,9 +892,8 @@ end)
 -- Hide FPS/MS Frame --
 local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
-FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame (*)")
-FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (Top left frame)."
-.." *This will only work if you are using the default Blizzard Minimap"
+FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame")
+FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (bottomleft)"
 FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
 addonTable.FPSMSFrame = FPSMSFrame_CheckButton
 -- OnClick Function
@@ -1429,12 +1428,13 @@ AbyssUIAutoGamma_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAutoGa
 -- OnClick Function
 AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
-  --local dataTime = GetGameTime()
-  local dataTime = tonumber(date("%H"))
-  if ( dataTime >= 6 and dataTime < 18 ) then
-    ConsoleExec( "Gamma 1.2" )
-  elseif ( dataTime >= 18 ) then
-    ConsoleExec( "Gamma 1.0" )
+  if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
+    local dataTime = tonumber(date("%H"))
+    if ( dataTime >= 6 and dataTime < 18 ) then
+      ConsoleExec( "Gamma 1.2" )
+    elseif ( dataTime >= 18 ) then
+      ConsoleExec( "Gamma 1.0" )
+    end
   end
 end)
 -- After Login/Reload
