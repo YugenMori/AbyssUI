@@ -256,6 +256,14 @@ f:SetScript("OnEvent", function(self, event)
   "PetitionFrameCancelButtonText",
   "GuildInviteFrameJoinButtonText",
   "GuildInviteFrameDeclineButtonText",
+  "ChatConfigFrameDefaultButtonText",
+  "ChatConfigFrameRedockButtonText",
+  "ChatConfigFrameOkayButtonText",
+  "ChatConfigCombatSettingsFiltersCopyFilterButtonText",
+  "ChatConfigCombatSettingsFiltersAddFilterButtonText",
+  "ChatConfigCombatSettingsFiltersDeleteButtonText",
+  "CombatLogDefaultButtonText",
+
 
   }
   if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
@@ -285,6 +293,7 @@ f:SetScript("OnEvent", function(self, event)
       AddonListDisableAllButton.Text,
       AddonListOkayButton.Text,
       AddonListCancelButton.Text,
+
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)

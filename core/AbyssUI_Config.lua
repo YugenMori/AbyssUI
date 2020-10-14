@@ -1030,7 +1030,7 @@ AbyssUI_ChatHideFrame:SetSize(30, 30)
 AbyssUI_ChatHideFrame.t = AbyssUI_ChatHideFrame:CreateTexture(nil, "BORDER")
 AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
 AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
-AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", 0, -10)
+AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", -1, -28)
 if ( AbyssUIAddonSettings.FadeUI ~= true ) then
   AbyssUI_ChatHideFrame:Show()
 else
