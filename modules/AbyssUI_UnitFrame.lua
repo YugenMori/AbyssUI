@@ -516,7 +516,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				hooksecurefunc("TargetFrame_Update", UnitFramesImproved_TargetFrame_Update)
 				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
 				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
-				--hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
+				hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
 				-- BossFrame hooks
 				hooksecurefunc("BossTargetFrame_OnLoad", UnitFramesImproved_BossTargetFrame_Style)
 				

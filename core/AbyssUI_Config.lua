@@ -1938,7 +1938,7 @@ AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
 AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() and MinimapCluster:IsShown() ) then
+    if ( not InCombatLockdown() ) then
       MinimapCluster:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.MinimapSlider = newValue
     end
@@ -1950,7 +1950,7 @@ AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
 AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() and PlayerFrame:IsShown() ) then
+    if ( not InCombatLockdown() ) then
       for i, v in pairs({
         PlayerFrame,
         TargetFrame,
@@ -1968,7 +1968,7 @@ AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
 AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() and BuffFrame:IsShown() ) then
+    if ( not InCombatLockdown() ) then
       BuffFrame:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.BuffFrameSlider = newValue
     end
@@ -1980,7 +1980,7 @@ AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
 AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
   if ( value ~= nil and value > 0 ) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() and PartyMemberFrame1:IsShown() ) then
+    if ( not InCombatLockdown() ) then
       for i, v in pairs({
         PartyMemberFrame1,
         PartyMemberFrame2,
@@ -2017,7 +2017,6 @@ AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
     end
   end
 end)
-
 ----------------------------- AbyssUI Stylization ------------------------------
 -- Player Portrait Style --
 local PSINFO_CheckButton = CreateFrame("Frame","$parentPSINFO_CheckButton", AbyssUI_Config.childpanel4)

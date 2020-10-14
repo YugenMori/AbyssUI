@@ -2450,6 +2450,27 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
-
+-- GuideFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_NewPlayerExperienceGuide" then
+		for i, v in pairs({
+			GuideFrame.NineSlice.TopEdge,
+			GuideFrame.NineSlice.RightEdge,
+			GuideFrame.NineSlice.BottomEdge,
+			GuideFrame.NineSlice.LeftEdge,
+			GuideFrame.NineSlice.TopRightCorner,
+			GuideFrame.NineSlice.TopLeftCorner,
+			GuideFrame.NineSlice.BottomLeftCorner,
+		GuideFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
 --------------------------------------------------------------
 -- End

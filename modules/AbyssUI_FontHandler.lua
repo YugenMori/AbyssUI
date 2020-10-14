@@ -178,13 +178,13 @@ end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
   _G[self]:SetTextColor(45/255, 45/255, 45/255)
-  _G[self]:SetFont(globalFont, 14, "NORMAL")
+  _G[self]:SetFont(globalFont, 12, "NORMAL")
   _G[self]:SetShadowColor(45/255, 45/255, 45/255)
   _G[self]:SetShadowOffset(0.5, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
   self:SetTextColor(45/255, 45/255, 45/255)
-  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetFont(globalFont, 12, "NORMAL")
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0.5, 0)
 end
@@ -285,7 +285,6 @@ f:SetScript("OnEvent", function(self, event)
       AddonListDisableAllButton.Text,
       AddonListOkayButton.Text,
       AddonListCancelButton.Text,
-
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)
@@ -508,6 +507,51 @@ f:SetScript("OnEvent", function(self, event, name)
       end
     end
   end
-end)  
+end) 
+-- TradeSkillFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_TradeSkillUI" then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+      for i, v in pairs ({
+        TradeSkillFrame.DetailsFrame.CreateButton.Text,
+        TradeSkillFrame.DetailsFrame.ExitButton.Text, 
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end) 
+-- ChromieTimeFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_ChromieTimeUI" then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+      for i, v in pairs ({
+        ChromieTimeFrame.SelectButton.Text, 
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end) 
+-- GuideFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_NewPlayerExperienceGuide" then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+      for i, v in pairs ({
+        GuideFrame.ScrollFrame.ConfirmationButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end) 
+
+
 --------------------------------------------------------------
 -- End
