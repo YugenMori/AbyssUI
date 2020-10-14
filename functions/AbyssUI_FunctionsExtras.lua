@@ -353,18 +353,23 @@ end)
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-		if frame:IsForbidden() or ( UnitIsFriend("player", frame.displayedUnit) and not UnitIsUnit(frame.displayedUnit, "player") ) then return end
-		if not frame.healthBar.percent then
-			frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
-			frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
-			frame.healthBar.percent:SetFont(damageFont, 10)
-			frame.healthBar.percent:SetShadowColor(0, 0, 0)
-			frame.healthBar.percent:SetShadowOffset(1, -0.25)
+		if ( not UnitIsFriend("player", frame.displayedUnit) ) then
+			if ( not frame.healthBar.percent ) then
+				frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
+				frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
+				frame.healthBar.percent:SetFont(damageFont, 10)
+				frame.healthBar.percent:SetShadowColor(0, 0, 0)
+				frame.healthBar.percent:SetShadowOffset(1, -0.25)
+			end
+			local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+			if ( percentcalc == 0 ) then return end
+			frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
+			frame.healthBar.percent:Show()
+		elseif (UnitIsFriend("player", frame.displayedUnit)) then
+			if (frame.healthBar.percent) then
+				frame.healthBar.percent:Hide()
+			end
 		end
-		local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
-		if ( percentcalc == 0 ) then return end
-		frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
-		--frame.healthBar.percent:Show()
 	end
 end)
 -- Nameplate colorization

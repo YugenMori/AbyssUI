@@ -31,31 +31,31 @@ end)
 local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
   if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
   elseif ( locale == "zhTW" ) then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
   elseif ( locale == "ruRU" ) then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
-    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont     = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
   elseif ( locale == "koKR" ) then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
-    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont     = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
   elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
-    subFont   = mediaFolder.."npcfont.ttf"
+    subFont     = mediaFolder.."npcfont.ttf"
     damageFont  = mediaFolder.."damagefont.ttf"
   else
     globalFont  = fontName
-    subFont   = fontName
+    subFont     = fontName
     damageFont  = fontName
   end
   return globalFont, subFont, damageFont
@@ -178,13 +178,13 @@ end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
   _G[self]:SetTextColor(45/255, 45/255, 45/255)
-  _G[self]:SetFont(globalFont, 12, "NORMAL")
+  _G[self]:SetFont(globalFont, 14, "NORMAL")
   _G[self]:SetShadowColor(45/255, 45/255, 45/255)
   _G[self]:SetShadowOffset(0.5, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
   self:SetTextColor(45/255, 45/255, 45/255)
-  self:SetFont(globalFont, 12, "NORMAL")
+  self:SetFont(globalFont, 14, "NORMAL")
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0.5, 0)
 end

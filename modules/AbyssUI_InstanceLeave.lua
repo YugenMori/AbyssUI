@@ -143,24 +143,20 @@ f:SetScript("OnEvent", function()
 		  FrameButton.text:SetShadowOffset(1, -1)
 		end
 	FrameButton:SetScript("OnClick", function()
-		local isDg = IsInLFGDungeon()
 		local isComplete = IsLFGComplete()
-		local isPt = IsInGroup()
-		local isLFG = IsPartyLFG()
-		if ( isComplete and isDg and isPt ) then 
-			LeaveParty() 
-			LeaveBattlefield() 
+		local inInstance, instanceType = IsInInstance()
+		if ( isComplete and (instanceType == "party" or instanceType == "raid") ) then 
+			C_PartyInfo.LeaveParty()
 			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
 			C_Timer.After(2, function()
 				AbyssUI_InstanceLeave_DynamicFrame:Hide()
 		    end)
-		elseif ( not isDg and not isLFG and not isPt ) then 
+		elseif ( not instanceType == "none" and not ( instanceType == "party" or instanceType == "raid") ) then 
 			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
 			C_Timer.After(2, function()
 				AbyssUI_InstanceLeave_DynamicFrame:Hide()
 		    end)
-		elseif ( isComplete and not isDg and isPt ) then 
-			LeaveParty() 
+		elseif ( isComplete and instanceType == "pvp" ) then 
 			LeaveBattlefield() 
 			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 1, 0)
 			C_Timer.After(2, function()
