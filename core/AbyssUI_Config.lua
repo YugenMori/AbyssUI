@@ -1030,7 +1030,7 @@ AbyssUI_ChatHideFrame:SetSize(30, 30)
 AbyssUI_ChatHideFrame.t = AbyssUI_ChatHideFrame:CreateTexture(nil, "BORDER")
 AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
 AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
-AbyssUI_ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM",0,-35)
+AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", 0, -10)
 if ( AbyssUIAddonSettings.FadeUI ~= true ) then
   AbyssUI_ChatHideFrame:Show()
 else
@@ -1288,6 +1288,32 @@ HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( AbyssUIAddonSettings.HideConvenantFrame == true ) then
       C_Timer.After(1, function()
         GarrisonLandingPageMinimapButton:Hide(0)
+      end)
+    end
+  end
+end)
+-- Hide Minimap Zone Text
+local HideMinimapZoneText_CheckButton = CreateFrame("CheckButton", "$parentHideMinimapZoneText_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+HideMinimapZoneText_CheckButton:SetPoint("TOPRIGHT", -200, -170)
+HideMinimapZoneText_CheckButton.Text:SetText("Hide Minimap Zone Text")
+HideMinimapZoneText_CheckButton.tooltip = "Hide zone text above minimap"
+HideMinimapZoneText_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimapZoneText)
+-- OnClick Function
+HideMinimapZoneText_CheckButton:SetScript("OnClick", function(self)
+  AbyssUIAddonSettings.HideMinimapZoneText = self:GetChecked()
+    if ( AbyssUIAddonSettings.HideMinimapZoneText == true ) then
+      MinimapZoneText:Hide()
+    else
+      MinimapZoneText:Show()
+    end
+end)
+-- After Login/Reload
+HideMinimapZoneText_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+HideMinimapZoneText_CheckButton:SetScript("OnEvent", function(self, event, ...)
+  if ( event == "PLAYER_ENTERING_WORLD" ) then
+    if ( AbyssUIAddonSettings.HideMinimapZoneText == true ) then
+      C_Timer.After(1, function()
+        MinimapZoneText:Hide()
       end)
     end
   end

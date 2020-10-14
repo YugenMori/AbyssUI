@@ -353,7 +353,7 @@ end)
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-		if ( not UnitIsFriend("player", frame.displayedUnit) ) then
+		if ( not frame:IsForbidden() and not UnitIsFriend("player", frame.displayedUnit) ) then
 			if ( not frame.healthBar.percent ) then
 				frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
 				frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
