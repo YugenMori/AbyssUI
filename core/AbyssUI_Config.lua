@@ -84,9 +84,9 @@ end
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
   self:SetTextColor(45/255, 45/255, 45/255)
-  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetFont(globalFont, 14)
   self:SetShadowColor(45/255, 45/255, 45/255)
-  self:SetShadowOffset(0.5, 0)
+  self:SetShadowOffset(0, 0)
 end
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -1031,7 +1031,8 @@ AbyssUI_ChatHideFrame.t = AbyssUI_ChatHideFrame:CreateTexture(nil, "BORDER")
 AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
 AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
 AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", -1, -28)
-if ( AbyssUIAddonSettings.FadeUI ~= true ) then
+local glass = IsAddOnLoaded("Glass")
+if ( AbyssUIAddonSettings.FadeUI ~= true and glass ~= true ) then
   AbyssUI_ChatHideFrame:Show()
 else
   AbyssUI_ChatHideFrame:Hide()

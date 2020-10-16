@@ -178,15 +178,15 @@ end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
   _G[self]:SetTextColor(45/255, 45/255, 45/255)
-  _G[self]:SetFont(globalFont, 14, "NORMAL")
+  _G[self]:SetFont(globalFont, 14)
   _G[self]:SetShadowColor(45/255, 45/255, 45/255)
-  _G[self]:SetShadowOffset(0.5, 0)
+  _G[self]:SetShadowOffset(0, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
   self:SetTextColor(45/255, 45/255, 45/255)
-  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetFont(globalFont, 14)
   self:SetShadowColor(45/255, 45/255, 45/255)
-  self:SetShadowOffset(0.5, 0)
+  self:SetShadowOffset(0, 0)
 end
 ----------------------------------------------------
 -- Change yellow fonts text color
@@ -416,6 +416,9 @@ f:SetScript("OnEvent", function(self, event, name)
         CommunitiesFrame.GuildMemberDetailFrame.GroupInviteButton.Text,
         CommunitiesFrame.ClubFinderInvitationFrame.ApplyButton.Text,
         CommunitiesFrame.ClubFinderInvitationFrame.DeclineButton.Text,
+        ClubFinderGuildFinderFrame.GuildCards.FirstCard.RequestJoin.Text,
+        ClubFinderGuildFinderFrame.GuildCards.SecondCard.RequestJoin.Text,
+        ClubFinderGuildFinderFrame.GuildCards.ThirdCard.RequestJoin.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
