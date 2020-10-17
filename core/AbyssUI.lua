@@ -1711,7 +1711,24 @@ f:SetScript("OnEvent", function(self, event, name)
 			CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.BG.TopRightCorner,
 			CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.BG.TopLeftCorner,
 			CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.BG.BottomLeftCorner,
-			CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.BG.BottomRightCorner, }) do
+			CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.BG.BottomRightCorner,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.TopEdge,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.RightEdge,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.LeftEdge,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.BottomEdge,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.TopRightCorner,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.TopLeftCorner,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.BottomLeftCorner,
+			ClubFinderGuildFinderFrame.RequestToJoinFrame.BG.BottomRightCorner,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.TopEdge,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.RightEdge,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.LeftEdge,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.BottomEdge,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.TopRightCorner,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.TopLeftCorner,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.BottomLeftCorner,
+			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.BottomRightCorner,
+			 }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs ({

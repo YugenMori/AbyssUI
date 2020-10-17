@@ -177,13 +177,13 @@ init:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
-  _G[self]:SetTextColor(45/255, 45/255, 45/255)
+  _G[self]:SetTextColor(31/255, 31/255, 31/255)
   _G[self]:SetFont(globalFont, 14)
   _G[self]:SetShadowColor(45/255, 45/255, 45/255)
   _G[self]:SetShadowOffset(0, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
-  self:SetTextColor(45/255, 45/255, 45/255)
+  self:SetTextColor(31/255, 31/255, 31/255)
   self:SetFont(globalFont, 14)
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0, 0)
@@ -419,6 +419,11 @@ f:SetScript("OnEvent", function(self, event, name)
         ClubFinderGuildFinderFrame.GuildCards.FirstCard.RequestJoin.Text,
         ClubFinderGuildFinderFrame.GuildCards.SecondCard.RequestJoin.Text,
         ClubFinderGuildFinderFrame.GuildCards.ThirdCard.RequestJoin.Text,
+        ClubFinderGuildFinderFrame.RequestToJoinFrame.Apply.Text,
+        ClubFinderGuildFinderFrame.RequestToJoinFrame.Cancel.Text,
+        ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.Apply.Text,
+        ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.Cancel.Text,
+
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end

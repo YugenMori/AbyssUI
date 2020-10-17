@@ -35,28 +35,28 @@ local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
   if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
   elseif ( locale == "zhTW" ) then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
   elseif ( locale == "ruRU" ) then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
-    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont     = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
   elseif ( locale == "koKR" ) then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
-    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont     = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
   elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
-    subFont   = mediaFolder.."npcfont.ttf"
+    subFont     = mediaFolder.."npcfont.ttf"
     damageFont  = mediaFolder.."damagefont.ttf"
   else
     globalFont  = fontName
-    subFont   = fontName
+    subFont     = fontName
     damageFont  = fontName
   end
   return globalFont, subFont, damageFont
@@ -83,7 +83,7 @@ local function AbyssUI_FrameSize(self, width, height)
 end
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
-  self:SetTextColor(45/255, 45/255, 45/255)
+  self:SetTextColor(31/255, 31/255, 31/255)
   self:SetFont(globalFont, 14)
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0, 0)
