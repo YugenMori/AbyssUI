@@ -13,7 +13,7 @@
 
 #### Always check the FAQ before posting. Bug reports have more visibility on our discord channel.
 ##### *The interface can support almost any language, including Russian, Chinese and Korean. (v9.0.1.5+)
-[![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://www.youtube.com/watch?v=meWuh0gTPmI&feature=youtu.be)
+[![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://www.youtube.com/watch?v=u4w3CYXb47M&feature=youtu.be)
 
 
 #### AbyssUI is lightweight and does not slow down your PC / game. In comparison, the Windows notepad uses about 2MB of RAM, while AbyssUI uses between 400 to 900KB.
