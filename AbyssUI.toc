@@ -1,6 +1,6 @@
 ## Interface: 90001
 ## Title: Abyss|cff0d75d4UI|r
-## Version: 9.0.1.7c
+## Version: 9.0.1.8
 ## Author: Yugen
 ## Notes-enUS: Minimalist UI for World of Warcraft
 ## Notes-ptBR: IU Minimalista para World of Warcraft

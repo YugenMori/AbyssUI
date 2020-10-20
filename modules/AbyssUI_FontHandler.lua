@@ -32,23 +32,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-  if ( locale == "zhCN") then
+  if (locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
     subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif ( locale == "zhTW" ) then
+  elseif (locale == "zhTW") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
     subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif ( locale == "ruRU" ) then
+  elseif (locale == "ruRU") then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
     subFont     = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
-  elseif ( locale == "koKR" ) then
+  elseif (locale == "koKR") then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
     subFont     = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
-  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
     subFont     = mediaFolder.."npcfont.ttf"
@@ -88,7 +88,7 @@ local AbyssUI_FontString = CreateFrame("Frame", "$parentAbyssUI_FontString", nil
 AbyssUI_FontString:RegisterEvent("ADDON_LOADED")
 AbyssUI_FontString:RegisterEvent("PLAYER_LOGOUT")
 AbyssUI_FontString:SetScript("OnEvent", function(self, event, arg1)
-  if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" )  then
+  if (event == "ADDON_LOADED" and arg1 == "AbyssUI")  then
     STANDARD_TEXT_FONT          = globalFont
     DAMAGE_TEXT_FONT            = damageFont
     UNIT_NAME_FONT              = subFont
@@ -163,7 +163,7 @@ local function AbyssUI_CheckButtonRed()
       if size == '11' then  
         return nil
       else
-        if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+        if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
           AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText = addonTable.HideUnitImprovedFaction:GetChecked()
         end
       end
@@ -268,7 +268,7 @@ f:SetScript("OnEvent", function(self, event)
   "CombatLogDefaultButtonText",
 
   }
-  if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+  if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
     for _, v in next, f.yellow do 
       AbyssUI_ApplyFonts(v)
     end
@@ -314,7 +314,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_BindingUI" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         KeyBindingFrame.defaultsButton.Text,
         KeyBindingFrame.unbindButton.Text,
@@ -340,7 +340,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "MacroSaveButtonText",
       "MacroCancelButtonText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -356,7 +356,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "HonorFrameQueueButtonText",
       "ConquestJoinButtonText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -373,7 +373,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "PetJournalFindBattleText",
       "MountJournalMountButtonText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -394,7 +394,7 @@ f:SetScript("OnEvent", function(self, event, name)
     f.yellow = {
       "ClassTrainerTrainButtonText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -410,7 +410,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "ClubFinderGuildFinderFrameText",
       "ClubFinderCommunityAndGuildFinderFrameText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -448,7 +448,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "PlayerTalentFrameSpecializationLearnButtonText",
       "PlayerTalentFrameTalentsPvpTalentFrameTalentListText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -465,7 +465,7 @@ f:SetScript("OnEvent", function(self, event, name)
       "CalendarCreateEventMassInviteButtonText",
       "CalendarCreateEventCreateButtonText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -480,7 +480,7 @@ f:SetScript("OnEvent", function(self, event, name)
     f.yellow = {
       "InspectPaperDollFrameText",
     }
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
       end
@@ -492,7 +492,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_AuctionHouseUI" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         AuctionHouseFrame.SearchBar.SearchButton.Text,
         AuctionHouseFrame.ItemBuyFrame.BackButton.Text,
@@ -507,6 +507,9 @@ f:SetScript("OnEvent", function(self, event, name)
         AuctionHouseFrame.CommoditiesSellFrame.PostButton.Text,
         AuctionHouseFrame.CommoditiesBuyFrame.BackButton.Text,
         AuctionHouseFrame.CommoditiesBuyFrame.BuyDisplay.BuyButton.Text,
+        AuctionHouseFrame.BuyDialog.BuyNowButton.Text,
+        AuctionHouseFrame.BuyDialog.CancelButton.Text,
+
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
@@ -518,7 +521,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_NewPlayerExperience" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         KeyboardMouseConfirmButton.Text,
       }) do 
@@ -532,7 +535,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_TradeSkillUI" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         TradeSkillFrame.DetailsFrame.CreateButton.Text,
         TradeSkillFrame.DetailsFrame.ExitButton.Text, 
@@ -547,7 +550,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_ChromieTimeUI" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         ChromieTimeFrame.SelectButton.Text, 
       }) do 
@@ -561,7 +564,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_NewPlayerExperienceGuide" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         GuideFrame.ScrollFrame.ConfirmationButton.Text,
       }) do 
@@ -575,7 +578,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_ItemSocketingUI" then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
       for i, v in pairs ({
         ItemSocketingSocketButton.Text,
       }) do 

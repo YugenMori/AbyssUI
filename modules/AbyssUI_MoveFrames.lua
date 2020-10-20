@@ -11,7 +11,7 @@ local UnLocked
 local Moveframes = { PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
     local f = v
-    if not ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
+    if not (f == PlayerFrame or f == TargetFrame or f == FocusFrame) then
 	    f:SetMovable(true) -- only set thes conditions once when you start up
 	    f:EnableMouse(true)
 	    f:SetClampedToScreen(true)
@@ -47,7 +47,7 @@ local function AbyssUIMoveFrames_Function(show)
         f.Movetex:SetShown(show)
         f.Movetex.text:SetShown(show)
         UnLocked = show
-	    if ( f == PlayerFrame or f == TargetFrame or f == FocusFrame ) then
+	    if (f == PlayerFrame or f == TargetFrame or f == FocusFrame) then
 	    	f:RegisterForDrag("LeftButton")
 	    	f:SetScript("OnDragStart", f.StartMoving) 
 	    	f:SetScript("OnDragStop", f.StopMovingOrSizing)
@@ -96,7 +96,7 @@ C_WowTokenPublic.UpdateMarketPrice()
     else
         print("|cfff2dc7fToken Price:|r Not available right now!")
     end
-    if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+    if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
         print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
     else
         print("|cfff2dc7fDate:|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
@@ -108,8 +108,8 @@ C_WowTokenPublic.UpdateMarketPrice()
 end
 -- Function
 local function AbyssUIMoveFrames_Slash(msg)
-    if ( msg ~= "" ) then
-        if ( msg == "config" or msg == "options" or msg == "op" or msg == "configuration") then
+    if (msg ~= "") then
+        if (msg == "config" or msg == "options" or msg == "op" or msg == "configuration") then
             InterfaceOptionsFrame_Show()
             InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
             InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")

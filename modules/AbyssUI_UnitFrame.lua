@@ -38,23 +38,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if ( locale == "zhCN") then
+	if (locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "zhTW" ) then
+	elseif (locale == "zhTW") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "ruRU" ) then
+	elseif (locale == "ruRU") then
 		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
 		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
 		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif ( locale == "koKR" ) then
+	elseif (locale == "koKR") then
 		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
 		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
 		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
 		locale == "esES" or locale == "esMX" or locale == "ptBR") then
 		globalFont	= mediaFolder.."global.ttf"
 		subFont 	= mediaFolder.."npcfont.ttf"
@@ -93,22 +93,22 @@ AbyssUI_UnitFrame:RegisterEvent("ADDON_LOADED")
 AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGOUT")
 AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
+	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
 		-- UnitColor
 		local UnitColor
 		local function UnitColor(unit)
 			local r, g, b
-			if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
+			if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
 				--Color it gray
 				r, g, b = 0.5, 0.5, 0.5
-			elseif ( UnitIsPlayer(unit) ) then
+			elseif (UnitIsPlayer(unit)) then
 				--Try to color it by class.
 				local localizedClass, englishClass = UnitClass(unit)
 				local classColor = RAID_CLASS_COLORS[englishClass]
-				if ( classColor ) then
+				if (classColor) then
 					r, g, b = classColor.r, classColor.g, classColor.b
 				else
-					if ( UnitIsFriend("player", unit) ) then
+					if (UnitIsFriend("player", unit)) then
 						r, g, b = 0.0, 1.0, 0.0
 					else
 						r, g, b = 1.0, 0.0, 0.0
@@ -121,7 +121,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- PlayerFrameStyle
 	    local function UnitFramesImproved_Style_PlayerFrame()
-	      if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 	        if not InCombatLockdown() then 
 	          PlayerFrameHealthBar.lockColor = true
 	          PlayerFrameHealthBar.capNumericDisplay = true
@@ -130,20 +130,20 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	          PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
 	          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
 	        end
-	        if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
-	          if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
+	          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
-  	          elseif ( AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+  	          elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
-	          elseif ( AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          elseif (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
-	          elseif ( AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
 	         	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	          else 
 	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 	          end
-	          if ( AbyssUIAddonSettings.DKHordePortrait == true ) then
+	          if (AbyssUIAddonSettings.DKHordePortrait == true) then
           		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
 	          	PlayerFrameHealthBar:SetWidth(105)
 	          else
@@ -151,7 +151,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	          end
 	          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
 	        else
-	          if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true ) then
+	          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
 	          else 
 	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
@@ -165,7 +165,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	    end
     -- PlayerArt
     local function UnitFramesImproved_PlayerFrame_ToPlayerArt(self)
-      if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
         if not InCombatLockdown() then
           UnitFramesImproved_Style_PlayerFrame()
         end
@@ -175,7 +175,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local eventVehicleHandle = CreateFrame("Frame", "$parent_eventVehicleHandle", nil)
 		eventVehicleHandle:RegisterEvent("UNIT_EXITED_VEHICLE")
 		eventVehicleHandle:SetScript("OnEvent", function(self, event, ...)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				C_Timer.After(0.1, function () 
 					PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
 					PlayerFrameHealthBar:SetWidth(119)
@@ -189,7 +189,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end)
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				if not InCombatLockdown()  or 
 					self ~= Boss1TargetFrame or
 					self ~= Boss2TargetFrame or
@@ -221,8 +221,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true and not InCombatLockdown() ) then
-				if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true and not InCombatLockdown()) then
+				if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
 				else
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
@@ -232,14 +232,14 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- Utility functions
 		local function UnitFramesImproved_AbbreviateLargeNumbers(value)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				local strLen = strlen(value)
 				local retString = value
-				if ( strLen >= 10 ) then
+				if (strLen >= 10) then
 					retString = string.sub(value, 1, -10).."."..string.sub(value, -9, -8).."G"
-				elseif ( strLen >= 7 ) then
+				elseif (strLen >= 7) then
 					retString = string.sub(value, 1, -7).."."..string.sub(value, -6, -5).."M"
-				elseif ( strLen >= 4 ) then
+				elseif (strLen >= 4) then
 					retString = string.sub(value, 1, -4).."."..string.sub(value, -3, -3).."k"
 				end
 				return retString
@@ -249,18 +249,18 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- UpdateTextString Values
 		local function UnitFramesImproved_TextStatusBar_UpdateTextStringWithValues(statusFrame, textString, value, valueMin, valueMax)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				if( statusFrame.LeftText and statusFrame.RightText ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+				if(statusFrame.LeftText and statusFrame.RightText) then
 					statusFrame.LeftText:SetText("")
 					statusFrame.RightText:SetText("")
 					statusFrame.LeftText:SetAlpha(0)
 					statusFrame.RightText:SetAlpha(0)
 					textString:Show()
 				end
-				if ( ( tonumber(valueMax) ~= valueMax or valueMax > 0 ) and not ( statusFrame.pauseUpdates ) ) then
+				if ((tonumber(valueMax) ~= valueMax or valueMax > 0) and not (statusFrame.pauseUpdates)) then
 					local valueDisplay = value
 					local valueMaxDisplay = valueMax
-					if ( statusFrame.capNumericDisplay ) then
+					if (statusFrame.capNumericDisplay) then
 						valueDisplay = UnitFramesImproved_AbbreviateLargeNumbers(value)
 						valueMaxDisplay = UnitFramesImproved_AbbreviateLargeNumbers(valueMax)
 					else
@@ -269,33 +269,33 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					end
 					local textDisplay = GetCVar("statusTextDisplay")
 					if (textDisplay == "NONE") then return end
-					if ( value and valueMax > 0 and ( textDisplay ~= "NUMERIC" or statusFrame.showPercentage ) and not statusFrame.showNumeric) then
-						if ( value == 0 and statusFrame.zeroText ) then
+					if (value and valueMax > 0 and (textDisplay ~= "NUMERIC" or statusFrame.showPercentage) and not statusFrame.showNumeric) then
+						if (value == 0 and statusFrame.zeroText) then
 							textString:SetText(statusFrame.zeroText)
 							statusFrame.isZero = 1
 							textString:Show()
 							return
 						end
 						percent = math.ceil((value / valueMax) * 100) .. "%"
-						if ( textDisplay == "BOTH" and not statusFrame.showPercentage) then
+						if (textDisplay == "BOTH" and not statusFrame.showPercentage) then
 							valueDisplay = valueDisplay .. " (" .. percent .. ")"
 							textString:SetText(valueDisplay)
 						else
 							valueDisplay = percent
-							if ( statusFrame.prefix and (statusFrame.alwaysPrefix or not (statusFrame.cvar and GetCVar(statusFrame.cvar) == "1" and statusFrame.textLockable) ) ) then
+							if (statusFrame.prefix and (statusFrame.alwaysPrefix or not (statusFrame.cvar and GetCVar(statusFrame.cvar) == "1" and statusFrame.textLockable))) then
 								textString:SetText(statusFrame.prefix .. " " .. valueDisplay)
 							else
 								textString:SetText(valueDisplay)
 							end
 						end
-					elseif ( value == 0 and statusFrame.zeroText ) then
+					elseif (value == 0 and statusFrame.zeroText) then
 						textString:SetText(statusFrame.zeroText)
 						statusFrame.isZero = 1
 						textString:Show()
 						return
 					else
 						statusFrame.isZero = nil
-						if ( statusFrame.prefix and (statusFrame.alwaysPrefix or not (statusFrame.cvar and GetCVar(statusFrame.cvar) == "1" and statusFrame.textLockable) ) ) then
+						if (statusFrame.prefix and (statusFrame.alwaysPrefix or not (statusFrame.cvar and GetCVar(statusFrame.cvar) == "1" and statusFrame.textLockable))) then
 							textString:SetText(statusFrame.prefix.." "..valueDisplay.."/"..valueMaxDisplay)
 						else
 							textString:SetText(valueDisplay.."/"..valueMaxDisplay)
@@ -308,7 +308,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- VehicleArt
 		local function UnitFramesImproved_PlayerFrame_ToVehicleArt(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				if not InCombatLockdown() then
 					PlayerFrameHealthBar:SetHeight(12)
 					PlayerFrameHealthBarText:SetPoint("CENTER", 50, 3)
@@ -319,7 +319,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- Unit Name
 		local function UnitFramesImproved_UnitName_Color(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				-- names
 				for i, v in pairs({
 					PlayerName,
@@ -327,7 +327,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					FocusFrameTextureFrameName,
 				}) do
 					C_Timer.After(0.1, function() 
-						v:SetVertexColor(229/255, 229/255, 229/255)
+						v:SetVertexColor(248/255, 248/255, 248/255)
 						v:SetShadowColor(0, 0, 0)
 						v:SetShadowOffset(1, -1)
 						v:SetScale(1.2)
@@ -366,7 +366,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					if (UnitIsPlayer(self.unit)) then
 						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
 							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-							if ( healthPercentage == 0 ) then return end
+							if (healthPercentage == 0) then return end
 							if healthPercentage == 100 then
 								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
 							elseif healthPercentage < 100 and healthPercentage > 21 then
@@ -379,7 +379,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						-- Change Color By health
 						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
 							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-							if ( healthPercentage == 0 ) then return end
+							if (healthPercentage == 0) then return end
 							if healthPercentage == 100 then
 								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
 							elseif healthPercentage < 100 and healthPercentage > 21 then
@@ -402,21 +402,21 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- CheckClassification
 		local function UnitFramesImproved_TargetFrame_CheckClassification(self, forceNormalTexture)
-			if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
-				if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
+				if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 					local texture
 					local classification = UnitClassification(self.unit)
-					if ( classification == "worldboss" or classification == "elite" ) then
+					if (classification == "worldboss" or classification == "elite") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite"
-					elseif ( classification == "rareelite" ) then
+					elseif (classification == "rareelite") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Rare-Elite"
-					elseif ( classification == "rare" ) then
+					elseif (classification == "rare") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Rare"
 					end
-					if ( texture and not forceNormalTexture) then
+					if (texture and not forceNormalTexture) then
 						self.borderTexture:SetTexture(texture)
 					else
-						if ( not (classification == "minus") ) then
+						if (not (classification == "minus")) then
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 						end
 					end
@@ -425,20 +425,20 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					return nil
 				end
 			else
-				if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+				if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 					local texture
 					local classification = UnitClassification(self.unit)
-					if ( classification == "worldboss" or classification == "elite" ) then
+					if (classification == "worldboss" or classification == "elite") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite"
-					elseif ( classification == "rareelite" ) then
+					elseif (classification == "rareelite") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Elite"
-					elseif ( classification == "rare" ) then
+					elseif (classification == "rare") then
 						texture = "Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare"
 					end
-					if ( texture and not forceNormalTexture) then
+					if (texture and not forceNormalTexture) then
 						self.borderTexture:SetTexture(texture)
 					else
-						if ( not (classification == "minus") ) then
+						if (not (classification == "minus")) then
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 						end
 					end
@@ -452,25 +452,25 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_TargetFrame_CheckFaction(self)
 			local factionGroup = UnitFactionGroup(self.unit)
 			local creatureType = UnitCreatureType(self.unit)
-			if ( creatureType == "Humanoid" or UnitIsPlayer(self.unit) ) then
+			if (creatureType == "Humanoid" or UnitIsPlayer(self.unit)) then
 				self.pvpIcon:Hide()
-				if ( UnitIsPVPFreeForAll(self.unit) ) then
+				if (UnitIsPVPFreeForAll(self.unit)) then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
-					if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
+					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
 						self.pvpIcon:Show()
 					else
 						self.pvpIcon:Hide()
 					end
-				elseif ( factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit) ) then
+				elseif (factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit)) then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
-					if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
+					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
 						self.pvpIcon:Show()
 					else
 						self.pvpIcon:Hide()
 					end
-				elseif ( factionGroup == "Alliance" or factionGroup == "Horde" ) then
+				elseif (factionGroup == "Alliance" or factionGroup == "Horde") then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup)
-					if ( AbyssUIAddonSettings.HideUnitImprovedFaction ~= true ) then
+					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
 						self.pvpIcon:Show()
 					else
 						self.pvpIcon:Hide()
@@ -492,7 +492,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		--StatusBarTextString
 		local function CreateStatusBarText(name, parentName, parent, point, x, y)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				local fontString = parent:CreateFontString(parentName..name, nil, "TextStatusBarText")
 				fontString:SetPoint(point, parent, point, x, y)
 				return fontString

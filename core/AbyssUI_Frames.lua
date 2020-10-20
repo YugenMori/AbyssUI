@@ -38,23 +38,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if ( locale == "zhCN") then
+	if (locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "zhTW" ) then
+	elseif (locale == "zhTW") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "ruRU" ) then
+	elseif (locale == "ruRU") then
 		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
 		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
 		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif ( locale == "koKR" ) then
+	elseif (locale == "koKR") then
 		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
 		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
 		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
 		locale == "esES" or locale == "esMX" or locale == "ptBR") then
 		globalFont	= mediaFolder.."global.ttf"
 		subFont 	= mediaFolder.."npcfont.ttf"
@@ -120,18 +120,18 @@ end)
 AbyssUI_EditBox_Frame:SetFrameStrata("Dialog")
 ----------------------------------------------------
 local Border = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture(dialogFrameTexture)
+Border:SetTexture(dialogFrameTextureBorder)
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_EditBox_Frame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTexture)
+BorderBody:SetTexture(dialogFrameTextureBorder)
 BorderBody:SetAllPoints(AbyssUI_EditBox_Frame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUI_EditBox_Frame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUI_EditBox_Frame)
 AbyssUI_EditBox_Frame.texture = Texture
 ----------------------------------------------------
@@ -146,11 +146,11 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
-			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetTextColor(248/255, 248/255, 248/255)
 			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
 			FrameButtonConfirm.text:SetShadowOffset(1, -1)
 		end
@@ -318,7 +318,7 @@ ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
 local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
-	if ( englishFaction == "Horde" ) then
+	if (englishFaction == "Horde") then
 		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
 	else
 		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
@@ -337,7 +337,7 @@ PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmou
 PlayerInfo_GoldAmount1.text:SetPoint("BOTTOMLEFT", 5 , 1)
 PlayerInfo_GoldAmount1.text:SetText(currency.."|cfff2dc7f"..money.."|r")
 -- Class colorization (all player info)
-if ( englishClass == "DEATHKNIGHT" ) then
+if (englishClass == "DEATHKNIGHT") then
 	for i, v in pairs({
 		AbyssUI_AFKCameraFrame, 
 		PlayerInfo_Name1,
@@ -354,7 +354,7 @@ if ( englishClass == "DEATHKNIGHT" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(196/255, 30/255, 59/255)
 	end 
-elseif ( englishClass == "DEMONHUNTER" ) then
+elseif (englishClass == "DEMONHUNTER") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame, 
 		PlayerInfo_Name1,
@@ -371,7 +371,7 @@ elseif ( englishClass == "DEMONHUNTER" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(163/255, 48/255, 201/255)
 	end 
-elseif ( englishClass == "DRUID" ) then
+elseif (englishClass == "DRUID") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame, 
 		PlayerInfo_Name1,
@@ -388,7 +388,7 @@ elseif ( englishClass == "DRUID" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 125/255, 10/255)
 	end 
-elseif ( englishClass == "HUNTER" ) then
+elseif (englishClass == "HUNTER") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -405,7 +405,7 @@ elseif ( englishClass == "HUNTER" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(171/255, 212/255, 115/255)
 	end 
-elseif ( englishClass == "MAGE" ) then
+elseif (englishClass == "MAGE") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -422,7 +422,7 @@ elseif ( englishClass == "MAGE" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(105/255, 204/255, 240/255)
 	end 
-elseif ( englishClass == "MONK" ) then
+elseif (englishClass == "MONK") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -439,7 +439,7 @@ elseif ( englishClass == "MONK" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(0/255, 255/255, 150/255)
 	end 
-elseif ( englishClass == "PALADIN" ) then
+elseif (englishClass == "PALADIN") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -456,7 +456,7 @@ elseif ( englishClass == "PALADIN" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(245/255, 140/255, 186/255)
 	end 
-elseif ( englishClass == "PRIEST" ) then
+elseif (englishClass == "PRIEST") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -473,7 +473,7 @@ elseif ( englishClass == "PRIEST" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 255/255, 255/255)
 	end 
-elseif ( englishClass == "ROGUE" ) then
+elseif (englishClass == "ROGUE") then
 	for i, v in pairs({
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -490,7 +490,7 @@ elseif ( englishClass == "ROGUE" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(255/255, 245/255, 105/255)
 	end 
-elseif ( englishClass == "SHAMAN" ) then
+elseif (englishClass == "SHAMAN") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -507,7 +507,7 @@ elseif ( englishClass == "SHAMAN" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(0/255, 112/255, 222/255)
 	end 
-elseif ( englishClass == "WARLOCK" ) then
+elseif (englishClass == "WARLOCK") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -524,7 +524,7 @@ elseif ( englishClass == "WARLOCK" ) then
 	PlayerInfo_GoldAmount1 }) do
 		v.text:SetVertexColor(148/255, 130/255, 201/255)
 	end 
-elseif ( englishClass == "WARRIOR" ) then
+elseif (englishClass == "WARRIOR") then
 	for i, v in pairs({ 
 		AbyssUI_AFKCameraFrame,
 		PlayerInfo_Name1,
@@ -558,7 +558,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
 	zoneName = GetZoneText()
 	guildName, guildRankName, guildRankIndex = GetGuildInfo("player")
-	if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+	if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
 		dataTime = date("%H:%M |cfff2dc7f%m/%d/%y|r ")
 	else
 		dataTime = date("%H:%M |cfff2dc7f%d/%m/%y|r ")
@@ -593,8 +593,8 @@ timer:Play()
 -- AbyssUI_AFKCamera SetScript
 AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 	local inInstance, instanceType = IsInInstance()
-	if ( AbyssUIAddonSettings.AFKCammeraFrame ~= true ) then
-		if ( event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD" ) then
+	if (AbyssUIAddonSettings.AFKCammeraFrame ~= true) then
+		if (event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD") then
 			local isAFK = UnitIsAFK("player")
 			if isAFK == true and inInstance ~= true then
 				UIParent:SetAlpha(0)
@@ -619,7 +619,7 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 				AbyssUI_AFKCameraFrame:Hide()
 				UIParent:SetAlpha(1)
 				if AbyssUIAddonSettings.HideMinimap ~= true then
-					if ( not MinimapCluster:IsShown() ) then
+					if (not MinimapCluster:IsShown()) then
 						MinimapCluster:Show()
 					end
 				end
@@ -628,9 +628,9 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 			end
 		end
 		-- OnClick
-		if ( AbyssUI_AFKCameraFrame:IsShown() ) then
+		if (AbyssUI_AFKCameraFrame:IsShown()) then
 			AbyssUI_AFKCameraFrame:SetScript("OnMouseDown", function (self, button)
-			    if ( button == 'LeftButton' ) then 
+			    if (button == 'LeftButton') then 
 			    	AbyssUI_AFKCameraFrame:Hide()
 					UIParent:SetAlpha(1)
 					if AbyssUIAddonSettings.HideMinimap ~= true then
@@ -664,8 +664,8 @@ AbyssUI_YouDiedFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_YouDiedFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
-		if ( event == "PLAYER_DEAD" ) then
+	if (AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true) then
+		if (event == "PLAYER_DEAD") then
 			AbyssUI_YouDiedFrame.text:SetText(strupper("|cff8b0000"..deathrecap.."|r"))
 			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
 			C_Timer.After(4, function()
@@ -748,8 +748,8 @@ local function AbyssUI_UpdateYouDiedLevelUpData()
 end
 AbyssUI_LevelUpFrame:RegisterEvent("PLAYER_LEVEL_UP")
 AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true ) then
-		if ( event == "PLAYER_LEVEL_UP" ) then
+	if (AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true) then
+		if (event == "PLAYER_LEVEL_UP") then
 			C_Timer.After(1, function()
 				AbyssUI_UpdateYouDiedLevelUpData()
 				UIFrameFadeIn(AbyssUI_LevelUpFrame, 2, 0, 1)
@@ -887,12 +887,12 @@ f:SetScript("OnEvent", function()
 	FrameButtonRecommended.text:SetFont(globalFont, 14)
 	FrameButtonRecommended.text:SetPoint("CENTER", FrameButtonRecommended, "CENTER", 0, -2)
 	FrameButtonRecommended.text:SetText(recommendedString)
-	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 		FrameButtonRecommended.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
 		FrameButtonRecommended.text:SetShadowOffset(0.5, 0)
 	else
-		FrameButtonRecommended.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonRecommended.text:SetTextColor(248/255, 248/255, 248/255)
 		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
 		FrameButtonRecommended.text:SetShadowOffset(1, -1)
 	end
@@ -926,7 +926,7 @@ f:SetScript("OnEvent", function()
 		FrameButtonRecommended.running = false
 		FrameButtonRecommended.Glow:Stop()
 	end
-	if( not FrameButtonRecommended:IsShown() ) then
+	if(not FrameButtonRecommended:IsShown()) then
 		FrameButtonRecommended.Glow:Stop()
 	end
 	----------------------------------------------------
@@ -976,12 +976,12 @@ f:SetScript("OnEvent", function()
 	FrameButtonModern.text:SetFont(globalFont, 14)
 	FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
 	FrameButtonModern.text:SetText("Modern")
-	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 		FrameButtonModern.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonModern.text:SetShadowColor(0, 0, 0)
 		FrameButtonModern.text:SetShadowOffset(0.5, 0)
 	else
-		FrameButtonModern.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonModern.text:SetTextColor(248/255, 248/255, 248/255)
 		FrameButtonModern.text:SetShadowColor(0, 0, 0)
 		FrameButtonModern.text:SetShadowOffset(1, -1)
 	end
@@ -1033,12 +1033,12 @@ f:SetScript("OnEvent", function()
 	FrameButtonClassic.text:SetFont(globalFont, 14)
 	FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
 	FrameButtonClassic.text:SetText("Classic")
-	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 	  	FrameButtonClassic.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
 		FrameButtonClassic.text:SetShadowOffset(0.5, 0)
 	else
-		FrameButtonClassic.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonClassic.text:SetTextColor(248/255, 248/255, 248/255)
 		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
 		FrameButtonClassic.text:SetShadowOffset(1, -1)
 	end
@@ -1123,18 +1123,18 @@ AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration ca
 "Click the |cffffcc00'"..confirmString.."'|r button to Reload.\nYou still can make changes (do before you confirm).")
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture(dialogFrameTexture)
+Border:SetTexture(dialogFrameTextureBorder)
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_ReloadFrame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTexture)
+BorderBody:SetTexture(dialogFrameTextureBorder)
 BorderBody:SetAllPoints(AbyssUI_ReloadFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUI_ReloadFrame)
 AbyssUI_ReloadFrame.texture = Texture
 ----------------------------------------------------
@@ -1149,11 +1149,11 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
-			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetTextColor(248/255, 248/255, 248/255)
 			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
 			FrameButtonConfirm.text:SetShadowOffset(1, -1)
 		end
@@ -1189,18 +1189,18 @@ AbyssUI_ReloadFrameFadeUI.text:SetText("It will only hide Blizzard frames, addon
 	" interaction with some frames (eg auction, loot, quest, frames).")
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrameFadeUI:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture(dialogFrameTexture)
+Border:SetTexture(dialogFrameTextureBorder)
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_ReloadFrameFadeUI:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTexture)
+BorderBody:SetTexture(dialogFrameTextureBorder)
 BorderBody:SetAllPoints(AbyssUI_ReloadFrameFadeUI)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUI_ReloadFrameFadeUI:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUI_ReloadFrameFadeUI)
 AbyssUI_ReloadFrameFadeUI.texture = Texture
 ----------------------------------------------------
@@ -1215,11 +1215,11 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
-			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetTextColor(248/255, 248/255, 248/255)
 			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
 			FrameButtonConfirm.text:SetShadowOffset(1, -1)
 		end
@@ -1252,18 +1252,18 @@ AbyssUI_ActionBarCleaner.text:SetJustifyV("CENTER")
 AbyssUI_ActionBarCleaner.text:SetText("Wait!\nThis will clean all your skills/spells from Actions Bars.")
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture(dialogFrameTexture)
+Border:SetTexture(dialogFrameTextureBorder)
 Border:SetPoint("TOPLEFT", -3, 3)
 Border:SetPoint("BOTTOMRIGHT", 3, -3)
 --Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
 ----------------------------------------------------
 local BorderBody = AbyssUI_ActionBarCleaner:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTexture)
+BorderBody:SetTexture(dialogFrameTextureBorder)
 BorderBody:SetAllPoints(AbyssUI_ActionBarCleaner)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
 ----------------------------------------------------
 local Texture = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTexture)
+Texture:SetTexture(dialogFrameTextureBorder)
 Texture:SetAllPoints(AbyssUI_ActionBarCleaner)
 AbyssUI_ActionBarCleaner.texture = Texture
 ----------------------------------------------------
@@ -1278,11 +1278,11 @@ f:SetScript("OnEvent", function()
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
 	FrameButtonConfirm.text:SetText(confirmString)
-		if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
 			FrameButtonConfirm.text:SetFont(globalFont, 14)
-			FrameButtonConfirm.text:SetTextColor(229/255, 229/255, 229/255)
+			FrameButtonConfirm.text:SetTextColor(248/255, 248/255, 248/255)
 			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
 			FrameButtonConfirm.text:SetShadowOffset(1, -1)
 		end
@@ -1305,11 +1305,11 @@ f:SetScript("OnEvent", function()
 	--FrameButtonCancel.text:SetFont(globalFont, 14)
 	FrameButtonCancel.text:SetPoint("CENTER", FrameButtonCancel, "CENTER", 0, 0)
 	FrameButtonCancel.text:SetText(cancelString)
-	if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 		AbyssUI_ApplyFonts(FrameButtonCancel.text)
 	else
 		FrameButtonCancel.text:SetFont(globalFont, 14)
-		FrameButtonCancel.text:SetTextColor(229/255, 229/255, 229/255)
+		FrameButtonCancel.text:SetTextColor(248/255, 248/255, 248/255)
 		FrameButtonCancel.text:SetShadowColor(0, 0, 0)
 		FrameButtonCancel.text:SetShadowOffset(1, -1)
 	end
@@ -1326,17 +1326,17 @@ local AbyssUISave = CreateFrame("Frame")
 AbyssUISave:RegisterEvent("ADDON_LOADED")
 AbyssUISave:RegisterEvent("PLAYER_LOGOUT")
 AbyssUISave:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
-		if ( AbyssUICount == nil ) then
+	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
+		if (AbyssUICount == nil) then
 			AbyssUICount = 0
 		end
-		if ( AbyssUIProfile == nil ) then
+		if (AbyssUIProfile == nil) then
 			AbyssUICount = AbyssUICount + 1
 			AbyssUIStart()
 		else
 			AbyssUIFirstFrame:Hide()
 		end
-	elseif ( event == "PLAYER_LOGOUT" ) then
+	elseif (event == "PLAYER_LOGOUT") then
 		AbyssUIProfile = time()
 	else
 		return nil

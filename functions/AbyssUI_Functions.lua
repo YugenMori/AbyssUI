@@ -38,23 +38,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if ( locale == "zhCN") then
+	if (locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "zhTW" ) then
+	elseif (locale == "zhTW") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "ruRU" ) then
+	elseif (locale == "ruRU") then
 		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
 		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
 		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif ( locale == "koKR" ) then
+	elseif (locale == "koKR") then
 		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
 		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
 		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
 		locale == "esES" or locale == "esMX" or locale == "ptBR") then
 		globalFont	= mediaFolder.."global.ttf"
 		subFont 	= mediaFolder.."npcfont.ttf"
@@ -172,7 +172,7 @@ end)
 local function colour(statusbar, unit)
 	local _, class, c
 	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
-		if( AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true ) then
+		if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true) then
 			_, class = UnitClass(unit)
 			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 			statusbar:SetStatusBarColor(c.r, c.g, c.b)
@@ -196,9 +196,9 @@ frame:RegisterEvent("UNIT_FACTION")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
-	if ( AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true ) then
-		if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
-			if ( PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+	if (AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
+		if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
+			if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 				c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 				local bg = PlayerFrame:CreateTexture()
 				bg:SetPoint("TOPLEFT", PlayerFrameBackground)
@@ -276,7 +276,7 @@ c.timer:SetShadowOffset(1, -1)
 c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
 c.update = .1
 c:HookScript("OnUpdate", function(self, elapsed)
-	if ( AbyssUIAddonSettings.HideCastTimer ~= true ) then
+	if (AbyssUIAddonSettings.HideCastTimer ~= true) then
 	    if not self.timer then return end
 	    if self.update and self.update < elapsed then
 	        if self.casting then
@@ -316,25 +316,25 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 	if  UnitIsPlayer(unit) then
 		local _, class = UnitClass(unit)
 		local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-		if ( color ~= nil ) then
+		if (color ~= nil) then
 			local text  = GameTooltipTextLeft1:GetText()
 			local text2 = GameTooltipTextLeft2:GetText()
 			local text3 = GameTooltipTextLeft3:GetText()
 			local text4 = GameTooltipTextLeft4:GetText()
 			local englishFaction, localizedFaction = UnitFactionGroup(unit)
-			if ( text ~= nil and text2 ~= nil ) then
+			if (text ~= nil and text2 ~= nil) then
 				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
 				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
 			end
-			if ( text ~= nil and text2 ~= nil and text3 ~= nil ) then
+			if (text ~= nil and text2 ~= nil and text3 ~= nil) then
 				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
 			end
-			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
+			if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
 				GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
 			end
-			if ( text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil ) then
+			if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
 				local text5 = GameTooltipTextLeft5:GetText()
-				if ( text5 ~= nil ) then
+				if (text5 ~= nil) then
 					GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
 				end
 			end
@@ -346,17 +346,17 @@ end)
 local UnitColor
 local function UnitColor(unit)
 	local r, g, b
-	if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
+	if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
 		--Color it gray
 		r, g, b = 0.5, 0.5, 0.5
-	elseif ( UnitIsPlayer(unit) ) then
+	elseif (UnitIsPlayer(unit)) then
 		--Try to color it by class.
 		local localizedClass, englishClass = UnitClass(unit)
 		local classColor = RAID_CLASS_COLORS[englishClass]
-		if ( classColor ) then
+		if (classColor) then
 			r, g, b = classColor.r, classColor.g, classColor.b
 		else
-			if ( UnitIsFriend("player", unit) ) then
+			if (UnitIsFriend("player", unit)) then
 				r, g, b = 0.0, 1.0, 0.0
 			else
 				r, g, b = 1.0, 0.0, 0.0
@@ -506,7 +506,7 @@ CF:SetScript("OnEvent", function(self, event)
 			self:SetHeight(StatsFrame.text:GetStringHeight())
 		end
 	end
-	if ( AbyssUIAddonSettings.SquareMinimap ~= true ) then
+	if (AbyssUIAddonSettings.SquareMinimap ~= true) then
 		StatsFrame:SetScript("OnUpdate", update)
 	else
 		return nil
@@ -515,7 +515,7 @@ end)
 local StatsFrameCheck_ = CreateFrame("CheckButton", "$parentStatsFrameCheck_", UIParent, "ChatConfigCheckButtonTemplate")
 StatsFrameCheck_:RegisterEvent("PLAYER_ENTERING_WORLD")
 StatsFrameCheck_:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideFPSMSFrame == true or AbyssUIAddonSettings.FadeUI == true ) then
+	if (AbyssUIAddonSettings.HideFPSMSFrame == true or AbyssUIAddonSettings.FadeUI == true) then
 		StatsFrame:Hide()
 	else
 		StatsFrame:Show()
@@ -526,7 +526,7 @@ end)
 local AbyssUI_AutoSell = CreateFrame("Frame", "$parentAbyssUI_AutoSell", nil)
 AbyssUI_AutoSell:RegisterEvent("MERCHANT_SHOW")
 AbyssUI_AutoSell:SetScript("OnEvent", function()
-	if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
+	if (AbyssUIAddonSettings.ExtraFunctionSellGray == true) then
 	    local bag, slot
 	    for bag = 0, 4 do
 	        for slot = 0, GetContainerNumSlots(bag) do
@@ -536,7 +536,7 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
 	            end
 	        end
 	    end
-	    if( CanMerchantRepair() ) then
+	    if(CanMerchantRepair()) then
 	        local cost = GetRepairAllCost()
 	        if cost > 0 then
 	            local money = GetMoney()
@@ -569,8 +569,8 @@ local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 local function eventHandler(self, event, ...)
-	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
-		if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+	if (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
+		if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 			TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
 			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
 		else
@@ -587,7 +587,7 @@ end
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+	if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))		
 		FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
@@ -602,7 +602,7 @@ local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
 ScaleElements:RegisterEvent("ADDON_LOADED")
 ScaleElements:RegisterEvent("PLAYER_LOGOUT")
 ScaleElements:SetScript("OnEvent", function(self, event, arg1)
-	if ( event == "ADDON_LOADED" and arg1 == "AbyssUI" ) then
+	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
 		CastingBarFrame:SetScale(1.05)
 	else 
 		return nil
@@ -629,7 +629,7 @@ function AbyssUI_ShowColorPicker()
 	ColorPickerFrame.cancelFunc = ColorPicker_Cancelled
 	ColorPickerFrame.opacityFunc = ColorPicker_Changed
 	ColorPickerFrame.func = ColorPicker_Changed
-	ColorPickerFrame:SetColorRGB( COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )
+	ColorPickerFrame:SetColorRGB(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 	ColorPickerFrame:ClearAllPoints()
 	ColorPickerFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", GetCursorPosition())
 	ColorPickerFrame:Show()
@@ -658,7 +658,7 @@ AbyssUI_ConfirmPopUps:SetScript("OnEvent", function()
 end)
 AbyssUI_ConfirmPopUps:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_ConfirmPopUps:SetScript("OnClick", function()
-	if ( AbyssUIAddonSettings.ExtraFunctionConfirmPopUps == true ) then
+	if (AbyssUIAddonSettings.ExtraFunctionConfirmPopUps == true) then
 		StaticPopup1Button1:Click()
 		StaticPopup2Button1:Click()
 		StaticPopup3Button1:Click()
@@ -681,9 +681,9 @@ objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
 objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
 	local inInstance, instanceType = IsInInstance()
-	if ( event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+	if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
 		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
-	elseif ( event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+	elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
 		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
 	else 
 		return nil
@@ -694,7 +694,7 @@ local objectiveFrame2 = CreateFrame("Frame", "$parentObjectiveFrame2", nil)
 objectiveFrame2:RegisterEvent("PLAYER_ENTERING_WORLD")
 objectiveFrame2:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
-	if ( event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == true) then
+	if (event == "PLAYER_ENTERING_WORLD" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == true) then
 		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)		
 	else 
 		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
@@ -709,9 +709,9 @@ end)
 AbyssUI_InspectTarget:RegisterEvent("PLAYER_LOGIN")
 AbyssUI_InspectTarget:SetScript("OnClick", function()
     if AbyssUIAddonSettings.ExtraFunctionInspectTarget == true then
-    	if ( UnitPlayerControlled("target") and not UnitIsUnit("player", "target") ) then
+    	if (UnitPlayerControlled("target") and not UnitIsUnit("player", "target")) then
 			InspectUnit("target")
-		elseif ( UnitPlayerControlled("mouseover") and not UnitIsUnit("player", "mouseover") ) then
+		elseif (UnitPlayerControlled("mouseover") and not UnitIsUnit("player", "mouseover")) then
 			InspectUnit("mouseover")
 		end
     else
@@ -732,8 +732,8 @@ end)
 local AbyssUI_MinimalActionBar = CreateFrame("Button", '$parentAbyssUI_MinimalActionBar', nil)
 AbyssUI_MinimalActionBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true  ) then
-	    if ( AbyssUIAddonSettings.MinimalActionBar == true ) then
+	if (AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
+	    if (AbyssUIAddonSettings.MinimalActionBar == true) then
 	    	C_Timer.After(1, function()
 	    		for i, v in pairs ({
 	   				MainMenuBarArtFrame.LeftEndCap,
@@ -771,7 +771,7 @@ end)
 local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrait', nil)
 AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
-    if ( AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
     	PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
 	else
 		return nil
@@ -781,7 +781,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-    if ( AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    if (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Alliance")
 	else
 		return nil
@@ -791,7 +791,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-    if ( AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+    if (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Horde")
     	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-StatusDKH")
     	PlayerFrameHealthBar:SetWidth(105)
@@ -803,7 +803,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+	if (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-TargetingFrame-DemonHunter")
     	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	else
@@ -813,23 +813,23 @@ end)
 local checkRune = CreateFrame("Frame", nil)
 checkRune:RegisterEvent("PLAYER_ENTERING_WORLD")
 checkRune:SetScript("OnEvent", function()
-	if ( AbyssUIAddonSettings.DKHordePortrait 		== true or 
+	if (AbyssUIAddonSettings.DKHordePortrait 		== true or 
 		AbyssUIAddonSettings.DKAllyPortrait 		== true or 
-		AbyssUIAddonSettings.DemonHunterPortrait 	== true ) then
+		AbyssUIAddonSettings.DemonHunterPortrait 	== true) then
 		PetFrame:SetFrameLevel(4)
 		PlayerFrameAlternateManaBar:SetFrameLevel(4)
 	else
 		return nil
 	end
-	if ( AbyssUIAddonSettings.DKHordePortrait == true ) then
+	if (AbyssUIAddonSettings.DKHordePortrait == true) then
 		RuneFrame:ClearAllPoints()
 		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
 		RuneFrame:SetFrameLevel(1)
-	elseif ( AbyssUIAddonSettings.DKAllyPortrait == true ) then
+	elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
 		RuneFrame:ClearAllPoints()
 		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 44, 15)
 		RuneFrame:SetFrameLevel(6)
-	elseif ( AbyssUIAddonSettings.DemonHunterPortrait == true ) then
+	elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		RuneFrame:ClearAllPoints()
 		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
 		RuneFrame:SetFrameLevel(1)
@@ -864,7 +864,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 		else
 			print("|cfff2dc7f"..fichaString..": |r".."Not available right now!")
 		end
-		if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+		if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
 			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
 		else
 			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
@@ -872,7 +872,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 		print("|cfff2dc7f"..honorString.." "..levelString..": |r|cffffcc00"..HonorLevel.."|r")
 		print("|cfff2dc7fWoW "..versionString..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
 		print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
-		if ( AbyssUIProfile ~= nil) then 
+		if (AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
 			print("Type |cffffcc00/abyssui|r for a list of commands")

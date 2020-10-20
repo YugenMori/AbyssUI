@@ -33,23 +33,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-  if ( locale == "zhCN") then
+  if (locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
     subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif ( locale == "zhTW" ) then
+  elseif (locale == "zhTW") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
     subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif ( locale == "ruRU" ) then
+  elseif (locale == "ruRU") then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
     subFont     = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
-  elseif ( locale == "koKR" ) then
+  elseif (locale == "koKR") then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
     subFont     = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
-  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
     subFont     = mediaFolder.."npcfont.ttf"
@@ -97,39 +97,39 @@ local colorColorString  = _G["COLOR"]
 local applyString       = _G["APPLY"]
 --------------------------------------------------------------
 local function InitSettings()
-AbyssUI_Config.panel = CreateFrame( "Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
+AbyssUI_Config.panel = CreateFrame("Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
 -- Register in the Interface Addon Options GUI
 -- Set the name for the Category for the Options Panel1
 AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
 -- Add the panel to the Interface Options
 InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
 --Child Panels
-AbyssUI_Config.childpanel1 = CreateFrame( "Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel1 = CreateFrame("Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel1.name = "Info Panel"
 AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
 --
-AbyssUI_Config.childpanel2 = CreateFrame( "Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel2.name = "Hide Elements"
 AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
 --
-AbyssUI_Config.childpanel3 = CreateFrame( "Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel3 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel3.name = "Miscellaneous"
 AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
 --
-AbyssUI_Config.childpanel4 = CreateFrame( "Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel4.name = "Themes"
 AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
 --
-AbyssUI_Config.childpanel5 = CreateFrame( "Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel5.name = "Tweaks & Extra"
 AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
 --
-AbyssUI_Config.childpanel6 = CreateFrame( "Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
+AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
 AbyssUI_Config.childpanel6.name = "Scale & Frame Size"
 AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
@@ -349,11 +349,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Setup")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -373,11 +373,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Clear Bars")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -397,11 +397,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("DailyInfo")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -416,7 +416,7 @@ f:SetScript("OnEvent", function()
       else
         print("|cfff2dc7f"..fichaString..": |r".."Not available right now!")
       end
-      if ( AbyssUIAddonSettings.ExtraFunctionAmericanClock == true ) then
+      if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
         print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
       else
         print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
@@ -439,11 +439,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Reload UI")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -463,11 +463,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Discord")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -488,11 +488,11 @@ f:SetScript("OnEvent", function()
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
   FrameButton.text:SetText("Patreon")
-    if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
       FrameButton.text:SetFont(globalFont, 14)
-      FrameButton.text:SetTextColor(229/255, 229/255, 229/255)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
       FrameButton.text:SetShadowColor(0, 0, 0)
       FrameButton.text:SetShadowOffset(1, -1)
     end
@@ -547,7 +547,7 @@ LatestUpdate_TexturePack.text:SetPoint("CENTER", LatestUpdate_TexturePack, "CENT
 LatestUpdate_TexturePack:SetScript("OnEvent", function(self, event, prefix, addonVersion, channel, name)
   if (prefix == "AbyssUI_Version") then
     local textureVersion = addonVersion
-    if ( textureVersion ~= nil and textureVersion == texturepackCheck ) then
+    if (textureVersion ~= nil and textureVersion == texturepackCheck) then
       LatestUpdate_TexturePack.text:SetText(textureVersion.." "..texturepackDate)
     else
       LatestUpdate_TexturePack.text:SetText("|cffFF0000"..versionString.." "..versionIncopatible.."\n"
@@ -572,7 +572,7 @@ t:SetAllPoints(DownloadIcon_TexturePack)
 DownloadIcon_TexturePack:Hide()
 -- OnClick
 AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
-    if ( button == 'LeftButton' ) then 
+    if (button == 'LeftButton') then 
       AbyssUI_EditBox:SetText("https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html")
       AbyssUI_EditBox_Frame:Show()
     end
@@ -598,7 +598,7 @@ t:SetAllPoints(CheckIcon_Glass)
 CheckIcon_Glass:Hide()
 -- OnClick
 Glass:SetScript("OnMouseDown", function (self, button)
-    if ( button == 'LeftButton' ) then
+    if (button == 'LeftButton') then
       AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/glass")
       AbyssUI_EditBox_Frame:Show()
     end
@@ -624,7 +624,7 @@ t:SetAllPoints(CheckIcon_Kui)
 CheckIcon_Kui:Hide()
 -- OnClick
 KuiNameplates:SetScript("OnMouseDown", function (self, button)
-    if ( button == 'LeftButton' ) then
+    if (button == 'LeftButton') then
       AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/Kuinameplates")
       AbyssUI_EditBox_Frame:Show()
     end
@@ -650,7 +650,7 @@ t:SetAllPoints(CheckIcon_Bagnon)
 CheckIcon_Bagnon:Hide()
 -- OnClick
 Bagnon:SetScript("OnMouseDown", function (self, button)
-    if ( button == 'LeftButton' ) then
+    if (button == 'LeftButton') then
       AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/Bagnon")
       AbyssUI_EditBox_Frame:Show()
     end
@@ -676,7 +676,7 @@ t:SetAllPoints(CheckIcon_DBM)
 CheckIcon_DBM:Hide()
 -- OnClick
 DBM:SetScript("OnMouseDown", function (self, button)
-    if ( button == 'LeftButton' ) then
+    if (button == 'LeftButton') then
       AbyssUI_EditBox:SetText("https://www.curseforge.com/wow/addons/deadly-boss-mods")
       AbyssUI_EditBox_Frame:Show()
     end
@@ -722,16 +722,16 @@ local kui     = IsAddOnLoaded("Kui_Nameplates")
 local bagnon  = IsAddOnLoaded("Bagnon")
 local dbm     = IsAddOnLoaded("DBM-Core")
 AbyssUI_CheckTexturePack()
-    if ( glass == true ) then
+    if (glass == true) then
       CheckIcon_Glass:Show()
     end
-    if ( kui == true ) then
+    if (kui == true) then
       CheckIcon_Kui:Show()
     end
-    if ( bagnon == true ) then
+    if (bagnon == true) then
       CheckIcon_Bagnon:Show()
     end
-    if ( dbm == true ) then
+    if (dbm == true) then
       CheckIcon_DBM:Show()
     end
 end)
@@ -803,7 +803,7 @@ end)
 -- After Login/Reload
 MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideMicroMenu == true then
       AbyssUI_HideMicroMenu_Function()
     else
@@ -831,7 +831,7 @@ end)
 -- After Login/Reload
 Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideGryphons == true then
       MainMenuBarArtFrame.RightEndCap:Hide()
       MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -855,7 +855,7 @@ end)
 -- After Login/Reload
 Minimap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 Minimap_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideMinimap == true then
       MinimapCluster:Hide()
     else
@@ -881,7 +881,7 @@ end)
 -- After Login/Reload
 ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideObjectiveTracker == true then
       ObjectiveTrackerFrame:Hide()
     else
@@ -922,7 +922,7 @@ HideMacroLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideMacroLabels)
 -- OnClick Function
 HideMacroLabels_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.HideMacroLabels = self:GetChecked()
-  if ( AbyssUIAddonSettings.HideMacroLabels == true ) then
+  if (AbyssUIAddonSettings.HideMacroLabels == true) then
     for i = 1, 12 do
       _G["ActionButton"..i.."Name"]:SetAlpha(0)
       _G["MultiBarBottomRightButton"..i.."Name"]:SetAlpha(0)
@@ -943,7 +943,7 @@ end)
 -- After Login/Reload
 HideMacroLabels_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideMacroLabels_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideMacroLabels == true then
       for i = 1, 12 do
         _G["ActionButton"..i.."Name"]:SetAlpha(0)
@@ -964,7 +964,7 @@ HideHotkeysLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideHotkeysLabels)
 -- OnClick Function
 HideHotkeysLabels_CheckButton:SetScript("OnClick", function(self)
 AbyssUIAddonSettings.HideHotkeysLabels = self:GetChecked()
-   if ( AbyssUIAddonSettings.HideHotkeysLabels == true ) then
+   if (AbyssUIAddonSettings.HideHotkeysLabels == true) then
      for i = 1, 12 do
        _G["ActionButton"..i.."HotKey"]:SetAlpha(0)
        _G["MultiBarBottomRightButton"..i.."HotKey"]:SetAlpha(0)
@@ -985,7 +985,7 @@ end)
 -- After Login/Reload
 HideHotkeysLabels_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideHotkeysLabels_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideHotkeysLabels == true then
       for i = 1, 12 do
         _G["ActionButton"..i.."HotKey"]:SetAlpha(0)
@@ -1006,7 +1006,7 @@ HideStanceBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideStanceBar)
 -- OnClick Function
 HideStanceBar_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
-   if ( AbyssUIAddonSettings.HideStanceBar == true ) then
+   if (AbyssUIAddonSettings.HideStanceBar == true) then
      StanceBarFrame:SetAlpha(0)
    else
      return nil
@@ -1015,7 +1015,7 @@ end)
 -- After Login/Reload
 HideStanceBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideStanceBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideStanceBar == true then
       C_Timer.After(0.5, function()
         StanceBarFrame:SetAlpha(0)
@@ -1032,7 +1032,7 @@ AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-U
 AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
 AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", -1, -28)
 local glass = IsAddOnLoaded("Glass")
-if ( AbyssUIAddonSettings.FadeUI ~= true and glass ~= true ) then
+if (AbyssUIAddonSettings.FadeUI ~= true and glass ~= true) then
   AbyssUI_ChatHideFrame:Show()
 else
   AbyssUI_ChatHideFrame:Hide()
@@ -1107,7 +1107,7 @@ HideChatButtons_CheckButton:SetChecked(AbyssUIAddonSettings.HideChatButtons)
 -- OnClick Function
 HideChatButtons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
-  if ( AbyssUIAddonSettings.HideChatButtons == true ) then
+  if (AbyssUIAddonSettings.HideChatButtons == true) then
     QuickJoinToastButton:Hide()
     GeneralDockManager:SetAlpha(0)
     ChatFrameMenuButton:Hide()
@@ -1130,7 +1130,7 @@ end)
 -- After Login/Reload
 HideChatButtons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideChatButtons_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.HideChatButtons == true then
       C_Timer.After(1, function()
         QuickJoinToastButton:Hide()
@@ -1164,7 +1164,7 @@ FactionPvpIcon_CheckButton:SetChecked(AbyssUIAddonSettings.FactionPvpIcon)
 -- OnClick Function
 FactionPvpIcon_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.FactionPvpIcon = self:GetChecked()
-    if ( AbyssUIAddonSettings.FactionPvpIcon == true ) then
+    if (AbyssUIAddonSettings.FactionPvpIcon == true) then
       for i, v in pairs ({
         PlayerPrestigeBadge,
         PlayerPrestigePortrait,
@@ -1191,7 +1191,7 @@ end)
 -- After Login/Reload
 FactionPvpIcon_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 FactionPvpIcon_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.FactionPvpIcon == true then
       for i, v in pairs ({
         PlayerPrestigeBadge,
@@ -1250,7 +1250,7 @@ addonTable.HideGroupFrame = HideGroupFrame_CheckButton
 -- OnClick Function
 HideGroupFrame_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGroupFrame = self:GetChecked()
-    if ( AbyssUIAddonSettings.HideGroupFrame == true ) then
+    if (AbyssUIAddonSettings.HideGroupFrame == true) then
       PlayerFrameGroupIndicator:SetAlpha(0)
     else
       PlayerFrameGroupIndicator:SetAlpha(1)
@@ -1259,8 +1259,8 @@ end)
 -- After Login/Reload
 HideGroupFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideGroupFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
-    if ( AbyssUIAddonSettings.HideGroupFrame == true ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
+    if (AbyssUIAddonSettings.HideGroupFrame == true) then
       PlayerFrameGroupIndicator:SetAlpha(0)
     else
       PlayerFrameGroupIndicator:SetAlpha(1)
@@ -1276,7 +1276,7 @@ HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFram
 -- OnClick Function
 HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
-    if ( AbyssUIAddonSettings.HideConvenantFrame == true ) then
+    if (AbyssUIAddonSettings.HideConvenantFrame == true) then
       GarrisonLandingPageMinimapButton:Hide()
     else
       GarrisonLandingPageMinimapButton:Show()
@@ -1285,8 +1285,8 @@ end)
 -- After Login/Reload
 HideConvenantFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
-    if ( AbyssUIAddonSettings.HideConvenantFrame == true ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
+    if (AbyssUIAddonSettings.HideConvenantFrame == true) then
       C_Timer.After(1, function()
         GarrisonLandingPageMinimapButton:Hide(0)
       end)
@@ -1302,7 +1302,7 @@ HideMinimapZoneText_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimapZoneT
 -- OnClick Function
 HideMinimapZoneText_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideMinimapZoneText = self:GetChecked()
-    if ( AbyssUIAddonSettings.HideMinimapZoneText == true ) then
+    if (AbyssUIAddonSettings.HideMinimapZoneText == true) then
       MinimapZoneText:Hide()
     else
       MinimapZoneText:Show()
@@ -1311,8 +1311,8 @@ end)
 -- After Login/Reload
 HideMinimapZoneText_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 HideMinimapZoneText_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
-    if ( AbyssUIAddonSettings.HideMinimapZoneText == true ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
+    if (AbyssUIAddonSettings.HideMinimapZoneText == true) then
       C_Timer.After(1, function()
         MinimapZoneText:Hide()
       end)
@@ -1342,11 +1342,11 @@ CameraSmooth50_CheckButton:SetScript("OnClick", function(self)
   if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
     AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 = self:GetChecked()
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 == true then
-      ConsoleExec( "cameraYawMoveSpeed 50" )
-      ConsoleExec( "cameraPitchMoveSpeed 50" )
+      ConsoleExec("cameraYawMoveSpeed 50")
+      ConsoleExec("cameraPitchMoveSpeed 50")
     else
-      ConsoleExec( "cameraYawMoveSpeed 100" )
-      ConsoleExec( "cameraPitchMoveSpeed 100" )
+      ConsoleExec("cameraYawMoveSpeed 100")
+      ConsoleExec("cameraPitchMoveSpeed 100")
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
         AbyssUI_ReloadFrame:Show()
       end
@@ -1358,10 +1358,10 @@ end)
 -- After Login/Reload
 CameraSmooth50_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 CameraSmooth50_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 == true then
-      ConsoleExec( "cameraYawMoveSpeed 50" )
-      ConsoleExec( "cameraPitchMoveSpeed 50" )
+      ConsoleExec("cameraYawMoveSpeed 50")
+      ConsoleExec("cameraPitchMoveSpeed 50")
     end
   end
 end)
@@ -1376,11 +1376,11 @@ CameraSmooth70_CheckButton:SetScript("OnClick", function(self)
   if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
     AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 = self:GetChecked()
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 == true then
-      ConsoleExec( "cameraYawMoveSpeed 30" )
-      ConsoleExec( "cameraPitchMoveSpeed 30" )
+      ConsoleExec("cameraYawMoveSpeed 30")
+      ConsoleExec("cameraPitchMoveSpeed 30")
     else
-      ConsoleExec( "cameraYawMoveSpeed 100" )
-      ConsoleExec( "cameraPitchMoveSpeed 100" )
+      ConsoleExec("cameraYawMoveSpeed 100")
+      ConsoleExec("cameraPitchMoveSpeed 100")
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 ~= true then
         AbyssUI_ReloadFrame:Show()
       end
@@ -1392,10 +1392,10 @@ end)
 -- After Login/Reload
 CameraSmooth70_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 CameraSmooth70_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 == true then
-      ConsoleExec( "cameraYawMoveSpeed 30" )
-      ConsoleExec( "cameraPitchMoveSpeed 30" )
+      ConsoleExec("cameraYawMoveSpeed 30")
+      ConsoleExec("cameraPitchMoveSpeed 30")
     end
   end
 end)
@@ -1410,11 +1410,11 @@ CameraSmooth90_CheckButton:SetScript("OnClick", function(self)
   if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
     AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 = self:GetChecked()
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 == true then
-      ConsoleExec( "cameraYawMoveSpeed 10" )
-      ConsoleExec( "cameraPitchMoveSpeed 10" )
+      ConsoleExec("cameraYawMoveSpeed 10")
+      ConsoleExec("cameraPitchMoveSpeed 10")
     else
-      ConsoleExec( "cameraYawMoveSpeed 100" )
-      ConsoleExec( "cameraPitchMoveSpeed 100" )
+      ConsoleExec("cameraYawMoveSpeed 100")
+      ConsoleExec("cameraPitchMoveSpeed 100")
       if AbyssUIAddonSettings.ExtraFunctionCameraSmooth50 ~= true and AbyssUIAddonSettings.ExtraFunctionCameraSmooth70 ~= true then
         AbyssUI_ReloadFrame:Show()
       end
@@ -1426,10 +1426,10 @@ end)
 -- After Login/Reload
 CameraSmooth90_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 CameraSmooth90_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.ExtraFunctionCameraSmooth90 == true then
-      ConsoleExec( "cameraYawMoveSpeed 10" )
-      ConsoleExec( "cameraPitchMoveSpeed 10" )
+      ConsoleExec("cameraYawMoveSpeed 10")
+      ConsoleExec("cameraPitchMoveSpeed 10")
     end
   end
 end)
@@ -1457,24 +1457,24 @@ AbyssUIAutoGamma_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.ExtraFunctionAutoGamma = self:GetChecked()
   if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
     local dataTime = tonumber(date("%H"))
-    if ( dataTime >= 6 and dataTime < 18 ) then
-      ConsoleExec( "Gamma 1.2" )
-    elseif ( dataTime >= 18 ) then
-      ConsoleExec( "Gamma 1.0" )
+    if (dataTime >= 6 and dataTime < 18) then
+      ConsoleExec("Gamma 1.2")
+    elseif (dataTime >= 18) then
+      ConsoleExec("Gamma 1.0")
     end
   end
 end)
 -- After Login/Reload
 AbyssUIAutoGamma_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUIAutoGamma_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.ExtraFunctionAutoGamma == true then
       C_Timer.After(0.5, function ()
         local dataTime = tonumber(date("%H"))
-        if ( dataTime >= 6 and dataTime < 18 ) then
-          ConsoleExec( "Gamma 1.2" )
-        elseif ( dataTime >= 18 ) then
-          ConsoleExec( "Gamma 1.0" )
+        if (dataTime >= 6 and dataTime < 18) then
+          ConsoleExec("Gamma 1.2")
+        elseif (dataTime >= 18) then
+          ConsoleExec("Gamma 1.0")
         end
       end)  
     end
@@ -1505,8 +1505,8 @@ end)
 -- After Login/Reload
 AbyssUI_BetterFonts_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_BetterFonts_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
-    if ( AbyssUIAddonSettings.ExtraFunctionBetterFonts == true ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
+    if (AbyssUIAddonSettings.ExtraFunctionBetterFonts == true) then
        ChatFrame1:SetFont("Fonts\\MORPHEUS.TTF", 13)
        ChatFrame1.editBox.header:SetFont("Fonts\\MORPHEUS.TTF",13)
     else 
@@ -1604,8 +1604,8 @@ end)
 -- After Login/Reload
 AbyssUI_DisableHealingSpam_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
-    if ( AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam == true ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam == true) then
       PlayerHitIndicator:SetText(nil)
       PlayerHitIndicator.SetText = function() end
 
@@ -1748,7 +1748,7 @@ end)
 -- After Login/Reload
 ActionButtonKeyUP_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 ActionButtonKeyUP_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.ActionButtonKeyDown == true then
       SetCVar('ActionButtonUseKeyDown', 0)
     else
@@ -1774,7 +1774,7 @@ AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_ENABLED")
 AbyssUIActionCam_CheckButton:RegisterEvent("PLAYER_REGEN_DISABLED")
 AbyssUIActionCam_CheckButton:SetScript("OnEvent", function(self, event, ...)
   local IsMouseLooking = IsMouselooking()
-  if ( event == "PLAYER_REGEN_DISABLED" and IsMouseLooking == false ) then
+  if (event == "PLAYER_REGEN_DISABLED" and IsMouseLooking == false) then
     if AbyssUIAddonSettings.ExtraFunctionActionCam == true then
       MouselookStart()
     else
@@ -1782,7 +1782,7 @@ AbyssUIActionCam_CheckButton:SetScript("OnEvent", function(self, event, ...)
     end
   end
 --[[
-  if ( event == "PLAYER_REGEN_ENABLED" ) then
+  if (event == "PLAYER_REGEN_ENABLED") then
     MouselookStop()
   end
 --]]
@@ -1797,7 +1797,7 @@ SquareMinimap_CheckButton:SetChecked(AbyssUIAddonSettings.SquareMinimap)
 addonTable.SquareMinimap = SquareMinimap_CheckButton
 -- OnClick Function
 SquareMinimap_CheckButton:SetScript("OnClick", function(self)
-  if ( AbyssUIAddonSettings.DisableNewMinimap == true ) then
+  if (AbyssUIAddonSettings.DisableNewMinimap == true) then
     UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
     SquareMinimap_CheckButton:SetChecked(nil)
   else
@@ -1825,7 +1825,7 @@ end)
  -- After Login/Reload
 KeepUnitDark_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 KeepUnitDark_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.KeepUnitDark == true then
       AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
     else
@@ -1853,7 +1853,7 @@ end)
 -- After Login/Reload
 KeepUnitBlizzard_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 KeepUnitBlizzard_CheckButton:SetScript("OnEvent", function(self, event, ...)
-  if ( event == "PLAYER_ENTERING_WORLD" ) then
+  if (event == "PLAYER_ENTERING_WORLD") then
     if AbyssUIAddonSettings.KeepUnitBlizzard == true then
       AbyssUIAddonSettings.KeepUnitBlizzard = self:GetChecked()
     else
@@ -1881,7 +1881,7 @@ FadeUI_CheckButton.tooltip = "Hide some parts of the UI when you are out of comb
 FadeUI_CheckButton:SetChecked(AbyssUIAddonSettings.FadeUI)
 -- OnClick Function
 FadeUI_CheckButton:SetScript("OnClick", function(self)
-  if ( AbyssUIAddonSettings.ExtraFunctionHideInCombat ~= true ) then
+  if (AbyssUIAddonSettings.ExtraFunctionHideInCombat ~= true) then
     AbyssUIAddonSettings.FadeUI = self:GetChecked()
     AbyssUI_ReloadFrameFadeUI:Show()
   else
@@ -1963,9 +1963,9 @@ end
 local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
 AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
 AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       MinimapCluster:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.MinimapSlider = newValue
     end
@@ -1975,9 +1975,9 @@ end)
 local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
 AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
 AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       for i, v in pairs({
         PlayerFrame,
         TargetFrame,
@@ -1993,9 +1993,9 @@ end)
 local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
 AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
 AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       BuffFrame:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.BuffFrameSlider = newValue
     end
@@ -2005,9 +2005,9 @@ end)
 local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
 AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
 AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       for i, v in pairs({
         PartyMemberFrame1,
         PartyMemberFrame2,
@@ -2024,9 +2024,9 @@ end)
 local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
 AbyssUI_RaidFrameSlider:SetPoint("TOPLEFT", 20, -200)
 AbyssUI_RaidFrameSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       CompactRaidFrameContainer:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.RaidFrameSlider = newValue
     end
@@ -2036,9 +2036,9 @@ end)
 local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel6, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
 AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -230)
 AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
-  if ( value ~= nil and value > 0 ) then
+  if (value ~= nil and value > 0) then
     local newValue = string.format("%.2f", value)
-    if ( not InCombatLockdown() and ObjectiveTrackerFrame:IsShown() ) then
+    if (not InCombatLockdown() and ObjectiveTrackerFrame:IsShown()) then
       ObjectiveTrackerFrame:SetScale(newValue)
       AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
     end
@@ -3131,11 +3131,11 @@ f:SetScript("OnEvent", function()
   --AbyssUIVertexColorFramesColorPicker_Button.text:SetFont(globalFont, 14)
   AbyssUIVertexColorFramesColorPicker_Button.text:SetPoint("CENTER", AbyssUIVertexColorFramesColorPicker_Button, "CENTER", 0, 0)
   AbyssUIVertexColorFramesColorPicker_Button.text:SetText(colorString)
-  if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
+  if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
         AbyssUI_ApplyFonts(AbyssUIVertexColorFramesColorPicker_Button.text)
       else
         AbyssUIVertexColorFramesColorPicker_Button.text:SetFont(globalFont, 14)
-        AbyssUIVertexColorFramesColorPicker_Button.text:SetTextColor(229/255, 229/255, 229/255)
+        AbyssUIVertexColorFramesColorPicker_Button.text:SetTextColor(248/255, 248/255, 248/255)
         AbyssUIVertexColorFramesColorPicker_Button.text:SetShadowColor(0, 0, 0)
         AbyssUIVertexColorFramesColorPicker_Button.text:SetShadowOffset(1, -1)
       end
@@ -3171,7 +3171,7 @@ AbyssUIVertexColorFramesColorPicker_CheckButton:SetScript("OnClick", function(se
   AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
   AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
-    if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true ) then
+    if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true) then
       AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
       ReloadUI()
     end
@@ -3187,7 +3187,7 @@ end
 -- Slider Save Values
 local function AbyssUI_SliderSaveLoad()
   C_Timer.After(0.5, function()
-    if ( not InCombatLockdown() ) then
+    if (not InCombatLockdown()) then
       for i, v in pairs({
        PlayerFrame,
        TargetFrame,

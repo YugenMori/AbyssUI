@@ -38,23 +38,23 @@ local function AbyssUI_Fontification(globalFont, subFont, damageFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
 local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if ( locale == "zhCN") then
+	if (locale == "zhCN") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "zhTW" ) then
+	elseif (locale == "zhTW") then
 		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
 		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
 		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif ( locale == "ruRU" ) then
+	elseif (locale == "ruRU") then
 		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
 		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
 		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif ( locale == "koKR" ) then
+	elseif (locale == "koKR") then
 		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
 		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
 		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
 		locale == "esES" or locale == "esMX" or locale == "ptBR") then
 		globalFont	= mediaFolder.."global.ttf"
 		subFont 	= mediaFolder.."npcfont.ttf"
@@ -130,19 +130,19 @@ end
 -- UnitColor
 local UnitColor
 local function UnitColor(unit)
-  if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+  if (AbyssUIAddonSettings.UnitFrameImproved == true) then
     local r, g, b
-    if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
+    if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
       --Color it gray
       r, g, b = 0.5, 0.5, 0.5
-    elseif ( UnitIsPlayer(unit) ) then
+    elseif (UnitIsPlayer(unit)) then
       --Try to color it by class.
       local localizedClass, englishClass = UnitClass(unit)
       local classColor = RAID_CLASS_COLORS[englishClass]
-      if ( classColor ) then
+      if (classColor) then
         r, g, b = classColor.r, classColor.g, classColor.b
       else
-        if ( UnitIsFriend("player", unit) ) then
+        if (UnitIsFriend("player", unit)) then
           r, g, b = 0.0, 1.0, 0.0
         else
           r, g, b = 1.0, 0.0, 0.0
@@ -161,36 +161,36 @@ local _G = _G
 -- check hide
 local function checkForWhatToHide(self, event)
 	local inInstance, instanceType = IsInInstance()
-	if ( instanceType == "pvp" or instanceType == "arena" or instanceType == "party" or instanceType == "raid" ) then
+	if (instanceType == "pvp" or instanceType == "arena" or instanceType == "party" or instanceType == "raid") then
 		self:SetAlpha(1)
 	else
-		if( (self:GetAlpha() == 0 or not self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0) ) then
+		if((self:GetAlpha() == 0 or not self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0)) then
 			--UIFrameFadeIn(self, 1, 0, 1)
 			self:SetAlpha(1)
-		elseif ( (self:GetAlpha() == 1 or self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0) ) then
+		elseif ((self:GetAlpha() == 1 or self:IsShown()) and (not TargetFrame:IsShown() or TargetFrame:GetAlpha() == 0)) then
 			--UIFrameFadeIn(self, 1, 1, 0)
 			self:SetAlpha(0)
-		elseif ( (self:GetAlpha() == 0 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) ) then
+		elseif ((self:GetAlpha() == 0 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1)) then
 			self:SetAlpha(1)
-		elseif ( (self:GetAlpha() == 0 or not self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) ) then
+		elseif ((self:GetAlpha() == 0 or not self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1)) then
 			self:SetAlpha(1)
-		elseif ( (self:GetAlpha() == 1 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) and event == "PLAYER_REGEN_ENABLED" ) then
+		elseif ((self:GetAlpha() == 1 or self:IsShown()) and (TargetFrame:IsShown() or TargetFrame:GetAlpha() == 1) and event == "PLAYER_REGEN_ENABLED") then
 			--UIFrameFadeIn(self, 1, 1, 0)
 			self:SetAlpha(0)
 		else
 			return nil
 		end
-		if ( event == "PLAYER_REGEN_ENABLED" ) then
+		if (event == "PLAYER_REGEN_ENABLED") then
 			--UIFrameFadeIn(self, 1, 1, 0)
 			self:SetAlpha(0)
 		end
 	end
 end
 local function checkUnitToHide(self)
-	if( self:IsShown() and (not PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 0) ) then
+	if(self:IsShown() and (not PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 0)) then
 		--UIFrameFadeIn(self, 1, 1, 0)
 		self:SetAlpha(0)
-	elseif ( not self:IsShown() and (PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 1) ) then
+	elseif (not self:IsShown() and (PlayerFrame:IsShown() or PlayerFrame:GetAlpha() == 1)) then
 		self:SetAlpha(1)
 	else
 		return nil
@@ -199,7 +199,7 @@ end
 local FadeUIFirstHide = CreateFrame("CheckButton", "$parentFadeUIFirstHide", UIParent, "ChatConfigCheckButtonTemplate")
 FadeUIFirstHide:RegisterEvent("PLAYER_ENTERING_WORLD")
 FadeUIFirstHide:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.FadeUI == true ) then
+	if (AbyssUIAddonSettings.FadeUI == true) then
 		C_Timer.After(1, function() 
 			for i, v in pairs ({
 				PlayerFrame,
@@ -237,8 +237,8 @@ FadeUI:RegisterEvent("PLAYER_FOCUS_CHANGED")
 --FadeUI:RegisterEvent("PARTY_MEMBERS_CHANGED")
 FadeUI:RegisterEvent("RAID_ROSTER_UPDATE")
 FadeUI:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.FadeUI == true ) then
-		if ( event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" ) then
+	if (AbyssUIAddonSettings.FadeUI == true) then
+		if (event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED") then
 			for i, v in pairs ({
 				PlayerFrame,
 				BuffFrame,
@@ -262,7 +262,7 @@ FadeUI:SetScript("OnEvent", function(self, event, ...)
 			}) do
 				checkUnitToHide(v) 
 			end
-		elseif ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" ) then
+		elseif (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
 			for i, v in pairs ({
 				PlayerFrame,
 				BuffFrame,
@@ -283,7 +283,7 @@ FadeUI:SetScript("OnEvent", function(self, event, ...)
 			}) do
 				checkUnitToHide(v) 
 			end
-		elseif ( event == "PARTY_MEMBERS_CHANGED" or event == "RAID_ROSTER_UPDATE" ) then
+		elseif (event == "PARTY_MEMBERS_CHANGED" or event == "RAID_ROSTER_UPDATE") then
 			for i, v in pairs ({
 				PlayerFrame,
 				BuffFrame,
@@ -318,7 +318,7 @@ FadeUI_MouseOver:SetScript("OnEvent", function()
 	SetBindingClick("ALT-CTRL-P", FadeUI_MouseOver:GetName())
 end)
 FadeUI_MouseOver:SetScript("OnClick", function()
-	if ( AbyssUIAddonSettings.FadeUI == true ) then
+	if (AbyssUIAddonSettings.FadeUI == true) then
 		for i, v in pairs ({
 			PlayerFrame,
 			BuffFrame,
@@ -344,7 +344,7 @@ end)
 -- NamePlate Style
 --  Move nametag
 hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
-	if ( not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
+	if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
 		frame.name:ClearAllPoints()
 		PixelUtil.SetPoint(frame.name, "BOTTOM", frame.healthBar, "TOP", 0, 4)
 	end
@@ -352,9 +352,9 @@ end)
 ----------------------------------------------
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
-	if ( AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
-		if ( not frame:IsForbidden() and not UnitIsFriend("player", frame.displayedUnit) ) then
-			if ( not frame.healthBar.percent ) then
+	if (AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
+		if (not frame:IsForbidden() and not UnitIsFriend("player", frame.displayedUnit)) then
+			if (not frame.healthBar.percent) then
 				frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
 				frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
 				frame.healthBar.percent:SetFont(damageFont, 10)
@@ -362,7 +362,7 @@ hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
 				frame.healthBar.percent:SetShadowOffset(1, -0.25)
 			end
 			local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
-			if ( percentcalc == 0 ) then return end
+			if (percentcalc == 0) then return end
 			frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
 			frame.healthBar.percent:Show()
 		elseif (UnitIsFriend("player", frame.displayedUnit)) then
@@ -375,17 +375,17 @@ end)
 -- Nameplate colorization
 -- Player
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if ( not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
+	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
     local _, class = UnitClass('player')
     local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 		local unitIsPlayer = UnitIsPlayer('player')
 		if self.optionTable.colorNameBySelection and not self:IsForbidden() then
 			-- Player
-		 	if ( unitIsPlayer == true ) then
+		 	if (unitIsPlayer == true) then
 				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit('player') then
 					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
-					if ( healthPercentage == 0 ) then return end
-          			if ( healthPercentage == 100 ) then
+					if (healthPercentage == 0) then return end
+          			if (healthPercentage == 100) then
             			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 100 and healthPercentage > 21 then
 						self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
@@ -401,15 +401,15 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
 end)
 -- Target
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if ( not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true ) then
+	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
 		local unitTarget = UnitIsPlayer("target")
 		local reaction = UnitReaction("player", "target") or 4
 		if self.optionTable.colorNameBySelection and not self:IsForbidden() then
 			-- Mobs
-		 	if  ( unitTarget ~= true and reaction < 5 ) then
+		 	if  (unitTarget ~= true and reaction < 5) then
 				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit("target") then
 					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
-					if ( healthPercentage == 0 ) then return end
+					if (healthPercentage == 0) then return end
 					if healthPercentage == 100 then
 						-- do nothing keep frame color
 					elseif healthPercentage < 100 and healthPercentage > 21 then
@@ -430,8 +430,8 @@ end)
 local ChatBubbleColorization = CreateFrame("CheckButton", "$parentChatBubbleColorization", UIParent, "ChatConfigCheckButtonTemplate")
 ChatBubbleColorization:RegisterEvent("PLAYER_ENTERING_WORLD")
 ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
-	if ( AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges ~= true ) then
-		if ( event == "PLAYER_ENTERING_WORLD" ) then
+	if (AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges ~= true) then
+		if (event == "PLAYER_ENTERING_WORLD") then
 			local reaction = UnitReaction("target", "player")
 			local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 			local color = CUSTOM_CLASS_COLORS
@@ -446,7 +446,7 @@ ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
 			}
 			
 			local function SkinFrame(frame)
-				if ( not frame:IsForbidden() ) then
+				if (not frame:IsForbidden()) then
 					for i = 1, select('#', frame:GetRegions()) do
 						local region = select(i, frame:GetRegions())
 						if (region:GetObjectType() == 'FontString') then
@@ -483,7 +483,7 @@ ChatBubbleColorization:SetScript("OnEvent", function(self, event, ...)
 			end
 			
 			local function UpdateFrame(frame, guid, name)
-				if ( not frame:IsForbidden() ) then
+				if (not frame:IsForbidden()) then
 					if (not frame.text) then
 						SkinFrame(frame) 
 					end
@@ -639,7 +639,7 @@ local function MinimapBehaviours()
 	CalendarFrameIcon.texture = t
 	-- OnClick
 	CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
-	    if ( button == 'LeftButton' ) then 
+	    if (button == 'LeftButton') then 
 			if(not CalendarFrame) then
 				LoadAddOn("Blizzard_Calendar")
 			end
@@ -675,7 +675,7 @@ local function MinimapBehaviours()
 	--]]
 
 	-- Check type of minimap
-	if ( AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true ) then
+	if (AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true) then
 		-- zone text
 		MinimapZoneText:ClearAllPoints()
 		MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 9, -8)
@@ -708,7 +708,7 @@ local function MinimapBehaviours()
 		Minimap:StopMovingOrSizing()
 		if (button == 'RightButton') then
 			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-			if ( not CalendarFrameIcon:IsShown() ) then
+			if (not CalendarFrameIcon:IsShown()) then
 				CalendarFrameIcon:Show()
 			else
 				CalendarFrameIcon:Hide()
@@ -759,7 +759,7 @@ local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIPar
 SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
 SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 	-- minimap default position - you can move it ingame by holding down ALT!
-	if ( AbyssUIAddonSettings.SquareMinimap == true and AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
+	if (AbyssUIAddonSettings.SquareMinimap == true and AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true) then
 		local position = "TOPRIGHT"     	
 		local position_x = -11          		
 		local position_y = -5     
@@ -828,10 +828,10 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		if not classColoredBorder then
 			BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 		else
-			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+			if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true) then
+				if (AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true) then
 					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
-				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+				elseif (AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true) then
 					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 				else
 					BorderFrame:SetBackdropBorderColor(color.r, color.g, color.b)
@@ -857,10 +857,10 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		if not classColoredBorder then
 			FLMframe:SetBackdropBorderColor(unpack(brdcolor))
 		else
-			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
+			if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true) then
+				if (AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true) then
 					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
-				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
+				elseif (AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true) then
 					FLMframe:SetBackdropBorderColor(unpack(brdcolor))
 				else
 					FLMframe:SetBackdropBorderColor(color.r, color.g, color.b)
@@ -884,11 +884,11 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		text:SetPoint("CENTER", FLMframe, 4, 0)
 		text:SetFont(font, fontSize, fontFlag)
 		text:SetShadowOffset(1, -1)
-		if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+		if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true) then
 			text:SetTextColor(color.r, color.g, color.b)
 		else
 			local character = UnitName("player").."-"..GetRealmName()
-			text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )	
+			text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)	
 		end
 		
 		--========[ important functions ]========--
@@ -981,7 +981,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			local latencycolor = ColorizeLatency(select(3, GetNetStats()))
 			local fpscolor = ColorizeFramerate(GetFramerate())
 			
-			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+			if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true) then
 				GameTooltip:AddLine(date("%A, %d %B, %Y"), 1, 1, 1)
 				GameTooltip:AddDoubleLine(fpsStringLabel, format("%.1f fps", GetFramerate()), color.r, color.g, color.b, fpscolor.r, fpscolor.g, fpscolor.b)
 				GameTooltip:AddDoubleLine(latencyStringLabel..":", format("%d ms", select(3, GetNetStats())), color.r, color.g, color.b, latencycolor.r, latencycolor.g, latencycolor.b)
@@ -1021,7 +1021,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 			end
 
 			local cr, cg, cb = ColorGradient((entry.memory / 800), 0, 1, 0, 1, 1, 0, 1, 0, 0) 
-			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
+			if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true) then
 				GameTooltip:AddDoubleLine(". . . . . . . . . . .", ". . . . . . . . . . .", 1, 1, 1, 1, 1, 1)
 				GameTooltip:AddDoubleLine(totalStringLabel..":", MemFormat(total), color.r, color.g, color.b, cr, cg, cb)
 				GameTooltip:AddDoubleLine("+ Blizzard:", MemFormat(collectgarbage("count")), color.r, color.g, color.b, cr, cg, cb)
@@ -1052,7 +1052,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		end)	
 	end
 		MinimapBehaviours()
-	elseif ( AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true ) then
+	elseif (AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true) then
 		MinimapBehaviours()
 		Minimap:SetMaskTexture("Interface\\AddOns\\AbyssUI\\textures\\minimap\\round")
 	else
@@ -1176,9 +1176,9 @@ local numSoundsHorde = #soundIDSHorde
 local numSoundsAlly  = #soundIDSAlly
 local englishFaction, localizedFaction = UnitFactionGroup("player")
 local function PlaySoundRandom()
-	if ( englishFaction == "Horde") then
+	if (englishFaction == "Horde") then
 		PlaySound(soundIDSHorde[random(1, numSoundsHorde)], "MASTER")
-	elseif ( englishFaction == "Alliance") then
+	elseif (englishFaction == "Alliance") then
 		PlaySound(soundIDSAlly[random(1, numSoundsAlly)], "MASTER")
 	else
 		return nil
@@ -1189,28 +1189,28 @@ local KillAnouncer = CreateFrame("FRAME", "$parentKillAnouncer")
 local name = GetUnitName("player")
 KillAnouncer:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 KillAnouncer:SetScript("OnEvent", function(self)
-	if ( AbyssUIAddonSettings.DisableKillAnnouncer ~= true ) then
+	if (AbyssUIAddonSettings.DisableKillAnnouncer ~= true) then
 	    local timeStamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, prefixParam1, prefixParam2, dummyparam, suffixParam1, suffixParam2 = CombatLogGetCurrentEventInfo()
-	    if ( event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE" ) and suffixParam2 > 0 then
-			if ( suffixParam2 ~= nil ) then
-				if ( sourceName == name ) then
-					if ( string.find(destGUID, "Player") ) then
+	    if (event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE") and suffixParam2 > 0 then
+			if (suffixParam2 ~= nil) then
+				if (sourceName == name) then
+					if (string.find(destGUID, "Player")) then
 						KillAnouncerFrame:Hide()
 						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
-						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
+						if (AbyssUIAddonSettings.SilenceKillAnnouncer ~= true) then
 							PlaySoundRandom()
 						end
 						UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
 					end
 		  		end
 		  	end
-	  	elseif ( event == "SWING_DAMAGE" ) and prefixParam2 > 0 then
-	  		if ( prefixParam2 ~= nil ) then
-				if ( sourceName == name ) then
-					if ( string.find(destGUID, "Player") ) then
+	  	elseif (event == "SWING_DAMAGE") and prefixParam2 > 0 then
+	  		if (prefixParam2 ~= nil) then
+				if (sourceName == name) then
+					if (string.find(destGUID, "Player")) then
 						KillAnouncerFrame:Hide()
 						KillAnouncerFrame.text:SetText("|cfff2f2f2"..destName.."|r")
-						if ( AbyssUIAddonSettings.SilenceKillAnnouncer ~= true ) then
+						if (AbyssUIAddonSettings.SilenceKillAnnouncer ~= true) then
 							PlaySoundRandom()
 						end
 						UIFrameFadeIn(KillAnouncerFrame, 4, 1, 0)
@@ -1235,7 +1235,7 @@ end
 local TooltipOnCursor = CreateFrame("Frame", nil)
 TooltipOnCursor:RegisterEvent("PLAYER_ENTERING_WORLD")
 TooltipOnCursor:SetScript("OnEvent", function()
-	if ( AbyssUIAddonSettings.TooltipOnCursor == true ) then
+	if (AbyssUIAddonSettings.TooltipOnCursor == true) then
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
 			if GetMouseFocus() ~= WorldFrame then return end
 			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
@@ -1301,7 +1301,7 @@ local AbyssUI_FirstPerson = CreateFrame("Frame", nil)
 AbyssUI_FirstPerson:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_FirstPerson:RegisterEvent("PLAYER_REGEN_DISABLED")
 AbyssUI_FirstPerson:SetScript("OnEvent", function()
-  if ( AbyssUIAddonSettings.FirstPerson == true ) then
+  if (AbyssUIAddonSettings.FirstPerson == true) then
   	SetView(5) -- Reset cam
   	SetView(5)
     SetView(3)
@@ -1313,7 +1313,7 @@ end)
 local AbyssUI_PlayerClassicName = CreateFrame("Frame", nil)
 AbyssUI_PlayerClassicName:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_PlayerClassicName:SetScript("OnEvent", function()
-	if( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
+	if(AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 		for i, v in pairs({
 			PlayerName,
 			TargetFrameTextureFrameName,
@@ -1325,7 +1325,7 @@ AbyssUI_PlayerClassicName:SetScript("OnEvent", function()
 			FocusFrameTextureFrameHealthBarText,
 			FocusFrameTextureFrameManaBarText,
 		}) do
-			v:SetVertexColor(229/255, 229/255, 229/255)
+			v:SetVertexColor(248/255, 248/255, 248/255)
 			v:SetShadowColor(0, 0, 0)
 			v:SetShadowOffset(1, -0.8)
 		end

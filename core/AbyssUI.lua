@@ -52,7 +52,8 @@ local BasicFrames = CreateFrame("Frame")
 BasicFrames:RegisterEvent("ADDON_LOADED")
 BasicFrames:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "AbyssUI") then
-		for i, v in pairs({	PlayerFrameTexture,
+		for i, v in pairs({	
+			PlayerFrameTexture,
 			TargetFrameTextureFrameTexture,
 			PetFrameTexture,
 			PartyMemberFrame1Texture,
@@ -171,7 +172,8 @@ local NewFrames = CreateFrame("Frame")
 NewFrames:RegisterEvent("ADDON_LOADED")
 NewFrames:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "AbyssUI") then
-		for i, v in pairs({ MainMenuBarArtFrame.LeftEndCap,
+		for i, v in pairs({ 
+			MainMenuBarArtFrame.LeftEndCap,
 			MainMenuBarArtFrame.RightEndCap,
 			MainMenuBarArtFrameBackground.BackgroundSmall,
 			MainMenuBarArtFrameBackground.BackgroundLarge,
@@ -190,7 +192,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 		end
 		----------------------------------------------------------------------
 		-- Character
-		for i, v in pairs({	CharacterFrame.NineSlice.RightEdge,
+		for i, v in pairs({	
+			CharacterFrame.NineSlice.RightEdge,
 			CharacterFrame.NineSlice.LeftEdge,
 			CharacterFrame.NineSlice.TopEdge,
 			CharacterFrame.NineSlice.BottomEdge,
@@ -240,7 +243,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- SpellBook
-		for i, v in pairs({ SpellBookFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			SpellBookFrame.NineSlice.TopEdge,
 			SpellBookFrame.NineSlice.RightEdge,
 			SpellBookFrame.NineSlice.LeftEdge,
 			SpellBookFrame.NineSlice.TopEdge,
@@ -306,7 +310,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Friends
-		for i, v in pairs({ FriendsFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			FriendsFrame.NineSlice.TopEdge,
 			FriendsFrame.NineSlice.TopEdge,
 			FriendsFrame.NineSlice.TopRightCorner,
 			FriendsFrame.NineSlice.RightEdge,
@@ -353,7 +358,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Map
-		for i, v in pairs({ WorldMapFrame.BorderFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
 			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
 			WorldMapFrame.BorderFrame.NineSlice.TopEdge,
 			WorldMapFrame.BorderFrame.NineSlice.TopRightCorner,
@@ -370,7 +376,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Channels
-		for i, v in pairs({ ChannelFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			ChannelFrame.NineSlice.TopEdge,
 			ChannelFrame.NineSlice.TopEdge,
 			ChannelFrame.NineSlice.TopRightCorner,
 			ChannelFrame.NineSlice.RightEdge,
@@ -400,7 +407,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Chat
-		for i, v in pairs({ ChatFrame1EditBoxLeft,
+		for i, v in pairs({ 
+			ChatFrame1EditBoxLeft,
 			ChatFrame1EditBoxRight,
 			ChatFrame1EditBoxMid,
 			ChatFrame2EditBoxLeft,
@@ -428,7 +436,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- StatusBar (ExpBar)
-		for i, v in pairs({ StatusTrackingBarManager.SingleBarLarge,
+		for i, v in pairs({ 
+			StatusTrackingBarManager.SingleBarLarge,
 			StatusTrackingBarManager.SingleBarSmall,
 			StatusTrackingBarManager.SingleBarLargeUpper,
 		StatusTrackingBarManager.SingleBarSmallUpper,	}) do
@@ -439,7 +448,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Mail
-		for i, v in pairs({ MailFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			MailFrame.NineSlice.TopEdge,
 			MailFrame.NineSlice.TopRightCorner,
 			MailFrame.NineSlice.RightEdge,
 			MailFrame.NineSlice.BottomRightCorner,
@@ -463,7 +473,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Merchant
-		for i, v in pairs({ MerchantFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			MerchantFrame.NineSlice.TopEdge,
 			MerchantFrame.NineSlice.RightEdge,
 			MerchantFrame.NineSlice.BottomEdge,
 			MerchantFrame.NineSlice.LeftEdge,
@@ -495,7 +506,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Gossip (e.g NPC dialog frame and interactions)
-		for i, v in pairs({ GossipFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			GossipFrame.NineSlice.TopEdge,
 			GossipFrame.NineSlice.RightEdge,
 			GossipFrame.NineSlice.BottomEdge,
 			GossipFrame.NineSlice.LeftEdge,
@@ -518,7 +530,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Bank
-		for i, v in pairs({ BankFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			BankFrame.NineSlice.TopEdge,
 			BankFrame.NineSlice.RightEdge,
 			BankFrame.NineSlice.BottomEdge,
 			BankFrame.NineSlice.LeftEdge,
@@ -533,7 +546,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- Quest
-		for i, v in pairs({ QuestFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			QuestFrame.NineSlice.TopEdge,
 			QuestFrame.NineSlice.RightEdge,
 			QuestFrame.NineSlice.BottomEdge,
 			QuestFrame.NineSlice.LeftEdge,
@@ -590,7 +604,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- StanceBar
-		for i, v in pairs({ StanceBarLeft,
+		for i, v in pairs({ 
+			StanceBarLeft,
 			StanceBarMiddle,
 		StanceBarRight, }) do
 			if AbyssUIAddonSettings ~= nil then
@@ -600,7 +615,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- DressUP
-		for i, v in pairs({ DressUpFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			DressUpFrame.NineSlice.TopEdge,
 			DressUpFrame.NineSlice.RightEdge,
 			DressUpFrame.NineSlice.BottomEdge,
 			DressUpFrame.NineSlice.LeftEdge,
@@ -623,7 +639,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- LootFrame
-		for i, v in pairs({ LootFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			LootFrame.NineSlice.TopEdge,
 			LootFrame.NineSlice.RightEdge,
 			LootFrame.NineSlice.BottomEdge,
 			LootFrame.NineSlice.LeftEdge,
@@ -647,7 +664,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- HelpFrame
-		for i, v in pairs({ HelpFrameTopBorder,
+		for i, v in pairs({ 
+			HelpFrameTopBorder,
 			HelpFrameRightBorder,
 			HelpFrameTopRightCorner,
 			HelpFrameBottomRightCorner,
@@ -695,7 +713,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- ItemTextFrame
-		for i, v in pairs({	ItemTextFrame.NineSlice.TopEdge,
+		for i, v in pairs({	
+			ItemTextFrame.NineSlice.TopEdge,
 			ItemTextFrame.NineSlice.RightEdge,
 			ItemTextFrame.NineSlice.BottomEdge,
 			ItemTextFrame.NineSlice.LeftEdge,
@@ -710,7 +729,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		-- PetitionFrame
-		for i, v in pairs({	PetitionFrame.NineSlice.TopEdge,
+		for i, v in pairs({	
+			PetitionFrame.NineSlice.TopEdge,
 			PetitionFrame.NineSlice.RightEdge,
 			PetitionFrame.NineSlice.BottomEdge,
 			PetitionFrame.NineSlice.LeftEdge,
@@ -724,8 +744,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		-- Guild Register Frame (pt?) & Tabard Frame
-		for i, v in pairs({	GuildRegistrarFrame.NineSlice.TopEdge,
+		-- Guild Register Frame & Tabard Frame
+		for i, v in pairs({	
+			GuildRegistrarFrame.NineSlice.TopEdge,
 			GuildRegistrarFrame.NineSlice.RightEdge,
 			GuildRegistrarFrame.NineSlice.BottomEdge,
 			GuildRegistrarFrame.NineSlice.LeftEdge,
@@ -748,7 +769,8 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			end
 		end	
 		-- GuildInviteFrame
-		for i, v in pairs({	GuildInviteFrame.TopEdge,
+		for i, v in pairs({	
+			GuildInviteFrame.TopEdge,
 			GuildInviteFrame.RightEdge,
 			GuildInviteFrame.BottomEdge,
 			GuildInviteFrame.LeftEdge,
@@ -1581,7 +1603,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TalentUI" then
-		for i, v in pairs({ PlayerTalentFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			PlayerTalentFrame.NineSlice.TopEdge,
 			PlayerTalentFrame.NineSlice.RightEdge,
 			PlayerTalentFrame.NineSlice.BottomEdge,
 			PlayerTalentFrame.NineSlice.LeftEdge,
@@ -1609,7 +1632,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Collections" then
-		for i, v in pairs({ CollectionsJournal.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			CollectionsJournal.NineSlice.TopEdge,
 			CollectionsJournal.NineSlice.TopRightCorner,
 			CollectionsJournal.NineSlice.RightEdge,
 			CollectionsJournal.NineSlice.BottomRightCorner,
@@ -1660,7 +1684,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_EncounterJournal" then
-		for i, v in pairs({ EncounterJournal.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			EncounterJournal.NineSlice.TopEdge,
 			EncounterJournal.NineSlice.RightEdge,
 			EncounterJournal.NineSlice.BottomEdge,
 			EncounterJournal.NineSlice.LeftEdge,
@@ -1687,7 +1712,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Communities" then
-		for i, v in pairs({ CommunitiesFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			CommunitiesFrame.NineSlice.TopEdge,
 			CommunitiesFrame.NineSlice.RightEdge,
 			CommunitiesFrame.NineSlice.BottomEdge,
 			CommunitiesFrame.NineSlice.LeftEdge,
@@ -1770,7 +1796,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_MacroUI" then
-		for i, v in pairs({ MacroFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			MacroFrame.NineSlice.TopEdge,
 			MacroFrame.NineSlice.RightEdge,
 			MacroFrame.NineSlice.BottomEdge,
 			MacroFrame.NineSlice.LeftEdge,
@@ -1799,7 +1826,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AuctionHouseUI" then
-		for i, v in pairs({ AuctionHouseFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			AuctionHouseFrame.NineSlice.TopEdge,
 			AuctionHouseFrame.NineSlice.RightEdge,
 			AuctionHouseFrame.NineSlice.BottomEdge,
 			AuctionHouseFrame.NineSlice.LeftEdge,
@@ -1870,7 +1898,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_FlightMap" then
-		for i, v in pairs({ FlightMapFrame.BorderFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			FlightMapFrame.BorderFrame.NineSlice.TopEdge,
 			FlightMapFrame.BorderFrame.NineSlice.RightEdge,
 			FlightMapFrame.BorderFrame.NineSlice.BottomEdge,
 			FlightMapFrame.BorderFrame.NineSlice.LeftEdge,
@@ -1891,7 +1920,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TradeSkillUI" then
-		for i, v in pairs({ TradeSkillFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			TradeSkillFrame.NineSlice.TopEdge,
 			TradeSkillFrame.NineSlice.RightEdge,
 			TradeSkillFrame.NineSlice.BottomEdge,
 			TradeSkillFrame.NineSlice.LeftEdge,
@@ -1924,7 +1954,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_InspectUI" then
-		for i, v in pairs({ InspectFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			InspectFrame.NineSlice.TopEdge,
 			InspectFrame.NineSlice.RightEdge,
 			InspectFrame.NineSlice.BottomEdge,
 			InspectFrame.NineSlice.LeftEdge,
@@ -1959,7 +1990,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Collections" then
-		for i, v in pairs({ WardrobeFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			WardrobeFrame.NineSlice.TopEdge,
 			WardrobeFrame.NineSlice.RightEdge,
 			WardrobeFrame.NineSlice.BottomEdge,
 			WardrobeFrame.NineSlice.LeftEdge,
@@ -1992,7 +2024,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TrainerUI" then
-		for i, v in pairs({ ClassTrainerFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			ClassTrainerFrame.NineSlice.TopEdge,
 			ClassTrainerFrame.NineSlice.RightEdge,
 			ClassTrainerFrame.NineSlice.BottomEdge,
 			ClassTrainerFrame.NineSlice.LeftEdge,
@@ -2022,7 +2055,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AchievementUI" then
-		for i, v in pairs({ AchievementFrameHeaderRight,
+		for i, v in pairs({ 
+			AchievementFrameHeaderRight,
 			AchievementFrameHeaderLeft,
 			AchievementFrameWoodBorderTopLeft,
 			AchievementFrameWoodBorderBottomLeft,
@@ -2049,7 +2083,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AzeriteUI" then
-		for i, v in pairs({ AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.TopEdge,
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.RightEdge,
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.BottomEdge,
 			AzeriteEmpoweredItemUI.BorderFrame.NineSlice.LeftEdge,
@@ -2070,7 +2105,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AlliedRacesUI" then
-		for i, v in pairs({ AlliedRacesFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			AlliedRacesFrame.NineSlice.TopEdge,
 			AlliedRacesFrame.NineSlice.RightEdge,
 			AlliedRacesFrame.NineSlice.BottomEdge,
 			AlliedRacesFrame.NineSlice.LeftEdge,
@@ -2099,7 +2135,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_IslandsQueueUI" then
-		for i, v in pairs({ IslandsQueueFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			IslandsQueueFrame.NineSlice.TopEdge,
 			IslandsQueueFrame.NineSlice.RightEdge,
 			IslandsQueueFrame.NineSlice.BottomEdge,
 			IslandsQueueFrame.NineSlice.LeftEdge,
@@ -2121,7 +2158,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_GarrisonUI" then
-		for i, v in pairs({ GarrisonCapacitiveDisplayFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			GarrisonCapacitiveDisplayFrame.NineSlice.TopEdge,
 			GarrisonCapacitiveDisplayFrame.NineSlice.RightEdge,
 			GarrisonCapacitiveDisplayFrame.NineSlice.BottomEdge,
 			GarrisonCapacitiveDisplayFrame.NineSlice.LeftEdge,
@@ -2150,7 +2188,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_Calendar" then
-		for i, v in pairs({ CalendarFrameTopMiddleTexture,
+		for i, v in pairs({ 
+			CalendarFrameTopMiddleTexture,
 			CalendarFrameRightTopTexture,
 			CalendarFrameRightMiddleTexture,
 			CalendarFrameRightBottomTexture,
@@ -2208,7 +2247,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AzeriteRespecUI" then
-		for i, v in pairs({ AzeriteRespecFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			AzeriteRespecFrame.NineSlice.TopEdge,
 			AzeriteRespecFrame.NineSlice.RightEdge,
 			AzeriteRespecFrame.NineSlice.BottomEdge,
 			AzeriteRespecFrame.NineSlice.LeftEdge,
@@ -2229,7 +2269,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_ScrappingMachineUI" then
-		for i, v in pairs({ ScrappingMachineFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			ScrappingMachineFrame.NineSlice.TopEdge,
 			ScrappingMachineFrame.NineSlice.RightEdge,
 			ScrappingMachineFrame.NineSlice.BottomEdge,
 			ScrappingMachineFrame.NineSlice.LeftEdge,
@@ -2250,7 +2291,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TimeManager" then
-		for i, v in pairs({ TimeManagerFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			TimeManagerFrame.NineSlice.TopEdge,
 			TimeManagerFrame.NineSlice.RightEdge,
 			TimeManagerFrame.NineSlice.BottomEdge,
 			TimeManagerFrame.NineSlice.LeftEdge,
@@ -2285,7 +2327,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_AzeriteEssenceUI" then
-		for i, v in pairs({ AzeriteEssenceUI.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			AzeriteEssenceUI.NineSlice.TopEdge,
 			AzeriteEssenceUI.NineSlice.RightEdge,
 			AzeriteEssenceUI.NineSlice.BottomEdge,
 			AzeriteEssenceUI.NineSlice.LeftEdge,
@@ -2347,7 +2390,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_ArchaeologyUI" then
-		for i, v in pairs({ ArchaeologyFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			ArchaeologyFrame.NineSlice.TopEdge,
 			ArchaeologyFrame.NineSlice.RightEdge,
 			ArchaeologyFrame.NineSlice.BottomEdge,
 			ArchaeologyFrame.NineSlice.LeftEdge,
@@ -2376,7 +2420,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_BindingUI" then
-		for i, v in pairs({ KeyBindingFrame.BG.TopEdge,
+		for i, v in pairs({ 
+			KeyBindingFrame.BG.TopEdge,
 			KeyBindingFrame.BG.RightEdge,
 			KeyBindingFrame.BG.BottomEdge,
 			KeyBindingFrame.BG.LeftEdge,
@@ -2400,7 +2445,8 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_OrderHallUI" then
-		for i, v in pairs({ OrderHallTalentFrame.NineSlice.TopEdge,
+		for i, v in pairs({ 
+			OrderHallTalentFrame.NineSlice.TopEdge,
 			OrderHallTalentFrame.NineSlice.RightEdge,
 			OrderHallTalentFrame.NineSlice.BottomEdge,
 			OrderHallTalentFrame.NineSlice.LeftEdge,
