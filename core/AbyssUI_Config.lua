@@ -739,14 +739,14 @@ end)
 -- End
 ------------------------------- Hide Elements ---------------------------------
 local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", AbyssUI_Config.childpanel2)
-PSINFOHide_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel2, "BOTTOMLEFT", 10, 10)
+PSINFOHide_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel2, "BOTTOMLEFT", 10, 20)
 PSINFOHide_CheckButton:SetHeight(24)
 PSINFOHide_CheckButton:SetWidth(200)
 PSINFOHide_CheckButton:SetScale(1)
 PSINFOHide_CheckButton = PSINFOHide_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOHide_CheckButton:SetPoint("LEFT")
-PSINFOHide_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings (based on your choice in the setup).")
+PSINFOHide_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions \nto be read. "..
+  "Options with a different color are recommended settings\n(based on your choice in the setup).")
 -- MicroMenu/Bags --
 local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
@@ -1322,14 +1322,14 @@ end)
 -- End
 ------------------------------- Miscellaneous -------------------------------
 local PSINFOMisce_CheckButton = CreateFrame("Frame","$parentPSINFOMisce_CheckButton", AbyssUI_Config.childpanel3)
-PSINFOMisce_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel3, "BOTTOMLEFT", 10, 10)
+PSINFOMisce_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel3, "BOTTOMLEFT", 10, 20)
 PSINFOMisce_CheckButton:SetHeight(24)
 PSINFOMisce_CheckButton:SetWidth(200)
 PSINFOMisce_CheckButton:SetScale(1)
 PSINFOMisce_CheckButton = PSINFOMisce_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOMisce_CheckButton:SetPoint("LEFT")
-PSINFOMisce_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings (based on your choice in the setup).")
+PSINFOMisce_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions \nto be read. "..
+  "Options with a different color are recommended settings\n(based on your choice in the setup).")
 --- General ---
 -- Camera Pitch Function Option 50%
 local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -1656,14 +1656,14 @@ end)
 ----------------------------------- Tweaks & Extra  -----------------------------------
 -- Read tooltip--
 local PSINFOTweaks_CheckButton = CreateFrame("Frame","$parentPSINFOTweaks_CheckButton", AbyssUI_Config.childpanel5)
-PSINFOTweaks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel5, "BOTTOMLEFT", 10, 10)
+PSINFOTweaks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel5, "BOTTOMLEFT", 10, 20)
 PSINFOTweaks_CheckButton:SetHeight(24)
 PSINFOTweaks_CheckButton:SetWidth(200)
 PSINFOTweaks_CheckButton:SetScale(1)
 PSINFOTweaks_CheckButton = PSINFOTweaks_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOTweaks_CheckButton:SetPoint("LEFT")
-PSINFOTweaks_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions to be read.\n"..
-  "Options with a different color are recommended settings (based on your choice in the setup).")
+PSINFOTweaks_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions \nto be read. "..
+  "Options with a different color are recommended settings\n(based on your choice in the setup).")
 --- Global ---
 -- Disable Kill Announcer --
 local KillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentKillAnnouncer_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
@@ -1914,13 +1914,13 @@ end)
 ----------------------------------- Scale & Frame Size  -----------------------------------
 -- Read tooltip--
 local PSINFOScale_CheckButton = CreateFrame("Frame","$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel6)
-PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel6, "BOTTOMLEFT", 10, 10)
+PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel6, "BOTTOMLEFT", 10, 20)
 PSINFOScale_CheckButton:SetHeight(24)
 PSINFOScale_CheckButton:SetWidth(200)
 PSINFOScale_CheckButton:SetScale(1)
 PSINFOScale_CheckButton = PSINFOScale_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOScale_CheckButton:SetPoint("LEFT")
-PSINFOScale_CheckButton:SetText("|cffb62a25This is a work in progress, I'm still learning how it works, please report any bugs in our discord|r")
+PSINFOScale_CheckButton:SetText("|cffb62a25This is a work in progress, I'm still learning how it works, please report any bugs in our \ndiscord|r")
 -- Slider Func
 local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
   local slider = CreateFrame("Slider", name, parent, "OptionsSliderTemplate")
@@ -2053,7 +2053,7 @@ PSINFO_CheckButton:SetWidth(200)
 PSINFO_CheckButton:SetScale(1)
 PSINFO_CheckButton = PSINFO_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFO_CheckButton:SetPoint("LEFT")
-PSINFO_CheckButton:SetText("Some of this options needs the AbyssUI_TexturePack. You can find a download link in the addon\n"
+PSINFO_CheckButton:SetText("Some of this options needs the AbyssUI_TexturePack. You can find a download link in \nthe addon "
   .."page. You also can find the link in te 'Info Panel' section.")
 -- UnitFrame Themes
 -- UnitFrame Improved --
