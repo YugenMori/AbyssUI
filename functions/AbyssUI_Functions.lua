@@ -484,7 +484,9 @@ CF:SetScript("OnEvent", function(self, event)
 
 	StatsFrame.text = StatsFrame:CreateFontString(nil, 'BACKGROUND')
 	StatsFrame.text:SetPoint("BOTTOMLEFT", StatsFrame)
-	StatsFrame.text:SetFont(subFont, 12)
+	StatsFrame.text:SetFont(damageFont, 12)
+	StatsFrame.text:SetShadowColor(0, 0, 0)
+	StatsFrame.text:SetShadowOffset(1, -1)
 	if useShadow then
 		StatsFrame.text:SetShadowOffset(1, -1)
 		StatsFrame.text:SetShadowColor(0, 0, 0)

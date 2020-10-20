@@ -6,8 +6,8 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
-local texturepackCheck    = "1.0.1.4"
-local texturepackDate     = "13/10/20"
+local texturepackCheck    = "1.0.1.5"
+local texturepackDate     = "20/10/20"
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -348,7 +348,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("AbyssUI Setup")
+  FrameButton.text:SetText("Setup")
     if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -372,7 +372,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("Clear Action Bar")
+  FrameButton.text:SetText("Clear Bars")
     if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -396,7 +396,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("AbyssUI DailyInfo")
+  FrameButton.text:SetText("DailyInfo")
     if ( AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true ) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -3224,14 +3224,25 @@ f:SetScript("OnEvent", function(self, event, ...)
       AbyssUIAddonSettings[character] = {}
     end
     if not AbyssUIAddonSettings[character].Slider then
-      AbyssUIAddonSettings[character].Slider = {
-        ["MinimapSlider"]        = 1,
-        ["UnitFrameSlider"]      = 1,
-        ["BuffFrameSlider"]      = 1,
-        ["PartyFrameSlider"]     = 1,
-        ["RaidFrameSlider"]      = 1,
-        ["ObjectiveFrameSlider"] = 1,
-      }
+      AbyssUIAddonSettings[character].Slider = {}
+    end
+    if not AbyssUIAddonSettings[character].Slider.MinimapSlider then
+      AbyssUIAddonSettings[character].Slider.MinimapSlider = 1
+    end
+    if not AbyssUIAddonSettings[character].Slider.UnitFrameSlider then
+      AbyssUIAddonSettings[character].Slider.UnitFrameSlider = 1
+    end
+    if not AbyssUIAddonSettings[character].Slider.BuffFrameSlider then
+      AbyssUIAddonSettings[character].Slider.BuffFrameSlider = 1
+    end
+    if not AbyssUIAddonSettings[character].Slider.PartyFrameSlider then
+      AbyssUIAddonSettings[character].Slider.PartyFrameSlider = 1
+    end
+    if not AbyssUIAddonSettings[character].Slider.RaidFrameSlider then
+      AbyssUIAddonSettings[character].Slider.RaidFrameSlider = 1
+    end
+    if not AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider then
+      AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = 1
     end
     InitSettings()
     AbyssUI_SliderSaveLoad()

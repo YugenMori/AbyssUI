@@ -678,7 +678,7 @@ local function MinimapBehaviours()
 	if ( AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true ) then
 		-- zone text
 		MinimapZoneText:ClearAllPoints()
-		MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 10, -15)
+		MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 9, -8)
 		MinimapZoneText:SetFont(globalFont, 14, "THINOUTLINE")
 		-- garrison icon
 		GarrisonLandingPageMinimapButton:ClearAllPoints()
@@ -783,7 +783,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 
 		local mailicon = mediaFolder.."mail"
 		local calendaricon = mediaFolder.."calendar"
-		local font = subFont
+		local font = damageFont
 		local fontSize = 11
 		local fontFlag = "THINOUTLINE"						-- "THINOUTLINE", "OUTLINE MONOCHROME", "OUTLINE" or nil (no outline)
 

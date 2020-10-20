@@ -97,31 +97,27 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- UnitColor
 		local UnitColor
 		local function UnitColor(unit)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				local r, g, b
-				if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
-					--Color it gray
-					r, g, b = 0.5, 0.5, 0.5
-				elseif ( UnitIsPlayer(unit) ) then
-					--Try to color it by class.
-					local localizedClass, englishClass = UnitClass(unit)
-					local classColor = RAID_CLASS_COLORS[englishClass]
-					if ( classColor ) then
-						r, g, b = classColor.r, classColor.g, classColor.b
-					else
-						if ( UnitIsFriend("player", unit) ) then
-							r, g, b = 0.0, 1.0, 0.0
-						else
-							r, g, b = 1.0, 0.0, 0.0
-						end
-					end
+			local r, g, b
+			if ( ( not UnitIsPlayer(unit) ) and ( ( not UnitIsConnected(unit) ) or ( UnitIsDeadOrGhost(unit) ) ) ) then
+				--Color it gray
+				r, g, b = 0.5, 0.5, 0.5
+			elseif ( UnitIsPlayer(unit) ) then
+				--Try to color it by class.
+				local localizedClass, englishClass = UnitClass(unit)
+				local classColor = RAID_CLASS_COLORS[englishClass]
+				if ( classColor ) then
+					r, g, b = classColor.r, classColor.g, classColor.b
 				else
-					r, g, b = UnitSelectionColor(unit)
+					if ( UnitIsFriend("player", unit) ) then
+						r, g, b = 0.0, 1.0, 0.0
+					else
+						r, g, b = 1.0, 0.0, 0.0
+					end
 				end
-				return r, g, b
 			else
-				return nil
+				r, g, b = UnitSelectionColor(unit)
 			end
+			return r, g, b
 		end
 		-- PlayerFrameStyle
 	    local function UnitFramesImproved_Style_PlayerFrame()
@@ -194,7 +190,11 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
-				if not InCombatLockdown() then
+				if not InCombatLockdown()  or 
+					self ~= Boss1TargetFrame or
+					self ~= Boss2TargetFrame or
+					self ~= Boss3TargetFrame or 
+					self ~= Boss4TargetFrame then
 					local classification = UnitClassification(self.unit)
 					if (classification == "minus") then
 						self.healthbar:SetHeight(12)
@@ -221,7 +221,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if ( AbyssUIAddonSettings.UnitFrameImproved == true and not InCombatLockdown() ) then
 				if ( AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true ) then
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
 				else
@@ -253,8 +253,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				if( statusFrame.LeftText and statusFrame.RightText ) then
 					statusFrame.LeftText:SetText("")
 					statusFrame.RightText:SetText("")
-					statusFrame.LeftText:Hide()
-					statusFrame.RightText:Hide()
+					statusFrame.LeftText:SetAlpha(0)
+					statusFrame.RightText:SetAlpha(0)
 					textString:Show()
 				end
 				if ( ( tonumber(valueMax) ~= valueMax or valueMax > 0 ) and not ( statusFrame.pauseUpdates ) ) then
@@ -356,14 +356,14 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- TargetUpdate
 		local function UnitFramesImproved_TargetFrame_Update(self)
-			if ( AbyssUIAddonSettings.UnitFrameImproved == true ) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				-- Set back color of health bar
-				if ( not UnitPlayerControlled(self.unit) and UnitIsTapDenied(self.unit) ) then
+				if (not UnitPlayerControlled(self.unit) and UnitIsTapDenied(self.unit)) then
 					-- Gray if npc is tapped by other player
 					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 				else
 					-- Standard by class etc if not
-					if ( UnitIsPlayer(self.unit) ) then
+					if (UnitIsPlayer(self.unit)) then
 						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
 							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
 							if ( healthPercentage == 0 ) then return end
@@ -391,7 +391,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					end
 					if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
 						if (not UnitIsUnconscious(self.unit)) then
-							if (self.healthbar.TextString ) then
+							if (self.healthbar.TextString) then
 								self.healthbar.TextString:Hide()
 								self.healthbar.forceHideText = true
 							end
@@ -485,8 +485,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- ToTStyle
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
-			if not InCombatLockdown() then 
-				TargetFrameToTHealthBar.lockColor = true
+			if (not InCombatLockdown ()) then
+				TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+				FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 			end
 		end
 		--StatusBarTextString

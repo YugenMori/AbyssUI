@@ -230,11 +230,14 @@ f:SetScript("OnEvent", function(self, event)
   "LFDQueueFrameFindGroupButtonText",
   "LFDRoleCheckPopupAcceptButtonText",
   "LFDRoleCheckPopupDeclineButtonText",
+  "LFDQueueFramePartyBackfillBackfillButtonText",
   "RaidFinderFrameFindRaidButtonText",
   "StaticPopup1Button1Text",
   "StaticPopup1Button2Text",
   "StaticPopup1Button3Text",
   "StaticPopup1Button4Text",
+  "StaticPopup2Button2Text",
+  "StaticPopup1ExtraButtonText",
   "PVPReadyDialogEnterBattleButtonText",
   "PVPReadyDialogLeaveQueueButtonText",
   "LFGDungeonReadyDialogEnterDungeonButtonText",
@@ -264,7 +267,6 @@ f:SetScript("OnEvent", function(self, event)
   "ChatConfigCombatSettingsFiltersDeleteButtonText",
   "CombatLogDefaultButtonText",
 
-
   }
   if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
     for _, v in next, f.yellow do 
@@ -293,7 +295,11 @@ f:SetScript("OnEvent", function(self, event)
       AddonListDisableAllButton.Text,
       AddonListOkayButton.Text,
       AddonListCancelButton.Text,
-
+      ReadyCheckFrameYesButton.Text,
+      ReadyCheckFrameNoButton.Text,
+      DressUpFrameResetButton.Text,
+      DressUpFrameCancelButton.Text,
+      DressUpFrameOutfitDropDown.SaveButton.Text,
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)
@@ -416,6 +422,9 @@ f:SetScript("OnEvent", function(self, event, name)
         CommunitiesFrame.GuildMemberDetailFrame.GroupInviteButton.Text,
         CommunitiesFrame.ClubFinderInvitationFrame.ApplyButton.Text,
         CommunitiesFrame.ClubFinderInvitationFrame.DeclineButton.Text,
+        CommunitiesFrame.ClubFinderInvitationFrame.AcceptButton.Text,
+        CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.Accept.Text,
+        CommunitiesFrame.ClubFinderInvitationFrame.WarningDialog.Cancel.Text,
         ClubFinderGuildFinderFrame.GuildCards.FirstCard.RequestJoin.Text,
         ClubFinderGuildFinderFrame.GuildCards.SecondCard.RequestJoin.Text,
         ClubFinderGuildFinderFrame.GuildCards.ThirdCard.RequestJoin.Text,
@@ -470,17 +479,10 @@ f:SetScript("OnEvent", function(self, event, name)
   if name == "Blizzard_InspectUI" then
     f.yellow = {
       "InspectPaperDollFrameText",
-      "DressUpFrameResetButtonText",
-      "DressUpFrameCancelButtonText",
     }
     if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
       for _, v in next, f.yellow do 
         AbyssUI_ApplyFonts(v)
-      end
-      for i, v in pairs ({
-        DressUpFrameOutfitDropDown.SaveButton.Text,
-      }) do 
-        AbyssUI_ApplyFontsNoGlobal(v)
       end
     end
   end
@@ -568,7 +570,19 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end) 
-
-
+-- ItemSocket
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_ItemSocketingUI" then
+    if ( AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true ) then
+      for i, v in pairs ({
+        ItemSocketingSocketButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end) 
 --------------------------------------------------------------
 -- End

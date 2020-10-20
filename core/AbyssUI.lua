@@ -1542,6 +1542,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
+
 		----------------------------------------------------------------------
 		-- Frames that act weird
 		-- LFGDungeonReadyDialog
@@ -2481,6 +2482,28 @@ f:SetScript("OnEvent", function(self, event, name)
 			GuideFrame.NineSlice.TopLeftCorner,
 			GuideFrame.NineSlice.BottomLeftCorner,
 		GuideFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+-- ItemSocketingFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_ItemSocketingUI" then
+		for i, v in pairs({
+			ItemSocketingFrame.NineSlice.TopEdge,
+			ItemSocketingFrame.NineSlice.RightEdge,
+			ItemSocketingFrame.NineSlice.BottomEdge,
+			ItemSocketingFrame.NineSlice.LeftEdge,
+			ItemSocketingFrame.NineSlice.TopRightCorner,
+			ItemSocketingFrame.NineSlice.TopLeftCorner,
+			ItemSocketingFrame.NineSlice.BottomLeftCorner,
+		ItemSocketingFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
