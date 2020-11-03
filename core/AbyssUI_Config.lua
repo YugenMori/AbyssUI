@@ -6,6 +6,7 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 local texturepackCheck    = "1.0.1.5"
 local texturepackDate     = "20/10/20"
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
@@ -105,32 +106,32 @@ AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
 InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
 --Child Panels
 AbyssUI_Config.childpanel1 = CreateFrame("Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel1.name = "Info Panel"
+AbyssUI_Config.childpanel1.name = L["Info Panel"]
 AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
 --
 AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel2.name = "Hide Elements"
+AbyssUI_Config.childpanel2.name = L["Hide Elements"]
 AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
 --
 AbyssUI_Config.childpanel3 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel3.name = "Miscellaneous"
+AbyssUI_Config.childpanel3.name = L["Miscellaneous"]
 AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
 --
 AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel4.name = "Themes"
+AbyssUI_Config.childpanel4.name = L["Themes"]
 AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
 --
 AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel5.name = "Tweaks & Extra"
+AbyssUI_Config.childpanel5.name = L["Tweaks & Extra"]
 AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
 --
 AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
-AbyssUI_Config.childpanel6.name = "Scale & Frame Size"
+AbyssUI_Config.childpanel6.name = L["Scale & Frame Size"]
 AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
 InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
 --------------------------------------------------------------
@@ -151,13 +152,13 @@ Frame:SetWidth(200)
 Frame:SetScale(1.1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Thank you for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,"..
+Frame:SetText(L["Thank you for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,"..
 " consider sharing with your friends\n or even making a donation."..
 " It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
 "Options that have a different text color are based on your choice in the setup."..
 "\nThose options are set by default if you choose recommended settings.\n"..
-"Check the options by clicking in the (+) button on the left.")
+"Check the options by clicking in the (+) button on the left."])
 --Special Thanks
 local Frame = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
 Frame:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 70)
@@ -166,7 +167,7 @@ Frame:SetWidth(200)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("LEFT")
-Frame:SetText("|cff0d75d4Special Thanks|r")
+Frame:SetText(L["|cff0d75d4Special Thanks|r"])
 local Frame1 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
 Frame1:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 50)
 Frame1:SetHeight(24)
@@ -174,7 +175,7 @@ Frame1:SetWidth(200)
 Frame1:SetScale(1)
 Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame1:SetPoint("LEFT")
-Frame1:SetText("|cfff2dc7fFizzlemizz|r for helping me with programming questions.")
+Frame1:SetText(L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."])
 local Frame2 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
 Frame2:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 30)
 Frame2:SetHeight(24)
@@ -182,16 +183,8 @@ Frame2:SetWidth(200)
 Frame2:SetScale(1)
 Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame2:SetPoint("LEFT")
-Frame2:SetText("|cfff2dc7fFry|r for helping me with grammatical errors.")
-local Frame3 = CreateFrame("Frame","$parentFrameButtonSubTitle", AbyssUI_Config.panel)
-Frame3:SetPoint("BOTTOMLEFT", AbyssUI_Config.panel, "BOTTOMLEFT", 10, 10)
-Frame3:SetHeight(24)
-Frame3:SetWidth(200)
-Frame3:SetScale(1)
-Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-Frame3:SetPoint("LEFT")
-Frame3:SetText("|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
-" UnitFrame for AbyssUI.")
+Frame2:SetText(L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
+" UnitFrame for AbyssUI."])
 -- Panel 01 (Info Panel)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
@@ -200,7 +193,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Abyss|cff0d75d4UI|r Info Panel")
+Frame:SetText(L["Info Panel"])
 -- Panel 02 (HideElements)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -209,7 +202,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Hide Elements")
+Frame:SetText(L["Hide Elements"])
 -- Panel 03 (Miscellaneous)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel3)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", 0, -20)
@@ -218,7 +211,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Miscellaneous")
+Frame:SetText(L["Miscellaneous"])
 -- Panel 03.01 (Miscellaneous)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel3)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", -265, -70)
@@ -227,7 +220,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- General")
+Frame:SetText(L["- General"])
 -- Panel 03.01 (Miscellaneous)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel3)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", 125, -70)
@@ -236,7 +229,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- Frames")
+Frame:SetText(L["- Frames"])
 -- Panel 04 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel04", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", -150, -20)
@@ -245,7 +238,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Player Portrait")
+Frame:SetText(L["Player Portrait"])
 -- Panel 04.01 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", -255, -70)
@@ -254,7 +247,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- Portrait Art")
+Frame:SetText(L["- Portrait Art"])
 -- Panel 05 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 120, -20)
@@ -263,7 +256,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Frame Colorization")
+Frame:SetText(L["Frame Colorization"])
 -- Panel 05.01 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel051", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 90, -70)
@@ -272,7 +265,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- Preset Colors")
+Frame:SetText(L["- Preset Colors"])
 -- Panel 05.02 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", 98, -50)
@@ -281,7 +274,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- Choose a Color")
+Frame:SetText(L["- Choose a Color"])
 -- Panel 6 (Themes)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "CENTER", -235, -50)
@@ -290,7 +283,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("LEFT")
-Frame:SetText("- UnitFrame Art")
+Frame:SetText(L["- UnitFrame Art"])
 -- Panel 06 (Extra)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel06", AbyssUI_Config.childpanel5)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", 0, -20)
@@ -299,7 +292,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Tweaks & Extra")
+Frame:SetText(L["Tweaks & Extra"])
 -- Panel 06.01 (Extra)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel061", AbyssUI_Config.childpanel5)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", -265, -70)
@@ -308,7 +301,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- General")
+Frame:SetText(L["- General"])
 -- Panel 06.02 (Extra)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel062", AbyssUI_Config.childpanel5)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", 125, -70)
@@ -317,7 +310,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("- Frames")
+Frame:SetText(L["- Frames"])
 -- Panel 07 (Scale)
 local Frame = CreateFrame("Frame","$parentFrameButtonPanel07", AbyssUI_Config.childpanel6)
 Frame:SetPoint("CENTER", AbyssUI_Config.childpanel6, "TOP", 0, -20)
@@ -326,7 +319,7 @@ Frame:SetHeight(24)
 Frame:SetScale(1.5)
 Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 Frame:SetPoint("CENTER")
-Frame:SetText("Scale & Frame Size")
+Frame:SetText(L["Scale & Frame Size"])
 --------------------------------- Buttons ---------------------------------
 local _G = _G
 local fichaString         = _G["TOKEN_FILTER_LABEL"]
@@ -348,7 +341,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("Setup")
+  FrameButton.text:SetText(L["Setup"])
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -372,7 +365,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("Clear Bars")
+  FrameButton.text:SetText(L["Clear Bars"])
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -396,7 +389,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("DailyInfo")
+  FrameButton.text:SetText(L["DailyInfo"])
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -410,11 +403,11 @@ f:SetScript("OnEvent", function()
     C_Timer.After(0.5, function()
       local HonorLevel = UnitHonorLevel("player")
       local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
-      print("|cfff2dc7f~ AbyssUI Daily Info ~|r")
+      print(L["|cfff2dc7f~ AbyssUI Daily Info ~|r"])
       if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
         print("|cfff2dc7f"..fichaString..": |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
       else
-        print("|cfff2dc7f"..fichaString..": |r".."Not available right now!")
+        print("|cfff2dc7f"..fichaString..": |r"..L["Not available right now!"])
       end
       if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
         print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
@@ -438,7 +431,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("Reload UI")
+  FrameButton.text:SetText(L["Reload UI"])
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -487,7 +480,7 @@ f:SetScript("OnEvent", function()
   FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
   --FrameButton.text:SetFont(globalFont, 14)
   FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-  FrameButton.text:SetText("Patreon")
+  FrameButton.text:SetText(L["Donate"])
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -511,9 +504,9 @@ InfoPanelSubText:SetWidth(256)
 InfoPanelSubText:SetScale(1)
 InfoPanelSubText = InfoPanelSubText:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 InfoPanelSubText:SetPoint("LEFT")
-InfoPanelSubText:SetText("In this page you can find links to some other AddOns/Packs that make AbyssUI even better.\n" ..
+InfoPanelSubText:SetText(L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better.\n" ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem.\n"..
-"Click on the image so you can get the respective link. Don't forget to check then out!")
+"Click on the image so you can get the respective link. Don't forget to check then out!"])
 --- Frames and Boxes ---
 -- AbyssUI_TexturePack
 local AbyssUI_TexturePack = CreateFrame("Frame", "$parentAbyssUI_TexturePack", AbyssUI_Config.childpanel1)
@@ -745,13 +738,13 @@ PSINFOHide_CheckButton:SetWidth(200)
 PSINFOHide_CheckButton:SetScale(1)
 PSINFOHide_CheckButton = PSINFOHide_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 PSINFOHide_CheckButton:SetPoint("LEFT")
-PSINFOHide_CheckButton:SetText("The symbol (*) in some options means that there is important information/instructions \nto be read. "..
-  "Options with a different color are recommended settings\n(based on your choice in the setup).")
+PSINFOHide_CheckButton:SetText(L["The symbol (*) in some options means that there is important information/instructions \nto be read. "..
+  "Options with a different color are recommended settings\n(based on your choice in the setup)."])
 -- MicroMenu/Bags --
 local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
-MicroMenu_CheckButton.Text:SetText("Hide MicroMenu")
-MicroMenu_CheckButton.tooltip = "Hide the ActionBar MicroMenu (Bags Bar)"
+MicroMenu_CheckButton.Text:SetText(L["Hide MicroMenu"])
+MicroMenu_CheckButton.tooltip = L["Hide the ActionBar MicroMenu (Bags Bar)"]
 MicroMenu_CheckButton:SetChecked(AbyssUIAddonSettings.HideMicroMenu)
 --  Hide
 local function AbyssUI_HideMicroMenu_Function()
@@ -814,8 +807,8 @@ end)
 -- Gryphons Option --
 local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 Gryphons_CheckButton:SetPoint("TOPLEFT", 10, -110)
-Gryphons_CheckButton.Text:SetText("Hide Gryphons")
-Gryphons_CheckButton.tooltip = "Hide the ActionBar Gryphons"
+Gryphons_CheckButton.Text:SetText(L["Hide Gryphons"])
+Gryphons_CheckButton.tooltip = L["Hide the ActionBar Gryphons"]
 Gryphons_CheckButton:SetChecked(AbyssUIAddonSettings.HideGryphons)
 -- OnClick Function
 Gryphons_CheckButton:SetScript("OnClick", function(self)
@@ -844,8 +837,8 @@ end)
 -- Minimap
 local Minimap_CheckButton = CreateFrame("CheckButton", "$parentMinimap_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 Minimap_CheckButton:SetPoint("TOPLEFT", 10, -140)
-Minimap_CheckButton.Text:SetText("Hide Minimap")
-Minimap_CheckButton.tooltip = "Hide the Game Minimap"
+Minimap_CheckButton.Text:SetText(L["Hide Minimap"])
+Minimap_CheckButton.tooltip = L["Hide the Game Minimap"]
 Minimap_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimap)
 -- OnClick Function
 Minimap_CheckButton:SetScript("OnClick", function(self)
@@ -866,8 +859,8 @@ end)
 -- Objective Tracker --
 local ObjTracker_CheckButton = CreateFrame("CheckButton", "$parentObjTracker_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 ObjTracker_CheckButton:SetPoint("TOPLEFT", 10, -170)
-ObjTracker_CheckButton.Text:SetText("Hide Objective Tracker")
-ObjTracker_CheckButton.tooltip = "Hide the Objective Tracker (Quest Frame)"
+ObjTracker_CheckButton.Text:SetText(L["Hide Objective Tracker"])
+ObjTracker_CheckButton.tooltip = L["Hide the Objective Tracker (Quest Frame)"]
 ObjTracker_CheckButton:SetChecked(AbyssUIAddonSettings.HideObjectiveTracker)
 -- OnClick Function
 ObjTracker_CheckButton:SetScript("OnClick", function(self)
@@ -892,8 +885,8 @@ end)
 -- Hide FPS/MS Frame --
 local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
-FPSMSFrame_CheckButton.Text:SetText("Hide FPS/MS Frame")
-FPSMSFrame_CheckButton.tooltip = "Hide the fps/ms frame (bottomleft)"
+FPSMSFrame_CheckButton.Text:SetText(L["Hide FPS/MS Frame"])
+FPSMSFrame_CheckButton.tooltip = L["Hide the fps/ms frame (bottomleft)"]
 FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
 addonTable.FPSMSFrame = FPSMSFrame_CheckButton
 -- OnClick Function
@@ -904,9 +897,9 @@ end)
 -- YouDied LevelUp Frame --
 local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 YouDiedLevelUpFrame_CheckButton:SetPoint("TOPLEFT", 10, -230)
-YouDiedLevelUpFrame_CheckButton.Text:SetText("Hide YouDied/LevelUp Frame")
-YouDiedLevelUpFrame_CheckButton.tooltip = "Hide the 'You Died' and 'Level Up' frame when you"..
-" die/level in the game"
+YouDiedLevelUpFrame_CheckButton.Text:SetText(L["Hide YouDied/LevelUp Frame"])
+YouDiedLevelUpFrame_CheckButton.tooltip = L["Hide the 'You Died' and 'Level Up' frame when you"..
+" die/level in the game"]
 YouDiedLevelUpFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideYouDiedLevelUpFrame)
 addonTable.YouDiedLevelUpFrame = YouDiedLevelUpFrame_CheckButton
 -- OnClick Function
@@ -916,8 +909,8 @@ end)
 -- Hide Macro Labels --
 local HideMacroLabels_CheckButton = CreateFrame("CheckButton", "$parentHideMacroLabels_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideMacroLabels_CheckButton:SetPoint("TOPLEFT", 10, -260)
-HideMacroLabels_CheckButton.Text:SetText("Hide Macro Labels")
-HideMacroLabels_CheckButton.tooltip = "Hide Macro Labels from Action Bar"
+HideMacroLabels_CheckButton.Text:SetText(L["Hide Macro Labels"])
+HideMacroLabels_CheckButton.tooltip = L["Hide Macro Labels from Action Bar"]
 HideMacroLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideMacroLabels)
 -- OnClick Function
 HideMacroLabels_CheckButton:SetScript("OnClick", function(self)
@@ -958,8 +951,8 @@ end)
 -- Hide Hotkeys --
 local HideHotkeysLabels_CheckButton = CreateFrame("CheckButton", "$parentHideHotkeysLabels_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideHotkeysLabels_CheckButton:SetPoint("TOPLEFT", 10, -290)
-HideHotkeysLabels_CheckButton.Text:SetText("Hide Hotkeys Labels")
-HideHotkeysLabels_CheckButton.tooltip = "Hide Hotkeys Labels from Action Bar"
+HideHotkeysLabels_CheckButton.Text:SetText(L["Hide Hotkeys Labels"])
+HideHotkeysLabels_CheckButton.tooltip = L["Hide Hotkeys Labels from Action Bar"]
 HideHotkeysLabels_CheckButton:SetChecked(AbyssUIAddonSettings.HideHotkeysLabels)
 -- OnClick Function
 HideHotkeysLabels_CheckButton:SetScript("OnClick", function(self)
@@ -1000,8 +993,8 @@ end)
 -- Hide StanceBar
 local HideStanceBar_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideStanceBar_CheckButton:SetPoint("TOPLEFT", 10, -320)
-HideStanceBar_CheckButton.Text:SetText("Hide Stance Bar")
-HideStanceBar_CheckButton.tooltip = "Hide the Stance Bar (Druid forms, Rogue stealth, etc)"
+HideStanceBar_CheckButton.Text:SetText(L["Hide Stance Bar"])
+HideStanceBar_CheckButton.tooltip = L["Hide the Stance Bar (Druid forms, Rogue stealth, etc)"]
 HideStanceBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideStanceBar)
 -- OnClick Function
 HideStanceBar_CheckButton:SetScript("OnClick", function(self)
@@ -1101,8 +1094,8 @@ end)
 -- Hide Chat Buttons
 local HideChatButtons_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideChatButtons_CheckButton:SetPoint("TOPLEFT", 10, -350)
-HideChatButtons_CheckButton.Text:SetText("Hide Chat Buttons")
-HideChatButtons_CheckButton.tooltip = "Hide the Chat buttons (voice, social, etc)"
+HideChatButtons_CheckButton.Text:SetText(L["Hide Chat Buttons"])
+HideChatButtons_CheckButton.tooltip = L["Hide the Chat buttons (voice, social, etc)"]
 HideChatButtons_CheckButton:SetChecked(AbyssUIAddonSettings.HideChatButtons)
 -- OnClick Function
 HideChatButtons_CheckButton:SetScript("OnClick", function(self)
@@ -1148,8 +1141,8 @@ end)
 -- AFKCammeraFrame --
 local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 AFKCammeraFrame_CheckButton:SetPoint("TOPLEFT", 10, -380)
-AFKCammeraFrame_CheckButton.Text:SetText("Hide AFK Frame")
-AFKCammeraFrame_CheckButton.tooltip = "Hide the AFKMode when you are AFK"
+AFKCammeraFrame_CheckButton.Text:SetText(L["Hide AFK Frame"])
+AFKCammeraFrame_CheckButton.tooltip = L["Hide the AFKMode when you are AFK"]
 AFKCammeraFrame_CheckButton:SetChecked(AbyssUIAddonSettings.AFKCammeraFrame)
 -- OnClick Function
 AFKCammeraFrame_CheckButton:SetScript("OnClick", function(self)
@@ -1158,8 +1151,8 @@ end)
 -- Faction/PvP/Prestige icon --
 local FactionPvpIcon_CheckButton = CreateFrame("CheckButton", "$parentFactionPvpIcon_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 FactionPvpIcon_CheckButton:SetPoint("TOPLEFT", 10, -410)
-FactionPvpIcon_CheckButton.Text:SetText("Hide Faction/PvP/Prestige icon")
-FactionPvpIcon_CheckButton.tooltip = "Hide the player frame Faction/PvP/Prestige icon"
+FactionPvpIcon_CheckButton.Text:SetText(L["Hide Faction/PvP/Prestige icon"])
+FactionPvpIcon_CheckButton.tooltip = L["Hide the player frame Faction/PvP/Prestige icon"]
 FactionPvpIcon_CheckButton:SetChecked(AbyssUIAddonSettings.FactionPvpIcon)
 -- OnClick Function
 FactionPvpIcon_CheckButton:SetScript("OnClick", function(self)
@@ -1220,8 +1213,8 @@ end)
 -- Hide UnitImproved Faction Icons
 local HideUnitImprovedFaction_CheckButton = CreateFrame("CheckButton", "$parentHideUnitImprovedFaction_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideUnitImprovedFaction_CheckButton:SetPoint("TOPLEFT", 10, -440)
-HideUnitImprovedFaction_CheckButton.Text:SetText("|cfff2dc7fHide UnitImproved Faction Icon|r")
-HideUnitImprovedFaction_CheckButton.tooltip = "Hide the Faction Icon (Ally/Horde) on players frames"
+HideUnitImprovedFaction_CheckButton.Text:SetText(L["|cfff2dc7fHide UnitImproved Faction Icon|r"])
+HideUnitImprovedFaction_CheckButton.tooltip = L["Hide the Faction Icon (Ally/Horde) on players frames"]
 HideUnitImprovedFaction_CheckButton:SetChecked(AbyssUIAddonSettings.HideUnitImprovedFaction)
 addonTable.HideUnitImprovedFaction = HideUnitImprovedFaction_CheckButton
 -- OnClick Function
@@ -1232,8 +1225,8 @@ end)
 -- Hide Cast Timer
 local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
-HideCastTimer_CheckButton.Text:SetText("Hide CastBar Timer")
-HideCastTimer_CheckButton.tooltip = "Hide the timer below CastBar"
+HideCastTimer_CheckButton.Text:SetText(L["Hide CastBar Timer"])
+HideCastTimer_CheckButton.tooltip = L["Hide the timer below CastBar"]
 HideCastTimer_CheckButton:SetChecked(AbyssUIAddonSettings.HideCastTimer)
 addonTable.HideCastTimer = HideCastTimer_CheckButton
 -- OnClick Function
@@ -1243,8 +1236,8 @@ end)
 -- Hide Group Frame
 local HideGroupFrame_CheckButton = CreateFrame("CheckButton", "$parentHideGroupFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideGroupFrame_CheckButton:SetPoint("TOPRIGHT", -200, -110)
-HideGroupFrame_CheckButton.Text:SetText("|cfff2dc7fHide GroupFrame|r")
-HideGroupFrame_CheckButton.tooltip = "Hide the GroupFrame on the player portrait"
+HideGroupFrame_CheckButton.Text:SetText(L["|cfff2dc7fHide GroupFrame|r"])
+HideGroupFrame_CheckButton.tooltip = L["Hide the GroupFrame on the player portrait"]
 HideGroupFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideGroupFrame)
 addonTable.HideGroupFrame = HideGroupFrame_CheckButton
 -- OnClick Function
@@ -1270,8 +1263,8 @@ end)
 -- Hide Covenant Frame
 local HideConvenantFrame_CheckButton = CreateFrame("CheckButton", "$parentHideConvenantFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideConvenantFrame_CheckButton:SetPoint("TOPRIGHT", -200, -140)
-HideConvenantFrame_CheckButton.Text:SetText("Hide Covenant Frame")
-HideConvenantFrame_CheckButton.tooltip = "Hide the Covenant/Garrison minimap icon"
+HideConvenantFrame_CheckButton.Text:SetText(L["Hide Covenant Frame"])
+HideConvenantFrame_CheckButton.tooltip = L["Hide the Covenant/Garrison minimap icon"]
 HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFrame)
 -- OnClick Function
 HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
@@ -1296,8 +1289,8 @@ end)
 -- Hide Minimap Zone Text
 local HideMinimapZoneText_CheckButton = CreateFrame("CheckButton", "$parentHideMinimapZoneText_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
 HideMinimapZoneText_CheckButton:SetPoint("TOPRIGHT", -200, -170)
-HideMinimapZoneText_CheckButton.Text:SetText("Hide Minimap Zone Text")
-HideMinimapZoneText_CheckButton.tooltip = "Hide zone text above minimap"
+HideMinimapZoneText_CheckButton.Text:SetText(L["Hide Minimap Zone Text"])
+HideMinimapZoneText_CheckButton.tooltip = L["Hide zone text above minimap"]
 HideMinimapZoneText_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimapZoneText)
 -- OnClick Function
 HideMinimapZoneText_CheckButton:SetScript("OnClick", function(self)

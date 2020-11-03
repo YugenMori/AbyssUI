@@ -4,18 +4,38 @@
 ## Author: Yugen
 ## Notes-enUS: Minimalist UI for World of Warcraft
 ## Notes-ptBR: IU Minimalista para World of Warcraft
+## SavedVariables: AbyssuiDB
 ## SavedVariablesPerCharacter: AbyssUIProfile, AbyssUIAddonSettings, COLOR_MY_UI
-## OptionalDeps: AbyssUI_TexturePack
+## OptionalDeps: AbyssUI_TexturePack, Ace3
+## X-Embeds: Ace3
 
-core/AbyssUI.lua
-core/AbyssUI_Config.lua
-core/AbyssUI_Frames.lua
+# Libs
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\AceLocale-3.0\AceLocale-3.0.xml
+libs\AceEvent-3.0\AceEvent-3.0.xml
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceConsole-3.0\AceConsole-3.0.xml
+libs\AceDB-3.0\AceDB-3.0.xml
+libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+libs\AceHook-3.0\AceHook-3.0.xml
 
-functions/AbyssUI_Functions.lua
-functions/AbyssUI_FunctionsExtras.lua
+# Localization
+localization\enUS.lua
+localization\ptBR.lua
 
-modules/AbyssUI_FontHandler.lua
-modules/AbyssUI_InstanceLeave.lua
-modules/AbyssUI_MoveFrames.lua
-modules/AbyssUI_SavedProfiles.lua
-modules/AbyssUI_UnitFrame.lua
+# AbyssUI
+core\AbyssUI.lua
+core\AbyssUI_Config.lua
+core\AbyssUI_Frames.lua
+
+functions\AbyssUI_Functions.lua
+functions\AbyssUI_FunctionsExtras.lua
+
+modules\AbyssUI_FontHandler.lua
+modules\AbyssUI_InstanceLeave.lua
+modules\AbyssUI_MoveFrames.lua
+modules\AbyssUI_SavedProfiles.lua
+modules\AbyssUI_UnitFrame.lua

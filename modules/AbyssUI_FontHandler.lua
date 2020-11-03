@@ -300,6 +300,7 @@ f:SetScript("OnEvent", function(self, event)
       DressUpFrameResetButton.Text,
       DressUpFrameCancelButton.Text,
       DressUpFrameOutfitDropDown.SaveButton.Text,
+      LFDQueueFramePartyBackfillNoBackfillButton.Text,
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)

@@ -239,6 +239,7 @@ TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds,
   AbyssUI_RegionListSize(TimerTrackerTimer1StatusBar, 200, 18)
 	TimerTrackerTimer1StatusBarBorder:Hide()
 end)
+
 for i, v in pairs({
 	MirrorTimer1,
 	MirrorTimer2,
