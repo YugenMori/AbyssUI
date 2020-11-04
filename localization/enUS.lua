@@ -24,12 +24,12 @@ L["Themes"] 						= true
 L["Tweaks & Extra"] 		= true
 L["Scale & Frame Size"] = true
 -- 
-L["Thank you for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,"..
-" consider sharing with your friends\n or even making a donation."..
-" It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
+L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
+" consider sharing with your friends or even making a donation."..
+"It helps a lot! This is a minimalist UI that makes changes directly to the WoW frames,"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
 "Options that have a different text color are based on your choice in the setup."..
-"\nThose options are set by default if you choose recommended settings.\n"..
+" Those options are set by default if you choose recommended settings.\n"..
 "Check the options by clicking in the (+) button on the left."] = true
 --
 L["|cff0d75d4Special Thanks|r"] = true
@@ -51,12 +51,12 @@ L["DailyInfo"]					= true
 L["Reload UI"]					= true
 L["Donate"]							= true
 -- Config Info Panel
-L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better.\n" ..
-"These addons are verify to especially work with AbyssUI without any conflict or problem.\n"..
+L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
+"These addons are verify to especially work with AbyssUI without any conflict or problem."..
 "Click on the image so you can get the respective link. Don't forget to check then out!"] = true
 -- Config Hide Elements
-L["The symbol (*) in some options means that there is important information/instructions \nto be read. "..
-"Options with a different color are recommended settings\n(based on your choice in the setup)."] = true
+L["The symbol (*) in some options means that there is important information/instructions to be read. "..
+"Options with a different color are recommended settings (based on your choice in the setup)."] = true
 L["Hide MicroMenu"] = true
 L["Hide the ActionBar MicroMenu (Bags Bar)"] = true
 L["Hide Gryphons"] = true
@@ -93,7 +93,8 @@ L["Hide the Covenant/Garrison minimap icon"] = true
 L["Hide Minimap Zone Text"] = true
 L["Hide zone text above minimap"] = true
 -- Config Miscellaneous
-
+L["Smooth Camera\n(50% Slower)"] = true
+L["Makes the Camera turns in a more smooth way"] = true
 
 
 -- Daily Info

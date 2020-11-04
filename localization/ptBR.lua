@@ -24,24 +24,24 @@ L["Themes"] 						= "Temas"
 L["Tweaks & Extra"] 		= "Ajustes e extras"
 L["Scale & Frame Size"] = "Escala e Tamanhos"
 -- 
-L["Thank you for using Abyss|cff0d75d4UI|r.\nIf you enjoy this addon,"..
-" consider sharing with your friends\n or even making a donation."..
-" It helps a lot!\nThis is a minimalist UI that makes changes directly to the WoW frames,\n"..
+L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
+" consider sharing with your friends or even making a donation."..
+"It helps a lot! This is a minimalist UI that makes changes directly to the WoW frames,"..
 "using nearly the same amount of CPU/RAM as the Blizzard default UI.\n\n"..
 "Options that have a different text color are based on your choice in the setup."..
-"\nThose options are set by default if you choose recommended settings.\n"..
-"Check the options by clicking in the (+) button on the left."] = "Obrigado por usar Abyss|cff0d75d4UI|r.\n Se você gostou desse addon,"..
-" considere compartilhar com seus amigos\n ou até mesmo fazer uma doação."..
-" Isso ajuda muito!\nEste é uma interface minimalista que faz mudanças diretamente nos frames do wow,\n"..
-"usando pouco uso de CPU/RAM quanto o padrão da interface da Blizzard.\n\n"..
+" Those options are set by default if you choose recommended settings.\n"..
+"Check the options by clicking in the (+) button on the left."] = "Obrigado por usar Abyss|cff0d75d4UI|r. Se você gostou desse addon,"..
+" considere compartilhar com seus amigos ou até mesmo fazer uma doação."..
+" Isso ajuda muito! Interface minimalista que faz mudanças diretamente nos frames do wow,"..
+"usando pouco de CPU/RAM quanto o padrão da interface da Blizzard.\n\n"..
 "Opções com cores diferentes são baseadas na suas escolhas no setup."..
-"\nEssas opções são setadas por padrão se você escolheu as opções recomendads.\n"..
+" Essas opções são setadas por padrão se você escolheu as opções recomendadas.\n"..
 "Confira as opções clicando no botão (+) na esquerda."
 --
 L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4Agradecimentos|r"
 L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r por me ajudar na com dúvidas de programação."
 L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
-" UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r pela UnitFrame melhorada, onde eu pude me inspirar"..
+" UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r pela UnitFrame melhorada, onde eu pude me inspirar\n"..
 " e criar algo muito bom para a AbyssUI."
 -- Config Options
 L["- General"] 					= "- Geral"
@@ -58,15 +58,15 @@ L["DailyInfo"]					= "Info Diária"
 L["Reload UI"]					= "Recarregar IU"
 L["Donate"]							= "Doações"
 -- Config Info Panel
-L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better.\n" ..
-"These addons are verify to especially work with AbyssUI without any conflict or problem.\n"..
-"Click on the image so you can get the respective link. Don't forget to check then out!"] = "Nessa página você pode encontrar links para outros Addons/Pacotes que fazem AbyssUI ainda melhor.\n"..
-"Esses addons são verificados para funcionar com a AbyssUI sem conflitos ou erros.\n"..
+L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
+"These addons are verify to especially work with AbyssUI without any conflict or problem."..
+"Click on the image so you can get the respective link. Don't forget to check then out!"] = "Nessa página você pode encontrar links para outros Addons/Pacotes que fazem AbyssUI ainda melhor."..
+"Esses addons são verificados para funcionar com a AbyssUI sem conflitos ou erros."..
 "Clique na imagem para obter o link do mesmo. Não esqueça de dar uma olhada!"
 -- Config Hide Elements
-L["The symbol (*) in some options means that there is important information/instructions \nto be read. "..
-"Options with a different color are recommended settings\n(based on your choice in the setup)."] = "O símbolo (*) em algumas opções significa que tem informação importante\npara ser lida. "..
-"Opções com uma cor diferente são configurações recomendadas\n(com base na sua escolha no setup)."
+L["The symbol (*) in some options means that there is important information/instructions to be read. "..
+"Options with a different color are recommended settings (based on your choice in the setup)."] = "O símbolo (*) em algumas opções significa que tem informação importante para ser lida. "..
+"Opções com uma cor diferente são configurações recomendadas (com base na sua escolha no setup)."
 L["Hide MicroMenu"] = "Esconder o MicroMenu"
 L["Hide the ActionBar MicroMenu (Bags Bar)"] = "Esconde o MicroMenu (Barra de bolsas)"
 L["Hide Gryphons"] = "Esconder Grifos"
@@ -104,7 +104,8 @@ L["Hide the Covenant/Garrison minimap icon"] = "Esconde o ícone do minimapa do 
 L["Hide Minimap Zone Text"] = "Esconder Texto Minimapa"
 L["Hide zone text above minimap"] = "Esconde o texto de local atual acima do minimapa"
 -- Config Miscellaneous
-
+L["Smooth Camera\n(50% Slower)"] = "Câmera Suave\n(50% Lenta)"
+L["Makes the Camera turns in a more smooth way"] = "Faz a câmera virar de uma forma mais suave"
 
 
 
