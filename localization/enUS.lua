@@ -1,5 +1,8 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "enUS", true)
 
+--Example
+-- L["Some English Text"] = "Your Translation"
+
 -- Chat commands
 L["abyssui"] = true
 L["ab"] = true
@@ -93,9 +96,89 @@ L["Hide the Covenant/Garrison minimap icon"] = true
 L["Hide Minimap Zone Text"] = true
 L["Hide zone text above minimap"] = true
 -- Config Miscellaneous
-L["Smooth Camera\n(50% Slower)"] = true
+L["Smooth Camera (50% Slower)"] = true
+L["Smooth Camera (70% Slower)"] = true
+L["Smooth Camera (90% Slower)"] = true
 L["Makes the Camera turns in a more smooth way"] = true
-
+L["|cfff2dc7fAuto Repair/Sell Gray Items|r"] = true
+L["When you open a Merchant shop, auto sell gray"..
+" and repair items"] = true
+L["Auto Gamma"] = true
+L["Automatically change the gamma when is day to"..
+" 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = true
+L["USA Date Format"] = true
+L["Change the date format of the whole UI to"..
+" the USA format"] = true
+L["RPG chat fonts"] = true
+L["Change the chat fonts to a RPG look-alike style"] = true
+L["Auto Screenshot"] = true
+L["Automatically takes a screenshot when you level up"] = true
+L["Transparent Name BKGD"] = true
+L["Remove any color in the target name background"] = true
+L["Default Class Background"] = true
+L["Remove the class color background behind"..
+" the player names to default values (Transparent Name needs to be unchecked)"] = true
+L["Disable Nameplate Changes"] = true
+L["This option will remove any change that was made to the nameplates (the bar above mobs and players)"] = true
+L["Disable ChatBubble Changes"] = true
+L["This option will remove any change that was made to the chatbubbles (the frame text above players)"] = true
+L["Disable Damage Font (*)"] = true 
+L["This option will remove any change to the damage font text."..
+"\n*You need to restart the game so the font can be reloaded. You can change it to any font, "..
+"go to Textures->font and replace the file keeping the same name"] = true
+L["|cfff2dc7fDisable Portrait Text Spam|r"] = true
+L["Disable healing/damage spam over player"..
+" and pet portraits"] = true
+L["Disable New Minimap"] = true
+L["This option will get you back to the"..
+" Blizzard default minimap style (round)."] = true
+L["Disable Smoke Texture"] = true
+L["It will disable the 'smoke' texture around the portrait in "..
+"the UnitFrameImproved version of it"] = true
+L["Disable Button Color Text"] = true
+L["Change the button colors back to default yellow"] = true
+-- Config Tweaks & Extra
+L["Disable Kill Announcer"] = true
+L["Disable the Kill Announcer frame that show up when you kill someone"] = true
+L["Silence Kill Announcer"] = true
+L["Remove boss/kill sounds from the Kill Announcer frame"] = true
+L["|cfff2dc7fTooltip on Cursor|r"] = true
+L["Tooltips will appear close to the mouse cursor position"] = true
+L["|cfff2dc7fInspect Target (Shift + ')|r"] = true
+L["When you have a target or your mouse is over someone character,"..
+" to inspect this player press the keys Shift + '"] = true
+L["|cfff2dc7fConfirm Pop-Ups (Ctrl + ')|r"] = true
+L["When this is active you can confirm almost"..
+" any pop-ups (release, quests, stacks, etc) pressing the keys Ctrl + '"] = true
+L["First Person View"] = true
+L["Change the camera view to a 'First Person' experience"] = true
+L["ActionButton on KeyUp"] = true
+L["With this option spells can be cast just when the"..
+" keybind are released"] = true
+L["Combat Cursor Mode"] = true
+L["Makes the camera turns with your mouse when in"..
+" combat (right-click to show cursor)"] = true
+L["Square Minimap"] = true
+L["A modern minimap (neon class borders)"] = true
+L["Keep UnitFrame Dark"] = true
+L["Even if you change theme, this will keep UnitFrame Dark"..
+" (player frame, boss, etc)."] = true
+L["You can only select one style of UnitFrame color"] = true
+L["Keep UnitFrame Blizzard Like"] = true
+L["Even if you change theme, this will keep UnitFrame"..
+" Blizzard like (player frame, boss, etc)."] = true
+L["|cfff2dc7fInstance Leave Frame|r"] = true
+L["A dynamic frame that pop-up when you"..
+" complete a LFG (dungeon, raid, etc)"] = true
+L["Minimalist UI"] = true
+L["Hide some parts of the UI when you are out of combat ('ATL-CTRL-P' to show frames)"] = true
+L["Disable 'Dynamic Quest Tracker' at Miscellaneous tab first"] = true
+L["Minimal ActionBar"] = true
+L["Minimalist actionbar, hide all the textures"] = true
+L["Dynamic Quest Tracker"] = true
+L["Hide the quest track when you"..
+" are in combat or in a PVP instance"] = true
+-- Config Scale & Frame Size
 
 -- Daily Info
 L["|cfff2dc7f~ AbyssUI Daily Info ~|r"] = true

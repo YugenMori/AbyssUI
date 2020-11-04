@@ -4,6 +4,7 @@
 --
 -- Saved Variables for AbyssUI
 --------------------------------------------------------------
+--[[
 AbyssUI = LibStub("AceAddon-3.0"):NewAddon("AbyssUI", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 
@@ -104,3 +105,5 @@ end
 function AbyssUI:ToggleShowOnScreen(info, value)
     self.db.profile.showOnScreen = value
 end
+
+--]]
