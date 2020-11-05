@@ -76,7 +76,7 @@ local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Backgrou
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
   self:SetTextColor(31/255, 31/255, 31/255)
-  self:SetFont(globalFont, 14)
+  self:SetFont(globalFont, 13)
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0, 0)
 end

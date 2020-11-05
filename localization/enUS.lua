@@ -1,23 +1,7 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "enUS", true)
 
---Example
+-- Example
 -- L["Some English Text"] = "Your Translation"
-
--- Chat commands
-L["abyssui"] = true
-L["ab"] = true
-
-L["Welcome Home!"] = true
-
-L["Message"] = true
-L["The message to be displayed when you get home."] = true
-L["<Your message>"] = true
-
-L["Show in Chat"] = true
-L["Toggles the display of the message in the chat window."] = true
-
-L["Show on Screen"] = true
-L["Toggles the display of the message on the screen."] = true
 --------------------------------------------------------------
 -- Config
 L["Info Panel"] 				= true
@@ -137,6 +121,8 @@ L["It will disable the 'smoke' texture around the portrait in "..
 "the UnitFrameImproved version of it"] = true
 L["Disable Button Color Text"] = true
 L["Change the button colors back to default yellow"] = true
+L["Disable New CastBar"] = true
+L["Will disable the new castbar and return to Blizzard default texture"] = true
 -- Config Tweaks & Extra
 L["Disable Kill Announcer"] = true
 L["Disable the Kill Announcer frame that show up when you kill someone"] = true
@@ -179,6 +165,80 @@ L["Dynamic Quest Tracker"] = true
 L["Hide the quest track when you"..
 " are in combat or in a PVP instance"] = true
 -- Config Scale & Frame Size
+L["|cffb62a25This is a work in progress,".. 
+" I'm still learning how it works, please report any bugs in our discord|r"] = true
+-- Config Themes
+L["Some of this options needs the AbyssUI_TexturePack."..
+" You can find a download link in the addon page. You also can find the link in te 'Info Panel' section."] = true
+L["|cfff2dc7fUnitFrame Improved|r"] = true
+L["This is a improved version of unitframes,"..
+" it changes those frames to a more beautiful and complete version"] = true
+L["|cfff2dc7fElite Portrait|r"] = true
+L["Add a elite texture to the player portrait"] = true
+L["You can only select one UnitFrame portrait art"] = true
+L["DeathKnight Alliance Portrait"] = true
+L["DeathKnight Horde Portrait"] = true
+L["Add a sword texture to the player portrait"] = true
+L["Demon Hunter Portrait"] = true
+L["Add a DH inspired texture to the player portrait"] = true
+L["Artistic"] = true
+L["A artistic version of UnitPlayerFrame"] = true
+L["You need to uncheck any other portrait art to apply a new one"] = true
+L["Bright"]= true
+L["A bright version of UnitPlayerFrame"] = true
+L["Classic"] = true
+L["A classic version of UnitPlayerFrame"] = true
+L["Artistic(V2)"] = true
+L["Version two of artistic UnitPlayerFrame"] = true
+L["Dark"] = true
+L["Dark version of UnitPlayerFrame"] = true
+L["DarkGray"] = true
+L["A dark gray version of UnitPlayerFrame"] = true
+L["Dark(V2)"] = true
+L["Version 2 of the dark UnitPlayerFrame"] = true
+L["GrayScale"] = true
+L["A grayscale version of UnitPlayerFrame"] = true
+L["LightGray"] = true
+L["A light gray version of UnitPlayerFrame"] = true
+L["MediumGray"] = true
+L["A medium gray version of UnitPlayerFrame"] = true
+L["MinimalBlue"] = true
+L["A blue version of UnitPlayerFrame"] = true
+L["MinimalRed"] = true
+L["A red version of UnitPlayerFrame"] = true
+L["Muted"] = true
+L["A muted version of UnitPlayerFrame"] = true
+L["Psychedelic"] = true
+L["A psychedelic version of UnitPlayerFrame"] = true
+L["Retro"] = true
+L["A retrowave version of UnitPlayerFrame"] = true
+L["Vibrant"] = true
+L["A vibrant version of UnitPlayerFrame"] = true
+L["|cffc0c0c0Blizzard (Default)|r"] = true
+L["Blizzard Silver Colorization for Frames"] = true
+L["You can only select one preset color, uncheck others"] = true
+L["|cff636363Blackout|r"] = true
+L["A completely dark colorization"] = true
+L["|cffb62a25Blood|r"] = true
+L["A dark red colorization"] = true
+L["|cffecc13cGold|r"] = true
+L["A golden colorization"] = true
+L["|cffc41F3BDeath Knight|r"] = true
+L["|cffA330C9Demon Hunter|r"] = true
+L["|cffFF7D0ADruid|r"] = true
+L["|cffABD473Hunter|r"] = true
+L["|cff69CCF0Mage|r"] = true
+L["|cff00FF96Monk|r"] = true
+L["|cffF58CBAPaladin|r"] = true
+L["Priest (Shadow)"] = true
+L["|cffFFF569Rogue|r"] = true
+L["|cff0070DEShaman|r"] = true
+L["|cff9482C9Warlock|r"] = true
+L["|cffC79C6EWarrior|r"] = true
+L["Apply the color you choose from the ColorPicker"] = true
+L["You need to uncheck any preset color, to apply a color"] = true
+
+
 
 -- Daily Info
 L["|cfff2dc7f~ AbyssUI Daily Info ~|r"] = true

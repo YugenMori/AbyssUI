@@ -178,13 +178,13 @@ end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
   _G[self]:SetTextColor(31/255, 31/255, 31/255)
-  _G[self]:SetFont(globalFont, 14)
+  _G[self]:SetFont(globalFont, 13)
   _G[self]:SetShadowColor(45/255, 45/255, 45/255)
   _G[self]:SetShadowOffset(0, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
   self:SetTextColor(31/255, 31/255, 31/255)
-  self:SetFont(globalFont, 14)
+  self:SetFont(globalFont, 13)
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0, 0)
 end
@@ -227,6 +227,9 @@ f:SetScript("OnEvent", function(self, event)
   "OpenAllMailText",
   "SendMailMailButtonText",
   "SendMailCancelButtonText",
+  "OpenMailReplyButtonText",
+  "OpenMailDeleteButtonText",
+  "OpenMailCancelButtonText",
   "LFDQueueFrameFindGroupButtonText",
   "LFDRoleCheckPopupAcceptButtonText",
   "LFDRoleCheckPopupDeclineButtonText",
@@ -266,6 +269,7 @@ f:SetScript("OnEvent", function(self, event)
   "ChatConfigCombatSettingsFiltersAddFilterButtonText",
   "ChatConfigCombatSettingsFiltersDeleteButtonText",
   "CombatLogDefaultButtonText",
+  "SplashFrameText",
 
   }
   if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then

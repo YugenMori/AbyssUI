@@ -1,24 +1,8 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "ptBR")
 
---Exemplo
+-- Exemplo
 -- L ["Texto em inglês"] = "Sua tradução"
-
--- Chat commands
-L["abyssui"] = true
-L["ab"] = true
-
-L["Welcome Home!"] = "Bem Vindo" 
-
-L["Message"] = "Mensagem"
-L["The message to be displayed when you get home."] = "A mensagem que será mostrada quando entra."
-L["<Your message>"] = "Sua mensagem"
-
-L["Show in Chat"] = "Mostrar no chat"
-L["Toggles the display of the message in the chat window."] = "Mostra na janela de chat a mensagem"
-
-L["Show on Screen"] = "Mostrar na tela"
-L["Toggles the display of the message on the screen."] = "Mostra na tela a mensagem"
-
+--------------------------------------------------------------
 -- Config
 L["Info Panel"] 				= "Informações"
 L["Hide Elements"] 			= "Esconder Elementos"
@@ -36,7 +20,7 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 "Check the options by clicking in the (+) button on the left."] = "Obrigado por usar Abyss|cff0d75d4UI|r. Se você gostou desse addon,"..
 " considere compartilhar com seus amigos ou até mesmo fazer uma doação."..
 " Isso ajuda muito! Interface minimalista que faz mudanças diretamente nos frames do wow,"..
-"usando pouco de CPU/RAM quanto o padrão da interface da Blizzard.\n\n"..
+" usando pouco de CPU/RAM quanto o padrão da interface da Blizzard.\n\n"..
 "Opções com cores diferentes são baseadas na suas escolhas no setup."..
 " Essas opções são setadas por padrão se você escolheu as opções recomendadas.\n"..
 "Confira as opções clicando no botão (+) na esquerda."
@@ -52,7 +36,7 @@ L["- Frames"]						= "- Frames"
 L["Player Portrait"]		= "Retrato do Jogador"
 L["- Portrait Art"]			= "- Arte do Retrato"
 L["Frame Colorization"] = "Colorização de Frame"
-L["- Preset Colors"]		= "- Cores Preset"
+L["- Preset Colors"]		= "- Cores Predefinidas"
 L["- Choose a Color"]		= "- Escolha uma Cor"
 L["- UnitFrame Art"]		= "- Arte da UnitFrame"
 L["Setup"]							= "Configuração"
@@ -64,8 +48,8 @@ L["Donate"]							= "Doações"
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
 "Click on the image so you can get the respective link. Don't forget to check then out!"] = "Nessa página você pode encontrar links para outros Addons/Pacotes que fazem AbyssUI ainda melhor."..
-"Esses addons são verificados para funcionar com a AbyssUI sem conflitos ou erros."..
-"Clique na imagem para obter o link do mesmo. Não esqueça de dar uma olhada!"
+" Esses addons são verificados para funcionar com a AbyssUI sem conflitos ou erros."..
+" Clique na imagem para obter o link do mesmo. Não esqueça de dar uma olhada!"
 -- Config Hide Elements
 L["The symbol (*) in some options means that there is important information/instructions to be read. "..
 "Options with a different color are recommended settings (based on your choice in the setup)."] = "O símbolo (*) em algumas opções significa que tem informação importante para ser lida. "..
@@ -133,10 +117,10 @@ L["Remove the class color background behind"..
 " do nome do jogador (Fundo Transparente precisa estar desmarcado)"
 L["Disable Nameplate Changes"] = "Desativa Mudanças Nameplates"
 L["This option will remove any change that was made to the nameplates (the bar above mobs and players)"] = "Irá remover qualquer"..
-"mudança feita nas nameplates (barra acima dos mobs e jogadores)"
+" mudança feita nas nameplates (barra acima dos mobs e jogadores)"
 L["Disable ChatBubble Changes"] = "Desativa Mudanças Bolha de Chat"
 L["This option will remove any change that was made to the chatbubbles (the frame text above players)"] = "Irá remover qualquer"..
-"mudança feita nas bolhas de chat (o frame de texto acima dos jogadores)"
+" mudança feita nas bolhas de chat (o frame de texto acima dos jogadores)"
 L["Disable Damage Font (*)"] = "Desativar Fonte Dano (*)" 
 L["This option will remove any change to the damage font text."..
 "\n*You need to restart the game so the font can be reloaded. You can change it to any font, "..
@@ -155,6 +139,9 @@ L["It will disable the 'smoke' texture around the portrait in "..
 " UnitFrameImproved"
 L["Disable Button Color Text"] = "Desativar Cor Texto Botões"
 L["Change the button colors back to default yellow"] = "Muda a cor dos botões para o padrão amarelo"
+L["Disable New CastBar"] = "Desativar CastBar Nova"
+L["Will disable the new castbar and return to Blizzard default texture"] = "Irá desativar a nova castbar"..
+" e retornar para a textura padrão da Blizzard"
 -- Config Tweaks & Extra
 L["Disable Kill Announcer"] = "Desativar Kill Announcer"
 L["Disable the Kill Announcer frame that show up when you kill someone"] = "Desativa o frame de morte quando você mata alguém"
@@ -202,6 +189,83 @@ L["Dynamic Quest Tracker"] = "Missões Dinâmicas"
 L["Hide the quest track when you"..
 " are in combat or in a PVP instance"] = "Esconde a barra de missões quando você está em combate ou em uma instância JxJ"
 -- Config Scale & Frame Size
+L["|cffb62a25This is a work in progress,".. 
+" I'm still learning how it works, please report any bugs in our discord|r"] = "|cffb62a25Em desenvolvimento,"..
+" ainda estou aprendendo como funciona, reporte qualquer erro no nosso discord|r"
+-- Config Themes
+L["Some of this options needs the AbyssUI_TexturePack."..
+" You can find a download link in the addon page. You also can find the link in te 'Info Panel' section."] = "Algumas dessas opções precisam do AbyssUI_TexturePack."..
+" Você pode encontrar o link para download na página do addon. Você também encontra o link na seção 'Informações'."
+L["|cfff2dc7fUnitFrame Improved|r"] = "|cfff2dc7fUnitFrame Melhorado|r"
+L["This is a improved version of unitframes,"..
+" it changes those frames to a more beautiful and complete version"] = "Uma versão melhorada da unitframe,"..
+" muda aqueles frames para algo mais bonito e completo"
+L["|cfff2dc7fElite Portrait|r"] = "|cfff2dc7fRetrato Elite|r"
+L["Add a elite texture to the player portrait"] = "Adiciona a textura elite no retrato do jogador (dragão)"
+L["You can only select one UnitFrame portrait art"] = "Você só pode selecionar uma arte de retrato por vez"
+L["DeathKnight Alliance Portrait"] = "Retrato Cavaleiro da Morte (Ally)"
+L["DeathKnight Horde Portrait"] = "Retrato Cavaleiro da Morte (Horda)"
+L["Add a sword texture to the player portrait"] = "Adiciona uma textura de arma de dk no retrato do jogador"
+L["Demon Hunter Portrait"] = "Retrato Caçador de Demônios"
+L["Add a DH inspired texture to the player portrait"] = "Adiciona uma textura de dh no retrato do jogador"
+L["Artistic"] = "Artística"
+L["A artistic version of UnitPlayerFrame"] = "Uma versão artística da UnitFrame do jogador"
+L["You need to uncheck any other portrait art to apply a new one"] = "Você precisa desmarcar qualquer outra arte de retrato para usar uma nova"
+L["Bright"]= "Brilhante"
+L["A bright version of UnitPlayerFrame"] = "Uma versão brilhante da UnitFrame do jogador"
+L["Classic"] = "Clássica"
+L["A classic version of UnitPlayerFrame"] = "Uma versão clássica da UnitFrame do jogador"
+L["Artistic(V2)"] = "Artística(V2)"
+L["Version two of artistic UnitPlayerFrame"] = "Outra versão artística da UnitFrame do jogador"
+L["Dark"] = "Sombria"
+L["Dark version of UnitPlayerFrame"] = "Uma versão sombria da UnitFrame do jogador"
+L["DarkGray"] = "Cinza Escuro"
+L["A dark gray version of UnitPlayerFrame"] = "Uma versão cinza escuro da UnitFrame do jogador"
+L["Dark(V2)"] = "Sombria(V2)"
+L["Version 2 of the dark UnitPlayerFrame"] = "Outra versão sombria da UnitFrame do jogador"
+L["GrayScale"] = "Acinzentado"
+L["A grayscale version of UnitPlayerFrame"] = "Uma versão acinzentada da UnitFrame do jogador"
+L["LightGray"] = "Cinza Claro"
+L["A light gray version of UnitPlayerFrame"] = "Uma versão cinza claro da UnitFrame do jogador"
+L["MediumGray"] = "Cinza Médio"
+L["A medium gray version of UnitPlayerFrame"] = "Uma versão cinza médio da UnitFrame do jogador"
+L["MinimalBlue"] = "Azul Minimalista"
+L["A blue version of UnitPlayerFrame"] = "Uma versão azul minimalista da UnitFrame do jogador"
+L["MinimalRed"] = "Vermelho Minimalista"
+L["A red version of UnitPlayerFrame"] = "Uma versão vermelho minimalista da UnitFrame do jogador"
+L["Muted"] = "Silenciada"
+L["A muted version of UnitPlayerFrame"] = "Uma versão silenciada da UnitFrame do jogador"
+L["Psychedelic"] = "Psicodélica"
+L["A psychedelic version of UnitPlayerFrame"] = "Uma versão psicodélica da UnitFrame do jogador"
+L["Retro"] = "Retro"
+L["A retrowave version of UnitPlayerFrame"] = "Uma versão retro da UnitFrame do jogador"
+L["Vibrant"] = "Vibrante"
+L["A vibrant version of UnitPlayerFrame"] = "Uma versão vibrante da UnitFrame do jogador"
+L["|cffc0c0c0Blizzard (Default)|r"] = "|cffc0c0c0Blizzard (Padrão)|r"
+L["Blizzard Silver Colorization for Frames"] = "Colorização prateada da Blizzard para os frames"
+L["You can only select one preset color, uncheck others"] = "Você só pode selecionar uma cor predefinidas, desmarque outras"
+L["|cff636363Blackout|r"] = "|cff636363Obscura|r"
+L["A completely dark colorization"] = "Uma colorização completamente escura"
+L["|cffb62a25Blood|r"] = "|cffb62a25Sangue|r"
+L["A dark red colorization"] = "Uma colorização vermelho escuro"
+L["|cffecc13cGold|r"] = "|cffecc13cDourado|r"
+L["A golden colorization"] = "Uma colorização dourada"
+L["|cffc41F3BDeath Knight|r"] = "|cffc41F3BCavaleiro da Morte|r"
+L["|cffA330C9Demon Hunter|r"] = "|cffA330C9Caçador de Demônios|r"
+L["|cffFF7D0ADruid|r"] = "|cffFF7D0ADruida|r"
+L["|cffABD473Hunter|r"] = "|cffABD473Caçador|r"
+L["|cff69CCF0Mage|r"] = "|cff69CCF0Mago|r"
+L["|cff00FF96Monk|r"] = "|cff00FF96Monge|r"
+L["|cffF58CBAPaladin|r"] = "|cffF58CBAPaladino|r"
+L["Priest (Shadow)"] = "Sacerdote (Sombras)"
+L["|cffFFF569Rogue|r"] = "|cffFFF569Ladino|r"
+L["|cff0070DEShaman|r"] = "|cff0070DEXamã|r"
+L["|cff9482C9Warlock|r"] = "|cff9482C9Bruxo|r"
+L["|cffC79C6EWarrior|r"] = "|cffC79C6EGuerreiro|r"
+L["Apply the color you choose from the ColorPicker"] = "Aplique a cor que você escolheu no seletor de cores"
+L["You need to uncheck any preset color, to apply a color"] = "Você precisa desmarcar qualquer cor predefinida, para aplicar essa cor"
+
+
 
 -- Daily Info
 L["|cfff2dc7f~ AbyssUI Daily Info ~|r"] = "|cfff2dc7f~ AbyssUI Info Diária ~|r"

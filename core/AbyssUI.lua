@@ -457,7 +457,17 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			MailFrame.NineSlice.BottomLeftCorner,
 			MailFrame.NineSlice.LeftEdge,
 			MailFrame.NineSlice.TopLeftCorner,
-		MailFrameInset.NineSlice.BottomEdge, }) do
+			MailFrameInset.NineSlice.BottomEdge,
+			OpenMailFrame.NineSlice.TopEdge,
+			OpenMailFrame.NineSlice.TopRightCorner,
+			OpenMailFrame.NineSlice.RightEdge,
+			OpenMailFrame.NineSlice.BottomRightCorner,
+			OpenMailFrame.NineSlice.BottomEdge,
+			OpenMailFrame.NineSlice.BottomLeftCorner,
+			OpenMailFrame.NineSlice.LeftEdge,
+			OpenMailFrame.NineSlice.TopLeftCorner,
+		OpenMailFrame.NineSlice.BottomEdge,
+			 }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({

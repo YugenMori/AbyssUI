@@ -1384,5 +1384,91 @@ hooksecurefunc('AuraButton_Update', function(buttonName, index)
     end     
   end
 end)
+-- CastBar size fixes
+TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds, totalTime)
+  if event ~= "START_TIMER" then return end
+  AbyssUI_FrameSize(TimerTrackerTimer1StatusBar, 200, 18)
+  AbyssUI_RegionListSize(TimerTrackerTimer1StatusBar, 200, 18)
+	TimerTrackerTimer1StatusBarBorder:Hide()
+end)
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event)
+	if (AbyssUIAddonSettings.NewCastBar ~= true) then
+		for i, v in pairs({
+			MirrorTimer1,
+			MirrorTimer2,
+			MirrorTimer3,
+			PetCastingBarFrame,
+		}) do
+			AbyssUI_RegionListSize(v, 200, 20)
+		end
+		for i, v in pairs({	
+			CastingBarFrame, 
+			PetCastingBarFrame,
+			MirrorTimer1StatusBar, 
+			MirrorTimer2StatusBar, 
+			MirrorTimer3StatusBar, }) do
+			AbyssUI_FrameSize(v, 200, 20)
+		end
+		-- Cast bars
+		local c  = CastingBarFrame 
+		c.Icon:Show()
+		c.Icon:SetWidth(22)
+		c.Icon:SetHeight(22)
+		c.Icon:ClearAllPoints()
+		c.Icon:SetPoint("LEFT", c, "LEFT", -22, 0.5)
+		c.Text = c:CreateFontString(nil)
+		c.Text:SetFont(globalFont, 12)
+		c.Text:SetShadowColor(0, 0, 0)
+		c.Text:SetShadowOffset(1, -1)
+		c.Text:ClearAllPoints()
+		c.Text:SetPoint("TOP", c, "TOP", 0, 15)
+		-- Timer
+		c.timer = c:CreateFontString(nil)
+		c.timer:SetFont(globalFont, 12)
+		c.timer:SetShadowColor(0, 0, 0)
+		c.timer:SetShadowOffset(1, -1)
+		c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
+		c.update = .1
+		c:HookScript("OnUpdate", function(self, elapsed)
+			if (AbyssUIAddonSettings.HideCastTimer ~= true) then
+			    if not self.timer then return end
+			    if self.update and self.update < elapsed then
+			        if self.casting then
+			            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
+			        elseif self.channeling then
+			            self.timer:SetText(format("%.1f", max(self.value, 0)))
+			        else
+			            self.timer:SetText("")
+			        end
+			        self.update = .1
+			    else
+			        self.update = self.update - elapsed
+			    end
+			else
+				return nil
+			end
+		end)
+	end
+end)
+-- Castbar BorderFrame
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event)
+	if (AbyssUIAddonSettings.NewCastBar ~= true) then
+		CastingBarFrame.Border:Hide()
+		local c = CreateFrame("Frame", "$parentAbyssUI_CastingBarFrameBorder", CastingBarFrame)
+		c:SetFrameStrata("HIGH")
+		c:SetWidth(256)
+		c:SetHeight(70)
+		c:SetPoint("CENTER", 0, 5)
+		local t = c:CreateTexture(nil, "HIGH")
+		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Border")
+		t:SetAllPoints(c)
+	else
+		return nil
+	end
+end)
 ----------------------------------------------------
 --End

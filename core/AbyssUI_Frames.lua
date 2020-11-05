@@ -88,7 +88,7 @@ end
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
   self:SetTextColor(45/255, 45/255, 45/255)
-  self:SetFont(globalFont, 14, "NORMAL")
+  self:SetFont(globalFont, 13, "NORMAL")
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0.5, 0)
 end
@@ -1061,6 +1061,7 @@ f:SetScript("OnEvent", function()
 			addonTable.DisableHealingSpam,
 			addonTable.DisableNewMinimap,
 			addonTable.DisableUnitFrameSmoke,
+			addonTable.NewCastBar,
 		} do
 			v:SetChecked(true)
 		end
@@ -1077,6 +1078,8 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
 		AbyssUIAddonSettings.DisableNewMinimap				      	= addonTable.DisableNewMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
+	 	AbyssUIAddonSettings.NewCastBar												= addonTable.NewCastBar:GetChecked()
+
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)
