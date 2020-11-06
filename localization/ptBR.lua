@@ -1,16 +1,26 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "ptBR")
-
+if not L then return end
+-- Tradutor: Yugen
 -- Exemplo
 -- L ["Texto em inglês"] = "Sua tradução"
 --------------------------------------------------------------
 -- Config
-L["Info Panel"] 				= "Informações"
-L["Hide Elements"] 			= "Esconder Elementos"
-L["Miscellaneous"] 			= "Diversos"
-L["Themes"] 						= "Temas"
-L["Tweaks & Extra"] 		= "Ajustes e extras"
-L["Scale & Frame Size"] = "Escala e Tamanhos"
--- 
+L["Info Panel"] 						= "Informações"
+L["Hide Elements"] 					= "Esconder Elementos"
+L["Miscellaneous"] 					= "Diversos"
+L["Themes"] 								= "Temas"
+L["Tweaks & Extra"] 				= "Ajustes e extras"
+L["Scale & Frame Size"] 		= "Escala e Tamanhos" 
+L["Thanks & Translations"] 	= "Agradecimentos e Traduções"
+-- Daily Info
+L["Thank you for choosing Abyss|cff0d75d4UI|r!"] = "Obrigado por escolher Abyss|cff0d75d4UI|r!"
+L["The improved World of Warcraft user interface."] = "A interface de World of Warcraft melhorada."
+L["|cfff2dc7fAbyssUI Daily Info|r"] = "|cfff2dc7fAbyssUI Info Diária|r"
+L["Not available right now!"] = "Não disponível agora!"
+L["|cfff2dc7fTime since last login: |r"] = "|cfff2dc7fTempo desde o último login: |r"
+L[" you were gone for |cffffcc00"] = " você saiu por |cffffcc00"
+L["Type |cffffcc00/abyssui|r for a list of commands"] = "Digite |cffffcc00/abyssui|r para lista de comandos"
+--
 L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " consider sharing with your friends or even making a donation."..
 "It helps a lot! This is a minimalist UI that makes changes directly to the WoW frames,"..
@@ -24,12 +34,6 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 "Opções com cores diferentes são baseadas na suas escolhas no setup."..
 " Essas opções são setadas por padrão se você escolheu as opções recomendadas.\n"..
 "Confira as opções clicando no botão (+) na esquerda."
---
-L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4Agradecimentos|r"
-L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r por me ajudar na com dúvidas de programação."
-L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
-" UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r pela UnitFrame melhorada, onde eu pude me inspirar\n"..
-" e criar algo muito bom para a AbyssUI."
 -- Config Options
 L["- General"] 					= "- Geral"
 L["- Frames"]						= "- Frames"
@@ -264,9 +268,90 @@ L["|cff9482C9Warlock|r"] = "|cff9482C9Bruxo|r"
 L["|cffC79C6EWarrior|r"] = "|cffC79C6EGuerreiro|r"
 L["Apply the color you choose from the ColorPicker"] = "Aplique a cor que você escolheu no seletor de cores"
 L["You need to uncheck any preset color, to apply a color"] = "Você precisa desmarcar qualquer cor predefinida, para aplicar essa cor"
+--------------------------------------------------------------
+-- Frames
+L["Move"]					= "Mova-se"
+L["Level: "] 			= "Nível: "
+L["Honor: "] 			= "Honra: "
+L["ItemLevel: "]	= "NívelItem: "
+L["Confirm"] 			= "Confirmar"
+L["Recommended"]	= "Recomendada"
+L["Modern"] 			= "Moderna"
+L["Classic"] 			= "Clássica"
+L["|cff8b0000YOU DIED|r"] = "|cff8b0000VOCÊ MORREU|r"
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, choose the option that best suits your taste.\n\n"
+.."|cfff2dc7fClassic|r: interface model close to the original, with few modifications.\n\n"
+.."|cfff2dc7fRecommended|r: a mix between the other options, with the best of the two.\n\n"
+.."|cfff2dc7fModern|r: a modern interface model, with striking changes to the interface.\n\n"
+.."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info."] = "Vamos"
+.." salvar as variáveis e preparar a interface para o primeiro uso.\n"
+.."Para fazer isso, escolha uma das opções que melhor se encaixa no seu gosto.\n\n"
+.."|cfff2dc7fClássica|r: modelo de interface próximo do original, com poucas modificações.\n\n"
+.."|cfff2dc7fRecomendada|r: uma mistura entre as outras opções, com o melhor de ambas.\n\n"
+.."|cfff2dc7fModerna|r: um modelo de interface moderno, com mudanças consideráveis na interface.\n\n"
+.."Você poderá mudar as opções a qualquer hora no painel de configurações.\nDigite '|cfff2dc7f/abyssui|r' no chat para mais informações."
+L["A reload is necessary so this configuration can be save!\n"..
+"Click the |cffffcc00'confirm'|r button to Reload.\nYou still can make changes (do before you confirm)."] = "Um"
+.." reload é necessário para que essa configuração seja salva!\n"..
+"Clique no botão |cffffcc00'confirmar'|r para recarregar.\n Você ainda pode fazer mudanças (faça antes de confirmar)."
+L["It will only hide Blizzard frames, addons have their"..
+" own frames,\n a good addon probably has an option to hide while out of combat.\n"..
+" I could have added the entire interface to be hidden,\n but that would prevent"..
+" interaction with some frames (auction, loot, quest, etc)."] = "Irá apenas esconder os frames da Blizzard, addons possuem"..
+" os próprios frames,\n um bom addon provávelmente tem uma opção de esconder enquanto em combate.\n"..
+" Poderia ter adicionado a interface inteira para esconder,\n mas isso ia previnir"..
+" a interação com algumas frames (casa de leilões, loot, missões, etc)."
+L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "Espere!\n Isso irá limpar todas magias/habilidades da barra de ações."
 
 
-
--- Daily Info
-L["|cfff2dc7f~ AbyssUI Daily Info ~|r"] = "|cfff2dc7f~ AbyssUI Info Diária ~|r"
-L["Not available right now!"]						= "Não disponível agora!"
+--------------------------------------------------------------
+-- Extras
+L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100Reparo pago pela Guilda: %.1fg|r"
+L["|cffead000Repair cost: %.1fg|r"] = "|cffead000Valor do reparo: %.1fg|r"
+L["Not enough gold for repair."] = "Sem ouro para reparar."
+L["This instance is completed! Want to leave?"..
+"You can also teleport out/in or just close this frame"] = "A instância foi completada! Deseja sair?"..
+" Você pode também teleportar ou apenas fechar esse frame"
+L["Teleport"] = "Teleportar"
+L["|cfff2dc7fAbyssUI Command List|r"] = "|cfff2dc7fAbyssUI Lista de Comandos|r"
+L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = "|cfff2dc7fDigite /abyssui |r|cffffcc00'nome do comando'|r"
+L["/abyssui |cffffcc00config|r ~configuration panel"] = "/abyssui |cffffcc00config|r ~painel de configuração"
+L["/abyssui |cffffcc00setup|r ~show the setup frame"] = "/abyssui |cffffcc00setup|r ~mostrar tela de setup"
+L["/abyssui |cffffcc00reset|r ~reset UI frames to default positions"] = "/abyssui |cffffcc00reset|r ~resetar posição dos frames"
+L["/abyssui |cffffcc00daily|r ~daily info"] = "/abyssui |cffffcc00daily|r ~informação diária"
+L["/abyssui |cffffcc00reload|r ~reload the interface"] = "/abyssui |cffffcc00reload|r ~recarregar interface"
+L["/abyssui |cffffcc00more|r ~for more commands"] = "/abyssui |cffffcc00more|r ~para mais comandos"
+L["|cfff2dc7fToken Price: |r"] = "|cfff2dc7fPreço do Token: |r"
+L["|cfff2dc7fToken Price:|r Not available right now!"] = "|cfff2dc7fPreço do Token:|r Não disponível!"
+L["|cfff2dc7fDate:|r "] = "|cfff2dc7fData:|r "
+L["|cfff2dc7fHonor Level: |r|cffffcc00"] = "|cfff2dc7fNível de Honra: |r|cffffcc00"
+L["|cfff2dc7fWoW Version: |r|cffffcc00"] = "|cfff2dc7fVersão do WoW: |r|cffffcc00"
+L["|cfff2dc7fAbyssUI Version: |r|cffffcc00"] = "|cfff2dc7fVersão da AbyssUI: |r|cffffcc00"
+L["/abyssui |cffffcc00clc|r ~clear CombatLog entries"] = "/abyssui |cffffcc00clc|r ~limpar o log de combate"
+L["/abyssui |cffffcc00gm|r ~custumer support"] = "/abyssui |cffffcc00gm|r ~suporte ao consumidor"
+L["/abyssui |cffffcc00rc|r ~ready check"] = "/abyssui |cffffcc00rc|r ~confirmar 'pronto'"
+L["/abyssui |cffffcc00cr|r ~check role poll"] = "/abyssui |cffffcc00cr|r ~confirmar função"
+L["/abyssui |cffffcc00unlock|r ~unlock some frames"] = "/abyssui |cffffcc00unlock|r ~destravar alguns frames"
+L["/abyssui |cffffcc00lock|r ~lock unlocked frames"] = "/abyssui |cffffcc00lock|r ~travar frames destravados"
+L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00/reload|r'"] = "|cfff2dc7fConsidere recarregar a interface para garantir que os frames estão travados|r '|cffffcc00/reload|r'"
+L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4Agradecimentos|r"
+L["|cff0d75d4Translators|r"] 		= "|cff0d75d4Tradutores|r"
+L["Default"] = "Padrão"
+L["Google Translate"] = "Google Tradutor"
+L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r por me ajudar com dúvidas de programação."
+L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
+" UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r pela UnitFrame melhorada, onde eu pude me inspirar"..
+" e criar algo muito bom para a AbyssUI."
+L["|cfff2dc7fEnglish (United States): |r"] = "|cfff2dc7fInglês (Estados Unidos): |r"
+L["|cfff2dc7fSpanish (Mexico): |r"] = "|cfff2dc7fEspanhol (México): |r"
+L["|cfff2dc7fPortuguese: |r"] = "|cfff2dc7fPortuguês: |r"
+L["|cfff2dc7fGerman: |r"] = "|cfff2dc7fAlemão: |r"
+L["|cfff2dc7fEnglish (Great Britain): |r"] = "|cfff2dc7fInglês (Grã-Bretanha): |r"
+L["|cfff2dc7fSpanish (Spain): |r"] = "|cfff2dc7fEspanhol (Espanha): |r"
+L["|cfff2dc7fFrench: |r"] = "|cfff2dc7fFrancês: |r"
+L["|cfff2dc7fItalian: |r"] = "|cfff2dc7fItaliano: |r"
+L["|cfff2dc7fRussian: |r"] = "|cfff2dc7fRusso: |r"
+L["|cfff2dc7fKorean: |r"] = "|cfff2dc7fCoreano: |r"
+L["|cfff2dc7fChinese (Traditional): |r"] = "|cfff2dc7fChinês (Tradicional): |r"
+L["|cfff2dc7fChinese (Simplified): |r"] = "|cfff2dc7fChinês (Simplificado): |r"

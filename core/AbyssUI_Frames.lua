@@ -6,6 +6,8 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
+--
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -95,10 +97,10 @@ end
 --------------------------------------------------------------
 --------------------------------------------------------------
 local _G = _G
-local moveString     						= _G["BINDING_NAME_MOVEFORWARD"]
+--local moveString     						= _G["BINDING_NAME_MOVEFORWARD"]
+--local confirmString   					= _G["OKAY"]
+--local recommendedString 				= _G["RECOMMENDED"]
 local cancelString    					= _G["CANCEL"]
-local confirmString   					= _G["OKAY"]
-local recommendedString 				= _G["RECOMMENDED"]
 local dialogFrameTexture 				= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
 local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
 ----------------------------------------------------
@@ -145,7 +147,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-	FrameButtonConfirm.text:SetText(confirmString)
+	FrameButtonConfirm.text:SetText(L["Confirm"])
 		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
@@ -190,7 +192,7 @@ AbyssUI_AFKCameraFrame.text:SetJustifyH("BOTTOM")
 AbyssUI_AFKCameraFrame.text:SetJustifyV("BOTTOM")
 AbyssUI_AFKCameraFrame.text:SetWidth(GetScreenWidth()/4)
 AbyssUI_AFKCameraFrame.text:SetHeight(GetScreenHeight()/2)
-AbyssUI_AFKCameraFrame.text:SetText(moveString)
+AbyssUI_AFKCameraFrame.text:SetText(L["Move"])
 -- Texture
 local Texture = AbyssUI_AFKCameraFrame:CreateTexture(nil, "BACKGROUND")
 Texture:SetTexture(dialogFrameTextureBorder)
@@ -271,7 +273,7 @@ PlayerInfo_Level1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Level1:SetScale(3)
 PlayerInfo_Level1.text = PlayerInfo_Level1.text or PlayerInfo_Level1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Level1.text:SetPoint("BOTTOMLEFT", 5, 70)
-PlayerInfo_Level1.text:SetText("Level: "..level)
+PlayerInfo_Level1.text:SetText(L["Level: "]..level)
 -- Honor Level
 local PlayerInfo_Honor1 = CreateFrame("Frame", "$parentPlayerInfo_Honor1", AbyssUI_AFKCameraFrame)
 local HonorLevel = UnitHonorLevel("player")
@@ -279,7 +281,7 @@ PlayerInfo_Honor1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Honor1:SetScale(3)
 PlayerInfo_Honor1.text = PlayerInfo_Honor1.text or PlayerInfo_Honor1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Honor1.text:SetPoint("BOTTOMLEFT", 5, 60)
-PlayerInfo_Honor1.text:SetText("Honor: "..HonorLevel)
+PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
 -- Item Level
 local PlayerInfo_ILevel1 = CreateFrame("Frame", "$parentPlayerInfo_ILevel1", AbyssUI_AFKCameraFrame)
 local overall, equipped = GetAverageItemLevel()
@@ -287,7 +289,7 @@ PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_ILevel1:SetScale(3)
 PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
-PlayerInfo_ILevel1.text:SetText("ILevel: "..floor(overall + 0.5))
+PlayerInfo_ILevel1.text:SetText(L["ItemLevel: "]..floor(overall + 0.5))
 -- Zone
 local PlayerInfo_CurrentZone1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentZone1", AbyssUI_AFKCameraFrame)
 local zoneName = GetZoneText()
@@ -568,12 +570,12 @@ local function AbyssUI_UpdateAFKCameraData()
 	-- Set
 	PlayerInfo_Name1.text:SetText(playerName)
 	PlayerInfo_Title1.text:SetText(titleName)
-	PlayerInfo_Level1.text:SetText("Level: "..level)
+	PlayerInfo_Level1.text:SetText(L["Level: "]..level)
 	PlayerInfo_Race1.text:SetText(race)
 	PlayerInfo_Class1.text:SetText(playerClass)
 	ExtraInfo_Clock1.text:SetText(dataTime)
-	PlayerInfo_Honor1.text:SetText("Honor: "..HonorLevel)
-	PlayerInfo_ILevel1.text:SetText("ILvl: "..floor(overall + 0.5))
+	PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
+	PlayerInfo_ILevel1.text:SetText(L["ItemLevel: "]..floor(overall + 0.5))
 	PlayerInfo_GoldAmount1.text:SetText(currency..": |cfff2dc7f"..money.."|r")
 	PlayerInfo_CurrentSpec1.text:SetText(currentSpecName)
 	PlayerInfo_CurrentZone1.text:SetText(zoneName)
@@ -646,7 +648,7 @@ end)
 --------------------------------------------
 -- YouDied Frame
 local _G = _G
-local deathrecap = _G["DEAD"]
+--local deathrecap = _G["DEAD"]
 local AbyssUI_YouDiedFrame = CreateFrame("Frame", "$parentAbyssUI_YouDiedFrame", UIParent)
 AbyssUI_YouDiedFrame:RegisterEvent("PLAYER_DEAD")
 AbyssUI_YouDiedFrame:SetFrameStrata("DIALOG")
@@ -659,14 +661,14 @@ AbyssUI_YouDiedFrame.text:SetScale(8*2)
 AbyssUI_YouDiedFrame.text:SetAllPoints(true)
 AbyssUI_YouDiedFrame.text:SetJustifyH("CENTER")
 AbyssUI_YouDiedFrame.text:SetJustifyV("CENTER")
-AbyssUI_YouDiedFrame.text:SetText(strupper("|cff8b0000"..deathrecap.."|r"))
+AbyssUI_YouDiedFrame.text:SetText(strupper(L["|cff8b0000YOU DIED|r"]))
 AbyssUI_YouDiedFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_YouDiedFrame.text:SetHeight(GetScreenHeight()/4)
 AbyssUI_YouDiedFrame:Hide()
 AbyssUI_YouDiedFrame:SetScript("OnEvent", function(self, event, ...)
 	if (AbyssUIAddonSettings.HideYouDiedLevelUpFrame ~= true) then
 		if (event == "PLAYER_DEAD") then
-			AbyssUI_YouDiedFrame.text:SetText(strupper("|cff8b0000"..deathrecap.."|r"))
+			AbyssUI_YouDiedFrame.text:SetText(strupper(L["|cff8b0000YOU DIED|r"]))
 			UIFrameFadeIn(AbyssUI_YouDiedFrame, 2, 0, 1)
 			C_Timer.After(4, function()
 				UIFrameFadeIn(AbyssUI_YouDiedFrame, 4, 1, 0)
@@ -699,7 +701,7 @@ AbyssUI_YouDiedFrame.texture = Texture
 -- LevelUp Fixes
 local _G = _G
 local levelupreachedString 	= _G["LEVEL_UP_YOU_REACHED"]
-local levelString 	 		= _G["LEVEL"]
+local levelString 	 				= _G["LEVEL"]
 -- LevelUp Frame
 local AbyssUI_LevelUpFrame = CreateFrame("Frame", "$parentAbyssUI_LevelUpFrame", UIParent)
 AbyssUI_LevelUpFrame:SetFrameStrata("DIALOG")
@@ -781,7 +783,7 @@ AbyssUIFirstFrame.text:SetScale(5)
 AbyssUIFirstFrame.text:SetAllPoints(true)
 AbyssUIFirstFrame.text:SetJustifyH("CENTER")
 AbyssUIFirstFrame.text:SetJustifyV("CENTER")
-AbyssUIFirstFrame.text:SetText("Thank you for choosing Abyss|cff0d75d4UI|r!")
+AbyssUIFirstFrame.text:SetText(L["Thank you for choosing Abyss|cff0d75d4UI|r!"])
 ----------------------------------------------------
 local Subtittle = CreateFrame("Frame", "$parentSubtittle", AbyssUIFirstFrame)
 Subtittle:SetWidth(GetScreenWidth())
@@ -794,7 +796,7 @@ Subtittle.text:SetScale(3)
 Subtittle.text:SetAllPoints(true)
 Subtittle.text:SetJustifyH("CENTER")
 Subtittle.text:SetJustifyV("CENTER")
-Subtittle.text:SetText("The improved World of Warcraft user interface")
+Subtittle.text:SetText(L["The improved World of Warcraft user interface."])
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture(dialogFrameTextureBorder)
@@ -849,15 +851,13 @@ AbyssUISecondFrame:EnableMouse(true)
 AbyssUISecondFrame:SetFrameStrata("HIGH")
 AbyssUISecondFrame.text = AbyssUISecondFrame.text or AbyssUISecondFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUISecondFrame.text:SetScale(2)
-AbyssUISecondFrame.text:SetAllPoints(true)
-AbyssUISecondFrame.text:SetJustifyH("CENTER")
-AbyssUISecondFrame.text:SetJustifyV("CENTER")
-AbyssUISecondFrame.text:SetText("Let's save the variables and prepare the interface for the first use.\n"
+AbyssUISecondFrame.text:SetAllPoints()
+AbyssUISecondFrame.text:SetText(L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, choose the option that best suits your taste.\n\n"
 .."|cfff2dc7fClassic|r: interface model close to the original, with few modifications.\n\n"
-.."|cfff2dc7f"..recommendedString.."|r: a mix between the other options, with the best of the two.\n\n"
+.."|cfff2dc7fRecommended|r: a mix between the other options, with the best of the two.\n\n"
 .."|cfff2dc7fModern|r: a modern interface model, with striking changes to the interface.\n\n"
-.."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info.")
+.."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info."])
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUISecondFrame:CreateTexture(nil, "BACKGROUND")
 AbyssUIBorder:SetTexture(dialogFrameTextureBorder)
@@ -886,7 +886,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonRecommended.text = FrameButtonRecommended.text or FrameButtonRecommended:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	FrameButtonRecommended.text:SetFont(globalFont, 14)
 	FrameButtonRecommended.text:SetPoint("CENTER", FrameButtonRecommended, "CENTER", 0, -2)
-	FrameButtonRecommended.text:SetText(recommendedString)
+	FrameButtonRecommended.text:SetText(L["Recommended"])
 	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 		FrameButtonRecommended.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonRecommended.text:SetShadowColor(0, 0, 0)
@@ -975,7 +975,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonModern.text = FrameButtonModern.text or FrameButtonModern:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	FrameButtonModern.text:SetFont(globalFont, 14)
 	FrameButtonModern.text:SetPoint("CENTER", FrameButtonModern, "CENTER", 0, -2)
-	FrameButtonModern.text:SetText("Modern")
+	FrameButtonModern.text:SetText(L["Modern"])
 	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 		FrameButtonModern.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonModern.text:SetShadowColor(0, 0, 0)
@@ -1032,7 +1032,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonClassic.text = FrameButtonClassic.text or FrameButtonClassic:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	FrameButtonClassic.text:SetFont(globalFont, 14)
 	FrameButtonClassic.text:SetPoint("CENTER", FrameButtonClassic, "CENTER", 0, -2)
-	FrameButtonClassic.text:SetText("Classic")
+	FrameButtonClassic.text:SetText(L["Classic"])
 	if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 	  	FrameButtonClassic.text:SetTextColor(49/255, 49/255, 49/255)
 		FrameButtonClassic.text:SetShadowColor(0, 0, 0)
@@ -1122,8 +1122,8 @@ AbyssUI_ReloadFrame.text:SetScale(1.5)
 AbyssUI_ReloadFrame.text:SetAllPoints(true)
 AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
 AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
-AbyssUI_ReloadFrame.text:SetText("A reload is necessary so this configuration can be save!\n"..
-"Click the |cffffcc00'"..confirmString.."'|r button to Reload.\nYou still can make changes (do before you confirm).")
+AbyssUI_ReloadFrame.text:SetText(L["A reload is necessary so this configuration can be save!\n"..
+"Click the |cffffcc00'confirm'|r button to Reload.\nYou still can make changes (do before you confirm)."])
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrame:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture(dialogFrameTextureBorder)
@@ -1151,7 +1151,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-	FrameButtonConfirm.text:SetText(confirmString)
+	FrameButtonConfirm.text:SetText(L["Confirm"])
 		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
@@ -1183,13 +1183,11 @@ end)
 AbyssUI_ReloadFrameFadeUI:SetFrameStrata("Dialog")
 AbyssUI_ReloadFrameFadeUI.text = AbyssUI_ReloadFrameFadeUI.text or AbyssUI_ReloadFrameFadeUI:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
 AbyssUI_ReloadFrameFadeUI.text:SetScale(1.5)
-AbyssUI_ReloadFrameFadeUI.text:SetAllPoints(true)
-AbyssUI_ReloadFrameFadeUI.text:SetJustifyH("CENTER")
-AbyssUI_ReloadFrameFadeUI.text:SetJustifyV("CENTER")
-AbyssUI_ReloadFrameFadeUI.text:SetText("It will only hide Blizzard frames, addons have their"..
-	" own frames,\n a good addon probably has an option to hide while out of combat.\n"..
-	" I could have added the entire interface to be hidden,\n but that would prevent"..
-	" interaction with some frames (eg auction, loot, quest, frames).")
+AbyssUI_ReloadFrameFadeUI.text:SetAllPoints()
+AbyssUI_ReloadFrameFadeUI.text:SetText(L["It will only hide Blizzard frames, addons have their"..
+" own frames,\n a good addon probably has an option to hide while out of combat.\n"..
+" I could have added the entire interface to be hidden,\n but that would prevent"..
+" interaction with some frames (auction, loot, quest, etc)."])
 ----------------------------------------------------
 local Border = AbyssUI_ReloadFrameFadeUI:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture(dialogFrameTextureBorder)
@@ -1217,7 +1215,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-	FrameButtonConfirm.text:SetText(confirmString)
+	FrameButtonConfirm.text:SetText(L["Confirm"])
 		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else
@@ -1252,7 +1250,7 @@ AbyssUI_ActionBarCleaner.text:SetScale(1.5)
 AbyssUI_ActionBarCleaner.text:SetAllPoints(true)
 AbyssUI_ActionBarCleaner.text:SetJustifyH("CENTER")
 AbyssUI_ActionBarCleaner.text:SetJustifyV("CENTER")
-AbyssUI_ActionBarCleaner.text:SetText("Wait!\nThis will clean all your skills/spells from Actions Bars.")
+AbyssUI_ActionBarCleaner.text:SetText(L["Wait!\nThis will clean all your skills/spells from Actions Bars."])
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")
 Border:SetTexture(dialogFrameTextureBorder)
@@ -1280,7 +1278,7 @@ f:SetScript("OnEvent", function()
 	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButtonConfirm.text:SetFont(globalFont, 14)
 	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-	FrameButtonConfirm.text:SetText(confirmString)
+	FrameButtonConfirm.text:SetText(L["Confirm"])
 		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
 		else

@@ -6,6 +6,8 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
+--
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -68,7 +70,7 @@ end
 local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
 local _G = _G 
 local leaveString 		= _G["LEAVE_VEHICLE"]
-local teleportString	= _G["QUESTS_LABEL"]
+--local teleportString	= _G["QUESTS_LABEL"]
 local closeString 		= _G["CLOSE"]
 local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
 local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
@@ -92,11 +94,9 @@ AbyssUI_InstanceLeave_DynamicFrame:SetFrameLevel(300)
 AbyssUI_InstanceLeave_DynamicFrame:SetFrameStrata("HIGH")
 AbyssUI_InstanceLeave_DynamicFrame:SetPoint("CENTER", 0, -140)
 AbyssUI_InstanceLeave_DynamicFrame.text = AbyssUI_InstanceLeave_DynamicFrame.text or AbyssUI_InstanceLeave_DynamicFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-AbyssUI_InstanceLeave_DynamicFrame.text:SetAllPoints(true)
-AbyssUI_InstanceLeave_DynamicFrame.text:SetJustifyH("CENTER")
-AbyssUI_InstanceLeave_DynamicFrame.text:SetJustifyV("CENTER")
-AbyssUI_InstanceLeave_DynamicFrame.text:SetText("This instance is completed! Want to leave?\n"..
-	"You can also teleport out/in or just close this frame")
+AbyssUI_InstanceLeave_DynamicFrame.text:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
+AbyssUI_InstanceLeave_DynamicFrame.text:SetText(L["This instance is completed! Want to leave?"..
+" You can also teleport out/in or just close this frame"])
 AbyssUI_InstanceLeave_DynamicFrame.text:SetFont(globalFont, 16)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetTextColor(248/255, 248/255, 248/255)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetShadowColor(0, 0, 0)
@@ -178,7 +178,7 @@ f:SetScript("OnEvent", function()
 	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
-	FrameButton.text:SetText(teleportString)
+	FrameButton.text:SetText(L["Teleport"])
 	    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
 	      AbyssUI_ApplyFonts(FrameButton.text)
 	    else

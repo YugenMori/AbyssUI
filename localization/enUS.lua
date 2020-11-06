@@ -1,15 +1,25 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "enUS", true)
-
+if not L then return end
+-- Translator: Default Language
 -- Example
 -- L["Some English Text"] = "Your Translation"
 --------------------------------------------------------------
 -- Config
-L["Info Panel"] 				= true
-L["Hide Elements"] 			= true
-L["Miscellaneous"] 			= true
-L["Themes"] 						= true
-L["Tweaks & Extra"] 		= true
-L["Scale & Frame Size"] = true
+L["Info Panel"] 						= true
+L["Hide Elements"] 					= true
+L["Miscellaneous"] 					= true
+L["Themes"] 								= true
+L["Tweaks & Extra"] 				= true
+L["Scale & Frame Size"] 		= true
+L["Thanks & Translations"] 	= true
+-- Daily Info
+L["Thank you for choosing Abyss|cff0d75d4UI|r!"] = true
+L["The improved World of Warcraft user interface."] = true
+L["|cfff2dc7fAbyssUI Daily Info|r"] = true
+L["Not available right now!"]	= true
+L["|cfff2dc7fTime since last login: |r"] = true
+L[" you were gone for |cffffcc00"] = true
+L["Type |cffffcc00/abyssui|r for a list of commands"] = true
 -- 
 L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " consider sharing with your friends or even making a donation."..
@@ -18,11 +28,6 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 "Options that have a different text color are based on your choice in the setup."..
 " Those options are set by default if you choose recommended settings.\n"..
 "Check the options by clicking in the (+) button on the left."] = true
---
-L["|cff0d75d4Special Thanks|r"] = true
-L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = true
-L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
-" UnitFrame for AbyssUI."] = true
 -- Config Options
 L["- General"]					= true
 L["- Frames"]						= true
@@ -237,9 +242,75 @@ L["|cff9482C9Warlock|r"] = true
 L["|cffC79C6EWarrior|r"] = true
 L["Apply the color you choose from the ColorPicker"] = true
 L["You need to uncheck any preset color, to apply a color"] = true
-
-
-
--- Daily Info
-L["|cfff2dc7f~ AbyssUI Daily Info ~|r"] = true
-L["Not available right now!"]						= true
+--------------------------------------------------------------
+-- Frames
+L["Move"]					= true
+L["Level: "] 			= true
+L["Honor: "] 			= true
+L["ItemLevel: "] 	= true
+L["Confirm"] 			= true
+L["Recommended"]	= true
+L["Modern"] 			= true
+L["Classic"] 			= true
+L["|cff8b0000YOU DIED|r"] = true
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, choose the option that best suits your taste.\n\n"
+.."|cfff2dc7fClassic|r: interface model close to the original, with few modifications.\n\n"
+.."|cfff2dc7fRecommended|r: a mix between the other options, with the best of the two.\n\n"
+.."|cfff2dc7fModern|r: a modern interface model, with striking changes to the interface.\n\n"
+.."You always can change options on the configuration panel.\nType '|cfff2dc7f/abyssui|r' on chat for more info."] = true
+L["A reload is necessary so this configuration can be save!\n"..
+"Click the |cffffcc00'confirm'|r button to Reload.\nYou still can make changes (do before you confirm)."] = true
+L["It will only hide Blizzard frames, addons have their"..
+" own frames,\n a good addon probably has an option to hide while out of combat.\n"..
+" I could have added the entire interface to be hidden,\n but that would prevent"..
+" interaction with some frames (auction, loot, quest, etc)."] = true
+L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = true
+--------------------------------------------------------------
+-- Extras
+L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = true
+L["|cffead000Repair cost: %.1fg|r"] = true
+L["Not enough gold for repair."] = true
+L["This instance is completed! Want to leave?"..
+" You can also teleport out/in or just close this frame"] = true
+L["Teleport"] = true
+L["|cfff2dc7fAbyssUI Command List|r"] = true
+L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = true
+L["/abyssui |cffffcc00config|r ~configuration panel"] = true
+L["/abyssui |cffffcc00setup|r ~show the setup frame"] = true
+L["/abyssui |cffffcc00reset|r ~reset UI frames to default positions"] = true
+L["/abyssui |cffffcc00daily|r ~daily info"] = true
+L["/abyssui |cffffcc00reload|r ~reload the interface"] = true
+L["/abyssui |cffffcc00more|r ~for more commands"] = true
+L["|cfff2dc7fToken Price: |r"] = true
+L["|cfff2dc7fToken Price:|r Not available right now!"] = true
+L["|cfff2dc7fDate:|r "] = true
+L["|cfff2dc7fHonor Level: |r|cffffcc00"] = true
+L["|cfff2dc7fWoW Version: |r|cffffcc00"] = true
+L["|cfff2dc7fAbyssUI Version: |r|cffffcc00"] = true
+L["/abyssui |cffffcc00clc|r ~clear CombatLog entries"] = true
+L["/abyssui |cffffcc00gm|r ~custumer support"] = true
+L["/abyssui |cffffcc00rc|r ~ready check"] = true
+L["/abyssui |cffffcc00cr|r ~check role poll"] = true
+L["/abyssui |cffffcc00unlock|r ~unlock some frames"] = true
+L["/abyssui |cffffcc00lock|r ~lock unlocked frames"] = true
+L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00/reload|r'"] = true
+L["|cff0d75d4Special Thanks|r"] = true
+L["|cff0d75d4Translators|r"] 		= true
+L["Default"] = true
+L["Google Translate"] = true
+L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = true
+L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
+" UnitFrame for AbyssUI."] = true
+L["|cfff2dc7fEnglish (United States): |r"] = true
+L["|cfff2dc7fSpanish (Mexico): |r"] = true
+L["|cfff2dc7fPortuguese: |r"] = true
+L["|cfff2dc7fGerman: |r"] = true
+L["|cfff2dc7fEnglish (Great Britain): |r"] = true
+L["|cfff2dc7fSpanish (Spain): |r"] = true
+L["|cfff2dc7fFrench: |r"] = true
+L["|cfff2dc7fItalian: |r"] = true
+L["|cfff2dc7fRussian: |r"] = true
+L["|cfff2dc7fKorean: |r"] = true
+L["|cfff2dc7fChinese (Traditional): |r"] = true
+L["|cfff2dc7fChinese (Simplified): |r"] = true

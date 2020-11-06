@@ -694,8 +694,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			HelpFrameHeaderBottomLeftCorner,
 			HelpFrameHeaderLeftBorder,
 			HelpFrameHeaderTopLeftCorner,
-			HelpFrameLeftInset.NineSlice.LeftEdge,
-			HelpFrameLeftInset.NineSlice.BottomEdge,
 			HelpBrowser.BrowserInset.NineSlice.BottomEdge,
 			HelpFrameMainInset.NineSlice.BottomEdge,
 			HelpFrame.Header.LeftBG,

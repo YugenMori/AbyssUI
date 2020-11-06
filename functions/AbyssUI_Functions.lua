@@ -6,6 +6,8 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
+--
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -484,15 +486,15 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
 	            end
 	            if guildMoney > cost and CanGuildBankRepair() then
 	              RepairAllItems(1)
-	              print(format("|cfff07100Repair cost paid by Guild: %.1fg|r", cost * 0.0001))
+	              print(format(L["|cfff07100Repair cost paid by Guild: %.1fg|r"], cost * 0.0001))
 	              return
 	            end
 	            end
 	            if money > cost then
 	            	RepairAllItems()
-	            	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
+	            	print(format(L["|cffead000Repair cost: %.1fg|r"], cost * 0.0001))
 	            else
-	            	print("Not enough gold for repair.")
+	            	print(L["Not enough gold for repair."])
 	            end
 	    	end
 		end
@@ -780,8 +782,8 @@ local fichaString 			= _G["TOKEN_FILTER_LABEL"]
 local honorString 			= _G["HONOR"]
 local levelString 			= _G["LEVEL"]
 local versionString 		= _G["GAME_VERSION_LABEL"]
-local latestString     		= _G["KBASE_RECENTLY_UPDATED"] 
-local timeStringLabel 		= _G["TIME_LABEL"]
+local latestString     	= _G["KBASE_RECENTLY_UPDATED"] 
+local timeStringLabel 	= _G["TIME_LABEL"]
 -- DailyInfo Function
 ----------------------------------------------------
 local AbyssUIDailyInfo = CreateFrame("Frame")
@@ -789,17 +791,17 @@ AbyssUIDailyInfo:RegisterEvent("PLAYER_LOGIN")
 AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 C_WowTokenPublic.UpdateMarketPrice()
 	C_Timer.After(3, function()
-		print("Thank you for choosing |cff0d75d4AbyssUI|r")
-		print("The improved World of Warcraft user interface.")
+		print(L["Thank you for choosing Abyss|cff0d75d4UI|r!"])
+		print(L["The improved World of Warcraft user interface."])
 	end)
 	C_Timer.After(4, function()
 		local HonorLevel = UnitHonorLevel("player")
 		local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
-		print("|cfff2dc7f~ AbyssUI Daily Info ~|r")
+		print(L["|cfff2dc7fAbyssUI Daily Info|r"])
 		if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
 			print("|cfff2dc7f"..fichaString..": |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
 		else
-			print("|cfff2dc7f"..fichaString..": |r".."Not available right now!")
+			print("|cfff2dc7f"..fichaString..": |r"..L["Not available right now!"])
 		end
 		if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
 			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
@@ -811,8 +813,8 @@ C_WowTokenPublic.UpdateMarketPrice()
 		print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
 		if (AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
-			print("|cfff2dc7fTime since last login: |r" .. name .. " you were gone for |cffffcc00" .. SecondsToTime(elapsed) .. "|r")
-			print("Type |cffffcc00/abyssui|r for a list of commands")
+			print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
+			print(L["Type |cffffcc00/abyssui|r for a list of commands"])
 		end
 	end)
 end)
