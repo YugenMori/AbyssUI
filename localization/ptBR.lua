@@ -5,13 +5,13 @@ if not L then return end
 -- L ["Texto em inglês"] = "Sua tradução"
 --------------------------------------------------------------
 -- Config
-L["Info Panel"] 						= "Informações"
-L["Hide Elements"] 					= "Esconder Elementos"
-L["Miscellaneous"] 					= "Diversos"
-L["Themes"] 								= "Temas"
-L["Tweaks & Extra"] 				= "Ajustes e extras"
-L["Scale & Frame Size"] 		= "Escala e Tamanhos" 
-L["Thanks & Translations"] 	= "Agradecimentos e Traduções"
+L["Info Panel"] = "Informações"
+L["Hide Elements"] = "Esconder Elementos"
+L["Miscellaneous"] = "Diversos"
+L["Themes"] = "Temas"
+L["Tweaks & Extra"] = "Ajustes e extras"
+L["Scale & Frame Size"] = "Escala e Tamanhos" 
+L["Thanks & Translations"] = "Agradecimentos e Traduções"
 -- Daily Info
 L["Thank you for choosing Abyss|cff0d75d4UI|r!"] = "Obrigado por escolher Abyss|cff0d75d4UI|r!"
 L["The improved World of Warcraft user interface."] = "A interface de World of Warcraft melhorada."
@@ -20,6 +20,10 @@ L["Not available right now!"] = "Não disponível agora!"
 L["|cfff2dc7fTime since last login: |r"] = "|cfff2dc7fTempo desde o último login: |r"
 L[" you were gone for |cffffcc00"] = " você saiu por |cffffcc00"
 L["Type |cffffcc00/abyssui|r for a list of commands"] = "Digite |cffffcc00/abyssui|r para lista de comandos"
+L["Current Time"] = "Horário Atual"
+L["Honor Level"] = "Nível de Honra"
+L["|cfff2dc7fWoW Version"] = "|cfff2dc7fVersão do WoW"
+L["|cfff2dc7fAbyssUI Version"] = "|cfff2dc7fVersão da AbyssUI"
 --
 L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " consider sharing with your friends or even making a donation."..

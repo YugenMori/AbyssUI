@@ -5,13 +5,13 @@ if not L then return end
 -- L ["Text in English"] = "Ihre Übersetzung"
 --------------------------------------------------------------
 -- Config
-L["Info Panel"] 						= "Information"
-L["Hide Elements"] 					= "Elemente ausblenden"
-L["Miscellaneous"] 					= "Verschiedenes"
-L["Themes"] 								= "Themen"
-L["Tweaks & Extra"] 				= "Anpassungen und Extras"
-L["Scale & Frame Size"] 		= "Scale and Sizes"
-L["Thanks & Translations"] 	= "Danke und Übersetzungen"
+L["Info Panel"] = "Information"
+L["Hide Elements"] = "Elemente ausblenden"
+L["Miscellaneous"] = "Verschiedenes"
+L["Themes"] = "Themen"
+L["Tweaks & Extra"] = "Anpassungen und Extras"
+L["Scale & Frame Size"] = "Scale and Sizes"
+L["Thanks & Translations"] = "Danke und Übersetzungen"
 -- Daily Info
 L["Thank you for choosing Abyss|cff0d75d4UI|r!"] = "Vielen Dank, dass Sie sich für Abyss|cff0d75d4UI|r entschieden haben!"
 L["The improved World of Warcraft user interface."] = "Die verbesserte World of Warcraft-Schnittstelle."
@@ -20,6 +20,10 @@ L["Not available right now!"] = "Jetzt nicht verfügbar!"
 L["|cfff2dc7fTime since last login: |r"] = "|cfff2dc7fTime seit dem letzten Login: |r"
 L[" you were gone for |cffffcc00"] = " sie links von |cffffcc00"
 L["Type |cffffcc00/abyssui|r for a list of commands"] = "Geben Sie |cffffcc00/abyssui|r für Befehlsliste ein"
+L["Current Time"] = "Aktuelle Zeit"
+L["Honor Level"] = "Ehrenebene"
+L["|cfff2dc7fWoW Version"] = "|cfff2dc7fWoW Version"
+L["|cfff2dc7fAbyssUI Version"] = "|cfff2dc7fVersion von AbyssUI"
 --
 L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " consider sharing with your friends or even making a donation."..
@@ -35,19 +39,19 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " Diese Optionen sind standardmäßig festgelegt, wenn Sie die empfohlenen Optionen ausgewählt haben.\n"..
 "Überprüfen Sie die Optionen, indem Sie auf die Schaltfläche (+) auf der linken Seite klicken."
 -- Config Options
-L["- General"] 					= "- Allgemein"
-L["- Frames"]						= "- Rahmen"
-L["Player Portrait"]		= "Spielerportrait"
-L["- Portrait Art"]			= "- Kunst des Porträts"
+L["- General"] = "- Allgemein"
+L["- Frames"]	= "- Rahmen"
+L["Player Portrait"] = "Spielerportrait"
+L["- Portrait Art"]	= "- Kunst des Porträts"
 L["Frame Colorization"] = "Frame-Farbgebung"
-L["- Preset Colors"]		= "- Vordefinierte Kerne"
-L["- Choose a Color"]		= "- Wählen Sie eine Farbe"
-L["- UnitFrame Art"]		= "- UnitFrame Art"
-L["Setup"]							= "Konfiguration"
-L["Clear Bars"]					= "Klare Balken"
-L["DailyInfo"]					= "Tägliche Infos"
-L["Reload UI"]					= "UI neu laden"
-L["Donate"]							= "Spenden"
+L["- Preset Colors"]	= "- Vordefinierte Kerne"
+L["- Choose a Color"]	= "- Wählen Sie eine Farbe"
+L["- UnitFrame Art"] = "- UnitFrame Art"
+L["Setup"] = "Konfiguration"
+L["Clear Bars"]	= "Klare Balken"
+L["DailyInfo"] = "Tägliche Infos"
+L["Reload UI"] = "UI neu laden"
+L["Donate"]	= "Spenden"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -270,14 +274,14 @@ L["Apply the color you choose from the ColorPicker"] = "Anwenden der Farbe, die 
 L["You need to uncheck any preset color, to apply a color"] = "Sie müssen jede voreingestellte Farbe deaktivieren, um diese Farbe anzuwenden"
 --------------------------------------------------------------
 -- Frames
-L["Move"]					= "Bewegen"
-L["Level: "] 			= "Ebene: "
-L["Honor: "] 			= "Ehre: "
-L["ItemLevel: "]	= "LevelItem: "
-L["Confirm"] 			= "Bestätigen"
+L["Move"]	= "Bewegen"
+L["Level: "] = "Ebene: "
+L["Honor: "] = "Ehre: "
+L["ItemLevel: "] = "LevelItem: "
+L["Confirm"] = "Bestätigen"
 L["Recommended"]	= "Empfohlen"
-L["Modern"] 			= "Modernen"
-L["Classic"] 			= "Klassisch"
+L["Modern"] = "Modernen"
+L["Classic"] = "Klassisch"
 L["|cff8b0000YOU DIED|r"] = "|cff8b0000DU BIST TOT|r"
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, choose the option that best suits your taste.\n\n"
@@ -303,8 +307,6 @@ L["It will only hide Blizzard frames, addons have their"..
 " Hätte die gesamte Schnittstelle zum Ausblenden hinzugefügt,\n aber das würde verhindern, dass"..
 " Interaktion mit einigen Frames (Auktionshaus, Beute, Missionen, etc.)."
 L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "Warte!\n Dadurch werden alle Zaubersprüche/Fähigkeiten aus der Aktionsleiste entfernt."
-
-
 --------------------------------------------------------------
 -- Extras
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100Von der Gilde bezahlte Reparatur: %.1fg|r"

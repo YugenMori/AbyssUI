@@ -778,12 +778,12 @@ checkRune:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 local _G = _G
+--local honorString 			= _G["HONOR"]
+--local levelString 			= _G["LEVEL"]
+--local timeStringLabel 	= _G["TIME_LABEL"]
 local fichaString 			= _G["TOKEN_FILTER_LABEL"]
-local honorString 			= _G["HONOR"]
-local levelString 			= _G["LEVEL"]
 local versionString 		= _G["GAME_VERSION_LABEL"]
 local latestString     	= _G["KBASE_RECENTLY_UPDATED"] 
-local timeStringLabel 	= _G["TIME_LABEL"]
 -- DailyInfo Function
 ----------------------------------------------------
 local AbyssUIDailyInfo = CreateFrame("Frame")
@@ -804,13 +804,13 @@ C_WowTokenPublic.UpdateMarketPrice()
 			print("|cfff2dc7f"..fichaString..": |r"..L["Not available right now!"])
 		end
 		if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
-			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
 		else
-			print("|cfff2dc7f"..timeStringLabel.."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		print("|cfff2dc7f"..honorString.." "..levelString..": |r|cffffcc00"..HonorLevel.."|r")
-		print("|cfff2dc7fWoW "..versionString..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
-		print("|cfff2dc7fAbyssUI "..versionString..": |r|cffffcc00" .. AddonVersion .. "|r")
+		print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
+		print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+		print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
 		if (AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
