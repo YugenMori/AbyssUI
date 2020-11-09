@@ -1763,7 +1763,14 @@ f:SetScript("OnEvent", function(self, event, name)
 			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.TopLeftCorner,
 			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.BottomLeftCorner,
 			ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.BG.BottomRightCorner,
-			 }) do
+			CommunitiesFrame.RecruitmentDialog.BG.TopEdge,
+			CommunitiesFrame.RecruitmentDialog.BG.RightEdge,
+			CommunitiesFrame.RecruitmentDialog.BG.LeftEdge,
+			CommunitiesFrame.RecruitmentDialog.BG.BottomEdge,
+			CommunitiesFrame.RecruitmentDialog.BG.TopRightCorner,
+			CommunitiesFrame.RecruitmentDialog.BG.TopLeftCorner,
+			CommunitiesFrame.RecruitmentDialog.BG.BottomLeftCorner,
+		CommunitiesFrame.RecruitmentDialog.BG.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs ({

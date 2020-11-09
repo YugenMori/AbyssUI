@@ -270,6 +270,10 @@ f:SetScript("OnEvent", function(self, event)
   "ChatConfigCombatSettingsFiltersDeleteButtonText",
   "CombatLogDefaultButtonText",
   "SplashFrameText",
+  "TabardFrameAcceptButtonText",
+  "TabardFrameCancelButtonText",
+  "GuildRegistrarFramePurchaseButtonText",
+  "GuildRegistrarFrameCancelButtonText",
 
   }
   if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
@@ -305,6 +309,8 @@ f:SetScript("OnEvent", function(self, event)
       DressUpFrameCancelButton.Text,
       DressUpFrameOutfitDropDown.SaveButton.Text,
       LFDQueueFramePartyBackfillNoBackfillButton.Text,
+      PetitionFrameRequestButton.Text,
+      PetitionFrameRenameButton.Text,
 
     }) do 
       AbyssUI_ApplyFontsNoGlobal(v)
@@ -437,8 +443,8 @@ f:SetScript("OnEvent", function(self, event, name)
         ClubFinderGuildFinderFrame.RequestToJoinFrame.Cancel.Text,
         ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.Apply.Text,
         ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.Cancel.Text,
-
-      }) do 
+        CommunitiesFrame.RecruitmentDialog.Accept.Text,
+        CommunitiesFrame.RecruitmentDialog.Cancel.Text,  }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end
     end

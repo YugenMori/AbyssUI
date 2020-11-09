@@ -1,17 +1,17 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "enGB")
-if not L then return end 
+if not L then return end
 -- Translator: Default Language
 -- Example
 -- L["Some English Text"] = "Your Translation"
 --------------------------------------------------------------
 -- Config
-L["Info Panel"] 						= true
-L["Hide Elements"] 					= true
-L["Miscellaneous"] 					= true
-L["Themes"] 								= true
-L["Tweaks & Extra"] 				= true
-L["Scale & Frame Size"] 		= true
-L["Thanks & Translations"] 	= true
+L["Info Panel"] = true
+L["Hide Elements"] = true
+L["Miscellaneous"] = true
+L["Themes"] = true
+L["Tweaks & Extra"] = true
+L["Scale & Frame Size"] = true
+L["Thanks & Translations"] = true
 -- Daily Info
 L["Thank you for choosing Abyss|cff0d75d4UI|r!"] = true
 L["The improved World of Warcraft user interface."] = true
@@ -20,6 +20,10 @@ L["Not available right now!"]	= true
 L["|cfff2dc7fTime since last login: |r"] = true
 L[" you were gone for |cffffcc00"] = true
 L["Type |cffffcc00/abyssui|r for a list of commands"] = true
+L["Current Time"] = true
+L["Honor Level"] = true
+L["|cfff2dc7fWoW Version"] = true
+L["|cfff2dc7fAbyssUI Version"] = true
 -- 
 L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " consider sharing with your friends or even making a donation."..
@@ -29,19 +33,19 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " Those options are set by default if you choose recommended settings.\n"..
 "Check the options by clicking in the (+) button on the left."] = true
 -- Config Options
-L["- General"]					= true
-L["- Frames"]						= true
-L["Player Portrait"]		= true
-L["- Portrait Art"]			= true
+L["- General"] = true
+L["- Frames"]	= true
+L["Player Portrait"] = true
+L["- Portrait Art"]	= true
 L["Frame Colorization"] = true
-L["- Preset Colors"]		= true
-L["- Choose a Color"]		= true
-L["- UnitFrame Art"]		= true
-L["Setup"]							= true
-L["Clear Bars"]					= true
-L["DailyInfo"]					= true
-L["Reload UI"]					= true
-L["Donate"]							= true
+L["- Preset Colors"] = true
+L["- Choose a Color"]	= true
+L["- UnitFrame Art"] = true
+L["Setup"] = true
+L["Clear Bars"]	= true
+L["DailyInfo"]	= true
+L["Reload UI"]	= true
+L["Donate"]	= true
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -244,14 +248,14 @@ L["Apply the color you choose from the ColorPicker"] = true
 L["You need to uncheck any preset color, to apply a color"] = true
 --------------------------------------------------------------
 -- Frames
-L["Move"]					= true
-L["Level: "] 			= true
-L["Honor: "] 			= true
+L["Move"]	= true
+L["Level: "] = true
+L["Honor: "] = true
 L["ItemLevel: "] 	= true
-L["Confirm"] 			= true
+L["Confirm"] = true
 L["Recommended"]	= true
-L["Modern"] 			= true
-L["Classic"] 			= true
+L["Modern"] = true
+L["Classic"] = true
 L["|cff8b0000YOU DIED|r"] = true
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, choose the option that best suits your taste.\n\n"

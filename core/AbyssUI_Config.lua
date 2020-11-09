@@ -663,6 +663,7 @@ DBM:SetScript("OnMouseDown", function (self, button)
 end)
 -- Check InfoPanel AddOns
 -- Texture Trigger Function
+--[[
 local function AbyssUI_CheckTexturePack()
   local f  = CreateFrame('frame') -- Don't create a new frame for every texture, this is just an example
   local tx = f:CreateTexture()
@@ -693,6 +694,7 @@ local function AbyssUI_CheckTexturePack()
       end
   end)
 end
+--]]
 -- CheckFunction
 local Check = CreateFrame("Frame")
 Check:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -701,7 +703,6 @@ local glass   = IsAddOnLoaded("Glass")
 local kui     = IsAddOnLoaded("Kui_Nameplates")
 local bagnon  = IsAddOnLoaded("Bagnon")
 local dbm     = IsAddOnLoaded("DBM-Core")
-AbyssUI_CheckTexturePack()
     if (glass == true) then
       CheckIcon_Glass:Show()
     end

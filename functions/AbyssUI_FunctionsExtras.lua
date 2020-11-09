@@ -1415,6 +1415,7 @@ f:SetScript("OnEvent", function(self, event)
 		local t = c:CreateTexture(nil, "HIGH")
 		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Border")
 		t:SetAllPoints(c)
+		CastingBarFrame.Flash:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Flash")
 		for i, v in pairs({
 			MirrorTimer1,
 			MirrorTimer2,

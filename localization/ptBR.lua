@@ -39,19 +39,19 @@ L["Thank you for using Abyss|cff0d75d4UI|r. If you enjoy this addon,"..
 " Essas opções são setadas por padrão se você escolheu as opções recomendadas.\n"..
 "Confira as opções clicando no botão (+) na esquerda."
 -- Config Options
-L["- General"] 					= "- Geral"
-L["- Frames"]						= "- Frames"
-L["Player Portrait"]		= "Retrato do Jogador"
-L["- Portrait Art"]			= "- Arte do Retrato"
+L["- General"] = "- Geral"
+L["- Frames"]	= "- Frames"
+L["Player Portrait"]	= "Retrato do Jogador"
+L["- Portrait Art"]	= "- Arte do Retrato"
 L["Frame Colorization"] = "Colorização de Frame"
-L["- Preset Colors"]		= "- Cores Predefinidas"
-L["- Choose a Color"]		= "- Escolha uma Cor"
-L["- UnitFrame Art"]		= "- Arte da UnitFrame"
-L["Setup"]							= "Configuração"
-L["Clear Bars"]					= "Limpar Barras"
-L["DailyInfo"]					= "Info Diária"
-L["Reload UI"]					= "Recarregar IU"
-L["Donate"]							= "Doações"
+L["- Preset Colors"]	= "- Cores Predefinidas"
+L["- Choose a Color"]	= "- Escolha uma Cor"
+L["- UnitFrame Art"]	= "- Arte da UnitFrame"
+L["Setup"]	= "Configuração"
+L["Clear Bars"]	= "Limpar Barras"
+L["DailyInfo"]	= "Info Diária"
+L["Reload UI"]	= "Recarregar IU"
+L["Donate"]	= "Doações"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -274,14 +274,14 @@ L["Apply the color you choose from the ColorPicker"] = "Aplique a cor que você 
 L["You need to uncheck any preset color, to apply a color"] = "Você precisa desmarcar qualquer cor predefinida, para aplicar essa cor"
 --------------------------------------------------------------
 -- Frames
-L["Move"]					= "Mova-se"
-L["Level: "] 			= "Nível: "
-L["Honor: "] 			= "Honra: "
+L["Move"]	= "Mova-se"
+L["Level: "] = "Nível: "
+L["Honor: "] 	= "Honra: "
 L["ItemLevel: "]	= "NívelItem: "
-L["Confirm"] 			= "Confirmar"
+L["Confirm"] = "Confirmar"
 L["Recommended"]	= "Recomendada"
-L["Modern"] 			= "Moderna"
-L["Classic"] 			= "Clássica"
+L["Modern"] = "Moderna"
+L["Classic"] = "Clássica"
 L["|cff8b0000YOU DIED|r"] = "|cff8b0000VOCÊ MORREU|r"
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, choose the option that best suits your taste.\n\n"
@@ -315,7 +315,7 @@ L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100Reparo pago pela 
 L["|cffead000Repair cost: %.1fg|r"] = "|cffead000Valor do reparo: %.1fg|r"
 L["Not enough gold for repair."] = "Sem ouro para reparar."
 L["This instance is completed! Want to leave?"..
-"You can also teleport out/in or just close this frame"] = "A instância foi completada! Deseja sair?"..
+" You can also teleport out/in or just close this frame"] = "A instância foi completada! Deseja sair?"..
 " Você pode também teleportar ou apenas fechar esse frame"
 L["Teleport"] = "Teleportar"
 L["|cfff2dc7fAbyssUI Command List|r"] = "|cfff2dc7fAbyssUI Lista de Comandos|r"
