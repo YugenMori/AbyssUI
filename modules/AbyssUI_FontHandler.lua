@@ -598,5 +598,21 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end) 
+-- GuildBank
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_GuildBankUI" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        GuildBankFrameWithdrawButton.Text,
+        GuildBankFrameDepositButton.Text,
+        GuildBankInfoSaveButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
 --------------------------------------------------------------
 -- End
