@@ -70,12 +70,12 @@ L["Hide Minimap"] = "Esconder Minimapa"
 L["Hide the Game Minimap"] = "Esconde o minimapa do jogo"
 L["Hide Objective Tracker"] = "Esconder Barra de Missões"
 L["Hide the Objective Tracker (Quest Frame)"] = "Esconde as barras de missões (objetivos)"
-L["Hide FPS/MS Frame"] = "Esconder Frame QPS/MS"
+L["Hide FPS/MS Frame"] = "Esconder Frame FPS/MS"
 L["Hide the fps/ms frame (bottomleft)"] = "Esconde o frame de fps/ms (esquerda inferior)"
 L["Hide YouDied/LevelUp Frame"] = "Esconder Frame Morreu/LevelUp"
 L["Hide the 'You Died' and 'Level Up' frame when you"..
 " die/level in the game"] = "Esconde o frame 'Morreu' e 'LevelUp' quando"..
-" você morre/upa no jogo"
+" você morre/level no jogo"
 L["Hide Macro Labels"] = "Esconder Etiquetas Macro"
 L["Hide Macro Labels from Action Bar"] = "Esconde a etiqueta das macros na barra de ações"
 L["Hide Hotkeys Labels"] = "Esconder Etiquetas Teclas"
@@ -84,8 +84,8 @@ L["Hide Stance Bar"] = "Esconder Barra de Instâncias"
 L["Hide the Stance Bar (Druid forms, Rogue stealth, etc)"] = "Esconde a barra de instâncias (formas do druida, furtivo do ladino, etc)"
 L["Hide Chat Buttons"] = "Esconder Botões Chat" 
 L["Hide the Chat buttons (voice, social, etc)"] = "Esconde os botões do chat (voz, social, etc)"
-L["Hide AFK Frame"] = "Esconder Frame LDT"
-L["Hide the AFKMode when you are AFK"] = "Esconde a tela no modo LDT(AFK)"
+L["Hide AFK Frame"] = "Esconder Frame AFK"
+L["Hide the AFKMode when you are AFK"] = "Esconde o frame no modo AFK"
 L["Hide Faction/PvP/Prestige icon"] = "Esconder ícone de Facção/JvJ/Prestígio"
 L["Hide the player frame Faction/PvP/Prestige icon"] = "Esconde o ícone de Facção/JvJ/Prestígio do frame do jogador"
 L["|cfff2dc7fHide UnitImproved Faction Icon|r"] = "|cfff2dc7fEsconder ícone de Facção UnitImproved|r"
@@ -98,6 +98,8 @@ L["Hide Covenant Frame"] = "Esconder Frame do Pacto"
 L["Hide the Covenant/Garrison minimap icon"] = "Esconde o ícone do minimapa do pacto/guarnição"
 L["Hide Minimap Zone Text"] = "Esconder Texto Minimapa"
 L["Hide zone text above minimap"] = "Esconde o texto de local atual acima do minimapa"
+L["Hide Castbar"] = "Esconder Castbar"
+L["Completely hide the player's castbar"] = "Esconde completamente a castbar do jogador"
 -- Config Miscellaneous
 L["Smooth Camera (50% Slower)"] = "Câmera Suave (50% Lenta)"
 L["Smooth Camera (70% Slower)"] = "Câmera Suave (70% Lenta)"
@@ -110,7 +112,7 @@ L["Auto Gamma"] = "Gamma Automática"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "Muda a gamma automaticamente quando"..
 " é dia para 1.2 (claro) e para 1.0 (padrão) quando é noite, baseado no tempo local"
-L["USA Date Format"] = "Fomato de Data/Hora do EUA"
+L["USA Date Format"] = "Formato de Data/Hora do EUA"
 L["Change the date format of the whole UI to"..
 " the USA format"] = "Muda o formato da data da interface para o formato EUA"
 L["RPG chat fonts"] = "Chat Fonte RPG"
@@ -195,7 +197,7 @@ L["Minimal ActionBar"] = "Barra Minimalista"
 L["Minimalist actionbar, hide all the textures"] = "Barra de ações minimalista, esconde todas as texturas"
 L["Dynamic Quest Tracker"] = "Missões Dinâmicas"
 L["Hide the quest track when you"..
-" are in combat or in a PVP instance"] = "Esconde a barra de missões quando você está em combate ou em uma instância JxJ"
+" are in combat or in a PVP instance"] = "Esconde a barra de missões quando você está em combate ou em uma instância JvJ"
 -- Config Scale & Frame Size
 L["|cffb62a25This is a work in progress,".. 
 " I'm still learning how it works, please report any bugs in our discord|r"] = "|cffb62a25Em desenvolvimento,"..
@@ -307,8 +309,6 @@ L["It will only hide Blizzard frames, addons have their"..
 " Poderia ter adicionado a interface inteira para esconder,\n mas isso ia previnir"..
 " a interação com algumas frames (casa de leilões, loot, missões, etc)."
 L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "Espere!\n Isso irá limpar todas magias/habilidades da barra de ações."
-
-
 --------------------------------------------------------------
 -- Extras
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100Reparo pago pela Guilda: %.1fg|r"
@@ -359,3 +359,6 @@ L["|cfff2dc7fRussian: |r"] = "|cfff2dc7fRusso: |r"
 L["|cfff2dc7fKorean: |r"] = "|cfff2dc7fCoreano: |r"
 L["|cfff2dc7fChinese (Traditional): |r"] = "|cfff2dc7fChinês (Tradicional): |r"
 L["|cfff2dc7fChinese (Simplified): |r"] = "|cfff2dc7fChinês (Simplificado): |r"
+L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
+"there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = "Sinta-se à vontade para ajudar a traduzir o AbyssUI para o seu idioma, se quiser ajudar, vá para a página do AbyssUI no Github, "..
+"procure uma pasta chamada 'localization', encontre o idioma que você conhece melhor e ajude a melhorá-lo. Muito obrigado por isso."

@@ -88,6 +88,8 @@ L["Hide Covenant Frame"] = true
 L["Hide the Covenant/Garrison minimap icon"] = true
 L["Hide Minimap Zone Text"] = true
 L["Hide zone text above minimap"] = true
+L["Hide Castbar"] = true
+L["Completely hide the player's castbar"] = true
 -- Config Miscellaneous
 L["Smooth Camera (50% Slower)"] = true
 L["Smooth Camera (70% Slower)"] = true
@@ -318,3 +320,5 @@ L["|cfff2dc7fRussian: |r"] = true
 L["|cfff2dc7fKorean: |r"] = true
 L["|cfff2dc7fChinese (Traditional): |r"] = true
 L["|cfff2dc7fChinese (Simplified): |r"] = true
+L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
+"there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = true

@@ -98,6 +98,8 @@ L["Hide Covenant Frame"] = "Ocultar marco de Covenant"
 L["Hide the Covenant/Garrison minimap icon"] = "Oculta el icono de minimapa de pacto/recorte"
 L["Hide Minimap Zone Text"] = "Ocultar minimapa de texto"
 L["Hide zone text above minimap"] = "Oculta el texto de la ubicación actual por encima del minimapa"
+L["Hide Castbar"] = "Ocultar Castbar"
+L["Completely hide the player's castbar"] = "Oculta por completo el castbar del jugador"
 -- Config Miscellaneous
 L["Smooth Camera (50% Slower)"] = "Cámara suave (50% Lento)"
 L["Smooth Camera (70% Slower)"] = "Cámara suave (70% Lento)"
@@ -110,7 +112,7 @@ L["Auto Gamma"] = "Gamma automático"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "Cambia la gamma automáticamente cuando"..
 " es día para 1.2 (por supuesto) y para 1.0 (predeterminado) cuando es de noche, basado en la hora local"
-L["USA Date Format"] = "USA Date/Time Fomato"
+L["USA Date Format"] = "Formato de fecha Estadounidense"
 L["Change the date format of the whole UI to"..
 " the USA format"] = "Cambia el formato de la fecha de la interfaz al formato estadounidense"
 L["RPG chat fonts"] = "Fuente de chat RPG"
@@ -359,3 +361,6 @@ L["|cfff2dc7fRussian: |r"] = "|cfff2dc7fRuso: |r"
 L["|cfff2dc7fKorean: |r"] = "|cfff2dc7fCoreano: |r"
 L["|cfff2dc7fChinese (Traditional): |r"] = "|cfff2dc7fChino (tradicional): |r"
 L["|cfff2dc7fChinese (Simplified): |r"] = "|cfff2dc7fChino (simplificado): |r"
+L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
+"there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = "Siéntase libre de ayudar a traducir AbyssUI a su idioma, si desea ayudar, vaya a la página de AbyssUI en Github, "..
+"buscar una carpeta llamada 'localization', encontrar el idioma que mejor conoces y ayudar a mejorarlo. Muchas gracias por eso."

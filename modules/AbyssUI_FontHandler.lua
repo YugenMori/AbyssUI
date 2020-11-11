@@ -614,5 +614,20 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end)
+-- EncounterJournal
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_EncounterJournal" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        EncounterJournalSuggestFrame.Suggestion1.button.Text,
+        EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
 --------------------------------------------------------------
 -- End
