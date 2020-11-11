@@ -304,7 +304,7 @@ L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00
 L["|cff0d75d4Special Thanks|r"] = true
 L["|cff0d75d4Translators|r"] 		= true
 L["Default"] = true
-L["Google Translate"] = true
+L["Need Translator"] = true
 L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = true
 L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI."] = true

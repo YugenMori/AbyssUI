@@ -342,7 +342,7 @@ L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00
 L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4Agradecimentos|r"
 L["|cff0d75d4Translators|r"] 		= "|cff0d75d4Tradutores|r"
 L["Default"] = "Padrão"
-L["Google Translate"] = "Google Tradutor"
+L["Need Translator"] = "Precisa de Tradutor"
 L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r por me ajudar com dúvidas de programação."
 L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r pela UnitFrame melhorada, onde eu pude me inspirar"..

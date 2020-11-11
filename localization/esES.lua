@@ -1,8 +1,8 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "esES")
 if not L then return end
--- Traductor: Traductor de Google
+-- Traductor: Necesita Traductor
 -- Ejemplo
--- L ["Texto en inglés"] - "Su traducción"
+-- L["Texto en inglés"] - "Su traducción"
 --------------------------------------------------------------
 -- Config
 L["Info Panel"] = "Información"
@@ -344,7 +344,7 @@ L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00
 L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4Gracias|r"
 L["|cff0d75d4Translators|r"] 		= "|cff0d75d4Traductores|r"
 L["Default"] = "Predeterminado"
-L["Google Translate"] = "Traductor de Google"
+L["Need Translator"] = "Necesita Traductor"
 L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r por ayudarme con preguntas de programación."
 L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r Por UnitFrame Mejorado, donde podría inspirarme"..

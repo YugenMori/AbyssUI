@@ -342,7 +342,7 @@ L["|cfff2dc7fConsider reload the UI to make sure frames are locked|r '|cffffcc00
 L["|cff0d75d4Special Thanks|r"] = "|cff0d75d4감사|r"
 L["|cff0d75d4Translators|r"] 		= "|cff0d75d4번역가|r"
 L["Default"] = "무늬"
-L["Google Translate"] = "구글 번역기"
+L["Need Translator"] = "번역가 필요"
 L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."] = "|cfff2dc7fFizzlemizz|r 프로그래밍 질문을 도와 주셔서."
 L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
 " UnitFrame for AbyssUI."] = "|cfff2dc7fKawF|r 개선 된 UnitFrame에 의해 영감을 얻었습니다"..
