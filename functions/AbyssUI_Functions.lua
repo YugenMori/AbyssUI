@@ -394,7 +394,7 @@ CF:SetScript("OnEvent", function(self, event)
 		return string.format('|cff%02x%02x%02x', r*255, g*255, b*255)
 	end
 	local function getFPS()
-		return "|c00ffffff" .. floor(GetFramerate()) .. "|r fps"
+		return "|c00ffffff" .. floor(GetFramerate()+0.5) .. "|r fps"
 	end
 	local function getLatencyWorldRaw()
 		return select(4, GetNetStats())

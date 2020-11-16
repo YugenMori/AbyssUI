@@ -1436,17 +1436,24 @@ f:SetScript("OnEvent", function(self, event)
 	end
 end)
 -- Timer
-local c = CastingBarFrame
-c.timer = c:CreateFontString(nil)
-c.timer:SetFont(globalFont, 12)
-c.timer:SetShadowColor(0, 0, 0)
-c.timer:SetShadowOffset(1, -1)
-c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
-c.update = .1
-c:HookScript("OnUpdate", function(self, elapsed)
-	if (AbyssUIAddonSettings.HideCastTimer ~= true) then
-	    if not self.timer then return end
-	    if self.update and self.update < elapsed then
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+	local c = CastingBarFrame
+	c.timer = c:CreateFontString(nil)
+	c.timer:SetFont(globalFont, 12)
+	c.timer:SetShadowColor(0, 0, 0)
+	c.timer:SetShadowOffset(1, -1)
+	if (AbyssUIAddonSettings.NewCastBar == true) then
+		c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
+	else
+		c.timer:SetPoint("RIGHT", c, "RIGHT", 0, 0)
+	end
+	c.update = .1
+	c:HookScript("OnUpdate", function(self, elapsed)
+		if (AbyssUIAddonSettings.HideCastTimer ~= true) then
+    	if not self.timer then return end
+	    	if self.update and self.update < elapsed then
 	        if self.casting then
 	            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
 	        elseif self.channeling then
@@ -1458,9 +1465,10 @@ c:HookScript("OnUpdate", function(self, elapsed)
 	    else
 	        self.update = self.update - elapsed
 	    end
-	else
-		return nil
-	end
+		else
+			return nil
+		end
+	end)
 end)
 -- TimerTracker fixes
 TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds, totalTime)
@@ -1468,6 +1476,21 @@ TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds,
   AbyssUI_FrameSize(TimerTrackerTimer1StatusBar, 200, 20)
   AbyssUI_RegionListSize(TimerTrackerTimer1StatusBar, 200, 20)
 	TimerTrackerTimer1StatusBarBorder:Hide()
+end)
+-- Hide CompackRaid Borders
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+	for i, v in pairs({
+		CompactRaidFrameManagerBorderTopLeft,
+		CompactRaidFrameManagerBorderTop,
+		CompactRaidFrameManagerBorderTopRight,
+		CompactRaidFrameManagerBorderRight,
+		CompactRaidFrameManagerBorderBottomRight,
+		CompactRaidFrameManagerBorderBottom,
+	CompactRaidFrameManagerBorderBottomLeft, }) do
+		v:SetAlpha(0)
+	end
 end)
 ----------------------------------------------------
 --End

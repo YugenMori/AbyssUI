@@ -1301,8 +1301,9 @@ HideMinimapZoneText_CheckButton:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- Hide Castbar
+--[[
 local HideMinimapZoneText_CheckButton = CreateFrame("CheckButton", "$parentHideMinimapZoneText_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
-HideMinimapZoneText_CheckButton:SetPoint("TOPRIGHT", -200, -170)
+HideMinimapZoneText_CheckButton:SetPoint("TOPRIGHT", -200, -200)
 HideMinimapZoneText_CheckButton.Text:SetText(L["Hide Castbar"])
 HideMinimapZoneText_CheckButton.tooltip = L["Completely hide the player's castbar"]
 HideMinimapZoneText_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimapZoneText)
@@ -1310,9 +1311,9 @@ HideMinimapZoneText_CheckButton:SetChecked(AbyssUIAddonSettings.HideMinimapZoneT
 HideMinimapZoneText_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideMinimapZoneText = self:GetChecked()
     if (AbyssUIAddonSettings.HideMinimapZoneText == true) then
-      CastingBarFrame:Hide()
+      CastingBarFrame:SetAlpha(0)
     else
-      CastingBarFrame:Show()
+      CastingBarFrame:SetAlpha(1)
     end
 end)
 -- After Login/Reload
@@ -1321,11 +1322,12 @@ HideMinimapZoneText_CheckButton:SetScript("OnEvent", function(self, event, ...)
   if (event == "PLAYER_ENTERING_WORLD") then
     if (AbyssUIAddonSettings.HideMinimapZoneText == true) then
       C_Timer.After(1, function()
-        CastingBarFrame:Hide()
+        CastingBarFrame:SetAlpha(0)
       end)
     end
   end
 end)
+--]]
 -- End
 ------------------------------- Miscellaneous -------------------------------
 local PSINFOMisce_CheckButton = CreateFrame("Frame","$parentPSINFOMisce_CheckButton", AbyssUI_Config.childpanel3)
