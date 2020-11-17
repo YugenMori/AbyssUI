@@ -694,28 +694,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			HelpFrameHeaderBottomLeftCorner,
 			HelpFrameHeaderLeftBorder,
 			HelpFrameHeaderTopLeftCorner,
-			HelpBrowser.BrowserInset.NineSlice.BottomEdge,
-			HelpFrameMainInset.NineSlice.BottomEdge,
-			HelpFrame.Header.LeftBG,
-			HelpFrame.Header.RightBG,
-		HelpFrame.Header.CenterBG, }) do
+			HelpBrowser.BrowserInset.NineSlice.BottomEdge, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
-				for i, v in pairs({
-					HelpFrameLeftInset.NineSlice,
-					HelpFrameLeftInset.NineSlice.BottomLeftCorner,
-					HelpFrameLeftInset.NineSlice.BottomRightCorner,
-					HelpFrameLeftInset.NineSlice.BottomEdge,
-					HelpFrameLeftInset.NineSlice.LeftEdge,
-					HelpFrameMainInset.NineSlice.BottomLeftCorner,
-					HelpFrameMainInset.NineSlice.BottomRightCorner, 
-					HelpFrameMainInset.NineSlice.BottomEdge,
-					HelpFrameMainInset.NineSlice.LeftEdge,
-					HelpFrameLeftInset.NineSlice.BottomLeftCorner,
-					HelpFrameLeftInset.NineSlice.BottomRightCorner,
-				HelpFrameLeftInset.NineSlice.LeftEdge, }) do
-					v:SetAlpha(0)
-				end
 			else
 				return nil
 			end
