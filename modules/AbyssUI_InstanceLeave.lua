@@ -143,6 +143,7 @@ f:SetScript("OnEvent", function()
 		  FrameButton.text:SetShadowOffset(1, -1)
 		end
 	FrameButton:SetScript("OnClick", function()
+		DoEmote("THANK","none")
 		local isComplete = IsLFGComplete()
 		local inInstance, instanceType = IsInInstance()
 		if (isComplete and (instanceType == "party" or instanceType == "raid")) then 

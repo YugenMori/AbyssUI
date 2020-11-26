@@ -233,29 +233,27 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if not InCombatLockdown() then
-					local classification = UnitClassification(self.unit)
-					if (classification == "minus") then
-						self.healthbar:SetHeight(12)
-						self.healthbar:SetPoint("TOPLEFT",7,-41)
-						if (self.healthbar.TextString) then
-							self.healthbar.TextString:SetPoint("CENTER",-50,4)
-						end
-						self.deadText:SetPoint("CENTER",-50,4)
-						self.Background:SetPoint("TOPLEFT",7,-41)
-					else
-						self.healthbar:SetHeight(29)
-						self.healthbar:SetPoint("TOPLEFT",7,-22)
-						if (self.healthbar.TextString) then
-							self.healthbar.TextString:SetPoint("CENTER",-50,6)
-						end
-						self.deadText:SetPoint("CENTER",-50,6)
-						self.nameBackground:SetAlpha(0)
-						self.Background:SetPoint("TOPLEFT",7,-22)
+				local classification = UnitClassification(self.unit)
+				if (classification == "minus") then
+					self.healthbar:SetHeight(12)
+					self.healthbar:SetPoint("TOPLEFT",7,-41)
+					if (self.healthbar.TextString) then
+						self.healthbar.TextString:SetPoint("CENTER",-50,4)
 					end
-					self.healthbar:SetWidth(119)
-					self.healthbar.lockColor = true
+					self.deadText:SetPoint("CENTER",-50,4)
+					self.Background:SetPoint("TOPLEFT",7,-41)
+				else
+					self.healthbar:SetHeight(29)
+					self.healthbar:SetPoint("TOPLEFT",7,-22)
+					if (self.healthbar.TextString) then
+						self.healthbar.TextString:SetPoint("CENTER",-50,6)
+					end
+					self.deadText:SetPoint("CENTER",-50,6)
+					self.nameBackground:SetAlpha(0)
+					self.Background:SetPoint("TOPLEFT",7,-22)
 				end
+				self.healthbar:SetWidth(119)
+				self.healthbar.lockColor = true
 			end
 		end
 		-- BossStyle

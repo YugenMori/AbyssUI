@@ -8,8 +8,8 @@
 local addonName, addonTable = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 --
-local texturepackCheck    = "1.0.1.6"
-local texturepackDate     = "17/11/20"
+local texturepackCheck    = "1.0.1.7"
+local texturepackDate     = "26/11/20"
 --
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)

@@ -886,7 +886,9 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			StaticPopup2.Border.BottomLeftCorner,
 		StaticPopup2.Border.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
-				AbyssUI_ColorizationFrameFunction(v)
+				if (not InCombatLockdown()) then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
 			else
 				return nil
 			end
@@ -2546,6 +2548,28 @@ f:SetScript("OnEvent", function(self, event, name)
 			ItemSocketingFrame.NineSlice.TopLeftCorner,
 			ItemSocketingFrame.NineSlice.BottomLeftCorner,
 		ItemSocketingFrame.NineSlice.BottomRightCorner, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+-- ItemUpgrade
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_ItemUpgradeUI" then
+		for i, v in pairs({
+			ItemUpgradeFrame.NineSlice.TopEdge,
+			ItemUpgradeFrame.NineSlice.RightEdge,
+			ItemUpgradeFrame.NineSlice.BottomEdge,
+			ItemUpgradeFrame.NineSlice.LeftEdge,
+			ItemUpgradeFrame.NineSlice.TopRightCorner,
+			ItemUpgradeFrame.NineSlice.TopLeftCorner,
+			ItemUpgradeFrame.NineSlice.BottomLeftCorner,
+		ItemUpgradeFrame.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
