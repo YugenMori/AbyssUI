@@ -646,5 +646,67 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end)
+-- Player Choice(Covenant) 
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_PlayerChoiceUI" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        PlayerChoiceFrame.Option1.OptionButtonsContainer.button1,
+        PlayerChoiceFrame.Option2.OptionButtonsContainer.button1,
+        PlayerChoiceFrame.Option3.OptionButtonsContainer.button1,
+        PlayerChoiceFrame.Option4.OptionButtonsContainer.button1,
+        PlayerChoiceFrame.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
+-- Covenant Preview
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_CovenantPreviewUI" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        CovenantPreviewFrame.SelectButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
+-- Covenant Sanctum
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_CovenantSanctum" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        CovenantSanctumFrame.UpgradesTab.DepositButton.Text,
+        CovenantSanctumFrame.UpgradesTab.TalentsList.UpgradeButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
+-- Soulbind
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_Soulbinds" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        SoulbindViewer.ActivateSoulbindButton.Text,
+        SoulbindViewer.CommitConduitsButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
 --------------------------------------------------------------
 -- End
