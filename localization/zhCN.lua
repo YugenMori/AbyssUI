@@ -363,3 +363,4 @@ L["|cfff2dc7fChinese (Simplified): |r"] = "|cfff2dc7f简体中文）: |r"
 L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
 "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = "随时帮助将AbyssUI翻译成您的语言，如果您想提供帮助，请转到Github上的AbyssUI页面， "..
 "寻找一个名为 'localization'，找到您最了解的语言，并帮助改进它。 非常感谢你做的这些。"
+L["Chat Commands"] = "聊天命令"

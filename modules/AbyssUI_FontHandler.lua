@@ -708,5 +708,37 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end)
+-- Torghast
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_TorghastLevelPicker" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        TorghastLevelPickerFrame.OpenPortalButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
+-- Covenant Missions
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_GarrisonUI" then
+    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+      for i, v in pairs ({
+        HealFollowerButtonTemplate.Text,
+        CovenantMissionFrameFollowers.HealAllButton.Text,
+        CovenantMissionFrame.MissionTab.MissionPage.StartMissionButton.Text,
+        CovenantMissionFrame.MissionComplete.CompleteFrame.ContinueButton.Text,
+        CovenantMissionFrame.MissionComplete.RewardsScreen.FinalRewardsPanel.ContinueButton.Text,
+      }) do 
+        AbyssUI_ApplyFontsNoGlobal(v)
+      end
+    end
+  end
+end)
 --------------------------------------------------------------
 -- End

@@ -260,7 +260,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				if (not (InCombatLockdown() or ShowBossFrameWhenUninteractable(self.unit))) then
-					UnitStatusBarColor(self)
+					--UnitStatusBarColor(self)
 				end
 				if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
