@@ -734,6 +734,7 @@ f:SetScript("OnEvent", function(self, event, name)
         CovenantMissionFrame.MissionTab.MissionPage.StartMissionButton.Text,
         CovenantMissionFrame.MissionComplete.CompleteFrame.ContinueButton.Text,
         CovenantMissionFrame.MissionComplete.RewardsScreen.FinalRewardsPanel.ContinueButton.Text,
+        CovenantMissionFrame.MissionComplete.CompleteFrame.SpeedButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end

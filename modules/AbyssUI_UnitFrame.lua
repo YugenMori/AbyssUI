@@ -233,40 +233,40 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				local classification = UnitClassification(self.unit)
-				if (classification == "minus") then
-					self.healthbar:SetHeight(12)
-					self.healthbar:SetPoint("TOPLEFT",7,-41)
-					if (self.healthbar.TextString) then
-						self.healthbar.TextString:SetPoint("CENTER",-50,4)
+				if not InCombatLockdown() then
+					local classification = UnitClassification(self.unit)
+					if (classification == "minus") then
+						self.healthbar:SetHeight(12)
+						self.healthbar:SetPoint("TOPLEFT", 7, -41)
+						if (self.healthbar.TextString) then
+							self.healthbar.TextString:SetPoint("CENTER", -50, 4)
+						end
+						self.deadText:SetPoint("CENTER", -50, 4)
+						self.Background:SetPoint("TOPLEFT", 7, -41)
+					else
+						self.healthbar:SetHeight(29)
+						self.healthbar:SetPoint("TOPLEFT", 7, -22)
+						if (self.healthbar.TextString) then
+							self.healthbar.TextString:SetPoint("CENTER", -50, 6)
+						end
+						self.deadText:SetPoint("CENTER", -50, 6)
+						self.nameBackground:SetAlpha(0)
+						self.Background:SetPoint("TOPLEFT", 7, -22)
 					end
-					self.deadText:SetPoint("CENTER",-50,4)
-					self.Background:SetPoint("TOPLEFT",7,-41)
-				else
-					self.healthbar:SetHeight(29)
-					self.healthbar:SetPoint("TOPLEFT",7,-22)
-					if (self.healthbar.TextString) then
-						self.healthbar.TextString:SetPoint("CENTER",-50,6)
-					end
-					self.deadText:SetPoint("CENTER",-50,6)
-					self.nameBackground:SetAlpha(0)
-					self.Background:SetPoint("TOPLEFT",7,-22)
+					self.healthbar:SetWidth(119)
+					self.healthbar.lockColor = true
 				end
-				self.healthbar:SetWidth(119)
-				self.healthbar.lockColor = true
 			end
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if (not (InCombatLockdown() or ShowBossFrameWhenUninteractable(self.unit))) then
-					--UnitStatusBarColor(self)
-				end
 				if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
 				else
 					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
 				end
+				UnitFramesImproved_Style_TargetFrame(self)
 			end
 		end
 		-- Utility functions
@@ -396,12 +396,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetUpdate
 		local function UnitFramesImproved_TargetFrame_Update(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if (not (UnitExists(self.unit) or ShowBossFrameWhenUninteractable(self.unit))) then
+				--if (not (UnitExists(self.unit) or ShowBossFrameWhenUninteractable(self.unit))) then
 					-- One time Show/Hide
-					return nil
-				else
+					--return nil
+				--else
 			  	UnitStatusBarColor(self)
-				end
+				--end
 			end
 		end
 		-- CheckClassification
@@ -424,7 +424,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 						end
 					end
-					self.nameBackground:Hide()
+					self.nameBackground:SetAlpha(0.1)
 				else
 					return nil
 				end
@@ -446,7 +446,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 						end
 					end
-					self.nameBackground:Hide()
+					self.nameBackground:SetAlpha(0.1)
 				else
 					return nil
 				end
@@ -457,39 +457,39 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			local factionGroup = UnitFactionGroup(self.unit)
 			local creatureType = UnitCreatureType(self.unit)
 			if (creatureType == "Humanoid" or UnitIsPlayer(self.unit)) then
-				self.pvpIcon:Hide()
+				self.pvpIcon:SetAlpha(0)
 				if (UnitIsPVPFreeForAll(self.unit)) then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
 					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
-						self.pvpIcon:Show()
+						self.pvpIcon:SetAlpha(1)
 					else
-						self.pvpIcon:Hide()
+						self.pvpIcon:SetAlpha(0)
 					end
 				elseif (factionGroup and UnitIsPVP(self.unit) and UnitIsEnemy("player", self.unit)) then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-FFA")
 					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
-						self.pvpIcon:Show()
+						self.pvpIcon:SetAlpha(1)
 					else
-						self.pvpIcon:Hide()
+						self.pvpIcon:SetAlpha(0)
 					end
 				elseif (factionGroup == "Alliance" or factionGroup == "Horde") then
 					--self.pvpIcon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup)
 					if (AbyssUIAddonSettings.HideUnitImprovedFaction ~= true) then
-						self.pvpIcon:Show()
+						self.pvpIcon:SetAlpha(1)
 					else
-						self.pvpIcon:Hide()
+						self.pvpIcon:SetAlpha(0)
 					end
 				else
-					self.pvpIcon:Hide()
+					self.pvpIcon:SetAlpha(0)
 				end
 			else
-				self.pvpIcon:Hide()
+				self.pvpIcon:SetAlpha(0)
 			end
 			UnitFramesImproved_Style_TargetFrame(self)
 		end
 		-- ToTStyle
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
-			if (not InCombatLockdown ()) then
+			if not InCombatLockdown () then
 				TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
 				FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 			end
