@@ -121,7 +121,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- Unit StatusBar Colorization
 		local function UnitStatusBarColor(self)
-			if ((not UnitPlayerControlled(self.unit)) and UnitIsTapDenied(self.unit)) then
+			if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
 				-- Gray if npc is tapped by other player
 				self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 			else
@@ -150,12 +150,15 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						elseif healthPercentage < 21 then
 							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
 						end				
-					end	
+					end
+				end
+				if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
+					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 				end
 				if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
 					if (not UnitIsUnconscious(self.unit)) then
 						if (self.healthbar.TextString) then
-							self.healthbar.TextString:Hide()
+							self.healthbar.TextString:SetAlpha(0)
 							self.healthbar.forceHideText = true
 						end
 					end
@@ -233,7 +236,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if not InCombatLockdown() then
+				--if not InCombatLockdown() then
 					local classification = UnitClassification(self.unit)
 					if (classification == "minus") then
 						self.healthbar:SetHeight(12)
@@ -255,18 +258,19 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					end
 					self.healthbar:SetWidth(119)
 					self.healthbar.lockColor = true
-				end
+				--end
 			end
 		end
 		-- BossStyle
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
-				else
-					self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
+				if (not InCombatLockdown()) then
+					if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
+						self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-UnitFrame-Boss")
+					else
+						self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-UnitFrame-Boss")
+					end
 				end
-				UnitFramesImproved_Style_TargetFrame(self)
 			end
 		end
 		-- Utility functions
@@ -295,6 +299,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					statusFrame.LeftText:SetAlpha(0)
 					statusFrame.RightText:SetAlpha(0)
 					textString:Show()
+					textString:SetAlpha(1)
 				end
 				if ((tonumber(valueMax) ~= valueMax or valueMax > 0) and not (statusFrame.pauseUpdates)) then
 					local valueDisplay = value
@@ -312,7 +317,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						if (value == 0 and statusFrame.zeroText) then
 							textString:SetText(statusFrame.zeroText)
 							statusFrame.isZero = 1
-							textString:Show()
+							textString:SetAlpha(1)
 							return
 						end
 						percent = math.ceil((value / valueMax) * 100) .. "%"
@@ -330,7 +335,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					elseif (value == 0 and statusFrame.zeroText) then
 						textString:SetText(statusFrame.zeroText)
 						statusFrame.isZero = 1
-						textString:Show()
+						textString:SetAlpha(1)
 						return
 					else
 						statusFrame.isZero = nil
@@ -396,12 +401,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- TargetUpdate
 		local function UnitFramesImproved_TargetFrame_Update(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				--if (not (UnitExists(self.unit) or ShowBossFrameWhenUninteractable(self.unit))) then
-					-- One time Show/Hide
-					--return nil
-				--else
-			  	UnitStatusBarColor(self)
-				--end
+			  UnitStatusBarColor(self)
 			end
 		end
 		-- CheckClassification
@@ -424,7 +424,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 						end
 					end
-					self.nameBackground:SetAlpha(0.1)
+					self.nameBackground:SetAlpha(0)
 				else
 					return nil
 				end
@@ -446,7 +446,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 						end
 					end
-					self.nameBackground:SetAlpha(0.1)
+					self.nameBackground:SetAlpha(0)
 				else
 					return nil
 				end
@@ -485,7 +485,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			else
 				self.pvpIcon:SetAlpha(0)
 			end
-			UnitFramesImproved_Style_TargetFrame(self)
+				UnitFramesImproved_Style_TargetFrame(self)
 		end
 		-- ToTStyle
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
