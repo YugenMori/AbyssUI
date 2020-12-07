@@ -7,6 +7,8 @@
 -- Frame Stuff
 -- Thanks to Fizz for part of this
 -- ObjectiveTrackerFrame
+local addonName, addonTable = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 local UnLocked
 local Moveframes = { PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do

@@ -8,7 +8,8 @@ if not L then return end
 L["Info Panel"] = true
 L["Hide Elements"] = true
 L["Miscellaneous"] = true
-L["Themes"] = true
+L["Art & Themes"] = true
+L["Colorization"] = true
 L["Tweaks & Extra"] = true
 L["Scale & Frame Size"] = true
 L["Thanks & Translations"] = true
