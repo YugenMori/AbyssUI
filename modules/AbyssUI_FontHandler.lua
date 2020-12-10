@@ -277,6 +277,7 @@ f:SetScript("OnEvent", function(self, event)
   "TabardFrameCancelButtonText",
   "GuildRegistrarFramePurchaseButtonText",
   "GuildRegistrarFrameCancelButtonText",
+  "QuestFrameGreetingGoodbyeButtonText",
 
   }
   if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
@@ -294,6 +295,8 @@ f:SetScript("OnEvent", function(self, event)
       LFGListApplicationDialog.CancelButton.Text,
       LFGListInviteDialog.AcceptButton.Text,
       LFGListInviteDialog.DeclineButton.Text,
+      LFGListInviteDialog.AcknowledgeButton.Text,
+      LFGListSearchPanelScrollFrame.StartGroupButton.Text,
       InterfaceOptionsSocialPanelRedockChat.Text,
       ScriptErrorsFrame.Close.Text,
       RecruitAFriendFrame.RecruitmentButton.Text,
@@ -656,19 +659,21 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-  if name == "Blizzard_PlayerChoiceUI" then
-    if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
-      for i, v in pairs ({
-        PlayerChoiceFrame.Option1.OptionButtonsContainer.button1,
-        PlayerChoiceFrame.Option2.OptionButtonsContainer.button1,
-        PlayerChoiceFrame.Option3.OptionButtonsContainer.button1,
-        PlayerChoiceFrame.Option4.OptionButtonsContainer.button1,
-        PlayerChoiceFrame.Text,
-      }) do 
-        AbyssUI_ApplyFontsNoGlobal(v)
+    if name == "Blizzard_PlayerChoiceUI" then
+      if (AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true and AbyssUIAddonSettings.FontsValue == true) then
+        hooksecurefunc(PlayerChoiceFrame, "Update", function(self)
+            if f.HookRun then return end
+            if not f.HookRun and not PlayerChoiceFrame.Option1.OptionButtonsContainer.button1 then return end
+            f.HookRun = true
+            for i=1, 4 do
+              PlayerChoiceFrame["Option"..i].OptionButtonsContainer.button1.Text:SetTextColor(31/255, 31/255, 31/255)
+              PlayerChoiceFrame["Option"..i].OptionButtonsContainer.button1.Text:SetFont(globalFont, 13)
+              PlayerChoiceFrame["Option"..i].OptionButtonsContainer.button1.Text:SetShadowColor(45/255, 45/255, 45/255)
+              PlayerChoiceFrame["Option"..i].OptionButtonsContainer.button1.Text:SetShadowOffset(0, 0)
+            end
+        end)
       end
     end
-  end
 end)
 -- Covenant Preview
 local f = CreateFrame("Frame")
@@ -741,6 +746,8 @@ f:SetScript("OnEvent", function(self, event, name)
         CovenantMissionFrame.MissionComplete.CompleteFrame.ContinueButton.Text,
         CovenantMissionFrame.MissionComplete.RewardsScreen.FinalRewardsPanel.ContinueButton.Text,
         CovenantMissionFrame.MissionComplete.CompleteFrame.SpeedButton.Text,
+        AdventureMapQuestChoiceDialog.AcceptButton.Text,
+        AdventureMapQuestChoiceDialog.DeclineButton.Text,
       }) do 
         AbyssUI_ApplyFontsNoGlobal(v)
       end

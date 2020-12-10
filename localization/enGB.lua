@@ -324,3 +324,5 @@ L["|cfff2dc7fChinese (Simplified): |r"] = true
 L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
 "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = true
 L["Chat Commands"] = true
+L["Always Show Titles"] = true
+L["Always show people titles on their names"] = true

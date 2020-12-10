@@ -365,3 +365,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = "随时帮助将AbyssUI翻译成您的语言，如果您想提供帮助，请转到Github上的AbyssUI页面， "..
 "寻找一个名为 'localization'，找到您最了解的语言，并帮助改进它。 非常感谢你做的这些。"
 L["Chat Commands"] = "聊天命令"
+L["Always Show Titles"] = "一律显示标题"
+L["Always show people titles on their names"] = "一律显示人物名称"

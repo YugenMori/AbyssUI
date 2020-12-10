@@ -2,8 +2,18 @@
 ## Title: Abyss|cff0d75d4UI|r
 ## Version: 9.0.2.3
 ## Author: Yugen
+## Notes-deDE: Minimalistische Benutzeroberfläche für World of Warcraft
+## Notes-enGB: Minimalist UI for World of Warcraft
 ## Notes-enUS: Minimalist UI for World of Warcraft
-## Notes-ptBR: IU Minimalista para World of Warcraft
+## Notes-esES: Interfaz de usuario minimalista para World of Warcraft
+## Notes-esMX: Interfaz de usuario minimalista para World of Warcraft
+## Notes-frFR: Interface utilisateur minimaliste pour World of Warcraft
+## Notes-itIT: Interfaccia utente minimalista per World of Warcraft
+## Notes-koKR: 월드 오브 워크래프트 용 미니멀리스트 UI
+## Notes-ptBR: Interface minimalista para World of Warcraft
+## Notes-ruRU: Минималистичный интерфейс для World of Warcraft
+## Notes-zhCN: 魔兽世界的简约UI
+## Notes-zhTW: 魔獸世界的簡約UI
 ## SavedVariables: AbyssuiDB
 ## SavedVariablesPerCharacter: AbyssUIProfile, AbyssUIAddonSettings, COLOR_MY_UI
 ## OptionalDeps: AbyssUI_TexturePack, Ace3

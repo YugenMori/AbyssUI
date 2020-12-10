@@ -536,7 +536,7 @@ local function InitSettings()
         FrameButton.text:SetShadowOffset(1, -1)
       end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("yugenmorimail@gmail.com ")
+        AbyssUI_EditBox:SetText("yugenmorimail@gmail.com")
         AbyssUI_EditBox_Frame:Show()
     end)
   end)
@@ -1902,11 +1902,30 @@ local function TweaksExtra()
         MouselookStop()
       end
     end
-  --[[
-    if (event == "PLAYER_REGEN_ENABLED") then
-      MouselookStop()
+  end)
+  -- Show Titles --
+  local AbyssUIShowTitles_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  AbyssUIShowTitles_CheckButton:SetPoint("TOPLEFT", 10, -320)
+  AbyssUIShowTitles_CheckButton.Text:SetText(L["Always Show Titles"])
+  AbyssUIShowTitles_CheckButton.tooltip = L["Always show people titles on their names"]
+  AbyssUIShowTitles_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionShowTitle)
+  -- OnClick Function
+  AbyssUIShowTitles_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionShowTitle = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
+  -- After Login/Reload
+  AbyssUIShowTitles_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  AbyssUIShowTitles_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if AbyssUIAddonSettings.ExtraFunctionShowTitle == true then
+        SetCVar('UnitNamePlayerPVPTitle', 1)
+      else
+        SetCVar('UnitNamePlayerPVPTitle', 0)
+      end
+    else
+      return nil
     end
-  --]]
   end)
   --- Frames ---
   -- Square Minimap --

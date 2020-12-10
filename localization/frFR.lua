@@ -364,3 +364,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."] = "N’hésitez pas à aider à traduire AbyssUI dans votre langue, si vous voulez aider, allez à la page AbyssUI sur Github, "..
 "rechercher un dossier appelé 'localization', trouver la langue que vous connaissez le mieux et aider à l’améliorer. Merci beaucoup pour ça."
 L["Chat Commands"] = "Commandes de Chat"
+L["Always Show Titles"] = "Toujours Afficher les Titres"
+L["Always show people titles on their names"] = "Toujours afficher les titres des personnes sur leurs noms"

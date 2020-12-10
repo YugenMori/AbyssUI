@@ -551,7 +551,12 @@ local function MinimapBehaviours()
 	local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\minimap\\"
 	local mailicon = mediaFolder.."mail"
 	local calendaricon = mediaFolder.."calendar"
+	local showclock = true		
+	local font = damageFont
+	local fontSize = 12
+	local fontFlag = "THINOUTLINE"		
 
+	-- Clock
 	if showclock then
 		LoadAddOn('Blizzard_TimeManager')
 		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
@@ -772,8 +777,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		local qposition_y = -260         
 		local qheight = 400             
 
-		local useInfoPanel = true		
-		local showclock = false			
+		local useInfoPanel = true	
 		local AddonNumb = 30			
 
 		local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\minimap\\"
