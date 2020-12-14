@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: Abyss|cff0d75d4UI|r
-## Version: 9.0.2.3
+## Version: 9.0.2.3a
 ## Author: Yugen
 ## Notes-deDE: Minimalistische Benutzeroberfläche für World of Warcraft
 ## Notes-enGB: Minimalist UI for World of Warcraft

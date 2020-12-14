@@ -366,3 +366,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 L["Chat Commands"] = "채팅 명령"
 L["Always Show Titles"] = "항상 제목 표시"
 L["Always show people titles on their names"] = "항상 이름에 제목 표시"
+L["Green Health Bars"] = "그린 헬스 바"
+L["All unitframe health bars will be green (default)"] = "모든 유닛 프레임 체력 표시 줄이 녹색으로 표시됩니다 (기본값)."

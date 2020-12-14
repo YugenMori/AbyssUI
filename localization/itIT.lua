@@ -366,3 +366,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 L["Chat Commands"] = "Comandi di chat"
 L["Always Show Titles"] = "Mostra Sempre i Titoli"
 L["Always show people titles on their names"] = "Mostra sempre i titoli delle persone sui loro nomi"
+L["Green Health Bars"] = "Barrette Verdi della Salute"
+L["All unitframe health bars will be green (default)"] = "Tutte le barre della salute del telaio dell'unità saranno verdi (impostazione predefinita)"

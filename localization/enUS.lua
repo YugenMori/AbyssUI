@@ -326,3 +326,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 L["Chat Commands"] = true
 L["Always Show Titles"] = true
 L["Always show people titles on their names"] = true
+L["Green Health Bars"] = true
+L["All unitframe health bars will be green (default)"] = true

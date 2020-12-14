@@ -174,7 +174,7 @@ end)
 local function colour(statusbar, unit)
 	local _, class, c
 	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
-		if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true) then
+		if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true and not AbyssUIAddonSettings.GreenHealth) then
 			_, class = UnitClass(unit)
 			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 			statusbar:SetStatusBarColor(c.r, c.g, c.b)
@@ -292,7 +292,7 @@ local function UnitColor(unit)
 		--Try to color it by class.
 		local localizedClass, englishClass = UnitClass(unit)
 		local classColor = RAID_CLASS_COLORS[englishClass]
-		if (classColor) then
+		if (classColor and not AbyssUIAddonSettings.GreenHealth) then
 			r, g, b = classColor.r, classColor.g, classColor.b
 		else
 			if (UnitIsFriend("player", unit)) then

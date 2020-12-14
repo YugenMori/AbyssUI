@@ -105,7 +105,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				--Try to color it by class.
 				local localizedClass, englishClass = UnitClass(unit)
 				local classColor = RAID_CLASS_COLORS[englishClass]
-				if (classColor) then
+				if (classColor and not AbyssUIAddonSettings.GreenHealth) then
 					r, g, b = classColor.r, classColor.g, classColor.b
 				else
 					if (UnitIsFriend("player", unit)) then
@@ -121,13 +121,13 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- Unit StatusBar Colorization
 		local function UnitStatusBarColor(self)
-			if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
+			--if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
 				-- Gray if npc is tapped by other player
-				self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
-			else
+				--self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
+			--else
 				-- Standard by class etc if not
 				if (UnitIsPlayer(self.unit)) then
-					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
+					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
 						local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
 						if (healthPercentage == 0) then return end
 						if healthPercentage == 100 then
@@ -140,7 +140,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					end	
 				else
 					-- Change Color By health
-					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit)) then
+					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
 						local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
 						if (healthPercentage == 0) then return end
 						if healthPercentage == 100 then
@@ -151,10 +151,13 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
 						end				
 					end
-				end
+				--end
+				--
+				--[[
 				if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
 					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 				end
+				--]]
 				if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
 					if (not UnitIsUnconscious(self.unit)) then
 						if (self.healthbar.TextString) then

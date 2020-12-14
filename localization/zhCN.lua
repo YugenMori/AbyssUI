@@ -367,3 +367,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 L["Chat Commands"] = "聊天命令"
 L["Always Show Titles"] = "一律显示标题"
 L["Always show people titles on their names"] = "一律显示人物名称"
+L["Green Health Bars"] = "绿色健康吧"
+L["All unitframe health bars will be green (default)"] = "所有单位框健康栏将为绿色（默认）"

@@ -366,3 +366,5 @@ L["Feel free to help translate AbyssUI to your own language, if you want to help
 L["Chat Commands"] = "Команды чата"
 L["Always Show Titles"] = "Всегда показывать заголовки"
 L["Always show people titles on their names"] = "Всегда показывать названия людей в их именах"
+L["Green Health Bars"] = "Зеленые полоски здоровья"
+L["All unitframe health bars will be green (default)"] = "Все полоски здоровья корпуса юнита будут зелеными (по умолчанию)"

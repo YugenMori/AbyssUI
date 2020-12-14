@@ -139,7 +139,7 @@ local function UnitColor(unit)
       --Try to color it by class.
       local localizedClass, englishClass = UnitClass(unit)
       local classColor = RAID_CLASS_COLORS[englishClass]
-      if (classColor) then
+      if (classColor and not AbyssUIAddonSettings.GreenHealth) then
         r, g, b = classColor.r, classColor.g, classColor.b
       else
         if (UnitIsFriend("player", unit)) then
@@ -152,8 +152,6 @@ local function UnitColor(unit)
       r, g, b = UnitSelectionColor(unit)
     end
     return r, g, b
-  else
-    return nil
   end
 end
 -- Fade UI
@@ -375,7 +373,7 @@ end)
 -- Nameplate colorization
 -- Player
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
+	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
     local _, class = UnitClass('player')
     local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 		local unitIsPlayer = UnitIsPlayer('player')
@@ -385,8 +383,8 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
 				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit('player') then
 					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
 					if (healthPercentage == 0) then return end
-          			if (healthPercentage == 100) then
-            			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
+    			if (healthPercentage == 100) then
+      			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 100 and healthPercentage > 21 then
 						self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
 					elseif healthPercentage < 21 then
@@ -401,7 +399,7 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
 end)
 -- Target
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
+	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
 		local unitTarget = UnitIsPlayer("target")
 		local reaction = UnitReaction("player", "target") or 4
 		if self.optionTable.colorNameBySelection and not self:IsForbidden() then
@@ -556,23 +554,6 @@ local function MinimapBehaviours()
 	local fontSize = 12
 	local fontFlag = "THINOUTLINE"		
 
-	-- Clock
-	if showclock then
-		LoadAddOn('Blizzard_TimeManager')
-		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
-		clockFrame:Hide()
-		clockTime:Show()
-		clockTime:SetFont(font, fontSize, fontFlag)
-		TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
-	else
-		LoadAddOn('Blizzard_TimeManager')
-		TimeManagerClockButton.Show = TimeManagerClockButton.Hide
-		local region = TimeManagerClockButton:GetRegions()
-		region:Hide()	
-		TimeManagerClockButton:ClearAllPoints()	
-		TimeManagerClockButton:Hide()	
-	end
-
 	MiniMapWorldMapButton:Hide()
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetParent(Minimap)
@@ -637,7 +618,7 @@ local function MinimapBehaviours()
 	CalendarFrameIcon:SetWidth(22)
 	CalendarFrameIcon:SetHeight(22)
 	CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
-	CalendarFrameIcon:Hide()
+	CalendarFrameIcon:SetAlpha(0)
 	local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
 	t:SetTexture(calendaricon)
 	t:SetAllPoints(CalendarFrameIcon)
@@ -713,11 +694,6 @@ local function MinimapBehaviours()
 		Minimap:StopMovingOrSizing()
 		if (button == 'RightButton') then
 			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-			if (not CalendarFrameIcon:IsShown()) then
-				CalendarFrameIcon:Show()
-			else
-				CalendarFrameIcon:Hide()
-			end
 		elseif (button == 'MiddleButton') then
 			if(not CalendarFrame) then
 				LoadAddOn("Blizzard_Calendar")
@@ -727,6 +703,35 @@ local function MinimapBehaviours()
 			Minimap_OnClick(self)
 		end
 	end)
+
+	-- Clock
+	if showclock then
+		LoadAddOn('Blizzard_TimeManager')
+		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
+		clockFrame:Hide()
+		clockTime:Show()
+		clockTime:SetFont(font, fontSize, fontFlag)
+		TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
+		TimeManagerClockButton:SetAlpha(0)
+	else
+		LoadAddOn('Blizzard_TimeManager')
+		TimeManagerClockButton.Show = TimeManagerClockButton.Hide
+		local region = TimeManagerClockButton:GetRegions()
+		region:Hide()	
+		TimeManagerClockButton:ClearAllPoints()	
+		TimeManagerClockButton:Hide()	
+	end
+	
+	-- Clock/Calendar Handler
+  Minimap:HookScript("OnEnter", function()
+    TimeManagerClockButton:SetAlpha(1)
+    CalendarFrameIcon:SetAlpha(1)
+  end)
+
+  Minimap:HookScript("OnLeave", function()
+    TimeManagerClockButton:SetAlpha(0)
+    CalendarFrameIcon:SetAlpha(0)
+  end)
 	
 	local function GetMinimapShape() return 'SQUARE' end
 

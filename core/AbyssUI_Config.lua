@@ -1771,6 +1771,22 @@ local function Miscellaneous()
     AbyssUIAddonSettings.NewCastBar = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
+  -- Green Health --
+  local GreenHealth_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  GreenHealth_CheckButton:SetPoint("TOPLEFT", 400, -380)
+  GreenHealth_CheckButton.Text:SetText(L["Green Health Bars"])
+  local Frame = CreateFrame("Frame", nil, GreenHealth_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  GreenHealth_CheckButton.Text:SetAllPoints(Frame)
+  GreenHealth_CheckButton.tooltip = L["All unitframe health bars will be green (default)"]
+  GreenHealth_CheckButton:SetChecked(AbyssUIAddonSettings.GreenHealth)
+  -- OnClick Function
+  GreenHealth_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.GreenHealth = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
 end
 --End
 ----------------------------------- Tweaks & Extra  -----------------------------------
