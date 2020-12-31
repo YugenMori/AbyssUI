@@ -2407,7 +2407,7 @@ local function ThanksTraslations()
   Frame:SetAllPoints()
   Frame:SetJustifyV("RIGHT")
   Frame:SetJustifyH("RIGHT")
-  Frame:SetText(L["|cfff2dc7fChinese (Simplified): |r"]..L["Need Translator"])
+  Frame:SetText(L["|cfff2dc7fChinese (Simplified): |r"].."Wallrained")
 end
 --End
 ----------------------------- AbyssUI Stylization ------------------------------

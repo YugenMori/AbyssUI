@@ -1,7 +1,7 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AbyssUI", "zhCN")
 if not L then return end 
 -- Simplified
---翻译：需要翻译
+--翻译：Wallrained (I have no idea if it's correcly, so any error please report to me)
 --例子
 --L [“英文文本”] = “您的翻译”
 --------------------------------------------------------------
