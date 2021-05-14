@@ -296,7 +296,7 @@ f:SetScript("OnEvent", function(self, event)
       LFGListInviteDialog.AcceptButton.Text,
       LFGListInviteDialog.DeclineButton.Text,
       LFGListInviteDialog.AcknowledgeButton.Text,
-      LFGListSearchPanelScrollFrame.StartGroupButton.Text,
+      --LFGListSearchPanelScrollFrame.StartGroupButton.Text,
       InterfaceOptionsSocialPanelRedockChat.Text,
       ScriptErrorsFrame.Close.Text,
       RecruitAFriendFrame.RecruitmentButton.Text,

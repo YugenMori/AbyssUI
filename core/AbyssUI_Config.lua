@@ -7,9 +7,10 @@
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
+local GetWoWVersion = ((select(4, GetBuildInfo())))
 --
-local texturepackCheck    = "1.0.1.7"
-local texturepackDate     = "26/11/20"
+--local texturepackCheck    = "1.0.1.7"
+--local texturepackDate     = "26/11/20"
 --
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
@@ -515,31 +516,6 @@ local function InitSettings()
         AbyssUI_EditBox_Frame:Show()
     end)
   end)
-  -- Skrill
-  local f = CreateFrame("Frame", nil)
-  f:RegisterEvent("PLAYER_ENTERING_WORLD")
-  f:SetScript("OnEvent", function() 
-    local FrameButton = CreateFrame("Button","$parentExtraTwitchButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(30)
-    FrameButton:SetWidth(140)
-    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -300)
-    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-    --FrameButton.text:SetFont(globalFont, 14)
-    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetText(L["Donate"].." (Skrill)")
-      if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
-        AbyssUI_ApplyFonts(FrameButton.text)
-      else
-        FrameButton.text:SetFont(globalFont, 14)
-        FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
-        FrameButton.text:SetShadowColor(0, 0, 0)
-        FrameButton.text:SetShadowOffset(1, -1)
-      end
-    FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("yugenmorimail@gmail.com")
-        AbyssUI_EditBox_Frame:Show()
-    end)
-  end)
   -- Github
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -602,6 +578,7 @@ local function InitSettings()
   t:SetAllPoints(CheckIcon_TexturePack)
   CheckIcon_TexturePack:Hide()
   -- Latest update
+  --[[
   local LatestUpdate_TexturePack = CreateFrame("Frame", "$parentLatestUpdate_TexturePack", AbyssUI_TexturePack)
   LatestUpdate_TexturePack:RegisterEvent("CHAT_MSG_ADDON")
   LatestUpdate_TexturePack:SetFrameStrata("HIGH")
@@ -627,10 +604,11 @@ local function InitSettings()
   LatestUpdate_TexturePack.text:SetTextColor(230/255, 204/255, 128/255)
   LatestUpdate_TexturePack.text:SetShadowColor(0, 0, 0)
   LatestUpdate_TexturePack.text:SetShadowOffset(1, -1)
+  --]]
   -- Download Icon
   local DownloadIcon_TexturePack = CreateFrame("Frame", "$parentDownloadIcon_TexturePack", AbyssUI_TexturePack)
   DownloadIcon_TexturePack:SetFrameStrata("HIGH")
-  DownloadIcon_TexturePack:SetHeight(128)
+  DownloadIcon_TexturePack:SetHeight(32)
   DownloadIcon_TexturePack:SetWidth(128)
   DownloadIcon_TexturePack:SetPoint("TOPRIGHT", 20, 35)
   local t = DownloadIcon_TexturePack:CreateTexture(nil, "HIGH")
@@ -640,7 +618,7 @@ local function InitSettings()
   -- OnClick
   AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
       if (button == 'LeftButton') then 
-        AbyssUI_EditBox:SetText("https://www.wowinterface.com/downloads/info25657-AbyssUI_TexturePack.html")
+        AbyssUI_EditBox:SetText("|cffFF0000This project was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions.|r")
         AbyssUI_EditBox_Frame:Show()
       end
   end)
@@ -809,40 +787,46 @@ local function HideElementsInit()
   end
   -- Show
   local function AbyssUI_ShowMicroMenu_Function()
-      for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-        MicroButtonAndBagsBar,
-        MainMenuBarPerformanceBar,
-        MainMenuMicroButton,
-        EJMicroButton,
-        CollectionsMicroButton,
-        LFDMicroButton,
-        GuildMicroButton,
-        QuestLogMicroButton,
-        TalentMicroButton,
-        SpellbookMicroButton,
-        CharacterMicroButton, }) do
-        v:Show()
-        AchievementMicroButton:SetAlpha(1)
-        StoreMicroButton:SetAlpha(1)
+    for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+      MicroButtonAndBagsBar,
+      MainMenuBarPerformanceBar,
+      MainMenuMicroButton,
+      EJMicroButton,
+      CollectionsMicroButton,
+      LFDMicroButton,
+      GuildMicroButton,
+      QuestLogMicroButton,
+      TalentMicroButton,
+      SpellbookMicroButton,
+      CharacterMicroButton, }) do
+      v:Show()
+      AchievementMicroButton:SetAlpha(1)
+      StoreMicroButton:SetAlpha(1)
     end
   end
   -- OnClick Function
   MicroMenu_CheckButton:SetScript("OnClick", function(self)
-  AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
-    if AbyssUIAddonSettings.HideMicroMenu == true then
-      AbyssUI_HideMicroMenu_Function()
-    else
-      AbyssUI_ShowMicroMenu_Function()
-    end
-  end)
-  -- After Login/Reload
-  MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-  MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
+  if (GetWoWVersion ~= 20501) then
+    AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
       if AbyssUIAddonSettings.HideMicroMenu == true then
         AbyssUI_HideMicroMenu_Function()
       else
         AbyssUI_ShowMicroMenu_Function()
+      end
+   else 
+     UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+   end
+  end)
+  -- After Login/Reload
+  MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (GetWoWVersion ~= 20501) then
+      if (event == "PLAYER_ENTERING_WORLD") then
+        if AbyssUIAddonSettings.HideMicroMenu == true then
+          AbyssUI_HideMicroMenu_Function()
+        else
+          AbyssUI_ShowMicroMenu_Function()
+        end
       end
     end
   end)
@@ -855,24 +839,44 @@ local function HideElementsInit()
   -- OnClick Function
   Gryphons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-    if AbyssUIAddonSettings.HideGryphons == true then
-      MainMenuBarArtFrame.RightEndCap:Hide()
-      MainMenuBarArtFrame.LeftEndCap:Hide()
-    else
-      MainMenuBarArtFrame.RightEndCap:Show()
-      MainMenuBarArtFrame.LeftEndCap:Show()
-    end
-  end)
-  -- After Login/Reload
-  Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-  Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
+    if (GetWoWVersion ~= 20501) then
       if AbyssUIAddonSettings.HideGryphons == true then
         MainMenuBarArtFrame.RightEndCap:Hide()
         MainMenuBarArtFrame.LeftEndCap:Hide()
       else
         MainMenuBarArtFrame.RightEndCap:Show()
         MainMenuBarArtFrame.LeftEndCap:Show()
+      end
+    else
+      if AbyssUIAddonSettings.HideGryphons == true then
+        MainMenuBarLeftEndCap:Hide()
+        MainMenuBarRightEndCap:Hide()
+      else
+        MainMenuBarLeftEndCap:Show()
+        MainMenuBarRightEndCap:Show()
+      end
+    end
+  end)
+  -- After Login/Reload
+  Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if (GetWoWVersion ~= 20501) then
+        if AbyssUIAddonSettings.HideGryphons == true then
+          MainMenuBarArtFrame.RightEndCap:Hide()
+          MainMenuBarArtFrame.LeftEndCap:Hide()
+        else
+          MainMenuBarArtFrame.RightEndCap:Show()
+          MainMenuBarArtFrame.LeftEndCap:Show()
+        end
+      else
+        if AbyssUIAddonSettings.HideGryphons == true then
+          MainMenuBarLeftEndCap:Hide()
+          MainMenuBarRightEndCap:Hide()
+        else
+          MainMenuBarLeftEndCap:Show()
+          MainMenuBarRightEndCap:Show()
+        end
       end
     end
   end)
@@ -917,10 +921,12 @@ local function HideElementsInit()
   ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if AbyssUIAddonSettings.HideObjectiveTracker == true then
-        ObjectiveTrackerFrame:Hide()
-      else
-        ObjectiveTrackerFrame:Show()
+      if (GetWoWVersion ~= 20501) then
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          ObjectiveTrackerFrame:Hide()
+        else
+          ObjectiveTrackerFrame:Show()
+        end
       end
     end
   end)
@@ -3586,7 +3592,9 @@ local function AbyssUI_SliderSaveLoad()
       --
       MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
       BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
-      ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
+      if (GetWoWVersion ~= 20501) then
+        ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
+      end
       CompactRaidFrameContainer:SetScale(AbyssUIAddonSettings[character].Slider.RaidFrameSlider)
     end
   end)

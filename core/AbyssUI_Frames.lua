@@ -6,6 +6,7 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local GetWoWVersion = ((select(4, GetBuildInfo())))
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 --
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
@@ -109,7 +110,7 @@ local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Backgrou
 AbyssUI_EditBox_Frame = CreateFrame("Frame", "$parentAbyssUI_EditBox_Frame", AbyssUI_Config.childpanel1)
 AbyssUI_EditBox_Frame:Hide()
 AbyssUI_EditBox_Frame:SetWidth(500)
-AbyssUI_EditBox_Frame:SetHeight(64)
+AbyssUI_EditBox_Frame:SetHeight(128)
 AbyssUI_EditBox_Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "CENTER", 0, 0)
 AbyssUI_EditBox_Frame:EnableMouse(true)
 AbyssUI_EditBox_Frame:SetClampedToScreen(true)
@@ -259,8 +260,12 @@ PlayerInfo_Class1.text:SetPoint("BOTTOMLEFT", 5, 90)
 PlayerInfo_Class1.text:SetText(playerClass)
 -- Current Specialization
 local PlayerInfo_CurrentSpec1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentSpec1", AbyssUI_AFKCameraFrame)
-local currentSpec = GetSpecialization()
-local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+if (GetWoWVersion ~= 20501) then 
+	local currentSpec = GetSpecialization()
+	local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+else 
+	return nil
+end
 PlayerInfo_CurrentSpec1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_CurrentSpec1:SetScale(3)
 PlayerInfo_CurrentSpec1.text = PlayerInfo_CurrentSpec1.text or PlayerInfo_CurrentSpec1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")

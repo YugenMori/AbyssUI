@@ -7,6 +7,7 @@
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
+local GetWoWVersion = ((select(4, GetBuildInfo())))
 --
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)

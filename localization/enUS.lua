@@ -328,3 +328,4 @@ L["Always Show Titles"] = true
 L["Always show people titles on their names"] = true
 L["Green Health Bars"] = true
 L["All unitframe health bars will be green (default)"] = true
+L["Not available in this version of WoW!"] = true

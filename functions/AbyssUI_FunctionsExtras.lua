@@ -6,6 +6,7 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local GetWoWVersion = ((select(4, GetBuildInfo())))
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -341,12 +342,16 @@ end)
 ----------------------------------------------
 -- NamePlate Style
 --  Move nametag
-hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
-	if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
-		frame.name:ClearAllPoints()
-		PixelUtil.SetPoint(frame.name, "BOTTOM", frame.healthBar, "TOP", 0, 4)
-	end
-end)
+if (GetWoWVersion ~= 20501) then
+	hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
+		if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
+			frame.name:ClearAllPoints()
+			PixelUtil.SetPoint(frame.name, "BOTTOM", frame.healthBar, "TOP", 0, 4)
+		end
+	end)
+else 
+	return nil
+end
 ----------------------------------------------
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)

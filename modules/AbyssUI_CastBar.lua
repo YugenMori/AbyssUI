@@ -6,6 +6,7 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
+local GetWoWVersion = ((select(4, GetBuildInfo())))
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -176,12 +177,16 @@ f:SetScript("OnEvent", function(self, event)
 	end)
 end)
 -- TimerTracker fixes
-TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds, totalTime)
-  if event ~= "START_TIMER" then return end
-  AbyssUI_FrameSize(TimerTrackerTimer1StatusBar, 200, 20)
-  AbyssUI_RegionListSize(TimerTrackerTimer1StatusBar, 200, 20)
-	TimerTrackerTimer1StatusBarBorder:Hide()
-end)
+if (GetWoWVersion ~= 20501) then
+	TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds, totalTime)
+	  if event ~= "START_TIMER" then return end
+	  AbyssUI_FrameSize(TimerTrackerTimer1StatusBar, 200, 20)
+	  AbyssUI_RegionListSize(TimerTrackerTimer1StatusBar, 200, 20)
+		TimerTrackerTimer1StatusBarBorder:Hide()
+	end)
+else
+	return nil
+end
 
 
 --[[
