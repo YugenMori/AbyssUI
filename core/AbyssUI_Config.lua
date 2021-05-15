@@ -618,7 +618,7 @@ local function InitSettings()
   -- OnClick
   AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
       if (button == 'LeftButton') then 
-        AbyssUI_EditBox:SetText("|cffFF0000This project was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions.|r")
+        AbyssUI_EditBox:SetText("https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
         AbyssUI_EditBox_Frame:Show()
       end
   end)
