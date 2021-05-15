@@ -246,8 +246,10 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
 		Minimap_ZoomOut()
 	end
 end)
-MiniMapTracking:ClearAllPoints()
-MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
+if (GetWoWVersion ~= 20501) then
+	MiniMapTracking:ClearAllPoints()
+	MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
+end
 ----------------------------------------------------
 -- Tooltip Class Color and extras 
 GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
@@ -836,9 +838,6 @@ C_WowTokenPublic.UpdateMarketPrice()
 		print(L["The improved World of Warcraft user interface."])
 	end)
 	C_Timer.After(4, function()
-		if (GetWoWVersion ~= 20501) then
-			local HonorLevel = UnitHonorLevel("player")
-		end
 		local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
 		print(L["|cfff2dc7fAbyssUI Daily Info|r"])
 		if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
@@ -852,6 +851,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
 		if (GetWoWVersion ~= 20501) then
+			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end
 		print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")

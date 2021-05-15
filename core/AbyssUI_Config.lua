@@ -390,7 +390,6 @@ local function InitSettings()
     FrameButton:SetScript("OnClick", function()
     C_WowTokenPublic.UpdateMarketPrice()
       C_Timer.After(0.5, function()
-        local HonorLevel = UnitHonorLevel("player")
         local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
         print(L["|cfff2dc7fAbyssUI Daily Info|r"])
         if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
@@ -403,7 +402,10 @@ local function InitSettings()
         else
           print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
         end
-        print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
+        if (GetWoWVersion ~= 20501) then
+          local HonorLevel = UnitHonorLevel("player")
+          print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
+        end
         print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
         print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
       end)
@@ -500,7 +502,7 @@ local function InitSettings()
     FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
     --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetText(L["Donate"].." (Paypal)")
+    FrameButton.text:SetText(L["Donate"])
       if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
         AbyssUI_ApplyFonts(FrameButton.text)
       else
@@ -806,13 +808,14 @@ local function HideElementsInit()
   MicroMenu_CheckButton:SetScript("OnClick", function(self)
   if (GetWoWVersion ~= 20501) then
     AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
-      if AbyssUIAddonSettings.HideMicroMenu == true then
-        AbyssUI_HideMicroMenu_Function()
-      else
-        AbyssUI_ShowMicroMenu_Function()
-      end
+    if AbyssUIAddonSettings.HideMicroMenu == true then
+      AbyssUI_HideMicroMenu_Function()
+    else
+      AbyssUI_ShowMicroMenu_Function()
+    end
    else 
-     UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      MicroMenu_CheckButton:SetChecked(nil)
    end
   end)
   -- After Login/Reload
@@ -1348,21 +1351,28 @@ local function HideElementsInit()
   HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFrame)
   -- OnClick Function
   HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
+    if (GetWoWVersion ~= 20501) then
+      AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
       if (AbyssUIAddonSettings.HideConvenantFrame == true) then
         GarrisonLandingPageMinimapButton:Hide()
       else
         GarrisonLandingPageMinimapButton:Show()
       end
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      HideConvenantFrame_CheckButton:SetChecked(nil)
+    end
   end)
   -- After Login/Reload
   HideConvenantFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (AbyssUIAddonSettings.HideConvenantFrame == true) then
-        C_Timer.After(1, function()
-          GarrisonLandingPageMinimapButton:Hide(0)
-        end)
+      if (GetWoWVersion ~= 20501) then
+        if (AbyssUIAddonSettings.HideConvenantFrame == true) then
+          C_Timer.After(1, function()
+            GarrisonLandingPageMinimapButton:Hide(0)
+          end)
+        end
       end
     end
   end)
@@ -1739,8 +1749,13 @@ local function Miscellaneous()
   addonTable.DisableNewMinimap = DisableNewMinimap_CheckButton
   -- OnClick Function
   DisableNewMinimap_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.DisableNewMinimap = self:GetChecked()
-    AbyssUI_ReloadFrame:Show()
+    if (GetWoWVersion ~= 20501) then
+      AbyssUIAddonSettings.DisableNewMinimap = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else 
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      DisableNewMinimap_CheckButton:SetChecked(nil)
+    end
   end)
   -- Disable UnitFrame Smoke --
   local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -1981,12 +1996,17 @@ local function TweaksExtra()
   addonTable.SquareMinimap = SquareMinimap_CheckButton
   -- OnClick Function
   SquareMinimap_CheckButton:SetScript("OnClick", function(self)
-    if (AbyssUIAddonSettings.DisableNewMinimap == true) then
-      UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
-      SquareMinimap_CheckButton:SetChecked(nil)
+    if (GetWoWVersion ~= 20501) then
+      if (AbyssUIAddonSettings.DisableNewMinimap == true) then
+        UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
+        SquareMinimap_CheckButton:SetChecked(nil)
+      else
+        AbyssUIAddonSettings.SquareMinimap = self:GetChecked()
+        AbyssUI_ReloadFrame:Show()
+      end
     else
-      AbyssUIAddonSettings.SquareMinimap = self:GetChecked()
-      AbyssUI_ReloadFrame:Show()
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      SquareMinimap_CheckButton:SetChecked(nil)
     end
   end)
   -- Keep UnitFrame Dark --
