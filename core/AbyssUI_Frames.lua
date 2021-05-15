@@ -107,7 +107,7 @@ local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Backgrou
 ----------------------------------------------------
 ----------------------------------------------------
 -- AbyssUI_EditBox_Frame
-AbyssUI_EditBox_Frame = CreateFrame("Frame", "$parentAbyssUI_EditBox_Frame", AbyssUI_Config.childpanel1)
+local AbyssUI_EditBox_Frame = CreateFrame("Frame", "AbyssUI_EditBox_Frame", AbyssUI_Config.childpanel1)
 AbyssUI_EditBox_Frame:Hide()
 AbyssUI_EditBox_Frame:SetWidth(500)
 AbyssUI_EditBox_Frame:SetHeight(128)
@@ -163,7 +163,7 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- EditBox
-AbyssUI_EditBox= CreateFrame("EditBox", "$parentEditBox_TexturePack", AbyssUI_EditBox_Frame)
+local AbyssUI_EditBox= CreateFrame("EditBox", "AbyssUI_EditBox", AbyssUI_EditBox_Frame)
 AbyssUI_EditBox:SetFont(globalFont, 14, "THINOUTLINE")
 AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
 AbyssUI_EditBox:SetMultiLine(true)
@@ -172,7 +172,7 @@ AbyssUI_EditBox:SetWidth(450)
 ----------------------------------------------------
 ----------------------------------------------------
 -- AbyssUI_AFKCameraFrame
-local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "$parentAbyssUI_AFKCameraFrame", WorldFrame)
+local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "AbyssUI_AFKCameraFrame", WorldFrame)
 AbyssUI_AFKCameraFrame:SetFrameStrata("HIGH")
 AbyssUI_AFKCameraFrame:SetScale(UIParent:GetScale())
 AbyssUI_AFKCameraFrame:SetAllPoints(UIParent)
@@ -263,8 +263,6 @@ local PlayerInfo_CurrentSpec1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentS
 if (GetWoWVersion ~= 20501) then 
 	local currentSpec = GetSpecialization()
 	local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
-else 
-	return nil
 end
 PlayerInfo_CurrentSpec1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_CurrentSpec1:SetScale(3)
@@ -281,20 +279,26 @@ PlayerInfo_Level1.text:SetPoint("BOTTOMLEFT", 5, 70)
 PlayerInfo_Level1.text:SetText(L["Level: "]..level)
 -- Honor Level
 local PlayerInfo_Honor1 = CreateFrame("Frame", "$parentPlayerInfo_Honor1", AbyssUI_AFKCameraFrame)
-local HonorLevel = UnitHonorLevel("player")
+if (GetWoWVersion ~= 20501) then 
+	local HonorLevel = UnitHonorLevel("player")
+end
 PlayerInfo_Honor1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Honor1:SetScale(3)
 PlayerInfo_Honor1.text = PlayerInfo_Honor1.text or PlayerInfo_Honor1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 PlayerInfo_Honor1.text:SetPoint("BOTTOMLEFT", 5, 60)
-PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
+if (GetWoWVersion ~= 20501) then
+	PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
+end
 -- Item Level
-local PlayerInfo_ILevel1 = CreateFrame("Frame", "$parentPlayerInfo_ILevel1", AbyssUI_AFKCameraFrame)
-local overall, equipped = GetAverageItemLevel()
-PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
-PlayerInfo_ILevel1:SetScale(3)
-PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
-PlayerInfo_ILevel1.text:SetText(L["Item Level: "]..floor(overall + 0.5))
+if (GetWoWVersion ~= 20501) then
+	local PlayerInfo_ILevel1 = CreateFrame("Frame", "$parentPlayerInfo_ILevel1", AbyssUI_AFKCameraFrame)
+	local overall, equipped = GetAverageItemLevel()
+	PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
+	PlayerInfo_ILevel1:SetScale(3)
+	PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+	PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
+	PlayerInfo_ILevel1.text:SetText(L["Item Level: "]..floor(overall + 0.5))
+end
 -- Zone
 local PlayerInfo_CurrentZone1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentZone1", AbyssUI_AFKCameraFrame)
 local zoneName = GetZoneText()
@@ -352,14 +356,17 @@ if (englishClass == "DEATHKNIGHT") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(196/255, 30/255, 59/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(196/255, 30/255, 59/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(196/255, 30/255, 59/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(196/255, 30/255, 59/255)
+		end
 	end 
 elseif (englishClass == "DEMONHUNTER") then
 	for i, v in pairs({ 
@@ -369,14 +376,17 @@ elseif (englishClass == "DEMONHUNTER") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(163/255, 48/255, 201/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(163/255, 48/255, 201/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(163/255, 48/255, 201/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(163/255, 48/255, 201/255)
+		end
 	end 
 elseif (englishClass == "DRUID") then
 	for i, v in pairs({ 
@@ -386,14 +396,17 @@ elseif (englishClass == "DRUID") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(255/255, 125/255, 10/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(255/255, 125/255, 10/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(255/255, 125/255, 10/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 125/255, 10/255)
+		end
 	end 
 elseif (englishClass == "HUNTER") then
 	for i, v in pairs({ 
@@ -410,7 +423,12 @@ elseif (englishClass == "HUNTER") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(171/255, 212/255, 115/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(171/255, 212/255, 115/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(171/255, 212/255, 115/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(171/255, 212/255, 115/255)
+		end
 	end 
 elseif (englishClass == "MAGE") then
 	for i, v in pairs({ 
@@ -427,7 +445,12 @@ elseif (englishClass == "MAGE") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(105/255, 204/255, 240/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(105/255, 204/255, 240/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(105/255, 204/255, 240/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(105/255, 204/255, 240/255)
+		end
 	end 
 elseif (englishClass == "MONK") then
 	for i, v in pairs({ 
@@ -444,7 +467,12 @@ elseif (englishClass == "MONK") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(0/255, 255/255, 150/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(0/255, 255/255, 150/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(0/255, 255/255, 150/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(0/255, 255/255, 150/255)
+		end
 	end 
 elseif (englishClass == "PALADIN") then
 	for i, v in pairs({ 
@@ -461,7 +489,12 @@ elseif (englishClass == "PALADIN") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(245/255, 140/255, 186/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(245/255, 140/255, 186/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(245/255, 140/255, 186/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(245/255, 140/255, 186/255)
+		end
 	end 
 elseif (englishClass == "PRIEST") then
 	for i, v in pairs({ 
@@ -478,7 +511,12 @@ elseif (englishClass == "PRIEST") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(255/255, 255/255, 255/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(255/255, 255/255, 255/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(255/255, 255/255, 255/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 255/255, 255/255)
+		end
 	end 
 elseif (englishClass == "ROGUE") then
 	for i, v in pairs({
@@ -495,7 +533,12 @@ elseif (englishClass == "ROGUE") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(255/255, 245/255, 105/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(255/255, 245/255, 105/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(255/255, 245/255, 105/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 245/255, 105/255)
+		end
 	end 
 elseif (englishClass == "SHAMAN") then
 	for i, v in pairs({ 
@@ -512,7 +555,12 @@ elseif (englishClass == "SHAMAN") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(0/255, 112/255, 222/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(0/255, 112/255, 222/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(0/255, 112/255, 222/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(0/255, 112/255, 222/255)
+		end
 	end 
 elseif (englishClass == "WARLOCK") then
 	for i, v in pairs({ 
@@ -529,7 +577,12 @@ elseif (englishClass == "WARLOCK") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(148/255, 130/255, 201/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(148/255, 130/255, 201/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(148/255, 130/255, 201/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(148/255, 130/255, 201/255)
+		end
 	end 
 elseif (englishClass == "WARRIOR") then
 	for i, v in pairs({ 
@@ -546,7 +599,12 @@ elseif (englishClass == "WARRIOR") then
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
-		v.text:SetVertexColor(199/255, 156/255, 110/255)
+		if (GetWoWVersion ~= 20501) then 
+			v.text:SetVertexColor(199/255, 156/255, 110/255)
+		else
+			PlayerInfo_Honor1.text:SetVertexColor(199/255, 156/255, 110/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(199/255, 156/255, 110/255)
+		end
 	end 
 else
 	return nil
@@ -559,10 +617,12 @@ local function AbyssUI_UpdateAFKCameraData()
 	level = UnitLevel("player")
 	race, raceEn = UnitRace("player")
 	playerClass, englishClass = UnitClass("player")
-	HonorLevel = UnitHonorLevel("player")
-	overall, equipped = GetAverageItemLevel()
-	currentSpec = GetSpecialization()
-	currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+	if (GetWoWVersion ~= 20501) then
+		HonorLevel = UnitHonorLevel("player")
+		overall, equipped = GetAverageItemLevel()
+		currentSpec = GetSpecialization()
+		currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+	end
 	zoneName = GetZoneText()
 	guildName, guildRankName, guildRankIndex = GetGuildInfo("player")
 	if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
@@ -579,10 +639,12 @@ local function AbyssUI_UpdateAFKCameraData()
 	PlayerInfo_Race1.text:SetText(race)
 	PlayerInfo_Class1.text:SetText(playerClass)
 	ExtraInfo_Clock1.text:SetText(dataTime)
-	PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
-	PlayerInfo_ILevel1.text:SetText(L["Item Level: "]..floor(overall + 0.5))
+	if (GetWoWVersion ~= 20501) then
+		PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
+		PlayerInfo_ILevel1.text:SetText(L["Item Level: "]..floor(overall + 0.5))
+		PlayerInfo_CurrentSpec1.text:SetText(currentSpecName)
+	end
 	PlayerInfo_GoldAmount1.text:SetText(currency..": |cfff2dc7f"..money.."|r")
-	PlayerInfo_CurrentSpec1.text:SetText(currentSpecName)
 	PlayerInfo_CurrentZone1.text:SetText(zoneName)
 	PlayerInfo_Guild1.text:SetText(guildName)
 end
@@ -796,7 +858,7 @@ AbyssUI_LevelUpFrame:SetScript("OnEvent", function(self, event, ...)
 end)
 ----------------------------------------------------
 -- AbyssUIFirstFrame
-local AbyssUIFirstFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
+local AbyssUIFirstFrame = CreateFrame("Frame", "AbyssUIFirstFrame", UIParent)
 AbyssUIFirstFrame:Hide()
 AbyssUIFirstFrame:SetWidth(GetScreenWidth())
 AbyssUIFirstFrame:SetHeight(GetScreenHeight())
@@ -867,7 +929,7 @@ FrameButton:SetScript("OnClick", function()
 end)
 ----------------------------------------------------
 -- AbyssUISecondFrame
-AbyssUISecondFrame = CreateFrame("Frame", "$parentAbyssUIFirstFrame", UIParent)
+local AbyssUISecondFrame = CreateFrame("Frame", "AbyssUISecondFrame", UIParent)
 AbyssUISecondFrame:Hide()
 AbyssUISecondFrame:SetWidth(GetScreenWidth())
 AbyssUISecondFrame:SetHeight(GetScreenHeight())
@@ -1128,7 +1190,7 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ReloadFrame
-AbyssUI_ReloadFrame = CreateFrame("Frame", "$parentAbyssUI_ReloadFrame", UIParent)
+local AbyssUI_ReloadFrame = CreateFrame("Frame", "AbyssUI_ReloadFrame", UIParent)
 AbyssUI_ReloadFrame:Hide()
 AbyssUI_ReloadFrame:SetWidth(400)
 AbyssUI_ReloadFrame:SetHeight(150)
@@ -1192,7 +1254,7 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ReloadFrameFadeUI
-AbyssUI_ReloadFrameFadeUI = CreateFrame("Frame", "$parentAbyssUI_ReloadFrameFadeUI", UIParent)
+local AbyssUI_ReloadFrameFadeUI = CreateFrame("Frame", "AbyssUI_ReloadFrameFadeUI", UIParent)
 AbyssUI_ReloadFrameFadeUI:Hide()
 AbyssUI_ReloadFrameFadeUI:SetWidth(500)
 AbyssUI_ReloadFrameFadeUI:SetHeight(180)
@@ -1256,7 +1318,7 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- AbyssUI_ActionBarCleaner
-AbyssUI_ActionBarCleaner = CreateFrame("Frame", "$parentAbyssUI_ActionBarCleaner", UIParent)
+local AbyssUI_ActionBarCleaner = CreateFrame("Frame", "AbyssUI_ActionBarCleaner", UIParent)
 AbyssUI_ActionBarCleaner:Hide()
 AbyssUI_ActionBarCleaner:SetWidth(400)
 AbyssUI_ActionBarCleaner:SetHeight(150)

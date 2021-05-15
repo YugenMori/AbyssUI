@@ -6,6 +6,7 @@
 --------------------------------------------------------------
 -- DarkerUI Core--
 --------------------------------------------------------------
+local addonName, addonTable = ...
 local GetWoWVersion = ((select(4, GetBuildInfo())))
 local function AbyssUI_ColorizationFrameFunction(...)
 	local v = ...
@@ -204,14 +205,12 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				MainMenuBarArtFrameBackground.BackgroundLarge, }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
 				end
 			end
 		else
 			for i, v in pairs({ 
 				MainMenuBarLeftEndCap,
-				MainMenuBarRightEndCap, }) do
+				MainMenuBarRightEndCap,  }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 				else

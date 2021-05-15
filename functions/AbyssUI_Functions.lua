@@ -621,12 +621,18 @@ objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
 objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
 	local inInstance, instanceType = IsInInstance()
-	if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
-		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
-	elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
-		UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
-	else 
-		return nil
+	if (GetWoWVersion ~= 20501) then 
+		if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+			UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
+		elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+			UIFrameFadeIn(ObjectiveTrackerFrame, 1, 0, 1)
+		end
+		else
+			if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+			UIFrameFadeIn(QuestWatchFrame, 1, 1, 0)
+		elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
+			UIFrameFadeIn(QuestWatchFrame, 1, 0, 1)
+		end
 	end
 end)
 -- Entering World / PvP
@@ -675,30 +681,60 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	if (AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
 	    if (AbyssUIAddonSettings.MinimalActionBar == true) then
 	    	C_Timer.After(1, function()
-	    		for i, v in pairs ({
-	   				MainMenuBarArtFrame.LeftEndCap,
-		    		MainMenuBarArtFrame.RightEndCap,
-		    		MainMenuBarArtFrameBackground,
-		    		MicroButtonAndBagsBar.MicroBagBar,
-		    		MicroButtonAndBagsBar,
-		    		ActionBarUpButton,
-		    		ActionBarDownButton,
-		    		MainMenuBarArtFrame.PageNumber,
-				    MainMenuMicroButton,
-				    EJMicroButton,
-				    CollectionsMicroButton,
-				    LFDMicroButton,
-				    GuildMicroButton,
-				    QuestLogMicroButton,
-				    TalentMicroButton,
-				    SpellbookMicroButton,
-				    CharacterMicroButton,
-	    		}) do
-	    			AchievementMicroButton:SetAlpha(0)
-		    		StoreMicroButton:SetAlpha(0)
-		    		StatusTrackingBarManager:SetAlpha(0)
-	    			v:Hide() 
-		    	end
+	    		if (GetWoWVersion ~= 20501) then
+		    		for i, v in pairs ({
+		   				MainMenuBarArtFrame.LeftEndCap,
+			    		MainMenuBarArtFrame.RightEndCap,
+			    		MainMenuBarArtFrameBackground,
+			    		MicroButtonAndBagsBar.MicroBagBar,
+			    		MicroButtonAndBagsBar,
+			    		ActionBarUpButton,
+			    		ActionBarDownButton,
+			    		MainMenuBarArtFrame.PageNumber,
+					    MainMenuMicroButton,
+					    EJMicroButton,
+					    CollectionsMicroButton,
+					    LFDMicroButton,
+					    GuildMicroButton,
+					    QuestLogMicroButton,
+					    TalentMicroButton,
+					    SpellbookMicroButton,
+					    CharacterMicroButton,
+		    		}) do
+		    			AchievementMicroButton:SetAlpha(0)
+			    		StoreMicroButton:SetAlpha(0)
+			    		StatusTrackingBarManager:SetAlpha(0)
+		    			v:Hide() 
+			    	end
+			    else
+			    	for i, v in pairs ({
+  						MainMenuBarLeftEndCap,
+							MainMenuBarRightEndCap,
+			    		MainMenuBarArtFrameBackground,
+			    		ActionBarUpButton,
+			    		ActionBarDownButton,
+			    		MainMenuBarArtFrame.PageNumber,
+					    MainMenuMicroButton,
+					    EJMicroButton,
+					    CollectionsMicroButton,
+					    LFDMicroButton,
+					    GuildMicroButton,
+					    QuestLogMicroButton,
+					    TalentMicroButton,
+					    SpellbookMicroButton,
+					    CharacterMicroButton,
+					    SocialsMicroButton,	
+					    WorldMapMicroButton,
+					    HelpMicroButton,
+					    CharacterBag0Slot,
+					    CharacterBag1Slot,
+					    CharacterBag2Slot,
+					    CharacterBag3Slot,
+					    MainMenuBarBackpackButton,
+					  }) do
+	    				v:Hide()
+			    	end
+			    end
 	    	end)
 	    else
 			return nil
@@ -753,28 +789,32 @@ end)
 local checkRune = CreateFrame("Frame", nil)
 checkRune:RegisterEvent("PLAYER_ENTERING_WORLD")
 checkRune:SetScript("OnEvent", function()
-	if (AbyssUIAddonSettings.DKHordePortrait 		== true or 
-		AbyssUIAddonSettings.DKAllyPortrait 		== true or 
-		AbyssUIAddonSettings.DemonHunterPortrait 	== true) then
+	if (AbyssUIAddonSettings.DKHordePortrait == true or 
+		AbyssUIAddonSettings.DKAllyPortrait == true or 
+		AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		PetFrame:SetFrameLevel(4)
-		PlayerFrameAlternateManaBar:SetFrameLevel(4)
+		if (GetWoWVersion ~= 20501) then
+			PlayerFrameAlternateManaBar:SetFrameLevel(4)
+		end
 	else
 		return nil
 	end
-	if (AbyssUIAddonSettings.DKHordePortrait == true) then
-		RuneFrame:ClearAllPoints()
-		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
-		RuneFrame:SetFrameLevel(1)
-	elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
-		RuneFrame:ClearAllPoints()
-		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 44, 15)
-		RuneFrame:SetFrameLevel(6)
-	elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
-		RuneFrame:ClearAllPoints()
-		RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
-		RuneFrame:SetFrameLevel(1)
-	else
-		return nil
+	if (GetWoWVersion ~= 20501) then
+		if (AbyssUIAddonSettings.DKHordePortrait == true) then
+			RuneFrame:ClearAllPoints()
+			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
+			RuneFrame:SetFrameLevel(1)
+		elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
+			RuneFrame:ClearAllPoints()
+			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 44, 15)
+			RuneFrame:SetFrameLevel(6)
+		elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
+			RuneFrame:ClearAllPoints()
+			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
+			RuneFrame:SetFrameLevel(1)
+		else
+			return nil
+		end
 	end
 end)
 ----------------------------------------------------

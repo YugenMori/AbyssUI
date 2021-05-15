@@ -6,12 +6,10 @@
 --------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
-local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 local GetWoWVersion = ((select(4, GetBuildInfo())))
---
+local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 --local texturepackCheck    = "1.0.1.7"
 --local texturepackDate     = "26/11/20"
---
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -911,10 +909,18 @@ local function HideElementsInit()
   -- OnClick Function
   ObjTracker_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
-    if AbyssUIAddonSettings.HideObjectiveTracker == true then
-      ObjectiveTrackerFrame:Hide()
+    if (GetWoWVersion ~= 20501) then
+      if AbyssUIAddonSettings.HideObjectiveTracker == true then
+        ObjectiveTrackerFrame:Hide()
+      else
+        ObjectiveTrackerFrame:Show()
+      end
     else
-      ObjectiveTrackerFrame:Show()
+      if AbyssUIAddonSettings.HideObjectiveTracker == true then
+        QuestWatchFrame:Hide()
+      else
+        QuestWatchFrame:Show()
+      end
     end
   end)
   -- After Login/Reload
@@ -926,6 +932,12 @@ local function HideElementsInit()
           ObjectiveTrackerFrame:Hide()
         else
           ObjectiveTrackerFrame:Show()
+        end
+      else
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          QuestWatchFrame:Hide()
+        else
+          QuestWatchFrame:Show()
         end
       end
     end
@@ -1149,23 +1161,28 @@ local function HideElementsInit()
   HideChatButtons_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
     if (AbyssUIAddonSettings.HideChatButtons == true) then
-      QuickJoinToastButton:Hide()
+      if (GetWoWVersion ~= 20501) then
+        QuickJoinToastButton:Hide()
+        ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
+        ChatFrameToggleVoiceMuteButton:SetAlpha(0)
+      end
       GeneralDockManager:SetAlpha(0)
       ChatFrameMenuButton:Hide()
       ChatFrameChannelButton:Hide()
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
-      ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
-      ChatFrameToggleVoiceMuteButton:SetAlpha(0)
+
     else 
-      QuickJoinToastButton:Show()
+      if (GetWoWVersion ~= 20501) then
+        QuickJoinToastButton:Show()
+        ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
+        ChatFrameToggleVoiceMuteButton:SetAlpha(1)
+      end
       GeneralDockManager:SetAlpha(1)
       ChatFrameMenuButton:Show()
       ChatFrameChannelButton:Show()
       ChatFrame1ButtonFrame:SetAlpha(1)
       AbyssUI_ChatHideFrame:Show()
-      ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
-      ChatFrameToggleVoiceMuteButton:SetAlpha(1)
     end
   end)
   -- After Login/Reload

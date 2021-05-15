@@ -47,8 +47,8 @@ localization\zhTW.lua
 
 # AbyssUI
 core\AbyssUI.lua
-core\AbyssUI_Config.lua
 core\AbyssUI_Frames.lua
+core\AbyssUI_Config.lua
 
 functions\AbyssUI_Functions.lua
 functions\AbyssUI_FunctionsExtras.lua
