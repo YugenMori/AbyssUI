@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + BCC
 --
 -- Configuration page for AbyssUI
 --------------------------------------------------------------
@@ -136,15 +136,20 @@ local function InitSettings()
   AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
   --
-  AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel7.name = L["Scale & Frame Size"]
+  AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel7.name = "Classic & BCC"
   AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
   --
-  AbyssUI_Config.childpanel8 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel8.name = L["Thanks & Translations"]
+  AbyssUI_Config.childpanel8 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel8.name = L["Scale & Frame Size"]
   AbyssUI_Config.childpanel8.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
+  --
+  AbyssUI_Config.childpanel9 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel9.name = L["Thanks & Translations"]
+  AbyssUI_Config.childpanel9.parent = AbyssUI_Config.panel.name
+  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel9)
   --------------------------------------------------------------
   -- Title
   local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.panel)
@@ -291,7 +296,7 @@ local function InitSettings()
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Frames"])
-  -- Panel 07 (Scale)
+  -- Panel 07 (Classic)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel07", AbyssUI_Config.childpanel7)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel7, "TOP", 0, -20)
   Frame:SetWidth(600)
@@ -299,10 +304,19 @@ local function InitSettings()
   Frame:SetScale(1.5)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetText(L["Scale & Frame Size"])
-  -- Panel 08 (Thanks)
+  Frame:SetText("Classic & BCC")
+  -- Panel 08 (Scale)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel08", AbyssUI_Config.childpanel8)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel8, "TOP", 0, -20)
+  Frame:SetWidth(600)
+  Frame:SetHeight(40)
+  Frame:SetScale(1.5)
+  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  Frame:SetAllPoints()
+  Frame:SetText(L["Scale & Frame Size"])
+  -- Panel 09 (Thanks)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel09", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel9, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -503,14 +517,49 @@ local function InitSettings()
     --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
     FrameButton.text:SetText(L["Donate"])
-      if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
-        AbyssUI_ApplyFonts(FrameButton.text)
-      else
-        FrameButton.text:SetFont(globalFont, 14)
-        FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
-        FrameButton.text:SetShadowColor(0, 0, 0)
-        FrameButton.text:SetShadowOffset(1, -1)
-      end
+    -- animation
+    FrameButton.GlowTexture = FrameButton:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
+    FrameButton.GlowTexture:SetAllPoints()
+    FrameButton.GlowTexture:Hide()
+    FrameButton.Glow = FrameButton:CreateAnimationGroup()
+    FrameButton.Glow:SetLooping("REPEAT")
+    local anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetChildKey("GlowTexture")
+    anim:SetOrder(1)
+    anim:SetFromAlpha(0)
+    anim:SetToAlpha(1)
+    anim:SetDuration(0.5)
+    anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetOrder(2)
+    anim:SetChildKey("GlowTexture")
+    anim:SetFromAlpha(1)
+    anim:SetToAlpha(0)
+    anim:SetDuration(0.5)
+    FrameButton.Glow:SetScript("OnPlay", function(self)
+      self:GetParent().GlowTexture:Show()
+    end)
+    FrameButton.Glow:SetScript("OnStop", function(self)
+      self:GetParent().GlowTexture:Hide()
+    end)
+    if not FrameButton.running then
+      FrameButton.running = true
+      FrameButton.Glow:Play()
+    else
+      FrameButton.running = false
+      FrameButton.Glow:Stop()
+    end
+    if(not FrameButton:IsShown()) then
+      FrameButton.Glow:Stop()
+    end
+    --
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 14)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
     FrameButton:SetScript("OnClick", function()
         AbyssUI_EditBox:SetText("https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
         AbyssUI_EditBox_Frame:Show()
@@ -2147,11 +2196,98 @@ local function TweaksExtra()
   end)
 end
 -- End
+----------------------------------- Classic & BCC -----------------------------------
+local function ClassicBCC()
+  local InfoPanelSubText = CreateFrame("Frame", "$parentInfoPanelSubText", AbyssUI_Config.childpanel7)
+  InfoPanelSubText:SetPoint("TOPLEFT", 20, -40)
+  InfoPanelSubText:SetHeight(60)
+  InfoPanelSubText:SetWidth(600)
+  InfoPanelSubText:SetScale(1)
+  InfoPanelSubText = InfoPanelSubText:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  InfoPanelSubText:SetPoint("LEFT")
+  InfoPanelSubText:SetAllPoints()
+  InfoPanelSubText:SetText(L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+  " Many of them are exclusive and can only be used in Burning Crusade and similar client versions."])
+  -- 
+  -- Hide Helm --
+  local HideHelm_CheckButton = CreateFrame("CheckButton", "$parentHideHelm_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  HideHelm_CheckButton:SetPoint("TOPLEFT", 10, -110)
+  HideHelm_CheckButton.Text:SetText(L["Hide Helm"])
+  HideHelm_CheckButton.tooltip = L["Hide the player helm"]
+  HideHelm_CheckButton:SetChecked(AbyssUIAddonSettings.HideHelm)
+  -- OnClick Function
+  HideHelm_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501) then
+      AbyssUIAddonSettings.HideHelm = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      HideHelm_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  HideHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  HideHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501) then
+        if AbyssUIAddonSettings.HideHelm == true then
+          ShowHelm(false)
+        else
+          ShowHelm(true)
+        end
+      end
+    end
+  end)
+  -- Hide Cloak --
+  local HideCloak_CheckButton = CreateFrame("CheckButton", "$parentHideCloak_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  HideCloak_CheckButton:SetPoint("TOPLEFT", 10, -140)
+  HideCloak_CheckButton.Text:SetText(L["Hide Cloak"])
+  HideCloak_CheckButton.tooltip = L["Hide the player cloak"]
+  HideCloak_CheckButton:SetChecked(AbyssUIAddonSettings.HideCloak)
+  -- OnClick Function
+  HideCloak_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501) then
+      AbyssUIAddonSettings.HideCloak = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      HideCloak_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  HideCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  HideCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501) then
+        if AbyssUIAddonSettings.HideCloak == true then
+          ShowCloak(false)
+        else
+          ShowCloak(true)
+        end
+      end
+    end
+  end)
+
+
+
+
+  -- 2nd Collum
+  -- Read tooltip --
+  local PSINFOScale_CheckButton = CreateFrame("Frame", "$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel7)
+  PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel7, "BOTTOMLEFT", 10, 20)
+  PSINFOScale_CheckButton:SetWidth(600)
+  PSINFOScale_CheckButton:SetHeight(40)
+  PSINFOScale_CheckButton:SetScale(1)
+  PSINFOScale_CheckButton = PSINFOScale_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  PSINFOScale_CheckButton:SetPoint("LEFT")
+  PSINFOScale_CheckButton:SetAllPoints()
+  PSINFOScale_CheckButton:SetText(L["|cffb62a25In development, more features will be added soon, so be patient.|r"])
+  end
 ----------------------------------- Scale & Frame Size  -----------------------------------
 local function ScaleFrameSize()
   -- Read tooltip --
-  local PSINFOScale_CheckButton = CreateFrame("Frame","$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel7)
-  PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel7, "BOTTOMLEFT", 10, 20)
+  local PSINFOScale_CheckButton = CreateFrame("Frame","$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel8)
+  PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel8, "BOTTOMLEFT", 10, 20)
   PSINFOScale_CheckButton:SetWidth(600)
   PSINFOScale_CheckButton:SetHeight(40)
   PSINFOScale_CheckButton:SetScale(1)
@@ -2199,7 +2335,7 @@ local function ScaleFrameSize()
     return slider
   end
   -- Minimap
-  local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
+  local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
   AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
   AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2211,7 +2347,7 @@ local function ScaleFrameSize()
     end
   end)
   -- Player Frame / Target / Focus
-  local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
+  local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
   AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
   AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2229,7 +2365,7 @@ local function ScaleFrameSize()
     end
   end)
   -- BuffFrame
-  local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
+  local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
   AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
   AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2241,7 +2377,7 @@ local function ScaleFrameSize()
     end
   end)
   -- Party Frame
-  local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
+  local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
   AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
   AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2260,7 +2396,7 @@ local function ScaleFrameSize()
     end
   end)
   -- Raid Frame
-  local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
+  local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
   AbyssUI_RaidFrameSlider:SetPoint("TOPLEFT", 20, -200)
   AbyssUI_RaidFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2272,7 +2408,7 @@ local function ScaleFrameSize()
     end
   end)
   -- Objective Frame
-  local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel7, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
+  local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
   AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -230)
   AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
@@ -2287,8 +2423,8 @@ end
 --End
 ----------------------------------- Thanks & Translations  -----------------------------------
 local function ThanksTraslations()
-  local PSINFOThanks_CheckButton = CreateFrame("Frame","$parentPSINFOThanks_CheckButton", AbyssUI_Config.childpanel8)
-  PSINFOThanks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel8, "BOTTOMLEFT", 10, 20)
+  local PSINFOThanks_CheckButton = CreateFrame("Frame","$parentPSINFOThanks_CheckButton", AbyssUI_Config.childpanel9)
+  PSINFOThanks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel9, "BOTTOMLEFT", 10, 20)
   PSINFOThanks_CheckButton:SetHeight(80)
   PSINFOThanks_CheckButton:SetWidth(600)
   PSINFOThanks_CheckButton = PSINFOThanks_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2297,15 +2433,15 @@ local function ThanksTraslations()
   PSINFOThanks_CheckButton:SetText(L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
   "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."])
   -- Special Thanks
-  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 0, -60)
+  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 0, -60)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["|cff0d75d4Special Thanks|r"])
-  local Frame1 = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel8)
-  Frame1:SetPoint("TOPLEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -80)
+  local Frame1 = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel9)
+  Frame1:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -80)
   Frame1:SetWidth(600)
   Frame1:SetHeight(40)
   Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2313,8 +2449,8 @@ local function ThanksTraslations()
   Frame1:SetJustifyV("LEFT")
   Frame1:SetJustifyH("LEFT")
   Frame1:SetText(L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."])
-  local Frame2 = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel8)
-  Frame2:SetPoint("TOPLEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -100)
+  local Frame2 = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel9)
+  Frame2:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -100)
   Frame2:SetWidth(600)
   Frame2:SetHeight(40)
   Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2324,16 +2460,16 @@ local function ThanksTraslations()
   Frame2:SetText(L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
   " UnitFrame for AbyssUI."])
   -- Translations
-  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 0, -200)
+  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 0, -200)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["|cff0d75d4Translators|r"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -230)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -230)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2342,8 +2478,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (United States): |r"]..L["Default"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -260)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -260)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2352,8 +2488,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Mexico): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -290)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -290)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2362,8 +2498,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fPortuguese: |r"].."Yūgen")
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -320)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -320)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2372,8 +2508,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fGerman: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -350)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -350)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2382,8 +2518,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (Great Britain): |r"]..L["Default"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", 10, -380)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 10, -380)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2392,8 +2528,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Spain): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -230)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -230)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2402,8 +2538,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("RIGHT")
   Frame:SetText(L["|cfff2dc7fFrench: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -260)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -260)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2412,8 +2548,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("RIGHT")
   Frame:SetText(L["|cfff2dc7fItalian: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -290)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -290)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2422,8 +2558,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("RIGHT")
   Frame:SetText(L["|cfff2dc7fRussian: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -320)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -320)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2432,8 +2568,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("RIGHT")
   Frame:SetText(L["|cfff2dc7fKorean: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -350)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -350)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2442,8 +2578,8 @@ local function ThanksTraslations()
   Frame:SetJustifyH("RIGHT")
   Frame:SetText(L["|cfff2dc7fChinese (Traditional): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel8, "TOPLEFT", -10, -380)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel9)
+  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -10, -380)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -3673,6 +3809,7 @@ f:SetScript("OnEvent", function(self, event, ...)
     HideElementsInit()
     Miscellaneous()
     TweaksExtra()
+    ClassicBCC()
     ScaleFrameSize()
     ThanksTraslations()
     Stylization()

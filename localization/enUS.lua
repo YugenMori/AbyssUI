@@ -329,3 +329,10 @@ L["Always show people titles on their names"] = true
 L["Green Health Bars"] = true
 L["All unitframe health bars will be green (default)"] = true
 L["Not available in this version of WoW!"] = true
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = true
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = true
+L["Hide Helm"] = true
+L["Hide the player helm"] = true
+L["Hide Cloak"] = true
+L["Hide the player cloak"] = true

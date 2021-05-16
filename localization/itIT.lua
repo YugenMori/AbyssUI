@@ -369,3 +369,11 @@ L["Always show people titles on their names"] = "Mostra sempre i titoli delle pe
 L["Green Health Bars"] = "Barrette Verdi della Salute"
 L["All unitframe health bars will be green (default)"] = "Tutte le barre della salute del telaio dell'unità saranno verdi (impostazione predefinita)"
 L["Not available in this version of WoW!"] = "Non disponibile in questa versione di WoW!"
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = "In questa scheda delle impostazioni del componente aggiuntivo, troverai le opzioni dirette alla versione di WoW Classic."..
+" Molti di loro sono esclusivi e possono essere utilizzati solo in Burning Crusade e versioni client simili."
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = "In fase di sviluppo, verranno aggiunte presto altre funzionalità, quindi sii paziente."
+L["Hide Helm"] = "Nascondi Helm"
+L["Hide the player helm"] = "Nascondi il timone del giocatore"
+L["Hide Cloak"] = "Nascondi mantello"
+L["Hide the player cloak"] = "Nascondi il mantello del giocatore"

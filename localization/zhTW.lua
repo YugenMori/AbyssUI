@@ -370,3 +370,11 @@ L["Always show people titles on their names"] = "一律顯示人物名稱"
 L["Green Health Bars"] = "綠色健康吧"
 L["All unitframe health bars will be green (default)"] = "所有單位框架健康欄將為綠色（默認）"
 L["Not available in this version of WoW!"] = "在此版本的《魔獸世界》中不可用！"
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = "在附加組件設置的此選項卡中，您將找到針對WoW Classic版本的選項。"..
+" 它們中的許多是專有的，只能在Burning Crusade和類似的客戶端版本中使用。"
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = "在開發中，將很快添加更多功能，因此請耐心等待。"
+L["Hide Helm"] = "隱藏頭盔"
+L["Hide the player helm"] = "隱藏玩家頭盔"
+L["Hide Cloak"] = "隱藏披風"
+L["Hide the player cloak"] = "隱藏玩家披風"

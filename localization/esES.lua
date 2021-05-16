@@ -371,3 +371,11 @@ L["Always show people titles on their names"] = "Mostrar siempre los títulos de
 L["Green Health Bars"] = "Barras de Salud Verde"
 L["All unitframe health bars will be green (default)"] = "Todas las barras de salud del marco de la unidad serán verdes (predeterminado)"
 L["Not available in this version of WoW!"] = "¡No disponible en esta versión de WoW!"
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = "En esta pestaña de la configuración del complemento, encontrará opciones dirigidas a la versión de WoW Classic."..
+" Muchos de ellos son exclusivos y solo se pueden usar en Burning Crusade y versiones de clientes similares."
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = "En desarrollo, pronto se agregarán más funciones, así que tenga paciencia."
+L["Hide Helm"] = "Ocultar yelmo"
+L["Hide the player helm"] = "Ocultar el yelmo del jugador"
+L["Hide Cloak"] = "Ocultar capa"
+L["Hide the player cloak"] = "Ocultar la capa del jugador"

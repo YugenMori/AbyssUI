@@ -369,3 +369,11 @@ L["Always show people titles on their names"] = "항상 이름에 제목 표시"
 L["Green Health Bars"] = "그린 헬스 바"
 L["All unitframe health bars will be green (default)"] = "모든 유닛 프레임 체력 표시 줄이 녹색으로 표시됩니다 (기본값)."
 L["Not available in this version of WoW!"] = "이 버전의 와우에서는 사용할 수 없습니다!"
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = "애드온 설정의이 탭에서 WoW 클래식 버전에 대한 옵션을 찾을 수 있습니다."..
+" 대부분은 독점적이며 Burning Crusade 및 유사한 클라이언트 버전에서만 사용할 수 있습니다."
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = "개발 중에 더 많은 기능이 곧 추가 될 예정 이니 기다려주세요."
+L["Hide Helm"] = "투구 숨기기"
+L["Hide the player helm"] = "플레이어 투구 숨기기"
+L["Hide Cloak"] = "망토 숨기기"
+L["Hide the player cloak"] = "플레이어 망토 숨기기"

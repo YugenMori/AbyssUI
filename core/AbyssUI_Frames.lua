@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + BCC
 --
 -- Frames for AbyssUI
 --------------------------------------------------------------

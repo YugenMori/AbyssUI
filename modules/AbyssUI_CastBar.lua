@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + BCC
 --
 -- CastBar functions for AbyssUI
 --------------------------------------------------------------

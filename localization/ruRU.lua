@@ -369,3 +369,11 @@ L["Always show people titles on their names"] = "Всегда показыват
 L["Green Health Bars"] = "Зеленые полоски здоровья"
 L["All unitframe health bars will be green (default)"] = "Все полоски здоровья корпуса юнита будут зелеными (по умолчанию)"
 L["Not available in this version of WoW!"] = "Недоступно в этой версии WoW!"
+L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
+" Many of them are exclusive and can only be used in Burning Crusade and similar client versions."] = "На этой вкладке настроек аддона вы найдете параметры, относящиеся к версии WoW Classic."..
+" Многие из них являются эксклюзивными и могут использоваться только в Burning Crusade и подобных клиентских версиях."
+L["|cffb62a25In development, more features will be added soon, so be patient.|r"] = "В разработке скоро будут добавлены новые функции, так что наберитесь терпения."
+L["Hide Helm"] = "Скрыть шлем"
+L["Hide the player helm"] = "Скрыть штурвал игрока"
+L["Hide Cloak"] = "Плащ из шкуры"
+L["Hide the player cloak"] = "Скрыть плащ игрока"

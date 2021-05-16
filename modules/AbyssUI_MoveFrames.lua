@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + BCC
 --
 -- Simple frame mover for AbyssUI
 --------------------------------------------------------------

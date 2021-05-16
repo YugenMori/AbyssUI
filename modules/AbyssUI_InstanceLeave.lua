@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + BCC
 --
 -- Simple Frame to leave instances for AbyssUI
 --------------------------------------------------------------
