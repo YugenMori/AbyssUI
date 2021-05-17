@@ -2208,7 +2208,6 @@ local function ClassicBCC()
   InfoPanelSubText:SetAllPoints()
   InfoPanelSubText:SetText(L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
   " Many of them are exclusive and can only be used in Burning Crusade and similar client versions."])
-  -- 
   -- Hide Helm --
   local HideHelm_CheckButton = CreateFrame("CheckButton", "$parentHideHelm_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
   HideHelm_CheckButton:SetPoint("TOPLEFT", 10, -110)
@@ -2267,10 +2266,66 @@ local function ClassicBCC()
       end
     end
   end)
-
-
-
-
+  -- Better WorldMap --
+  local AbyssUI_BetterWorldMap_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterWorldMap_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  AbyssUI_BetterWorldMap_CheckButton:SetPoint("TOPLEFT", 10, -170)
+  AbyssUI_BetterWorldMap_CheckButton.Text:SetText("Better World Map")
+  AbyssUI_BetterWorldMap_CheckButton.tooltip = "Makes the worldmap minimalist/clean"
+  AbyssUI_BetterWorldMap_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterWorldMap)
+  -- OnClick Function
+  AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501) then
+      AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      AbyssUI_BetterWorldMap_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  AbyssUI_BetterWorldMap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  AbyssUI_BetterWorldMap_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501) then
+        if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
+          WorldMapFrame.BlackoutFrame:Hide()
+          WorldMapFrame.BlackoutFrame:EnableMouse(false)
+        else 
+          WorldMapFrame.BlackoutFrame:Show()
+          WorldMapFrame.BlackoutFrame:EnableMouse(true)
+        end
+      end
+    end
+  end)
+  -- WorldMap Fader --
+  -- Thanks to Ketho for the fader
+  local AbyssUI_WorldMapFade_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_WorldMapFade_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  AbyssUI_WorldMapFade_CheckButton:SetPoint("TOPLEFT", 10, -200)
+  AbyssUI_WorldMapFade_CheckButton.Text:SetText("World Map Fader")
+  AbyssUI_WorldMapFade_CheckButton.tooltip = "Makes the worldmap fade while you move"
+  AbyssUI_WorldMapFade_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionWorldMapFade)
+  -- OnClick Function
+  AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501) then
+      AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      AbyssUI_WorldMapFade_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  AbyssUI_WorldMapFade_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  AbyssUI_WorldMapFade_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501) then
+        if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
+          PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
+        end
+      end
+    end
+  end)
+  
   -- 2nd Collum
   -- Read tooltip --
   local PSINFOScale_CheckButton = CreateFrame("Frame", "$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel7)

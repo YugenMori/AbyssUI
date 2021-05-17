@@ -90,10 +90,10 @@ local function AbyssUI_FrameSize(self, width, height)
 end
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
-  self:SetTextColor(45/255, 45/255, 45/255)
+  --self:SetTextColor(45/255, 45/255, 45/255)
   self:SetFont(globalFont, 13, "NORMAL")
-  self:SetShadowColor(45/255, 45/255, 45/255)
-  self:SetShadowOffset(0.5, 0)
+  --self:SetShadowColor(45/255, 45/255, 45/255)
+  --self:SetShadowOffset(0.5, 0)
 end
 --------------------------------------------------------------
 --------------------------------------------------------------

@@ -177,16 +177,16 @@ init:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)
-  _G[self]:SetTextColor(31/255, 31/255, 31/255)
+  --_G[self]:SetTextColor(31/255, 31/255, 31/255)
   _G[self]:SetFont(globalFont, 13)
-  _G[self]:SetShadowColor(45/255, 45/255, 45/255)
-  _G[self]:SetShadowOffset(0, 0)
+  --_G[self]:SetShadowColor(45/255, 45/255, 45/255)
+  --_G[self]:SetShadowOffset(0, 0)
 end
 local function AbyssUI_ApplyFontsNoGlobal(self)
-  self:SetTextColor(31/255, 31/255, 31/255)
+  --self:SetTextColor(31/255, 31/255, 31/255)
   self:SetFont(globalFont, 13)
-  self:SetShadowColor(45/255, 45/255, 45/255)
-  self:SetShadowOffset(0, 0)
+  --self:SetShadowColor(45/255, 45/255, 45/255)
+  --self:SetShadowOffset(0, 0)
 end
 ----------------------------------------------------
 -- Change yellow fonts text color
