@@ -377,3 +377,11 @@ L["Hide Helm"] = "Скрыть шлем"
 L["Hide the player helm"] = "Скрыть штурвал игрока"
 L["Hide Cloak"] = "Плащ из шкуры"
 L["Hide the player cloak"] = "Скрыть плащ игрока"
+L["Better World Map"] = "Лучшая карта мира"
+L["Makes the worldmap minimalist/clean"] = "Делает карту мира минималистичной / чистой"
+L["World Map Fader"] = "Фейдер карты мира"
+L["Makes the worldmap fade while you move"] = "Заставляет карту мира исчезать при движении"
+L["Default Nameplate Range"] = "Диапазон паспортной таблички по умолчанию"
+L["Disable the double range of"..
+" nameplates to Blizzard default value"] = "Отключить двойной диапазон"..
+" таблички со значением по умолчанию для Blizzard" 

@@ -377,3 +377,11 @@ L["Hide Helm"] = "Nascondi Helm"
 L["Hide the player helm"] = "Nascondi il timone del giocatore"
 L["Hide Cloak"] = "Nascondi mantello"
 L["Hide the player cloak"] = "Nascondi il mantello del giocatore"
+L["Better World Map"] = "Mappa del mondo migliore"
+L["Makes the worldmap minimalist/clean"] = "Rende la mappa del mondo minimalista / pulita"
+L["World Map Fader"] = "Dissolvenza della mappa del mondo"
+L["Makes the worldmap fade while you move"] = "Fa sbiadire la mappa del mondo mentre ti muovi"
+L["Default Nameplate Range"] = "Intervallo targhetta predefinito"
+L["Disable the double range of"..
+" nameplates to Blizzard default value"] = "Disabilita il doppio intervallo di"..
+" targhette con il valore predefinito Blizzard" 

@@ -377,3 +377,11 @@ L["Hide Helm"] = "Cacher le casque"
 L["Hide the player helm"] = "Cachez le casque du joueur"
 L["Hide Cloak"] = "Masquer la cape"
 L["Hide the player cloak"] = "Cachez la cape du joueur"
+L["Better World Map"] = "Meilleure carte du monde"
+L["Makes the worldmap minimalist/clean"] = "Rend la carte du monde minimaliste / propre"
+L["World Map Fader"] = "Fader de la carte du monde"
+L["Makes the worldmap fade while you move"] = "Fait disparaître la carte du monde pendant que vous vous déplacez"
+L["Default Nameplate Range"] = "Plage de plaque signalétique par défaut"
+L["Disable the double range of"..
+" nameplates to Blizzard default value"] = "Désactivez la double plage de"..
+" plaques signalétiques à la valeur par défaut de Blizzard" 

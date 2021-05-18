@@ -336,3 +336,10 @@ L["Hide Helm"] = true
 L["Hide the player helm"] = true
 L["Hide Cloak"] = true
 L["Hide the player cloak"] = true
+L["Better World Map"] = true
+L["Makes the worldmap minimalist/clean"] = true
+L["World Map Fader"] = true
+L["Makes the worldmap fade while you move"] = true
+L["Default Nameplate Range"] = true
+L["Disable the double range of"..
+" nameplates to Blizzard default value"] = true

@@ -2269,8 +2269,8 @@ local function ClassicBCC()
   -- Better WorldMap --
   local AbyssUI_BetterWorldMap_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterWorldMap_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
   AbyssUI_BetterWorldMap_CheckButton:SetPoint("TOPLEFT", 10, -170)
-  AbyssUI_BetterWorldMap_CheckButton.Text:SetText("Better World Map")
-  AbyssUI_BetterWorldMap_CheckButton.tooltip = "Makes the worldmap minimalist/clean"
+  AbyssUI_BetterWorldMap_CheckButton.Text:SetText(L["Better World Map"])
+  AbyssUI_BetterWorldMap_CheckButton.tooltip = L["Makes the worldmap minimalist/clean"]
   AbyssUI_BetterWorldMap_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterWorldMap)
   -- OnClick Function
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
@@ -2301,8 +2301,8 @@ local function ClassicBCC()
   -- Thanks to Ketho for the fader
   local AbyssUI_WorldMapFade_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_WorldMapFade_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
   AbyssUI_WorldMapFade_CheckButton:SetPoint("TOPLEFT", 10, -200)
-  AbyssUI_WorldMapFade_CheckButton.Text:SetText("World Map Fader")
-  AbyssUI_WorldMapFade_CheckButton.tooltip = "Makes the worldmap fade while you move"
+  AbyssUI_WorldMapFade_CheckButton.Text:SetText(L["World Map Fader"])
+  AbyssUI_WorldMapFade_CheckButton.tooltip = L["Makes the worldmap fade while you move"]
   AbyssUI_WorldMapFade_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionWorldMapFade)
   -- OnClick Function
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
@@ -2325,7 +2325,23 @@ local function ClassicBCC()
       end
     end
   end)
-  
+  -- Default Nameplate Range --
+  local AbyssUI_DefaultNameplate_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DefaultNameplate_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  AbyssUI_DefaultNameplate_CheckButton:SetPoint("TOPLEFT", 10, -230)
+  AbyssUI_DefaultNameplate_CheckButton.Text:SetText(L["Default Nameplate Range"])
+  AbyssUI_DefaultNameplate_CheckButton.tooltip = L["Disable the double range of"..
+  " nameplates to Blizzard default value"]
+  AbyssUI_DefaultNameplate_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDefaultNameplate)
+  -- OnClick Function
+  AbyssUI_DefaultNameplate_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501) then
+      AbyssUIAddonSettings.ExtraFunctionDefaultNameplate = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      AbyssUI_DefaultNameplate_CheckButton:SetChecked(nil)
+    end
+  end)
   -- 2nd Collum
   -- Read tooltip --
   local PSINFOScale_CheckButton = CreateFrame("Frame", "$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel7)

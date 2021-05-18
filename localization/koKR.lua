@@ -377,3 +377,11 @@ L["Hide Helm"] = "투구 숨기기"
 L["Hide the player helm"] = "플레이어 투구 숨기기"
 L["Hide Cloak"] = "망토 숨기기"
 L["Hide the player cloak"] = "플레이어 망토 숨기기"
+L["Better World Map"] = "더 나은 세계지도"
+L["Makes the worldmap minimalist/clean"] = "월드 맵을 미니멀하고 깔끔하게 만듭니다"
+L["World Map Fader"] = "세계지도 페이더"
+L["Makes the worldmap fade while you move"] = "움직이는 동안 월드 맵이 희미 해집니다."
+L["Default Nameplate Range"] = "기본 명판 범위"
+L["Disable the double range of"..
+" nameplates to Blizzard default value"] = "이중 범위 비활성화"..
+" 명판을 블리자드 기본값으로"
