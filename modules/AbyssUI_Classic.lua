@@ -423,6 +423,37 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
+			-- MerchantFrame
+			for i, v in pairs({ 
+				MerchantFrameTopBorder,
+				MerchantFrameTopLeftCorner,
+				MerchantFrameTopRightCorner,
+				MerchantFrameBotLeftCorner,
+				MerchantFrameBotRightCorner,
+				MerchantFrameLeftBorder,
+				MerchantFrameRightBorder,
+				MerchantFrameBottomBorder,
+				MerchantFrameButtonBottomBorder,
+				MerchantFrameBtnCornerLeft,
+				MerchantFrameBtnCornerRight,
+				MerchantFramePortraitFrame,
+				MerchantFrameTab1Left,
+				MerchantFrameTab1LeftDisabled,
+				MerchantFrameTab1Middle,
+				MerchantFrameTab1MiddleDisabled,
+				MerchantFrameTab1Right,
+				MerchantFrameTab1RightDisabled,
+				MerchantFrameTab2Left,
+				MerchantFrameTab2LeftDisabled,
+				MerchantFrameTab2Middle,
+				MerchantFrameTab2MiddleDisabled,
+				MerchantFrameTab2Right,
+				MerchantFrameTab2RightDisabled,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
 
 		else
 			return nil
@@ -506,18 +537,38 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
+
 			
 ---------------------------- Classic Dynamically ----------------------------------
--- PaperDollFrame
---[[
+-- Clock
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "AbyssUI" and GetWoWVersion == 20501 then
-		hooksecurefunc("PaperDollFrame_OnLoad", function(self, texture)
-	     if string.find(texture, "PaperDoll") then
-	        self.SetVertexColor(0,0,0)
-	     end
+		local showclock = true
+		if showclock then
+			LoadAddOn('Blizzard_TimeManager')
+			local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
+			clockFrame:Hide()
+			clockTime:Show()
+			TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
+			TimeManagerClockButton:SetAlpha(0)
+		else
+			LoadAddOn('Blizzard_TimeManager')
+			TimeManagerClockButton.Show = TimeManagerClockButton.Hide
+			local region = TimeManagerClockButton:GetRegions()
+			region:Hide()	
+			TimeManagerClockButton:ClearAllPoints()	
+			TimeManagerClockButton:Hide()	
+		end
+		-- Clock/Calendar Handler
+		Minimap:HookScript("OnEnter", function()
+		  TimeManagerClockButton:SetAlpha(1)
 		end)
+		Minimap:HookScript("OnLeave", function()
+		  TimeManagerClockButton:SetAlpha(0)
+		end)
+	end
 end)
---]]
+
+-- PaperDollFrame
