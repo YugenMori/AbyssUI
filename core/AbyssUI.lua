@@ -1584,6 +1584,71 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end
+			-- ContainerFrame1
+			for i, v in pairs({ 
+				ContainerFrame1Background1Slot,
+				ContainerFrame1BackgroundBottom,
+				ContainerFrame1BackgroundMiddle1,
+				ContainerFrame1BackgroundMiddle2,
+				ContainerFrame1BackgroundTop,
+				ContainerFrame1BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame2
+			for i, v in pairs({ 
+				ContainerFrame2Background1Slot,
+				ContainerFrame2BackgroundBottom,
+				ContainerFrame2BackgroundMiddle1,
+				ContainerFrame2BackgroundMiddle2,
+				ContainerFrame2BackgroundTop,
+				ContainerFrame2BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame3
+			for i, v in pairs({ 
+				ContainerFrame3Background1Slot,
+				ContainerFrame3BackgroundBottom,
+				ContainerFrame3BackgroundMiddle1,
+				ContainerFrame3BackgroundMiddle2,
+				ContainerFrame3BackgroundTop,
+				ContainerFrame3BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame4
+			for i, v in pairs({ 
+				ContainerFrame4Background1Slot,
+				ContainerFrame4BackgroundBottom,
+				ContainerFrame4BackgroundMiddle1,
+				ContainerFrame4BackgroundMiddle2,
+				ContainerFrame4BackgroundTop,
+				ContainerFrame4BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame5
+			for i, v in pairs({ 
+				ContainerFrame5Background1Slot,
+				ContainerFrame5BackgroundBottom,
+				ContainerFrame5BackgroundMiddle1,
+				ContainerFrame5BackgroundMiddle2,
+				ContainerFrame5BackgroundTop,
+				ContainerFrame5BackgroundPortrait,
+		 	 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
 			----------------------------------------------------------------------
 			-- Frames that act weird
 			-- LFGDungeonReadyDialog
