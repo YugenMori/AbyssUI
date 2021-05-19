@@ -454,6 +454,62 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
+			-- CharacterFrame
+			for i, v in pairs({
+				CharacterFrameTab1Left,
+				CharacterFrameTab1LeftDisabled,
+				CharacterFrameTab1Middle,
+				CharacterFrameTab1MiddleDisabled,
+				CharacterFrameTab1Right,
+				CharacterFrameTab1RightDisabled,
+				CharacterFrameTab2Left,
+				CharacterFrameTab2LeftDisabled,
+				CharacterFrameTab2Middle,
+				CharacterFrameTab2MiddleDisabled,
+				CharacterFrameTab2Right,
+				CharacterFrameTab2RightDisabled,
+				CharacterFrameTab3Left,
+				CharacterFrameTab3LeftDisabled,
+				CharacterFrameTab3Middle,
+				CharacterFrameTab3MiddleDisabled,
+				CharacterFrameTab3Right,
+				CharacterFrameTab3RightDisabled,
+				CharacterFrameTab4Left,
+				CharacterFrameTab4LeftDisabled,
+				CharacterFrameTab4Middle,
+				CharacterFrameTab4MiddleDisabled,
+				CharacterFrameTab4Right,
+				CharacterFrameTab4RightDisabled,
+				CharacterFrameTab5Left,
+				CharacterFrameTab5LeftDisabled,
+				CharacterFrameTab5Middle,
+				CharacterFrameTab5MiddleDisabled,
+				CharacterFrameTab5Right,
+				CharacterFrameTab5RightDisabled,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- MailFrame
+			for i, v in pairs({ 
+				MailFrameTopBorder,
+				MailFrameTopLeftCorner,
+				MailFrameTopRightCorner,
+				MailFrameBotLeftCorner,
+				MailFrameBotRightCorner,
+				MailFrameLeftBorder,
+				MailFrameRightBorder,
+				MailFrameBottomBorder,
+				MailFrameButtonBottomBorder,
+				MailFrameBtnCornerLeft,
+				MailFrameBtnCornerRight,
+				MailFramePortraitFrame,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
 
 		else
 			return nil
@@ -537,24 +593,62 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
-
-			
----------------------------- Classic Dynamically ----------------------------------
--- Clock
+-- AuctionFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "AbyssUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_AuctionUI" and GetWoWVersion == 20501 then
+		for i, v in pairs({
+			AuctionFrameBot,
+			AuctionFrameBotLeft,
+			AuctionFrameBotRight,
+			AuctionFrameTop,
+			AuctionFrameTopLeft,
+			AuctionFrameTopRight,
+			AuctionFrameTab1Left,
+			AuctionFrameTab1LeftDisabled,
+			AuctionFrameTab1Middle,
+			AuctionFrameTab1MiddleDisabled,
+			AuctionFrameTab1Right,
+			AuctionFrameTab1RightDisabled,
+			AuctionFrameTab2Left,
+			AuctionFrameTab2LeftDisabled,
+			AuctionFrameTab2Middle,
+			AuctionFrameTab2MiddleDisabled,
+			AuctionFrameTab2Right,
+			AuctionFrameTab2RightDisabled,
+			AuctionFrameTab3Left,
+			AuctionFrameTab3LeftDisabled,
+			AuctionFrameTab3Middle,
+			AuctionFrameTab3MiddleDisabled,
+			AuctionFrameTab3Right,
+			AuctionFrameTab3RightDisabled, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+---------------------------- Classic Dynamically ----------------------------------
+-- Clock
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self, event, name)
+	if GetWoWVersion == 20501 then
+		loaded = IsAddOnLoaded("Blizzard_TimeManager")
+		if not loaded then
+			LoadAddOn('Blizzard_TimeManager')
+		end
 		local showclock = true
 		if showclock then
-			LoadAddOn('Blizzard_TimeManager')
 			local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
 			clockFrame:Hide()
 			clockTime:Show()
 			TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
 			TimeManagerClockButton:SetAlpha(0)
 		else
-			LoadAddOn('Blizzard_TimeManager')
 			TimeManagerClockButton.Show = TimeManagerClockButton.Hide
 			local region = TimeManagerClockButton:GetRegions()
 			region:Hide()	
@@ -570,5 +664,20 @@ f:SetScript("OnEvent", function(self, event, name)
 		end)
 	end
 end)
-
--- PaperDollFrame
+-- Character Name Class Color
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "AbyssUI" then
+		local localizedClass, englishClass = UnitClass("player")
+    local classColor = RAID_CLASS_COLORS[englishClass]
+    if (classColor) then
+      r, g, b = classColor.r, classColor.g, classColor.b
+    end
+    if (GetWoWVersion == 20501) then
+    	CharacterNameText:SetVertexColor(r, g, b)
+    else
+    	CharacterFrameTitleText:SetVertexColor(r, g, b)
+  	end
+	end
+end)
