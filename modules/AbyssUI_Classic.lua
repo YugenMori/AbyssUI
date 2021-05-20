@@ -631,6 +631,224 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
+-- PlayerTalentFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_TalentUI" and GetWoWVersion == 20501 then
+		self:UnregisterAllEvents()
+    local ChildRegions = { PlayerTalentFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+	end
+end)
+-- ClassTrainerFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_TrainerUI" and GetWoWVersion == 20501 then
+		self:UnregisterAllEvents()
+    local ChildRegions = { ClassTrainerFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+	end
+end)
+-- PaperDollFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { PaperDollFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- ReputationFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { ReputationFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- SkillFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { SkillFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- PVPFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { PVPFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- SpellBookFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { SpellBookFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+    for i, v in pairs({
+    	SpellButton1SubSpellName,
+    	SpellButton2SubSpellName,
+    	SpellButton3SubSpellName,
+    	SpellButton4SubSpellName,
+    	SpellButton5SubSpellName,
+    	SpellButton6SubSpellName,
+    	SpellButton7SubSpellName,
+    	SpellButton8SubSpellName,
+    	SpellButton9SubSpellName,
+    	SpellButton10SubSpellName,
+    	SpellButton11SubSpellName,
+    	SpellButton12SubSpellName,
+    }) do
+    	v:SetVertexColor(219/255, 222/255, 231/255)
+    end
+  end
+end)
+-- QuestLogFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { QuestLogFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+    for i, v in pairs({ 
+    	QuestLogQuestTitle,
+    	QuestLogObjective1,
+    	QuestLogObjective2,
+    	QuestLogObjectivesText,
+    	QuestLogDescriptionTitle,
+    	QuestLogQuestDescription,
+    }) do
+    	v:SetVertexColor(219/255, 222/255, 231/255)
+    end
+  end
+end)
+-- QuestFrameDetailPanel
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { QuestFrameDetailPanel:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+    for i, v in pairs({ 
+    	QuestInfoDescriptionText,
+    	QuestInfoObjectivesHeader,
+    	QuestInfoObjectivesText,
+    	QuestInfoTitleHeader,
+    }) do
+    	v:SetVertexColor(219/255, 222/255, 231/255)
+    end
+  end
+end)
+-- QuestFrameProgressPanel
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { QuestFrameProgressPanel:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+    QuestProgressTitleText:SetVertexColor(219/255, 222/255, 231/255)
+    QuestProgressText:SetVertexColor(219/255, 222/255, 231/255)
+  end
+end)
+-- GossipFrameGreetingPanel
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { GossipFrameGreetingPanel:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- BankFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { BankFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- TaxiFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { TaxiFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- TabardFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { TabardFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
 ---------------------------- Classic Dynamically ----------------------------------
 -- Clock
 local f = CreateFrame("Frame")
