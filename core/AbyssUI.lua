@@ -312,7 +312,19 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				SpellBookFrame.NineSlice.TopRightCorner,
 				SpellBookFrame.NineSlice.TopLeftCorner,
 				SpellBookFrame.NineSlice.BottomLeftCorner,
-			SpellBookFrame.NineSlice.BottomRightCorner, }) do
+				SpellBookFrame.NineSlice.BottomRightCorner,
+				SpellBookFrameTabButton1Left,
+				SpellBookFrameTabButton1LeftDisabled,
+				SpellBookFrameTabButton1Middle,
+				SpellBookFrameTabButton1MiddleDisabled,
+				SpellBookFrameTabButton1Right,
+				SpellBookFrameTabButton1RightDisabled,
+				SpellBookFrameTabButton2Left,
+				SpellBookFrameTabButton2LeftDisabled,
+				SpellBookFrameTabButton2Middle,
+				SpellBookFrameTabButton2MiddleDisabled,
+				SpellBookFrameTabButton2Right,
+			SpellBookFrameTabButton2RightDisabled, }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 					for i, v in pairs({
@@ -334,7 +346,26 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				PVEFrame.NineSlice.BottomRightCorner,
 				PVEFrame.NineSlice.BottomEdge,
 				PVEFrame.NineSlice.BottomLeftCorner,
-			PVEFrame.NineSlice.TopLeftCorner, }) do
+				PVEFrame.NineSlice.TopLeftCorner,
+				PVEFrameTab1Left,
+				PVEFrameTab1LeftDisabled,
+				PVEFrameTab1Middle,
+				PVEFrameTab1MiddleDisabled,
+				PVEFrameTab1Right,
+				PVEFrameTab1RightDisabled,
+				PVEFrameTab2Left,
+				PVEFrameTab2LeftDisabled,
+				PVEFrameTab2Middle,
+				PVEFrameTab2MiddleDisabled,
+				PVEFrameTab2Right,
+				PVEFrameTab2RightDisabled,
+				PVEFrameTab3Left,
+				PVEFrameTab3LeftDisabled,
+				PVEFrameTab3Middle,
+				PVEFrameTab3MiddleDisabled,
+				PVEFrameTab3Right,
+			PVEFrameTab3RightDisabled,
+			 }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 					for i, v in pairs({
@@ -549,7 +580,19 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				OpenMailFrame.NineSlice.BottomLeftCorner,
 				OpenMailFrame.NineSlice.LeftEdge,
 				OpenMailFrame.NineSlice.TopLeftCorner,
-			OpenMailFrame.NineSlice.BottomEdge,
+				OpenMailFrame.NineSlice.BottomEdge,
+				MailFrameTab1Left,
+				MailFrameTab1LeftDisabled,
+				MailFrameTab1Middle,
+				MailFrameTab1MiddleDisabled,
+				MailFrameTab1Right,
+				MailFrameTab1RightDisabled,
+				MailFrameTab2Left,
+				MailFrameTab2LeftDisabled,
+				MailFrameTab2Middle,
+				MailFrameTab2MiddleDisabled,
+				MailFrameTab2Right,
+			MailFrameTab2RightDisabled,
 				 }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
@@ -643,7 +686,20 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				BankFrame.NineSlice.TopRightCorner,
 				BankFrame.NineSlice.TopLeftCorner,
 				BankFrame.NineSlice.BottomLeftCorner,
-			BankFrame.NineSlice.BottomRightCorner,	}) do
+				BankFrame.NineSlice.BottomRightCorner,
+				BankFrameTab1Left,
+				BankFrameTab1LeftDisabled,
+				BankFrameTab1Middle,
+				BankFrameTab1MiddleDisabled,
+				BankFrameTab1Right,
+				BankFrameTab1RightDisabled,
+				BankFrameTab2Left,
+				BankFrameTab2LeftDisabled,
+				BankFrameTab2Middle,
+				BankFrameTab2MiddleDisabled,
+				BankFrameTab2Right,
+			BankFrameTab2RightDisabled,
+				}) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 				else
@@ -1759,7 +1815,25 @@ f:SetScript("OnEvent", function(self, event, name)
 			PlayerTalentFrame.NineSlice.TopRightCorner,
 			PlayerTalentFrame.NineSlice.TopLeftCorner,
 			PlayerTalentFrame.NineSlice.BottomLeftCorner,
-		PlayerTalentFrame.NineSlice.BottomRightCorner, }) do
+			PlayerTalentFrame.NineSlice.BottomRightCorner,
+			PlayerTalentFrameTab1Left,
+			PlayerTalentFrameTab1LeftDisabled,
+			PlayerTalentFrameTab1Middle,
+			PlayerTalentFrameTab1MiddleDisabled,
+			PlayerTalentFrameTab1Right,
+			PlayerTalentFrameTab1RightDisabled,
+			PlayerTalentFrameTab2Left,
+			PlayerTalentFrameTab2LeftDisabled,
+			PlayerTalentFrameTab2Middle,
+			PlayerTalentFrameTab2MiddleDisabled,
+			PlayerTalentFrameTab2Right,
+			PlayerTalentFrameTab2RightDisabled,
+			PlayerTalentFrameTab3Left,
+			PlayerTalentFrameTab3LeftDisabled,
+			PlayerTalentFrameTab3Middle,
+			PlayerTalentFrameTab32MiddleDisabled,
+			PlayerTalentFrameTab3Right,
+		PlayerTalentFrameTab3RightDisabled, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -1789,6 +1863,36 @@ f:SetScript("OnEvent", function(self, event, name)
 			CollectionsJournal.NineSlice.BottomLeftCorner,
 			CollectionsJournal.NineSlice.LeftEdge,
 			CollectionsJournal.NineSlice.TopLeftCorner,
+			CollectionsJournalTab1Left,
+			CollectionsJournalTab1LeftDisabled,
+			CollectionsJournalTab1Middle,
+			CollectionsJournalTab1MiddleDisabled,
+			CollectionsJournalTab1Right,
+			CollectionsJournalTab1RightDisabled,
+			CollectionsJournalTab2Left,
+			CollectionsJournalTab2LeftDisabled,
+			CollectionsJournalTab2Middle,
+			CollectionsJournalTab2MiddleDisabled,
+			CollectionsJournalTab2Right,
+			CollectionsJournalTab2RightDisabled,
+			CollectionsJournalTab3Left,
+			CollectionsJournalTab3LeftDisabled,
+			CollectionsJournalTab3Middle,
+			CollectionsJournalTab3MiddleDisabled,
+			CollectionsJournalTab3Right,
+			CollectionsJournalTab3RightDisabled,
+			CollectionsJournalTab4Left,
+			CollectionsJournalTab4LeftDisabled,
+			CollectionsJournalTab4Middle,
+			CollectionsJournalTab4MiddleDisabled,
+			CollectionsJournalTab4Right,
+			CollectionsJournalTab4RightDisabled,
+			CollectionsJournalTab5Left,
+			CollectionsJournalTab5LeftDisabled,
+			CollectionsJournalTab5Middle,
+			CollectionsJournalTab5MiddleDisabled,
+			CollectionsJournalTab5Right,
+			CollectionsJournalTab5RightDisabled,
 		MountJournal.BottomLeftInset.NineSlice.BottomRightCorner, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)

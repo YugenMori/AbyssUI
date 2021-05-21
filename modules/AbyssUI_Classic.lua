@@ -505,6 +505,18 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				MailFrameBtnCornerLeft,
 				MailFrameBtnCornerRight,
 				MailFramePortraitFrame,
+				MailFrameTab1Left,
+				MailFrameTab1LeftDisabled,
+				MailFrameTab1Middle,
+				MailFrameTab1MiddleDisabled,
+				MailFrameTab1Right,
+				MailFrameTab1RightDisabled,
+				MailFrameTab2Left,
+				MailFrameTab2LeftDisabled,
+				MailFrameTab2Middle,
+				MailFrameTab2MiddleDisabled,
+				MailFrameTab2Right,
+			MailFrameTab2RightDisabled,
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
@@ -641,6 +653,27 @@ f:SetScript("OnEvent", function(self, event, name)
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
+    end
+    for i, v in pairs({ 
+    	PlayerTalentFrameTab1Left,
+			PlayerTalentFrameTab1LeftDisabled,
+			PlayerTalentFrameTab1Middle,
+			PlayerTalentFrameTab1MiddleDisabled,
+			PlayerTalentFrameTab1Right,
+			PlayerTalentFrameTab1RightDisabled,
+			PlayerTalentFrameTab2Left,
+			PlayerTalentFrameTab2LeftDisabled,
+			PlayerTalentFrameTab2Middle,
+			PlayerTalentFrameTab2MiddleDisabled,
+			PlayerTalentFrameTab2Right,
+			PlayerTalentFrameTab2RightDisabled,
+			PlayerTalentFrameTab3Left,
+			PlayerTalentFrameTab3LeftDisabled,
+			PlayerTalentFrameTab3Middle,
+			PlayerTalentFrameTab32MiddleDisabled,
+			PlayerTalentFrameTab3Right,
+			PlayerTalentFrameTab3RightDisabled,	}) do
+			AbyssUI_ColorizationFrameFunction(v)
     end
 	end
 end)
@@ -821,6 +854,22 @@ f:SetScript("OnEvent", function(self)
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
     end
+    for i, v in pairs({
+	    BankFrameTab1Left,
+			BankFrameTab1LeftDisabled,
+			BankFrameTab1Middle,
+			BankFrameTab1MiddleDisabled,
+			BankFrameTab1Right,
+			BankFrameTab1RightDisabled,
+			BankFrameTab2Left,
+			BankFrameTab2LeftDisabled,
+			BankFrameTab2Middle,
+			BankFrameTab2MiddleDisabled,
+			BankFrameTab2Right,
+			BankFrameTab2RightDisabled, 
+	 	}) do
+	 		AbyssUI_ColorizationFrameFunction(v)
+		end
   end
 end)
 -- TaxiFrame
@@ -843,6 +892,19 @@ f:SetScript("OnEvent", function(self)
 	if (GetWoWVersion == 20501) then
     self:UnregisterAllEvents()
     local ChildRegions = { TabardFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- WorldMapFrame.BorderFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
