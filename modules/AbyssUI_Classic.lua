@@ -156,15 +156,12 @@ local function UnitColor(unit)
     return r, g, b
   end
 end
----------------------------- Classic Modules ----------------------------------
-
-
 ---------------------------- Classic Frames ----------------------------------
 local ClassicFrames = CreateFrame("Frame")
 ClassicFrames:RegisterEvent("ADDON_LOADED")
 ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "AbyssUI") then
-		if (GetWoWVersion == 20501) then
+		if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
 			-- General
 			for i, v in pairs({ 
 				MiniMapTrackingBorder,
@@ -198,7 +195,9 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				GameMenuFrameHeader,
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
+					if (GetWoWVersion ~= 11307) then
+						AbyssUI_ColorizationFrameFunction(v)
+					end
 				end
 			end
 			-- HelpFrame
@@ -533,7 +532,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_BindingUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_BindingUI" and GetWoWVersion == 20501 and GetWoWVersion ~= 11307 then
 		for i, v in pairs({
 			KeyBindingFrame.BottomEdge,
 			KeyBindingFrame.BottomLeftCorner,
@@ -557,7 +556,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_MacroUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_MacroUI" and GetWoWVersion == 20501 or GetWoWVersion == 11307 then
 		for i, v in pairs({
 			MacroFramePortraitFrame,
 			MacroFrameTopBorder,
@@ -583,7 +582,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TimeManager" and GetWoWVersion == 20501 then
+	if name == "Blizzard_TimeManager" and GetWoWVersion == 20501 or GetWoWVersion == 11307 then
 		for i, v in pairs({
 			TimeManagerFrameTopBorder,
 			TimeManagerFrameTopLeftCorner,
@@ -609,7 +608,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_AuctionUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_AuctionUI" and GetWoWVersion == 20501 or GetWoWVersion == 11307 then
 		for i, v in pairs({
 			AuctionFrameBot,
 			AuctionFrameBotLeft,
@@ -647,7 +646,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TalentUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_TalentUI" and GetWoWVersion == 20501 and GetWoWVersion ~= 11307 then
 		self:UnregisterAllEvents()
     local ChildRegions = { PlayerTalentFrame:GetRegions() }
     local fs = {}
@@ -681,7 +680,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TrainerUI" and GetWoWVersion == 20501 then
+	if name == "Blizzard_TrainerUI" and GetWoWVersion == 20501 and GetWoWVersion ~= 11307 then
 		self:UnregisterAllEvents()
     local ChildRegions = { ClassTrainerFrame:GetRegions() }
     local fs = {}
@@ -694,7 +693,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { PaperDollFrame:GetRegions() }
     local fs = {}
@@ -707,7 +706,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { ReputationFrame:GetRegions() }
     local fs = {}
@@ -720,7 +719,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { SkillFrame:GetRegions() }
     local fs = {}
@@ -733,9 +732,22 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 and GetWoWVersion ~= 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { PVPFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- HonorFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion ~= 20501 and GetWoWVersion == 11307) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { HonorFrame:GetRegions() }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
@@ -746,7 +758,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { SpellBookFrame:GetRegions() }
     local fs = {}
@@ -775,7 +787,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { QuestLogFrame:GetRegions() }
     local fs = {}
@@ -798,7 +810,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { QuestFrameDetailPanel:GetRegions() }
     local fs = {}
@@ -819,7 +831,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { QuestFrameProgressPanel:GetRegions() }
     local fs = {}
@@ -834,7 +846,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { GossipFrameGreetingPanel:GetRegions() }
     local fs = {}
@@ -847,7 +859,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { BankFrame:GetRegions() }
     local fs = {}
@@ -876,7 +888,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { TaxiFrame:GetRegions() }
     local fs = {}
@@ -889,7 +901,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { TabardFrame:GetRegions() }
     local fs = {}
@@ -902,7 +914,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20501) then
+	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     self:UnregisterAllEvents()
     local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
     local fs = {}
@@ -916,7 +928,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self, event, name)
-	if GetWoWVersion == 20501 then
+	if GetWoWVersion == 20501 or GetWoWVersion == 11307 then
 		loaded = IsAddOnLoaded("Blizzard_TimeManager")
 		if not loaded then
 			LoadAddOn('Blizzard_TimeManager')
@@ -954,28 +966,52 @@ f:SetScript("OnEvent", function(self, event, name)
     if (classColor) then
       r, g, b = classColor.r, classColor.g, classColor.b
     end
-    if (GetWoWVersion == 20501) then
+    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
     	CharacterNameText:SetVertexColor(r, g, b)
     else
-    	CharacterFrameTitleText:SetVertexColor(r, g, b)
+    	if (GetWoWVersion ~= 11307) then
+    		CharacterFrameTitleText:SetVertexColor(r, g, b)
+    	end
   	end
 	end
 end)
--- GameTooltip
-GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
-	if (GetWoWVersion == 20501) then
-		for i, v in pairs({
-			GameTooltip.BottomEdge,
-			GameTooltip.TopEdge,
-			GameTooltip.RightEdge,
-			GameTooltip.BottomEdge,
-			GameTooltip.LeftEdge,
-			GameTooltip.TopRightCorner,
-			GameTooltip.TopLeftCorner,
-			GameTooltip.BottomLeftCorner,
-			GameTooltip.BottomRightCorner,
-		}) do
-		 AbyssUI_ColorizationFrameFunction(v)
-		end
+---------------------------- Classic Era Modules ----------------------------------
+-- InterfaceOptionsFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 11307) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { InterfaceOptionsFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- VideoOptionsFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 11307) then
+    self:UnregisterAllEvents()
+    local ChildRegions = { VideoOptionsFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- KeyBindingFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_BindingUI" and GetWoWVersion == 11307 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { KeyBindingFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
 	end
 end)

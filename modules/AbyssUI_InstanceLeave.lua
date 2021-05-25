@@ -223,13 +223,15 @@ f:SetScript("OnEvent", function()
 	end)
 end)
 -- DynamicFrame --
-local frame = CreateFrame("Frame", "$parentFrame", nil)
-frame:RegisterEvent("LFG_COMPLETION_REWARD")
-frame:SetScript("OnEvent", function(self, event)
-	if (event == "LFG_COMPLETION_REWARD" and AbyssUIAddonSettings.ExtraFunctionInstanceLeave == true) then
-		UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 0, 1)
-	else 
-		return nil
-	end
-end)
+if (GetWoWVersion ~= 11307) then
+	local frame = CreateFrame("Frame", "$parentFrame", nil)
+	frame:RegisterEvent("LFG_COMPLETION_REWARD")
+	frame:SetScript("OnEvent", function(self, event)
+		if (event == "LFG_COMPLETION_REWARD" and AbyssUIAddonSettings.ExtraFunctionInstanceLeave == true) then
+			UIFrameFadeIn(AbyssUI_InstanceLeave_DynamicFrame, 1, 0, 1)
+		else 
+			return nil
+		end
+	end)
+end
 -- End

@@ -194,7 +194,9 @@ end)
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
+if (GetWoWVersion ~= 11307) then
+	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
+end
 frame:RegisterEvent("UNIT_FACTION")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 local function eventHandler(self, event, ...)
@@ -214,7 +216,7 @@ local function eventHandler(self, event, ...)
 				c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
 				TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
 			end
-			if UnitIsPlayer("focus") then
+			if UnitIsPlayer("focus") and GetWoWVersion ~= 11307 then
 				c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
 				FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
 			end
@@ -225,8 +227,10 @@ local function eventHandler(self, event, ...)
 		-- Remove background
 		TargetFrameNameBackground:SetAlpha(0.5)
 		TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-		FocusFrameNameBackground:SetAlpha(0.5)
-		FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+		if (GetWoWVersion ~= 11307) then
+			FocusFrameNameBackground:SetAlpha(0.5)
+			FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+		end
 	end
 end
 
@@ -246,7 +250,7 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
 		Minimap_ZoomOut()
 	end
 end)
-if (GetWoWVersion ~= 20501) then
+if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
 	MiniMapTracking:ClearAllPoints()
 	MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 end
@@ -509,17 +513,23 @@ end)
 -- Target Mob(Enemy) Health Bar Color
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
+if (GetWoWVersion ~= 11307) then
+	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
+end
 local function eventHandler(self, event, ...)
 	if (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
 		if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 			TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+			if (GetWoWVersion ~= 11307) then
+				FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+			end
 		else
 			return nil
 		end
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-		FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+		if (GetWoWVersion ~= 11307) then
+			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+		end
 	end	
 end
 frame:SetScript("OnEvent", eventHandler)
@@ -530,10 +540,12 @@ end
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
 	if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))		
-		FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
+		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
-		FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+		if (GetWoWVersion ~= 11307) then		
+			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
+			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+		end
 	else
 		return nil
 	end
@@ -623,7 +635,7 @@ objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
 objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
 	local inInstance, instanceType = IsInInstance()
-	if (GetWoWVersion ~= 20501) then 
+	if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then 
 		if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
 			UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
 		elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
@@ -683,7 +695,7 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	if (AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
 	    if (AbyssUIAddonSettings.MinimalActionBar == true) then
 	    	C_Timer.After(1, function()
-	    		if (GetWoWVersion ~= 20501) then
+	    		if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
 		    		for i, v in pairs ({
 		   				MainMenuBarArtFrame.LeftEndCap,
 			    		MainMenuBarArtFrame.RightEndCap,
@@ -795,13 +807,13 @@ checkRune:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DKAllyPortrait == true or 
 		AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		PetFrame:SetFrameLevel(4)
-		if (GetWoWVersion ~= 20501) then
+		if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
 			PlayerFrameAlternateManaBar:SetFrameLevel(4)
 		end
 	else
 		return nil
 	end
-	if (GetWoWVersion ~= 20501) then
+	if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
 		if (AbyssUIAddonSettings.DKHordePortrait == true) then
 			RuneFrame:ClearAllPoints()
 			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
@@ -850,7 +862,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		if (GetWoWVersion ~= 20501) then
+		if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end
