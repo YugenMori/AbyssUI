@@ -385,3 +385,8 @@ L["Makes the worldmap fade while you move"] = "在移动时使世界地图褪色
 L["Default Nameplate Range"] = "默认铭牌范围"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "禁用双倍范围铭牌为暴雪的默认值"
+L["Monthly Donators: "] = "每月捐赠者： "
+L["Top Donator: "] = "最高捐赠者： "
+L["Buy me a coffee s2"] = "给我买一杯咖啡S2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "感谢帮助维护AbyssUI的所有人。您是最棒的！"
+L["You are the best of the best! Thank you very much s2"] = "您是最好的！！非常感谢s2"

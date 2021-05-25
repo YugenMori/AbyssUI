@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "Distância padrão Nameplates"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Desativa a distância dupla das"..
 "nameplates para o valor padrão da Blizzard"
+L["Monthly Donators: "] = "Doadores mensais: "
+L["Top Donator: "] = "Principal doador: "
+L["Buy me a coffee s2"] = "Me paga um café s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Obrigado a todos que ajudam a manter o AbyssUI. Vocês são os melhores!"
+L["You are the best of the best! Thank you very much s2"] = "Você é o melhor dos melhores! Muito obrigado s2"

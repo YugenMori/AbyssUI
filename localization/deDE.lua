@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "Standard-Typenschildbereich"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Deaktivieren Sie den doppelten Bereich von"..
 " Typenschilder auf Blizzard-Standardwert"
+L["Monthly Donators: "] = "Monatliche Spender: "
+L["Top Donator: "] = "Top Spender: "
+L["Buy me a coffee s2"] = "Kauf mir einen Kaffee s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Vielen Dank an alle, die bei der Pflege von AbyssUI helfen. Du bist der beste!"
+L["You are the best of the best! Thank you very much s2"] = "Du bist der Beste der Besten! Vielen Dank s2"

@@ -961,3 +961,21 @@ f:SetScript("OnEvent", function(self, event, name)
   	end
 	end
 end)
+-- GameTooltip
+GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
+	if (GetWoWVersion == 20501) then
+		for i, v in pairs({
+			GameTooltip.BottomEdge,
+			GameTooltip.TopEdge,
+			GameTooltip.RightEdge,
+			GameTooltip.BottomEdge,
+			GameTooltip.LeftEdge,
+			GameTooltip.TopRightCorner,
+			GameTooltip.TopLeftCorner,
+			GameTooltip.BottomLeftCorner,
+			GameTooltip.BottomRightCorner,
+		}) do
+		 AbyssUI_ColorizationFrameFunction(v)
+		end
+	end
+end)

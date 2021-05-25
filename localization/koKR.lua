@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "기본 명판 범위"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "이중 범위 비활성화"..
 " 명판을 블리자드 기본값으로"
+L["Monthly Donators: "] = "월간 기부자 : "
+L["Top Donator: "] = "최고 기부자 : "
+L["Buy me a coffee s2"] = "커피 s2 사줘"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "AbyssUI 유지를 도와 주신 모든 분들께 감사드립니다. 당신이 최고입니다!"
+L["You are the best of the best! Thank you very much s2"] = "당신은 최고 중 최고입니다! s2 정말 감사합니다"

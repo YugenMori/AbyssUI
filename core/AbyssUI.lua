@@ -2240,7 +2240,31 @@ f:SetScript("OnEvent", function(self, event, name)
 			InspectFrame.NineSlice.TopLeftCorner,
 			InspectFrame.NineSlice.BottomLeftCorner,
 			InspectFrame.NineSlice.BottomRightCorner,
-		InspectFrameInset.NineSlice.BottomEdge, }) do
+			InspectFrameInset.NineSlice.BottomEdge,
+			InspectFrameTab1Left,
+			InspectFrameTab1LeftDisabled,
+			InspectFrameTab1Middle,
+			InspectFrameTab1MiddleDisabled,
+			InspectFrameTab1Right,
+			InspectFrameTab1RightDisabled,
+			InspectFrameTab2Left,
+			InspectFrameTab2LeftDisabled,
+			InspectFrameTab2Middle,
+			InspectFrameTab2MiddleDisabled,
+			InspectFrameTab2Right,
+			InspectFrameTab2RightDisabled,
+			InspectFrameTab3Left,
+			InspectFrameTab3LeftDisabled,
+			InspectFrameTab3Middle,
+			InspectFrameTab3MiddleDisabled,
+			InspectFrameTab3Right,
+			InspectFrameTab3RightDisabled,
+			InspectFrameTab4Left,
+			InspectFrameTab4LeftDisabled,
+			InspectFrameTab4Middle,
+			InspectFrameTab4MiddleDisabled,
+			InspectFrameTab4Right,
+			InspectFrameTab4RightDisabled, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 				for i, v in pairs({
@@ -2253,7 +2277,8 @@ f:SetScript("OnEvent", function(self, event, name)
 					InspectModelFrameBorderBottom2,
 					InspectModelFrameBorderLeft,
 					InspectModelFrameBorderRight,
-				InspectModelFrameBorderTop, }) do
+					InspectModelFrameBorderTop,
+				}) do
 					v:SetAlpha(0)
 				end
 			else
@@ -2857,6 +2882,22 @@ f:SetScript("OnEvent", function(self, event, name)
 				return nil
 			end
 		end
+	end
+end)
+-- GameTooltip
+GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
+	for i, v in pairs({
+		GameTooltip.BottomEdge,
+		GameTooltip.TopEdge,
+		GameTooltip.RightEdge,
+		GameTooltip.BottomEdge,
+		GameTooltip.LeftEdge,
+		GameTooltip.TopRightCorner,
+		GameTooltip.TopLeftCorner,
+		GameTooltip.BottomLeftCorner,
+		GameTooltip.BottomRightCorner,
+	}) do
+	 AbyssUI_ColorizationFrameFunction(v)
 	end
 end)
 --------------------------------------------------------------

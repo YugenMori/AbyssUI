@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "Plage de plaque signalétique par défaut"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Désactivez la double plage de"..
 " plaques signalétiques à la valeur par défaut de Blizzard" 
+L["Monthly Donators: "] = "Donateurs mensuels: "
+L["Top Donator: "] = "Meilleur donateur: "
+L["Buy me a coffee s2"] = "Achète-moi un café s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Merci à tous ceux qui aident à maintenir AbyssUI. Vous êtes le meilleur!"
+L["You are the best of the best! Thank you very much s2"] = "Vous êtes le meilleur des meilleurs! Merci beaucoup s2"

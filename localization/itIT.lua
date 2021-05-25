@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "Intervallo targhetta predefinito"
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Disabilita il doppio intervallo di"..
 " targhette con il valore predefinito Blizzard" 
+L["Monthly Donators: "] = "Donatori mensili: "
+L["Top Donator: "] = "Miglior donatore: "
+L["Buy me a coffee s2"] = "Comprami un caffè s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Grazie a tutti coloro che aiutano a mantenere AbyssUI. Sei il migliore!"
+L["You are the best of the best! Thank you very much s2"] = "Sei il meglio del meglio! Grazie mille s2"

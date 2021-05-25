@@ -387,3 +387,8 @@ L["Default Nameplate Range"] = "Rango de placa de identificación predeterminado
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Deshabilitar el rango doble de"..
 " placas de identificación al valor predeterminado de Blizzard" 
+L["Monthly Donators: "] = "Donantes mensuales: "
+L["Top Donator: "] = "Mejor donante: "
+L["Buy me a coffee s2"] = "Cómprame un café s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Gracias a todos los que ayudan a mantener AbyssUI. ¡Eres el mejor!"
+L["You are the best of the best! Thank you very much s2"] = "¡Eres el mejor de los mejores! Muchas gracias s2"

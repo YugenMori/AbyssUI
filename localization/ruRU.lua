@@ -385,3 +385,8 @@ L["Default Nameplate Range"] = "Диапазон паспортной табли
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Отключить двойной диапазон"..
 " таблички со значением по умолчанию для Blizzard" 
+L["Monthly Donators: "] = "Ежемесячные жертвователи: "
+L["Top Donator: "] = "Главный жертвователь: "
+L["Buy me a coffee s2"] = "Купи мне кофе s2"
+L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Спасибо всем, кто помогает поддерживать AbyssUI. Вы лучшие!"
+L["You are the best of the best! Thank you very much s2"] = "Ты лучший из лучших! Большое спасибо s2"
