@@ -521,7 +521,26 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
-
+			-- TradeFrame
+			for i, v in pairs({ 
+				TradeFrameTopBorder,
+				TradeFrameTopLeftCorner,
+				TradeFrameTopRightCorner,
+				TradeFrameBotLeftCorner,
+				TradeFrameBotRightCorner,
+				TradeFrameLeftBorder,
+				TradeFrameRightBorder,
+				TradeFrameBottomBorder,
+				TradeFrameBtnCornerLeft,
+				TradeFrameBtnCornerRight,
+				TradeFramePlayerPortrait,
+				TradeFrameRecipientPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+		-- End
 		else
 			return nil
 		end
