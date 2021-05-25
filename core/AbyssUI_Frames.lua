@@ -658,24 +658,24 @@ timer:SetScript("OnFinished", function(self, requested)
 	self:Play() -- start it over again
 end)
 timer:Play()
-if (GetWoWVersion ~= 11307) then
-	local function PlayerModelRandomAnimation()
-		local idRandAnimation = { 
-	    4,   -- walk
-	    5,   -- run
-	    40,  -- falling
-	    42,  -- swimming
-	    62,  -- mining
-	    69,  -- dance
-	    94,  -- iddle(normal)
-	    96,  -- siting
-	    102, -- knell
-	    103, -- knell2
-	    115, -- headdown
-	    193, -- levitating
-	    234, -- state_work_chopwood
-		}
-		local randAnimation = #idRandAnimation 
+local function PlayerModelRandomAnimation()
+	local idRandAnimation = { 
+    4,   -- walk
+    5,   -- run
+    40,  -- falling
+    42,  -- swimming
+    62,  -- mining
+    69,  -- dance
+    94,  -- iddle(normal)
+    96,  -- siting
+    102, -- knell
+    103, -- knell2
+    115, -- headdown
+    193, -- levitating
+    234, -- state_work_chopwood
+	}
+	local randAnimation = #idRandAnimation 
+	if (GetWoWVersion ~= 11307) then
 		ModelFrame_Model1:SetAnimation(idRandAnimation[random(1, randAnimation)])
 	end
 end
@@ -685,9 +685,7 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 	local inInstance, instanceType = IsInInstance()
 	if (AbyssUIAddonSettings.AFKCammeraFrame ~= true) then
 		if (event == "PLAYER_FLAGS_CHANGED" or event == "PLAYER_ENTERING_WORLD") then
-			if (GetWoWVersion ~= 11307) then
-				PlayerModelRandomAnimation()
-			end
+			PlayerModelRandomAnimation()
 			local isAFK = UnitIsAFK("player")
 			if isAFK == true and inInstance ~= true then
 				UIParent:SetAlpha(0)
