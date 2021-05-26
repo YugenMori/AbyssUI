@@ -348,3 +348,5 @@ L["Top Donator: "] = true
 L["Buy me a coffee s2"] = true
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = true
 L["You are the best of the best! Thank you very much s2"] = true
+L["Flat HealthBars"] = true
+L["Make the health bar textures looks Flat"] = true

@@ -2838,6 +2838,22 @@ local function Stylization()
       DemonHunterPortrait_CheckButton:SetChecked(nil)
     end
   end)
+  -- Flat HealthBar --
+  local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  FlatHealthBar_CheckButton:SetPoint("TOPLEFT", 400, -230)
+  FlatHealthBar_CheckButton.Text:SetText(L["Flat HealthBars"])
+  local Frame = CreateFrame("Frame", nil, FlatHealthBar_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  FlatHealthBar_CheckButton.Text:SetAllPoints(Frame)
+  FlatHealthBar_CheckButton.tooltip = L["Make the health bar textures looks Flat"]
+  FlatHealthBar_CheckButton:SetChecked(AbyssUIAddonSettings.FlatHealth)
+  -- OnClick Function
+  FlatHealthBar_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.FlatHealth = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
   -- AbyssUIClassCircles01_CheckButton
   local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)

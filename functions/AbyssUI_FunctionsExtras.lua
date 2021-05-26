@@ -429,6 +429,21 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
 		return nil
 	end
 end)
+-- Border
+hooksecurefunc("CompactUnitFrame_UpdateHealthBorder", function(frame)
+	if frame.optionTable.selectedBorderColor and UnitIsUnit(frame.displayedUnit, "target") then
+		if (not InCombatLockdown) then
+			for i, v in pairs ({
+				frame.healthBar.border.Bottom,
+				frame.healthBar.border.Top,
+				frame.healthBar.border.Left,
+				frame.healthBar.border.Right,
+			}) do
+				AbyssUI_ColorizationFrameFunction(v)
+			end
+		end
+	end
+end)
 ----------------------------------------------------
 -- ChatBubble
 -- Thanks to cokedrivers for this awesome code
@@ -1400,7 +1415,7 @@ hooksecurefunc('AuraButton_Update', function(buttonName, index)
     end     
   end
 end)
--- Hide CompackRaid Borders
+-- Hide CompactRaid Borders
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
@@ -1414,6 +1429,58 @@ f:SetScript("OnEvent", function(self, event)
 	CompactRaidFrameManagerBorderBottomLeft, }) do
 		v:SetAlpha(0)
 	end
+end)
+-- Change Health Bar Fill
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
+local UnitFrames = {
+  PlayerFrame,
+  PetFrame,
+  TargetFrame,
+  TargetFrameToT,
+  FocusFrame,
+  FocusFrameToT,
+  PartyMemberFrame1,
+  PartyMemberFrame2,
+  PartyMemberFrame3,
+  PartyMemberFrame4,
+}
+local UnitFrameRegions = {
+  "healthbar",
+  "myHealPredictionBar",
+  "otherHealPredictionBar",
+  "healAbsorbBar",
+  "totalAbsorbBar",
+  "manabar",
+  "myManaCostPredictionBar",
+  "spellbar",
+}
+local OtherStatusBars = {
+  CastingBarFrame,
+  MirrorTimer1StatusBar,
+  MirrorTimer2StatusBar,
+  MirrorTimer3StatusBar,
+}
+if (AbyssUIAddonSettings.FlatHealth == true) then
+	for _, frame in next, UnitFrames do
+    for _, region in next, UnitFrameRegions do
+      local bar = frame[region]
+      if bar and bar.SetStatusBarTexture then
+        bar:SetStatusBarTexture(TEXTURE)
+        bar:GetStatusBarTexture():SetHorizTile(true)
+      elseif bar and bar.SetTexture then
+        bar:SetTexture(TEXTURE)
+        bar:SetHorizTile(true)
+      end
+    end
+	end
+	for _, bar in next, OtherStatusBars do
+    bar:SetStatusBarTexture(TEXTURE)
+    bar:GetStatusBarTexture():SetHorizTile(true)
+	end
+end
 end)
 ----------------------------------------------------
 --End
