@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + BCC
+-- Shadowlands + Burning Crusade Classic + Classic
 --
 -- Icon Style Module
 --

@@ -1,3 +1,9 @@
+-- Author: Yugen
+--
+-- Shadowlands + Burning Crusade Classic + Classic
+--
+-- Font Handler for AbyssUI
+--------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)

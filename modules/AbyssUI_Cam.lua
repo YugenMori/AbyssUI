@@ -1,3 +1,9 @@
+-- Author: Yugen
+--
+-- Shadowlands + Burning Crusade Classic + Classic
+--
+-- Cam Tricks
+--------------------------------------------------------------
 -- Init - Tables - Saves
 local addonName, addonTable = ...
 if not AbyssUI_Config then

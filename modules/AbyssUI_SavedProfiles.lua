@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + Burning Crusade Classic + Classic
 --
 -- Saved Variables for AbyssUI
 --------------------------------------------------------------

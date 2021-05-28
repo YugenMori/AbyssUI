@@ -1,6 +1,6 @@
 -- Author: Yugen (changes, fixes and enchantments for AbyssUI), KawF (Original code)
 --
--- Shadowlands + BCC
+-- Shadowlands + Burning Crusade Classic + Classic
 --
 -- UnitFrameImproved for AbyssUI.
 --------------------------------------------------------------

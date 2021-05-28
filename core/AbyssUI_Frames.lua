@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + BCC
+-- Shadowlands + Burning Crusade Classic + Classic
 --
 -- Frames for AbyssUI
 --------------------------------------------------------------

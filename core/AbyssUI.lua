@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands
+-- Shadowlands + Burning Crusade Classic + Classic
 --
 -- Dark Minimalist UI for World of Warcraft
 --------------------------------------------------------------
@@ -2907,7 +2907,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "AbyssUI" then
+	if name == "AbyssUI" and GetWoWVersion ~= 11307 then
     self:UnregisterAllEvents()
     local ChildRegions = { LFGDungeonReadyDialog.Border:GetRegions() }
     local fs = {}
