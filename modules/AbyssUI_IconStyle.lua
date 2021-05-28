@@ -11,8 +11,42 @@
 local addon, ns = ...
 local Abconfig = CreateFrame("Frame")
 
--- Textures and borders
+local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local locale = GetLocale()
+local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
+  if (locale == "zhCN") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif (locale == "zhTW") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif (locale == "ruRU") then
+    globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont     = mediaFolder.."ruRU\\dejavu.ttf"
+    damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif (locale == "koKR") then
+    globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont     = mediaFolder.."koKR\\dxlbab.ttf"
+    damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    locale == "esES" or locale == "esMX" or locale == "ptBR") then
+    globalFont  = mediaFolder.."global.ttf"
+    subFont     = mediaFolder.."npcfont.ttf"
+    damageFont  = mediaFolder.."damagefont.ttf"
+  else
+    globalFont  = fontName
+    subFont     = fontName
+    damageFont  = fontName
+  end
+  return globalFont, subFont, damageFont
+end
+-- declarations
+local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
 
+-- Textures and borders
 -- action bars settings
 Abconfig.textures = {
   normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss",
@@ -66,7 +100,7 @@ Abconfig.cooldown = {
   spacing          = 0,
 }
 
-Abconfig.font = STANDARD_TEXT_FONT
+Abconfig.font = globalFont
 
 --adjust the oneletter abbrev?
 Abconfig.adjustOneletterAbbrev = true
@@ -107,12 +141,12 @@ Abconfig.buffFrame = {
     padding           = 4,
   },
   duration = {
-    font              = STANDARD_TEXT_FONT,
+    font              = globalFont,
     size              = 11,
     pos               = { a1 = "BOTTOM", x = 0, y = 0 },
   },
   count = {
-    font              = STANDARD_TEXT_FONT,
+    font              = globalFont,
     size              = 11,
     pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
   },
@@ -153,12 +187,12 @@ Abconfig.debuffFrame = {
     padding           = 4,
   },
   duration = {
-    font              = STANDARD_TEXT_FONT,
+    font              = globalFont,
     size              = 11,
     pos               = { a1 = "BOTTOM", x = 0, y = 0 },
   },
   count = {
-    font              = STANDARD_TEXT_FONT,
+    font              = globalFont,
     size              = 11,
     pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
   },
