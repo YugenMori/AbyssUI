@@ -1364,6 +1364,7 @@ AbyssUI_PlayerClassicName:SetScript("OnEvent", function()
 		return nil
 	end
 end)
+--[[
 -- Timer on BuffFrame (Thanks to coke for this)
 local origSecondsToTimeAbbrev = _G.SecondsToTimeAbbrev
 local function SecondsToTimeAbbrevHook(seconds)
@@ -1415,6 +1416,7 @@ hooksecurefunc('AuraButton_Update', function(buttonName, index)
     end     
   end
 end)
+--]]
 -- Hide CompactRaid Borders
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")

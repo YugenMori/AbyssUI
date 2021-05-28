@@ -1794,26 +1794,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
-			----------------------------------------------------------------------
-			-- Frames that act weird
-			-- LFGDungeonReadyDialog
-			for i, v in pairs({ 
-				LFGDungeonReadyDialog.Border.Bg,
-				LFGDungeonReadyDialog.Border.TopEdge,
-				LFGDungeonReadyDialog.Border.RightEdge,
-				LFGDungeonReadyDialog.Border.BottomEdge,
-				LFGDungeonReadyDialog.Border.LeftEdge,
-				LFGDungeonReadyDialog.Border.TopRightCorner,
-				LFGDungeonReadyDialog.Border.TopLeftCorner,
-				LFGDungeonReadyDialog.Border.BottomLeftCorner,
-				LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-					--v:SetAlpha(0)
-				else
-					return nil
-				end
-			end
 		end
 		----------------------------------------------------------------------
 		-- End
@@ -2929,7 +2909,7 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "AbyssUI" then
     self:UnregisterAllEvents()
-    local ChildRegions = { LFGDungeonReadyDialog:GetRegions() }
+    local ChildRegions = { LFGDungeonReadyDialog.Border:GetRegions() }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
