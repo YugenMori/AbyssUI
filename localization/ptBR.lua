@@ -51,7 +51,7 @@ L["- UnitFrame Art"]	= "- Arte da UnitFrame"
 L["Setup"]	= "Configuração"
 L["Clear Bars"]	= "Limpar Barras"
 L["DailyInfo"]	= "Info Diária"
-L["Reload UI"]	= "Recarregar IU"
+L["Reload UI"]	= "Recarregar UI"
 L["Donate"]	= "Doações"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
@@ -386,7 +386,7 @@ L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Desativa a distância dupla das"..
 "nameplates para o valor padrão da Blizzard"
 L["Monthly Donators: "] = "Doadores mensais: "
-L["Top Donator: "] = "Principal doador: "
+L["Top Donator: "] = "Top Doador: "
 L["Buy me a coffee s2"] = "Me paga um café s2"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Obrigado a todos que ajudam a manter o AbyssUI. Vocês são os melhores!"
 L["You are the best of the best! Thank you very much s2"] = "Você é o melhor dos melhores! Muito obrigado s2"

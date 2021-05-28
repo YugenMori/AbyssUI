@@ -338,31 +338,38 @@ local function InitSettings()
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
     local FrameButton = CreateFrame("Button","$parentExtraDonatorButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(30)
-    FrameButton:SetWidth(140)
+    FrameButton:SetHeight(45)
+    FrameButton:SetWidth(180)
     FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -200)
     FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-    --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetFont(globalFont, 11)
+    FrameButton.text:SetFont(globalFont, 13)
+    FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
     FrameButton.text:SetText(L["Monthly Donators: "].."1/10")
     FrameButton:SetScript("OnClick", function()
       AbyssUI_EditBox:SetText(L["Thanks to everyone who helps maintain AbyssUI. You are the best!"])
       AbyssUI_EditBox_Frame:Show()
     end)
+    for i, v in pairs({
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraDonatorButton.Right,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraDonatorButton.Middle,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraDonatorButton.Left,
+    }) do
+      v:SetVertexColor(232/255, 201/255, 121/255)
+    end
   end)
   --
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
     local FrameButton = CreateFrame("Button","$parentExtraTopDonatorButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(30)
-    FrameButton:SetWidth(140)
+    FrameButton:SetHeight(45)
+    FrameButton:SetWidth(180)
     FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -200)
     FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-    --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetFont(globalFont, 11)
+    FrameButton.text:SetFont(globalFont, 13)
+    FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
     FrameButton.text:SetText(L["Top Donator: "].."Ash")
     -- animation
     FrameButton.GlowTexture = FrameButton:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
@@ -402,24 +409,38 @@ local function InitSettings()
       AbyssUI_EditBox:SetText(L["You are the best of the best! Thank you very much s2"])
       AbyssUI_EditBox_Frame:Show()
     end)
+    for i, v in pairs({
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraTopDonatorButton.Right,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraTopDonatorButton.Middle,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigExtraTopDonatorButton.Left,
+    }) do
+      v:SetVertexColor(232/255, 201/255, 121/255)
+    end
   end)
   --
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
     local FrameButton = CreateFrame("Button","$parentBuyCoffeeButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
-    FrameButton:SetHeight(30)
-    FrameButton:SetWidth(140)
+    FrameButton:SetHeight(45)
+    FrameButton:SetWidth(180)
     FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -200)
     FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-    --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetFont(globalFont, 11)
+    FrameButton.text:SetFont(globalFont, 13)
+    FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
     FrameButton.text:SetText(L["Buy me a coffee s2"])
     FrameButton:SetScript("OnClick", function()
       AbyssUI_EditBox:SetText("https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
       AbyssUI_EditBox_Frame:Show()
     end)
+    for i, v in pairs({
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Right,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Middle,
+      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Left,
+    }) do
+      v:SetVertexColor(232/255, 201/255, 121/255)
+    end
   end)
   -- Buttons
   -- AbyssUI Setup --

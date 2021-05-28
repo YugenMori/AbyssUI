@@ -49,7 +49,7 @@ local function AbyssUI_ColorizationFrameFunction(...)
 		v:SetVertexColor(.4, .4, .4)
 	end
 end
-
+--
 local BasicFrames = CreateFrame("Frame")
 BasicFrames:RegisterEvent("ADDON_LOADED")
 BasicFrames:SetScript("OnEvent", function(self, event, addon)
@@ -102,7 +102,6 @@ BasicFrames:SetScript("OnEvent", function(self, event, addon)
 		BasicFrames:SetScript("OnEvent", nil)
 	end
 end)
-
 -- Dark Unit Frames Exception
 local DarkException = CreateFrame("Frame")
 DarkException:RegisterEvent("ADDON_LOADED")
@@ -178,6 +177,30 @@ SetAlphaFrames:SetScript("OnEvent", function(self, event, addon)
 			return nil
 		end
 end)
+-- SupportedAddons
+--[[
+local BagnonSupport = CreateFrame("Frame")
+BagnonSupport:RegisterEvent("ADDON_LOADED")
+BagnonSupport:SetScript("OnEvent", function(self, event, addon)
+	if (addon == "Bagnon") then
+		for i, v in pairs({
+			BagnonInventoryFrame1.BottomEdge,
+			BagnonInventoryFrame1.RightEdge,
+			BagnonInventoryFrame1.LeftEdge,
+			BagnonInventoryFrame1.TopEdge,
+			BagnonInventoryFrame1.BottomEdge,
+			BagnonInventoryFrame1.PortraitFrame,
+			BagnonInventoryFrame1.TopRightCorner,
+			BagnonInventoryFrame1.TopLeftCorner,
+			BagnonInventoryFrame1.BottomLeftCorner,
+			BagnonInventoryFrame1.BottomRightCorner,
+			BagnonInventoryFrame1.Center,
+		}) do
+			AbyssUI_ColorizationFrameFunction(v)
+		end
+	end
+end)
+--]]
 -- New Interface
 local NewFrames = CreateFrame("Frame")
 NewFrames:RegisterEvent("ADDON_LOADED")
@@ -1783,10 +1806,10 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				LFGDungeonReadyDialog.Border.TopRightCorner,
 				LFGDungeonReadyDialog.Border.TopLeftCorner,
 				LFGDungeonReadyDialog.Border.BottomLeftCorner,
-			LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
+				LFGDungeonReadyDialog.Border.BottomRightCorner, }) do
 				if AbyssUIAddonSettings ~= nil then
-					--AbyssUI_ColorizationFrameFunction(v)
-					v:SetAlpha(0)
+					AbyssUI_ColorizationFrameFunction(v)
+					--v:SetAlpha(0)
 				else
 					return nil
 				end
@@ -2898,6 +2921,26 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 		GameTooltip.BottomRightCorner,
 	}) do
 	 AbyssUI_ColorizationFrameFunction(v)
+	end
+end)
+-- LFGDungeonReadyDialog
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "AbyssUI" then
+    self:UnregisterAllEvents()
+    local ChildRegions = { LFGDungeonReadyDialog:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+    for i, v in pairs ({
+    	LFGDungeonReadyDialogYourRoleDescription,
+    	LFGDungeonReadyDialogRoleLabel,
+    	LFGDungeonReadyDialogLabel,
+    }) do
+    	v:SetVertexColor(219/255, 222/255, 231/255)
+    end
 	end
 end)
 --------------------------------------------------------------
