@@ -215,7 +215,7 @@ f:SetScript("OnEvent", function(self, event)
   "GossipFrameGreetingGoodbyeButtonText",
   "GameMenuButtonHelpText",
   "GameMenuButtonStoreText",
-  "GameMenuButtonWhatsNewText",
+  --"GameMenuButtonWhatsNewText",
   "GameMenuButtonOptionsText",
   "GameMenuButtonUIOptionsText",
   "GameMenuButtonKeybindingsText",
