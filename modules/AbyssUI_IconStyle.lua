@@ -201,14 +201,8 @@ Abconfig.debuffFrame = {
 ns.Abconfig = Abconfig
 
 -- Action Bar
-
 --get the config values
 local Abconfig = ns.Abconfig
-
-local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-local dominos = IsAddOnLoaded("Dominos")
-local bartender4 = IsAddOnLoaded("Bartender4")
---local lorti = IsAddOnLoaded("Lorti-UI-TBC")
 
 if Abconfig.color.classcolored then
   Abconfig.color.normal = classcolor
@@ -233,12 +227,10 @@ local backdrop = {
     bottom = Abconfig.background.inset,
   },
 }
-
-
-if IsAddOnLoaded("Masque") and (dominos or bartender4) then
-  return
-end
-
+local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+local dominos = IsAddOnLoaded("Dominos")
+local bartender4 = IsAddOnLoaded("Bartender4")
+if IsAddOnLoaded("Masque") and (dominos or bartender4) then return end
 local function applyBackground(bu)
   if not bu or (bu and bu.bg) then return end
   --shadows+background
@@ -380,19 +372,19 @@ end
 -- style leave button
 local function styleLeaveButton(bu)
   if not bu or (bu and bu.rabs_styled) then return end
---local region = select(1, bu:GetRegions())
-local name = bu:GetName()
-local nt = bu:GetNormalTexture()
-local bo = bu:CreateTexture(name.."Border", "BACKGROUND", nil, -7)
-nt:SetTexCoord(0.2,0.8,0.2,0.8)
-nt:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
+  --local region = select(1, bu:GetRegions())
+  local name = bu:GetName()
+  local nt = bu:GetNormalTexture()
+  local bo = bu:CreateTexture(name.."Border", "BACKGROUND", nil, -7)
+  nt:SetTexCoord(0.2,0.8,0.2,0.8)
+  nt:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
   nt:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
-bo:SetTexture(Abconfig.textures.normal)
-bo:SetTexCoord(0, 1, 0, 1)
-bo:SetDrawLayer("BACKGROUND", -7)
-bo:SetVertexColor(0.4, 0.35, 0.35)
-bo:ClearAllPoints()
-bo:SetAllPoints(bu)
+  bo:SetTexture(Abconfig.textures.normal)
+  bo:SetTexCoord(0, 1, 0, 1)
+  bo:SetDrawLayer("BACKGROUND", -7)
+  bo:SetVertexColor(0.4, 0.35, 0.35)
+  bo:ClearAllPoints()
+  bo:SetAllPoints(bu)
   --shadows+background
   if not bu.bg then applyBackground(bu) end
   bu.rabs_styled = true
@@ -422,8 +414,8 @@ local function stylePetButton(bu)
   end)
   --cut the default border of the icons and make them shiny
   ic:SetTexCoord(0.1,0.9,0.1,0.9)
-ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
-ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
+  ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
+  ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
   --shadows+background
   if not bu.bg then applyBackground(bu) end
   bu.rabs_styled = true
@@ -521,9 +513,10 @@ local function updateHotkey(self, actionButtonType)
     ho:Hide()
   end
 end
-
 local function init()
-  --style the actionbar buttons
+local dominos = IsAddOnLoaded("Dominos")
+local bartender4 = IsAddOnLoaded("Bartender4")
+--style the actionbar buttons
   for i = 1, NUM_ACTIONBAR_BUTTONS do
     styleActionButton(_G["ActionButton"..i])
     styleActionButton(_G["MultiBarBottomLeftButton"..i])
@@ -568,14 +561,14 @@ local function init()
 
   --hide the hotkeys if needed
   if not dominos and not bartender4 and not Abconfig.hotkeys.show then
-    hooksecurefunc("ActionButton_UpdateHotkeys",  updateHotkey)
+    hooksecurefunc("ActionButton_UpdateHotkeys", updateHotkey)
   end
-
 end
 
 local a = CreateFrame("Frame")
-a:RegisterEvent("PLAYER_LOGIN")
+a:RegisterEvent("PLAYER_ENTERING_WORLD")
 a:SetScript("OnEvent", init)
+
 
 -- Auras
 --apply aura frame texture func
