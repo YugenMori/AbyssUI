@@ -385,10 +385,12 @@ L["Default Nameplate Range"] = "Диапазон паспортной табли
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Отключить двойной диапазон"..
 " таблички со значением по умолчанию для Blizzard" 
-L["Monthly Donators: "] = "Ежемесячные жертвователи: "
-L["Top Donator: "] = "Главный жертвователь: "
-L["Buy me a coffee s2"] = "Купи мне кофе s2"
+L["Monthly Donators:\n"] = "Ежемесячные жертвователи:\n"
+L["Top Donator:\n"] = "Лучший жертвователь:\n"
+L["Buy me a coffee\ns2"] = "Купи мне кофе\ns2"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Спасибо всем, кто помогает поддерживать AbyssUI. Вы лучшие!"
 L["You are the best of the best! Thank you very much s2"] = "Ты лучший из лучших! Большое спасибо s2"
 L["Flat HealthBars"] = "Плоские HealthBars"
 L["Make the health bar textures looks Flat"] = "Сделайте текстуры индикатора здоровья плоскими"
+L["Show Minimap Clock"] = "Часы на миникарте"
+L["This will always show the minimap clock, instead of showing on hover"] = "Это всегда будет показывать часы на миникарте, а не при наведении курсора"

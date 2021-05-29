@@ -585,8 +585,8 @@ local function applySkin(b)
   local name = b:GetName()
   if (name:match("Debuff")) then
     b.debuff = true
-    else
-      b.buff = true
+  else
+    b.buff = true
   end
   --icon
   local icon = _G[name.."Icon"]
@@ -687,87 +687,86 @@ cf = CreateFrame("Frame")
 cf:SetScript("OnUpdate", UpdateTimer)
 
 -- Buff Frames
+local dragFrameList = ns.dragFrameList
 
-  local dragFrameList = ns.dragFrameList
+--rCreateDragFrame func
+function rCreateDragFrame(self, dragFrameList, inset, clamp)
+  if not self or not dragFrameList then return end
+  --save the default position for later
+  self.defaultPoint = rGetPoint(self)
+  table.insert(dragFrameList,self) --add frame object to the list
+  --anchor a dragable frame on self
+  local df = CreateFrame("Frame",nil,self)
+  df:SetAllPoints(self)
+  df:SetFrameStrata("HIGH")
+  df:SetHitRectInsets(inset or 0,inset or 0,inset or 0,inset or 0)
+  df:EnableMouse(true)
+  df:RegisterForDrag("LeftButton")
+  df:SetScript("OnDragStart", function(self) if IsAltKeyDown() and IsShiftKeyDown() then self:GetParent():StartMoving() end end)
+  df:SetScript("OnDragStop", function(self) self:GetParent():StopMovingOrSizing() end)
+  df:SetScript("OnEnter", function(self)
+    GameTooltip:SetOwner(self, "ANCHOR_TOP")
+    GameTooltip:AddLine(self:GetParent():GetName(), 0, 1, 0.5, 1, 1, 1)
+    GameTooltip:AddLine("Hold down ALT+SHIFT to drag!", 1, 1, 1, 1, 1, 1)
+    GameTooltip:Show()
+  end)
+  df:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+  df:Hide()
+  --overlay texture
+  local t = df:CreateTexture(nil,"OVERLAY",nil,6)
+  t:SetAllPoints(df)
+  t:SetTexture(0,1,0)
+  t:SetAlpha(0.2)
+  df.texture = t
+  --self stuff
+  self.dragFrame = df
+  self:SetClampedToScreen(clamp or false)
+  self:SetMovable(true)
+  self:SetUserPlaced(true)
+end
 
-  --rCreateDragFrame func
-  function rCreateDragFrame(self, dragFrameList, inset, clamp)
-    if not self or not dragFrameList then return end
-    --save the default position for later
-    self.defaultPoint = rGetPoint(self)
-    table.insert(dragFrameList,self) --add frame object to the list
-    --anchor a dragable frame on self
-    local df = CreateFrame("Frame",nil,self)
-    df:SetAllPoints(self)
-    df:SetFrameStrata("HIGH")
-    df:SetHitRectInsets(inset or 0,inset or 0,inset or 0,inset or 0)
-    df:EnableMouse(true)
-    df:RegisterForDrag("LeftButton")
-    df:SetScript("OnDragStart", function(self) if IsAltKeyDown() and IsShiftKeyDown() then self:GetParent():StartMoving() end end)
-    df:SetScript("OnDragStop", function(self) self:GetParent():StopMovingOrSizing() end)
-    df:SetScript("OnEnter", function(self)
-      GameTooltip:SetOwner(self, "ANCHOR_TOP")
-      GameTooltip:AddLine(self:GetParent():GetName(), 0, 1, 0.5, 1, 1, 1)
-      GameTooltip:AddLine("Hold down ALT+SHIFT to drag!", 1, 1, 1, 1, 1, 1)
-      GameTooltip:Show()
-    end)
-    df:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
-    df:Hide()
-    --overlay texture
-    local t = df:CreateTexture(nil,"OVERLAY",nil,6)
-    t:SetAllPoints(df)
-    t:SetTexture(0,1,0)
-    t:SetAlpha(0.2)
-    df.texture = t
-    --self stuff
-    self.dragFrame = df
-    self:SetClampedToScreen(clamp or false)
-    self:SetMovable(true)
-    self:SetUserPlaced(true)
-  end
+--rewrite the oneletter shortcuts
+if Abconfig.adjustOneletterAbbrev then
+  HOUR_ONELETTER_ABBR   = "%dh"
+  DAY_ONELETTER_ABBR    = "%dd"
+  MINUTE_ONELETTER_ABBR = "%dm"
+  SECOND_ONELETTER_ABBR = "%ds"
+end
 
-  --rewrite the oneletter shortcuts
-  if Abconfig.adjustOneletterAbbrev then
-    HOUR_ONELETTER_ABBR = "%dh"
-    DAY_ONELETTER_ABBR = "%dd"
-    MINUTE_ONELETTER_ABBR = "%dm"
-    SECOND_ONELETTER_ABBR = "%ds"
-  end
+--backdrop debuff
+local backdropDebuff = {
+  bgFile = nil,
+  edgeFile = Abconfig.debuffFrame.background.edgeFile,
+  tile = false,
+  tileSize = 32,
+  edgeSize = Abconfig.debuffFrame.background.inset,
+  insets = {
+    left = Abconfig.debuffFrame.background.inset,
+    right = Abconfig.debuffFrame.background.inset,
+    top = Abconfig.debuffFrame.background.inset,
+    bottom = Abconfig.debuffFrame.background.inset,
+  },
+}
 
-  --backdrop debuff
-  local backdropDebuff = {
-    bgFile = nil,
-    edgeFile = Abconfig.debuffFrame.background.edgeFile,
-    tile = false,
-    tileSize = 32,
-    edgeSize = Abconfig.debuffFrame.background.inset,
-    insets = {
-      left = Abconfig.debuffFrame.background.inset,
-      right = Abconfig.debuffFrame.background.inset,
-      top = Abconfig.debuffFrame.background.inset,
-      bottom = Abconfig.debuffFrame.background.inset,
-    },
-  }
+--backdrop buff
+local backdropBuff = {
+  bgFile = nil,
+  edgeFile = Abconfig.buffFrame.background.edgeFile,
+  tile = false,
+  tileSize = 32,
+  edgeSize = Abconfig.buffFrame.background.inset,
+  insets = {
+    left = Abconfig.buffFrame.background.inset,
+    right = Abconfig.buffFrame.background.inset,
+    top = Abconfig.buffFrame.background.inset,
+    bottom = Abconfig.buffFrame.background.inset,
+  },
+}
 
-  --backdrop buff
-  local backdropBuff = {
-    bgFile = nil,
-    edgeFile = Abconfig.buffFrame.background.edgeFile,
-    tile = false,
-    tileSize = 32,
-    edgeSize = Abconfig.buffFrame.background.inset,
-    insets = {
-      left = Abconfig.buffFrame.background.inset,
-      right = Abconfig.buffFrame.background.inset,
-      top = Abconfig.buffFrame.background.inset,
-      bottom = Abconfig.buffFrame.background.inset,
-    },
-  }
+local ceil, min, max = ceil, min, max
+local ShouldShowConsolidatedBuffFrame = ShouldShowConsolidatedBuffFrame
 
-  local ceil, min, max = ceil, min, max
-  local ShouldShowConsolidatedBuffFrame = ShouldShowConsolidatedBuffFrame
-  
-  local buffFrameHeight = 0
+local buffFrameHeight = 0
 
 --apply aura frame texture func
 local function applySkin(b)

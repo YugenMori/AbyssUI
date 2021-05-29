@@ -387,10 +387,12 @@ L["Default Nameplate Range"] = "Rango de placa de identificación predeterminado
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "Deshabilitar el rango doble de"..
 " placas de identificación al valor predeterminado de Blizzard" 
-L["Monthly Donators: "] = "Donantes mensuales: "
-L["Top Donator: "] = "Mejor donante: "
-L["Buy me a coffee s2"] = "Cómprame un café s2"
+L["Monthly Donators:\n"] = "Donantes mensuales:\n"
+L["Top Donator:\n"] = "Mejor donante:\n"
+L["Buy me a coffee\ns2"] = "Cómprame un café\ns2"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Gracias a todos los que ayudan a mantener AbyssUI. ¡Eres el mejor!"
 L["You are the best of the best! Thank you very much s2"] = "¡Eres el mejor de los mejores! Muchas gracias s2"
 L["Flat HealthBars"] = "Barras de salud planas"
 L["Make the health bar textures looks Flat"] = "Hacer que las texturas de la barra de salud se vean planas"
+L["Show Minimap Clock"] = "Reloj del minimapa"
+L["This will always show the minimap clock, instead of showing on hover"] = "Esto siempre mostrará el reloj del minimapa, en lugar de mostrarlo al pasar el mouse"

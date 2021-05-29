@@ -343,10 +343,12 @@ L["Makes the worldmap fade while you move"] = true
 L["Default Nameplate Range"] = true
 L["Disable the double range of"..
 " nameplates to Blizzard default value"] = true
-L["Monthly Donators: "] = true
-L["Top Donator: "] = true
-L["Buy me a coffee s2"] = true
+L["Monthly Donators:\n"] = true
+L["Top Donator:\n"] = true
+L["Buy me a coffee\ns2"] = true
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = true
 L["You are the best of the best! Thank you very much s2"] = true
 L["Flat HealthBars"] = true
 L["Make the health bar textures looks Flat"] = true
+L["Show Minimap Clock"] = true
+L["This will always show the minimap clock, instead of showing on hover"] = true
