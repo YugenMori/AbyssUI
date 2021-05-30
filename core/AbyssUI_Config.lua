@@ -600,6 +600,7 @@ local function InitSettings()
         end
         print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
         print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
+        print(L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"])
       end)
     end)
   end)

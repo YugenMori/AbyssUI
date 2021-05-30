@@ -352,3 +352,4 @@ L["Flat HealthBars"] = true
 L["Make the health bar textures looks Flat"] = true
 L["Show Minimap Clock"] = true
 L["This will always show the minimap clock, instead of showing on hover"] = true
+L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = true
