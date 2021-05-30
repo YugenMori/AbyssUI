@@ -387,7 +387,7 @@ L["Disable the double range of"..
 " таблички со значением по умолчанию для Blizzard" 
 L["Monthly Donators:\n"] = "Ежемесячные жертвователи:\n"
 L["Top Donator:\n"] = "Лучший жертвователь:\n"
-L["Buy me a coffee\ns2"] = "Купи мне кофе\ns2"
+L["Patreon\nBuy me a coffee s2"] = "Patreon\nКупи мне кофе s2"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Спасибо всем, кто помогает поддерживать AbyssUI. Вы лучшие!"
 L["You are the best of the best! Thank you very much s2"] = "Ты лучший из лучших! Большое спасибо s2"
 L["Flat HealthBars"] = "Плоские HealthBars"

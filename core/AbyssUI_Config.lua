@@ -346,6 +346,40 @@ local function InitSettings()
     FrameButton.text:SetFont(globalFont, 13)
     FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
     FrameButton.text:SetText(L["Monthly Donators:\n"].."1/10")
+    -- animation
+    FrameButton.GlowTexture = FrameButton:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
+    FrameButton.GlowTexture:SetAllPoints()
+    FrameButton.GlowTexture:Hide()
+    FrameButton.Glow = FrameButton:CreateAnimationGroup()
+    FrameButton.Glow:SetLooping("REPEAT")
+    local anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetChildKey("GlowTexture")
+    anim:SetOrder(1)
+    anim:SetFromAlpha(0)
+    anim:SetToAlpha(1)
+    anim:SetDuration(0.5)
+    anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetOrder(2)
+    anim:SetChildKey("GlowTexture")
+    anim:SetFromAlpha(1)
+    anim:SetToAlpha(0)
+    anim:SetDuration(0.5)
+    FrameButton.Glow:SetScript("OnPlay", function(self)
+      self:GetParent().GlowTexture:Show()
+    end)
+    FrameButton.Glow:SetScript("OnStop", function(self)
+      self:GetParent().GlowTexture:Hide()
+    end)
+    if not FrameButton.running then
+      FrameButton.running = true
+      FrameButton.Glow:Play()
+    else
+      FrameButton.running = false
+      FrameButton.Glow:Stop()
+    end
+    if(not FrameButton:IsShown()) then
+      FrameButton.Glow:Stop()
+    end
     FrameButton:SetScript("OnClick", function()
       AbyssUI_EditBox:SetText(L["Thanks to everyone who helps maintain AbyssUI. You are the best!"])
       AbyssUI_EditBox_Frame:Show()
@@ -429,9 +463,43 @@ local function InitSettings()
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
     FrameButton.text:SetFont(globalFont, 13)
     FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
-    FrameButton.text:SetText(L["Buy me a coffee\ns2"])
+    FrameButton.text:SetText(L["Patreon\nBuy me a coffee s2"])
+    -- animation
+    FrameButton.GlowTexture = FrameButton:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
+    FrameButton.GlowTexture:SetAllPoints()
+    FrameButton.GlowTexture:Hide()
+    FrameButton.Glow = FrameButton:CreateAnimationGroup()
+    FrameButton.Glow:SetLooping("REPEAT")
+    local anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetChildKey("GlowTexture")
+    anim:SetOrder(1)
+    anim:SetFromAlpha(0)
+    anim:SetToAlpha(1)
+    anim:SetDuration(0.5)
+    anim = FrameButton.Glow:CreateAnimation("Alpha")
+    anim:SetOrder(2)
+    anim:SetChildKey("GlowTexture")
+    anim:SetFromAlpha(1)
+    anim:SetToAlpha(0)
+    anim:SetDuration(0.5)
+    FrameButton.Glow:SetScript("OnPlay", function(self)
+      self:GetParent().GlowTexture:Show()
+    end)
+    FrameButton.Glow:SetScript("OnStop", function(self)
+      self:GetParent().GlowTexture:Hide()
+    end)
+    if not FrameButton.running then
+      FrameButton.running = true
+      FrameButton.Glow:Play()
+    else
+      FrameButton.running = false
+      FrameButton.Glow:Stop()
+    end
+    if(not FrameButton:IsShown()) then
+      FrameButton.Glow:Stop()
+    end
     FrameButton:SetScript("OnClick", function()
-      AbyssUI_EditBox:SetText("https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
+      AbyssUI_EditBox:SetText("https://www.patreon.com/abyssui")
       AbyssUI_EditBox_Frame:Show()
     end)
     for i, v in pairs({
