@@ -232,7 +232,7 @@ local function InitSettings()
   Frame:SetText(L["Player Portrait"])
   -- Panel 04.01 (Themes)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -25, -50)
+  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -240,12 +240,20 @@ local function InitSettings()
   Frame:SetText(L["- Portrait Art"])
   -- Panel 4.02 (Themes)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel4, "TOPRIGHT", -50, -50)
+  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel4, "TOPRIGHT", -65, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- UnitFrame Art"])
+    -- Panel 04.03 (Themes)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
+  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -320)
+  Frame:SetWidth(200)
+  Frame:SetHeight(40)
+  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  Frame:SetAllPoints()
+  Frame:SetText("- Icon Border")
   -- Panel 05 (Colorization)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel5)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", 0, -20)
@@ -2983,6 +2991,127 @@ local function Stylization()
     else
       UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
       AbyssUIClassCircles01_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Icon Border --
+  -- Gloss
+  local GlossIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlossIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  GlossIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -350)
+  GlossIconBorder_CheckButton.Text:SetText("Class Color")
+  local Frame = CreateFrame("Frame", nil, GlossIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  GlossIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  GlossIconBorder_CheckButton.tooltip = "Change icon border to a class colored theme"
+  GlossIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.GlossIconBorder)
+  -- OnClick Function
+  GlossIconBorder_CheckButton:SetScript("OnClick", function(self)
+   if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+      AbyssUIAddonSettings.GlossIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      GlossIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Crisp
+  local CrispIconBorder_CheckButton = CreateFrame("CheckButton", "$parentCrispIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  CrispIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -380)
+  CrispIconBorder_CheckButton.Text:SetText("Crisp")
+  local Frame = CreateFrame("Frame", nil, CrispIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  CrispIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  CrispIconBorder_CheckButton.tooltip = "Change icon border to a crisp theme"
+  CrispIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.CrispIconBorder)
+  -- OnClick Function
+  CrispIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.GlossIconBorder   ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+      AbyssUIAddonSettings.CrispIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      CrispIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Original
+  local OriginalIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOriginalIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  OriginalIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -410)
+  OriginalIconBorder_CheckButton.Text:SetText("Original")
+  local Frame = CreateFrame("Frame", nil, OriginalIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  OriginalIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  OriginalIconBorder_CheckButton.tooltip = "Change icon border to a original theme"
+  OriginalIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.OriginalIconBorder)
+  -- OnClick Function
+  OriginalIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder    ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+      AbyssUIAddonSettings.OriginalIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      OriginalIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Square
+  local SquareIconBorder_CheckButton = CreateFrame("CheckButton", "$parentSquareIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  SquareIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -440)
+  SquareIconBorder_CheckButton.Text:SetText("Square")
+  local Frame = CreateFrame("Frame", nil, SquareIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  SquareIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  SquareIconBorder_CheckButton.tooltip = "Change icon border to a square theme"
+  SquareIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.SquareIconBorder)
+  -- OnClick Function
+  SquareIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder    ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+      AbyssUIAddonSettings.SquareIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      SquareIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Thin
+  local ThinIconBorder_CheckButton = CreateFrame("CheckButton", "$parentThinIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  ThinIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -470)
+  ThinIconBorder_CheckButton.Text:SetText("Thin")
+  local Frame = CreateFrame("Frame", nil, ThinIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  ThinIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  ThinIconBorder_CheckButton.tooltip = "Change icon border to a thin theme"
+  ThinIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.ThinIconBorder)
+  -- OnClick Function
+  ThinIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder    ~= true then 
+      AbyssUIAddonSettings.ThinIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      ThinIconBorder_CheckButton:SetChecked(nil)
     end
   end)
   -- AbyssUIClassCircles02_CheckButton
