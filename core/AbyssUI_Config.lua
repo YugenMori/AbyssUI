@@ -3010,6 +3010,7 @@ local function Stylization()
    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
       AbyssUIAddonSettings.OriginalIconBorder ~= true and 
       AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder    ~= true and 
       AbyssUIAddonSettings.ThinIconBorder     ~= true then 
       AbyssUIAddonSettings.GlossIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -3033,7 +3034,8 @@ local function Stylization()
   CrispIconBorder_CheckButton:SetScript("OnClick", function(self)
     if AbyssUIAddonSettings.GlossIconBorder   ~= true and 
       AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and
+      AbyssUIAddonSettings.GlassIconBorder    ~= true and  
       AbyssUIAddonSettings.ThinIconBorder     ~= true then 
       AbyssUIAddonSettings.CrispIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -3058,6 +3060,7 @@ local function Stylization()
     if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
       AbyssUIAddonSettings.GlossIconBorder    ~= true and 
       AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder    ~= true and 
       AbyssUIAddonSettings.ThinIconBorder     ~= true then 
       AbyssUIAddonSettings.OriginalIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -3082,6 +3085,7 @@ local function Stylization()
     if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
       AbyssUIAddonSettings.OriginalIconBorder ~= true and 
       AbyssUIAddonSettings.GlossIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder    ~= true and 
       AbyssUIAddonSettings.ThinIconBorder     ~= true then 
       AbyssUIAddonSettings.SquareIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -3106,12 +3110,37 @@ local function Stylization()
     if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
       AbyssUIAddonSettings.OriginalIconBorder ~= true and 
       AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder    ~= true and 
       AbyssUIAddonSettings.GlossIconBorder    ~= true then 
       AbyssUIAddonSettings.ThinIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
       UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
       ThinIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Glass
+  local GlassIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlassIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  GlassIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -350)
+  GlassIconBorder_CheckButton.Text:SetText(L["Glass"])
+  local Frame = CreateFrame("Frame", nil, GlassIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  GlassIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  GlassIconBorder_CheckButton.tooltip = L["Change the icon to a glass theme"]
+  GlassIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.GlassIconBorder)
+  -- OnClick Function
+  GlassIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder    ~= true then 
+      AbyssUIAddonSettings.GlassIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      GlassIconBorder_CheckButton:SetChecked(nil)
     end
   end)
   -- AbyssUIClassCircles02_CheckButton

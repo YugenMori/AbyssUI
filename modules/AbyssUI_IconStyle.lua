@@ -119,7 +119,7 @@ local function GlossTheme()
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
-    buttonsPerRow       = 16,
+    buttonsPerRow       = 12,
     button = {
       size              = 28,
     },
@@ -269,7 +269,7 @@ local function ClassColor()
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
-    buttonsPerRow       = 16,
+    buttonsPerRow       = 12,
     button = {
       size              = 28,
     },
@@ -419,7 +419,7 @@ local function CrispTheme()
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
-    buttonsPerRow       = 16,
+    buttonsPerRow       = 12,
     button = {
       size              = 28,
     },
@@ -569,7 +569,7 @@ local function OriginalTheme()
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
-    buttonsPerRow       = 16,
+    buttonsPerRow       = 12,
     button = {
       size              = 28,
     },
@@ -869,7 +869,7 @@ local function ThinTheme()
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
-    buttonsPerRow       = 16,
+    buttonsPerRow       = 12,
     button = {
       size              = 28,
     },
@@ -947,12 +947,162 @@ local function ThinTheme()
   }
 end
 
+local function GlassTheme() 
+  Abconfig.textures = {
+    normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass",
+    flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
+    hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
+    pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
+    checked           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\checked",
+    equipped          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss_grey",
+    buttonback        = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background",
+    buttonbackflat    = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background_flat",
+    outer_shadow      = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+  }
+
+  Abconfig.background = {
+    showbg            = true,   --show a background image?
+    showshadow        = true,   --show an outer shadow?
+    useflatbackground = false,  --true uses plain flat color instead
+    backgroundcolor   = { r = 0.2, g = 0.2, b = 0.2, a = 0.3 },
+    shadowcolor       = { r = 0, g = 0, b = 0, a = 0.9 },
+    classcolored      = false,
+    inset             = 5,
+  }
+
+  Abconfig.color = {
+    normal            = { r = 1, g = 1, b = 1, 0.8},
+    equipped          = { r = 0.1, g = 0.5, b = 0.1, },
+    classcolored      = false,
+  }
+
+  Abconfig.hotkeys = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    pos2             = { a1 = "TOPLEFT", x = 0, y = 0 }, --important! two points are needed to make the hotkeyname be inside of the button
+  }
+
+  Abconfig.macroname = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMLEFT", x = 0, y = 0 },
+    pos2             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 }, --important! two points are needed to make the macroname be inside of the button
+  }
+
+  Abconfig.itemcount = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 },
+  }
+
+  Abconfig.cooldown = {
+    spacing          = 0,
+  }
+
+  Abconfig.font = globalFont
+
+  --adjust the oneletter abbrev?
+  Abconfig.adjustOneletterAbbrev = true
+
+  --scale of the consolidated tooltip
+  Abconfig.consolidatedTooltipScale = 1.2
+
+  --combine buff and debuff frame - should buffs and debuffs be displayed in one single frame?
+  --if you disable this it is intended that you unlock the buff and debuffs and move them apart!
+  Abconfig.combineBuffsAndDebuffs = false
+
+  -- buff frame settings
+  Abconfig.buffFrame = {
+    pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
+    gap                 = 30, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 10,
+    colSpacing          = 7,
+    buttonsPerRow       = 12,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -2,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass",
+      color             = { r = 1, g = 1, b = 1, 0.8},
+      classcolored      = false,
+    },
+    background = {
+      show              = true,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
+      classcolored      = false,
+      inset             = 6,
+      padding           = 4,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+
+  -- debuff frame settings
+  Abconfig.debuffFrame = {
+    pos = {
+      a1 = "TOPRIGHT",
+      af = "Minimap",
+      a2 = "TOPLEFT",
+      x = -35,
+      y = -85
+    },
+    gap                 = 10, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 10,
+    colSpacing          = 7,
+    buttonsPerRow       = 10,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -2,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass",
+      color             = { r = 1, g = 1, b = 1, 0.8},
+      classcolored      = false,
+    },
+    background = {
+      show              = true,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
+      classcolored      = false,
+      inset             = 6,
+      padding           = 4,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+end
+
 -- Textures and borders
 -- action bars settings
 local function IconThemeInit()
   if (AbyssUIAddonSettings.GlossIconBorder ~= true and AbyssUIAddonSettings.CrispIconBorder ~= true and
     AbyssUIAddonSettings.OriginalIconBorder ~= true and AbyssUIAddonSettings.SquareIconBorder ~= true and
-    AbyssUIAddonSettings.ThinIconBorder ~= true) then
+    AbyssUIAddonSettings.ThinIconBorder ~= true and AbyssUIAddonSettings.GlassIconBorder ~= true) then
     GlossTheme()
   end
   if AbyssUIAddonSettings.GlossIconBorder then 
@@ -969,6 +1119,9 @@ local function IconThemeInit()
   end
   if AbyssUIAddonSettings.ThinIconBorder then
     ThinTheme()
+  end
+  if AbyssUIAddonSettings.GlassIconBorder then
+    GlassTheme()
   end
 
   ns.Abconfig = Abconfig

@@ -364,3 +364,5 @@ L["Square"] = true
 L["Change icon border to a square theme"] = true
 L["Thin"] = true
 L["Change icon border to a thin theme"] = true
+L["Glass"] = true
+L["Change the icon to a glass theme"] = true
