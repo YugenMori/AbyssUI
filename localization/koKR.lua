@@ -387,7 +387,7 @@ L["Disable the double range of"..
 " 명판을 블리자드 기본값으로"
 L["Monthly Donators:\n"] = "월간 기부자 :\n"
 L["Top Donator:\n"] = "최고 기부자 :\n"
-L["Buy me a coffee\ns2"] ="커피 사줘\ns2"
+L["Patreon"] ="Patreon"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "AbyssUI 유지를 도와 주신 모든 분들께 감사드립니다. 당신이 최고입니다!"
 L["You are the best of the best! Thank you very much s2"] = "당신은 최고 중 최고입니다! s2 정말 감사합니다"
 L["Flat HealthBars"] = "플랫 헬스 바"

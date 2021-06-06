@@ -345,7 +345,7 @@ L["Disable the double range of"..
 " nameplates to Blizzard default value"] = true
 L["Monthly Donators:\n"] = true
 L["Top Donator:\n"] = true
-L["Patreon\nBuy me a coffee s2"] = true
+L["Patreon"] = true
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = true
 L["You are the best of the best! Thank you very much s2"] = true
 L["Flat HealthBars"] = true

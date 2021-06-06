@@ -387,7 +387,7 @@ L["Disable the double range of"..
 " nameplates to Blizzard default value"] = "禁用雙倍範圍銘牌為暴雪的默認值"
 L["Monthly Donators:\n"] = "每月捐贈者：\n"
 L["Top Donator:\n"] = "主要捐贈者：\n"
-L["Patreon\nBuy me a coffee s2"] = "Patreon\n給我買咖啡 s2"
+L["Patreon"] = "Patreon"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "感謝幫助維護AbyssUI的所有人。您是最棒的！"
 L["You are the best of the best! Thank you very much s2"] = "您是最好的！！非常感謝s2"
 L["Flat HealthBars"] = "平面保健吧"

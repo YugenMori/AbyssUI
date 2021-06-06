@@ -387,7 +387,7 @@ L["Disable the double range of"..
 "nameplates para o valor padrão da Blizzard"
 L["Monthly Donators:\n"] = "Doadores mensais:\n"
 L["Top Donator:\n"] = "Top Doador:\n"
-L["Patreon\nBuy me a coffee s2"] = "Patreon\nMe paga um café s2"
+L["Patreon"] = "Patreon"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Obrigado a todos que ajudam a manter o AbyssUI. Vocês são os melhores!"
 L["You are the best of the best! Thank you very much s2"] = "Você é o melhor dos melhores! Muito obrigado s2"
 L["Flat HealthBars"] = "Barras de vida Flat"

@@ -387,7 +387,7 @@ L["Disable the double range of"..
 " Typenschilder auf Blizzard-Standardwert"
 L["Monthly Donators:\n"] = "Monatliche Spender:\n"
 L["Top Donator:\n"] = "Top Spender:\n"
-L["Patreon\nBuy me a coffee s2"] = "Patreon\nKauf mir einen Kaffee s2"
+L["Patreon"] = "Patreon"
 L["Thanks to everyone who helps maintain AbyssUI. You are the best!"] = "Vielen Dank an alle, die bei der Pflege von AbyssUI helfen. Du bist der beste!"
 L["You are the best of the best! Thank you very much s2"] = "Du bist der Beste der Besten! Vielen Dank s2"
 L["Flat HealthBars"] = "Flat HealthBars"
