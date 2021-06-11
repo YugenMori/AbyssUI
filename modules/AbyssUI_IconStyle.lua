@@ -115,7 +115,7 @@ local function GlossTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 35, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
     rowSpacing          = 10,
     colSpacing          = 7,
@@ -142,7 +142,7 @@ local function GlossTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -292,7 +292,7 @@ local function ClassColor()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -442,7 +442,7 @@ local function CrispTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -592,7 +592,7 @@ local function OriginalTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -742,7 +742,7 @@ local function SquareTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -892,7 +892,7 @@ local function ThinTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,
@@ -1042,7 +1042,7 @@ local function GlassTheme()
     duration = {
       font              = globalFont,
       size              = 11,
-      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
     },
     count = {
       font              = globalFont,

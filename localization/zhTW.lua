@@ -394,7 +394,7 @@ L["Flat HealthBars"] = "平面保健吧"
 L["Make the health bar textures looks Flat"] = "使健康條紋理看起來平整"
 L["Show Minimap Clock"] = "小地圖時鐘"
 L["This will always show the minimap clock, instead of showing on hover"] = "這將始終顯示小地圖時鐘，而不是在懸停時顯示"
-L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = "給我買咖啡：|cffffcc00https：//www.patreon.com/abyssui|r"
+L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"] = "給我買咖啡：|cffffcc00patreon.com/abyssui|r"
 L["Class Color"] = "班級顏色"
 L["Change icon border to a class colored theme"] = "將圖標邊框更改為類彩色主題"
 L["You need to select just one of those options so they don't overlap"] = "您只需要選擇其中一個選項，這樣它們就不會重疊"
@@ -408,3 +408,20 @@ L["Thin"] = "瘦"
 L["Change icon border to a thin theme"] = "將圖標邊框更改為較薄的主題"
 L["Glass"] = "玻璃"
 L["Change the icon to a glass theme"] = "將圖標更改為玻璃主題"
+L["Default QuestFrame"] = "默認任務框架"
+L["Disable QuestFrame border and text colorization to default from Blizzard"] = "禁用 QuestFrame 邊框和文本著色為暴雪的默認設置"
+L["|cfff2dc7fLortUI|r for better icon borders and shadows."] = "|cfff2dc7fLortUI|r 以獲得更好的圖標邊框和陰影。"
+L["|cff0d75d4Frequently Answered Questions|r"] = "|cff0d75d4常見問題解答|r"
+L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."] = "在發布之前總是檢查常見問題。錯誤報告在我們的不和諧頻道上有更多的可見性。"
+L["- How to change fonts or go back to Bliizard default?\n"..
+"A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."] = "- 如何更改字體或返回暴雪默認設置？\n"..
+"A：轉到 AbyssUI 文件夾 -> 紋理 -> 字體並更改字體並保留其名稱（您需要重新啟動遊戲）。"
+L["- Do you plan to add save profiles to the UI?\n"..
+"A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."] = "- 您是否打算將保存配置文件添加到 UI？\n"..
+"A：不，至少現在不在我的計劃中。在這一點上，界面有很多選擇，我的時間很短，所以沒有計劃。"
+L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
+"A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = "- 某些紋理看起來/表現得很奇怪，或者紋理/圖像不正確或被裁剪？\n"..
+"A：您可能使用的是舊版本的AbyssUI，請嘗試全新安裝，刪除舊版本並重新下載。"
+L["- How to make interface looks like in the video?\n"..
+"A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- 如何使界面看起來像視頻中的樣子？\n"..
+"A：白色按鈕是另一個項目，由於缺乏時間和使其在不同條件下工作所需的大量工作而停止。它可能仍然有效，但沒有計劃支持或即將進行的更新。"

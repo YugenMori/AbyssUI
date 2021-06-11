@@ -147,12 +147,12 @@ local function AbyssUI_CheckFonts()
   FontsValue:SetAllPoints(tx)
   FontsValue:SetAlpha(0)
   FontsValue:SetScript('OnSizeChanged', function(self, width, height)
-      local size = format('%.0f%.0f', width, height)
-      if size == '11' then  
-        AbyssUIAddonSettings.FontsValue = false
-      else
-        AbyssUIAddonSettings.FontsValue = true
-      end
+    local size = format('%.0f%.0f', width, height)
+    if size == '11' then  
+      AbyssUIAddonSettings.FontsValue = false
+    else
+      AbyssUIAddonSettings.FontsValue = true
+    end
   end)
 end
 local function AbyssUI_CheckButtonRed()
@@ -178,8 +178,8 @@ end
 local init = CreateFrame("Frame", nil)
 init:RegisterEvent("PLAYER_ENTERING_WORLD")
 init:SetScript("OnEvent", function()
-    AbyssUI_CheckButtonRed()
-    AbyssUI_CheckFonts()
+  AbyssUI_CheckButtonRed()
+  AbyssUI_CheckFonts()
 end)
 ----------------------------------------------------
 local function AbyssUI_ApplyFonts(self)

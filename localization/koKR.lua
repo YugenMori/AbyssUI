@@ -394,7 +394,7 @@ L["Flat HealthBars"] = "플랫 헬스 바"
 L["Make the health bar textures looks Flat"] = "헬스 바 텍스처를 평평하게 보이게"
 L["Show Minimap Clock"] = "미니 맵 시계"
 L["This will always show the minimap clock, instead of showing on hover"] = "이렇게하면 마우스 오버시 표시되는 대신 항상 미니 맵 시계가 표시됩니다."
-L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = "커피 사주세요: |cffffcc00https://www.patreon.com/abyssui|r"
+L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"] = "커피 사주세요: |cffffcc00patreon.com/abyssui|r"
 L["Class Color"] = "클래스 색상"
 L["Change icon border to a class colored theme"] = "아이콘 테두리를 수업 색상 테마로 변경"
 L["You need to select just one of those options so they don't overlap"] = "겹치지 않도록 이러한 옵션 중 하나만 선택해야합니다."
@@ -408,3 +408,20 @@ L["Thin"] = "얇은"
 L["Change icon border to a thin theme"] = "아이콘 테두리를 얇은 테마로 변경"
 L["Glass"] = "유리"
 L["Change the icon to a glass theme"] = "아이콘을 유리 테마로 변경"
+L["Default QuestFrame"] = "기본 QuestFrame"
+L["Disable QuestFrame border and text colorization to default from Blizzard"] = "블리자드에서 QuestFrame 테두리 및 텍스트 색상을 기본값으로 비활성화"
+L["|cfff2dc7fLortUI|r for better icon borders and shadows."] = "|cfff2dc7fLortUI|r 는 더 나은 아이콘 테두리와 그림자를 제공합니다."
+L["|cff0d75d4Frequently Answered Questions|r"] = "|cff0d75d4자주 대답하는 질문|r"
+L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."] = "게시하기 전에 항상 FAQ를 확인하십시오. 버그 보고서는 우리의 불화 채널에서 더 많은 가시성을 갖습니다."
+L["- How to change fonts or go back to Bliizard default?\n"..
+"A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."] = "-글꼴을 변경하거나 블리자드 기본값으로 돌아가는 방법?\n"..
+"A : AbyssUI 폴더-> 텍스처-> 글꼴로 이동하여 이름을 유지하는 글꼴을 변경하십시오 (게임을 다시 시작해야 함)."
+L["- Do you plan to add save profiles to the UI?\n"..
+"A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."] = "-UI에 저장 프로필을 추가 할 계획입니까?\n"..
+"A : 아니요, 적어도 지금 당장은 내 계획에 없습니다.이 시점에서 인터페이스에는 많은 옵션이 있고 작업 할 시간이 짧기 때문에 계획되지 않았습니다."
+L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
+"A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = "- 일부 텍스처가 이상하게 보이거나 작동하거나 텍스처 / 이미지가 올바르지 않거나 잘리지 않습니까?\n"..
+"A : 아마도 이전 버전의 AbyssUI를 사용하고있을 것입니다. 새로 설치를 시도하고 이전 버전을 삭제 한 다음 다시 다운로드하십시오."
+L["- How to make interface looks like in the video?\n"..
+"A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "-어떻게 인터페이스를 동영상에 보이게 만들까요?\n"..
+"A : 흰색 버튼은 시간 부족과 다른 조건에서 작동하는 데 필요한 작업량으로 인해 중단 된 또 다른 프로젝트였습니다. 여전히 작동 할 수 있지만 지원이나 향후 업데이트는 계획되어 있지 않습니다."

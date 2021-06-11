@@ -396,7 +396,7 @@ L["Flat HealthBars"] = "Barras de salud planas"
 L["Make the health bar textures looks Flat"] = "Hacer que las texturas de la barra de salud se vean planas"
 L["Show Minimap Clock"] = "Reloj del minimapa"
 L["This will always show the minimap clock, instead of showing on hover"] = "Esto siempre mostrará el reloj del minimapa, en lugar de mostrarlo al pasar el mouse"
-L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = "Cómprame un café: |cffffcc00https://www.patreon.com/abyssui|r"
+L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"] = "Cómprame un café: |cffffcc00patreon.com/abyssui|r"
 L["Class Color"] = "Color de clase"
 L["Change icon border to a class colored theme"] = "Cambiar el borde del icono a un tema de color de clase"
 L["You need to select just one of those options so they don't overlap"] = "Debe seleccionar solo una de esas opciones para que no se superpongan"
@@ -410,3 +410,20 @@ L["Thin"] = "Delgada"
 L["Change icon border to a thin theme"] = "Cambiar el borde del icono a un tema delgado"
 L["Glass"] = "Vidrio"
 L["Change the icon to a glass theme"] = "Cambiar el ícono a un tema de vidrio"
+L["Default QuestFrame"] = "QuestFrame predeterminado"
+L["Disable QuestFrame border and text colorization to default from Blizzard"] = "Deshabilitar la coloración del texto y el borde de QuestFrame de forma predeterminada en Blizzard"
+L["|cfff2dc7fLortUI|r for better icon borders and shadows."] = "|cfff2dc7fLortUI|r para obtener mejores bordes y sombras de los iconos."
+L["|cff0d75d4Frequently Answered Questions|r"] = "|cff0d75d4Preguntas frecuentes|r"
+L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."] = "Siempre consulte las preguntas frecuentes antes de publicar. Los informes de errores tienen más visibilidad en nuestro canal Discord."
+L["- How to change fonts or go back to Bliizard default?\n"..
+"A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."] = "- ¿Cómo cambiar las fuentes o volver a los valores predeterminados de Blizzard?\n"..
+"A: Ve a la carpeta AbyssUI -> texturas -> fuente y cambia las fuentes manteniendo sus nombres (necesitas reiniciar el juego)."
+L["- Do you plan to add save profiles to the UI?\n"..
+"A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."] = "- ¿Planea agregar perfiles guardados a la interfaz de usuario?\n"..
+"R: No, al menos no está en mis planes en este momento. En este punto, la interfaz tiene tantas opciones y tengo poco tiempo para trabajar en ella, así que no está planeado."
+L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
+"A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = "- ¿Algunas texturas se ven o actúan de forma extraña o la textura o la imagen no son correctas o están recortadas?\n"..
+"R: Probablemente esté utilizando una versión antigua de AbyssUI, intente una instalación nueva, elimine la versión antigua y vuelva a descargarla."
+L["- How to make interface looks like in the video?\n"..
+"A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- ¿Cómo se ve la interfaz en el video?\n"..
+"R: Los botones blancos fue otro proyecto que se suspendió debido a la falta de tiempo y la cantidad de trabajo que se necesitaba para que funcionara en diferentes condiciones. Es posible que aún funcione, pero no se planean actualizaciones ni soporte técnico."

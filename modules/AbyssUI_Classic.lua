@@ -807,22 +807,24 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-    self:UnregisterAllEvents()
-    local ChildRegions = { QuestLogFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-    for i, v in pairs({ 
-    	QuestLogQuestTitle,
-    	QuestLogObjective1,
-    	QuestLogObjective2,
-    	QuestLogObjectivesText,
-    	QuestLogDescriptionTitle,
-    	QuestLogQuestDescription,
-    }) do
-    	v:SetVertexColor(219/255, 222/255, 231/255)
-    end
+		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
+	    self:UnregisterAllEvents()
+	    local ChildRegions = { QuestLogFrame:GetRegions() }
+	    local fs = {}
+	    for k, v in pairs(ChildRegions) do
+	    	AbyssUI_ColorizationFrameFunction(v)
+	    end
+	    for i, v in pairs({ 
+	    	QuestLogQuestTitle,
+	    	QuestLogObjective1,
+	    	QuestLogObjective2,
+	    	QuestLogObjectivesText,
+	    	QuestLogDescriptionTitle,
+	    	QuestLogQuestDescription,
+	    }) do
+	    	v:SetVertexColor(219/255, 222/255, 231/255)
+	    end
+	  end
   end
 end)
 -- QuestFrameDetailPanel
@@ -830,20 +832,22 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-    self:UnregisterAllEvents()
-    local ChildRegions = { QuestFrameDetailPanel:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-    for i, v in pairs({ 
-    	QuestInfoDescriptionText,
-    	QuestInfoObjectivesHeader,
-    	QuestInfoObjectivesText,
-    	QuestInfoTitleHeader,
-    }) do
-    	v:SetVertexColor(219/255, 222/255, 231/255)
-    end
+		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
+	    self:UnregisterAllEvents()
+	    local ChildRegions = { QuestFrameDetailPanel:GetRegions() }
+	    local fs = {}
+	    for k, v in pairs(ChildRegions) do
+	    	AbyssUI_ColorizationFrameFunction(v)
+	    end
+	    for i, v in pairs({ 
+	    	QuestInfoDescriptionText,
+	    	QuestInfoObjectivesHeader,
+	    	QuestInfoObjectivesText,
+	    	QuestInfoTitleHeader,
+	    }) do
+	    	v:SetVertexColor(219/255, 222/255, 231/255)
+	    end
+	  end
   end
 end)
 -- QuestFrameProgressPanel
@@ -851,14 +855,16 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-    self:UnregisterAllEvents()
-    local ChildRegions = { QuestFrameProgressPanel:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-    QuestProgressTitleText:SetVertexColor(219/255, 222/255, 231/255)
-    QuestProgressText:SetVertexColor(219/255, 222/255, 231/255)
+		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
+	    self:UnregisterAllEvents()
+	    local ChildRegions = { QuestFrameProgressPanel:GetRegions() }
+	    local fs = {}
+	    for k, v in pairs(ChildRegions) do
+	    	AbyssUI_ColorizationFrameFunction(v)
+	    end
+	    QuestProgressTitleText:SetVertexColor(219/255, 222/255, 231/255)
+	    QuestProgressText:SetVertexColor(219/255, 222/255, 231/255)
+	  end
   end
 end)
 -- GossipFrameGreetingPanel
@@ -1003,6 +1009,92 @@ f:SetScript("OnEvent", function(self, event, name)
     	end
   	end
 	end
+end)
+local function ChatHiderFunc()
+	-- Chat Hide Frame (needs to be here so the hide chat buttons works on this too)
+	-- Thanks to Syncrow for part of this 
+	local ChatHideFrame = CreateFrame("Button", "$parentChatHideFrame", UIParent)
+	ChatHideFrame:SetSize(30, 30)
+	ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
+	ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+	ChatHideFrame.t:SetAllPoints(ChatHideFrame)
+	ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM", 0, -35)
+	if ( AbyssUIAddonSettings.FadeUI ~= true ) then
+	  ChatHideFrame:Show()
+	else
+	  ChatHideFrame:Hide()
+	end
+
+	local ChatHide = false
+	ChatHideFrame:SetScript("OnMouseDown", function(self, Button)
+	  if ChatHide == false then
+	    if Button == "LeftButton" then
+	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
+	    end
+	  elseif ChatHide == true then
+	    if Button == "LeftButton" then
+	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
+	    end
+	  end
+	end)
+
+	ChatHideFrame:SetScript("OnMouseUp", function(self, Button)
+	  if ChatHide == false then
+	    if Button == "LeftButton" then
+	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+	    end
+	  elseif ChatHide == true then
+	    if Button == "LeftButton" then
+	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+	    end
+	  end
+	end)
+
+	ChatHideFrame:SetScript("OnClick", function(self, Button)
+	  if ChatHide == false then
+	    ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
+	    GeneralDockManager:Hide()
+	    ChatFrameMenuButton:Hide()
+	    ChatFrameChannelButton:Hide()
+	    ChatFrame1EditBox:Hide()
+	    if (GetWoWVersion > 20501) then
+	  		QuickJoinToastButton:Hide()
+				ChatFrameToggleVoiceDeafenButton.Icon:Hide()
+	    	ChatFrameToggleVoiceMuteButton.Icon:Hide()
+	    end
+
+	    for i = 1, NUM_CHAT_WINDOWS do
+	      _G["ChatFrame"..i..""]:SetAlpha(0)
+	      _G["ChatFrame"..i.."ButtonFrame"]:Hide()
+	      _G["ChatFrame"..i.."EditBox"]:SetAlpha(0)
+	    end
+	    ChatHide = true
+	  elseif ChatHide == true then
+	    ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
+	    GeneralDockManager:Show()
+	    ChatFrameMenuButton:Show()
+	    ChatFrameChannelButton:Show()
+	    ChatFrame1EditBox:Show()
+	    if (GetWoWVersion > 20501) then
+	  		QuickJoinToastButton:Show()
+				ChatFrameToggleVoiceDeafenButton.Icon:Show()
+	    	ChatFrameToggleVoiceMuteButton.Icon:Show()
+	    end
+
+	    for i = 1 , NUM_CHAT_WINDOWS do
+	      _G["ChatFrame"..i..""]:SetAlpha(1)
+	      _G["ChatFrame"..i.."ButtonFrame"]:Show()
+	      _G["ChatFrame"..i.."EditBox"]:SetAlpha(1)
+	    end
+	    ChatHide = false
+	  end
+	end)
+end
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	ChatHiderFunc()
 end)
 ---------------------------- Classic Era Modules ----------------------------------
 -- InterfaceOptionsFrame

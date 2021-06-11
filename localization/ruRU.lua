@@ -394,7 +394,7 @@ L["Flat HealthBars"] = "Плоские HealthBars"
 L["Make the health bar textures looks Flat"] = "Сделайте текстуры индикатора здоровья плоскими"
 L["Show Minimap Clock"] = "Часы на миникарте"
 L["This will always show the minimap clock, instead of showing on hover"] = "Это всегда будет показывать часы на миникарте, а не при наведении курсора"
-L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = "Купи мне кофе: |cffffcc00https://www.patreon.com/abyssui|r"
+L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"] = "Купи мне кофе: |cffffcc00patreon.com/abyssui|r"
 L["Class Color"] = "Цвет класса"
 L["Change icon border to a class colored theme"] = "Измените границу значка на цветную тему класса"
 L["You need to select just one of those options so they don't overlap"] = "Вам нужно выбрать только один из этих вариантов, чтобы они не пересекались"
@@ -408,3 +408,20 @@ L["Thin"] = "Тонкий"
 L["Change icon border to a thin theme"] = "Измените границу значка на тонкую тему"
 L["Glass"] = "Стекло"
 L["Change the icon to a glass theme"] = "Измените значок на стеклянную тему"
+L["Default QuestFrame"] = "QuestFrame по умолчанию"
+L["Disable QuestFrame border and text colorization to default from Blizzard"] = "Отключить границу QuestFrame и раскраску текста по умолчанию от Blizzard"
+L["|cfff2dc7fLortUI|r for better icon borders and shadows."] = "|cfff2dc7fLortUI|r для улучшения границ и теней значков."
+L["|cff0d75d4Frequently Answered Questions|r"] = "|cff0d75d4Часто ответы на вопросы|r"
+L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."] = "Всегда проверяйте FAQ перед публикацией. Сообщения об ошибках более заметны на нашем канале Discord."
+L["- How to change fonts or go back to Bliizard default?\n"..
+"A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."] = "- Как изменить шрифты или вернуться к настройкам Blizzard по умолчанию?\n"..
+"О: Перейдите в папку AbyssUI -> текстуры -> шрифт и измените шрифты, сохранив их имена (вам нужно перезапустить игру)."
+L["- Do you plan to add save profiles to the UI?\n"..
+"A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."] = "- Планируете ли вы добавить профили сохранения в пользовательский интерфейс?\n"..
+"О: Нет, по крайней мере, сейчас это не входит в мои планы. На данный момент у интерфейса так много опций, и у меня мало времени, чтобы поработать над ним, поэтому это не планируется."
+L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
+"A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = "- Некоторые текстуры выглядят/действуют странно или Текстура/изображение неправильное или обрезано?\n" ..
+"О: Вы, вероятно, используете старую версию AbyssUI, попробуйте новую установку, удалите старую версию и повторно загрузите ее."
+L["- How to make interface looks like in the video?\n"..
+"A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- Как сделать так, чтобы интерфейс выглядел как на видео?\n"..
+"О: Белые кнопки - это еще один проект, который был прекращен из-за нехватки времени и объема работы, необходимой для того, чтобы заставить его работать в других условиях. Он все еще может работать, но никакой поддержки или предстоящих обновлений не планируется."

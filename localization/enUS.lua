@@ -352,7 +352,7 @@ L["Flat HealthBars"] = true
 L["Make the health bar textures looks Flat"] = true
 L["Show Minimap Clock"] = true
 L["This will always show the minimap clock, instead of showing on hover"] = true
-L["Buy me a coffee: |cffffcc00https://www.patreon.com/abyssui|r"] = true
+L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"] = true
 L["Class Color"] = true
 L["Change icon border to a class colored theme"] = true
 L["You need to select just one of those options so they don't overlap"] = true
@@ -366,3 +366,16 @@ L["Thin"] = true
 L["Change icon border to a thin theme"] = true
 L["Glass"] = true
 L["Change the icon to a glass theme"] = true
+L["Default QuestFrame"] = true
+L["Disable QuestFrame border and text colorization to default from Blizzard"] = true
+L["|cfff2dc7fLortUI|r for better icon borders and shadows."] = true
+L["|cff0d75d4Frequently Answered Questions|r"] = true
+L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."] = true
+L["- How to change fonts or go back to Bliizard default?\n"..
+"A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."] = true
+L["- Do you plan to add save profiles to the UI?\n"..
+"A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."] = true
+L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
+"A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = true
+L["- How to make interface looks like in the video?\n"..
+"A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = true
