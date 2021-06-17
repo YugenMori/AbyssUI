@@ -425,3 +425,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- Как сделать так, чтобы интерфейс выглядел как на видео?\n"..
 "О: Белые кнопки - это еще один проект, который был прекращен из-за нехватки времени и объема работы, необходимой для того, чтобы заставить его работать в других условиях. Он все еще может работать, но никакой поддержки или предстоящих обновлений не планируется."
+L["Show Helm"] = "Показать Шлем"
+L["Always show helm"] = "Всегда показывать штурвал"
+L["Show Cloak"] = "Показать плащ"
+L["Always show cloak"] = "Всегда показывать плащ"

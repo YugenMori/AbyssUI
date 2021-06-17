@@ -425,3 +425,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "-어떻게 인터페이스를 동영상에 보이게 만들까요?\n"..
 "A : 흰색 버튼은 시간 부족과 다른 조건에서 작동하는 데 필요한 작업량으로 인해 중단 된 또 다른 프로젝트였습니다. 여전히 작동 할 수 있지만 지원이나 향후 업데이트는 계획되어 있지 않습니다."
+L["Show Helm"] = "헬름 표시"
+L["Always show helm"] = "항상 투구 표시"
+L["Show Cloak"] = "망토 보이기"
+L["Always show cloak"] = "항상 망토 보여줘"

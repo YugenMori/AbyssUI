@@ -425,3 +425,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- 如何使界面看起来像视频中的样子？\n"..
 "A：白色按钮是另一个项目，由于缺乏时间和使其在不同条件下工作所需的大量工作而停止。它可能仍然有效，但没有计划支持或即将进行的更新。"
+L["Show Helm"] = "显示头盔"
+L["Always show helm"] = "始终显示掌舵"
+L["Show Cloak"] = "展示斗篷"
+L["Always show cloak"] = "总是露出斗篷"

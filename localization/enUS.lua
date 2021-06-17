@@ -379,3 +379,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 "A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."] = true
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = true
+L["Show Helm"] = true
+L["Always show helm"] = true
+L["Show Cloak"] = true
+L["Always show cloak"] = true

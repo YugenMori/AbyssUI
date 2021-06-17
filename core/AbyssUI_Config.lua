@@ -2305,8 +2305,6 @@ local function ClassicBCC()
       if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
         if AbyssUIAddonSettings.HideHelm == true then
           ShowHelm(false)
-        else
-          ShowHelm(true)
         end
       end
     end
@@ -2334,39 +2332,96 @@ local function ClassicBCC()
       if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
         if AbyssUIAddonSettings.HideCloak == true then
           ShowCloak(false)
-        else
+        end
+      end
+    end
+  end)
+    -- Show Helm --
+  local ShowHelm_CheckButton = CreateFrame("CheckButton", "$parentShowHelm_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  ShowHelm_CheckButton:SetPoint("TOPLEFT", 10, -170)
+  ShowHelm_CheckButton.Text:SetText(L["Show Helm"])
+  ShowHelm_CheckButton.tooltip = L["Always show helm"]
+  ShowHelm_CheckButton:SetChecked(AbyssUIAddonSettings.ShowHelm)
+  -- OnClick Function
+  ShowHelm_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      AbyssUIAddonSettings.ShowHelm = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      ShowHelm_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  ShowHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  ShowHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        if AbyssUIAddonSettings.ShowHelm == true then
+          ShowHelm(true)
+        end
+      end
+    end
+  end)
+  -- Show Cloak --
+  local ShowCloak_CheckButton = CreateFrame("CheckButton", "$parentShowCloak_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  ShowCloak_CheckButton:SetPoint("TOPLEFT", 10, -200)
+  ShowCloak_CheckButton.Text:SetText(L["Show Cloak"])
+  ShowCloak_CheckButton.tooltip = L["Always show cloak"]
+  ShowCloak_CheckButton:SetChecked(AbyssUIAddonSettings.ShowCloak)
+  -- OnClick Function
+  ShowCloak_CheckButton:SetScript("OnClick", function(self)
+    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      AbyssUIAddonSettings.ShowCloak = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      ShowCloak_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- After Login/Reload
+  ShowCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  ShowCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if ( event == "PLAYER_ENTERING_WORLD" ) then
+      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        if AbyssUIAddonSettings.ShowCloak == true then
           ShowCloak(true)
         end
       end
     end
   end)
   -- Better WorldMap --
+  local leatrix = IsAddOnLoaded("Leatrix_Maps")
   local AbyssUI_BetterWorldMap_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterWorldMap_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
-  AbyssUI_BetterWorldMap_CheckButton:SetPoint("TOPLEFT", 10, -170)
+  AbyssUI_BetterWorldMap_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUI_BetterWorldMap_CheckButton.Text:SetText(L["Better World Map"])
   AbyssUI_BetterWorldMap_CheckButton.tooltip = L["Makes the worldmap minimalist/clean"]
   AbyssUI_BetterWorldMap_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterWorldMap)
   -- OnClick Function
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-      AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
-      AbyssUI_ReloadFrame:Show()
-    else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
-      AbyssUI_BetterWorldMap_CheckButton:SetChecked(nil)
+    if (not leatrix) then
+      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
+        AbyssUI_ReloadFrame:Show()
+      else
+        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+        AbyssUI_BetterWorldMap_CheckButton:SetChecked(nil)
+      end
     end
   end)
   -- After Login/Reload
   AbyssUI_BetterWorldMap_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-        if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
-          WorldMapFrame.BlackoutFrame:Hide()
-          WorldMapFrame.BlackoutFrame:EnableMouse(false)
-        else 
-          WorldMapFrame.BlackoutFrame:Show()
-          WorldMapFrame.BlackoutFrame:EnableMouse(true)
+      if (not leatrix) then
+        if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+          if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
+            WorldMapFrame.BlackoutFrame:Hide()
+            WorldMapFrame.BlackoutFrame:EnableMouse(false)
+          else 
+            WorldMapFrame.BlackoutFrame:Show()
+            WorldMapFrame.BlackoutFrame:EnableMouse(true)
+          end
         end
       end
     end
@@ -2374,34 +2429,38 @@ local function ClassicBCC()
   -- WorldMap Fader --
   -- Thanks to Ketho for the fader
   local AbyssUI_WorldMapFade_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_WorldMapFade_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
-  AbyssUI_WorldMapFade_CheckButton:SetPoint("TOPLEFT", 10, -200)
+  AbyssUI_WorldMapFade_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUI_WorldMapFade_CheckButton.Text:SetText(L["World Map Fader"])
   AbyssUI_WorldMapFade_CheckButton.tooltip = L["Makes the worldmap fade while you move"]
   AbyssUI_WorldMapFade_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionWorldMapFade)
   -- OnClick Function
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-      AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
-      AbyssUI_ReloadFrame:Show()
-    else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
-      AbyssUI_WorldMapFade_CheckButton:SetChecked(nil)
+    if (not leatrix) then
+      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
+        AbyssUI_ReloadFrame:Show()
+      else
+        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+        AbyssUI_WorldMapFade_CheckButton:SetChecked(nil)
+      end
     end
   end)
   -- After Login/Reload
   AbyssUI_WorldMapFade_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-        if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
-          PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
+      if (not leatrix) then
+        if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+          if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
+            PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
+          end
         end
       end
     end
   end)
   -- Default Nameplate Range --
   local AbyssUI_DefaultNameplate_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DefaultNameplate_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
-  AbyssUI_DefaultNameplate_CheckButton:SetPoint("TOPLEFT", 10, -230)
+  AbyssUI_DefaultNameplate_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUI_DefaultNameplate_CheckButton.Text:SetText(L["Default Nameplate Range"])
   AbyssUI_DefaultNameplate_CheckButton.tooltip = L["Disable the double range of"..
   " nameplates to Blizzard default value"]
@@ -2418,7 +2477,7 @@ local function ClassicBCC()
   end)
   -- Disable QuestFrame Border
   local DisableQuestFrame_CheckButton = CreateFrame("CheckButton", "$parentDisableQuestFrame_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
-  DisableQuestFrame_CheckButton:SetPoint("TOPLEFT", 10, -260)
+  DisableQuestFrame_CheckButton:SetPoint("TOPLEFT", 10, -320)
   DisableQuestFrame_CheckButton.Text:SetText(L["Default QuestFrame"])
   local Frame = CreateFrame("Frame", nil, DisableQuestFrame_CheckButton)
   Frame:SetWidth(180)
@@ -2633,7 +2692,7 @@ local function Patreon()
   PatreonBronzeTextPatrons = PatreonBronzeTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PatreonBronzeTextPatrons:SetPoint("LEFT")
   PatreonBronzeTextPatrons:SetAllPoints()
-  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."\n- Anshul\n- Karis/Renwa".."|r")
+  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."\n- Karis/Renwa".."|r")
   PatreonBronzeTextPatrons:SetFont(globalFont, 14)
   -- Silver
   local AbyssUI_PatreonSilver = CreateFrame("Frame", "$parentAbyssUI_PatreonSilver", AbyssUI_Config.childpanel9)
@@ -2654,6 +2713,16 @@ local function Patreon()
   PatreonSilverText:SetAllPoints()
   PatreonSilverText:SetText("SILVER")
   PatreonSilverText:SetFont(globalFont, 14)
+  -- Patreons Silver
+  local PatreonSilverTextPatrons = CreateFrame("Frame","$parentPatreonSilverTextPatrons", AbyssUI_Config.childpanel9)
+  PatreonSilverTextPatrons:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 13, -100)
+  PatreonSilverTextPatrons:SetHeight(80)
+  PatreonSilverTextPatrons:SetWidth(600)
+  PatreonSilverTextPatrons = PatreonSilverTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  PatreonSilverTextPatrons:SetPoint("LEFT")
+  PatreonSilverTextPatrons:SetAllPoints()
+  PatreonSilverTextPatrons:SetText("|cffC0C0C0".."\n- Anshul".."|r")
+  PatreonSilverTextPatrons:SetFont(globalFont, 14)
   -- Gold
   local AbyssUI_PatreonGold = CreateFrame("Frame", "$parentAbyssUI_PatreonGold", AbyssUI_Config.childpanel9)
   AbyssUI_PatreonGold:SetFrameStrata("HIGH")

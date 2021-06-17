@@ -425,3 +425,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- Como fazer a interface se parecer com o vídeo?\n"..
 "R: Os botões brancos foi outro projeto que foi descontinuado devido à falta de tempo e à quantidade de trabalho necessária para fazê-lo funcionar em diferentes condições. Ele ainda pode funcionar, mas nenhum suporte ou atualizações futuras estão planejados."
+L["Show Helm"] = "Mostrar Elmo"
+L["Always show helm"] = "Sempre mostrar o Elmo"
+L["Show Cloak"] = "Mostrar capa"
+L["Always show cloak"] = "Sempre mostrar a capa"

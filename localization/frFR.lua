@@ -425,3 +425,7 @@ L["- Some texture are looking/acting weird or Texture/Image is not right or crop
 L["- How to make interface looks like in the video?\n"..
 "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."] = "- Comment faire en sorte que l'interface ressemble à la vidéo?\n"..
 "R: Les boutons blancs étaient un autre projet qui a été interrompu en raison du manque de temps et de la quantité de travail nécessaire pour le faire fonctionner dans différentes conditions. Cela peut toujours fonctionner, mais aucun support ni aucune mise à jour à venir ne sont prévus."
+L["Show Helm"] = "Montrer le casque"
+L["Always show helm"] = "Toujours montrer la barre"
+L["Show Cloak"] = "Montrer la cape"
+L["Always show cloak"] = "Toujours montrer la cape"

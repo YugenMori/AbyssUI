@@ -936,16 +936,19 @@ f:SetScript("OnEvent", function(self)
   end
 end)
 -- WorldMapFrame.BorderFrame
+local leatrix = IsAddOnLoaded("Leatrix_Maps")
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
-    self:UnregisterAllEvents()
-    local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
+		if (not leatrix) then
+	    self:UnregisterAllEvents()
+	    local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
+	    local fs = {}
+	    for k, v in pairs(ChildRegions) do
+	    	AbyssUI_ColorizationFrameFunction(v)
+	    end
+	  end
   end
 end)
 ---------------------------- Classic Dynamically ----------------------------------
