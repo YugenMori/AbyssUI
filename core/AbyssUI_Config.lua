@@ -1196,7 +1196,7 @@ local function HideElementsInit()
   AbyssUI_ChatHideFrame.t = AbyssUI_ChatHideFrame:CreateTexture(nil, "BORDER")
   AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
   AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
-  AbyssUI_ChatHideFrame:SetPoint("BOTTOM", QuickJoinToastButton, "BOTTOM", -1, -28)
+  AbyssUI_ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM", 0, -35)
   local glass = IsAddOnLoaded("Glass")
   if (AbyssUIAddonSettings.FadeUI ~= true and glass ~= true) then
     AbyssUI_ChatHideFrame:Show()
@@ -1236,7 +1236,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Hide()
       ChatFrameChannelButton:Hide()
       ChatFrame1EditBox:Hide()
-      if (GetWoWVersion ~= 20501 or GetWoWVersion ~= 11307) then
+      if (GetWoWVersion > 20501) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton.Icon:Hide()
         ChatFrameToggleVoiceMuteButton.Icon:Hide()
@@ -1253,7 +1253,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Show()
       ChatFrameChannelButton:Show()
       ChatFrame1EditBox:Show()
-      if (GetWoWVersion ~= 20501 or GetWoWVersion ~= 11307) then
+      if (GetWoWVersion > 20501) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton.Icon:Show()
         ChatFrameToggleVoiceMuteButton.Icon:Show()
@@ -1277,7 +1277,7 @@ local function HideElementsInit()
   HideChatButtons_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
     if (AbyssUIAddonSettings.HideChatButtons == true) then
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
+      if (GetWoWVersion > 20501) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
         ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1288,7 +1288,7 @@ local function HideElementsInit()
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
     else 
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
+      if (GetWoWVersion > 20501) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
         ChatFrameToggleVoiceMuteButton:SetAlpha(1)
@@ -1311,7 +1311,7 @@ local function HideElementsInit()
           ChatFrameChannelButton:Hide()
           ChatFrame1ButtonFrame:SetAlpha(0)
           AbyssUI_ChatHideFrame:Hide()
-          if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
+          if (GetWoWVersion > 20501) then
             QuickJoinToastButton:Hide()
             ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
             ChatFrameToggleVoiceMuteButton:SetAlpha(0)

@@ -1013,6 +1013,7 @@ f:SetScript("OnEvent", function(self, event, name)
   	end
 	end
 end)
+--[[
 local function ChatHiderFunc()
 	-- Chat Hide Frame (needs to be here so the hide chat buttons works on this too)
 	-- Thanks to Syncrow for part of this 
@@ -1099,6 +1100,7 @@ f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	ChatHiderFunc()
 end)
+--]]
 ---------------------------- Classic Era Modules ----------------------------------
 -- InterfaceOptionsFrame
 local f = CreateFrame("Frame")
