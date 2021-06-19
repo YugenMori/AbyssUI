@@ -1232,14 +1232,15 @@ local function HideElementsInit()
   AbyssUI_ChatHideFrame:SetScript("OnClick", function(self, Button)
     if ChatHide == false then
       AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
-      QuickJoinToastButton:Hide()
       GeneralDockManager:Hide()
       ChatFrameMenuButton:Hide()
       ChatFrameChannelButton:Hide()
-      --ChatFrameToggleVoiceDeafenButton.Icon:Hide()
-      --ChatFrameToggleVoiceMuteButton.Icon:Hide()
       ChatFrame1EditBox:Hide()
-
+      if (GetWoWVersion ~= 20501 or GetWoWVersion ~= 11307) then
+        QuickJoinToastButton:Hide()
+        ChatFrameToggleVoiceDeafenButton.Icon:Hide()
+        ChatFrameToggleVoiceMuteButton.Icon:Hide()
+      end
       for i = 1, NUM_CHAT_WINDOWS do
         _G["ChatFrame"..i..""]:SetAlpha(0)
         _G["ChatFrame"..i.."ButtonFrame"]:Hide()
@@ -1248,13 +1249,15 @@ local function HideElementsInit()
       ChatHide = true
     elseif ChatHide == true then
       AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-      QuickJoinToastButton:Show()
       GeneralDockManager:Show()
       ChatFrameMenuButton:Show()
       ChatFrameChannelButton:Show()
-      --ChatFrameToggleVoiceDeafenButton.Icon:Show()
-      --ChatFrameToggleVoiceMuteButton.Icon:Show()
       ChatFrame1EditBox:Show()
+      if (GetWoWVersion ~= 20501 or GetWoWVersion ~= 11307) then
+        QuickJoinToastButton:Show()
+        ChatFrameToggleVoiceDeafenButton.Icon:Show()
+        ChatFrameToggleVoiceMuteButton.Icon:Show()
+      end
 
       for i = 1 , NUM_CHAT_WINDOWS do
         _G["ChatFrame"..i..""]:SetAlpha(1)
@@ -1284,7 +1287,6 @@ local function HideElementsInit()
       ChatFrameChannelButton:Hide()
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
-
     else 
       if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
         QuickJoinToastButton:Show()
@@ -1304,14 +1306,16 @@ local function HideElementsInit()
     if (event == "PLAYER_ENTERING_WORLD") then
       if AbyssUIAddonSettings.HideChatButtons == true then
         C_Timer.After(1, function()
-          QuickJoinToastButton:Hide()
           GeneralDockManager:SetAlpha(0)
           ChatFrameMenuButton:Hide()
           ChatFrameChannelButton:Hide()
           ChatFrame1ButtonFrame:SetAlpha(0)
           AbyssUI_ChatHideFrame:Hide()
-          ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
-          ChatFrameToggleVoiceMuteButton:SetAlpha(0)
+          if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
+            QuickJoinToastButton:Hide()
+            ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
+            ChatFrameToggleVoiceMuteButton:SetAlpha(0)
+          end
         end)
       end
     end
