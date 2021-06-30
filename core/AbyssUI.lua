@@ -2905,9 +2905,9 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 end)
 -- LFGDungeonReadyDialog
 local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "AbyssUI" and GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 then
+	if GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 then
     self:UnregisterAllEvents()
     local ChildRegions = { LFGDungeonReadyDialog.Border:GetRegions() }
     local fs = {}
