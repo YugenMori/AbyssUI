@@ -177,7 +177,7 @@ f:SetScript("OnEvent", function(self, event)
 	end)
 end)
 -- TimerTracker fixes
-if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307) then
+if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
 	TimerTracker:HookScript("OnEvent", function(self, event, timerType, timeSeconds, totalTime)
 	  if event ~= "START_TIMER" then return end
 	  AbyssUI_FrameSize(TimerTrackerTimer1StatusBar, 200, 20)
