@@ -1,6 +1,5 @@
 # AbyssUI
 ## Shadowlands + Burning Crusade Classic
-[![Discord](https://img.shields.io/static/v1?label=Discord&message=Join&color=7289DA&logo=discord&link=https://discord.gg/Y9TYtdk)](https://discord.gg/Y9TYtdk)
 [![Github](https://img.shields.io/static/v1?label=Github&message=Follow&color=e64413&logo=git&link=https://github.com/YugenMori/AbyssUI)](https://github.com/YugenMori/AbyssUI)
 [![Paypal](https://img.shields.io/static/v1?label=PayPal&message=Donate&color=0079C1&logo=paypal)](https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2)
 ##### Donating the equivalent of one cup of ☕ each month helps a lot 💛

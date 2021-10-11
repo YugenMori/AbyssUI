@@ -459,7 +459,7 @@ local function InitSettings()
         end
         print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
         print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
-        print(L["Buy me a coffee: |cffffcc00patreon.com/abyssui|r"])
+        print(L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"])
       end)
     end)
   end)
@@ -616,8 +616,8 @@ local function InitSettings()
       FrameButton.Glow:Stop()
     end
     FrameButton:SetScript("OnClick", function()
-      AbyssUI_EditBox:SetText("patreon.com/abyssui")
-      AbyssUI_EditBox_Frame:Show()
+      AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"])
+      AbyssUI_EditBoxPatreon_Frame:Show()
     end)
     for i, v in pairs({
       InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Right,
@@ -728,8 +728,8 @@ local function InitSettings()
   -- OnClick
   AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
       if (button == 'LeftButton') then 
-        AbyssUI_EditBox:SetText("patreon.com/abyssui")
-        AbyssUI_EditBox_Frame:Show()
+        AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"])
+        AbyssUI_EditBoxPatreon_Frame:Show()
       end
   end)
   -- Glass
@@ -2666,7 +2666,7 @@ local function Patreon()
   PSINFOPatreon_CheckButton = PSINFOPatreon_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PSINFOPatreon_CheckButton:SetPoint("LEFT")
   PSINFOPatreon_CheckButton:SetAllPoints()
-  PSINFOPatreon_CheckButton:SetText("patreon.com/abyssui")
+  PSINFOPatreon_CheckButton:SetText("")
   PSINFOPatreon_CheckButton:SetFont(globalFont, 18)
   --
   -- Bronze
@@ -2696,7 +2696,7 @@ local function Patreon()
   PatreonBronzeTextPatrons = PatreonBronzeTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PatreonBronzeTextPatrons:SetPoint("LEFT")
   PatreonBronzeTextPatrons:SetAllPoints()
-  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."\n- Karis/Renwa".."|r")
+  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."".."|r")
   PatreonBronzeTextPatrons:SetFont(globalFont, 14)
   -- Silver
   local AbyssUI_PatreonSilver = CreateFrame("Frame", "$parentAbyssUI_PatreonSilver", AbyssUI_Config.childpanel9)
@@ -2725,7 +2725,7 @@ local function Patreon()
   PatreonSilverTextPatrons = PatreonSilverTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PatreonSilverTextPatrons:SetPoint("LEFT")
   PatreonSilverTextPatrons:SetAllPoints()
-  PatreonSilverTextPatrons:SetText("|cffC0C0C0".."\n- Anshul".."|r")
+  PatreonSilverTextPatrons:SetText("|cffC0C0C0".."".."|r")
   PatreonSilverTextPatrons:SetFont(globalFont, 14)
   -- Gold
   local AbyssUI_PatreonGold = CreateFrame("Frame", "$parentAbyssUI_PatreonGold", AbyssUI_Config.childpanel9)
@@ -2994,8 +2994,8 @@ local function Stylization()
   PSINFO_CheckButton = PSINFO_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PSINFO_CheckButton:SetPoint("LEFT")
   PSINFO_CheckButton:SetAllPoints()
-  PSINFO_CheckButton:SetText(L["Some of this options needs the AbyssUI_TexturePack."..
-  " You can find a download link in the addon page. You also can find the link in te 'Info Panel' section."])
+  --PSINFO_CheckButton:SetText(L["Some of this options needs the AbyssUI_TexturePack."..
+  --" You can find a download link in the addon page. You also can find the link in te 'Info Panel' section."])
   -- UnitFrame Themes
   -- UnitFrame Improved --
   local UnitFrameImproved_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")

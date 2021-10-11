@@ -951,6 +951,48 @@ f:SetScript("OnEvent", function(self)
 	  end
   end
 end)
+-- LFGParentFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501 or GetWoWVersion == 20502) and GetWoWVersion ~= 11307 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { LFGParentFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+   	for i, v in pairs({
+	    LFGParentFrameTab1Left,
+			LFGParentFrameTab1LeftDisabled,
+			LFGParentFrameTab1Middle,
+			LFGParentFrameTab1MiddleDisabled,
+			LFGParentFrameTab1Right,
+			LFGParentFrameTab1RightDisabled,
+			LFGParentFrameTab2Left,
+			LFGParentFrameTab2LeftDisabled,
+			LFGParentFrameTab2Middle,
+			LFGParentFrameTab2MiddleDisabled,
+			LFGParentFrameTab2Right,
+			LFGParentFrameTab2RightDisabled, 
+	 	}) do
+	 		AbyssUI_ColorizationFrameFunction(v)
+		end
+  end
+end)
+-- ArenaFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if (GetWoWVersion == 20501 or GetWoWVersion == 20502) or GetWoWVersion == 11307 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { ArenaFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
 ---------------------------- Classic Dynamically ----------------------------------
 -- Clock
 local f = CreateFrame("Frame")
