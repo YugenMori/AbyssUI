@@ -47,6 +47,7 @@ L["Clear Bars"]	= true
 L["DailyInfo"]	= true
 L["Reload UI"]	= true
 L["Donate"]	= true
+L["Donators"]	= true
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -353,6 +354,7 @@ L["Make the health bar textures looks Flat"] = true
 L["Show Minimap Clock"] = true
 L["This will always show the minimap clock, instead of showing on hover"] = true
 L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"] = true
+L["|cffffcc00Consider buying me a coffee!|r"] = true
 L["Class Color"] = true
 L["Change icon border to a class colored theme"] = true
 L["You need to select just one of those options so they don't overlap"] = true
@@ -384,3 +386,4 @@ L["Always show helm"] = true
 L["Show Cloak"] = true
 L["Always show cloak"] = true
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = true
+L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = true

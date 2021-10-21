@@ -115,10 +115,10 @@ local function GlossTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 35, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -160,10 +160,10 @@ local function GlossTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -265,10 +265,10 @@ local function ClassColor()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -310,10 +310,10 @@ local function ClassColor()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -415,10 +415,10 @@ local function CrispTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -460,10 +460,10 @@ local function CrispTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -565,10 +565,10 @@ local function OriginalTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -610,10 +610,10 @@ local function OriginalTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -715,10 +715,10 @@ local function SquareTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -760,10 +760,10 @@ local function SquareTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -865,10 +865,10 @@ local function ThinTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -910,10 +910,10 @@ local function ThinTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,
@@ -1015,10 +1015,10 @@ local function GlassTheme()
   -- buff frame settings
   Abconfig.buffFrame = {
     pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
-    gap                 = 30, --gap between buff and debuff rows
+    gap                 = 40, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 12,
     button = {
       size              = 28,
@@ -1060,10 +1060,10 @@ local function GlassTheme()
       x = -35,
       y = -85
     },
-    gap                 = 10, --gap between buff and debuff rows
+    gap                 = 20, --gap between buff and debuff rows
     userplaced          = true, --want to place the bar somewhere else?
-    rowSpacing          = 10,
-    colSpacing          = 7,
+    rowSpacing          = 13,
+    colSpacing          = 10,
     buttonsPerRow       = 10,
     button = {
       size              = 28,

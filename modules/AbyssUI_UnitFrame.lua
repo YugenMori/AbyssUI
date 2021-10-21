@@ -217,12 +217,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
     local function UnitFramesImproved_PlayerFrame_ToPlayerArt(self)
       if (AbyssUIAddonSettings.UnitFrameImproved == true) then
         if not InCombatLockdown() then
-          UnitFramesImproved_Style_PlayerFrame()
+          --UnitFramesImproved_Style_PlayerFrame()
         end
       end
     end
 		-- VehicleHandle
-		if (GetWoWVersion ~= 11307) then
+		if (GetWoWVersion >= 20502) then
 			local eventVehicleHandle = CreateFrame("Frame", "$parent_eventVehicleHandle", nil)
 			eventVehicleHandle:RegisterEvent("UNIT_EXITED_VEHICLE")
 			eventVehicleHandle:SetScript("OnEvent", function(self, event, ...)
@@ -243,31 +243,42 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				--if not InCombatLockdown() then
-				local classification = UnitClassification(self.unit)
-				if (classification == "minus") then
-					self.healthbar:SetHeight(12)
-					self.healthbar:SetPoint("TOPLEFT", 7, -41)
-					if (self.healthbar.TextString) then
-						self.healthbar.TextString:SetPoint("CENTER", -50, 4)
-					end
-					self.deadText:SetPoint("CENTER", -50, 4)
-					self.Background:SetPoint("TOPLEFT", 7, -41)
-				else
-					self.healthbar:SetHeight(29)
-					self.healthbar:SetPoint("TOPLEFT", 7, -22)
-					if (self.healthbar.TextString) then
-						self.healthbar.TextString:SetPoint("CENTER", -50, 6)
-					end
-					self.deadText:SetPoint("CENTER", -50, 6)
-					self.nameBackground:SetAlpha(0)
-					self.Background:SetPoint("TOPLEFT", 7, -22)
+				if (GetWoWVersion > 11401) then
+					local classification = UnitClassification(self.unit)
 				end
-				self.healthbar:SetWidth(119)
-				self.healthbar.lockColor = true
+					if (classification == "minus") then
+						self.healthbar:SetHeight(12)
+						self.healthbar:SetPoint("TOPLEFT", 7, -41)
+						if (self.healthbar.TextString) then
+							self.healthbar.TextString:SetPoint("CENTER", -50, 4)
+						end
+						self.deadText:SetPoint("CENTER", -50, 4)
+						self.Background:SetPoint("TOPLEFT", 7, -41)
+					else
+						if (GetWoWVersion < 20502) then
+							TargetFrameHealthBar:SetHeight(29)
+							TargetFrameHealthBar:SetPoint("TOPLEFT", 7, -22)
+							if (TargetFrameHealthBar.TextString) then
+								TargetFrameHealthBar.TextString:SetPoint("CENTER", -50, 6)
+							end
+						else
+							self.healthbar:SetHeight(29)
+							self.healthbar:SetPoint("TOPLEFT", 7, -22)
+							if (self.healthbar.TextString) then
+								self.healthbar.TextString:SetPoint("CENTER", -50, 6)
+							end
+							self.deadText:SetPoint("CENTER", -50, 6)
+							self.nameBackground:SetAlpha(0)
+							self.Background:SetPoint("TOPLEFT", 7, -22)
+						end
+					end
+					self.healthbar:SetWidth(119)
+					self.healthbar.lockColor = true
 				--end
 			end
 		end
 		-- BossStyle
+		--[[
 		local function UnitFramesImproved_BossTargetFrame_Style(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				if not InCombatLockdown() then
@@ -279,6 +290,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				end
 			end
 		end
+		--]]
 		-- Utility functions
 		local function UnitFramesImproved_AbbreviateLargeNumbers(value)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
@@ -384,7 +396,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						v:ClearAllPoints()
 						PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
 						TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
-						if (GetWoWVersion ~= 11307) then
+						if (GetWoWVersion >= 20502) then
 							FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
 						end
 					end)
@@ -499,7 +511,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
 			if not InCombatLockdown () then
 				TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-				if (GetWoWVersion ~= 11307) then
+				if (GetWoWVersion >= 20502) then
 					FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 				end
 			end
@@ -532,23 +544,25 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
 				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
 				hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
-				-- BossFrame hooks
-				hooksecurefunc("BossTargetFrame_OnLoad", UnitFramesImproved_BossTargetFrame_Style)
-				
-				-- Set up some stylings
-				UnitFramesImproved_Style_PlayerFrame()
 
-				UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
-				UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+				-- Set up some stylings
+				UnitFramesImproved_Style_PlayerFrame(PlayerFrame)
+				--[[
+				--UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
+				--UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
+				--UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
+				--UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+				--]]
+
+				-- BossFrame hooks
+				--hooksecurefunc("BossTargetFrame_OnLoad", UnitFramesImproved_BossTargetFrame_Style)
 
 				UnitFramesImproved_Style_TargetFrame(TargetFrame)
-				if (GetWoWVersion ~= 11307) then
+				if (GetWoWVersion >= 20502) then
 					UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				end
 				UnitFramesImproved_UnitName_Color()
-				if (FocusFrame and GetWoWVersion ~= 11307) then
+				if (FocusFrame and GetWoWVersion >= 20502) then
 					UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				end
 				UnitFramesImproved_Style_TargetOfTargetFrame()

@@ -147,7 +147,7 @@ local function InitSettings()
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
   --
   AbyssUI_Config.childpanel9 = CreateFrame("Frame", "$parentConfigChild_Patreon", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel9.name = "|cfff2dc7f"..L["Patreon"].."|r"
+  AbyssUI_Config.childpanel9.name = "|cfff2dc7f"..L["Donators"].."|r"
   AbyssUI_Config.childpanel9.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel9)
   --
@@ -340,7 +340,7 @@ local function InitSettings()
   Frame:SetScale(1.5)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetText(L["Patreon"])
+  Frame:SetText(L["Donators"])
   -- Panel 10 (Thanks)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel10", AbyssUI_Config.childpanel10)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel10, "TOP", 0, -20)
@@ -453,13 +453,13 @@ local function InitSettings()
         else
           print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
         end
-        if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+        if (GetWoWVersion > 20502) then
           local HonorLevel = UnitHonorLevel("player")
           print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
         end
         print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
         print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
-        print(L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"])
+        print(L["|cffffcc00Consider buying me a coffee!|r"])
       end)
     end)
   end)
@@ -554,7 +554,7 @@ local function InitSettings()
     FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
     --FrameButton.text:SetFont(globalFont, 14)
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
-    FrameButton.text:SetText(L["Donate"])
+    FrameButton.text:SetText("Paypal")
     if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
       AbyssUI_ApplyFonts(FrameButton.text)
     else
@@ -568,7 +568,7 @@ local function InitSettings()
         AbyssUI_EditBox_Frame:Show()
     end)
   end)
-  -- Patreon
+  -- Donators
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
@@ -580,7 +580,7 @@ local function InitSettings()
     FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
     FrameButton.text:SetFont(globalFont, 13)
     FrameButton.text:SetTextColor(232/255, 201/255, 121/255)
-    FrameButton.text:SetText(L["Patreon"])
+    FrameButton.text:SetText(L["Donate"])
     -- animation
     FrameButton.GlowTexture = FrameButton:CreateTexture(nil, "OVERLAY", "UIPanelButtonHighlightTexture")
     FrameButton.GlowTexture:SetAllPoints()
@@ -616,7 +616,7 @@ local function InitSettings()
       FrameButton.Glow:Stop()
     end
     FrameButton:SetScript("OnClick", function()
-      AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"])
+      AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"])
       AbyssUI_EditBoxPatreon_Frame:Show()
     end)
     for i, v in pairs({
@@ -728,8 +728,8 @@ local function InitSettings()
   -- OnClick
   AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
       if (button == 'LeftButton') then 
-        AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"])
-        AbyssUI_EditBoxPatreon_Frame:Show()
+       AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"])
+       AbyssUI_EditBoxPatreon_Frame:Show()
       end
   end)
   -- Glass
@@ -897,26 +897,28 @@ local function HideElementsInit()
   end
   -- Show
   local function AbyssUI_ShowMicroMenu_Function()
-    for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
-      MicroButtonAndBagsBar,
-      MainMenuBarPerformanceBar,
-      MainMenuMicroButton,
-      EJMicroButton,
-      CollectionsMicroButton,
-      LFDMicroButton,
-      GuildMicroButton,
-      QuestLogMicroButton,
-      TalentMicroButton,
-      SpellbookMicroButton,
-      CharacterMicroButton, }) do
-      v:Show()
-      AchievementMicroButton:SetAlpha(1)
-      StoreMicroButton:SetAlpha(1)
+    if (GetWoWVersion ~= 11400 or GetWoWVersion ~= 11401) then
+      for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
+        MicroButtonAndBagsBar,
+        MainMenuBarPerformanceBar,
+        MainMenuMicroButton,
+        EJMicroButton,
+        CollectionsMicroButton,
+        LFDMicroButton,
+        GuildMicroButton,
+        QuestLogMicroButton,
+        TalentMicroButton,
+        SpellbookMicroButton,
+        CharacterMicroButton, }) do
+        v:Show()
+        AchievementMicroButton:SetAlpha(1)
+        StoreMicroButton:SetAlpha(1)
+      end
     end
   end
   -- OnClick Function
   MicroMenu_CheckButton:SetScript("OnClick", function(self)
-  if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+  if (GetWoWVersion > 20502) then
     AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
     if AbyssUIAddonSettings.HideMicroMenu == true then
       AbyssUI_HideMicroMenu_Function()
@@ -931,7 +933,7 @@ local function HideElementsInit()
   -- After Login/Reload
   MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       if (event == "PLAYER_ENTERING_WORLD") then
         if AbyssUIAddonSettings.HideMicroMenu == true then
           AbyssUI_HideMicroMenu_Function()
@@ -950,7 +952,7 @@ local function HideElementsInit()
   -- OnClick Function
   Gryphons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       if AbyssUIAddonSettings.HideGryphons == true then
         MainMenuBarArtFrame.RightEndCap:Hide()
         MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -972,7 +974,7 @@ local function HideElementsInit()
   Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+      if (GetWoWVersion > 20502) then
         if AbyssUIAddonSettings.HideGryphons == true then
           MainMenuBarArtFrame.RightEndCap:Hide()
           MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -1022,7 +1024,7 @@ local function HideElementsInit()
   -- OnClick Function
   ObjTracker_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       if AbyssUIAddonSettings.HideObjectiveTracker == true then
         ObjectiveTrackerFrame:Hide()
       else
@@ -1040,7 +1042,7 @@ local function HideElementsInit()
   ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+      if (GetWoWVersion > 20502) then
         if AbyssUIAddonSettings.HideObjectiveTracker == true then
           ObjectiveTrackerFrame:Hide()
         else
@@ -1236,7 +1238,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Hide()
       ChatFrameChannelButton:Hide()
       ChatFrame1EditBox:Hide()
-      if (GetWoWVersion > 20501) then
+      if (GetWoWVersion > 20502) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton.Icon:Hide()
         ChatFrameToggleVoiceMuteButton.Icon:Hide()
@@ -1253,7 +1255,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Show()
       ChatFrameChannelButton:Show()
       ChatFrame1EditBox:Show()
-      if (GetWoWVersion > 20501) then
+      if (GetWoWVersion > 20502) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton.Icon:Show()
         ChatFrameToggleVoiceMuteButton.Icon:Show()
@@ -1277,7 +1279,7 @@ local function HideElementsInit()
   HideChatButtons_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
     if (AbyssUIAddonSettings.HideChatButtons == true) then
-      if (GetWoWVersion > 20501) then
+      if (GetWoWVersion > 20502) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
         ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1288,7 +1290,7 @@ local function HideElementsInit()
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
     else 
-      if (GetWoWVersion > 20501) then
+      if (GetWoWVersion > 20502) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
         ChatFrameToggleVoiceMuteButton:SetAlpha(1)
@@ -1311,7 +1313,7 @@ local function HideElementsInit()
           ChatFrameChannelButton:Hide()
           ChatFrame1ButtonFrame:SetAlpha(0)
           AbyssUI_ChatHideFrame:Hide()
-          if (GetWoWVersion > 20501) then
+          if (GetWoWVersion > 20502) then
             QuickJoinToastButton:Hide()
             ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
             ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1465,7 +1467,7 @@ local function HideElementsInit()
   HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFrame)
   -- OnClick Function
   HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
       if (AbyssUIAddonSettings.HideConvenantFrame == true) then
         GarrisonLandingPageMinimapButton:Hide()
@@ -1481,7 +1483,7 @@ local function HideElementsInit()
   HideConvenantFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+      if (GetWoWVersion > 20502) then
         if (AbyssUIAddonSettings.HideConvenantFrame == true) then
           C_Timer.After(1, function()
             GarrisonLandingPageMinimapButton:Hide(0)
@@ -1876,7 +1878,7 @@ local function Miscellaneous()
   addonTable.DisableNewMinimap = DisableNewMinimap_CheckButton
   -- OnClick Function
   DisableNewMinimap_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       AbyssUIAddonSettings.DisableNewMinimap = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else 
@@ -2123,7 +2125,7 @@ local function TweaksExtra()
   addonTable.SquareMinimap = SquareMinimap_CheckButton
   -- OnClick Function
   SquareMinimap_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+    if (GetWoWVersion > 20502) then
       if (AbyssUIAddonSettings.DisableNewMinimap == true) then
         UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
         SquareMinimap_CheckButton:SetChecked(nil)
@@ -2294,7 +2296,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:SetChecked(AbyssUIAddonSettings.HideHelm)
   -- OnClick Function
   HideHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.HideHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2306,7 +2308,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         if AbyssUIAddonSettings.HideHelm == true then
           ShowHelm(false)
         end
@@ -2321,7 +2323,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:SetChecked(AbyssUIAddonSettings.HideCloak)
   -- OnClick Function
   HideCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.HideCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2333,7 +2335,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         if AbyssUIAddonSettings.HideCloak == true then
           ShowCloak(false)
         end
@@ -2348,7 +2350,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:SetChecked(AbyssUIAddonSettings.ShowHelm)
   -- OnClick Function
   ShowHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.ShowHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2360,7 +2362,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         if AbyssUIAddonSettings.ShowHelm == true then
           ShowHelm(true)
         end
@@ -2375,7 +2377,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:SetChecked(AbyssUIAddonSettings.ShowCloak)
   -- OnClick Function
   ShowCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.ShowCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2387,7 +2389,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         if AbyssUIAddonSettings.ShowCloak == true then
           ShowCloak(true)
         end
@@ -2404,7 +2406,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2418,7 +2420,7 @@ local function ClassicBCC()
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
           if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
             WorldMapFrame.BlackoutFrame:Hide()
             WorldMapFrame.BlackoutFrame:EnableMouse(false)
@@ -2440,7 +2442,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+      if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
         AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2454,7 +2456,7 @@ local function ClassicBCC()
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+        if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
           if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
             PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
           end
@@ -2471,7 +2473,7 @@ local function ClassicBCC()
   AbyssUI_DefaultNameplate_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDefaultNameplate)
   -- OnClick Function
   AbyssUI_DefaultNameplate_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.ExtraFunctionDefaultNameplate = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2492,7 +2494,7 @@ local function ClassicBCC()
   DisableQuestFrame_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame)
   -- OnClick Function
   DisableQuestFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20501 or GetWoWVersion == 11307) then
+    if (GetWoWVersion == 20502 or GetWoWVersion == 11400) then
       AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2642,7 +2644,7 @@ local function ScaleFrameSize()
   AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
       local newValue = string.format("%.2f", value)
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+      if (GetWoWVersion > 20502) then
         if (not InCombatLockdown() and ObjectiveTrackerFrame:IsShown()) then
           ObjectiveTrackerFrame:SetScale(newValue)
           AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
@@ -4326,7 +4328,7 @@ local function AbyssUI_SliderSaveLoad()
       --
       MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
       BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
-      if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+      if (GetWoWVersion > 20502) then
         ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
       else
         QuestWatchFrame:SetScale(AbyssUIAddonSettings[character].Slider.QuestWatchFrame)
@@ -4341,47 +4343,47 @@ f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
   character = UnitName("player").."-"..GetRealmName()
-    if not AbyssUIAddonSettings then
-      AbyssUIAddonSettings = {}
-    end
-    if not AbyssUIAddonSettings[character] then
-      AbyssUIAddonSettings[character] = {}
-    end
-    if not AbyssUIAddonSettings[character].Slider then
-      AbyssUIAddonSettings[character].Slider = {}
-    end
-    if not AbyssUIAddonSettings[character].Slider.MinimapSlider then
-      AbyssUIAddonSettings[character].Slider.MinimapSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.UnitFrameSlider then
-      AbyssUIAddonSettings[character].Slider.UnitFrameSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.BuffFrameSlider then
-      AbyssUIAddonSettings[character].Slider.BuffFrameSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.PartyFrameSlider then
-      AbyssUIAddonSettings[character].Slider.PartyFrameSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.RaidFrameSlider then
-      AbyssUIAddonSettings[character].Slider.RaidFrameSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider then
-      AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = 1
-    end
-    if not AbyssUIAddonSettings[character].Slider.QuestWatchFrame then
-      AbyssUIAddonSettings[character].Slider.QuestWatchFrame = 1
-    end
-    InitSettings()
-    HideElementsInit()
-    Miscellaneous()
-    TweaksExtra()
-    ClassicBCC()
-    ScaleFrameSize()
-    Patreon()
-    ThanksTraslations()
-    FAQ()
-    Stylization()
-    AbyssUI_SliderSaveLoad()
+  if not AbyssUIAddonSettings then
+    AbyssUIAddonSettings = {}
+  end
+  if not AbyssUIAddonSettings[character] then
+    AbyssUIAddonSettings[character] = {}
+  end
+  if not AbyssUIAddonSettings[character].Slider then
+    AbyssUIAddonSettings[character].Slider = {}
+  end
+  if not AbyssUIAddonSettings[character].Slider.MinimapSlider then
+    AbyssUIAddonSettings[character].Slider.MinimapSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.UnitFrameSlider then
+    AbyssUIAddonSettings[character].Slider.UnitFrameSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.BuffFrameSlider then
+    AbyssUIAddonSettings[character].Slider.BuffFrameSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.PartyFrameSlider then
+    AbyssUIAddonSettings[character].Slider.PartyFrameSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.RaidFrameSlider then
+    AbyssUIAddonSettings[character].Slider.RaidFrameSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider then
+    AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = 1
+  end
+  if not AbyssUIAddonSettings[character].Slider.QuestWatchFrame then
+    AbyssUIAddonSettings[character].Slider.QuestWatchFrame = 1
+  end
+  InitSettings()
+  HideElementsInit()
+  Miscellaneous()
+  TweaksExtra()
+  ClassicBCC()
+  ScaleFrameSize()
+  Patreon()
+  ThanksTraslations()
+  FAQ()
+  Stylization()
+  AbyssUI_SliderSaveLoad()
 end)
 --------------------------------------------------------------
 -- End

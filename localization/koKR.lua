@@ -53,6 +53,7 @@ L["Clear Bars"]	= "클리어 바"
 L["DailyInfo"]	= "일일 정보"
 L["Reload UI"]	= "UI 새로 고침"
 L["Donate"]	= "기부"
+L["Donators"]	= "기증자"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -395,6 +396,7 @@ L["Make the health bar textures looks Flat"] = "헬스 바 텍스처를 평평�
 L["Show Minimap Clock"] = "미니 맵 시계"
 L["This will always show the minimap clock, instead of showing on hover"] = "이렇게하면 마우스 오버시 표시되는 대신 항상 미니 맵 시계가 표시됩니다."
 L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"] = "커피 사주세요: |cffffcc00patreon.com/yugensan|r"
+L["|cffffcc00Consider buying me a coffee!|r"] = "|cffffcc00커피 사줄까!|r"
 L["Class Color"] = "클래스 색상"
 L["Change icon border to a class colored theme"] = "아이콘 테두리를 수업 색상 테마로 변경"
 L["You need to select just one of those options so they don't overlap"] = "겹치지 않도록 이러한 옵션 중 하나만 선택해야합니다."
@@ -430,3 +432,4 @@ L["Always show helm"] = "항상 투구 표시"
 L["Show Cloak"] = "망토 보이기"
 L["Always show cloak"] = "항상 망토 보여줘"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f 내 Patreon은, 내 모든 프로젝트와 관련이 있으므로 이를 염두에 두십시오. 한 번에 많은 프로젝트에 도움이 될 것입니다! 링크를 받으려면 확인|r" 
+L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7f기부금은 '기부자' 탭에 순위로 표시됩니다. 대단히 감사합니다. 링크를 받으려면 확인|r"

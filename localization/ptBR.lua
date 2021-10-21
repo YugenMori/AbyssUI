@@ -53,6 +53,7 @@ L["Clear Bars"]	= "Limpar Barras"
 L["DailyInfo"]	= "Info Diária"
 L["Reload UI"]	= "Recarregar UI"
 L["Donate"]	= "Doações"
+L["Donators"]	= "Doadores"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -395,6 +396,7 @@ L["Make the health bar textures looks Flat"] = "Faz as texturas da barra de saú
 L["Show Minimap Clock"] = "Relógio Minimapa"
 L["This will always show the minimap clock, instead of showing on hover"] = "Isso sempre mostrará o relógio do minimapa, em vez de mostrar só ao passar o mouse"
 L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"] = "Me paga um café: |cffffcc00patreon.com/yugensan|r"
+L["|cffffcc00Consider buying me a coffee!|r"] = "|cffffcc00Considere me comprar um café!|r"
 L["Class Color"] = "Cor da Classe"
 L["Change icon border to a class colored theme"] = "Alterar a borda do ícone para um tema colorido da classe"
 L["You need to select just one of those options so they don't overlap"] = "Você precisa selecionar apenas uma dessas opções para que não se sobreponham"
@@ -430,3 +432,4 @@ L["Always show helm"] = "Sempre mostrar o Elmo"
 L["Show Cloak"] = "Mostrar capa"
 L["Always show cloak"] = "Sempre mostrar a capa"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7fMeu Patreon, está relacionado a todos os meus projetos, então tenha isso em mente. Você estará ajudando muitos projetos de uma vez! Confirme para obter o link|r" 
+L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7fDoações aparecerá na guia 'Doadores' como uma classificação. Muito obrigado, confirme para obter o link|r"

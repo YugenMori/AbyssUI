@@ -232,7 +232,7 @@ local FadeUI = CreateFrame("CheckButton", "$parentFadeUI", UIParent, "ChatConfig
 FadeUI:RegisterEvent("PLAYER_REGEN_DISABLED")
 FadeUI:RegisterEvent("PLAYER_REGEN_ENABLED")
 FadeUI:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion ~= 11307) then
+if (GetWoWVersion ~= 11400) then
 	FadeUI:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 --FadeUI:RegisterEvent("PARTY_MEMBERS_CHANGED")
@@ -344,7 +344,7 @@ end)
 ----------------------------------------------
 -- NamePlate Style
 --  Move nametag
-if (GetWoWVersion ~= 20501 and GetWoWVersion ~= 11307 and GetWoWVersion ~= 20502) then
+if (GetWoWVersion > 20502) then
 	hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 		if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
 			frame.name:ClearAllPoints()

@@ -223,7 +223,7 @@ f:SetScript("OnEvent", function()
 	end)
 end)
 -- DynamicFrame --
-if (GetWoWVersion ~= 11307) then
+if (GetWoWVersion ~= 11400 and GetWoWVersion ~= 11401) then
 	local frame = CreateFrame("Frame", "$parentFrame", nil)
 	frame:RegisterEvent("LFG_COMPLETION_REWARD")
 	frame:SetScript("OnEvent", function(self, event)

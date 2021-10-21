@@ -54,6 +54,7 @@ L["Clear Bars"]	= "清空动作条"
 L["DailyInfo"]	= "每日资讯"
 L["Reload UI"]	= "重新加载UI"
 L["Donate"]	= "打赏"
+L["Donators"]	= "捐助者"
 -- Config Info Panel
 L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
 "These addons are verify to especially work with AbyssUI without any conflict or problem."..
@@ -395,6 +396,7 @@ L["Make the health bar textures looks Flat"] = "使健康条纹理看起来平�
 L["Show Minimap Clock"] = "小地图时钟"
 L["This will always show the minimap clock, instead of showing on hover"] = "这将始终显示小地图时钟，而不是在悬停时显示"
 L["Buy me a coffee: |cffffcc00patreon.com/yugensan|r"] = "给我买杯咖啡：|cffffcc00patreon.com/yugensan|r"
+L["|cffffcc00Consider buying me a coffee!|r"] = "|cffffcc00考虑给我买杯咖啡！|r"
 L["Class Color"] = "班级颜色"
 L["Change icon border to a class colored theme"] = "将图标边框更改为类彩色主题"
 L["You need to select just one of those options so they don't overlap"] = "您只需要选择其中一个选项，以免它们重叠"
@@ -430,3 +432,4 @@ L["Always show helm"] = "始终显示掌舵"
 L["Show Cloak"] = "展示斗篷"
 L["Always show cloak"] = "总是露出斗篷"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f 我的 Patreon，它与我所有的项目有关，所以请记住这一点。您将同时帮助很多项目！确认获取链接|r"
+L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7f捐款 将作为排名出现在‘捐助者’标签中。非常感谢，确认获取链接|r"
