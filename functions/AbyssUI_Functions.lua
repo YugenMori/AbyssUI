@@ -872,7 +872,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
 			print(L["Type |cffffcc00/abyssui|r for a list of commands"])
-     	print(L["|cffffcc00Consider buying me a coffee!|r"])
+     	print(L["|cffffcc00Consider buying me a coffee!|r"].."\nko-fi.com/yugen_san")
 		end
 	end)
 end)

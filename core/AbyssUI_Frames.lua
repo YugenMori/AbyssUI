@@ -223,7 +223,7 @@ f:SetScript("OnEvent", function()
 		end
 	FrameButtonConfirm:SetScript("OnClick", function()
 	  AbyssUI_EditBoxPatreon_Frame:Hide()
-    AbyssUI_EditBox:SetText("paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2")
+    AbyssUI_EditBox:SetText("ko-fi.com/yugen_san")
     AbyssUI_EditBox_Frame:Show()
 	end)
 end)
