@@ -67,7 +67,9 @@ local function AbyssUIMoveFrames_Reset()
 	end
 	PlayerFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -19, -4)
 	TargetFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -4)
-	FocusFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -240)
+    if (GetWoWVersion ~= 11400 or GetWoWVersion ~= 11401) then
+	   FocusFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -240)
+    end
 	--MinimapCluster:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 10, 0)
     --PartyMemberFrame1:SetPoint("TOPLEFT", CompactRaidFrameManager, "TOPRIGHT", 0, -20)
 	--[[
