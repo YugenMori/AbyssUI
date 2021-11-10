@@ -2698,7 +2698,7 @@ local function Patreon()
   PatreonBronzeTextPatrons = PatreonBronzeTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PatreonBronzeTextPatrons:SetPoint("LEFT")
   PatreonBronzeTextPatrons:SetAllPoints()
-  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."".."|r")
+  PatreonBronzeTextPatrons:SetText("|cffcd7f32".."Maurizio".."|r")
   PatreonBronzeTextPatrons:SetFont(globalFont, 14)
   -- Silver
   local AbyssUI_PatreonSilver = CreateFrame("Frame", "$parentAbyssUI_PatreonSilver", AbyssUI_Config.childpanel9)
