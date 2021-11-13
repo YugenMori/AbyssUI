@@ -194,7 +194,7 @@ end)
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion ~= 11400) then
+if (GetWoWVersion > 11401) then
 	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 frame:RegisterEvent("UNIT_FACTION")
@@ -216,7 +216,7 @@ local function eventHandler(self, event, ...)
 				c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
 				TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
 			end
-			if UnitIsPlayer("focus") and GetWoWVersion ~= 11400 then
+			if UnitIsPlayer("focus") and GetWoWVersion > 11401 then
 				c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
 				FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
 			end
@@ -227,7 +227,7 @@ local function eventHandler(self, event, ...)
 		-- Remove background
 		TargetFrameNameBackground:SetAlpha(0.5)
 		TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-		if (GetWoWVersion ~= 11400) then
+		if (GetWoWVersion > 11401) then
 			FocusFrameNameBackground:SetAlpha(0.5)
 			FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
 		end
@@ -513,21 +513,21 @@ end)
 -- Target Mob(Enemy) Health Bar Color
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion ~= 11400) then
+if (GetWoWVersion > 11401) then
 	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 local function eventHandler(self, event, ...)
 	if (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
 		if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 			TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-			if (GetWoWVersion ~= 11400) then
+			if (GetWoWVersion > 11401) then
 				FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
 			end
 		else
 			return nil
 		end
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-		if (GetWoWVersion ~= 11400) then
+		if (GetWoWVersion > 11401) then
 			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 		end
 	end	
@@ -542,7 +542,7 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 	if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
-		if (GetWoWVersion ~= 11400) then		
+		if (GetWoWVersion > 11401) then		
 			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
 			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 		end
