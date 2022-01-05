@@ -866,7 +866,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end
-		print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .. "|r")
+		print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .."|r".." ".."("..(GetWoWVersion)..")")
 		print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
 		if (AbyssUIProfile ~= nil) then 
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
