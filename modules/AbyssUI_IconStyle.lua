@@ -50,6 +50,7 @@ local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFon
 local function GlossTheme() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -200,6 +201,7 @@ end
 local function ClassColor() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classcolor",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -285,7 +287,7 @@ local function ClassColor()
       show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
-      classcolored      = false,
+      classcolored      = true,
       inset             = 6,
       padding           = 4,
     },
@@ -350,6 +352,7 @@ end
 local function CrispTheme() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -371,8 +374,8 @@ local function CrispTheme()
   }
 
   Abconfig.color = {
-    normal            = { r = 0.37, g = 0.3, b = 0.3, },
-    equipped          = { r = 0.1, g = 0.5, b = 0.1, },
+    normal            = { r = 0.5, g = 0.5, b = 0.5, },
+    equipped          = { r = 0.3, g = 0.5, b = 0.3, },
     classcolored      = false,
   }
 
@@ -432,7 +435,7 @@ local function CrispTheme()
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -477,7 +480,7 @@ local function CrispTheme()
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -500,6 +503,7 @@ end
 local function OriginalTheme() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -521,7 +525,7 @@ local function OriginalTheme()
   }
 
   Abconfig.color = {
-    normal            = { r = 0.77, g = 0.7, b = 0.7, },
+    normal            = { r = 0.7, g = 0.7, b = 0.7, },
     equipped          = { r = 0.1, g = 0.5, b = 0.1, },
     classcolored      = false,
   }
@@ -582,7 +586,7 @@ local function OriginalTheme()
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -627,7 +631,7 @@ local function OriginalTheme()
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -648,8 +652,9 @@ local function OriginalTheme()
 end
 
 local function SquareTheme() 
-  Abconfig.textures = {
+Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -671,8 +676,8 @@ local function SquareTheme()
   }
 
   Abconfig.color = {
-    normal            = { r = 0.37, g = 0.3, b = 0.3, },
-    equipped          = { r = 0.1, g = 0.5, b = 0.1, },
+    normal            = { r = 0.5, g = 0.5, b = 0.5, },
+    equipped          = { r = 0.3, g = 0.5, b = 0.3, },
     classcolored      = false,
   }
 
@@ -728,11 +733,11 @@ local function SquareTheme()
     },
     border = {
       texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square",
-      color             = { r = 0.77, g = 0.7, b = 0.7, },
+      color             = { r = 0.7, g = 0.7, b = 0.7, },
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -773,7 +778,7 @@ local function SquareTheme()
     },
     border = {
       texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square",
-      color             = { r = 0.77, g = 0.7, b = 0.7, },
+      color             = { r = 0.4, g = 0.35, b = 0.35, },
       classcolored      = false,
     },
     background = {
@@ -800,6 +805,7 @@ end
 local function ThinTheme() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\thin",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\thin",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -950,6 +956,7 @@ end
 local function GlassTheme() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -1077,9 +1084,160 @@ local function GlassTheme()
       classcolored      = false,
     },
     background = {
-      show              = true,   --show backdrop
+      show              = false,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.8},
+      classcolored      = false,
+      inset             = 6,
+      padding           = 4,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+end
+
+local function OldTheme() 
+    Abconfig.textures = {
+    normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
+    hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
+    pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
+    checked           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\checked",
+    equipped          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss_grey",
+    buttonback        = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background",
+    buttonbackflat    = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background_flat",
+    outer_shadow      = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+  }
+
+  Abconfig.background = {
+    showbg            = true,   --show a background image?
+    showshadow        = true,   --show an outer shadow?
+    useflatbackground = false,  --true uses plain flat color instead
+    backgroundcolor   = { r = 0.2, g = 0.2, b = 0.2, a = 0.3 },
+    shadowcolor       = { r = 0, g = 0, b = 0, a = 0.9 },
+    classcolored      = false,
+    inset             = 5,
+  }
+
+  Abconfig.color = {
+    normal            = { r = 0.5, g = 0.5, b = 0.5, },
+    equipped          = { r = 0.3, g = 0.5, b = 0.3, },
+    classcolored      = false,
+  }
+
+  Abconfig.hotkeys = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    pos2             = { a1 = "TOPLEFT", x = 0, y = 0 }, --important! two points are needed to make the hotkeyname be inside of the button
+  }
+
+  Abconfig.macroname = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMLEFT", x = 0, y = 0 },
+    pos2             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 }, --important! two points are needed to make the macroname be inside of the button
+  }
+
+  Abconfig.itemcount = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 },
+  }
+
+  Abconfig.cooldown = {
+    spacing          = 0,
+  }
+
+  Abconfig.font = globalFont
+
+  --adjust the oneletter abbrev?
+  Abconfig.adjustOneletterAbbrev = true
+
+  --scale of the consolidated tooltip
+  Abconfig.consolidatedTooltipScale = 1.2
+
+  --combine buff and debuff frame - should buffs and debuffs be displayed in one single frame?
+  --if you disable this it is intended that you unlock the buff and debuffs and move them apart!
+  Abconfig.combineBuffsAndDebuffs = false
+
+  -- buff frame settings
+  Abconfig.buffFrame = {
+    pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
+    gap                 = 40, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 13,
+    colSpacing          = 10,
+    buttonsPerRow       = 12,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -2,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      color             = { r = 0.5, g = 0.5, b = 0.5, },
+      classcolored      = false,
+    },
+    background = {
+      show              = false,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      color             = { r = 0.5, g = 0.5, b = 0.5, a = 0.9},
+      classcolored      = false,
+      inset             = 6,
+      padding           = 4,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+
+  -- debuff frame settings
+  Abconfig.debuffFrame = {
+    pos = {
+      a1 = "TOPRIGHT",
+      af = "Minimap",
+      a2 = "TOPLEFT",
+      x = -35,
+      y = -85
+    },
+    gap                 = 20, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 13,
+    colSpacing          = 10,
+    buttonsPerRow       = 10,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -2,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      color             = { r = 0.5, g = 0.5, b = 0.5, },
+      classcolored      = false,
+    },
+    background = {
+      show              = false,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
       inset             = 6,
       padding           = 4,
@@ -1102,26 +1260,36 @@ end
 local function IconThemeInit()
   if (AbyssUIAddonSettings.GlossIconBorder ~= true and AbyssUIAddonSettings.CrispIconBorder ~= true and
     AbyssUIAddonSettings.OriginalIconBorder ~= true and AbyssUIAddonSettings.SquareIconBorder ~= true and
-    AbyssUIAddonSettings.ThinIconBorder ~= true and AbyssUIAddonSettings.GlassIconBorder ~= true) then
+    AbyssUIAddonSettings.ThinIconBorder ~= true and AbyssUIAddonSettings.GlassIconBorder ~= true and AbyssUIAddonSettings.OldIconBorder ~= true) then
     GlossTheme()
   end
   if AbyssUIAddonSettings.GlossIconBorder then 
     ClassColor()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.classcolor end
   end
   if AbyssUIAddonSettings.CrispIconBorder then
     CrispTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.crisp end
   end
   if AbyssUIAddonSettings.OriginalIconBorder then
     OriginalTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.original end
   end
   if AbyssUIAddonSettings.SquareIconBorder then
     SquareTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.square end
   end
   if AbyssUIAddonSettings.ThinIconBorder then
     ThinTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.thin end
   end
   if AbyssUIAddonSettings.GlassIconBorder then
     GlassTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.glass end
+  end
+  if AbyssUIAddonSettings.OldIconBorder then
+    OldTheme()
+    --if Abconfig.background.showshadow then edgefile = Abconfig.textures.crisp end
   end
 
   ns.Abconfig = Abconfig
@@ -1412,15 +1580,15 @@ local function IconThemeInit()
     ic:SetTexCoord(0.1,0.9,0.1,0.9)
     ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
     ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
-    bu:SetNormalTexture(Abconfig.textures.normal)
+    bu:SetNormalTexture(Abconfig.textures.bags)
     --bu:SetHighlightTexture(Abconfig.textures.hover)
     bu:SetPushedTexture(Abconfig.textures.pushed)
     --bu:SetCheckedTexture(Abconfig.textures.checked)
     
     --make sure the normaltexture stays the way we want it
     hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
-      if texture and texture ~= Abconfig.textures.normal then
-        self:SetNormalTexture(Abconfig.textures.normal)
+      if texture and texture ~= Abconfig.textures.bags then
+        self:SetNormalTexture(Abconfig.textures.bags)
       end
     end)
     bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")

@@ -1142,7 +1142,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- Areana/Bg EnemyFrame
-			if GetWoWVersion > 11401 then
+			if GetWoWVersion > 11402 then
 				for i, v in pairs({ 
 					ArenaEnemyFrame1Texture,
 					ArenaEnemyFrame1CastingBar,
@@ -1425,7 +1425,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- ArenaPrepFrame
-			if GetWoWVersion > 11401 then
+			if GetWoWVersion > 11402 then
 				for i, v in pairs({
 					ArenaPrepFrame1CastingBar,
 					ArenaPrepFrame1DropDown,

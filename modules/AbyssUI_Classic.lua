@@ -195,7 +195,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				GameMenuFrameHeader,
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
-					if (GetWoWVersion > 11401) then
+					if (GetWoWVersion > 11402) then
 						AbyssUI_ColorizationFrameFunction(v)
 					end
 				end
@@ -551,7 +551,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_BindingUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11401 then
+	if name == "Blizzard_BindingUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11402 then
 		for i, v in pairs({
 			KeyBindingFrame.BottomEdge,
 			KeyBindingFrame.BottomLeftCorner,
@@ -665,7 +665,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TalentUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11401 then
+	if name == "Blizzard_TalentUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11402 then
 		self:UnregisterAllEvents()
     local ChildRegions = { PlayerTalentFrame:GetRegions() }
     local fs = {}
@@ -699,7 +699,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TrainerUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11401 then
+	if name == "Blizzard_TrainerUI" and (GetWoWVersion == 20502) and GetWoWVersion > 11402 then
 		self:UnregisterAllEvents()
     local ChildRegions = { ClassTrainerFrame:GetRegions() }
     local fs = {}
@@ -751,7 +751,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if ((GetWoWVersion == 20502) and GetWoWVersion > 11401) then
+	if ((GetWoWVersion == 20502) and GetWoWVersion > 11402) then
     self:UnregisterAllEvents()
     local ChildRegions = { PVPFrame:GetRegions() }
     local fs = {}
@@ -764,7 +764,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if ((GetWoWVersion ~= 20502) and GetWoWVersion <= 11401) then
+	if ((GetWoWVersion ~= 20502) and GetWoWVersion <= 11402) then
     self:UnregisterAllEvents()
     local ChildRegions = { HonorFrame:GetRegions() }
     local fs = {}
@@ -984,7 +984,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion == 20502) and GetWoWVersion > 11401 then
+	if (GetWoWVersion == 20502) and GetWoWVersion > 11402 then
     self:UnregisterAllEvents()
     local ChildRegions = { LFGParentFrame:GetRegions() }
     local fs = {}
@@ -1078,7 +1078,7 @@ f:SetScript("OnEvent", function(self, event, name)
     if (GetWoWVersion <= 20503) then
     	CharacterNameText:SetVertexColor(r, g, b)
     else
-    	if (GetWoWVersion > 11401) then
+    	if (GetWoWVersion > 11402) then
     		CharacterFrameTitleText:SetVertexColor(r, g, b)
     	end
   	end
@@ -1177,7 +1177,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 11401) then
+	if (GetWoWVersion <= 11402) then
     self:UnregisterAllEvents()
     local ChildRegions = { InterfaceOptionsFrame:GetRegions() }
     local fs = {}
@@ -1190,7 +1190,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 11401) then
+	if (GetWoWVersion <= 11402) then
     self:UnregisterAllEvents()
     local ChildRegions = { VideoOptionsFrame:GetRegions() }
     local fs = {}
@@ -1203,7 +1203,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_BindingUI" and GetWoWVersion <= 11401 then
+	if name == "Blizzard_BindingUI" and GetWoWVersion <= 11402 then
     self:UnregisterAllEvents()
     local ChildRegions = { KeyBindingFrame:GetRegions() }
     local fs = {}

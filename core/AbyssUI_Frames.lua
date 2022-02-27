@@ -301,7 +301,7 @@ PlayerInfo_Name1.text:SetPoint("TOP", 0, -1)
 PlayerInfo_Name1.text:SetText(playerName)
 -- Title
 local PlayerInfo_Title1 = CreateFrame("Frame", "$parentPlayerInfo_Title1", AbyssUI_AFKCameraFrame)
-if (GetWoWVersion > 11401) then
+if (GetWoWVersion > 11402) then
 	local titleId = GetCurrentTitle() 
 	local titleName = GetTitleName(titleId)
 end
@@ -678,7 +678,7 @@ end
 local function AbyssUI_UpdateAFKCameraData()
 	-- Get
 	playerName = UnitName("player")
-	if (GetWoWVersion > 11401) then
+	if (GetWoWVersion > 11402) then
 		titleId = GetCurrentTitle() 
 		titleName = GetTitleName(titleId)
 	end
@@ -741,7 +741,7 @@ local function PlayerModelRandomAnimation()
     234, -- state_work_chopwood
 	}
 	local randAnimation = #idRandAnimation 
-	if (GetWoWVersion > 11401) then
+	if (GetWoWVersion > 11402) then
 		ModelFrame_Model1:SetAnimation(idRandAnimation[random(1, randAnimation)])
 	end
 end
