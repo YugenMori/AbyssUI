@@ -508,7 +508,7 @@ local function InitSettings()
         FrameButton.text:SetShadowOffset(1, -1)
       end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("https://discord.gg/Y9TYtdk")
+        AbyssUI_EditBox:SetText("offline")
         AbyssUI_EditBox_Frame:Show()
     end)
   end)
