@@ -250,7 +250,7 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
 		Minimap_ZoomOut()
 	end
 end)
-if (GetWoWVersion > 20503) then
+if (GetWoWVersion > 20600) then
 	MiniMapTracking:ClearAllPoints()
 	MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 end
@@ -635,7 +635,7 @@ objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
 objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
 	local inInstance, instanceType = IsInInstance()
-	if (GetWoWVersion > 20503) then 
+	if (GetWoWVersion > 20600) then 
 		if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
 			UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
 		elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
@@ -695,7 +695,7 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	if (AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
 	    if (AbyssUIAddonSettings.MinimalActionBar == true) then
 	    	C_Timer.After(1, function()
-	    		if (GetWoWVersion > 20503) then
+	    		if (GetWoWVersion > 20600) then
 		    		for i, v in pairs ({
 		   				MainMenuBarArtFrame.LeftEndCap,
 			    		MainMenuBarArtFrame.RightEndCap,
@@ -807,13 +807,13 @@ checkRune:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DKAllyPortrait == true or 
 		AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		PetFrame:SetFrameLevel(4)
-		if (GetWoWVersion > 20503) then
+		if (GetWoWVersion > 20600) then
 			PlayerFrameAlternateManaBar:SetFrameLevel(4)
 		end
 	else
 		return nil
 	end
-	if (GetWoWVersion > 20503) then
+	if (GetWoWVersion > 20600) then
 		if (AbyssUIAddonSettings.DKHordePortrait == true) then
 			RuneFrame:ClearAllPoints()
 			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
@@ -862,7 +862,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		if (GetWoWVersion > 20503) then
+		if (GetWoWVersion > 20600) then
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end

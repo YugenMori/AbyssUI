@@ -344,7 +344,7 @@ end)
 ----------------------------------------------
 -- NamePlate Style
 --  Move nametag
-if (GetWoWVersion > 20503) then
+if (GetWoWVersion > 20600) then
 	hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 		if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
 			frame.name:ClearAllPoints()
