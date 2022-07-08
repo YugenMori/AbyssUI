@@ -6,7 +6,7 @@
 
 #### AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow artwork/functionality.
 
-#### Hi, I'm Yugen, I really like to work on this UI (I did spend too much time editing textures tho lol), I hope you like AbyssUI. If you want me to continue share with your friends, and please consider making a [donation](https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=WFFUE2VL86ZZ2). This helps a lot and give me energy to make it even better! Thanks for all the support.
+#### Hi, I'm Yugen, I really like to work on this UI (I did spend too much time editing textures tho lol), I hope you like AbyssUI. If you want me to continue share with your friends, and please consider making a [donation](https://www.paypal.com/donate/?token=PE0dCeCHNl9JYBIawlPN4Zb5p3B3IgK3NqNoa3V334NMwtA69qplEHVV01ciQlV9VSeA6wN-RqNqV6ji&locale.x=US). This helps a lot and give me energy to make it even better! Thanks for all the support.
 
 #### Always check the FAQ before posting. Bug reports have more visibility on our discord channel.
 ##### *This interface support all languages. (since v9.0.1.9+)
