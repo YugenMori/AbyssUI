@@ -453,13 +453,13 @@ local function InitSettings()
         else
           print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
         end
-        if (GetWoWVersion > 20600) then
+        if (GetWoWVersion > 30400) then
           local HonorLevel = UnitHonorLevel("player")
           print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
         end
         print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .."|r".." ".."("..(GetWoWVersion)..")")
         print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
-        print(L["|cffffcc00Consider buying me a coffee!|r"].."\nko-fi.com/yugen_san")
+        print(L["|cffffcc00Consider buying me a coffee!|r"].." -> ko-fi.com/whiteravenstudio")
       end)
     end)
   end)
@@ -564,7 +564,7 @@ local function InitSettings()
       FrameButton.text:SetShadowOffset(1, -1)
     end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("ko-fi.com/yugen_san")
+        AbyssUI_EditBox:SetText("ko-fi.com/whiteravenstudio")
         AbyssUI_EditBox_Frame:Show()
     end)
   end)
@@ -918,7 +918,7 @@ local function HideElementsInit()
   end
   -- OnClick Function
   MicroMenu_CheckButton:SetScript("OnClick", function(self)
-  if (GetWoWVersion > 20600) then
+  if (GetWoWVersion > 30600) then
     AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
     if AbyssUIAddonSettings.HideMicroMenu == true then
       AbyssUI_HideMicroMenu_Function()
@@ -933,7 +933,7 @@ local function HideElementsInit()
   -- After Login/Reload
   MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
       if (event == "PLAYER_ENTERING_WORLD") then
         if AbyssUIAddonSettings.HideMicroMenu == true then
           AbyssUI_HideMicroMenu_Function()
@@ -952,7 +952,7 @@ local function HideElementsInit()
   -- OnClick Function
   Gryphons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-    if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
       if AbyssUIAddonSettings.HideGryphons == true then
         MainMenuBarArtFrame.RightEndCap:Hide()
         MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -974,7 +974,7 @@ local function HideElementsInit()
   Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         if AbyssUIAddonSettings.HideGryphons == true then
           MainMenuBarArtFrame.RightEndCap:Hide()
           MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -1024,36 +1024,48 @@ local function HideElementsInit()
   -- OnClick Function
   ObjTracker_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
-    if (GetWoWVersion > 20600) then
-      if AbyssUIAddonSettings.HideObjectiveTracker == true then
-        ObjectiveTrackerFrame:Hide()
-      else
-        ObjectiveTrackerFrame:Show()
-      end
-    else
-      if AbyssUIAddonSettings.HideObjectiveTracker == true then
-        QuestWatchFrame:Hide()
-      else
-        QuestWatchFrame:Show()
-      end
-    end
-  end)
-  -- After Login/Reload
-  ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-  ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
         if AbyssUIAddonSettings.HideObjectiveTracker == true then
           ObjectiveTrackerFrame:Hide()
         else
           ObjectiveTrackerFrame:Show()
         end
-      else
+      elseif (GetWoWVersion < 20600) then
         if AbyssUIAddonSettings.HideObjectiveTracker == true then
           QuestWatchFrame:Hide()
         else
           QuestWatchFrame:Show()
         end
+      else
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          WatchFrame:Hide()
+        else
+          WatchFrame:Show()
+        end 
+      end
+  end)
+  -- After Login/Reload
+  ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if (GetWoWVersion > 30600) then
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          ObjectiveTrackerFrame:Hide()
+        else
+          ObjectiveTrackerFrame:Show()
+        end
+      elseif (GetWoWVersion < 20600) then
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          QuestWatchFrame:Hide()
+        else
+          QuestWatchFrame:Show()
+        end
+      else
+        if AbyssUIAddonSettings.HideObjectiveTracker == true then
+          WatchFrame:Hide()
+        else
+          WatchFrame:Show()
+        end 
       end
     end
   end)
@@ -1238,7 +1250,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Hide()
       ChatFrameChannelButton:Hide()
       ChatFrame1EditBox:Hide()
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton.Icon:Hide()
         ChatFrameToggleVoiceMuteButton.Icon:Hide()
@@ -1255,7 +1267,7 @@ local function HideElementsInit()
       ChatFrameMenuButton:Show()
       ChatFrameChannelButton:Show()
       ChatFrame1EditBox:Show()
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton.Icon:Show()
         ChatFrameToggleVoiceMuteButton.Icon:Show()
@@ -1279,7 +1291,7 @@ local function HideElementsInit()
   HideChatButtons_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
     if (AbyssUIAddonSettings.HideChatButtons == true) then
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
         ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1290,7 +1302,7 @@ local function HideElementsInit()
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
     else 
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
         ChatFrameToggleVoiceMuteButton:SetAlpha(1)
@@ -1313,7 +1325,7 @@ local function HideElementsInit()
           ChatFrameChannelButton:Hide()
           ChatFrame1ButtonFrame:SetAlpha(0)
           AbyssUI_ChatHideFrame:Hide()
-          if (GetWoWVersion > 20600) then
+          if (GetWoWVersion > 30600) then
             QuickJoinToastButton:Hide()
             ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
             ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1467,7 +1479,7 @@ local function HideElementsInit()
   HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFrame)
   -- OnClick Function
   HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
       AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
       if (AbyssUIAddonSettings.HideConvenantFrame == true) then
         GarrisonLandingPageMinimapButton:Hide()
@@ -1483,7 +1495,7 @@ local function HideElementsInit()
   HideConvenantFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         if (AbyssUIAddonSettings.HideConvenantFrame == true) then
           C_Timer.After(1, function()
             GarrisonLandingPageMinimapButton:Hide(0)
@@ -1878,7 +1890,7 @@ local function Miscellaneous()
   addonTable.DisableNewMinimap = DisableNewMinimap_CheckButton
   -- OnClick Function
   DisableNewMinimap_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
       AbyssUIAddonSettings.DisableNewMinimap = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else 
@@ -2125,7 +2137,7 @@ local function TweaksExtra()
   addonTable.SquareMinimap = SquareMinimap_CheckButton
   -- OnClick Function
   SquareMinimap_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion > 20600) then
+    if (GetWoWVersion > 30600) then
       if (AbyssUIAddonSettings.DisableNewMinimap == true) then
         UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
         SquareMinimap_CheckButton:SetChecked(nil)
@@ -2644,7 +2656,7 @@ local function ScaleFrameSize()
   AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
     if (value ~= nil and value > 0) then
       local newValue = string.format("%.2f", value)
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         if (not InCombatLockdown() and ObjectiveTrackerFrame:IsShown()) then
           ObjectiveTrackerFrame:SetScale(newValue)
           AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
@@ -2748,6 +2760,16 @@ local function Patreon()
   PatreonGoldText:SetAllPoints()
   PatreonGoldText:SetText("GOLD")
   PatreonGoldText:SetFont(globalFont, 14)
+  -- Patreons Gold
+  local PatreonGoldTextPatrons = CreateFrame("Frame","$parentPatreonGoldTextPatrons", AbyssUI_Config.childpanel9)
+  PatreonGoldTextPatrons:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 214, -100)
+  PatreonGoldTextPatrons:SetHeight(80)
+  PatreonGoldTextPatrons:SetWidth(600)
+  PatreonGoldTextPatrons = PatreonGoldTextPatrons:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  PatreonGoldTextPatrons:SetPoint("LEFT")
+  PatreonGoldTextPatrons:SetAllPoints()
+  PatreonGoldTextPatrons:SetText("|cffffd700".."MrAddict".."|r")
+  PatreonGoldTextPatrons:SetFont(globalFont, 14)
 end
 ----------------------------------- Thanks & Translations  -----------------------------------
 local function ThanksTraslations()
@@ -4361,10 +4383,12 @@ local function AbyssUI_SliderSaveLoad()
       --
       MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
       BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
-      if (GetWoWVersion > 20600) then
+      if (GetWoWVersion > 30600) then
         ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
-      else
+      elseif (GetWoWVersion < 20600) then
         QuestWatchFrame:SetScale(AbyssUIAddonSettings[character].Slider.QuestWatchFrame)
+      else
+        WatchFrame:SetScale(AbyssUIAddonSettings[character].Slider.QuestWatchFrame)
       end
       CompactRaidFrameContainer:SetScale(AbyssUIAddonSettings[character].Slider.RaidFrameSlider)
     end

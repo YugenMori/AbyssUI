@@ -255,9 +255,11 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						self.deadText:SetPoint("CENTER", -50, 4)
 						self.Background:SetPoint("TOPLEFT", 7, -41)
 					else
-						if (GetWoWVersion < 20502) then
+						if (GetWoWVersion < 30600) then
 							TargetFrameHealthBar:SetHeight(29)
+							TargetFrameBackground:SetHeight(29)
 							TargetFrameHealthBar:SetPoint("TOPLEFT", 7, -22)
+							TargetFrameBackground:SetPoint("TOPLEFT", 7, -22)
 							if (TargetFrameHealthBar.TextString) then
 								TargetFrameHealthBar.TextString:SetPoint("CENTER", -50, 6)
 							end
