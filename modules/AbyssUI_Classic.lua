@@ -161,7 +161,7 @@ local ClassicFrames = CreateFrame("Frame")
 ClassicFrames:RegisterEvent("ADDON_LOADED")
 ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 	if (addon == "AbyssUI") then
-		if (GetWoWVersion <= 30600) then
+		if GetWoWVersion <= 30600 then
 			-- General
 			for i, v in pairs({ 
 				MiniMapTrackingBorder,
@@ -195,7 +195,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				GameMenuFrameHeader,
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
-					if (GetWoWVersion > 10000) then
+					if GetWoWVersion > 10000 then
 						AbyssUI_ColorizationFrameFunction(v)
 					end
 				end
@@ -551,7 +551,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_BindingUI" and (GetWoWVersion == 20502) and GetWoWVersion > 12000 then
+	if name == "Blizzard_BindingUI" and GetWoWVersion == 20502 and GetWoWVersion >= 12000 then
 		for i, v in pairs({
 			KeyBindingFrame.BottomEdge,
 			KeyBindingFrame.BottomLeftCorner,
@@ -665,7 +665,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TalentUI" and (GetWoWVersion == 20502) and GetWoWVersion > 12000 then
+	if name == "Blizzard_TalentUI" and GetWoWVersion == 20502 and GetWoWVersion >= 12000 then
 		self:UnregisterAllEvents()
     local ChildRegions = { PlayerTalentFrame:GetRegions() }
     local fs = {}
@@ -699,7 +699,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TrainerUI" and (GetWoWVersion == 20502) and GetWoWVersion > 12000 then
+	if name == "Blizzard_TrainerUI" and GetWoWVersion == 20502 and GetWoWVersion >= 12000 then
 		self:UnregisterAllEvents()
     local ChildRegions = { ClassTrainerFrame:GetRegions() }
     local fs = {}
@@ -712,7 +712,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { PaperDollFrame:GetRegions() }
     local fs = {}
@@ -725,7 +725,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { ReputationFrame:GetRegions() }
     local fs = {}
@@ -738,7 +738,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { SkillFrame:GetRegions() }
     local fs = {}
@@ -751,7 +751,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if ((GetWoWVersion <= 30600) and GetWoWVersion > 12000) then
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { PVPFrame:GetRegions() }
     local fs = {}
@@ -764,7 +764,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if ((GetWoWVersion ~= 20502) and GetWoWVersion <= 12000) then
+	if GetWoWVersion ~= 20502 and GetWoWVersion <= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { HonorFrame:GetRegions() }
     local fs = {}
@@ -777,7 +777,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { SpellBookFrame:GetRegions() }
     local fs = {}
@@ -803,13 +803,14 @@ f:SetScript("OnEvent", function(self)
   end
 end)
 -- QuestLogFrame
+--[[
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
 		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
 	    self:UnregisterAllEvents()
-	    local ChildRegions = { QuestLogFrame:GetRegions() }
+	    local ChildRegions = { QuestLogFrame:GetRegions(), QuestFrameDetailPanel:GetRegions() }
 	    local fs = {}
 	    for k, v in pairs(ChildRegions) do
 	    	AbyssUI_ColorizationFrameFunction(v)
@@ -827,11 +828,13 @@ f:SetScript("OnEvent", function(self)
 	  end
   end
 end)
+--]]
+--[[
 -- QuestFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion > 12000 then
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
 		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
 	    self:UnregisterAllEvents()
 	    local ChildRegions = { 
@@ -862,11 +865,12 @@ f:SetScript("OnEvent", function(self)
   	end
   end
 end)
+--]]
 -- GossipFrameGreetingPanel
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { GossipFrameGreetingPanel:GetRegions() }
     local ScrollRegions = { 
@@ -885,7 +889,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { BankFrame:GetRegions() }
     local fs = {}
@@ -914,7 +918,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { TaxiFrame:GetRegions() }
     local fs = {}
@@ -927,7 +931,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { TabardFrame:GetRegions() }
     local fs = {}
@@ -941,7 +945,7 @@ local leatrix = IsAddOnLoaded("Leatrix_Maps")
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
 		if (not leatrix) then
 	    self:UnregisterAllEvents()
 	    local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
@@ -956,7 +960,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion > 12000 then
+	if GetWoWVersion <= 20600 and GetWoWVersion >= 11000 then
     self:UnregisterAllEvents()
     local ChildRegions = { LFGParentFrame:GetRegions() }
     local fs = {}
@@ -998,7 +1002,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 12000) then
+	if GetWoWVersion <= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { InterfaceOptionsFrame:GetRegions() }
     local fs = {}
@@ -1011,7 +1015,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 12000) then
+	if GetWoWVersion <= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { VideoOptionsFrame:GetRegions() }
     local fs = {}
@@ -1024,7 +1028,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30000) then
+	if GetWoWVersion <= 30000 then
     self:UnregisterAllEvents()
     local ChildRegions = { HonorFrame:GetRegions() }
     local fs = {}
@@ -1150,7 +1154,7 @@ local function ChatHiderFunc()
 	    ChatFrameMenuButton:Hide()
 	    ChatFrameChannelButton:Hide()
 	    ChatFrame1EditBox:Hide()
-	    if (GetWoWVersion > 30600) then
+	    if GetWoWVersion > 30600 then
 	  		QuickJoinToastButton:Hide()
 				ChatFrameToggleVoiceDeafenButton.Icon:Hide()
 	    	ChatFrameToggleVoiceMuteButton.Icon:Hide()
@@ -1168,7 +1172,7 @@ local function ChatHiderFunc()
 	    ChatFrameMenuButton:Show()
 	    ChatFrameChannelButton:Show()
 	    ChatFrame1EditBox:Show()
-	    if (GetWoWVersion > 30600) then
+	    if GetWoWVersion > 30600 then
 	  		QuickJoinToastButton:Show()
 				ChatFrameToggleVoiceDeafenButton.Icon:Show()
 	    	ChatFrameToggleVoiceMuteButton.Icon:Show()
@@ -1208,7 +1212,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion >= 30000  then
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 30000  then
     self:UnregisterAllEvents()
     local ChildRegions = { PetPaperDollFrame:GetRegions() }
     local fs = {}
@@ -1221,8 +1225,8 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion > 12000 then
-    local ChildRegions = { LFGParentFrame:GetRegions(), LFGListingFrame:GetRegions(), LFGBrowseFrame:GetRegions(), }
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
+    local ChildRegions = { LFGListingFrame:GetRegions(), LFGBrowseFrame:GetRegions(), }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
@@ -1235,23 +1239,12 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion < 12000 then
-    local ChildRegions = { LFGParentFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-  end
-end)
 --[[
 -- GameTimeFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if (GetWoWVersion <= 30600) and GetWoWVersion >= 30000  then
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 30000  then
     self:UnregisterAllEvents()
     local ChildRegions = { GameTimeFrame:GetRegions() }
     local fs = {}
@@ -1272,10 +1265,10 @@ f:SetScript("OnEvent", function(self, event, name)
     if (classColor) then
       r, g, b = classColor.r, classColor.g, classColor.b
     end
-    if (GetWoWVersion <= 30600) then
+    if GetWoWVersion <= 30600 then
     	CharacterNameText:SetVertexColor(r, g, b)
     else
-    	if (GetWoWVersion > 40000) then
+    	if GetWoWVersion > 40000 then
     		CharacterFrameTitleText:SetVertexColor(r, g, b)
     	end
   	end
@@ -1286,7 +1279,7 @@ local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
 local function eventHandler(self, event, ...)
 	if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
-		if (GetWoWVersion <= 30600) then
+		if GetWoWVersion <= 30600 then
 			if ( event == "PLAYER_TARGET_CHANGED" ) then
 				if ( UnitReaction("player", "target") ~= nil ) then
 					local target = UnitReaction("player", "target")
@@ -1314,7 +1307,7 @@ end
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if (GetWoWVersion <= 30600) then
+	if GetWoWVersion <= 30600 then
 		if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
 			if ( UnitReaction("player", "target") ~= nil ) then
 				local target = UnitReaction("player", "target")
