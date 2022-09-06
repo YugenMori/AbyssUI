@@ -866,6 +866,7 @@ f:SetScript("OnEvent", function(self)
   end
 end)
 --]]
+--[[
 -- GossipFrameGreetingPanel
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -885,6 +886,7 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
+--]]
 -- BankFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -960,7 +962,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 20600 and GetWoWVersion >= 11000 then
+	if GetWoWVersion <= 20600 and GetWoWVersion >= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { LFGParentFrame:GetRegions() }
     local fs = {}
