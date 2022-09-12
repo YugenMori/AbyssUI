@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- Classic module for AbyssUI
 --------------------------------------------------------------
@@ -133,27 +133,27 @@ end
 local UnitColor
 local function UnitColor(unit)
   if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-    local r, g, b
+    local r, g, b, a
     if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
       --Color it gray
-      r, g, b = 0.5, 0.5, 0.5
+      r, g, b, a = 0.5, 0.5, 0.5, 1
     elseif (UnitIsPlayer(unit)) then
       --Try to color it by class.
       local localizedClass, englishClass = UnitClass(unit)
       local classColor = RAID_CLASS_COLORS[englishClass]
       if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-        r, g, b = classColor.r, classColor.g, classColor.b
+        r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
       else
         if (UnitIsFriend("player", unit)) then
-          r, g, b = 0.0, 1.0, 0.0
+          r, g, b, a = 0.0, 1.0, 0.0, 1
         else
-          r, g, b = 1.0, 0.0, 0.0
+          r, g, b, a = 1.0, 0.0, 0.0, 1
         end
       end
     else
-      r, g, b = UnitSelectionColor(unit)
+      r, g, b, a = UnitSelectionColor(unit)
     end
-    return r, g, b
+    return r, g, b, a
   end
 end
 ---------------------------- Classic Frames ----------------------------------

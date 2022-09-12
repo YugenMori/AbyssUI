@@ -7,9 +7,11 @@
 -- Frame Stuff
 -- Thanks to Fizz for part of this
 -- ObjectiveTrackerFrame
+
 local addonName, addonTable = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
 local GetWoWVersion = ((select(4, GetBuildInfo())))
+--[[
 local UnLocked
 local Moveframes = { PlayerFrame, TargetFrame, FocusFrame, } -- So we don't create a new table each time
 for i , v in pairs (Moveframes) do
@@ -72,12 +74,11 @@ local function AbyssUIMoveFrames_Reset()
     end
 	--MinimapCluster:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 10, 0)
     --PartyMemberFrame1:SetPoint("TOPLEFT", CompactRaidFrameManager, "TOPRIGHT", 0, -20)
-	--[[
-    C_Timer.After(0.5, function()
-		ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
-	end)
-    --]]
+    --C_Timer.After(0.5, function()
+		--ObjectiveTrackerFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOM", 45, -5)
+	--end)
 end
+--]]
 -- Slash Commands
 -- Handler
 local function AbyssUIMoveFrames_Slashhandler()
@@ -115,9 +116,13 @@ end
 local function AbyssUIMoveFrames_Slash(msg)
     if (msg ~= "") then
         if (msg == "config" or msg == "options" or msg == "op" or msg == "configuration") then
-            InterfaceOptionsFrame_Show()
-            InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
-            InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
+            if (GetWoWVersion <= 90500) then
+                InterfaceOptionsFrame_Show()
+                InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
+                InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
+            else
+                SettingsPanel:Show()
+            end
         elseif (msg == "setup") then
             AbyssUISecondFrame:Show()
         elseif (msg == "reset") then

@@ -1,6 +1,6 @@
-## Interface: 90207
+## Interface: 100000
 ## Title: Abyss|cff0d75d4UI|r
-## Version: 9.2.7.3_CEBCCLKC
+## Version: 10.0.0.1_CEBCCLKC
 ## Author: Yugen
 ## Notes-deDE: Minimalistische Benutzeroberfläche für World of Warcraft
 ## Notes-enGB: Minimalist UI for World of Warcraft
@@ -60,5 +60,5 @@ modules\AbyssUI_Classic.lua
 modules\AbyssUI_IconStyle.lua
 modules\AbyssUI_InstanceLeave.lua
 modules\AbyssUI_MoveFrames.lua
-# modules\AbyssUI_SavedProfiles.lua
+modules\AbyssUI_NewUI.lua
 modules\AbyssUI_UnitFrame.lua

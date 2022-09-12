@@ -91,7 +91,9 @@ BasicFrames:SetScript("OnEvent", function(self, event, addon)
 			MiniMapLFGFrameBorder,
 			MiniMapBattlefieldBorder,
 		MiniMapMailBorder, }) do
-			MiniMapWorldMapButton:SetAlpha(0.3)
+			if (GetWoWVersion <= 90500) then
+				MiniMapWorldMapButton:SetAlpha(0.3)
+			end
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else
@@ -220,7 +222,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		if (GetWoWVersion > 30600) then
+		if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
 			for i, v in pairs({ 
 				MainMenuBarArtFrame.LeftEndCap,
 				MainMenuBarArtFrame.RightEndCap,
@@ -834,15 +836,16 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			LootFrame.NineSlice.BottomRightCorner, }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
-					for i, v in pairs({
-						LootFrameInset.NineSlice,
-						LootFrameInset.NineSlice.BottomLeftCorner,
-						LootFrameInset.NineSlice.BottomRightCorner,
-						LootFrameInset.NineSlice.BottomEdge,
-					LootFrameInset.NineSlice.LeftEdge, }) do 
-						v:SetAlpha(0)
+					if (GetWoWVersion <= 90500) then
+						for i, v in pairs({
+							LootFrameInset.NineSlice,
+							LootFrameInset.NineSlice.BottomLeftCorner,
+							LootFrameInset.NineSlice.BottomRightCorner,
+							LootFrameInset.NineSlice.BottomEdge,
+						LootFrameInset.NineSlice.LeftEdge, }) do 
+							v:SetAlpha(0)
+						end
 					end
-
 				else
 					return nil
 				end
@@ -948,16 +951,18 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end	
 			-- CastBarBorder
-			for i, v in pairs({	
-				CastingBarFrame.Border,
-				TargetFrameSpellBar.Border,
-			TargetFrameSpellBar.BorderShield, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
-				end
-			end	
+			if (GetWoWVersion <= 90500) then
+				for i, v in pairs({	
+					CastingBarFrame.Border,
+					TargetFrameSpellBar.Border,
+				TargetFrameSpellBar.BorderShield, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
+				end	
+			end
 			-- GameMenu
 			for i, v in pairs({	
 				GameMenuFrame.Border.TopEdge,
@@ -978,41 +983,45 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end	
 			-- VideoOptions (System)
-			for i, v in pairs({	
-				VideoOptionsFrame.Border.TopEdge,
-				VideoOptionsFrame.Border.RightEdge,
-				VideoOptionsFrame.Border.BottomEdge,
-				VideoOptionsFrame.Border.LeftEdge,
-				VideoOptionsFrame.Border.TopRightCorner,
-				VideoOptionsFrame.Border.TopLeftCorner,
-				VideoOptionsFrame.Border.BottomLeftCorner,
-				VideoOptionsFrame.Border.BottomRightCorner,
-				VideoOptionsFrame.Header.RightBG,
-				VideoOptionsFrame.Header.CenterBG,
-			VideoOptionsFrame.Header.LeftBG, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
-				end
-			end	
+			if (GetWoWVersion <= 90500) then
+				for i, v in pairs({	
+					VideoOptionsFrame.Border.TopEdge,
+					VideoOptionsFrame.Border.RightEdge,
+					VideoOptionsFrame.Border.BottomEdge,
+					VideoOptionsFrame.Border.LeftEdge,
+					VideoOptionsFrame.Border.TopRightCorner,
+					VideoOptionsFrame.Border.TopLeftCorner,
+					VideoOptionsFrame.Border.BottomLeftCorner,
+					VideoOptionsFrame.Border.BottomRightCorner,
+					VideoOptionsFrame.Header.RightBG,
+					VideoOptionsFrame.Header.CenterBG,
+				VideoOptionsFrame.Header.LeftBG, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
+				end	
+			end
 			-- InterfaceOptions (Interface)
-			for i, v in pairs({	
-				InterfaceOptionsFrame.Border.TopEdge,
-				InterfaceOptionsFrame.Border.RightEdge,
-				InterfaceOptionsFrame.Border.BottomEdge,
-				InterfaceOptionsFrame.Border.LeftEdge,
-				InterfaceOptionsFrame.Border.TopRightCorner,
-				InterfaceOptionsFrame.Border.TopLeftCorner,
-				InterfaceOptionsFrame.Border.BottomLeftCorner,
-				InterfaceOptionsFrame.Border.BottomRightCorner,
-				InterfaceOptionsFrame.Header.RightBG,
-				InterfaceOptionsFrame.Header.CenterBG,
-			InterfaceOptionsFrame.Header.LeftBG, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
+			if (GetWoWVersion <= 90500) then
+				for i, v in pairs({	
+					InterfaceOptionsFrame.Border.TopEdge,
+					InterfaceOptionsFrame.Border.RightEdge,
+					InterfaceOptionsFrame.Border.BottomEdge,
+					InterfaceOptionsFrame.Border.LeftEdge,
+					InterfaceOptionsFrame.Border.TopRightCorner,
+					InterfaceOptionsFrame.Border.TopLeftCorner,
+					InterfaceOptionsFrame.Border.BottomLeftCorner,
+					InterfaceOptionsFrame.Border.BottomRightCorner,
+					InterfaceOptionsFrame.Header.RightBG,
+					InterfaceOptionsFrame.Header.CenterBG,
+				InterfaceOptionsFrame.Header.LeftBG, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
 				end
 			end
 			-- AddonsList (Addons)
@@ -1450,22 +1459,24 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- AudioOptionsFrame
-			for i, v in pairs({
-				AudioOptionsFrame.Header.CenterBG,
-				AudioOptionsFrame.Header.LeftBG,
-				AudioOptionsFrame.Header.RightBG,
-				AudioOptionsFrame.Border.TopEdge,
-				AudioOptionsFrame.Border.RightEdge,
-				AudioOptionsFrame.Border.BottomEdge,
-				AudioOptionsFrame.Border.LeftEdge,
-				AudioOptionsFrame.Border.TopRightCorner,
-				AudioOptionsFrame.Border.TopLeftCorner,
-				AudioOptionsFrame.Border.BottomLeftCorner,
-			AudioOptionsFrame.Border.BottomRightCorner, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
+			if (GetWoWVersion <= 90500) then
+				for i, v in pairs({
+					AudioOptionsFrame.Header.CenterBG,
+					AudioOptionsFrame.Header.LeftBG,
+					AudioOptionsFrame.Header.RightBG,
+					AudioOptionsFrame.Border.TopEdge,
+					AudioOptionsFrame.Border.RightEdge,
+					AudioOptionsFrame.Border.BottomEdge,
+					AudioOptionsFrame.Border.LeftEdge,
+					AudioOptionsFrame.Border.TopRightCorner,
+					AudioOptionsFrame.Border.TopLeftCorner,
+					AudioOptionsFrame.Border.BottomLeftCorner,
+				AudioOptionsFrame.Border.BottomRightCorner, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
 				end
 			end
 			-- ClubFinderReportFrame
@@ -1506,22 +1517,24 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- FolderPicker
-			for i, v in pairs({
-				FolderPicker.Header.CenterBG,
-				FolderPicker.Header.LeftBG,
-				FolderPicker.Header.RightBG,
-				FolderPicker.Border.TopEdge,
-				FolderPicker.Border.RightEdge,
-				FolderPicker.Border.BottomEdge,
-				FolderPicker.Border.LeftEdge,
-				FolderPicker.Border.TopRightCorner,
-				FolderPicker.Border.TopLeftCorner,
-				FolderPicker.Border.BottomLeftCorner,
-			FolderPicker.Border.BottomRightCorner, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
+			if (GetWoWVersion <= 90500) then
+				for i, v in pairs({
+					FolderPicker.Header.CenterBG,
+					FolderPicker.Header.LeftBG,
+					FolderPicker.Header.RightBG,
+					FolderPicker.Border.TopEdge,
+					FolderPicker.Border.RightEdge,
+					FolderPicker.Border.BottomEdge,
+					FolderPicker.Border.LeftEdge,
+					FolderPicker.Border.TopRightCorner,
+					FolderPicker.Border.TopLeftCorner,
+					FolderPicker.Border.BottomLeftCorner,
+				FolderPicker.Border.BottomRightCorner, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
 				end
 			end
 			-- LootHistoryFrame

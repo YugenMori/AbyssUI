@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- Configuration page for AbyssUI
 --------------------------------------------------------------
@@ -90,6 +90,15 @@ local function AbyssUI_ApplyFonts(self)
   self:SetShadowColor(45/255, 45/255, 45/255)
   self:SetShadowOffset(0, 0)
 end
+-- StatusBarFill
+local function AbyssUI_StatusBarFill()
+  --if (GetWoWVersion >= 90500) then
+    TargetFrameHealthBar:SetReverseFill(true)
+    if (GetWoWVersion >= 20502) then
+      FocusFrameHealthBar:SetReverseFill(true)
+    end
+  --end
+end
 --------------------------------------------------------------
 --------------------------------------------------------------
 local _G = _G
@@ -106,10 +115,14 @@ local function InitSettings()
   -- Add the panel to the Interface Options
   InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
   --Child Panels
-  AbyssUI_Config.childpanel1 = CreateFrame("Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel1.name = L["Info Panel"]
-  AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
+  --[[
+  if (GetWoWVersion <= 90500) then
+    AbyssUI_Config.childpanel1 = CreateFrame("Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
+    AbyssUI_Config.childpanel1.name = L["Info Panel"]
+    AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
+  end
+  --]]
   --
   AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
   AbyssUI_Config.childpanel2.name = L["Hide Elements"]
@@ -141,10 +154,14 @@ local function InitSettings()
   AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
   --
-  AbyssUI_Config.childpanel8 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel8.name = L["Scale & Frame Size"]
-  AbyssUI_Config.childpanel8.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
+  --[[
+  if (GetWoWVersion <= 90500) then
+    AbyssUI_Config.childpanel8 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
+    AbyssUI_Config.childpanel8.name = L["Scale & Frame Size"]
+    AbyssUI_Config.childpanel8.parent = AbyssUI_Config.panel.name
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
+  end
+  --]]
   --
   AbyssUI_Config.childpanel9 = CreateFrame("Frame", "$parentConfigChild_Patreon", AbyssUI_Config.panel)
   AbyssUI_Config.childpanel9.name = "|cfff2dc7f"..L["Donators"].."|r"
@@ -187,15 +204,19 @@ local function InitSettings()
   " Those options are set by default if you choose recommended settings.\n"..
   "Check the options by clicking in the (+) button on the left."])
   -- Panel 01 (Info Panel)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
-  Frame:SetWidth(600)
-  Frame:SetHeight(40)
-  Frame:SetScale(1.5)
-  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  Frame:SetPoint("CENTER")
-  Frame:SetAllPoints()
-  Frame:SetText(L["Info Panel"])
+  --[[
+  if (GetWoWVersion <= 90500) then
+    local Frame = CreateFrame("Frame","$parentFrameButtonPanel01", AbyssUI_Config.childpanel1)
+    Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "TOP", 0, -20)
+    Frame:SetWidth(600)
+    Frame:SetHeight(40)
+    Frame:SetScale(1.5)
+    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    Frame:SetPoint("CENTER")
+    Frame:SetAllPoints()
+    Frame:SetText(L["Info Panel"])
+  end
+  --]]
   -- Panel 02 (HideElements)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
@@ -324,14 +345,18 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText("Classic & BCC")
   -- Panel 08 (Scale)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel08", AbyssUI_Config.childpanel8)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel8, "TOP", 0, -20)
-  Frame:SetWidth(600)
-  Frame:SetHeight(40)
-  Frame:SetScale(1.5)
-  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  Frame:SetAllPoints()
-  Frame:SetText(L["Scale & Frame Size"])
+  --[[
+  if (GetWoWVersion <= 90500) then
+    local Frame = CreateFrame("Frame","$parentFrameButtonPanel08", AbyssUI_Config.childpanel8)
+    Frame:SetPoint("CENTER", AbyssUI_Config.childpanel8, "TOP", 0, -20)
+    Frame:SetWidth(600)
+    Frame:SetHeight(40)
+    Frame:SetScale(1.5)
+    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    Frame:SetAllPoints()
+    Frame:SetText(L["Scale & Frame Size"])
+  end
+  --]]
   -- Panel 09 (Patreon)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel09", AbyssUI_Config.childpanel9)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel9, "TOP", 0, -20)
@@ -619,13 +644,13 @@ local function InitSettings()
       AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"])
       AbyssUI_EditBoxPatreon_Frame:Show()
     end)
-    for i, v in pairs({
-      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Right,
-      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Middle,
-      InterfaceOptionsFramePanelContainerAbyssUI_ConfigBuyCoffeeButton.Left,
-    }) do
-      v:SetVertexColor(232/255, 201/255, 121/255)
-    end
+    --for i, v in pairs({
+      --TopAbyssUI_ConfigBuyCoffeeButton.Right,
+      --TopAbyssUI_ConfigBuyCoffeeButton.Middle,
+      --TopAbyssUI_ConfigBuyCoffeeButton.Left,
+    --}) do
+      --v:SetVertexColor(232/255, 201/255, 121/255)
+    --end
   end)
   -- Github
   local f = CreateFrame("Frame", nil)
@@ -655,208 +680,184 @@ local function InitSettings()
   ----------------------------- AbyssUI Info Panel -------------------------------
   --- Images ---
   -- SubText
-  local InfoPanelSubText = CreateFrame("Frame","$parentInfoPanelSubText", AbyssUI_Config.childpanel1)
-  InfoPanelSubText:SetPoint("TOPLEFT", 20, -40)
-  InfoPanelSubText:SetHeight(60)
-  InfoPanelSubText:SetWidth(600)
-  InfoPanelSubText:SetScale(1)
-  InfoPanelSubText = InfoPanelSubText:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  InfoPanelSubText:SetPoint("LEFT")
-  InfoPanelSubText:SetAllPoints()
-  InfoPanelSubText:SetText(L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
-  "These addons are verify to especially work with AbyssUI without any conflict or problem."..
-  "Click on the image so you can get the respective link. Don't forget to check then out!"])
-
-  --- Frames and Boxes ---
-  -- AbyssUI_TexturePack
-  local AbyssUI_TexturePack = CreateFrame("Frame", "$parentAbyssUI_TexturePack", AbyssUI_Config.childpanel1)
-  AbyssUI_TexturePack:SetFrameStrata("HIGH")
-  AbyssUI_TexturePack:SetHeight(256)
-  AbyssUI_TexturePack:SetWidth(256)
-  AbyssUI_TexturePack:SetPoint("TOP", 0, -120)
-  local t = AbyssUI_TexturePack:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\AbyssUITexturePackLogo2x2")
-  t:SetAllPoints(AbyssUI_TexturePack)
-  -- Check Icon
-  local CheckIcon_TexturePack = CreateFrame("Frame", "$parentCheckIcon_TexturePack", AbyssUI_TexturePack)
-  CheckIcon_TexturePack:SetFrameStrata("HIGH")
-  CheckIcon_TexturePack:SetHeight(32)
-  CheckIcon_TexturePack:SetWidth(32)
-  CheckIcon_TexturePack:SetPoint("TOPRIGHT", 5, 10)
-  local t = CheckIcon_TexturePack:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
-  t:SetAllPoints(CheckIcon_TexturePack)
-  CheckIcon_TexturePack:Hide()
-  -- Latest update
   --[[
-  local LatestUpdate_TexturePack = CreateFrame("Frame", "$parentLatestUpdate_TexturePack", AbyssUI_TexturePack)
-  LatestUpdate_TexturePack:RegisterEvent("CHAT_MSG_ADDON")
-  LatestUpdate_TexturePack:SetFrameStrata("HIGH")
-  LatestUpdate_TexturePack:SetPoint("BOTTOM", 0, 0)
-  LatestUpdate_TexturePack:SetHeight(32)
-  LatestUpdate_TexturePack:SetWidth(128)
-  LatestUpdate_TexturePack.text = LatestUpdate_TexturePack.text or LatestUpdate_TexturePack:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-  LatestUpdate_TexturePack.text:SetFont(globalFont, 16)
-  LatestUpdate_TexturePack.text:SetPoint("CENTER", LatestUpdate_TexturePack, "CENTER", 0, 20)
-  LatestUpdate_TexturePack:SetScript("OnEvent", function(self, event, prefix, addonVersion, channel, name)
-    if (prefix == "AbyssUI_Version") then
-      local textureVersion = addonVersion
-      if (textureVersion ~= nil and textureVersion == texturepackCheck) then
-        LatestUpdate_TexturePack.text:SetText(textureVersion.." "..texturepackDate)
-      else
-        LatestUpdate_TexturePack.text:SetText("|cffFF0000"..versionString.." "..versionIncopatible.."\n"
-          ..latestString..":\n"..texturepackCheck.." "..texturepackDate.."|r")
-      end
-    else
-      return nil
-    end
-  end)
-  LatestUpdate_TexturePack.text:SetTextColor(230/255, 204/255, 128/255)
-  LatestUpdate_TexturePack.text:SetShadowColor(0, 0, 0)
-  LatestUpdate_TexturePack.text:SetShadowOffset(1, -1)
+  if (GetWoWVersion <= 90500) then
+    local InfoPanelSubText = CreateFrame("Frame","$parentInfoPanelSubText", AbyssUI_Config.childpanel1)
+    InfoPanelSubText:SetPoint("TOPLEFT", 20, -40)
+    InfoPanelSubText:SetHeight(60)
+    InfoPanelSubText:SetWidth(600)
+    InfoPanelSubText:SetScale(1)
+    InfoPanelSubText = InfoPanelSubText:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    InfoPanelSubText:SetPoint("LEFT")
+    InfoPanelSubText:SetAllPoints()
+    InfoPanelSubText:SetText(L["In this page you can find links to some other AddOns/Packs that make AbyssUI even better." ..
+    "These addons are verify to especially work with AbyssUI without any conflict or problem."..
+    "Click on the image so you can get the respective link. Don't forget to check then out!"])
+
+    --- Frames and Boxes ---
+    -- AbyssUI_TexturePack
+    local AbyssUI_TexturePack = CreateFrame("Frame", "$parentAbyssUI_TexturePack", AbyssUI_Config.childpanel1)
+    AbyssUI_TexturePack:SetFrameStrata("HIGH")
+    AbyssUI_TexturePack:SetHeight(256)
+    AbyssUI_TexturePack:SetWidth(256)
+    AbyssUI_TexturePack:SetPoint("TOP", 0, -120)
+    local t = AbyssUI_TexturePack:CreateFrame(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\AbyssUITexturePackLogo2x2")
+    t:SetAllPoints(AbyssUI_TexturePack)
+    -- Check Icon
+    local CheckIcon_TexturePack = CreateFrame("Frame", "$parentCheckIcon_TexturePack", AbyssUI_TexturePack)
+    CheckIcon_TexturePack:SetFrameStrata("HIGH")
+    CheckIcon_TexturePack:SetHeight(32)
+    CheckIcon_TexturePack:SetWidth(32)
+    CheckIcon_TexturePack:SetPoint("TOPRIGHT", 5, 10)
+    local t = CheckIcon_TexturePack:CreateFrame(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
+    t:SetAllPoints(CheckIcon_TexturePack)
+    CheckIcon_TexturePack:Hide()
+    -- Download Icon
+    local DownloadIcon_TexturePack = CreateFrame("Frame", "$parentDownloadIcon_TexturePack", AbyssUI_TexturePack)
+    DownloadIcon_TexturePack:SetFrameStrata("HIGH")
+    DownloadIcon_TexturePack:SetHeight(32)
+    DownloadIcon_TexturePack:SetWidth(128)
+    DownloadIcon_TexturePack:SetPoint("TOPRIGHT", 20, 35)
+    local t = DownloadIcon_TexturePack:CreateFrame(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\downloadIcon")
+    t:SetAllPoints(DownloadIcon_TexturePack)
+    DownloadIcon_TexturePack:Hide()
+    -- OnClick
+    AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
+        if (button == 'LeftButton') then 
+         AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"])
+         AbyssUI_EditBoxPatreon_Frame:Show()
+        end
+    end)
+    -- Glass
+    local Glass = CreateFrame("Frame", "$parentGlass", AbyssUI_Config.childpanel1)
+    Glass:SetFrameStrata("HIGH")
+    Glass:SetHeight(128)
+    Glass:SetWidth(128)
+    Glass:SetPoint("BOTTOMLEFT", 20, 20)
+    local t = Glass:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Glass")
+    t:SetAllPoints(Glass)
+    -- Check Icon
+    local CheckIcon_Glass = CreateFrame("Frame", "$parentCheckIcon_Glass", Glass)
+    CheckIcon_Glass:SetFrameStrata("HIGH")
+    CheckIcon_Glass:SetHeight(32)
+    CheckIcon_Glass:SetWidth(32)
+    CheckIcon_Glass:SetPoint("TOPRIGHT", 5, 10)
+    local t = CheckIcon_Glass:CreateTexture(nil, "HIGH", nil, nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
+    t:SetAllPoints(CheckIcon_Glass)
+    CheckIcon_Glass:Hide()
+    -- OnClick
+    Glass:SetScript("OnMouseDown", function (self, button)
+        if (button == 'LeftButton') then
+          AbyssUI_EditBox:SetText("curseforge.com/wow/addons/glass")
+          AbyssUI_EditBox_Frame:Show()
+        end
+    end)
+    -- Kui Nameplates
+    local KuiNameplates = CreateFrame("Frame", "$parentKuiNameplates", AbyssUI_Config.childpanel1)
+    KuiNameplates:SetFrameStrata("HIGH")
+    KuiNameplates:SetHeight(128)
+    KuiNameplates:SetWidth(128)
+    KuiNameplates:SetPoint("BOTTOM", -80, 20)
+    local t = KuiNameplates:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\KuiNameplates")
+    t:SetAllPoints(KuiNameplates)
+    -- Check Icon
+    local CheckIcon_Kui = CreateFrame("Frame", "$parentCheckIcon_Kui", KuiNameplates)
+    CheckIcon_Kui:SetFrameStrata("HIGH")
+    CheckIcon_Kui:SetHeight(32)
+    CheckIcon_Kui:SetWidth(32)
+    CheckIcon_Kui:SetPoint("TOPRIGHT", 5, 10)
+    local t = CheckIcon_Kui:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
+    t:SetAllPoints(CheckIcon_Kui)
+    CheckIcon_Kui:Hide()
+    -- OnClick
+    KuiNameplates:SetScript("OnMouseDown", function (self, button)
+        if (button == 'LeftButton') then
+          AbyssUI_EditBox:SetText("curseforge.com/wow/addons/Kuinameplates")
+          AbyssUI_EditBox_Frame:Show()
+        end
+    end)
+    -- Bagnon
+    local Bagnon = CreateFrame("Frame", "$parentBagnon", AbyssUI_Config.childpanel1)
+    Bagnon:SetFrameStrata("HIGH")
+    Bagnon:SetHeight(128)
+    Bagnon:SetWidth(128)
+    Bagnon:SetPoint("BOTTOM", 80, 20)
+    local t = Bagnon:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Bagnon")
+    t:SetAllPoints(Bagnon)
+    -- Check Icon
+    local CheckIcon_Bagnon = CreateFrame("Frame", "$parentCheckIcon_Bagnon", Bagnon)
+    CheckIcon_Bagnon:SetFrameStrata("HIGH")
+    CheckIcon_Bagnon:SetHeight(32)
+    CheckIcon_Bagnon:SetWidth(32)
+    CheckIcon_Bagnon:SetPoint("TOPRIGHT", 5, 10)
+    local t = CheckIcon_Bagnon:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
+    t:SetAllPoints(CheckIcon_Bagnon)
+    CheckIcon_Bagnon:Hide()
+    -- OnClick
+    Bagnon:SetScript("OnMouseDown", function (self, button)
+        if (button == 'LeftButton') then
+          AbyssUI_EditBox:SetText("curseforge.com/wow/addons/Bagnon")
+          AbyssUI_EditBox_Frame:Show()
+        end
+    end)
+    -- DBM
+    local DBM = CreateFrame("Frame", "$parentDBM", AbyssUI_Config.childpanel1)
+    DBM:SetFrameStrata("HIGH")
+    DBM:SetHeight(128)
+    DBM:SetWidth(128)
+    DBM:SetPoint("BOTTOMRIGHT", -20, 20)
+    local t = DBM:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\DBM")
+    t:SetAllPoints(DBM)
+    -- Check Icon
+    local CheckIcon_DBM = CreateFrame("Frame", "$parentCheckIcon_DBM", DBM)
+    CheckIcon_DBM:SetFrameStrata("HIGH")
+    CheckIcon_DBM:SetHeight(32)
+    CheckIcon_DBM:SetWidth(32)
+    CheckIcon_DBM:SetPoint("TOPRIGHT", 5, 10)
+    local t = CheckIcon_DBM:CreateTexture(nil, "HIGH", nil)
+    t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
+    t:SetAllPoints(CheckIcon_DBM)
+    CheckIcon_DBM:Hide()
+    -- OnClick
+    DBM:SetScript("OnMouseDown", function (self, button)
+        if (button == 'LeftButton') then
+          AbyssUI_EditBox:SetText("curseforge.com/wow/addons/deadly-boss-mods")
+          AbyssUI_EditBox_Frame:Show()
+        end
+    end)
+    -- CheckFunction
+    local Check = CreateFrame("Frame")
+    Check:RegisterEvent("PLAYER_ENTERING_WORLD")
+    Check:SetScript("OnEvent", function(self, event, arg1)
+    local glass   = IsAddOnLoaded("Glass")
+    local kui     = IsAddOnLoaded("Kui_Nameplates")
+    local bagnon  = IsAddOnLoaded("Bagnon")
+    local dbm     = IsAddOnLoaded("DBM-Core")
+        if (glass == true) then
+          CheckIcon_Glass:Show()
+        end
+        if (kui == true) then
+          CheckIcon_Kui:Show()
+        end
+        if (bagnon == true) then
+          CheckIcon_Bagnon:Show()
+        end
+        if (dbm == true) then
+          CheckIcon_DBM:Show()
+        end
+    end)
+  end
   --]]
-  -- Download Icon
-  local DownloadIcon_TexturePack = CreateFrame("Frame", "$parentDownloadIcon_TexturePack", AbyssUI_TexturePack)
-  DownloadIcon_TexturePack:SetFrameStrata("HIGH")
-  DownloadIcon_TexturePack:SetHeight(32)
-  DownloadIcon_TexturePack:SetWidth(128)
-  DownloadIcon_TexturePack:SetPoint("TOPRIGHT", 20, 35)
-  local t = DownloadIcon_TexturePack:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\downloadIcon")
-  t:SetAllPoints(DownloadIcon_TexturePack)
-  DownloadIcon_TexturePack:Hide()
-  -- OnClick
-  AbyssUI_TexturePack:SetScript("OnMouseDown", function (self, button)
-      if (button == 'LeftButton') then 
-       AbyssUI_EditBoxPatreon:SetText(L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"])
-       AbyssUI_EditBoxPatreon_Frame:Show()
-      end
-  end)
-  -- Glass
-  local Glass = CreateFrame("Frame", "$parentGlass", AbyssUI_Config.childpanel1)
-  Glass:SetFrameStrata("HIGH")
-  Glass:SetHeight(128)
-  Glass:SetWidth(128)
-  Glass:SetPoint("BOTTOMLEFT", 20, 20)
-  local t = Glass:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Glass")
-  t:SetAllPoints(Glass)
-  -- Check Icon
-  local CheckIcon_Glass = CreateFrame("Frame", "$parentCheckIcon_Glass", Glass)
-  CheckIcon_Glass:SetFrameStrata("HIGH")
-  CheckIcon_Glass:SetHeight(32)
-  CheckIcon_Glass:SetWidth(32)
-  CheckIcon_Glass:SetPoint("TOPRIGHT", 5, 10)
-  local t = CheckIcon_Glass:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
-  t:SetAllPoints(CheckIcon_Glass)
-  CheckIcon_Glass:Hide()
-  -- OnClick
-  Glass:SetScript("OnMouseDown", function (self, button)
-      if (button == 'LeftButton') then
-        AbyssUI_EditBox:SetText("curseforge.com/wow/addons/glass")
-        AbyssUI_EditBox_Frame:Show()
-      end
-  end)
-  -- Kui Nameplates
-  local KuiNameplates = CreateFrame("Frame", "$parentKuiNameplates", AbyssUI_Config.childpanel1)
-  KuiNameplates:SetFrameStrata("HIGH")
-  KuiNameplates:SetHeight(128)
-  KuiNameplates:SetWidth(128)
-  KuiNameplates:SetPoint("BOTTOM", -80, 20)
-  local t = KuiNameplates:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\KuiNameplates")
-  t:SetAllPoints(KuiNameplates)
-  -- Check Icon
-  local CheckIcon_Kui = CreateFrame("Frame", "$parentCheckIcon_Kui", KuiNameplates)
-  CheckIcon_Kui:SetFrameStrata("HIGH")
-  CheckIcon_Kui:SetHeight(32)
-  CheckIcon_Kui:SetWidth(32)
-  CheckIcon_Kui:SetPoint("TOPRIGHT", 5, 10)
-  local t = CheckIcon_Kui:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
-  t:SetAllPoints(CheckIcon_Kui)
-  CheckIcon_Kui:Hide()
-  -- OnClick
-  KuiNameplates:SetScript("OnMouseDown", function (self, button)
-      if (button == 'LeftButton') then
-        AbyssUI_EditBox:SetText("curseforge.com/wow/addons/Kuinameplates")
-        AbyssUI_EditBox_Frame:Show()
-      end
-  end)
-  -- Bagnon
-  local Bagnon = CreateFrame("Frame", "$parentBagnon", AbyssUI_Config.childpanel1)
-  Bagnon:SetFrameStrata("HIGH")
-  Bagnon:SetHeight(128)
-  Bagnon:SetWidth(128)
-  Bagnon:SetPoint("BOTTOM", 80, 20)
-  local t = Bagnon:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Bagnon")
-  t:SetAllPoints(Bagnon)
-  -- Check Icon
-  local CheckIcon_Bagnon = CreateFrame("Frame", "$parentCheckIcon_Bagnon", Bagnon)
-  CheckIcon_Bagnon:SetFrameStrata("HIGH")
-  CheckIcon_Bagnon:SetHeight(32)
-  CheckIcon_Bagnon:SetWidth(32)
-  CheckIcon_Bagnon:SetPoint("TOPRIGHT", 5, 10)
-  local t = CheckIcon_Bagnon:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
-  t:SetAllPoints(CheckIcon_Bagnon)
-  CheckIcon_Bagnon:Hide()
-  -- OnClick
-  Bagnon:SetScript("OnMouseDown", function (self, button)
-      if (button == 'LeftButton') then
-        AbyssUI_EditBox:SetText("curseforge.com/wow/addons/Bagnon")
-        AbyssUI_EditBox_Frame:Show()
-      end
-  end)
-  -- DBM
-  local DBM = CreateFrame("Frame", "$parentDBM", AbyssUI_Config.childpanel1)
-  DBM:SetFrameStrata("HIGH")
-  DBM:SetHeight(128)
-  DBM:SetWidth(128)
-  DBM:SetPoint("BOTTOMRIGHT", -20, 20)
-  local t = DBM:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\DBM")
-  t:SetAllPoints(DBM)
-  -- Check Icon
-  local CheckIcon_DBM = CreateFrame("Frame", "$parentCheckIcon_DBM", DBM)
-  CheckIcon_DBM:SetFrameStrata("HIGH")
-  CheckIcon_DBM:SetHeight(32)
-  CheckIcon_DBM:SetWidth(32)
-  CheckIcon_DBM:SetPoint("TOPRIGHT", 5, 10)
-  local t = CheckIcon_DBM:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\checkIcon")
-  t:SetAllPoints(CheckIcon_DBM)
-  CheckIcon_DBM:Hide()
-  -- OnClick
-  DBM:SetScript("OnMouseDown", function (self, button)
-      if (button == 'LeftButton') then
-        AbyssUI_EditBox:SetText("curseforge.com/wow/addons/deadly-boss-mods")
-        AbyssUI_EditBox_Frame:Show()
-      end
-  end)
-  -- CheckFunction
-  local Check = CreateFrame("Frame")
-  Check:RegisterEvent("PLAYER_ENTERING_WORLD")
-  Check:SetScript("OnEvent", function(self, event, arg1)
-  local glass   = IsAddOnLoaded("Glass")
-  local kui     = IsAddOnLoaded("Kui_Nameplates")
-  local bagnon  = IsAddOnLoaded("Bagnon")
-  local dbm     = IsAddOnLoaded("DBM-Core")
-      if (glass == true) then
-        CheckIcon_Glass:Show()
-      end
-      if (kui == true) then
-        CheckIcon_Kui:Show()
-      end
-      if (bagnon == true) then
-        CheckIcon_Bagnon:Show()
-      end
-      if (dbm == true) then
-        CheckIcon_DBM:Show()
-      end
-  end)
 end
 -- End
 ------------------------------- Hide Elements ---------------------------------
@@ -952,29 +953,7 @@ local function HideElementsInit()
   -- OnClick Function
   Gryphons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-    if (GetWoWVersion > 30600) then
-      if AbyssUIAddonSettings.HideGryphons == true then
-        MainMenuBarArtFrame.RightEndCap:Hide()
-        MainMenuBarArtFrame.LeftEndCap:Hide()
-      else
-        MainMenuBarArtFrame.RightEndCap:Show()
-        MainMenuBarArtFrame.LeftEndCap:Show()
-      end
-    else
-      if AbyssUIAddonSettings.HideGryphons == true then
-        MainMenuBarLeftEndCap:Hide()
-        MainMenuBarRightEndCap:Hide()
-      else
-        MainMenuBarLeftEndCap:Show()
-        MainMenuBarRightEndCap:Show()
-      end
-    end
-  end)
-  -- After Login/Reload
-  Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-  Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 30600) then
+if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.HideGryphons == true then
           MainMenuBarArtFrame.RightEndCap:Hide()
           MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -983,12 +962,76 @@ local function HideElementsInit()
           MainMenuBarArtFrame.LeftEndCap:Show()
         end
       else
+        if (GetWoWVersion <= 90500) then
+          if AbyssUIAddonSettings.HideGryphons == true then
+            MainMenuBarLeftEndCap:Hide()
+            MainMenuBarRightEndCap:Hide()
+          else
+            MainMenuBarLeftEndCap:Show()
+            MainMenuBarRightEndCap:Show()
+          end
+        end
+      end
+      if (GetWoWVersion >= 90500) then
         if AbyssUIAddonSettings.HideGryphons == true then
-          MainMenuBarLeftEndCap:Hide()
-          MainMenuBarRightEndCap:Hide()
+          MainMenuBar.EndCaps.RightEndCap:Hide()
+          MainMenuBar.EndCaps.LeftEndCap:Hide()
         else
-          MainMenuBarLeftEndCap:Show()
-          MainMenuBarRightEndCap:Show()
+          MainMenuBar.EndCaps.RightEndCap:Show()
+          MainMenuBar.EndCaps.LeftEndCap:Show()
+        end
+      else
+        if (GetWoWVersion >= 90500) then
+          if AbyssUIAddonSettings.HideGryphons == true then
+            MainMenuBar.EndCaps.LeftEndCap:Hide()
+            MainMenuBar.EndCaps.RightEndCap:Hide()
+          else
+            MainMenuBar.EndCaps.LeftEndCap:Show()
+            MainMenuBar.EndCaps.RightEndCap:Show()
+          end
+        end
+      end
+  end)
+  -- After Login/Reload
+  Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
+        if AbyssUIAddonSettings.HideGryphons == true then
+          MainMenuBarArtFrame.RightEndCap:Hide()
+          MainMenuBarArtFrame.LeftEndCap:Hide()
+        else
+          MainMenuBarArtFrame.RightEndCap:Show()
+          MainMenuBarArtFrame.LeftEndCap:Show()
+        end
+      else
+        if (GetWoWVersion <= 90500) then
+          if AbyssUIAddonSettings.HideGryphons == true then
+            MainMenuBarLeftEndCap:Hide()
+            MainMenuBarRightEndCap:Hide()
+          else
+            MainMenuBarLeftEndCap:Show()
+            MainMenuBarRightEndCap:Show()
+          end
+        end
+      end
+      if (GetWoWVersion >= 90500) then
+        if AbyssUIAddonSettings.HideGryphons == true then
+          MainMenuBar.EndCaps.RightEndCap:Hide()
+          MainMenuBar.EndCaps.LeftEndCap:Hide()
+        else
+          MainMenuBar.EndCaps.RightEndCap:Show()
+          MainMenuBar.EndCaps.LeftEndCap:Show()
+        end
+      else
+        if (GetWoWVersion >= 90500) then
+          if AbyssUIAddonSettings.HideGryphons == true then
+            MainMenuBar.EndCaps.LeftEndCap:Hide()
+            MainMenuBar.EndCaps.RightEndCap:Hide()
+          else
+            MainMenuBar.EndCaps.LeftEndCap:Show()
+            MainMenuBar.EndCaps.RightEndCap:Show()
+          end
         end
       end
     end
@@ -1187,7 +1230,7 @@ local function HideElementsInit()
   HideStanceBar_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
      if (AbyssUIAddonSettings.HideStanceBar == true) then
-       StanceBarFrame:SetAlpha(0)
+       StanceBar:SetAlpha(0)
      else
        return nil
      end
@@ -1198,7 +1241,7 @@ local function HideElementsInit()
     if (event == "PLAYER_ENTERING_WORLD") then
       if AbyssUIAddonSettings.HideStanceBar == true then
         C_Timer.After(0.5, function()
-          StanceBarFrame:SetAlpha(0)
+          StanceBar:SetAlpha(0)
         end)
       end
     end
@@ -1458,7 +1501,7 @@ local function HideElementsInit()
   -- After Login/Reload
   HideGroupFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideGroupFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
+    if (event == "PLAYER_ENTERING_WORLD" and GetWoWVersion <= 90500) then
       if (AbyssUIAddonSettings.HideGroupFrame == true) then
         PlayerFrameGroupIndicator:SetAlpha(0)
       else
@@ -2527,149 +2570,153 @@ local function ClassicBCC()
   PSINFOScale_CheckButton:SetText(L["|cffb62a25In development, more features will be added soon, so be patient.|r"])
   end
 ----------------------------------- Scale & Frame Size  -----------------------------------
+--[[
 local function ScaleFrameSize()
   -- Read tooltip --
-  local PSINFOScale_CheckButton = CreateFrame("Frame","$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel8)
-  PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel8, "BOTTOMLEFT", 10, 20)
-  PSINFOScale_CheckButton:SetWidth(600)
-  PSINFOScale_CheckButton:SetHeight(40)
-  PSINFOScale_CheckButton:SetScale(1)
-  PSINFOScale_CheckButton = PSINFOScale_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  PSINFOScale_CheckButton:SetPoint("LEFT")
-  PSINFOScale_CheckButton:SetAllPoints()
-  PSINFOScale_CheckButton:SetText(L["|cffb62a25This is a work in progress,".. 
-  " I'm still learning how it works, please report any bugs in our discord|r"])
-  -- Slider Func
-  local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
-    local slider = CreateFrame("Slider", name, parent, "OptionsSliderTemplate")
-    local editbox = CreateFrame("EditBox", "$parentEditBox", slider, "InputBoxTemplate")
-    slider:SetMinMaxValues(minVal, maxVal)
-    --slider:SetValue(1)
-    slider:SetValueStep(valStep)
-    slider.text     = _G[name.."Text"]
-    slider.text:SetText(title)
-    slider.textLow  = _G[name.."Low"]
-    slider.textHigh = _G[name.."High"]
-    slider.textLow:SetText(math.floor(minVal))
-    slider.textHigh:SetText(math.floor(maxVal))
-    slider.textLow:SetTextColor(0.4,0.4,0.4)
-    slider.textHigh:SetTextColor(0.4,0.4,0.4)
-    editbox:SetSize(50,30)
-    editbox:ClearAllPoints()
-    editbox:SetPoint("LEFT", slider, "RIGHT", 15, 0)
-    editbox:SetText(slider:GetValue())
-    editbox:SetAutoFocus(false)
-    slider:SetScript("OnValueChanged", function(self,value)
-      self.editbox:SetText(math.floor(value/valStep)/100)
-    end)
-    editbox:SetScript("OnTextChanged", function(self)
-      if tonumber(val) then
-         self:GetParent():SetValue(val)
+  if (GetWoWVersion <= 90500) then
+    local PSINFOScale_CheckButton = CreateFrame("Frame","$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel8)
+    PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel8, "BOTTOMLEFT", 10, 20)
+    PSINFOScale_CheckButton:SetWidth(600)
+    PSINFOScale_CheckButton:SetHeight(40)
+    PSINFOScale_CheckButton:SetScale(1)
+    PSINFOScale_CheckButton = PSINFOScale_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    PSINFOScale_CheckButton:SetPoint("LEFT")
+    PSINFOScale_CheckButton:SetAllPoints()
+    PSINFOScale_CheckButton:SetText(L["|cffb62a25This is a work in progress,".. 
+    " I'm still learning how it works, please report any bugs in our discord|r"])
+    -- Slider Func
+    local CreateBasicSlider = function(parent, name, title, minVal, maxVal, valStep)
+      local slider = CreateFrame("Slider", name, parent, "OptionsSliderTemplate")
+      local editbox = CreateFrame("EditBox", "$parentEditBox", slider, "InputBoxTemplate")
+      slider:SetMinMaxValues(minVal, maxVal)
+      --slider:SetValue(1)
+      slider:SetValueStep(valStep)
+      slider.text     = _G[name.."Text"]
+      slider.text:SetText(title)
+      slider.textLow  = _G[name.."Low"]
+      slider.textHigh = _G[name.."High"]
+      slider.textLow:SetText(math.floor(minVal))
+      slider.textHigh:SetText(math.floor(maxVal))
+      slider.textLow:SetTextColor(0.4,0.4,0.4)
+      slider.textHigh:SetTextColor(0.4,0.4,0.4)
+      editbox:SetSize(50,30)
+      editbox:ClearAllPoints()
+      editbox:SetPoint("LEFT", slider, "RIGHT", 15, 0)
+      editbox:SetText(slider:GetValue())
+      editbox:SetAutoFocus(false)
+      slider:SetScript("OnValueChanged", function(self,value)
+        self.editbox:SetText(math.floor(value/valStep)/100)
+      end)
+      editbox:SetScript("OnTextChanged", function(self)
+        if tonumber(val) then
+           self:GetParent():SetValue(val)
+        end
+      end)
+      editbox:SetScript("OnEnterPressed", function(self)
+        local val = self:GetText()
+        if tonumber(val) then
+           self:GetParent():SetValue(val)
+           self:ClearFocus()
+        end
+      end)
+      slider.editbox = editbox
+      return slider
+    end
+    -- Minimap
+    local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
+    AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
+    AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0) then
+        local newValue = string.format("%.2f", value)
+        if (not InCombatLockdown()) then
+          MinimapCluster:SetScale(newValue)
+          AbyssUIAddonSettings[character].Slider.MinimapSlider = newValue
+        end
       end
     end)
-    editbox:SetScript("OnEnterPressed", function(self)
-      local val = self:GetText()
-      if tonumber(val) then
-         self:GetParent():SetValue(val)
-         self:ClearFocus()
+    -- Player Frame / Target / Focus
+    local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
+    AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
+    AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0 and GetWoWVersion <= 90500) then
+        local newValue = string.format("%.2f", value)
+        if (not InCombatLockdown()) then
+          for i, v in pairs({
+            PlayerFrame,
+            TargetFrame,
+            FocusFrame,
+          }) do
+            v:SetScale(newValue)
+          end
+          AbyssUIAddonSettings[character].Slider.UnitFrameSlider = newValue
+        end
       end
     end)
-    slider.editbox = editbox
-    return slider
+    -- BuffFrame
+    local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
+    AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
+    AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0) then
+        local newValue = string.format("%.2f", value)
+        if (not InCombatLockdown()) then
+          BuffFrame:SetScale(newValue)
+          AbyssUIAddonSettings[character].Slider.BuffFrameSlider = newValue
+        end
+      end
+    end)
+    -- Party Frame
+    local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
+    AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
+    AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0) then
+        local newValue = string.format("%.2f", value)
+        if (not InCombatLockdown()) then
+          for i, v in pairs({
+            PartyMemberFrame1,
+            PartyMemberFrame2,
+            PartyMemberFrame3,
+            PartyMemberFrame4,
+          }) do
+            v:SetScale(newValue)
+          end
+          AbyssUIAddonSettings[character].Slider.PartyFrameSlider = newValue
+        end
+      end
+    end)
+    -- Raid Frame
+    local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
+    AbyssUI_RaidFrameSlider:SetPoint("TOPLEFT", 20, -200)
+    AbyssUI_RaidFrameSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0) then
+        local newValue = string.format("%.2f", value)
+        if (not InCombatLockdown()) then
+          CompactRaidFrameContainer:SetScale(newValue)
+          AbyssUIAddonSettings[character].Slider.RaidFrameSlider = newValue
+        end
+      end
+    end)
+    -- Objective Frame
+    local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
+    AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -230)
+    AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
+      if (value ~= nil and value > 0) then
+        local newValue = string.format("%.2f", value)
+        if (GetWoWVersion > 30600) then
+          if (not InCombatLockdown() and ObjectiveTrackerFrame:IsShown()) then
+            ObjectiveTrackerFrame:SetScale(newValue)
+            AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
+          end
+        else
+          if (not InCombatLockdown() and QuestWatchFrame:IsShown()) then
+            QuestWatchFrame:SetScale(newValue)
+            AbyssUIAddonSettings[character].Slider.QuestWatchFrame = newValue
+          end
+        end
+      end
+    end)
   end
-  -- Minimap
-  local AbyssUI_MinimapSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_MinimapSlider", "Minimap", 0, 2, 0.01)
-  AbyssUI_MinimapSlider:SetPoint("TOPLEFT", 20, -80)
-  AbyssUI_MinimapSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (not InCombatLockdown()) then
-        MinimapCluster:SetScale(newValue)
-        AbyssUIAddonSettings[character].Slider.MinimapSlider = newValue
-      end
-    end
-  end)
-  -- Player Frame / Target / Focus
-  local AbyssUI_UnitFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_UnitFrameSlider", "UnitFrame", 0, 2, 0.01)
-  AbyssUI_UnitFrameSlider:SetPoint("TOPLEFT", 20, -110)
-  AbyssUI_UnitFrameSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (not InCombatLockdown()) then
-        for i, v in pairs({
-          PlayerFrame,
-          TargetFrame,
-          FocusFrame,
-        }) do
-          v:SetScale(newValue)
-        end
-        AbyssUIAddonSettings[character].Slider.UnitFrameSlider = newValue
-      end
-    end
-  end)
-  -- BuffFrame
-  local AbyssUI_BuffFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_BuffFrameSlider", "BuffFrame", 0, 2, 0.01)
-  AbyssUI_BuffFrameSlider:SetPoint("TOPLEFT", 20, -140)
-  AbyssUI_BuffFrameSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (not InCombatLockdown()) then
-        BuffFrame:SetScale(newValue)
-        AbyssUIAddonSettings[character].Slider.BuffFrameSlider = newValue
-      end
-    end
-  end)
-  -- Party Frame
-  local AbyssUI_PartyFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_PartyFrameSlider", "PartyFrame", 0, 2, 0.01)
-  AbyssUI_PartyFrameSlider:SetPoint("TOPLEFT", 20, -170)
-  AbyssUI_PartyFrameSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (not InCombatLockdown()) then
-        for i, v in pairs({
-          PartyMemberFrame1,
-          PartyMemberFrame2,
-          PartyMemberFrame3,
-          PartyMemberFrame4,
-        }) do
-          v:SetScale(newValue)
-        end
-        AbyssUIAddonSettings[character].Slider.PartyFrameSlider = newValue
-      end
-    end
-  end)
-  -- Raid Frame
-  local AbyssUI_RaidFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_RaidFrameSlider", "RaidFrame", 0, 2, 0.01)
-  AbyssUI_RaidFrameSlider:SetPoint("TOPLEFT", 20, -200)
-  AbyssUI_RaidFrameSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (not InCombatLockdown()) then
-        CompactRaidFrameContainer:SetScale(newValue)
-        AbyssUIAddonSettings[character].Slider.RaidFrameSlider = newValue
-      end
-    end
-  end)
-  -- Objective Frame
-  local AbyssUI_ObjectiveFrameSlider = CreateBasicSlider(AbyssUI_Config.childpanel8, "AbyssUI_ObjectiveFrameSlider", "QuestFrame", 0, 2, 0.01)
-  AbyssUI_ObjectiveFrameSlider:SetPoint("TOPLEFT", 20, -230)
-  AbyssUI_ObjectiveFrameSlider:HookScript("OnValueChanged", function(self, value)
-    if (value ~= nil and value > 0) then
-      local newValue = string.format("%.2f", value)
-      if (GetWoWVersion > 30600) then
-        if (not InCombatLockdown() and ObjectiveTrackerFrame:IsShown()) then
-          ObjectiveTrackerFrame:SetScale(newValue)
-          AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = newValue
-        end
-      else
-        if (not InCombatLockdown() and QuestWatchFrame:IsShown()) then
-          QuestWatchFrame:SetScale(newValue)
-          AbyssUIAddonSettings[character].Slider.QuestWatchFrame = newValue
-        end
-      end
-    end
-  end)
 end
+--]]
 --End
 ----------------------------------- Patreon  -----------------------------------
 local function Patreon()
@@ -2689,9 +2736,9 @@ local function Patreon()
   AbyssUI_PatreonBronze:SetHeight(48)
   AbyssUI_PatreonBronze:SetWidth(48)
   AbyssUI_PatreonBronze:SetPoint("TOP", -200, -60)
-  local t = AbyssUI_PatreonBronze:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\BronzeIcon")
-  t:SetAllPoints(AbyssUI_PatreonBronze)
+  --local t = AbyssUI_PatreonBronze:CreateTexture(nil, "HIGH")
+  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\BronzeIcon")
+  --t:SetAllPoints(AbyssUI_PatreonBronze)
   -- text
   local PatreonBronzeText = CreateFrame("Frame","$parentPatreonBronzeText", AbyssUI_Config.childpanel9)
   PatreonBronzeText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -189, -80)
@@ -2718,9 +2765,9 @@ local function Patreon()
   AbyssUI_PatreonSilver:SetHeight(64)
   AbyssUI_PatreonSilver:SetWidth(64)
   AbyssUI_PatreonSilver:SetPoint("TOP", 0, -60)
-  local t = AbyssUI_PatreonSilver:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\SilverIcon")
-  t:SetAllPoints(AbyssUI_PatreonSilver)
+  --local t = AbyssUI_PatreonSilver:CreateTexture(nil, "HIGH")
+  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\SilverIcon")
+  --t:SetAllPoints(AbyssUI_PatreonSilver)
   -- text
   local PatreonSilverText = CreateFrame("Frame","$parentPatreonSilverText", AbyssUI_Config.childpanel9)
   PatreonSilverText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 13, -80)
@@ -2747,9 +2794,9 @@ local function Patreon()
   AbyssUI_PatreonGold:SetHeight(64)
   AbyssUI_PatreonGold:SetWidth(64)
   AbyssUI_PatreonGold:SetPoint("TOP", 200, -60)
-  local t = AbyssUI_PatreonGold:CreateTexture(nil, "HIGH")
-  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\GoldIcon")
-  t:SetAllPoints(AbyssUI_PatreonGold)
+  --local t = AbyssUI_PatreonGold:CreateTexture(nil, "HIGH")
+  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\GoldIcon")
+  --t:SetAllPoints(AbyssUI_PatreonGold)
   -- text
   local PatreonGoldText = CreateFrame("Frame","$parentPatreonGoldText", AbyssUI_Config.childpanel9)
   PatreonGoldText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 214, -80)
@@ -3135,7 +3182,7 @@ local function Stylization()
   -- Flat HealthBar --
   local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   FlatHealthBar_CheckButton:SetPoint("TOPLEFT", 400, -230)
-  FlatHealthBar_CheckButton.Text:SetText(L["Flat HealthBars"])
+  FlatHealthBar_CheckButton.Text:SetText("|cfff2dc7f"..L["Flat HealthBars"].."|r")
   local Frame = CreateFrame("Frame", nil, FlatHealthBar_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -3143,11 +3190,25 @@ local function Stylization()
   FlatHealthBar_CheckButton.Text:SetAllPoints(Frame)
   FlatHealthBar_CheckButton.tooltip = L["Make the health bar textures looks Flat"]
   FlatHealthBar_CheckButton:SetChecked(AbyssUIAddonSettings.FlatHealth)
+  addonTable.FlatHealth = FlatHealthBar_CheckButton
   -- OnClick Function
   FlatHealthBar_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.FlatHealth = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
+  -- After Login/Reload
+  --[[
+  FlatHealthBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  FlatHealthBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if (AbyssUIAddonSettings.FlatHealth == true) then
+        AbyssUIAddonSettings.FlatHealth = self:GetChecked()
+      else
+        FlatHealth_CheckButton:SetChecked(nil)
+      end
+    end
+  end)  
+  --]]
   -- AbyssUIClassCircles01_CheckButton
   local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
@@ -4364,7 +4425,7 @@ end
 -- Slider Save Values
 local function AbyssUI_SliderSaveLoad()
   C_Timer.After(0.5, function()
-    if (not InCombatLockdown()) then
+    if (not InCombatLockdown() and GetWoWVersion <= 90500) then
       for i, v in pairs({
        PlayerFrame,
        TargetFrame,
@@ -4435,12 +4496,13 @@ f:SetScript("OnEvent", function(self, event, ...)
   Miscellaneous()
   TweaksExtra()
   ClassicBCC()
-  ScaleFrameSize()
+  --ScaleFrameSize()
   Patreon()
   ThanksTraslations()
   FAQ()
   Stylization()
   AbyssUI_SliderSaveLoad()
+  AbyssUI_StatusBarFill()
 end)
 --------------------------------------------------------------
 -- End

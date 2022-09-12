@@ -178,7 +178,7 @@ local function colour(statusbar, unit)
 		if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true and not AbyssUIAddonSettings.GreenHealth) then
 			_, class = UnitClass(unit)
 			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-			statusbar:SetStatusBarColor(c.r, c.g, c.b)
+			statusbar:SetStatusBarColor(c.r, c.g, c.b, c.a)
 			--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
 		else 
 			return nil
@@ -203,14 +203,16 @@ local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
 	if (AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
 		if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
-			if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-				c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-				local bg = PlayerFrame:CreateTexture()
-				bg:SetPoint("TOPLEFT", PlayerFrameBackground)
-				bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
-				bg:SetTexture(TargetFrameNameBackground:GetTexture())
-				bg:SetVertexColor(c.r,c.g,c.b)
-				PlayerFrame.bg = true
+			if (GetWoWVersion <= 90500) then
+				if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+					c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+					local bg = PlayerFrame:CreateTexture()
+					bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+					bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+					bg:SetTexture(TargetFrameNameBackground:GetTexture())
+					bg:SetVertexColor(c.r,c.g,c.b)
+					PlayerFrame.bg = true
+				end
 			end
 			if UnitIsPlayer("target") then
 				c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
@@ -235,24 +237,28 @@ local function eventHandler(self, event, ...)
 end
 
 frame:SetScript("OnEvent", eventHandler)
-for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackground, FocusFrameNameBackground, }) do
-	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
+if (GetWoWVersion <= 90500) then
+	for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackground, FocusFrameNameBackground, }) do
+		BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
+	end
 end
 ----------------------------------------------------
 -- Minimap Tweaks
-MinimapZoomIn:Hide()
-MinimapZoomOut:Hide()
-Minimap:EnableMouseWheel(true)
-Minimap:SetScript('OnMouseWheel', function(self, delta)
-	if delta > 0 then
-		Minimap_ZoomIn()
-	else
-		Minimap_ZoomOut()
+if (GetWoWVersion <= 90500) then
+	MinimapZoomIn:Hide()
+	MinimapZoomOut:Hide()
+	Minimap:EnableMouseWheel(true)
+	Minimap:SetScript('OnMouseWheel', function(self, delta)
+		if delta > 0 then
+			Minimap_ZoomIn()
+		else
+			Minimap_ZoomOut()
+		end
+	end)
+	if (GetWoWVersion > 30400) then
+		MiniMapTracking:ClearAllPoints()
+		MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 	end
-end)
-if (GetWoWVersion > 30400) then
-	MiniMapTracking:ClearAllPoints()
-	MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 end
 ----------------------------------------------------
 -- Tooltip Class Color and extras 
@@ -289,36 +295,41 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 end)
 ----------------------------------------------------
 -- Tooltip
+-- UnitColor
 local UnitColor
 local function UnitColor(unit)
-	local r, g, b
-	if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
-		--Color it gray
-		r, g, b = 0.5, 0.5, 0.5
-	elseif (UnitIsPlayer(unit)) then
-		--Try to color it by class.
-		local localizedClass, englishClass = UnitClass(unit)
-		local classColor = RAID_CLASS_COLORS[englishClass]
-		if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-			r, g, b = classColor.r, classColor.g, classColor.b
-		else
-			if (UnitIsFriend("player", unit)) then
-				r, g, b = 0.0, 1.0, 0.0
+	local r, g, b, a
+	--if (not InCombatLockdown()) then
+		if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
+			--Color it gray
+			r, g, b, a = 0.5, 0.5, 0.5, 1
+		elseif (UnitIsPlayer(unit)) then
+			--Try to color it by class.
+			local localizedClass, englishClass = UnitClass(unit)
+			local classColor = RAID_CLASS_COLORS[englishClass]
+			if (classColor and not AbyssUIAddonSettings.GreenHealth) then
+				r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
 			else
-				r, g, b = 1.0, 0.0, 0.0
+				if (UnitIsFriend("player", unit)) then
+					r, g, b, a = 0.0, 1.0, 0.0, 1
+				else
+					r, g, b, a = 1.0, 0.0, 0.0, 1
+				end
 			end
+		else
+			r, g, b, a = UnitSelectionColor(unit)
 		end
-	else
-		r, g, b = UnitSelectionColor(unit)
-	end
-	return r, g, b
+	--end
+	return r, g, b, a
 end
 -- Tooltip Background and borders
-local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
-TooltipBackground:SetPoint("TOPLEFT", 3, -3)
-TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
-TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
-TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
+if (GetWoWVersion <= 90500) then
+	local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
+	TooltipBackground:SetPoint("TOPLEFT", 3, -3)
+	TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
+	TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
+	TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
+end
 -- Tooltip Class Color Health
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	local _, unit = self:GetUnit()
@@ -536,6 +547,7 @@ frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground, }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
+
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
@@ -556,7 +568,7 @@ local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
 ScaleElements:RegisterEvent("ADDON_LOADED")
 ScaleElements:RegisterEvent("PLAYER_LOGOUT")
 ScaleElements:SetScript("OnEvent", function(self, event, arg1)
-	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
+	if (event == "ADDON_LOADED" and arg1 == "AbyssUI" and GetWoWVersion <= 90500) then
 		CastingBarFrame:SetScale(1.05)
 	else 
 		return nil
@@ -621,7 +633,9 @@ AbyssUI_ConfirmPopUps:SetScript("OnClick", function()
 		QuestFrameCompleteQuestButton:Click()
 		QuestFrameCompleteButton:Click()
 		LFGDungeonReadyDialogEnterDungeonButton:Click()
-		GossipFrameGreetingGoodbyeButton:Click()
+		if (GetWoWVersion <= 90500) then
+			GossipFrameGreetingGoodbyeButton:Click()
+		end
 		--PVPReadyDialogEnterBattleButton:Click()
 	else
 		return nil
@@ -761,7 +775,7 @@ end)
 local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrait', nil)
 AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
-    if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+    if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
 	else
 		return nil
@@ -771,7 +785,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-    if (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+    if (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Alliance")
 	else
 		return nil
@@ -781,7 +795,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-    if (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+    if (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-PlayerFrame-Deathknight-Horde")
     	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-StatusDKH")
     	PlayerFrameHealthBar:SetWidth(105)
@@ -793,7 +807,7 @@ end)
 local AbyssUI_DKPortrait = CreateFrame("Button", '$parentAbyssUI_DKPortrait', nil)
 AbyssUI_DKPortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_DKPortrait:SetScript("OnEvent", function(self, event, ...)
-	if (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+	if (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\UI-TargetingFrame-DemonHunter")
     	PlayerFrameTexture:SetVertexColor(1, 1, 1)
 	else
@@ -807,13 +821,13 @@ checkRune:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DKAllyPortrait == true or 
 		AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		PetFrame:SetFrameLevel(4)
-		if (GetWoWVersion > 30400) then
+		if (GetWoWVersion > 30400 and GetWoWVersion <= 90500) then
 			PlayerFrameAlternateManaBar:SetFrameLevel(4)
 		end
 	else
 		return nil
 	end
-	if (GetWoWVersion > 30400) then
+	if (GetWoWVersion > 30400 and GetWoWVersion <= 90500) then
 		if (AbyssUIAddonSettings.DKHordePortrait == true) then
 			RuneFrame:ClearAllPoints()
 			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)

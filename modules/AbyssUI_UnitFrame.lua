@@ -1,6 +1,6 @@
 -- Author: Yugen (changes, fixes and enchantments for AbyssUI), KawF (Original code)
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- UnitFrameImproved for AbyssUI.
 --------------------------------------------------------------
@@ -98,34 +98,36 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- UnitColor
 		local UnitColor
 		local function UnitColor(unit)
-			local r, g, b
-			if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
-				--Color it gray
-				r, g, b = 0.5, 0.5, 0.5
-			elseif (UnitIsPlayer(unit)) then
-				--Try to color it by class.
-				local localizedClass, englishClass = UnitClass(unit)
-				local classColor = RAID_CLASS_COLORS[englishClass]
-				if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-					r, g, b = classColor.r, classColor.g, classColor.b
-				else
-					if (UnitIsFriend("player", unit)) then
-						r, g, b = 0.0, 1.0, 0.0
+			local r, g, b, a
+			if (not InCombatLockdown()) then
+				if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
+					--Color it gray
+					r, g, b, a = 0.5, 0.5, 0.5, 1
+				elseif (UnitIsPlayer(unit)) then
+					--Try to color it by class.
+					local localizedClass, englishClass = UnitClass(unit)
+					local classColor = RAID_CLASS_COLORS[englishClass]
+					if (classColor and not AbyssUIAddonSettings.GreenHealth) then
+						r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
 					else
-						r, g, b = 1.0, 0.0, 0.0
+						if (UnitIsFriend("player", unit)) then
+							r, g, b, a = 0.0, 1.0, 0.0, 1
+						else
+							r, g, b, a = 1.0, 0.0, 0.0, 1
+						end
 					end
+				else
+					r, g, b, a = UnitSelectionColor(unit)
 				end
-			else
-				r, g, b = UnitSelectionColor(unit)
 			end
-			return r, g, b
+			return r, g, b, a
 		end
 		-- Unit StatusBar Colorization
 		local function UnitStatusBarColor(self)
-			--if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
+			if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
 				-- Gray if npc is tapped by other player
-				--self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
-			--else
+				self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
+			else
 				-- Standard by class etc if not
 				if (UnitIsPlayer(self.unit)) then
 					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
@@ -136,7 +138,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						elseif healthPercentage < 100 and healthPercentage > 21 then
 							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
 						elseif healthPercentage < 21 then
-							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
+							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
 						end				
 					end	
 				else
@@ -149,16 +151,15 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						elseif healthPercentage < 100 and healthPercentage > 21 then
 							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
 						elseif healthPercentage < 21 then
-							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255)
+							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
 						end				
 					end
-				--end
-				--
-				--[[
-				if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
-					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5)
 				end
-				--]]
+				--
+				if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
+					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
+				end
+				--
 				if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
 					if (not UnitIsUnconscious(self.unit)) then
 						if (self.healthbar.TextString) then
@@ -172,43 +173,45 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- PlayerFrameStyle
 	    local function UnitFramesImproved_Style_PlayerFrame()
 	      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-	        if not InCombatLockdown() then 
-	          PlayerFrameHealthBar.lockColor = true
-	          PlayerFrameHealthBar.capNumericDisplay = true
-	          PlayerFrameHealthBar:SetWidth(119)
-	          PlayerFrameHealthBar:SetHeight(29)
-	          PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
-	          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
-	        end
-	        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
-	          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
-  	          elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
-	          elseif (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
-	          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-	          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
-	         	PlayerFrameTexture:SetVertexColor(1, 1, 1)
-	          else 
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
-	          end
-	          if (AbyssUIAddonSettings.DKHordePortrait == true) then
-          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
-	          	PlayerFrameHealthBar:SetWidth(105)
-	          else
-	          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
-	          end
-	          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-	        else
-	          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
-	          else 
-	            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
-	          end
-	          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
-	          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-	        end
+	      	if (GetWoWVersion <= 90500) then
+		        if not InCombatLockdown() then 
+		          PlayerFrameHealthBar.lockColor = true
+		          PlayerFrameHealthBar.capNumericDisplay = true
+		          PlayerFrameHealthBar:SetWidth(119)
+		          PlayerFrameHealthBar:SetHeight(29)
+		          PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
+		          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
+		        end
+		        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
+		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
+	  	          elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
+		          elseif (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
+		          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
+		         		PlayerFrameTexture:SetVertexColor(1, 1, 1)
+		          else 
+		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+		          end
+		          if (AbyssUIAddonSettings.DKHordePortrait == true) then
+	          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
+		          	PlayerFrameHealthBar:SetWidth(105)
+		          else
+		          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
+		          end
+		          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		        else
+		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
+		          else 
+		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
+		          end
+		          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
+		          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		        end		      	
+		      end		      	
 	      else
 	        return nil
 	      end
@@ -216,8 +219,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
     -- PlayerArt
     local function UnitFramesImproved_PlayerFrame_ToPlayerArt(self)
       if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-        if not InCombatLockdown() then
-          --UnitFramesImproved_Style_PlayerFrame()
+        if not InCombatLockdown() and GetWoWVersion >= 90500 then
+          UnitFramesImproved_Style_PlayerFrame()
         end
       end
     end
@@ -426,6 +429,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 			  UnitStatusBarColor(self)
 			end
 		end
+		-- PlayerUpdate
+		local function UnitFrameImproved_PlayerFrameHealthBar(self)
+			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+			  UnitColor(self)
+			end
+		end
 		-- CheckClassification
 		local function UnitFramesImproved_TargetFrame_CheckClassification(self, forceNormalTexture)
 			if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
@@ -546,18 +555,18 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
 				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
 				hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
+				hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
 
 				-- Set up some stylings
-				UnitFramesImproved_Style_PlayerFrame(PlayerFrame)
-				--[[
-				--UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
-				--UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
-				--UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
-				--UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
-				--]]
-
-				-- BossFrame hooks
-				--hooksecurefunc("BossTargetFrame_OnLoad", UnitFramesImproved_BossTargetFrame_Style)
+				--if (GetWoWVersion <= 90500) then
+					UnitFramesImproved_Style_PlayerFrame(PlayerFrame)
+					--UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
+					--UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
+					--UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
+					--UnitFramesImproved_BossTargetFrame_Style(Boss4TargetFrame)
+					-- BossFrame hooks
+					--hooksecurefunc("BossTargetFrame_OnLoad", UnitFramesImproved_BossTargetFrame_Style)
+				--end
 
 				UnitFramesImproved_Style_TargetFrame(TargetFrame)
 				if (GetWoWVersion >= 20502) then

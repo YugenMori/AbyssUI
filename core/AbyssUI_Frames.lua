@@ -406,13 +406,15 @@ ExtraInfo_Faction1:SetWidth(64)
 ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
-local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
-	if (englishFaction == "Horde") then
-		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
-	else
-		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
-	end
-t:SetAllPoints(ExtraInfo_Faction1)
+if (GetWoWVersion <= 90500) then
+	local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
+		if (englishFaction == "Horde") then
+			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
+		else
+			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
+		end
+	t:SetAllPoints(ExtraInfo_Faction1)
+end
 -- Gold Amount
 local _G = _G
 local currency = _G["MONEY"]
@@ -1100,6 +1102,7 @@ f:SetScript("OnEvent", function()
 			addonTable.TooltipOnCursor,
 			addonTable.UnitFrameImproved,
 			addonTable.ElitePortrait,
+			addonTable.FlatHealth,
 		} do
 			v:SetChecked(true)
 		end
@@ -1114,6 +1117,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
+		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
 		FrameButtonRecommended.Glow:Finish()
 		ReloadUI()
@@ -1157,6 +1161,7 @@ f:SetScript("OnEvent", function()
 			addonTable.SquareMinimap,
 			addonTable.UnitFrameImproved,
 			addonTable.ElitePortrait,
+			addonTable.FlatHealth,
 		} do
 			v:SetChecked(true)
 		end
@@ -1172,6 +1177,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.SquareMinimap 				      	 		 = addonTable.SquareMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
+		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)

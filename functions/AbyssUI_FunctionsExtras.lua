@@ -131,29 +131,29 @@ end
 -- UnitColor
 local UnitColor
 local function UnitColor(unit)
-  if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-    local r, g, b
+  --if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+    local r, g, b, a
     if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
       --Color it gray
-      r, g, b = 0.5, 0.5, 0.5
+      r, g, b, a = 0.5, 0.5, 0.5, 1
     elseif (UnitIsPlayer(unit)) then
       --Try to color it by class.
       local localizedClass, englishClass = UnitClass(unit)
       local classColor = RAID_CLASS_COLORS[englishClass]
       if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-        r, g, b = classColor.r, classColor.g, classColor.b
+        r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
       else
         if (UnitIsFriend("player", unit)) then
-          r, g, b = 0.0, 1.0, 0.0
+          r, g, b, a = 0.0, 1.0, 0.0, 1
         else
-          r, g, b = 1.0, 0.0, 0.0
+          r, g, b, a = 1.0, 0.0, 0.0, 1
         end
       end
     else
-      r, g, b = UnitSelectionColor(unit)
+      r, g, b, a = UnitSelectionColor(unit)
     end
-    return r, g, b
-  end
+    return r, g, b, a
+  --end
 end
 -- Fade UI
 local _G = _G
@@ -575,198 +575,198 @@ local function MinimapBehaviours()
 	local font = damageFont
 	local fontSize = 12
 	local fontFlag = "THINOUTLINE"		
+  if (GetWoWVersion <= 90500) then
+		MiniMapWorldMapButton:Hide()
+		MiniMapInstanceDifficulty:ClearAllPoints()
+		MiniMapInstanceDifficulty:SetParent(Minimap)
+		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
+		DropDownList1:SetClampedToScreen(true)
 
-	MiniMapWorldMapButton:Hide()
-	MiniMapInstanceDifficulty:ClearAllPoints()
-	MiniMapInstanceDifficulty:SetParent(Minimap)
-	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
-	DropDownList1:SetClampedToScreen(true)
-
-	-----------------------------------------
-	-- hide some stuff and set positioins --
-	-----------------------------------------
-	-- Hide
-	MinimapBorderTop:Hide()
-	MinimapZoomIn:Hide()
-	MinimapZoomOut:Hide()
-	MiniMapTracking:Hide()
-	GameTimeFrame:Hide()
-	MiniMapMailBorder:Hide()
-	MinimapNorthTag:SetAlpha(0)
-	Minimap:SetQuestBlobRingAlpha(0)
-	Minimap:SetArchBlobRingScalar(0)
-	Minimap:SetQuestBlobRingScalar(0)
-	--MiniMapInstanceDifficulty:SetAlpha(0)
-	--GuildInstanceDifficulty:SetAlpha(0)
-
-	-- Extra
-	MiniMapInstanceDifficulty:ClearAllPoints()
-	MiniMapInstanceDifficulty:SetParent(Minimap)
-	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
-	DropDownList1:SetClampedToScreen(true)
-
-	--Frame Level
-	MiniMapMailFrame:SetFrameLevel(10)
-	MiniMapInstanceDifficulty:SetFrameLevel(10)
-	GarrisonLandingPageMinimapButton:SetFrameLevel(10)
-
-	-- extra align
-	QueueStatusMinimapButton:SetSize(20, 20)
-	QueueStatusMinimapButton:ClearAllPoints()
-	QueueStatusMinimapButton:SetParent(Minimap)
-	QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 22)
-	QueueStatusMinimapButton:SetFrameLevel(10)
-	QueueStatusMinimapButtonBorder:Hide()
-
-	---------------------
-	-- mousewheel zoom --
-	---------------------
-	Minimap:EnableMouseWheel(true)
-	Minimap:SetScript("OnMouseWheel", function(self, direction)
-		if(direction > 0) then
-			Minimap_ZoomIn()
-		else
-			Minimap_ZoomOut()
-		end
-	end)
-
-	-- mail icon
-	MiniMapMailIcon:SetTexture(mailicon)
-	MiniMapMailFrame:SetFrameLevel(10)
-
-	-- calendar icon
-	local CalendarFrameIcon = CreateFrame("Frame", "$parentCalendarFrameIcon", Minimap)
-	CalendarFrameIcon:SetFrameLevel(10)
-	CalendarFrameIcon:SetWidth(22)
-	CalendarFrameIcon:SetHeight(22)
-	CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
-	CalendarFrameIcon:SetAlpha(0)
-	local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
-	t:SetTexture(calendaricon)
-	t:SetAllPoints(CalendarFrameIcon)
-	CalendarFrameIcon.texture = t
-	-- OnClick
-	CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
-	    if (button == 'LeftButton') then 
-			if(not CalendarFrame) then
-				LoadAddOn("Blizzard_Calendar")
-			end
-			Calendar_Toggle()
-    	end
-	end)
-	
-	------------------------
-	-- move and clickable --
-	------------------------
-
-	--[[
-	Minimap:SetMovable(true)
-	Minimap:SetUserPlaced(true)
-	Minimap:SetScript("OnMouseDown", function()
-	    if (IsAltKeyDown()) then
-	        Minimap:ClearAllPoints()
-	        Minimap:StartMoving()
-	    end
-	end)
-
-	---------------------
-	-- move some stuff --
-	---------------------
-	if moveWatchFrame then
-		ObjectiveTrackerFrame:ClearAllPoints()	
-		ObjectiveTrackerFrame.ClearAllPoints = function() end
-		ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
-		ObjectiveTrackerFrame.SetPoint = function() end
-		ObjectiveTrackerFrame:SetClampedToScreen(true)
-		ObjectiveTrackerFrame:SetHeight(qheight)
-	end
-	--]]
-
-	-- Check type of minimap
-	if (AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true) then
-		-- zone text
-		MinimapZoneText:ClearAllPoints()
-		MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 9, -8)
-		MinimapZoneText:SetFont(globalFont, 14, "THINOUTLINE")
-		-- garrison icon
-		GarrisonLandingPageMinimapButton:ClearAllPoints()
-		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
-		-- mail icon
-		MiniMapMailFrame:ClearAllPoints()
-		MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, -20, -15)
-		-- calendar icon
-		CalendarFrameIcon:ClearAllPoints()
-		CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 0, -18)
-	else
+		-----------------------------------------
+		-- hide some stuff and set positioins --
+		-----------------------------------------
 		-- Hide
-		MinimapBorder:Hide()
-		MinimapZoneTextButton:Hide()
-		MinimapBackdrop:SetFrameLevel(1)
-		-- Garrison Icon
-		GarrisonLandingPageMinimapButton:ClearAllPoints()
-		GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
+		MinimapBorderTop:Hide()
+		MinimapZoomIn:Hide()
+		MinimapZoomOut:Hide()
+		MiniMapTracking:Hide()
+		GameTimeFrame:Hide()
+		MiniMapMailBorder:Hide()
+		MinimapNorthTag:SetAlpha(0)
+		Minimap:SetQuestBlobRingAlpha(0)
+		Minimap:SetArchBlobRingScalar(0)
+		Minimap:SetQuestBlobRingScalar(0)
+		--MiniMapInstanceDifficulty:SetAlpha(0)
+		--GuildInstanceDifficulty:SetAlpha(0)
+
+		-- Extra
+		MiniMapInstanceDifficulty:ClearAllPoints()
+		MiniMapInstanceDifficulty:SetParent(Minimap)
+		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
+		DropDownList1:SetClampedToScreen(true)
+
+		--Frame Level
+		MiniMapMailFrame:SetFrameLevel(10)
+		MiniMapInstanceDifficulty:SetFrameLevel(10)
 		GarrisonLandingPageMinimapButton:SetFrameLevel(10)
-		-- mail icon
-		MiniMapMailFrame:ClearAllPoints()
-		MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
-	end
 
-	-- minimap script
-	Minimap:SetScript('OnMouseUp', function(self, button)
-		Minimap:StopMovingOrSizing()
-		if (button == 'RightButton') then
-			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-		elseif (button == 'MiddleButton') then
-			if(not CalendarFrame) then
-				LoadAddOn("Blizzard_Calendar")
+		-- extra align
+		QueueStatusMinimapButton:SetSize(20, 20)
+		QueueStatusMinimapButton:ClearAllPoints()
+		QueueStatusMinimapButton:SetParent(Minimap)
+		QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", 0, 22)
+		QueueStatusMinimapButton:SetFrameLevel(10)
+		QueueStatusMinimapButtonBorder:Hide()
+
+		---------------------
+		-- mousewheel zoom --
+		---------------------
+		Minimap:EnableMouseWheel(true)
+		Minimap:SetScript("OnMouseWheel", function(self, direction)
+			if(direction > 0) then
+				Minimap_ZoomIn()
+			else
+				Minimap_ZoomOut()
 			end
-			Calendar_Toggle()
-		else
-			Minimap_OnClick(self)
+		end)
+
+		-- mail icon
+		MiniMapMailIcon:SetTexture(mailicon)
+		MiniMapMailFrame:SetFrameLevel(10)
+
+		-- calendar icon
+		local CalendarFrameIcon = CreateFrame("Frame", "$parentCalendarFrameIcon", Minimap)
+		CalendarFrameIcon:SetFrameLevel(10)
+		CalendarFrameIcon:SetWidth(22)
+		CalendarFrameIcon:SetHeight(22)
+		CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 1, -22)
+		CalendarFrameIcon:SetAlpha(0)
+		local t = CalendarFrameIcon:CreateTexture(nil, "BACKGROUND")
+		t:SetTexture(calendaricon)
+		t:SetAllPoints(CalendarFrameIcon)
+		CalendarFrameIcon.texture = t
+		-- OnClick
+		CalendarFrameIcon:SetScript("OnMouseDown", function (self, button)
+		    if (button == 'LeftButton') then 
+				if(not CalendarFrame) then
+					LoadAddOn("Blizzard_Calendar")
+				end
+				Calendar_Toggle()
+	    	end
+		end)
+
+		------------------------
+		-- move and clickable --
+		------------------------
+
+		--[[
+		Minimap:SetMovable(true)
+		Minimap:SetUserPlaced(true)
+		Minimap:SetScript("OnMouseDown", function()
+		    if (IsAltKeyDown()) then
+		        Minimap:ClearAllPoints()
+		        Minimap:StartMoving()
+		    end
+		end)
+
+		---------------------
+		-- move some stuff --
+		---------------------
+		if moveWatchFrame then
+			ObjectiveTrackerFrame:ClearAllPoints()	
+			ObjectiveTrackerFrame.ClearAllPoints = function() end
+			ObjectiveTrackerFrame:SetPoint(qanchor, qparent, qanchor, qposition_x, qposition_y)
+			ObjectiveTrackerFrame.SetPoint = function() end
+			ObjectiveTrackerFrame:SetClampedToScreen(true)
+			ObjectiveTrackerFrame:SetHeight(qheight)
 		end
-	end)
+		--]]
 
-	-- Clock
-	if (showclock and not AbyssUIAddonSettings.ExtraFunctionMinimapClock) then
-		LoadAddOn('Blizzard_TimeManager')
-		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
-		clockFrame:Hide()
-		clockTime:Show()
-		clockTime:SetFont(damageFont, 12, "THINOUTLINE")
-		TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
-		TimeManagerClockButton:SetAlpha(0)
-	elseif (showclock and AbyssUIAddonSettings.ExtraFunctionMinimapClock) then
-		LoadAddOn('Blizzard_TimeManager')
-		local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
-		clockFrame:Hide()
-		clockTime:Show()
-		clockTime:SetFont(damageFont, 12, "THINOUTLINE")
-		TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
-		TimeManagerClockButton:SetAlpha(1)
-	else
-		LoadAddOn('Blizzard_TimeManager')
-		TimeManagerClockButton.Show = TimeManagerClockButton.Hide
-		local region = TimeManagerClockButton:GetRegions()
-		region:Hide()	
-		TimeManagerClockButton:ClearAllPoints()	
-		TimeManagerClockButton:Hide()
-	end
-	
-	-- Clock/Calendar Handler
-	if not AbyssUIAddonSettings.ExtraFunctionMinimapClock then
-	  Minimap:HookScript("OnEnter", function()
-	    TimeManagerClockButton:SetAlpha(1)
-	    CalendarFrameIcon:SetAlpha(1)
-	  end)
+		-- Check type of minimap
+		if (AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.SquareMinimap ~= true) then
+			-- zone text
+			MinimapZoneText:ClearAllPoints()
+			MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 9, -8)
+			MinimapZoneText:SetFont(globalFont, 14, "THINOUTLINE")
+			-- garrison icon
+			GarrisonLandingPageMinimapButton:ClearAllPoints()
+			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
+			-- mail icon
+			MiniMapMailFrame:ClearAllPoints()
+			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, -20, -15)
+			-- calendar icon
+			CalendarFrameIcon:ClearAllPoints()
+			CalendarFrameIcon:SetPoint("TOPLEFT", Minimap, 0, -18)
+		else
+			-- Hide
+			MinimapBorder:Hide()
+			MinimapZoneTextButton:Hide()
+			MinimapBackdrop:SetFrameLevel(1)
+			-- Garrison Icon
+			GarrisonLandingPageMinimapButton:ClearAllPoints()
+			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
+			GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+			-- mail icon
+			MiniMapMailFrame:ClearAllPoints()
+			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
+		end
 
-	  Minimap:HookScript("OnLeave", function()
-	  	if not AbyssUIAddonSettings.ExtraFunctionMinimapClock then
-	    	TimeManagerClockButton:SetAlpha(0)
-	    	CalendarFrameIcon:SetAlpha(0)
-	  	end
-	  end)
-	end
+		-- minimap script
+		Minimap:SetScript('OnMouseUp', function(self, button)
+			Minimap:StopMovingOrSizing()
+			if (button == 'RightButton') then
+				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
+			elseif (button == 'MiddleButton') then
+				if(not CalendarFrame) then
+					LoadAddOn("Blizzard_Calendar")
+				end
+				Calendar_Toggle()
+			else
+				Minimap_OnClick(self)
+			end
+		end)
 	
+		-- Clock
+		if (showclock and not AbyssUIAddonSettings.ExtraFunctionMinimapClock) then
+			LoadAddOn('Blizzard_TimeManager')
+			local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
+			clockFrame:Hide()
+			clockTime:Show()
+			clockTime:SetFont(damageFont, 12, "THINOUTLINE")
+			TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
+			TimeManagerClockButton:SetAlpha(0)
+		elseif (showclock and AbyssUIAddonSettings.ExtraFunctionMinimapClock) then
+			LoadAddOn('Blizzard_TimeManager')
+			local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
+			clockFrame:Hide()
+			clockTime:Show()
+			clockTime:SetFont(damageFont, 12, "THINOUTLINE")
+			TimeManagerClockButton:SetPoint("BOTTOM", Minimap, 0, -6)
+			TimeManagerClockButton:SetAlpha(1)
+		else
+			LoadAddOn('Blizzard_TimeManager')
+			TimeManagerClockButton.Show = TimeManagerClockButton.Hide
+			local region = TimeManagerClockButton:GetRegions()
+			region:Hide()	
+			TimeManagerClockButton:ClearAllPoints()	
+			TimeManagerClockButton:Hide()
+		end
+		
+		-- Clock/Calendar Handler
+		if not AbyssUIAddonSettings.ExtraFunctionMinimapClock then
+		  Minimap:HookScript("OnEnter", function()
+		    TimeManagerClockButton:SetAlpha(1)
+		    CalendarFrameIcon:SetAlpha(1)
+		  end)
+
+		  Minimap:HookScript("OnLeave", function()
+		  	if not AbyssUIAddonSettings.ExtraFunctionMinimapClock then
+		    	TimeManagerClockButton:SetAlpha(0)
+		    	CalendarFrameIcon:SetAlpha(0)
+		  	end
+		  end)
+		end
+	end
 	local function GetMinimapShape() return 'SQUARE' end
 
 	-------------------------------
@@ -1448,53 +1448,53 @@ end)
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
-local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
-local UnitFrames = {
-  PlayerFrame,
-  PetFrame,
-  TargetFrame,
-  TargetFrameToT,
-  FocusFrame,
-  FocusFrameToT,
-  PartyMemberFrame1,
-  PartyMemberFrame2,
-  PartyMemberFrame3,
-  PartyMemberFrame4,
-}
-local UnitFrameRegions = {
-  "healthbar",
-  "myHealPredictionBar",
-  "otherHealPredictionBar",
-  "healAbsorbBar",
-  "totalAbsorbBar",
-  "manabar",
-  "myManaCostPredictionBar",
-  "spellbar",
-}
-local OtherStatusBars = {
-  CastingBarFrame,
-  MirrorTimer1StatusBar,
-  MirrorTimer2StatusBar,
-  MirrorTimer3StatusBar,
-}
-if (AbyssUIAddonSettings.FlatHealth == true) then
-	for _, frame in next, UnitFrames do
-    for _, region in next, UnitFrameRegions do
-      local bar = frame[region]
-      if bar and bar.SetStatusBarTexture then
-        bar:SetStatusBarTexture(TEXTURE)
-        bar:GetStatusBarTexture():SetHorizTile(true)
-      elseif bar and bar.SetTexture then
-        bar:SetTexture(TEXTURE)
-        bar:SetHorizTile(true)
-      end
-    end
+	local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
+	local UnitFrames = {
+	  PlayerFrame,
+	  PetFrame,
+	  TargetFrame,
+	  TargetFrameToT,
+	  FocusFrame,
+	  FocusFrameToT,
+	  PartyMemberFrame1,
+	  PartyMemberFrame2,
+	  PartyMemberFrame3,
+	  PartyMemberFrame4,
+	}
+	local UnitFrameRegions = {
+	  "healthbar",
+	  "myHealPredictionBar",
+	  "otherHealPredictionBar",
+	  "healAbsorbBar",
+	  "totalAbsorbBar",
+	  "manabar",
+	  "myManaCostPredictionBar",
+	  "spellbar",
+	}
+	local OtherStatusBars = {
+	  CastingBarFrame,
+	  MirrorTimer1StatusBar,
+	  MirrorTimer2StatusBar,
+	  MirrorTimer3StatusBar,
+	}
+	if (AbyssUIAddonSettings.FlatHealth == true) then
+		for _, frame in next, UnitFrames do
+	    for _, region in next, UnitFrameRegions do
+	      local bar = frame[region]
+	      if bar and bar.SetStatusBarTexture then
+	        bar:SetStatusBarTexture(TEXTURE)
+	        bar:GetStatusBarTexture():SetHorizTile(true)
+	      elseif bar and bar.SetTexture then
+	        bar:SetTexture(TEXTURE)
+	        bar:SetHorizTile(true)
+	      end
+	    end
+		end
+		for _, bar in next, OtherStatusBars do
+	    bar:SetStatusBarTexture(TEXTURE)
+	    bar:GetStatusBarTexture():SetHorizTile(true)
+		end
 	end
-	for _, bar in next, OtherStatusBars do
-    bar:SetStatusBarTexture(TEXTURE)
-    bar:GetStatusBarTexture():SetHorizTile(true)
-	end
-end
 end)
 ----------------------------------------------------
 --End
