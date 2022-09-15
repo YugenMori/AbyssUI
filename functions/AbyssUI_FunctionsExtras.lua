@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- Extra functions for AbyssUI
 --------------------------------------------------------------
@@ -357,22 +357,24 @@ end
 ----------------------------------------------
 -- Nameplate Health Percent
 hooksecurefunc("CompactUnitFrame_UpdateStatusText", function(frame)
-	if (AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
-		if (not frame:IsForbidden() and not UnitIsFriend("player", frame.displayedUnit)) then
-			if (not frame.healthBar.percent) then
-				frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
-				frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
-				frame.healthBar.percent:SetFont(damageFont, 10)
-				frame.healthBar.percent:SetShadowColor(0, 0, 0)
-				frame.healthBar.percent:SetShadowOffset(1, -0.25)
-			end
-			local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
-			if (percentcalc == 0) then return end
-			frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
-			frame.healthBar.percent:Show()
-		elseif (UnitIsFriend("player", frame.displayedUnit)) then
-			if (frame.healthBar.percent) then
-				frame.healthBar.percent:Hide()
+	if (AbyssUIAddonSettings ~= nil) then
+		if (AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
+			if (not frame:IsForbidden() and not UnitIsFriend("player", frame.displayedUnit)) then
+				if (not frame.healthBar.percent) then
+					frame.healthBar.percent = frame.healthBar:CreateFontString(nil,"OVERLAY")
+					frame.healthBar.percent:SetPoint("LEFT", frame.healthBar)
+					frame.healthBar.percent:SetFont(damageFont, 10)
+					frame.healthBar.percent:SetShadowColor(0, 0, 0)
+					frame.healthBar.percent:SetShadowOffset(1, -0.25)
+				end
+				local percentcalc = ceil(((UnitHealth(frame.displayedUnit) / UnitHealthMax(frame.displayedUnit)) * 1000) /10)
+				if (percentcalc == 0) then return end
+				frame.healthBar.percent:SetFormattedText("%d%%", percentcalc)
+				frame.healthBar.percent:Show()
+			elseif (UnitIsFriend("player", frame.displayedUnit)) then
+				if (frame.healthBar.percent) then
+					frame.healthBar.percent:Hide()
+				end
 			end
 		end
 	end
@@ -380,53 +382,57 @@ end)
 -- Nameplate colorization
 -- Player
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
-    local _, class = UnitClass('player')
-    local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-		local unitIsPlayer = UnitIsPlayer('player')
-		if self.optionTable.colorNameBySelection and not self:IsForbidden() then
-			-- Player
-		 	if (unitIsPlayer == true) then
-				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit('player') then
-					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
-					if (healthPercentage == 0) then return end
-    			if (healthPercentage == 100) then
-      			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-					elseif healthPercentage < 100 and healthPercentage > 21 then
-						self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-					elseif healthPercentage < 21 then
-						self.healthBar:SetStatusBarColor(255/255, 255/255, 255/255)
+	if (AbyssUIAddonSettings ~= nil) then
+		if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
+	    local _, class = UnitClass('player')
+	    local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+			local unitIsPlayer = UnitIsPlayer('player')
+			if self.optionTable.colorNameBySelection and not self:IsForbidden() then
+				-- Player
+			 	if (unitIsPlayer == true) then
+					if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit('player') then
+						local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
+						if (healthPercentage == 0) then return end
+	    			if (healthPercentage == 100) then
+	      			self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
+						elseif healthPercentage < 100 and healthPercentage > 21 then
+							self.healthBar:SetStatusBarColor(color.r, color.g, color.b)
+						elseif healthPercentage < 21 then
+							self.healthBar:SetStatusBarColor(255/255, 255/255, 255/255)
+						end
 					end
 				end
 			end
+		else
+			return nil
 		end
-	else
-		return nil
 	end
 end)
 -- Target
 hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(self)
-	if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
-		local unitTarget = UnitIsPlayer("target")
-		local reaction = UnitReaction("player", "target") or 4
-		if self.optionTable.colorNameBySelection and not self:IsForbidden() then
-			-- Mobs
-		 	if  (unitTarget ~= true and reaction < 5) then
-				if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit("target") then
-					local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
-					if (healthPercentage == 0) then return end
-					if healthPercentage == 100 then
-						-- do nothing keep frame color
-					elseif healthPercentage < 100 and healthPercentage > 21 then
-            self.healthBar:SetStatusBarColor(UnitColor(self.unit))
-          elseif healthPercentage < 21 then
-            self.healthBar:SetStatusBarColor(255/255, 255/255, 255/255)
-          end
+	if (AbyssUIAddonSettings ~= nil) then
+		if (not self:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true and not AbyssUIAddonSettings.GreenHealth) then
+			local unitTarget = UnitIsPlayer("target")
+			local reaction = UnitReaction("player", "target") or 4
+			if self.optionTable.colorNameBySelection and not self:IsForbidden() then
+				-- Mobs
+			 	if  (unitTarget ~= true and reaction < 5) then
+					if C_NamePlate.GetNamePlateForUnit(self.unit) == C_NamePlate.GetNamePlateForUnit("target") then
+						local healthPercentage = ceil(((UnitHealth(self.displayedUnit) / UnitHealthMax(self.displayedUnit)) * 1000) /10)
+						if (healthPercentage == 0) then return end
+						if healthPercentage == 100 then
+							-- do nothing keep frame color
+						elseif healthPercentage < 100 and healthPercentage > 21 then
+	            self.healthBar:SetStatusBarColor(UnitColor(self.unit))
+	          elseif healthPercentage < 21 then
+	            self.healthBar:SetStatusBarColor(255/255, 255/255, 255/255)
+	          end
+					end
 				end
 			end
+		else
+			return nil
 		end
-	else
-		return nil
 	end
 end)
 -- Border

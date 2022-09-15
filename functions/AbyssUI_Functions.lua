@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- Functions for AbyssUI
 --------------------------------------------------------------
