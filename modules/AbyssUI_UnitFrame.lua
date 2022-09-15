@@ -96,7 +96,6 @@ AbyssUI_UnitFrame:RegisterEvent("PLAYER_LOGOUT")
 AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
 		-- UnitColor
-		local UnitColor
 		--local isConnected = C_PlayerInfo.IsConnected(unit)
 		local function UnitColor(unit)
 			local r, g, b, a
@@ -118,7 +117,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						end
 					end
 				else
-					r, g, b, a = UnitSelectionColor(unit)
+					if (unit ~= nil) then
+						r, g, b, a = UnitSelectionColor(unit)
+					end
 				end
 			--end
 			return r, g, b, a
