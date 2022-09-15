@@ -1329,3 +1329,57 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 		end
 	end
 end)
+-- Change Health Bar Fill
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "AbyssUI" and GetWoWVersion <= 30600 and AbyssUIAddonSettings ~= nil then
+		local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
+		local UnitFrames = {
+		  PlayerFrame,
+		  PetFrame,
+		  TargetFrame,
+		  TargetFrameToT,
+		  FocusFrame,
+		  FocusFrameToT,
+		  PartyMemberFrame1,
+		  PartyMemberFrame2,
+		  PartyMemberFrame3,
+		  PartyMemberFrame4,
+		}
+		local UnitFrameRegions = {
+		  "healthbar",
+		  "myHealPredictionBar",
+		  "otherHealPredictionBar",
+		  "healAbsorbBar",
+		  "totalAbsorbBar",
+		  --"manabar",
+		  --"myManaCostPredictionBar",
+		  "spellbar",
+		}
+		local OtherStatusBars = {
+		  CastingBarFrame,
+		  MirrorTimer1StatusBar,
+		  MirrorTimer2StatusBar,
+		  MirrorTimer3StatusBar,
+		}
+		if (AbyssUIAddonSettings.FlatHealth == true) then
+			for _, frame in next, UnitFrames do
+		    for _, region in next, UnitFrameRegions do
+		      local bar = frame[region]
+		      if bar and bar.SetStatusBarTexture then
+		        bar:SetStatusBarTexture(TEXTURE)
+		        bar:GetStatusBarTexture():SetHorizTile(true)
+		      elseif bar and bar.SetTexture then
+		        bar:SetTexture(TEXTURE)
+		        bar:SetHorizTile(true)
+		      end
+		    end
+			end
+			for _, bar in next, OtherStatusBars do
+		    bar:SetStatusBarTexture(TEXTURE)
+		    bar:GetStatusBarTexture():SetHorizTile(true)
+			end
+		end
+	end
+end)

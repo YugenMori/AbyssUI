@@ -1473,8 +1473,8 @@ f:SetScript("OnEvent", function(self, event)
 	  "otherHealPredictionBar",
 	  "healAbsorbBar",
 	  "totalAbsorbBar",
-	  "manabar",
-	  "myManaCostPredictionBar",
+	  --"manabar",
+	  --"myManaCostPredictionBar",
 	  "spellbar",
 	}
 	local OtherStatusBars = {
