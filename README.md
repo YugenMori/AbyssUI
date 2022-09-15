@@ -10,8 +10,7 @@
 
 #### Always check the FAQ before posting. Bug reports have more visibility on our discord channel.
 ##### *This interface support all languages. (since v9.0.1.9+)
-[![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://www.youtube.com/watch?v=u4w3CYXb47M&feature=youtu.be)
-
+[![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://youtu.be/7nDiqznBVds)
 #### FAQ
 #### - How to make interface looks like in the video?
 #### A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned.
