@@ -274,6 +274,28 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
     end     
 end)
 ---------------------------- NewUI Functions ----------------------------------
+-- ClassTalentFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+    if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
+        for i, v in pairs({ 
+            ClassTalentFrame.NineSlice.RightEdge,
+            ClassTalentFrame.NineSlice.LeftEdge,
+            ClassTalentFrame.NineSlice.TopEdge,
+            ClassTalentFrame.NineSlice.BottomEdge,
+            ClassTalentFrame.NineSlice.PortraitFrame,
+            ClassTalentFrame.NineSlice.TopRightCorner,
+            ClassTalentFrame.NineSlice.TopLeftCorner,
+            ClassTalentFrame.NineSlice.BottomLeftCorner,
+            ClassTalentFrame.NineSlice.BottomRightCorner,
+         }) do
+            if AbyssUIAddonSettings ~= nil then
+                AbyssUI_ColorizationFrameFunction(v)
+            end
+        end
+    end
+end)
 -- KeyBindingFrame
 --[[
 local f = CreateFrame("Frame")

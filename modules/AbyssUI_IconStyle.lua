@@ -2082,15 +2082,6 @@ local function IconThemeInit()
     hooksecurefunc("DebuffButton_UpdateAnchors", updateDebuffAnchors)
   end
 end
-local NewBuffFrameCheck = CreateFrame("Frame", nil, nil)
-NewBuffFrameCheck:SetSize(50, 50)
-NewBuffFrameCheck:RegisterEvent("WEAPON_ENCHANT_CHANGED")
-NewBuffFrameCheck:RegisterEvent("WEAPON_SLOT_CHANGED")
-NewBuffFrameCheck:SetScript("OnEvent", function(self, event, ...)
-  if (GetWoWVersion >= 90500) then
-    updateNewAllBuffAnchors()
-  end
-end)
 -- Init
 local f = CreateFrame("Frame")
 f:SetSize(50, 50)

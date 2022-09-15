@@ -115,9 +115,9 @@ L["Auto Gamma"] = "自动伽玛值调整"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "在以下情况下自动更改伽玛值"..
 " 根据当地时间，白天为白天（晴天）为1.2（晴朗），晚上为1.0（默认）"
-L["USA Date Format"] = "美国日期/时间格式"
+L["Non-Millitary Date/Time"] = "美国日期/时间格式"
 L["Change the date format of the whole UI to"..
-" the USA format"] = "将界面日期格式更改为美国格式"
+" Non-Millitary format"] = "将界面日期格式更改为美国格式"
 L["RPG chat fonts"] = "聊天字体RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "将聊天字体更改为RPG样式"
 L["Auto Screenshot"] = "自动截图"

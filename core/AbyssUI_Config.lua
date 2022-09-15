@@ -1744,9 +1744,9 @@ local function Miscellaneous()
   -- American Clock Style --
   local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -230)
-  AbyssUI_AmericanClock_CheckButton.Text:SetText(L["USA Date Format"])
+  AbyssUI_AmericanClock_CheckButton.Text:SetText(L["Non-Millitary Date/Time"])
   AbyssUI_AmericanClock_CheckButton.tooltip = L["Change the date format of the whole UI to"..
-  " the USA format"]
+  " Non-Millitary format"]
   AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
   -- OnClick Function
   AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)

@@ -114,9 +114,9 @@ L["Auto Gamma"] = "Автоматическая гамма"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "Изменяет гамма автоматически, когда"..
 " день для 1.2 (конечно) и для 1.0 (по умолчанию), когда это ночь, в зависимости от местного времени"
-L["USA Date Format"] = "США Дата / Время Формат"
+L["Non-Millitary Date/Time"] = "США Дата / Время Формат"
 L["Change the date format of the whole UI to"..
-" the USA format"] = "Изменяет формат даты интерфейса на формат США"
+" Non-Millitary format"] = "Изменяет формат даты интерфейса на формат США"
 L["RPG chat fonts"] = "Источник чата RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "Изменяет шрифт чата на стиль RPG"
 L["Auto Screenshot"] = "Автоматический скриншот"

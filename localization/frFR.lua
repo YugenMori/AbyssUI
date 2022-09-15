@@ -114,9 +114,9 @@ L["Auto Gamma"] = "Gamma automatique"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "Modifications gamma automatiquement lorsque"..
 " est jour pour 1.2 (bien sûr) et pour 1.0 (par défaut) quand il est la nuit, basé sur l’heure locale"
-L["USA Date Format"] = "Date/Heure Format Américain"
+L["Non-Millitary Date/Time"] = "Date/Heure Format Américain"
 L["Change the date format of the whole UI to"..
-" the USA format"] = "Modifie le format de la date de l’interface au format américain"
+" Non-Millitary format"] = "Modifie le format de la date de l’interface au format américain"
 L["RPG chat fonts"] = "Chat Source RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "Modifie la police de chat en un style RPG"
 L["Auto Screenshot"] = "Capture d’écran automatique"

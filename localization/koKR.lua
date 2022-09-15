@@ -114,9 +114,9 @@ L["Auto Gamma"] = "자동 감마"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "다음과 같은 경우 감마를 자동으로 변경합니다"..
 " 현지 시간을 기준으로 한 주간 1.2 (지우기) 및 1.0 (기본값) 야간"
-L["USA Date Format"] = "미국 날짜 / 시간 형식"
+L["Non-Millitary Date/Time"] = "미국 날짜 / 시간 형식"
 L["Change the date format of the whole UI to"..
-" the USA format"] = "인터페이스 날짜 형식을 미국 형식으로 변경합니다"
+" Non-Millitary format"] = "인터페이스 날짜 형식을 미국 형식으로 변경합니다"
 L["RPG chat fonts"] = "채팅 글꼴 RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "채팅 소스를 스타일로 변경 RPG"
 L["Auto Screenshot"] = "자동 스크린 샷"

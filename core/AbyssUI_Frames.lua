@@ -677,9 +677,40 @@ elseif (englishClass == "WARRIOR") then
 else
 	return nil
 end
+-- nonMilitaryClock
+local function nonMilitaryClock(time)
+	if (time == 13) then
+		time = 1
+	elseif (time == 14) then
+		time = 2
+	elseif (time == 15) then
+		time = 3
+	elseif (time == 16) then
+		time = 4
+	elseif (time == 17) then
+		time = 5
+	elseif (time == 18) then
+		time = 6
+	elseif (time == 19) then
+		time = 7
+	elseif (time == 20) then
+		time = 8
+	elseif (time == 21) then
+		time = 9
+	elseif (time == 22) then
+		time = 10
+	elseif (time == 23) then
+		time = 11
+	elseif (time == 00) then
+		time = 12
+	end
+	return time
+end
 local function AbyssUI_UpdateAFKCameraData()
 	-- Get
 	playerName = UnitName("player")
+	local nonMilitaryHour = date("%H")
+	local nonMilitaryMinutes = date("%M |cffffcc00%m/%d/%y|r")
 	if (GetWoWVersion > 11402) then
 		titleId = GetCurrentTitle() 
 		titleName = GetTitleName(titleId)
@@ -702,7 +733,11 @@ local function AbyssUI_UpdateAFKCameraData()
 	PlayerInfo_Level1.text:SetText(L["Level: "]..level)
 	PlayerInfo_Race1.text:SetText(race)
 	PlayerInfo_Class1.text:SetText(playerClass)
-	ExtraInfo_Clock1.text:SetText(dataTime)
+	if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
+		ExtraInfo_Clock1.text:SetText(nonMilitaryClock(tonumber(nonMilitaryHour))..":"..nonMilitaryMinutes)
+	else
+		ExtraInfo_Clock1.text:SetText(dataTime)
+	end
 	if (GetWoWVersion > 30600) then
 		local HonorLevel = UnitHonorLevel("player")
 		local overall, equipped = GetAverageItemLevel()

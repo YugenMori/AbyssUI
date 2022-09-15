@@ -103,9 +103,9 @@ L["When you open a Merchant shop, auto sell gray"..
 L["Auto Gamma"] = true
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = true
-L["USA Date Format"] = true
+L["Non-Millitary Date/Time"] = true
 L["Change the date format of the whole UI to"..
-" the USA format"] = true
+" Non-Millitary format"] = true
 L["RPG chat fonts"] = true
 L["Change the chat fonts to a RPG look-alike style"] = true
 L["Auto Screenshot"] = true

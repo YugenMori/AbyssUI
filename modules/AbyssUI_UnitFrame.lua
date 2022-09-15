@@ -97,13 +97,14 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	if (event == "ADDON_LOADED" and arg1 == "AbyssUI") then
 		-- UnitColor
 		local UnitColor
+		--local isConnected = C_PlayerInfo.IsConnected(unit)
 		local function UnitColor(unit)
 			local r, g, b, a
-			if (not InCombatLockdown()) then
-				if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
-					--Color it gray
-					r, g, b, a = 0.5, 0.5, 0.5, 1
-				elseif (UnitIsPlayer(unit)) then
+			--if (not InCombatLockdown()) then
+				--if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
+					-- Turn it Gray
+					--r, g, b, a = 0.5, 0.5, 0.5, 1
+				if (UnitIsPlayer(unit)) then
 					--Try to color it by class.
 					local localizedClass, englishClass = UnitClass(unit)
 					local classColor = RAID_CLASS_COLORS[englishClass]
@@ -119,7 +120,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				else
 					r, g, b, a = UnitSelectionColor(unit)
 				end
-			end
+			--end
 			return r, g, b, a
 		end
 		-- Unit StatusBar Colorization
@@ -520,12 +521,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- ToTStyle
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
-			if not InCombatLockdown () then
-				TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-				if (GetWoWVersion >= 20502) then
-					FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
-				end
-			end
+			--if not InCombatLockdown () then
+				--TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+				--if (GetWoWVersion >= 20502) then
+					--FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+				--end
+			--end
 		end
 		--StatusBarTextString
 		local function CreateStatusBarText(name, parentName, parent, point, x, y)

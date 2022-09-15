@@ -855,10 +855,41 @@ local versionString 		= _G["GAME_VERSION_LABEL"]
 local latestString     	= _G["KBASE_RECENTLY_UPDATED"] 
 -- DailyInfo Function
 ----------------------------------------------------
+-- nonMilitaryClock
+local function nonMilitaryClock(time)
+	if (time == 13) then
+		time = 1
+	elseif (time == 14) then
+		time = 2
+	elseif (time == 15) then
+		time = 3
+	elseif (time == 16) then
+		time = 4
+	elseif (time == 17) then
+		time = 5
+	elseif (time == 18) then
+		time = 6
+	elseif (time == 19) then
+		time = 7
+	elseif (time == 20) then
+		time = 8
+	elseif (time == 21) then
+		time = 9
+	elseif (time == 22) then
+		time = 10
+	elseif (time == 23) then
+		time = 11
+	elseif (time == 00) then
+		time = 12
+	end
+	return time
+end
 local AbyssUIDailyInfo = CreateFrame("Frame")
 AbyssUIDailyInfo:RegisterEvent("PLAYER_LOGIN")
 AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
-C_WowTokenPublic.UpdateMarketPrice()
+	local nonMilitaryHour = date("%H")
+	local nonMilitaryMinutes = date("%M |cffffcc00%m/%d/%y|r" )
+	C_WowTokenPublic.UpdateMarketPrice()
 	C_Timer.After(3, function()
 		print(L["Thank you for choosing Abyss|cff0d75d4UI|r!"])
 		print(L["The improved World of Warcraft user interface."])
@@ -872,7 +903,7 @@ C_WowTokenPublic.UpdateMarketPrice()
 			print("|cfff2dc7f"..fichaString..": |r"..L["Not available right now!"])
 		end
 		if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
-			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%m/%d/%y|r "))
+			print("|cfff2dc7f"..L["Current Time"].."|r " .. (nonMilitaryClock(tonumber(nonMilitaryHour))..":"..nonMilitaryMinutes))
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
