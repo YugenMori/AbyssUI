@@ -301,7 +301,7 @@ PlayerInfo_Name1.text:SetPoint("TOP", 0, -1)
 PlayerInfo_Name1.text:SetText(playerName)
 -- Title
 local PlayerInfo_Title1 = CreateFrame("Frame", "$parentPlayerInfo_Title1", AbyssUI_AFKCameraFrame)
-if (GetWoWVersion > 11402) then
+if (GetWoWVersion > 12400) then
 	local titleId = GetCurrentTitle() 
 	local titleName = GetTitleName(titleId)
 end
@@ -711,7 +711,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	playerName = UnitName("player")
 	local nonMilitaryHour = date("%H")
 	local nonMilitaryMinutes = date("%M |cffffcc00%m/%d/%y|r")
-	if (GetWoWVersion > 11402) then
+	if (GetWoWVersion > 12400) then
 		titleId = GetCurrentTitle() 
 		titleName = GetTitleName(titleId)
 	end
@@ -778,7 +778,7 @@ local function PlayerModelRandomAnimation()
     234, -- state_work_chopwood
 	}
 	local randAnimation = #idRandAnimation 
-	if (GetWoWVersion > 11402) then
+	if (GetWoWVersion > 12400) then
 		ModelFrame_Model1:SetAnimation(idRandAnimation[random(1, randAnimation)])
 	end
 end

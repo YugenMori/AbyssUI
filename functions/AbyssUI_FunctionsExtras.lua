@@ -232,7 +232,7 @@ local FadeUI = CreateFrame("CheckButton", "$parentFadeUI", UIParent, "ChatConfig
 FadeUI:RegisterEvent("PLAYER_REGEN_DISABLED")
 FadeUI:RegisterEvent("PLAYER_REGEN_ENABLED")
 FadeUI:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion > 11402) then
+if (GetWoWVersion > 12400) then
 	FadeUI:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 --FadeUI:RegisterEvent("PARTY_MEMBERS_CHANGED")

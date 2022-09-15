@@ -247,7 +247,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function UnitFramesImproved_Style_TargetFrame(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 				--if not InCombatLockdown() then
-				if (GetWoWVersion > 11402) then
+				if (GetWoWVersion > 12400) then
 					local classification = UnitClassification(self.unit)
 				end
 					if (classification == "minus") then

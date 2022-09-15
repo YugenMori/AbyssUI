@@ -898,7 +898,7 @@ local function HideElementsInit()
   end
   -- Show
   local function AbyssUI_ShowMicroMenu_Function()
-    if (GetWoWVersion > 11402) then
+    if (GetWoWVersion > 12400) then
       for i, v in pairs({ MicroButtonAndBagsBar.MicroBagBar,
         MicroButtonAndBagsBar,
         MainMenuBarPerformanceBar,
@@ -2351,7 +2351,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:SetChecked(AbyssUIAddonSettings.HideHelm)
   -- OnClick Function
   HideHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.HideHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2363,7 +2363,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         if AbyssUIAddonSettings.HideHelm == true then
           ShowHelm(false)
         end
@@ -2378,7 +2378,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:SetChecked(AbyssUIAddonSettings.HideCloak)
   -- OnClick Function
   HideCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.HideCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2390,7 +2390,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         if AbyssUIAddonSettings.HideCloak == true then
           ShowCloak(false)
         end
@@ -2405,7 +2405,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:SetChecked(AbyssUIAddonSettings.ShowHelm)
   -- OnClick Function
   ShowHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.ShowHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2417,7 +2417,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         if AbyssUIAddonSettings.ShowHelm == true then
           ShowHelm(true)
         end
@@ -2432,7 +2432,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:SetChecked(AbyssUIAddonSettings.ShowCloak)
   -- OnClick Function
   ShowCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.ShowCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2444,7 +2444,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         if AbyssUIAddonSettings.ShowCloak == true then
           ShowCloak(true)
         end
@@ -2461,7 +2461,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2475,7 +2475,7 @@ local function ClassicBCC()
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+        if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
           if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
             WorldMapFrame.BlackoutFrame:Hide()
             WorldMapFrame.BlackoutFrame:EnableMouse(false)
@@ -2497,7 +2497,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
         AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2511,7 +2511,7 @@ local function ClassicBCC()
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+        if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
           if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
             PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
           end
@@ -2528,7 +2528,7 @@ local function ClassicBCC()
   AbyssUI_DefaultNameplate_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDefaultNameplate)
   -- OnClick Function
   AbyssUI_DefaultNameplate_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.ExtraFunctionDefaultNameplate = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2549,7 +2549,7 @@ local function ClassicBCC()
   DisableQuestFrame_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame)
   -- OnClick Function
   DisableQuestFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 11402) then
+    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
       AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
