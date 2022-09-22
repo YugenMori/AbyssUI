@@ -363,6 +363,10 @@ StatsFrame:SetScript("OnDragStop", StatsFrame.StopMovingOrSizing)
 local CF = CreateFrame("Frame", "$parentFrame", nil)
 CF:RegisterEvent("PLAYER_LOGIN")
 CF:SetScript("OnEvent", function(self, event)
+	if (AbyssUIAddonSettings.HideFPSMSFrame ~= nil and AbyssUIAddonSettings.HideFPSMSFrame == true) then
+		StatsFrame:ClearAllPoints()
+		StatsFrame:SetPoint('BOTTOMLEFT', UIParent, "BOTTOMLEFT", 5, 5)
+	end
 	local color
 	if customColor == false then
 		color = { r = 1, g = 1, b = 1 }

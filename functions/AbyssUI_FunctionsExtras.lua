@@ -1341,8 +1341,8 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, ...)
     local addon = ...
     if addon == "Blizzard_TalkingHeadUI" then
-        TalkingHeadFrameMover()
-        self:UnregisterAllEvents()
+      TalkingHeadFrameMover()
+      self:UnregisterAllEvents()
     end
 end)
 -- FirstPerson Cam

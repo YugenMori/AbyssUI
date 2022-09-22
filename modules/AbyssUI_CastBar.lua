@@ -89,10 +89,10 @@ end
 -- Cast bars
 local function CheckCastBarText()
 	if (not CastingBarFrame.Border:IsShown() and GetWoWVersion <= 90500) then
-		local c = CastingBarFrame 
+		local c = CastingBarFrame
 		c.Icon:Show()
-		c.Icon:SetWidth(22)
-		c.Icon:SetHeight(22)
+		c.Icon:SetWidth(21)
+		c.Icon:SetHeight(21)
 		c.Icon:ClearAllPoints()
 		c.Icon:SetPoint("LEFT", c, "LEFT", -1, 0)
 		c.Text = c:CreateFontString(nil)
@@ -189,7 +189,6 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
 else
 	return nil
 end
-
 
 --[[
 --	Original codebase:

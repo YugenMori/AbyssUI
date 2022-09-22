@@ -1,5 +1,5 @@
 # AbyssUI
-## Shadowlands + Burning Crusade Classic
+## Supports Any Version of World of Warcraft
 [![Github](https://img.shields.io/static/v1?label=Github&message=Follow&color=e64413&logo=git&link=https://github.com/YugenMori/AbyssUI)](https://github.com/YugenMori/AbyssUI)
 [![Ko-fi](https://img.shields.io/static/v1?label=PayPal&message=Donate&color=0079C1&logo=paypal)](https://ko-fi.com/whiteravenstudio)
 ##### Donating the equivalent of one cup of ☕ each month helps a lot 💛

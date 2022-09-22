@@ -3086,9 +3086,33 @@ local function Stylization()
     AbyssUIAddonSettings.UnitFrameImproved = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
+  -- UnitFrame DragonFlight --
+  local UnitFrameImproved_Dragonflight = CreateFrame("CheckButton", "$parentUnitFrameImproved_Dragonflight", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  UnitFrameImproved_Dragonflight:SetPoint("TOPLEFT", 400, -110)
+  UnitFrameImproved_Dragonflight.Text:SetText("|cfff2dc7fDragonflight UnitFrame|r")
+  local Frame = CreateFrame("Frame", nil, UnitFrameImproved_Dragonflight)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  UnitFrameImproved_Dragonflight.Text:SetAllPoints(Frame)
+  UnitFrameImproved_Dragonflight.tooltip = L["Add a elite texture to the player portrait"]
+  UnitFrameImproved_Dragonflight:SetChecked(AbyssUIAddonSettings.Dragonflight)
+  addonTable.DragonFlight = UnitFrameImproved_Dragonflight
+  -- OnClick Function
+  UnitFrameImproved_Dragonflight:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.DKAllyPortrait     ~= true and 
+      AbyssUIAddonSettings.DKHordePortrait     ~= true and
+      AbyssUIAddonSettings.DemonHunterPortrait ~= true then
+      AbyssUIAddonSettings.Dragonflight = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UnitFrameImproved_Dragonflight:SetChecked(nil)
+    end
+  end)
   -- Elite Portrait --
   local ElitePortrait_CheckButton = CreateFrame("CheckButton", "$parentElitePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  ElitePortrait_CheckButton:SetPoint("TOPLEFT", 400, -110)
+  ElitePortrait_CheckButton:SetPoint("TOPLEFT", 400, -140)
   ElitePortrait_CheckButton.Text:SetText(L["|cfff2dc7fElite Portrait|r"])
   local Frame = CreateFrame("Frame", nil, ElitePortrait_CheckButton)
   Frame:SetWidth(180)
@@ -3110,9 +3134,26 @@ local function Stylization()
       ElitePortrait_CheckButton:SetChecked(nil)
     end
   end)
+  -- Flat HealthBar --
+  local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  FlatHealthBar_CheckButton:SetPoint("TOPLEFT", 400, -170)
+  FlatHealthBar_CheckButton.Text:SetText("|cfff2dc7f"..L["Flat HealthBars"].."|r")
+  local Frame = CreateFrame("Frame", nil, FlatHealthBar_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  FlatHealthBar_CheckButton.Text:SetAllPoints(Frame)
+  FlatHealthBar_CheckButton.tooltip = L["Make the health bar textures looks Flat"]
+  FlatHealthBar_CheckButton:SetChecked(AbyssUIAddonSettings.FlatHealth)
+  addonTable.FlatHealth = FlatHealthBar_CheckButton
+  -- OnClick Function
+  FlatHealthBar_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.FlatHealth = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
   -- Dk Ally --
   local DKAllyPortrait_CheckButton = CreateFrame("CheckButton", "$parentDKAllyPortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  DKAllyPortrait_CheckButton:SetPoint("TOPLEFT", 400, -140)
+  DKAllyPortrait_CheckButton:SetPoint("TOPLEFT", 400, -200)
   DKAllyPortrait_CheckButton.Text:SetText(L["DeathKnight Alliance Portrait"])
   local Frame = CreateFrame("Frame", nil, DKAllyPortrait_CheckButton)
   Frame:SetWidth(180)
@@ -3135,7 +3176,7 @@ local function Stylization()
   end)
   -- Dk Horde Portrait --
   local DKHordePortrait_CheckButton = CreateFrame("CheckButton", "$parentDKHordePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  DKHordePortrait_CheckButton:SetPoint("TOPLEFT", 400, -170)
+  DKHordePortrait_CheckButton:SetPoint("TOPLEFT", 400, -230)
   DKHordePortrait_CheckButton.Text:SetText(L["DeathKnight Horde Portrait"])
   local Frame = CreateFrame("Frame", nil, DKHordePortrait_CheckButton)
   Frame:SetWidth(180)
@@ -3158,7 +3199,7 @@ local function Stylization()
   end)
   -- Demon Hunter Portrait --
   local DemonHunterPortrait_CheckButton = CreateFrame("CheckButton", "$parentDemonHunterPortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  DemonHunterPortrait_CheckButton:SetPoint("TOPLEFT", 400, -200)
+  DemonHunterPortrait_CheckButton:SetPoint("TOPLEFT", 400, -260)
   DemonHunterPortrait_CheckButton.Text:SetText(L["Demon Hunter Portrait"])
   local Frame = CreateFrame("Frame", nil, DemonHunterPortrait_CheckButton)
   Frame:SetWidth(180)
@@ -3179,36 +3220,6 @@ local function Stylization()
       DemonHunterPortrait_CheckButton:SetChecked(nil)
     end
   end)
-  -- Flat HealthBar --
-  local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  FlatHealthBar_CheckButton:SetPoint("TOPLEFT", 400, -230)
-  FlatHealthBar_CheckButton.Text:SetText("|cfff2dc7f"..L["Flat HealthBars"].."|r")
-  local Frame = CreateFrame("Frame", nil, FlatHealthBar_CheckButton)
-  Frame:SetWidth(180)
-  Frame:SetHeight(40)
-  Frame:SetPoint("LEFT", 25, 0)
-  FlatHealthBar_CheckButton.Text:SetAllPoints(Frame)
-  FlatHealthBar_CheckButton.tooltip = L["Make the health bar textures looks Flat"]
-  FlatHealthBar_CheckButton:SetChecked(AbyssUIAddonSettings.FlatHealth)
-  addonTable.FlatHealth = FlatHealthBar_CheckButton
-  -- OnClick Function
-  FlatHealthBar_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.FlatHealth = self:GetChecked()
-    AbyssUI_ReloadFrame:Show()
-  end)
-  -- After Login/Reload
-  --[[
-  FlatHealthBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
-  FlatHealthBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (event == "PLAYER_ENTERING_WORLD") then
-      if (AbyssUIAddonSettings.FlatHealth == true) then
-        AbyssUIAddonSettings.FlatHealth = self:GetChecked()
-      else
-        FlatHealth_CheckButton:SetChecked(nil)
-      end
-    end
-  end)  
-  --]]
   -- AbyssUIClassCircles01_CheckButton
   local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)

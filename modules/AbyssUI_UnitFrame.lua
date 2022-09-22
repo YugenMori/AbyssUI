@@ -172,6 +172,19 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				end
 			end
 		end
+		local function DragonflightUnitPlayerFrameStyle()
+			PlayerFrameHealthBar:SetHeight(20)
+			PlayerFrameHealthBar:SetWidth(125)
+	 		PlayerFrameHealthBar:SetPoint("TOPLEFT", 103, -34)
+ 			PlayerFrameBackground:SetAlpha(0)
+		end
+		local function DragonflightUnitTargetFrameStyle()
+			TargetFrameHealthBar:SetHeight(20)
+			TargetFrameHealthBar:SetWidth(125)
+			TargetFrameHealthBar:SetPoint("CENTER", 50, 6)
+	 		TargetFrameHealthBar:SetPoint("TOPLEFT", 5, -34)
+ 			TargetFrameBackground:SetAlpha(0)
+		end
 		-- PlayerFrameStyle
 	    local function UnitFramesImproved_Style_PlayerFrame()
 	      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
@@ -180,22 +193,38 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          PlayerFrameHealthBar.lockColor = true
 		          PlayerFrameHealthBar.capNumericDisplay = true
 		          PlayerFrameHealthBar:SetWidth(119)
-		          PlayerFrameHealthBar:SetHeight(29)
+		          PlayerFrameHealthBar:SetHeight(30)
 		          PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
 		          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
 		        end
 		        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
 		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
-	  	          elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          	if (AbyssUIAddonSettings.Dragonflight == true) then
+			          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
+		          		DragonflightUnitPlayerFrameStyle()
+		          	else
+		            	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
+		          	end
+	  	        elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
 		          elseif (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
 		          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
 		         		PlayerFrameTexture:SetVertexColor(1, 1, 1)
+		         	elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
+		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
+								DragonflightUnitPlayerFrameStyle()
+							elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.ElitePortrait == true) then
+		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrame-Elite")
+								DragonflightUnitPlayerFrameStyle()
 		          else 
-		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+		          	if (AbyssUIAddonSettings.Dragonflight == true) then
+		          		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
+		          		DragonflightUnitPlayerFrameStyle()
+		          	else
+		            	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+		          	end
 		          end
 		          if (AbyssUIAddonSettings.DKHordePortrait == true) then
 	          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
@@ -205,9 +234,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          end
 		          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
 		        else
-		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.Dragonflight ~= true) then
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
-		          else 
+		          elseif (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.Dragonflight == true)then
+		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
+		          	DragonflightUnitPlayerFrameStyle()
+		          else
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 		          end
 		          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
@@ -235,7 +267,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					C_Timer.After(0.1, function () 
 						PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
 						PlayerFrameHealthBar:SetWidth(119)
-						PlayerFrameHealthBar:SetHeight(29)
+						PlayerFrameHealthBar:SetHeight(30)
 						PlayerFrameHealthBar:SetPoint("TOPLEFT", PlayerFrame,"TOPLEFT", 106, -22)
 						PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
 					end)
@@ -261,15 +293,15 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						self.Background:SetPoint("TOPLEFT", 7, -41)
 					else
 						if (GetWoWVersion < 30600) then
-							TargetFrameHealthBar:SetHeight(29)
-							TargetFrameBackground:SetHeight(29)
+							TargetFrameHealthBar:SetHeight(30)
+							TargetFrameBackground:SetHeight(30)
 							TargetFrameHealthBar:SetPoint("TOPLEFT", 7, -22)
 							TargetFrameBackground:SetPoint("TOPLEFT", 7, -22)
 							if (TargetFrameHealthBar.TextString) then
 								TargetFrameHealthBar.TextString:SetPoint("CENTER", -50, 6)
 							end
 						else
-							self.healthbar:SetHeight(29)
+							self.healthbar:SetHeight(30)
 							self.healthbar:SetPoint("TOPLEFT", 7, -22)
 							if (self.healthbar.TextString) then
 								self.healthbar.TextString:SetPoint("CENTER", -50, 6)
@@ -401,10 +433,19 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						v:SetShadowOffset(1, -1)
 						v:SetScale(1.2)
 						v:ClearAllPoints()
-						PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
-						TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
+						if (AbyssUIAddonSettings.Dragonflight == true) then
+							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 20)
+							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 20)
+						else
+							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
+							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
+						end
 						if (GetWoWVersion >= 20502) then
-							FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
+							if (AbyssUIAddonSettings.Dragonflight == true) then
+								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 20)
+							else
+								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
+							end
 						end
 					end)
 				end
@@ -454,7 +495,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						self.borderTexture:SetTexture(texture)
 					else
 						if (not (classification == "minus")) then
-							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+							if (AbyssUIAddonSettings.Dragonflight == true) then
+								self.borderTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-TargetingFrame")
+								DragonflightUnitTargetFrameStyle()
+							else
+								self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+							end
 						end
 					end
 					self.nameBackground:SetAlpha(0)

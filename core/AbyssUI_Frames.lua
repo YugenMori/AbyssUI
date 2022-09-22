@@ -275,8 +275,10 @@ AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
 -- Model1
 local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
 AbyssUI_ModelFrameAFKMode:SetPoint("BOTTOMRIGHT", 5, 5)
-AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelFrame:GetWidth()*2)
-AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelFrame:GetHeight()*2)
+--if (GetWoWVersion <= 90500) then
+	AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelFrame:GetWidth()*2)
+	AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelFrame:GetHeight()*2)
+--end
 AbyssUI_ModelFrameAFKMode:SetAlpha(1)
 local ModelFrame_Model1 = CreateFrame("PlayerModel", "$parentModelFrame_Model1", AbyssUI_ModelFrameAFKMode)
 ModelFrame_Model1:SetUnit("player")
@@ -1136,6 +1138,7 @@ f:SetScript("OnEvent", function()
 			addonTable.DisableHealingSpam,
 			addonTable.TooltipOnCursor,
 			addonTable.UnitFrameImproved,
+			addonTable.Dragonflight,
 			addonTable.ElitePortrait,
 			addonTable.FlatHealth,
 		} do
@@ -1151,6 +1154,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
 		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.Dragonflight 				      			 = addonTable.Dragonflight:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
@@ -1195,6 +1199,7 @@ f:SetScript("OnEvent", function()
 			addonTable.TooltipOnCursor,
 			addonTable.SquareMinimap,
 			addonTable.UnitFrameImproved,
+			addonTable.Dragonflight,
 			addonTable.ElitePortrait,
 			addonTable.FlatHealth,
 		} do
@@ -1211,6 +1216,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.SquareMinimap 				      	 		 = addonTable.SquareMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.Dragonflight 				      			 = addonTable.Dragonflight:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
