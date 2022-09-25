@@ -1,7 +1,7 @@
 # AbyssUI
 ## Supports Any Version of World of Warcraft
 [![Github](https://img.shields.io/static/v1?label=Github&message=Follow&color=e64413&logo=git&link=https://github.com/YugenMori/AbyssUI)](https://github.com/YugenMori/AbyssUI)
-[![Ko-fi](https://img.shields.io/static/v1?label=PayPal&message=Donate&color=0079C1&logo=paypal)](https://ko-fi.com/whiteravenstudio)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q06OH43)
 ##### Donating the equivalent of one cup of ☕ each month helps a lot 💛
 
 #### AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow artwork/functionality.
