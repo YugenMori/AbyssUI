@@ -114,9 +114,9 @@ L["Auto Gamma"] = "Автоматическая гамма"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "Изменяет гамма автоматически, когда"..
 " день для 1.2 (конечно) и для 1.0 (по умолчанию), когда это ночь, в зависимости от местного времени"
-L["Non-Millitary Date/Time"] = "США Дата / Время Формат"
+L["Non-Military Date/Time"] = "США Дата / Время Формат"
 L["Change the date format of the whole UI to"..
-" Non-Millitary format"] = "Изменяет формат даты интерфейса на формат США"
+" Non-Military format"] = "Изменяет формат даты интерфейса на формат США"
 L["RPG chat fonts"] = "Источник чата RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "Изменяет шрифт чата на стиль RPG"
 L["Auto Screenshot"] = "Автоматический скриншот"
@@ -433,3 +433,6 @@ L["Show Cloak"] = "Показать плащ"
 L["Always show cloak"] = "Всегда показывать плащ"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7fмой Patreon, он связан со всеми моими проектами, так что имейте это в виду. Вы будете помогать многим проектам одновременно! Подтвердите получение ссылки|r" 
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7fПожертвования будут отображаться на вкладке 'Доноры'в качестве рейтинга. Большое спасибо, подтвердите получение ссылки|r"
+L["Dragonflight UnitFrame"] = true
+L["Reverse HealthBar Fill"] = "Обратное заполнение полосы здоровья"
+L["All unitframe health bars will fill in reverse"] = "Все полосы здоровья юнитфреймов будут заполняться в обратном порядке"

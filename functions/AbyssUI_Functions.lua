@@ -213,25 +213,27 @@ local function eventHandler(self, event, ...)
 					bg:SetVertexColor(c.r,c.g,c.b)
 					PlayerFrame.bg = true
 				end
-			end
-			if UnitIsPlayer("target") then
-				c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-				TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-			end
-			if UnitIsPlayer("focus") and GetWoWVersion > 12400 then
-				c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-				FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+				if UnitIsPlayer("target") then
+					c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
+					TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+				end
+				if UnitIsPlayer("focus") and GetWoWVersion > 12400 then
+					c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
+					FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+				end
 			end
 		else
 			return nil
 		end
 	else
 		-- Remove background
-		TargetFrameNameBackground:SetAlpha(0.5)
-		TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-		if (GetWoWVersion > 12400) then
-			FocusFrameNameBackground:SetAlpha(0.5)
-			FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+		if (GetWoWVersion <= 90500) then
+			TargetFrameNameBackground:SetAlpha(0.5)
+			TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+			if (GetWoWVersion > 12400) then
+				FocusFrameNameBackground:SetAlpha(0.5)
+				FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+			end
 		end
 	end
 end
@@ -294,7 +296,6 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
 	end
 end)
 ----------------------------------------------------
--- Tooltip
 -- UnitColor
 local UnitColor
 local function UnitColor(unit)
@@ -322,6 +323,7 @@ local function UnitColor(unit)
 	--end
 	return r, g, b, a
 end
+-- Tooltip
 -- Tooltip Background and borders
 if (GetWoWVersion <= 90500) then
 	local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
@@ -533,19 +535,21 @@ if (GetWoWVersion > 12400) then
 end
 local function eventHandler(self, event, ...)
 	if (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
-		if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-			TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-			if (GetWoWVersion > 12400) then
-				FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+		if (GetWoWVersion <= 90500) then
+			if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+				TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
+				if (GetWoWVersion > 12400) then
+					FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+				end
+			else
+				return nil
 			end
-		else
-			return nil
-		end
-		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-		if (GetWoWVersion > 12400) then
-			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
-		end
-	end	
+			TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+			if (GetWoWVersion > 12400) then
+				FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+			end
+		end	
+	end
 end
 frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground, }) do
@@ -555,7 +559,7 @@ end
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+	if (AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
 		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
 		if (GetWoWVersion > 12400) then		

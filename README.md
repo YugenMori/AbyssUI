@@ -7,7 +7,7 @@
 #### AbyssUI is a minimalist World of Warcraft interface. It changes parts of the interface so you can have a more customizable and clean UI. The goals was to have a high customizable interface, that changes little to the wow artwork/functionality.
 
 #### Hi, I'm Yugen, I really like to work on this UI (I did spend too much time editing textures tho lol), I hope you like AbyssUI. If you want me to continue share with your friends, and please consider making a [donation](https://ko-fi.com/whiteravenstudio). This helps a lot and give me energy to make it even better! Thanks for all the support.
-
+[![AbyssUI_DragonFlightPreview](https://cdn.discordapp.com/attachments/740267120956276764/1023649729583783996/WoWScrnShot_092522_143244.jpg)](https://ko-fi.com/whiteravenstudio)
 #### Always check the FAQ before posting. Bug reports have more visibility on our discord channel.
 ##### *This interface support all languages. (since v9.0.1.9+)
 [![AbyssUI_Preview](https://cdn.discordapp.com/attachments/740267120956276764/764559551495274536/abyssui_preview.png)](https://youtu.be/7nDiqznBVds)

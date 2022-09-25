@@ -259,7 +259,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
       end
     end
 		-- VehicleHandle
-		if (GetWoWVersion >= 20502) then
+		if (GetWoWVersion >= 20502 and GetWoWVersion <= 90500) then
 			local eventVehicleHandle = CreateFrame("Frame", "$parent_eventVehicleHandle", nil)
 			eventVehicleHandle:RegisterEvent("UNIT_EXITED_VEHICLE")
 			eventVehicleHandle:SetScript("OnEvent", function(self, event, ...)
@@ -278,7 +278,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- TargetFrameStyle
 		local function UnitFramesImproved_Style_TargetFrame(self)
-			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true and GetWoWVersion <= 90500) then
 				--if not InCombatLockdown() then
 				if (GetWoWVersion > 12400) then
 					local classification = UnitClassification(self.unit)
@@ -410,12 +410,40 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- VehicleArt
 		local function UnitFramesImproved_PlayerFrame_ToVehicleArt(self)
 			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-				if not InCombatLockdown() then
+				if (not InCombatLockdown() and GetWoWVersion <= 90500) then
 					PlayerFrameHealthBar:SetHeight(12)
 					PlayerFrameHealthBarText:SetPoint("CENTER", 50, 3)
 				end
 			else
 				return nil
+			end
+		end
+		local function DragonflightUnitNameText()
+			if (GetWoWVersion >= 90500) then
+				for i, v in pairs({
+						TargetFrame.TargetFrameContent.TargetFrameContentMain.Name,
+						FocusFrame.TargetFrameContent.TargetFrameContentMain.Name,
+					}) do
+						v:SetVertexColor(248/255, 248/255, 248/255)
+						v:SetShadowColor(0, 0, 0)
+						v:SetShadowOffset(1, -1)
+						v:SetScale(1.2)
+						v:ClearAllPoints()
+				end
+			end
+		end
+		local function DragonflightUnitNameNumbers()
+			if (GetWoWVersion >= 90500) then
+				for i, v in pairs ({
+					TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
+					TargetFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
+					FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
+					FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
+					}) do
+					v:SetFont(globalFont, 12)
+					v:SetShadowColor(0, 0, 0)
+					v:SetShadowOffset(1, -1)					
+				end
 			end
 		end
 		-- Unit Name
@@ -433,18 +461,33 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						v:SetShadowOffset(1, -1)
 						v:SetScale(1.2)
 						v:ClearAllPoints()
-						if (AbyssUIAddonSettings.Dragonflight == true) then
+						DragonflightUnitNameText()
+						if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
 							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 20)
 							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 20)
-						else
+						elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
 							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
-							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
+							TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", TargetFrame, "CENTER", -10, 15)
+						else
+							if (GetWoWVersion <= 90500) then
+								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
+								TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
+							else
+								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
+								TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", TargetFrame, "CENTER", -10, 15)
+							end
 						end
 						if (GetWoWVersion >= 20502) then
-							if (AbyssUIAddonSettings.Dragonflight == true) then
+							if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
 								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 20)
+							elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
+								FocusFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", FocusFrame, "CENTER", -18, 15)
 							else
-								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
+								if (GetWoWVersion <= 90500) then
+									FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
+								else
+									FocusFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", FocusFrame, "CENTER", -18, 15)
+								end
 							end
 						end
 					end)
@@ -462,13 +505,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					v:SetShadowColor(0, 0, 0)
 					v:SetShadowOffset(1, -1)					
 				end
-			else
-				return nil
+				DragonflightUnitNameNumbers()
 			end
 		end
 		-- TargetUpdate
 		local function UnitFramesImproved_TargetFrame_Update(self)
-			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true and GetWoWVersion <= 90500) then
 			  UnitStatusBarColor(self)
 			end
 		end
@@ -481,7 +523,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- CheckClassification
 		local function UnitFramesImproved_TargetFrame_CheckClassification(self, forceNormalTexture)
 			if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
-				if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+				if (AbyssUIAddonSettings.UnitFrameImproved == true and GetWoWVersion <= 90500) then
 					local texture
 					local classification = UnitClassification(self.unit)
 					if (classification == "worldboss" or classification == "elite") then
@@ -508,7 +550,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					return nil
 				end
 			else
-				if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+				if (AbyssUIAddonSettings.UnitFrameImproved == true and GetWoWVersion <= 90500) then
 					local texture
 					local classification = UnitClassification(self.unit)
 					if (classification == "worldboss" or classification == "elite") then
@@ -596,18 +638,19 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				-- Hook PlayerFrame functions
 	      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
 				hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
-
-				-- Hook TargetFrame functions
-				hooksecurefunc("TargetFrame_CheckDead", UnitFramesImproved_TargetFrame_Update)
-				hooksecurefunc("TargetFrame_Update", UnitFramesImproved_TargetFrame_Update)
-				hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
-				hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
-				hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
 				hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
+				
+				-- Hook TargetFrame functions
+				if (GetWoWVersion <= 90500) then
+					hooksecurefunc("TargetFrame_CheckDead", UnitFramesImproved_TargetFrame_Update)
+					hooksecurefunc("TargetFrame_Update", UnitFramesImproved_TargetFrame_Update)
+					hooksecurefunc("TargetFrame_CheckClassification", UnitFramesImproved_TargetFrame_CheckClassification)
+					hooksecurefunc("TargetofTarget_Update", UnitFramesImproved_TargetFrame_Update)
+					hooksecurefunc("TargetFrame_CheckFaction", UnitFramesImproved_TargetFrame_CheckFaction)
+				end
 
 				-- Set up some stylings
 				--if (GetWoWVersion <= 90500) then
-					UnitFramesImproved_Style_PlayerFrame(PlayerFrame)
 					--UnitFramesImproved_BossTargetFrame_Style(Boss1TargetFrame)
 					--UnitFramesImproved_BossTargetFrame_Style(Boss2TargetFrame)
 					--UnitFramesImproved_BossTargetFrame_Style(Boss3TargetFrame)
@@ -620,22 +663,21 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				if (GetWoWVersion >= 20502) then
 					UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				end
-				UnitFramesImproved_UnitName_Color()
 				if (FocusFrame and GetWoWVersion >= 20502) then
 					UnitFramesImproved_Style_TargetFrame(FocusFrame)
 				end
+				UnitFramesImproved_Style_PlayerFrame(PlayerFrame)
+				UnitFramesImproved_UnitName_Color()
 				UnitFramesImproved_Style_TargetOfTargetFrame()
-				
+
 				-- Update some values
 				TextStatusBar_UpdateTextString(PlayerFrame.healthbar)
 				TextStatusBar_UpdateTextString(PlayerFrame.manabar)
 
 				if (not FocusFrame) then
-			
 					TargetFrameHealthBar.TextString = CreateStatusBarText("Text", "TargetFrameHealthBar", TargetFrameTextureFrame, "CENTER", -50, 3)
 					TargetFrameHealthBar.LeftText = CreateStatusBarText("TextLeft", "TargetFrameHealthBar", TargetFrameTextureFrame, "LEFT", 8, 3)
 					TargetFrameHealthBar.RightText = CreateStatusBarText("TextRight", "TargetFrameHealthBar", TargetFrameTextureFrame, "RIGHT", -110, 3)
-					
 					TargetFrameManaBar.TextString = CreateStatusBarText("Text", "TargetFrameManaBar", TargetFrameTextureFrame, "CENTER", -50, -8)
 					TargetFrameManaBar.LeftText = CreateStatusBarText("TextLeft", "TargetFrameManaBar", TargetFrameTextureFrame, "LEFT", 8, -8)
 					TargetFrameManaBar.RightText = CreateStatusBarText("TextRight", "TargetFrameManaBar", TargetFrameTextureFrame, "RIGHT", -110, -8)

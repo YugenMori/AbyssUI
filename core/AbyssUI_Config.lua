@@ -92,12 +92,17 @@ local function AbyssUI_ApplyFonts(self)
 end
 -- StatusBarFill
 local function AbyssUI_StatusBarFill()
-  --if (GetWoWVersion >= 90500) then
-    TargetFrameHealthBar:SetReverseFill(true)
-    if (GetWoWVersion >= 20502) then
-      FocusFrameHealthBar:SetReverseFill(true)
+  if (AbyssUIAddonSettings ~= nil and AbyssUIAddonSettings.ReverseHealthFill == true) then
+    if (GetWoWVersion <= 90500) then
+      TargetFrameHealthBar:SetReverseFill(true)
+      if (GetWoWVersion >= 20502) then
+        FocusFrameHealthBar:SetReverseFill(true)
+      end
+    else
+      TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetReverseFill(true)
+      FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetReverseFill(true)
     end
-  --end
+  end
 end
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -1744,9 +1749,9 @@ local function Miscellaneous()
   -- American Clock Style --
   local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -230)
-  AbyssUI_AmericanClock_CheckButton.Text:SetText(L["Non-Millitary Date/Time"])
+  AbyssUI_AmericanClock_CheckButton.Text:SetText(L["Non-Military Date/Time"])
   AbyssUI_AmericanClock_CheckButton.tooltip = L["Change the date format of the whole UI to"..
-  " Non-Millitary format"]
+  " Non-Military format"]
   AbyssUI_AmericanClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionAmericanClock)
   -- OnClick Function
   AbyssUI_AmericanClock_CheckButton:SetScript("OnClick", function(self)
@@ -2007,6 +2012,22 @@ local function Miscellaneous()
   -- OnClick Function
   GreenHealth_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.GreenHealth = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
+  -- ReverseHealthFill --
+  local ReverseHealthFill_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  ReverseHealthFill_CheckButton:SetPoint("TOPLEFT", 400, -380)
+  ReverseHealthFill_CheckButton.Text:SetText(L["Reverse HealthBar Fill"])
+  local Frame = CreateFrame("Frame", nil, ReverseHealthFill_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  ReverseHealthFill_CheckButton.Text:SetAllPoints(Frame)
+  ReverseHealthFill_CheckButton.tooltip = L["All unitframe health bars will fill in reverse"]
+  ReverseHealthFill_CheckButton:SetChecked(AbyssUIAddonSettings.ReverseHealthFill)
+  -- OnClick Function
+  ReverseHealthFill_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ReverseHealthFill = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
 end
@@ -3095,9 +3116,9 @@ local function Stylization()
   Frame:SetHeight(40)
   Frame:SetPoint("LEFT", 25, 0)
   UnitFrameImproved_Dragonflight.Text:SetAllPoints(Frame)
-  UnitFrameImproved_Dragonflight.tooltip = L["Add a elite texture to the player portrait"]
+  UnitFrameImproved_Dragonflight.tooltip = L["Dragonflight UnitFrame"]
   UnitFrameImproved_Dragonflight:SetChecked(AbyssUIAddonSettings.Dragonflight)
-  addonTable.DragonFlight = UnitFrameImproved_Dragonflight
+  addonTable.Dragonflight = UnitFrameImproved_Dragonflight
   -- OnClick Function
   UnitFrameImproved_Dragonflight:SetScript("OnClick", function(self)
     if AbyssUIAddonSettings.DKAllyPortrait     ~= true and 

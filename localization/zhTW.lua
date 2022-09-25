@@ -115,9 +115,9 @@ L["Auto Gamma"] = "自動伽瑪"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "在以下情況下自動更改伽瑪"..
 " 根據當地時間，白天為白天（晴天）為1.2（晴朗），晚上為1.0（默認）"
-L["Non-Millitary Date/Time"] = "美國日期/時間格式"
+L["Non-Military Date/Time"] = "美國日期/時間格式"
 L["Change the date format of the whole UI to"..
-" Non-Millitary format"] = "將界面日期格式更改為美國格式"
+" Non-Military format"] = "將界面日期格式更改為美國格式"
 L["RPG chat fonts"] = "聊天字體RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "將聊天源更改為RPG樣式"
 L["Auto Screenshot"] = "自動截圖"
@@ -433,3 +433,6 @@ L["Show Cloak"] = "展示斗篷"
 L["Always show cloak"] = "總是露出斗篷"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f 我的 Patreon，它與我所有的項目有關，所以請記住這一點。您將同時幫助很多項目！確認獲取鏈接|r" 
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7f捐款 將作為排名出現在‘捐助者’標籤中。非常感謝，確認獲取鏈接|r"
+L["Dragonflight UnitFrame"] = true
+L["Reverse HealthBar Fill"] = "反向健康欄填充"
+L["All unitframe health bars will fill in reverse"] = "所有單位框架的生命值條將反向填充"

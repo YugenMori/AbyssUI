@@ -112,14 +112,13 @@ local function AbyssUI_ColorizationFrameFunction(...)
 end
 --------------------------------------------------------------
 -- UnitColor
-local UnitColor
 local function UnitColor(unit)
     local r, g, b, a
-    if (not InCombatLockdown()) then
-        if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
-            --Color it gray
-            r, g, b, a = 0.5, 0.5, 0.5, 1
-        elseif (UnitIsPlayer(unit)) then
+    --if (not InCombatLockdown()) then
+        --if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
+            -- Turn it Gray
+            --r, g, b, a = 0.5, 0.5, 0.5, 1
+        if (UnitIsPlayer(unit)) then
             --Try to color it by class.
             local localizedClass, englishClass = UnitClass(unit)
             local classColor = RAID_CLASS_COLORS[englishClass]
@@ -133,9 +132,11 @@ local function UnitColor(unit)
                 end
             end
         else
-            r, g, b, a = UnitSelectionColor(unit)
+            if (unit ~= nil) then
+                r, g, b, a = UnitSelectionColor(unit)
+            end
         end
-    end
+    --end
     return r, g, b, a
 end
 ---------------------------- NewUI Frames ----------------------------------
@@ -296,137 +297,121 @@ f:SetScript("OnEvent", function(self, event, name)
         end
     end
 end)
--- KeyBindingFrame
---[[
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", function(self, event, name)
-    if name == "Blizzard_BindingUI" and GetWoWVersion == 20502 and GetWoWVersion >= 12000 then
-        for i, v in pairs({
-            KeyBindingFrame.BottomEdge,
-            KeyBindingFrame.BottomLeftCorner,
-            KeyBindingFrame.BottomRightCorner,
-            KeyBindingFrame.Center,
-            KeyBindingFrame.LeftEdge,
-            KeyBindingFrame.RightEdge,
-            KeyBindingFrame.TopEdge,
-            KeyBindingFrame.TopLeftCorner,
-            KeyBindingFrame.TopRightCorner,
-            KeyBindingFrameHeader, }) do
-            if AbyssUIAddonSettings ~= nil then
-                AbyssUI_ColorizationFrameFunction(v)
-            else
-                return nil
+---------------------------- NewUI Health Bar Color ----------------------------------
+local f = CreateFrame("Frame", nil)
+f:RegisterEvent("PLAYER_LOGIN")
+f:SetScript("OnEvent", function(self, event)
+if (GetWoWVersion >= 90500) then
+        local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
+        local UnitFrames = {
+          PlayerFrame,
+          PetFrame,
+          TargetFrameToT,
+          FocusFrameToT,
+          PartyMemberFrame1,
+          PartyMemberFrame2,
+          PartyMemberFrame3,
+          PartyMemberFrame4,
+        }
+        local UnitFrameRegions = {
+          "healthbar",
+          "myHealPredictionBar",
+          "otherHealPredictionBar",
+          "healAbsorbBar",
+          "totalAbsorbBar",
+          --"manabar",
+          "myManaCostPredictionBar",
+          "spellbar",
+        }
+        local OtherStatusBars = {
+          CastingBarFrame,
+          MirrorTimer1StatusBar,
+          MirrorTimer2StatusBar,
+          MirrorTimer3StatusBar,
+        }
+        if (AbyssUIAddonSettings.FlatHealth == true) then
+            for _, frame in next, UnitFrames do
+            for _, region in next, UnitFrameRegions do
+              local bar = frame[region]
+              if bar and bar.SetStatusBarTexture then
+                bar:SetStatusBarTexture(TEXTURE)
+                bar:GetStatusBarTexture():SetHorizTile(true)
+              elseif bar and bar.SetTexture then
+                bar:SetTexture(TEXTURE)
+                bar:SetHorizTile(true)
+              end
+            end
+            end
+            for _, bar in next, OtherStatusBars do
+            bar:SetStatusBarTexture(TEXTURE)
+            bar:GetStatusBarTexture():SetHorizTile(true)
             end
         end
     end
 end)
---]]
-
-
-
--- testing stuff
--- /run ActionButton1.RightDivider:SetVertexColor(0,0,0)
---[[
-AbyssUI = LibStub("AceAddon-3.0"):NewAddon("AbyssUI", "AceConsole-3.0", "AceEvent-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
-
-
-local options = {
-    name = "AbyssUI",
-    handler = AbyssUI,
-    type = "group",
-    args = {
-        msg = {
-            type = "input",
-            name = L["Message"],
-            desc = L["The message to be displayed when you get home."],
-            usage = L["<Your message>"],
-            get = "GetMessage",
-            set = "SetMessage",
-        },
-        showInChat = {
-            type = "toggle",
-            name = L["Show in Chat"],
-            desc = L["Toggles the display of the message in the chat window."],
-            get = "IsShowInChat",
-            set = "ToggleShowInChat",
-        },
-        showOnScreen = {
-            type = "toggle",
-            name = L["Show on Screen"],
-            desc = L["Toggles the display of the message on the screen."],
-            get = "IsShowOnScreen",
-            set = "ToggleShowOnScreen",
-        },
-    },
-}
-
-local defaults = {
-    profile =  {
-        message = L["Welcome Home!"],
-        showInChat = false,
-        showOnScreen = true,
-    },
-}
-
-function AbyssUI:OnInitialize()
-    -- Called when the addon is loaded
-    self.db = LibStub("AceDB-3.0"):New("AbyssuiDB", defaults, true)
-
-    LibStub("AceConfig-3.0"):RegisterOptionsTable("AbyssUI", options)
-    self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("AbyssUI", "AbyssUI")
-    self:RegisterChatCommand("ab", "ChatCommand")
-    self:RegisterChatCommand("abyssui", "ChatCommand")
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_TARGET_CHANGED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+if (GetWoWVersion > 12400) then
+    f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
-
-function AbyssUI:OnEnable()
-    -- Called when the addon is enabled
-    self:RegisterEvent("ZONE_CHANGED")
-end
-
-function AbyssUI:ZONE_CHANGED()
-    if GetBindLocation() == GetSubZoneText() then
-        if self.db.profile.showInChat then
-            self:Print(self.db.profile.message)
-        end
-
-        if self.db.profile.showOnScreen then
-            UIErrorsFrame:AddMessage(self.db.profile.message, 1.0, 1.0, 1.0, 5.0)
-        end
+f:SetScript("OnEvent", function(self, event, name)
+ if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD") and GetWoWVersion >= 90500) then
+        PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
+        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+        TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))
+        FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
     end
-end
-
-function AbyssUI:ChatCommand(input)
-    if not input or input:trim() == "" then
-        InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
+end)
+----------------------------------------------------
+-- Keep the color when health changes
+hooksecurefunc("TargetHealthCheck", function()
+    if (GetWoWVersion >= 90500) then
+        PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
+        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+        TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    
+        FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
     else
-        LibStub("AceConfigCmd-3.0"):HandleCommand("ab", "abyssui", input)
+        return nil
     end
+end)
+-- For the new texture bars
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_TARGET_CHANGED")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+if (GetWoWVersion > 12400) then
+    f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
-
-function AbyssUI:GetMessage(info)
-    return self.db.profile.message
-end
-
-function AbyssUI:SetMessage(info, newValue)
-    self.db.profile.message = newValue
-end
-
-function AbyssUI:IsShowInChat(info)
-    return self.db.profile.showInChat
-end
-
-function AbyssUI:ToggleShowInChat(info, value)
-    self.db.profile.showInChat = value
-end
-
-function AbyssUI:IsShowOnScreen(info)
-    return self.db.profile.showOnScreen
-end
-
-function AbyssUI:ToggleShowOnScreen(info, value)
-    self.db.profile.showOnScreen = value
-end
-
---]]
+f:SetScript("OnEvent", function(self, event, name)
+ if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD") and GetWoWVersion >= 90500) then
+        for i, v in pairs({ 
+            TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+            FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+        }) do
+            if AbyssUIAddonSettings ~= nil then
+                v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
+                v:GetStatusBarTexture():SetHorizTile(false)
+            end
+        end
+    end
+end)
+hooksecurefunc("TargetHealthCheck", function()
+    if (GetWoWVersion >= 90500) then
+        for i, v in pairs({ 
+            TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+            FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+        }) do
+            if AbyssUIAddonSettings ~= nil then
+                v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
+                v:GetStatusBarTexture():SetHorizTile(false)
+            end
+        end
+    else
+        return nil
+    end
+end)

@@ -103,7 +103,7 @@ L["When you open a Merchant shop, auto sell gray"..
 L["Auto Gamma"] = true
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = true
-L["Non-Millitary Date/Time"] = true
+L["Non-Military Date/Time"] = true
 L["Change the date format of the whole UI to"..
 " Non-Millitary format"] = true
 L["RPG chat fonts"] = true
@@ -387,3 +387,6 @@ L["Show Cloak"] = true
 L["Always show cloak"] = true
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = true 
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = true
+L["Dragonflight UnitFrame"] = true
+L["Reverse HealthBar Fill"] = true
+L["All unitframe health bars will fill in reverse"] = true

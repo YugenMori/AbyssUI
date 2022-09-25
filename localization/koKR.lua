@@ -114,9 +114,9 @@ L["Auto Gamma"] = "자동 감마"
 L["Automatically change the gamma when is day to"..
 " 1.2 (brighter) and to 1.0 (default) at night based on the local time"] = "다음과 같은 경우 감마를 자동으로 변경합니다"..
 " 현지 시간을 기준으로 한 주간 1.2 (지우기) 및 1.0 (기본값) 야간"
-L["Non-Millitary Date/Time"] = "미국 날짜 / 시간 형식"
+L["Non-Military Date/Time"] = "미국 날짜 / 시간 형식"
 L["Change the date format of the whole UI to"..
-" Non-Millitary format"] = "인터페이스 날짜 형식을 미국 형식으로 변경합니다"
+" Non-Military format"] = "인터페이스 날짜 형식을 미국 형식으로 변경합니다"
 L["RPG chat fonts"] = "채팅 글꼴 RPG"
 L["Change the chat fonts to a RPG look-alike style"] = "채팅 소스를 스타일로 변경 RPG"
 L["Auto Screenshot"] = "자동 스크린 샷"
@@ -433,3 +433,6 @@ L["Show Cloak"] = "망토 보이기"
 L["Always show cloak"] = "항상 망토 보여줘"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f 내 Patreon은, 내 모든 프로젝트와 관련이 있으므로 이를 염두에 두십시오. 한 번에 많은 프로젝트에 도움이 될 것입니다! 링크를 받으려면 확인|r" 
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7f기부금은 '기부자' 탭에 순위로 표시됩니다. 대단히 감사합니다. 링크를 받으려면 확인|r"
+L["Dragonflight UnitFrame"] = true
+L["Reverse HealthBar Fill"] = "리버스 헬스바 필"
+L["All unitframe health bars will fill in reverse"] = "모든 유닛프레임 체력바가 반대로 채워집니다"

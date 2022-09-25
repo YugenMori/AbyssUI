@@ -1754,25 +1754,26 @@ local function IconThemeInit()
         cf:SetScript("OnUpdate", nil)
       end
     end
-
-    hooksecurefunc("TargetFrame_UpdateAuras", function(self)
-      for i = 1, MAX_TARGET_BUFFS do
-        b = _G["TargetFrameBuff"..i]
-        applySkin(b)
-      end
-      for i = 1, MAX_TARGET_DEBUFFS do
-        b = _G["TargetFrameDebuff"..i]
-        applySkin(b)
-      end
-      for i = 1, MAX_TARGET_BUFFS do
-        b = _G["FocusFrameBuff"..i]
-        applySkin(b)
-      end
-      for i = 1, MAX_TARGET_DEBUFFS do
-        b = _G["FocusFrameDebuff"..i]
-        applySkin(b)
-      end
-    end)
+    if (GetWoWVersion <= 90500) then
+      hooksecurefunc("TargetFrame_UpdateAuras", function(self)
+        for i = 1, MAX_TARGET_BUFFS do
+          b = _G["TargetFrameBuff"..i]
+          applySkin(b)
+        end
+        for i = 1, MAX_TARGET_DEBUFFS do
+          b = _G["TargetFrameDebuff"..i]
+          applySkin(b)
+        end
+        for i = 1, MAX_TARGET_BUFFS do
+          b = _G["FocusFrameBuff"..i]
+          applySkin(b)
+        end
+        for i = 1, MAX_TARGET_DEBUFFS do
+          b = _G["FocusFrameDebuff"..i]
+          applySkin(b)
+        end
+      end)
+    end
     
     total = 0
     cf = CreateFrame("Frame")
