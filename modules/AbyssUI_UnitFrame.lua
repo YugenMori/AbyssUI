@@ -444,6 +444,10 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					v:SetShadowColor(0, 0, 0)
 					v:SetShadowOffset(1, -1)					
 				end
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString:ClearAllPoints()
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText:ClearAllPoints()
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -20, 2)
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText:SetPoint("CENTER", FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar, "CENTER", 10, 0)
 			end
 		end
 		-- Unit Name
@@ -466,14 +470,14 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 20)
 							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 20)
 						elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
-							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
+							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 14)
 							TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", TargetFrame, "CENTER", -10, 15)
 						else
 							if (GetWoWVersion <= 90500) then
 								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
 								TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
 							else
-								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
+								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 14)
 								TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", TargetFrame, "CENTER", -10, 15)
 							end
 						end

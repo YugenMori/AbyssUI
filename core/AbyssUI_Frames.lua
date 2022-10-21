@@ -1198,7 +1198,6 @@ f:SetScript("OnEvent", function()
 			addonTable.SquareMinimap,
 			addonTable.UnitFrameImproved,
 			addonTable.Dragonflight,
-			addonTable.ElitePortrait,
 			addonTable.FlatHealth,
 		} do
 			v:SetChecked(true)
@@ -1215,7 +1214,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.SquareMinimap 				      	 		 = addonTable.SquareMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.Dragonflight 				      			 = addonTable.Dragonflight:GetChecked()
-		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()

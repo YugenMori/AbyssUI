@@ -436,3 +436,5 @@ L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you ve
 L["Dragonflight UnitFrame"] = true
 L["Reverse HealthBar Fill"] = "Gesundheitsbalken umkehren"
 L["All unitframe health bars will fill in reverse"] = "Alle Unitframe-Gesundheitsbalken werden umgekehrt ausgefüllt"
+L["Hide MainActionBar"] = "Hauptaktionsleiste ausblenden"
+L["Hides the MainActionBar"] = "Versteckt die Haupt-ActionBar"

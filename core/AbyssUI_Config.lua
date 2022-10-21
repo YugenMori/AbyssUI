@@ -932,7 +932,7 @@ local function HideElementsInit()
       AbyssUI_ShowMicroMenu_Function()
     end
    else 
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       MicroMenu_CheckButton:SetChecked(nil)
    end
   end)
@@ -1535,7 +1535,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
         GarrisonLandingPageMinimapButton:Show()
       end
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       HideConvenantFrame_CheckButton:SetChecked(nil)
     end
   end)
@@ -1579,6 +1579,47 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
       if (AbyssUIAddonSettings.HideMinimapZoneText == true) then
         C_Timer.After(1, function()
           MinimapZoneText:Hide()
+        end)
+      end
+    end
+  end)
+  -- Hide MainActionBar
+  local HideMainActionBar_CheckButton = CreateFrame("CheckButton", "$parentHideHideMainActionBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  HideMainActionBar_CheckButton:SetPoint("TOPRIGHT", -200, -200)
+  HideMainActionBar_CheckButton.Text:SetText(L["Hide MainActionBar"])
+  local Frame = CreateFrame("Frame", nil, HideMainActionBar_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  HideMainActionBar_CheckButton.Text:SetAllPoints(Frame)
+  HideMainActionBar_CheckButton.tooltip = L["Hides the MainActionBar"]
+  HideMainActionBar_CheckButton:SetChecked(AbyssUIAddonSettings.HideMainActionBar)
+  -- OnClick Function
+  HideMainActionBar_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.HideMainActionBar = self:GetChecked()
+      if (AbyssUIAddonSettings.HideMainActionBar == true ) then
+        MainMenuBar:Hide()
+        if (StanceBar) then
+          StanceBar:Hide()
+        end
+      else
+        MainMenuBar:Show()
+        if (StanceBar) then
+          StanceBar:ClearAllPoints()
+          StanceBar:Show()
+        end
+      end
+  end)
+  -- After Login/Reload
+  HideMainActionBar_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+  HideMainActionBar_CheckButton:SetScript("OnEvent", function(self, event, ...)
+    if (event == "PLAYER_ENTERING_WORLD") then
+      if (AbyssUIAddonSettings.HideMainActionBar == true) then
+        C_Timer.After(1, function()
+          MainMenuBar:Hide()
+          if (StanceBar) then
+            StanceBar:Hide()
+          end
         end)
       end
     end
@@ -1942,7 +1983,7 @@ local function Miscellaneous()
       AbyssUIAddonSettings.DisableNewMinimap = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else 
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       DisableNewMinimap_CheckButton:SetChecked(nil)
     end
   end)
@@ -2203,14 +2244,14 @@ local function TweaksExtra()
   SquareMinimap_CheckButton:SetScript("OnClick", function(self)
     if (GetWoWVersion > 30600) then
       if (AbyssUIAddonSettings.DisableNewMinimap == true) then
-        UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1, 0, 0, 3)
+        UIErrorsFrame:AddMessage("You need to uncheck 'Disable New Minimap' first", 1.0, 0.1, 0.1, 1.0)
         SquareMinimap_CheckButton:SetChecked(nil)
       else
         AbyssUIAddonSettings.SquareMinimap = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       end
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       SquareMinimap_CheckButton:SetChecked(nil)
     end
   end)
@@ -2229,7 +2270,7 @@ local function TweaksExtra()
   -- OnClick Function
   KeepUnitDark_CheckButton:SetScript("OnClick", function(self)
    if AbyssUIAddonSettings.KeepUnitBlizzard == true then
-     UIErrorsFrame:AddMessage(L["You can only select one style of UnitFrame color"], 1, 0, 0, 3)
+     UIErrorsFrame:AddMessage(L["You can only select one style of UnitFrame color"], 1.0, 0.1, 0.1, 1.0)
      KeepUnitDark_CheckButton:SetChecked(nil)
    else
      AbyssUIAddonSettings.KeepUnitDark = self:GetChecked()
@@ -2262,7 +2303,7 @@ local function TweaksExtra()
   -- OnClick Function
   KeepUnitBlizzard_CheckButton:SetScript("OnClick", function(self)
     if AbyssUIAddonSettings.KeepUnitDark == true then
-      UIErrorsFrame:AddMessage(L["You can only select one style of UnitFrame color"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one style of UnitFrame color"], 1.0, 0.1, 0.1, 1.0)
       KeepUnitBlizzard_CheckButton:SetChecked(nil)
     else
       AbyssUIAddonSettings.KeepUnitBlizzard = self:GetChecked()
@@ -2314,7 +2355,7 @@ local function TweaksExtra()
       AbyssUIAddonSettings.FadeUI = self:GetChecked()
       AbyssUI_ReloadFrameFadeUI:Show()
     else
-      UIErrorsFrame:AddMessage(L["Disable 'Dynamic Quest Tracker' at Miscellaneous tab first"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Disable 'Dynamic Quest Tracker' at Miscellaneous tab first"], 1.0, 0.1, 0.1, 1.0)
       FadeUI_CheckButton:SetChecked(nil)
     end
   end)
@@ -2376,7 +2417,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.HideHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       HideHelm_CheckButton:SetChecked(nil)
     end
   end)
@@ -2403,7 +2444,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.HideCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       HideCloak_CheckButton:SetChecked(nil)
     end
   end)
@@ -2430,7 +2471,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.ShowHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       ShowHelm_CheckButton:SetChecked(nil)
     end
   end)
@@ -2457,7 +2498,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.ShowCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       ShowCloak_CheckButton:SetChecked(nil)
     end
   end)
@@ -2486,7 +2527,7 @@ local function ClassicBCC()
         AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
-        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
         AbyssUI_BetterWorldMap_CheckButton:SetChecked(nil)
       end
     end
@@ -2522,7 +2563,7 @@ local function ClassicBCC()
         AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
-        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+        UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
         AbyssUI_WorldMapFade_CheckButton:SetChecked(nil)
       end
     end
@@ -2553,7 +2594,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.ExtraFunctionDefaultNameplate = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       AbyssUI_DefaultNameplate_CheckButton:SetChecked(nil)
     end
   end)
@@ -2574,7 +2615,7 @@ local function ClassicBCC()
       AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
       DisableQuestFrame_CheckButton:SetChecked(nil)
     end
   end)
@@ -3127,7 +3168,7 @@ local function Stylization()
       AbyssUIAddonSettings.Dragonflight = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
       UnitFrameImproved_Dragonflight:SetChecked(nil)
     end
   end)
@@ -3151,7 +3192,7 @@ local function Stylization()
       AbyssUIAddonSettings.ElitePortrait = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
       ElitePortrait_CheckButton:SetChecked(nil)
     end
   end)
@@ -3191,7 +3232,7 @@ local function Stylization()
       AbyssUIAddonSettings.DKAllyPortrait = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
       DKAllyPortrait_CheckButton:SetChecked(nil)
     end
   end)
@@ -3214,7 +3255,7 @@ local function Stylization()
       AbyssUIAddonSettings.DKHordePortrait = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
       DKHordePortrait_CheckButton:SetChecked(nil)
     end
   end)
@@ -3237,7 +3278,7 @@ local function Stylization()
       AbyssUIAddonSettings.DemonHunterPortrait = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
       DemonHunterPortrait_CheckButton:SetChecked(nil)
     end
   end)
@@ -3267,7 +3308,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles01 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles01_CheckButton:SetChecked(nil)
     end
   end)
@@ -3294,7 +3335,7 @@ local function Stylization()
       AbyssUIAddonSettings.GlossIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       GlossIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3320,7 +3361,7 @@ local function Stylization()
       AbyssUIAddonSettings.CrispIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       CrispIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3346,7 +3387,7 @@ local function Stylization()
       AbyssUIAddonSettings.OriginalIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       OriginalIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3372,7 +3413,7 @@ local function Stylization()
       AbyssUIAddonSettings.SquareIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       SquareIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3398,7 +3439,7 @@ local function Stylization()
       AbyssUIAddonSettings.ThinIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       ThinIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3424,7 +3465,7 @@ local function Stylization()
       AbyssUIAddonSettings.GlassIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       GlassIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3450,7 +3491,7 @@ local function Stylization()
       AbyssUIAddonSettings.OldIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       OldIconBorder_CheckButton:SetChecked(nil)
     end
   end)
@@ -3480,7 +3521,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles02 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles02_CheckButton:SetChecked(nil)
     end
   end)
@@ -3510,7 +3551,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles03 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles03_CheckButton:SetChecked(nil)
     end
   end)
@@ -3540,7 +3581,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles04 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles04_CheckButton:SetChecked(nil)
     end
   end)
@@ -3570,7 +3611,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles05 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles05_CheckButton:SetChecked(nil)
     end
   end)
@@ -3600,7 +3641,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles06 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles06_CheckButton:SetChecked(nil)
     end
   end)
@@ -3630,7 +3671,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles07 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles07_CheckButton:SetChecked(nil)
     end
   end)
@@ -3660,7 +3701,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles08 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles08_CheckButton:SetChecked(nil)
     end
   end)
@@ -3690,7 +3731,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles09 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles09_CheckButton:SetChecked(nil)
     end
   end)
@@ -3720,7 +3761,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles10 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles10_CheckButton:SetChecked(nil)
     end
   end)
@@ -3750,7 +3791,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles11 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles11_CheckButton:SetChecked(nil)
     end
   end)
@@ -3780,7 +3821,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles12 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles12_CheckButton:SetChecked(nil)
     end
   end)
@@ -3810,7 +3851,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles13 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles13_CheckButton:SetChecked(nil)
     end
   end)
@@ -3840,7 +3881,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles14 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles14_CheckButton:SetChecked(nil)
     end
   end)
@@ -3870,7 +3911,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles15 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles15_CheckButton:SetChecked(nil)
     end
   end)
@@ -3900,7 +3941,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIClassCircles16 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles16_CheckButton:SetChecked(nil)
     end
   end)
@@ -3932,7 +3973,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames01 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames01_CheckButton:SetChecked(nil)
     end
   end)
@@ -3963,7 +4004,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames02 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames02_CheckButton:SetChecked(nil)
     end
   end)
@@ -3994,7 +4035,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames03 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames03_CheckButton:SetChecked(nil)
     end
   end)
@@ -4025,7 +4066,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames04 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames04_CheckButton:SetChecked(nil)
     end
   end)
@@ -4055,7 +4096,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames05 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames05_CheckButton:SetChecked(nil)
     end
   end)
@@ -4085,7 +4126,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames06 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames06_CheckButton:SetChecked(nil)
     end
   end)
@@ -4115,7 +4156,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames07 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames07_CheckButton:SetChecked(nil)
     end
   end)
@@ -4145,7 +4186,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames08 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames08_CheckButton:SetChecked(nil)
     end
   end)
@@ -4175,7 +4216,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames09 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames09_CheckButton:SetChecked(nil)
     end
   end)
@@ -4205,7 +4246,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames10 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames10_CheckButton:SetChecked(nil)
     end
   end)
@@ -4235,7 +4276,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames11 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames11_CheckButton:SetChecked(nil)
     end
   end)
@@ -4265,7 +4306,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames12 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames12_CheckButton:SetChecked(nil)
     end
   end)
@@ -4295,7 +4336,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames13 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames13_CheckButton:SetChecked(nil)
     end
   end)
@@ -4325,7 +4366,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames14 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames14_CheckButton:SetChecked(nil)
     end
   end)
@@ -4355,7 +4396,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames15 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames15_CheckButton:SetChecked(nil)
     end
   end)
@@ -4385,7 +4426,7 @@ local function Stylization()
       AbyssUIAddonSettings.UIVertexColorFrames16 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames16_CheckButton:SetChecked(nil)
     end
   end)
@@ -4446,7 +4487,7 @@ local function Stylization()
         ReloadUI()
       end
     else
-      UIErrorsFrame:AddMessage(L["You need to uncheck any preset color, to apply a color"], 1, 0, 0, 3)
+      UIErrorsFrame:AddMessage(L["You need to uncheck any preset color, to apply a color"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFramesColorPicker_CheckButton:SetChecked(nil)
     end
   end)

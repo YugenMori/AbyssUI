@@ -126,7 +126,7 @@ local function AbyssUIMoveFrames_Slash(msg)
         elseif (msg == "setup") then
             AbyssUISecondFrame:Show()
         elseif (msg == "reset") then
-          	AbyssUIMoveFrames_Reset()
+            UIErrorsFrame:AddMessage("Function disabled after Dragonflight", 1.0, 0.1, 0.1, 1.0)
         elseif (msg == "daily") then
   			AbyssUIDailyInfo_Slash()
         elseif (msg == "reload") then

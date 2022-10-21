@@ -757,7 +757,7 @@ local function MinimapBehaviours()
 			TimeManagerClockButton:ClearAllPoints()	
 			TimeManagerClockButton:Hide()
 		end
-		
+	
 		-- Clock/Calendar Handler
 		if not AbyssUIAddonSettings.ExtraFunctionMinimapClock then
 		  Minimap:HookScript("OnEnter", function()
@@ -775,12 +775,15 @@ local function MinimapBehaviours()
 	end
 	local function GetMinimapShape() return 'SQUARE' end
 
-	-------------------------------
-	-- style Battlefield Minimap --
-	-------------------------------
+	-- style Battlefield Minimap 
 	local function hide(f)
 		f:SetTexture()
 		f.SetTexture = function() end
+	end
+
+	-- DragonFlightTexture
+	if (AbyssUIAddonSettings.SquareMinimap == true and GetWoWVersion >= 90500) then
+		MinimapCompassTexture:Hide()
 	end
 
 	hooksecurefunc("LoadAddOn", function(addon)

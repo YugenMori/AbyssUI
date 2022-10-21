@@ -436,3 +436,5 @@ L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you ve
 L["Dragonflight UnitFrame"] = true
 L["Reverse HealthBar Fill"] = "리버스 헬스바 필"
 L["All unitframe health bars will fill in reverse"] = "모든 유닛프레임 체력바가 반대로 채워집니다"
+L["Hide MainActionBar"] = "메인 액션바 숨기기"
+L["Hides the MainActionBar"] = "메인 액션바를 숨깁니다"

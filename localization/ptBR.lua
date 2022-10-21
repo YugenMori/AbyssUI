@@ -436,3 +436,5 @@ L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you ve
 L["Dragonflight UnitFrame"] = true
 L["Reverse HealthBar Fill"] = "Barra de Vida Reversa"
 L["All unitframe health bars will fill in reverse"] = "Reverte o enchimento de todas as barras de vidas"
+L["Hide MainActionBar"] = "Esconder a Barra de Ações"
+L["Hides the MainActionBar"] = "Esconde a Barra de Ações"
