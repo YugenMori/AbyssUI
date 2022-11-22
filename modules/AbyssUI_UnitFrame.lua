@@ -421,6 +421,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function DragonflightUnitNameText()
 			if (GetWoWVersion >= 90500) then
 				for i, v in pairs({
+						PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.Name,
 						TargetFrame.TargetFrameContent.TargetFrameContentMain.Name,
 						FocusFrame.TargetFrameContent.TargetFrameContentMain.Name,
 					}) do
@@ -435,6 +436,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function DragonflightUnitNameNumbers()
 			if (GetWoWVersion >= 90500) then
 				for i, v in pairs ({
+					PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar.TextString,
+					PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.ManaBarArea.ManaBar.ManaBarText,
 					TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
 					TargetFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
 					FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,

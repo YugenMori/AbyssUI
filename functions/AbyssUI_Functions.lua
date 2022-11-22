@@ -257,44 +257,46 @@ if (GetWoWVersion <= 90500) then
 			Minimap_ZoomOut()
 		end
 	end)
-	if (GetWoWVersion > 30400) then
+	if (GetWoWVersion > 31400) then
 		MiniMapTracking:ClearAllPoints()
 		MiniMapTracking:SetPoint("TOPRIGHT", -26, 7)
 	end
 end
 ----------------------------------------------------
 -- Tooltip Class Color and extras 
-GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
-	-- OnTooltipSetUnit
-	local _, unit = GameTooltip:GetUnit()
-	if  UnitIsPlayer(unit) then
-		local _, class = UnitClass(unit)
-		local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-		if (color ~= nil) then
-			local text  = GameTooltipTextLeft1:GetText()
-			local text2 = GameTooltipTextLeft2:GetText()
-			local text3 = GameTooltipTextLeft3:GetText()
-			local text4 = GameTooltipTextLeft4:GetText()
-			local englishFaction, localizedFaction = UnitFactionGroup(unit)
-			if (text ~= nil and text2 ~= nil) then
-				GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-				GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-			end
-			if (text ~= nil and text2 ~= nil and text3 ~= nil) then
-				GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-			end
-			if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-				GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-			end
-			if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-				local text5 = GameTooltipTextLeft5:GetText()
-				if (text5 ~= nil) then
-					GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
+if (GetWoWVersion <= 90500) then
+	GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
+		-- OnTooltipSetUnit
+		local _, unit = GameTooltip:GetUnit()
+		if  UnitIsPlayer(unit) then
+			local _, class = UnitClass(unit)
+			local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+			if (color ~= nil) then
+				local text  = GameTooltipTextLeft1:GetText()
+				local text2 = GameTooltipTextLeft2:GetText()
+				local text3 = GameTooltipTextLeft3:GetText()
+				local text4 = GameTooltipTextLeft4:GetText()
+				local englishFaction, localizedFaction = UnitFactionGroup(unit)
+				if (text ~= nil and text2 ~= nil) then
+					GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
+					GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
+				end
+				if (text ~= nil and text2 ~= nil and text3 ~= nil) then
+					GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+				end
+				if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+					GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+				end
+				if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+					local text5 = GameTooltipTextLeft5:GetText()
+					if (text5 ~= nil) then
+						GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
+					end
 				end
 			end
 		end
-	end
-end)
+	end)
+end
 ----------------------------------------------------
 -- UnitColor
 local UnitColor
@@ -326,11 +328,13 @@ end
 -- Tooltip
 -- Tooltip Background and borders
 if (GetWoWVersion <= 90500) then
-	local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
-	TooltipBackground:SetPoint("TOPLEFT", 3, -3)
-	TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
-	TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
-	TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
+	if (GetWoWVersion ~= 30401) then
+		local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
+		TooltipBackground:SetPoint("TOPLEFT", 3, -3)
+		TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
+		TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
+		TooltipBackground:SetAlpha(0.5, 0.5, 0.5, 0.5)
+	end
 end
 -- Tooltip Class Color Health
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
@@ -657,7 +661,7 @@ objectiveFrame1:RegisterEvent("PLAYER_REGEN_ENABLED")
 objectiveFrame1:SetScript("OnEvent", function(self, event, ...)
 	local isPVPMap = C_PvP.IsPVPMap()
 	local inInstance, instanceType = IsInInstance()
-	if (GetWoWVersion > 30400) then 
+	if (GetWoWVersion > 31400) then 
 		if (event == "PLAYER_REGEN_DISABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
 			UIFrameFadeIn(ObjectiveTrackerFrame, 1, 1, 0)
 		elseif (event == "PLAYER_REGEN_ENABLED" and AbyssUIAddonSettings.ExtraFunctionHideInCombat == true and isPVPMap == false and (instanceType == "none" or instanceType == "party")) then
@@ -717,7 +721,7 @@ AbyssUI_MinimalActionBar:SetScript("OnEvent", function(self, event, ...)
 	if (AbyssUIAddonSettings.HideMicroMenu ~= true or AbyssUIAddonSettings.HideGryphons ~= true ) then
 	    if (AbyssUIAddonSettings.MinimalActionBar == true) then
 	    	C_Timer.After(1, function()
-	    		if (GetWoWVersion > 30400) then
+	    		if (GetWoWVersion > 31400) then
 		    		for i, v in pairs ({
 		   				MainMenuBarArtFrame.LeftEndCap,
 			    		MainMenuBarArtFrame.RightEndCap,
@@ -829,13 +833,13 @@ checkRune:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DKAllyPortrait == true or 
 		AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		PetFrame:SetFrameLevel(4)
-		if (GetWoWVersion > 30400 and GetWoWVersion <= 90500) then
+		if (GetWoWVersion > 31400 and GetWoWVersion <= 90500) then
 			PlayerFrameAlternateManaBar:SetFrameLevel(4)
 		end
 	else
 		return nil
 	end
-	if (GetWoWVersion > 30400 and GetWoWVersion <= 90500) then
+	if (GetWoWVersion > 31400 and GetWoWVersion <= 90500) then
 		if (AbyssUIAddonSettings.DKHordePortrait == true) then
 			RuneFrame:ClearAllPoints()
 			RuneFrame:SetPoint("TOP", PlayerFrame, "BOTTOM", 50, 20)
@@ -915,7 +919,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		if (GetWoWVersion > 30400) then
+		if (GetWoWVersion > 30401) then
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end

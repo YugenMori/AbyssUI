@@ -483,7 +483,7 @@ local function InitSettings()
         else
           print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
         end
-        if (GetWoWVersion > 30400) then
+        if (GetWoWVersion > 31400) then
           local HonorLevel = UnitHonorLevel("player")
           print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
         end

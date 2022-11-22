@@ -409,13 +409,15 @@ ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
 if (GetWoWVersion <= 90500) then
-	local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
-		if (englishFaction == "Horde") then
-			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
-		else
-			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
-		end
-	t:SetAllPoints(ExtraInfo_Faction1)
+	if (GetWoWVersion ~= 30401) then
+		local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
+			if (englishFaction == "Horde") then
+				t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
+			else
+				t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
+			end
+		t:SetAllPoints(ExtraInfo_Faction1)
+	end
 end
 -- Gold Amount
 local _G = _G

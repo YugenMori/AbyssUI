@@ -107,38 +107,40 @@ local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (AbyssUIAddonSettings.NewCastBar ~= true and GetWoWVersion <= 90500) then
-		CastingBarFrame.Border:Hide()
-		PetCastingBarFrame.Border:Hide()
-		MirrorTimer1Border:Hide()
-		MirrorTimer2Border:Hide()
-		MirrorTimer3Border:Hide()
-		local c = CreateFrame("Frame", "$parentAbyssUI_CastingBarFrameBorder", CastingBarFrame)
-		c:SetFrameStrata("HIGH")
-		c:SetWidth(256)
-		c:SetHeight(72)
-		c:SetPoint("CENTER", 0, 5)
-		local t = c:CreateTexture(nil, "HIGH")
-		t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Border")
-		t:SetAllPoints(c)
-		CastingBarFrame.Flash:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Flash")
-		PetCastingBarFrame.Flash:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Flash")
-		for i, v in pairs({
-			MirrorTimer1,
-			MirrorTimer2,
-			MirrorTimer3,
-			PetCastingBarFrame,
-		}) do
-			AbyssUI_RegionListSize(v, 200, 20)
+		if (GetWoWVersion ~= 30401) then
+			CastingBarFrame.Border:Hide()
+			PetCastingBarFrame.Border:Hide()
+			MirrorTimer1Border:Hide()
+			MirrorTimer2Border:Hide()
+			MirrorTimer3Border:Hide()
+			local c = CreateFrame("Frame", "$parentAbyssUI_CastingBarFrameBorder", CastingBarFrame)
+			c:SetFrameStrata("HIGH")
+			c:SetWidth(256)
+			c:SetHeight(72)
+			c:SetPoint("CENTER", 0, 5)
+			local t = c:CreateTexture(nil, "HIGH")
+			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Border")
+			t:SetAllPoints(c)
+			CastingBarFrame.Flash:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Flash")
+			PetCastingBarFrame.Flash:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\castingbar\\UI-CastingBar-Flash")
+			for i, v in pairs({
+				MirrorTimer1,
+				MirrorTimer2,
+				MirrorTimer3,
+				PetCastingBarFrame,
+			}) do
+				AbyssUI_RegionListSize(v, 200, 20)
+			end
+			for i, v in pairs({	
+				CastingBarFrame, 
+				PetCastingBarFrame,
+				MirrorTimer1StatusBar, 
+				MirrorTimer2StatusBar, 
+				MirrorTimer3StatusBar, }) do
+				AbyssUI_FrameSize(v, 200, 20)
+			end
+			CheckCastBarText()
 		end
-		for i, v in pairs({	
-			CastingBarFrame, 
-			PetCastingBarFrame,
-			MirrorTimer1StatusBar, 
-			MirrorTimer2StatusBar, 
-			MirrorTimer3StatusBar, }) do
-			AbyssUI_FrameSize(v, 200, 20)
-		end
-		CheckCastBarText()
 	end
 end)
 -- Timer

@@ -2907,21 +2907,23 @@ f:SetScript("OnEvent", function(self, event, name)
 	end
 end)
 -- GameTooltip
-GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
-	for i, v in pairs({
-		GameTooltip.BottomEdge,
-		GameTooltip.TopEdge,
-		GameTooltip.RightEdge,
-		GameTooltip.BottomEdge,
-		GameTooltip.LeftEdge,
-		GameTooltip.TopRightCorner,
-		GameTooltip.TopLeftCorner,
-		GameTooltip.BottomLeftCorner,
-		GameTooltip.BottomRightCorner,
-	}) do
-	 AbyssUI_ColorizationFrameFunction(v)
-	end
-end)
+if (GetWoWVersion <= 90500) then
+	GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
+		for i, v in pairs({
+			GameTooltip.BottomEdge,
+			GameTooltip.TopEdge,
+			GameTooltip.RightEdge,
+			GameTooltip.BottomEdge,
+			GameTooltip.LeftEdge,
+			GameTooltip.TopRightCorner,
+			GameTooltip.TopLeftCorner,
+			GameTooltip.BottomLeftCorner,
+			GameTooltip.BottomRightCorner,
+		}) do
+		 AbyssUI_ColorizationFrameFunction(v)
+		end
+	end)
+end
 -- LFGDungeonReadyDialog
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")

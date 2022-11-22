@@ -357,7 +357,7 @@ if (GetWoWVersion > 12400) then
 end
 f:SetScript("OnEvent", function(self, event, name)
  if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD") and GetWoWVersion >= 90500) then
-        PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+        PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
         FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
@@ -370,7 +370,7 @@ end)
 -- Keep the color when health changes
 hooksecurefunc("TargetHealthCheck", function()
     if (GetWoWVersion >= 90500) then
-        PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+        PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
         FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
