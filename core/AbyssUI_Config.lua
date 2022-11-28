@@ -3969,6 +3969,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames01 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4000,6 +4001,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames02 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4031,6 +4033,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames03 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4062,6 +4065,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames04 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4092,6 +4096,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames05 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4122,6 +4127,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames06 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4152,6 +4158,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames07 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4182,6 +4189,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames08 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4212,6 +4220,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames09 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4242,6 +4251,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames10 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4272,6 +4282,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames11 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4302,6 +4313,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames12 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4332,6 +4344,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames13 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4362,6 +4375,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames14 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4392,6 +4406,7 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames15 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
@@ -4422,12 +4437,44 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true and
     AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
       AbyssUIAddonSettings.UIVertexColorFrames16 = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
       UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIVertexColorFrames16_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- AbyssUIVertexColorFrames17_CheckButton
+  local AbyssUIVertexColorFrames17_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames17_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  AbyssUIVertexColorFrames17_CheckButton:SetPoint("TOPLEFT", 10, -560)
+  AbyssUIVertexColorFrames17_CheckButton.Text:SetText("|cff33937FEvoker|r")
+  AbyssUIVertexColorFrames17_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames17)
+  -- OnClick Function
+  AbyssUIVertexColorFrames17_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.UIVertexColorFrames01 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames02 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames03 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames04 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames05 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames06 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames07 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames08 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames09 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames10 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames11 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames12 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true then
+      AbyssUIAddonSettings.UIVertexColorFrames17 = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You can only select one preset color, uncheck others"], 1.0, 0.1, 0.1, 1.0)
+      AbyssUIVertexColorFrames17_CheckButton:SetChecked(nil)
     end
   end)
   -- Choose a Color (Color Picker)

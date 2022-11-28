@@ -103,6 +103,8 @@ local function AbyssUI_ColorizationFrameFunction(...)
 		v:SetVertexColor(135/255, 135/255, 237/255)
 	elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 		v:SetVertexColor(199/255, 156/255, 110/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames17 == true then
+		v:SetVertexColor(51/255, 147/255, 127/255)
 	elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
 		local character = UnitName("player").."-"..GetRealmName()
 		v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)	

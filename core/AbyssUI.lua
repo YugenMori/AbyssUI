@@ -42,6 +42,8 @@ local function AbyssUI_ColorizationFrameFunction(...)
 		v:SetVertexColor(135/255, 135/255, 237/255)
 	elseif AbyssUIAddonSettings.UIVertexColorFrames16 == true then
 		v:SetVertexColor(199/255, 156/255, 110/255)
+	elseif AbyssUIAddonSettings.UIVertexColorFrames17 == true then
+		v:SetVertexColor(51/255, 147/255, 127/255)
 	elseif AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true then
 		local character = UnitName("player").."-"..GetRealmName()
 		v:SetVertexColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)	
@@ -49,6 +51,7 @@ local function AbyssUI_ColorizationFrameFunction(...)
 		v:SetVertexColor(.4, .4, .4)
 	end
 end
+
 --
 local BasicFrames = CreateFrame("Frame")
 BasicFrames:RegisterEvent("ADDON_LOADED")
@@ -2919,6 +2922,22 @@ if (GetWoWVersion <= 90500) then
 			GameTooltip.TopLeftCorner,
 			GameTooltip.BottomLeftCorner,
 			GameTooltip.BottomRightCorner,
+		}) do
+		 AbyssUI_ColorizationFrameFunction(v)
+		end
+	end)
+elseif (GetWoWVersion >= 90500) then
+	GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+		for i, v in pairs({
+			GameTooltip.NineSlice.BottomEdge,
+			GameTooltip.NineSlice.TopEdge,
+			GameTooltip.NineSlice.RightEdge,
+			GameTooltip.NineSlice.BottomEdge,
+			GameTooltip.NineSlice.LeftEdge,
+			GameTooltip.NineSlice.TopRightCorner,
+			GameTooltip.NineSlice.TopLeftCorner,
+			GameTooltip.NineSlice.BottomLeftCorner,
+			GameTooltip.NineSlice.BottomRightCorner,
 		}) do
 		 AbyssUI_ColorizationFrameFunction(v)
 		end
