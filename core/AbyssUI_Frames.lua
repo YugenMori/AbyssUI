@@ -432,7 +432,26 @@ PlayerInfo_GoldAmount1.text = PlayerInfo_GoldAmount1.text or PlayerInfo_GoldAmou
 PlayerInfo_GoldAmount1.text:SetPoint("BOTTOMLEFT", 5 , 1)
 PlayerInfo_GoldAmount1.text:SetText(currency.."|cfff2dc7f"..money.."|r")
 -- Class colorization (all player info)
-if (englishClass == "DEATHKNIGHT") then
+if (englishClass == "EVOKER") then
+	for i, v in pairs({
+		AbyssUI_AFKCameraFrame, 
+		PlayerInfo_Name1,
+		PlayerInfo_Title1, 
+		PlayerInfo_Level1, 
+		PlayerInfo_Race1, 
+		PlayerInfo_Class1,
+		PlayerInfo_ILevel1,
+		PlayerInfo_CurrentZone1,
+		PlayerInfo_Guild1,
+		ExtraInfo_Clock1,
+	PlayerInfo_GoldAmount1 }) do
+		if (GetWoWVersion > 30600) then 
+			v.text:SetVertexColor(51/255, 147/255, 127/255)
+			PlayerInfo_Honor1.text:SetVertexColor(51/255, 147/255, 127/255)
+			PlayerInfo_CurrentSpec1.text:SetVertexColor(51/255, 147/255, 127/255)
+		end
+	end 
+elseif (englishClass == "DEATHKNIGHT") then
 	for i, v in pairs({
 		AbyssUI_AFKCameraFrame, 
 		PlayerInfo_Name1,

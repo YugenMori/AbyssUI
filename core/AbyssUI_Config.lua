@@ -4527,7 +4527,8 @@ local function Stylization()
     AbyssUIAddonSettings.UIVertexColorFrames13 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames14 ~= true and
     AbyssUIAddonSettings.UIVertexColorFrames15 ~= true and
-    AbyssUIAddonSettings.UIVertexColorFrames16 ~= true then
+    AbyssUIAddonSettings.UIVertexColorFrames16 ~= true and
+    AbyssUIAddonSettings.UIVertexColorFrames17 ~= true then
       AbyssUIAddonSettings.UIVertexColorFramesColorPicker = self:GetChecked()
       if (AbyssUIAddonSettings.UIVertexColorFramesColorPicker == true) then
         AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetTextColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
@@ -4541,41 +4542,6 @@ local function Stylization()
 end
 -- End
 --------------------------------------------------------------
---------------------------------------------------------------
--- Slider Save Values
-local function AbyssUI_SliderSaveLoad()
-  C_Timer.After(0.5, function()
-    if (not InCombatLockdown() and GetWoWVersion <= 90500) then
-      for i, v in pairs({
-       PlayerFrame,
-       TargetFrame,
-       FocusFrame,
-      }) do
-        v:SetScale(AbyssUIAddonSettings[character].Slider.UnitFrameSlider)
-      end
-      for i, v in pairs({
-        PartyMemberFrame1,
-        PartyMemberFrame2,
-        PartyMemberFrame3,
-        PartyMemberFrame4,
-      }) do
-        v:SetScale(AbyssUIAddonSettings[character].Slider.PartyFrameSlider)
-      end
-      --
-      MinimapCluster:SetScale(AbyssUIAddonSettings[character].Slider.MinimapSlider)
-      BuffFrame:SetScale(AbyssUIAddonSettings[character].Slider.BuffFrameSlider)
-      if (GetWoWVersion > 30600) then
-        ObjectiveTrackerFrame:SetScale(AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider)
-      elseif (GetWoWVersion < 20600) then
-        QuestWatchFrame:SetScale(AbyssUIAddonSettings[character].Slider.QuestWatchFrame)
-      else
-        WatchFrame:SetScale(AbyssUIAddonSettings[character].Slider.QuestWatchFrame)
-      end
-      CompactRaidFrameContainer:SetScale(AbyssUIAddonSettings[character].Slider.RaidFrameSlider)
-    end
-  end)
-end
-
 local f = CreateFrame("Frame")
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -4587,41 +4553,15 @@ f:SetScript("OnEvent", function(self, event, ...)
   if not AbyssUIAddonSettings[character] then
     AbyssUIAddonSettings[character] = {}
   end
-  if not AbyssUIAddonSettings[character].Slider then
-    AbyssUIAddonSettings[character].Slider = {}
-  end
-  if not AbyssUIAddonSettings[character].Slider.MinimapSlider then
-    AbyssUIAddonSettings[character].Slider.MinimapSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.UnitFrameSlider then
-    AbyssUIAddonSettings[character].Slider.UnitFrameSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.BuffFrameSlider then
-    AbyssUIAddonSettings[character].Slider.BuffFrameSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.PartyFrameSlider then
-    AbyssUIAddonSettings[character].Slider.PartyFrameSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.RaidFrameSlider then
-    AbyssUIAddonSettings[character].Slider.RaidFrameSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider then
-    AbyssUIAddonSettings[character].Slider.ObjectiveFrameSlider = 1
-  end
-  if not AbyssUIAddonSettings[character].Slider.QuestWatchFrame then
-    AbyssUIAddonSettings[character].Slider.QuestWatchFrame = 1
-  end
   InitSettings()
   HideElementsInit()
   Miscellaneous()
   TweaksExtra()
   ClassicBCC()
-  --ScaleFrameSize()
   Patreon()
   ThanksTraslations()
   FAQ()
   Stylization()
-  AbyssUI_SliderSaveLoad()
   AbyssUI_StatusBarFill()
 end)
 --------------------------------------------------------------
