@@ -278,6 +278,9 @@ AbyssUI_ModelFrameAFKMode:SetPoint("BOTTOMRIGHT", 5, 5)
 if (GetWoWVersion <= 90500) then
 	AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelFrame:GetWidth()*2)
 	AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelFrame:GetHeight()*2)
+elseif (GetWoWVersion >= 90500) then
+	AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelScene:GetWidth()*2)
+	AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelScene:GetHeight()*2)
 end
 AbyssUI_ModelFrameAFKMode:SetAlpha(1)
 local ModelFrame_Model1 = CreateFrame("PlayerModel", "$parentModelFrame_Model1", AbyssUI_ModelFrameAFKMode)
@@ -408,16 +411,14 @@ ExtraInfo_Faction1:SetWidth(64)
 ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
-if (GetWoWVersion <= 90500) then
-	if (GetWoWVersion ~= 30401) then
-		local t = ExtraInfo_Faction1:CreateTexture(nil, "HIGH")
-			if (englishFaction == "Horde") then
-				t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
-			else
-				t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
-			end
-		t:SetAllPoints(ExtraInfo_Faction1)
-	end
+if (GetWoWVersion ~= 30401) then
+	local t = ExtraInfo_Faction1:CreateTexture(nil, "BACKGROUND")
+		if (englishFaction == "Horde") then
+			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
+		else
+			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Alliance-Logo")
+		end
+	t:SetAllPoints(ExtraInfo_Faction1)
 end
 -- Gold Amount
 local _G = _G

@@ -494,17 +494,15 @@ local AbyssUI_AutoSell = CreateFrame("Frame", "$parentAbyssUI_AutoSell", nil)
 AbyssUI_AutoSell:RegisterEvent("MERCHANT_SHOW")
 AbyssUI_AutoSell:SetScript("OnEvent", function()
 	if (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion <= 90500) then
-		--[[
     local bag, slot
     for bag = 0, 4 do
       for slot = 0, GetContainerNumSlots(bag) do
         local link = GetContainerItemLink(bag, slot)
         if link and (select(3, GetItemInfo(link)) == 0) then
-          UseContainerItem(bag, slot)
+        	UseContainerItem(bag, slot)
         end
       end
     end
-    --]]
     if(CanMerchantRepair()) then
 	    local cost = GetRepairAllCost()
       if cost > 0 then
@@ -528,6 +526,15 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
     	end
 		end
 	elseif (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion >= 90500) then
+    local bag, slot
+    for bag = 0, 4 do
+      for slot = 0, C_Container.GetContainerNumSlots(bag) do
+        local link = C_Container.GetContainerItemLink(bag, slot)
+        if link and (select(3, GetItemInfo(link)) == 0) then
+          C_Container.UseContainerItem(bag, slot)
+        end
+      end
+    end
     if(CanMerchantRepair()) then
 	    local cost = GetRepairAllCost()
       if cost > 0 then

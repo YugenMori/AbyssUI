@@ -2173,7 +2173,9 @@ local function TweaksExtra()
       if AbyssUIAddonSettings.ActionButtonKeyDown == true then
         SetCVar('ActionButtonUseKeyDown', 0)
       else
-        SetCVar('ActionButtonUseKeyDown', 1)
+        if (GetWoWVersion <= 90500) then
+          SetCVar('ActionButtonUseKeyDown', 1)
+        end
       end
     else
       return nil
@@ -2798,9 +2800,9 @@ local function Patreon()
   AbyssUI_PatreonBronze:SetHeight(48)
   AbyssUI_PatreonBronze:SetWidth(48)
   AbyssUI_PatreonBronze:SetPoint("TOP", -200, -60)
-  --local t = AbyssUI_PatreonBronze:CreateTexture(nil, "HIGH")
-  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\BronzeIcon")
-  --t:SetAllPoints(AbyssUI_PatreonBronze)
+  local t = AbyssUI_PatreonBronze:CreateTexture(nil, "BACKGROUND")
+  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\BronzeIcon")
+  t:SetAllPoints(AbyssUI_PatreonBronze)
   -- text
   local PatreonBronzeText = CreateFrame("Frame","$parentPatreonBronzeText", AbyssUI_Config.childpanel9)
   PatreonBronzeText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", -189, -80)
@@ -2827,9 +2829,9 @@ local function Patreon()
   AbyssUI_PatreonSilver:SetHeight(64)
   AbyssUI_PatreonSilver:SetWidth(64)
   AbyssUI_PatreonSilver:SetPoint("TOP", 0, -60)
-  --local t = AbyssUI_PatreonSilver:CreateTexture(nil, "HIGH")
-  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\SilverIcon")
-  --t:SetAllPoints(AbyssUI_PatreonSilver)
+  local t = AbyssUI_PatreonSilver:CreateTexture(nil, "BACKGROUND")
+  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\SilverIcon")
+  t:SetAllPoints(AbyssUI_PatreonSilver)
   -- text
   local PatreonSilverText = CreateFrame("Frame","$parentPatreonSilverText", AbyssUI_Config.childpanel9)
   PatreonSilverText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 13, -80)
@@ -2856,9 +2858,9 @@ local function Patreon()
   AbyssUI_PatreonGold:SetHeight(64)
   AbyssUI_PatreonGold:SetWidth(64)
   AbyssUI_PatreonGold:SetPoint("TOP", 200, -60)
-  --local t = AbyssUI_PatreonGold:CreateTexture(nil, "HIGH")
-  --t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\GoldIcon")
-  --t:SetAllPoints(AbyssUI_PatreonGold)
+  local t = AbyssUI_PatreonGold:CreateTexture(nil, "BACKGROUND")
+  t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\GoldIcon")
+  t:SetAllPoints(AbyssUI_PatreonGold)
   -- text
   local PatreonGoldText = CreateFrame("Frame","$parentPatreonGoldText", AbyssUI_Config.childpanel9)
   PatreonGoldText:SetPoint("TOPLEFT", AbyssUI_Config.childpanel9, "TOPLEFT", 214, -80)

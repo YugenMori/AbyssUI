@@ -304,8 +304,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                     AbyssUI_ColorizationFrameFunction(v)
                 end
             end
-
-        -- End
+       -- End
         else
             return nil
         end
