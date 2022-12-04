@@ -114,21 +114,25 @@ local function AbyssUI_ColorizationFrameFunction(...)
 end
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
-	local regionList = { 
-		self:GetRegions() } 
-	for i, self in ipairs(regionList) do 
-	    local regionType = self:GetObjectType() 
-	    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
-	        self:SetWidth(width)
-			self:SetHeight(height)
-	        break 
-	    end  
+	if (GetWoWVersion <= 90500) then
+		local regionList = { 
+			self:GetRegions() } 
+		for i, self in ipairs(regionList) do 
+		    local regionType = self:GetObjectType() 
+		    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
+		        self:SetWidth(width)
+				self:SetHeight(height)
+		        break 
+		    end  
+		end
 	end
 end
 -- FrameSize
 local function AbyssUI_FrameSize(self, width, height)
-	self:SetWidth(width)
-	self:SetHeight(height)
+	if (GetWoWVersion <= 90500) then
+		self:SetWidth(width)
+		self:SetHeight(height)
+	end
 end
 --------------------------------------------------------------
 -- UnitColor

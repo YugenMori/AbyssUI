@@ -113,21 +113,25 @@ local function AbyssUI_ColorizationFrameFunction(...)
 end
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
-	local regionList = { 
-		self:GetRegions() } 
-	for i, self in ipairs(regionList) do 
-	    local regionType = self:GetObjectType() 
-	    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
-	        self:SetWidth(width)
-			self:SetHeight(height)
-	        break 
-	    end  
+	if (GetWoWVersion <= 90500) then
+		local regionList = { 
+			self:GetRegions() } 
+		for i, self in ipairs(regionList) do 
+		    local regionType = self:GetObjectType() 
+		    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
+		        self:SetWidth(width)
+				self:SetHeight(height)
+		        break 
+		    end  
+		end
 	end
 end
 -- FrameSize
 local function AbyssUI_FrameSize(self, width, height)
-	self:SetWidth(width)
-	self:SetHeight(height)
+	if (GetWoWVersion <= 90500) then
+		self:SetWidth(width)
+		self:SetHeight(height)
+	end
 end
 --------------------------------------------------------------
 -- UnitColor
@@ -1307,15 +1311,13 @@ local function RemoveAnchor()
       return 
     end
   end
-end   
+end  
 
 local function TalkingHeadFrameMover()
   MoveTalkingHeadDB = MoveTalkingHeadDB or {}
-
   TalkingHeadFrame:SetMovable(true)
   TalkingHeadFrame:SetClampedToScreen(true)
   TalkingHeadFrame.ignoreFramePositionManager = true -- important
-  
   TalkingHeadFrame:RegisterForDrag("LeftButton")
   TalkingHeadFrame:SetScript("OnDragStart", function(self)
     if IsModifierKeyDown() then -- allow ctrl/shift/alt
@@ -1340,7 +1342,6 @@ local function TalkingHeadFrameMover()
     RemoveAnchor() -- only remove the anchor if the frame has been moved
   end
 end
-
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, ...)
@@ -1350,6 +1351,7 @@ f:SetScript("OnEvent", function(self, event, ...)
       self:UnregisterAllEvents()
     end
 end)
+
 -- FirstPerson Cam
 local AbyssUI_FirstPerson = CreateFrame("Frame", nil)
 AbyssUI_FirstPerson:RegisterEvent("PLAYER_ENTERING_WORLD")

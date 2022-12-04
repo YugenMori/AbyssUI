@@ -1404,7 +1404,7 @@ local function IconThemeInit()
       --applying the textures
       fl:SetTexture(Abconfig.textures.flash)
       --bu:SetHighlightTexture(Abconfig.textures.hover)
-      bu:SetPushedTexture(Abconfig.textures.pushed)
+      --bu:SetPushedTexture(Abconfig.textures.pushed)
       --bu:SetCheckedTexture(Abconfig.textures.checked)
       bu:SetNormalTexture(Abconfig.textures.normal)
       if not nt then
@@ -1490,18 +1490,22 @@ local function IconThemeInit()
       local name = bu:GetName()
       local ic  = _G[name.."Icon"]
       local fl  = _G[name.."Flash"]
-      if (GetWoWVersion <= 90500) then
-        local nt  = _G[name.."NormalTexture2"]
-        nt:SetAllPoints(bu)
-        --applying color
-        nt:SetVertexColor(Abconfig.color.normal.r,Abconfig.color.normal.g,Abconfig.color.normal.b,1)
-      end
+      local nt  = _G[name.."NormalTexture2"]
       --setting the textures
       fl:SetTexture(Abconfig.textures.flash)
       --bu:SetHighlightTexture(Abconfig.textures.hover)
-      bu:SetPushedTexture(Abconfig.textures.pushed)
+      --bu:SetPushedTexture(Abconfig.textures.pushed)
       --bu:SetCheckedTexture(Abconfig.textures.checked)
       bu:SetNormalTexture(Abconfig.textures.normal)
+      if not nt then
+        --fix the non existent texture problem (no clue what is causing this)
+        nt = bu:GetNormalTexture()
+      end
+      if (nt ~= nil) then
+        nt:SetAllPoints(bu)
+        --applying color
+        nt:SetVertexColor(Abconfig.color.normal.r, Abconfig.color.normal.g, Abconfig.color.normal.b, 1)
+      end
       hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
         --make sure the normaltexture stays the way we want it
         if texture and texture ~= Abconfig.textures.normal then
@@ -1526,11 +1530,11 @@ local function IconThemeInit()
       local nt  = _G[name.."NormalTexture2"]
       nt:SetAllPoints(bu)
       --applying color
-      nt:SetVertexColor(Abconfig.color.normal.r,Abconfig.color.normal.g,Abconfig.color.normal.b,1)
+      nt:SetVertexColor(Abconfig.color.normal.r, Abconfig.color.normal.g, Abconfig.color.normal.b, 1)
       --setting the textures
       fl:SetTexture(Abconfig.textures.flash)
       --bu:SetHighlightTexture(Abconfig.textures.hover)
-      bu:SetPushedTexture(Abconfig.textures.pushed)
+      --bu:SetPushedTexture(Abconfig.textures.pushed)
       --bu:SetCheckedTexture(Abconfig.textures.checked)
       bu:SetNormalTexture(Abconfig.textures.normal)
       --cut the default border of the icons and make them shiny
@@ -1555,7 +1559,7 @@ local function IconThemeInit()
       --setting the textures
       fl:SetTexture(Abconfig.textures.flash)
       --bu:SetHighlightTexture(Abconfig.textures.hover)
-      bu:SetPushedTexture(Abconfig.textures.pushed)
+      --bu:SetPushedTexture(Abconfig.textures.pushed)
       --bu:SetCheckedTexture(Abconfig.textures.checked)
       bu:SetNormalTexture(Abconfig.textures.normal)
       --cut the default border of the icons and make them shiny

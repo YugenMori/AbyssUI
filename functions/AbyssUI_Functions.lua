@@ -72,21 +72,25 @@ end
 local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
-	local regionList = { 
-		self:GetRegions() } 
-	for i, self in ipairs(regionList) do 
-	    local regionType = self:GetObjectType() 
-	    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
-	        self:SetWidth(width)
-					self:SetHeight(height)
-	        break 
-	    end  
+	if (GetWoWVersion <= 90500) then
+		local regionList = { 
+			self:GetRegions() } 
+		for i, self in ipairs(regionList) do 
+		    local regionType = self:GetObjectType() 
+		    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
+		        self:SetWidth(width)
+						self:SetHeight(height)
+		        break 
+		    end  
+		end
 	end
 end
 -- FrameSize
 local function AbyssUI_FrameSize(self, width, height)
-	self:SetWidth(width)
-	self:SetHeight(height)
+	if (GetWoWVersion <= 90500) then
+		self:SetWidth(width)
+		self:SetHeight(height)
+	end
 end
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -201,38 +205,40 @@ frame:RegisterEvent("UNIT_FACTION")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 local function eventHandler(self, event, ...)
 	--Thanks to Tz for the player background update
-	if (AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
-		if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
-			if (GetWoWVersion <= 90500) then
-				if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-					c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-					local bg = PlayerFrame:CreateTexture()
-					bg:SetPoint("TOPLEFT", PlayerFrameBackground)
-					bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
-					bg:SetTexture(TargetFrameNameBackground:GetTexture())
-					bg:SetVertexColor(c.r,c.g,c.b)
-					PlayerFrame.bg = true
+	if (AbyssUIAddonSettings ~= nil) then
+		if (AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
+			if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
+				if (GetWoWVersion <= 90500) then
+					if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+						c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+						local bg = PlayerFrame:CreateTexture()
+						bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+						bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+						bg:SetTexture(TargetFrameNameBackground:GetTexture())
+						bg:SetVertexColor(c.r,c.g,c.b)
+						PlayerFrame.bg = true
+					end
+					if UnitIsPlayer("target") then
+						c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
+						TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+					end
+					if UnitIsPlayer("focus") and GetWoWVersion > 12400 then
+						c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
+						FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+					end
 				end
-				if UnitIsPlayer("target") then
-					c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-					TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-				end
-				if UnitIsPlayer("focus") and GetWoWVersion > 12400 then
-					c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-					FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-				end
+			else
+				return nil
 			end
 		else
-			return nil
-		end
-	else
-		-- Remove background
-		if (GetWoWVersion <= 90500) then
-			TargetFrameNameBackground:SetAlpha(0.5)
-			TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-			if (GetWoWVersion > 12400) then
-				FocusFrameNameBackground:SetAlpha(0.5)
-				FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+			-- Remove background
+			if (GetWoWVersion <= 90500) then
+				TargetFrameNameBackground:SetAlpha(0.5)
+				TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+				if (GetWoWVersion > 12400) then
+					FocusFrameNameBackground:SetAlpha(0.5)
+					FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
+				end
 			end
 		end
 	end

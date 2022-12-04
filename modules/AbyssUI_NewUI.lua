@@ -142,38 +142,41 @@ local function UnitColor(unit)
     return r, g, b, a
 end
 ---------------------------- NewUI Functions ----------------------------------
--- Tooltip Class Color and extras 
-if (GetWoWVersion >= 90500) then
-    GameTooltip:HookScript("OnUpdate", function(self, elapsed)
-        -- OnTooltipSetUnit
-        local _, unit = GameTooltip:GetUnit()
-        if  UnitIsPlayer(unit) then
-            local _, class = UnitClass(unit)
-            local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-            if (color ~= nil) then
-                local text  = GameTooltipTextLeft1:GetText()
-                local text2 = GameTooltipTextLeft2:GetText()
-                local text3 = GameTooltipTextLeft3:GetText()
-                local text4 = GameTooltipTextLeft4:GetText()
-                local englishFaction, localizedFaction = UnitFactionGroup(unit)
-                if (text ~= nil and text2 ~= nil) then
-                    GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-                    GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-                end
-                if (text ~= nil and text2 ~= nil and text3 ~= nil) then
-                    GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-                end
-                if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-                    GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-                end
-                if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-                    local text5 = GameTooltipTextLeft5:GetText()
-                    if (text5 ~= nil) then
-                        GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
-                    end
+local function AbyssUI_TooltipSetUnit() 
+    -- OnTooltipSetUnit
+    local _, unit = GameTooltip:GetUnit()
+    if  UnitIsPlayer(unit) then
+        local _, class = UnitClass(unit)
+        local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+        if (color ~= nil) then
+            local text  = GameTooltipTextLeft1:GetText()
+            local text2 = GameTooltipTextLeft2:GetText()
+            local text3 = GameTooltipTextLeft3:GetText()
+            local text4 = GameTooltipTextLeft4:GetText()
+            local englishFaction, localizedFaction = UnitFactionGroup(unit)
+            if (text ~= nil and text2 ~= nil) then
+                GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
+                GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
+            end
+            if (text ~= nil and text2 ~= nil and text3 ~= nil) then
+                GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+            end
+            if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+                GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+            end
+            if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+                local text5 = GameTooltipTextLeft5:GetText()
+                if (text5 ~= nil) then
+                    GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
                 end
             end
         end
+    end
+end
+-- Tooltip Class Color and extras 
+if (GetWoWVersion >= 90500) then
+    GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+        AbyssUI_TooltipSetUnit()
     end)
 end
 ---------------------------- NewUI Frames ----------------------------------
@@ -304,6 +307,42 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                     AbyssUI_ColorizationFrameFunction(v)
                 end
             end
+            -- ProfessionsFrame
+            for i, v in pairs({ 
+                ProfessionsFrame.NineSlice.TopEdge,
+                ProfessionsFrame.NineSlice.RightEdge,
+                ProfessionsFrame.NineSlice.BottomEdge,
+                ProfessionsFrame.NineSlice.LeftEdge,
+                ProfessionsFrame.NineSlice.TopRightCorner,
+                ProfessionsFrame.NineSlice.TopLeftCorner,
+                ProfessionsFrame.NineSlice.BottomLeftCorner,
+                ProfessionsFrame.NineSlice.BottomRightCorner,
+             }) do
+                if AbyssUIAddonSettings ~= nil then
+                    AbyssUI_ColorizationFrameFunction(v)
+                end
+            end
+            -- Bags
+            for i, v in pairs({ 
+                ContainerFrame1.NineSlice,
+                ContainerFrame2.NineSlice,
+                ContainerFrame3.NineSlice,
+                ContainerFrame4.NineSlice,
+                ContainerFrame5.NineSlice,
+                ContainerFrame6.NineSlice,
+                ContainerFrame7.NineSlice,
+                ContainerFrame8.NineSlice,
+                ContainerFrame9.NineSlice,
+                ContainerFrame10.NineSlice,
+                ContainerFrame11.NineSlice,
+                ContainerFrame12.NineSlice,
+                ContainerFrame13.NineSlice,
+                ContainerFrameCombinedBags.NineSlice,
+             }) do
+                if AbyssUIAddonSettings ~= nil then
+                    AbyssUI_ColorizationFrameFunction(v)
+                end
+            end
        -- End
         else
             return nil
@@ -318,6 +357,28 @@ f:SetScript("OnEvent", function(self, event, name)
     if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
         for i, v in pairs({ 
             ClassTalentFrame.NineSlice.RightEdge,
+            ClassTalentFrame.NineSlice.LeftEdge,
+            ClassTalentFrame.NineSlice.TopEdge,
+            ClassTalentFrame.NineSlice.BottomEdge,
+            ClassTalentFrame.NineSlice.PortraitFrame,
+            ClassTalentFrame.NineSlice.TopRightCorner,
+            ClassTalentFrame.NineSlice.TopLeftCorner,
+            ClassTalentFrame.NineSlice.BottomLeftCorner,
+            ClassTalentFrame.NineSlice.BottomRightCorner,
+         }) do
+            if AbyssUIAddonSettings ~= nil then
+                AbyssUI_ColorizationFrameFunction(v)
+            end
+        end
+    end
+end)
+-- Pet Button Size
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+    if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
+        for i, v in pairs({ 
+            PetActionButton1,
             ClassTalentFrame.NineSlice.LeftEdge,
             ClassTalentFrame.NineSlice.TopEdge,
             ClassTalentFrame.NineSlice.BottomEdge,
@@ -388,16 +449,17 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_TARGET_CHANGED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("PLAYER_LOGIN")
 if (GetWoWVersion > 12400) then
     f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 f:SetScript("OnEvent", function(self, event, name)
- if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD") and GetWoWVersion >= 90500) then
+ if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
         PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
         FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
-        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
-        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+        --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+        --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
         TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))
         FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
     end
@@ -408,8 +470,8 @@ hooksecurefunc("TargetHealthCheck", function()
     if (GetWoWVersion >= 90500) then
         PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
-        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
-        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+        --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+        --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
         TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    
         FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
     else
@@ -418,13 +480,14 @@ hooksecurefunc("TargetHealthCheck", function()
 end)
 -- For the new texture bars
 local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_TARGET_CHANGED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("PLAYER_TARGET_CHANGED")
+f:RegisterEvent("PLAYER_LOGIN")
 if (GetWoWVersion > 12400) then
     f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 f:SetScript("OnEvent", function(self, event, name)
- if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD") and GetWoWVersion >= 90500) then
+ if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
         for i, v in pairs({ 
             TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
             FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
@@ -436,6 +499,7 @@ f:SetScript("OnEvent", function(self, event, name)
         end
     end
 end)
+--[[
 hooksecurefunc("TargetHealthCheck", function()
     if (GetWoWVersion >= 90500) then
         for i, v in pairs({ 
@@ -451,3 +515,4 @@ hooksecurefunc("TargetHealthCheck", function()
         return nil
     end
 end)
+--]]

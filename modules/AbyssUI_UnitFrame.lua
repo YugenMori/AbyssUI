@@ -70,21 +70,25 @@ end
 local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
-	local regionList = { 
-		self:GetRegions() } 
-	for i, self in ipairs(regionList) do 
-	    local regionType = self:GetObjectType() 
-	    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
-	        self:SetWidth(width)
-			self:SetHeight(height)
-	        break 
-	    end  
+	if (GetWoWVersion <= 90500) then
+		local regionList = { 
+			self:GetRegions() } 
+		for i, self in ipairs(regionList) do 
+		    local regionType = self:GetObjectType() 
+		    if regionType == "Texture" and not self:GetTexture() then  -- the region with no texture, just black colour
+		        self:SetWidth(width)
+				self:SetHeight(height)
+		        break 
+		    end  
+		end
 	end
 end
 -- FrameSize
 local function AbyssUI_FrameSize(self, width, height)
-	self:SetWidth(width)
-	self:SetHeight(height)
+	if (GetWoWVersion <= 90500) then
+		self:SetWidth(width)
+		self:SetHeight(height)
+	end
 end
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -472,15 +476,15 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						--v:ClearAllPoints()
 						DragonflightUnitNameText()
 						if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
-							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 20)
-							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 20)
+							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 45, 23)
+							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -45, 23)
 						elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
 							--PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 0, 14)
 							--TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("TOPLEFT", TargetFrame.TargetFrameContent.TargetFrameContentMain.ReputationColor, "TOPRIGHT", -100, -1)
 						else
 							if (GetWoWVersion <= 90500) then
-								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 15)
-								TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -40, 15)
+								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 50, 20)
+								TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -50, 20)
 							else
 								PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 40, 14)
 								TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", TargetFrame, "CENTER", -10, 15)
@@ -488,12 +492,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						end
 						if (GetWoWVersion >= 20502) then
 							if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
-								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 20)
+								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -45, 23)
 							elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
 								--FocusFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("TOPLEFT", FocusFrame.TargetFrameContent.TargetFrameContentMain.ReputationColor, "TOPRIGHT", -100, -1)
 							else
 								if (GetWoWVersion <= 90500) then
-									FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -40, 15)
+									FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -50, 20)
 								else
 									FocusFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("CENTER", FocusFrame, "CENTER", -18, 15)
 								end
