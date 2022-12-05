@@ -188,6 +188,9 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
             -- General
             for i, v in pairs({ 
                 PlayerFrame.PlayerFrameContainer.FrameTexture,
+                TargetFrame.TargetFrameContainer.FrameTexture,
+                FocusFrame.TargetFrameContainer.FrameTexture,
+                TargetFrameToT.FrameTexture,
                 MinimapCompassTexture,
              }) do
                 if AbyssUIAddonSettings ~= nil then
@@ -343,6 +346,15 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                     AbyssUI_ColorizationFrameFunction(v)
                 end
             end
+            -- StatusTrackingBarManager
+            for i, v in pairs({ 
+                StatusTrackingBarManager.BottomBarFrameTexture,
+                StatusTrackingBarManager.TopBarFrameTexture,
+             }) do
+                if AbyssUIAddonSettings ~= nil then
+                    AbyssUI_ColorizationFrameFunction(v)
+                end
+            end
        -- End
         else
             return nil
@@ -357,28 +369,6 @@ f:SetScript("OnEvent", function(self, event, name)
     if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
         for i, v in pairs({ 
             ClassTalentFrame.NineSlice.RightEdge,
-            ClassTalentFrame.NineSlice.LeftEdge,
-            ClassTalentFrame.NineSlice.TopEdge,
-            ClassTalentFrame.NineSlice.BottomEdge,
-            ClassTalentFrame.NineSlice.PortraitFrame,
-            ClassTalentFrame.NineSlice.TopRightCorner,
-            ClassTalentFrame.NineSlice.TopLeftCorner,
-            ClassTalentFrame.NineSlice.BottomLeftCorner,
-            ClassTalentFrame.NineSlice.BottomRightCorner,
-         }) do
-            if AbyssUIAddonSettings ~= nil then
-                AbyssUI_ColorizationFrameFunction(v)
-            end
-        end
-    end
-end)
--- Pet Button Size
-local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", function(self, event, name)
-    if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
-        for i, v in pairs({ 
-            PetActionButton1,
             ClassTalentFrame.NineSlice.LeftEdge,
             ClassTalentFrame.NineSlice.TopEdge,
             ClassTalentFrame.NineSlice.BottomEdge,
@@ -458,6 +448,7 @@ f:SetScript("OnEvent", function(self, event, name)
         PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
         FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+        PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
         --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
         --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
         TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))
@@ -470,6 +461,8 @@ hooksecurefunc("TargetHealthCheck", function()
     if (GetWoWVersion >= 90500) then
         PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
         TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
+        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+        PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
         --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
         --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
         TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    

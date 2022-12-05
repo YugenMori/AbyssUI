@@ -2927,7 +2927,7 @@ if (GetWoWVersion <= 90500) then
 		end
 	end)
 elseif (GetWoWVersion >= 90500) then
-	GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+	GameTooltip:HookScript("OnShow", function(self, elapsed)
 		for i, v in pairs({
 			GameTooltip.NineSlice.BottomEdge,
 			GameTooltip.NineSlice.TopEdge,
