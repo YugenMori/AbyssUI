@@ -316,9 +316,9 @@ L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "기다�
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100길드에서 지급 한 수리: %.1fg|r"
 L["|cffead000Repair cost: %.1fg|r"] = "|cffead000수리 가치: %.1fg|r"
 L["Not enough gold for repair."] = "수리 할 금 없음."
-L["This instance is completed! Want to leave?"..
-" You can also teleport out/in or just close this frame"] = "인스턴스가 완료되었습니다! 떠나고 싶니?"..
-" 순간 이동하거나 해당 프레임을 닫을 수도 있습니다."
+L["This instance is completed! Want to leave?\n"..
+"You can also teleport out/in or just close this frame"] = "인스턴스가 완료되었습니다! 떠나고 싶니?\n"..
+"순간 이동하거나 해당 프레임을 닫을 수도 있습니다."
 L["Teleport"] = "순간 이동"
 L["|cfff2dc7fAbyssUI Command List|r"] = "|cfff2dc7fAbyssUI 명령 목록|r"
 L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = "|cfff2dc7f이것을 입력해라 /abyssui |r|cffffcc00'명령 이름'|r"

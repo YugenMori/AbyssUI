@@ -236,7 +236,9 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          else
 		          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
 		          end
-		          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		          if (GetWoWVersion <= 90500) then
+		          	PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		        	end
 		        else
 		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.Dragonflight ~= true) then
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
@@ -246,8 +248,10 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          else
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
 		          end
-		          PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
-		          PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		          if (GetWoWVersion <= 90500) then
+		          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
+		          	PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+		        	end
 		        end		      	
 		      end		      	
 	      else
@@ -257,7 +261,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
     -- PlayerArt
     local function UnitFramesImproved_PlayerFrame_ToPlayerArt(self)
       if (AbyssUIAddonSettings.UnitFrameImproved == true) then
-        if not InCombatLockdown() and GetWoWVersion >= 90500 then
+        if not InCombatLockdown() and GetWoWVersion <= 90500 then
           UnitFramesImproved_Style_PlayerFrame()
         end
       end
@@ -529,7 +533,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- PlayerUpdate
 		local function UnitFrameImproved_PlayerFrameHealthBar(self)
-			if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+			if (AbyssUIAddonSettings.UnitFrameImproved == true and GetWoWVersion <= 90500) then
 			  UnitColor(self)
 			end
 		end
@@ -649,9 +653,11 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", UnitFramesImproved_TextStatusBar_UpdateTextStringWithValues)
 				
 				-- Hook PlayerFrame functions
-	      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
-				hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
-				hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
+				if (GetWoWVersion <= 90500) then
+		      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
+					hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
+					hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
+				end
 				
 				-- Hook TargetFrame functions
 				if (GetWoWVersion <= 90500) then

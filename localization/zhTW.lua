@@ -317,9 +317,9 @@ L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "等待�
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100公會支付的維修費用: %.1fg|r"
 L["|cffead000Repair cost: %.1fg|r"] = "|cffead000維修價值: %.1fg|r"
 L["Not enough gold for repair."] = "沒有金要修復。"
-L["This instance is completed! Want to leave?"..
-" You can also teleport out/in or just close this frame"] = "實例已完成！ 你要離開嗎"..
-" 您也可以傳送或僅關閉該框"
+L["This instance is completed! Want to leave?\n"..
+"You can also teleport out/in or just close this frame"] = "實例已完成！ 你要離開嗎\n"..
+"您也可以傳送或僅關閉該框"
 L["Teleport"] = "傳送"
 L["|cfff2dc7fAbyssUI Command List|r"] = "|cfff2dc7fAbyssUI 命令清單|r"
 L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = "|cfff2dc7f輸入 /abyssui |r|cffffcc00'命令名稱'|r"

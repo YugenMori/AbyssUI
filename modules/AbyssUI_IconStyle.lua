@@ -1528,15 +1528,21 @@ local function IconThemeInit()
       local ic  = _G[name.."Icon"]
       local fl  = _G[name.."Flash"]
       local nt  = _G[name.."NormalTexture2"]
-      nt:SetAllPoints(bu)
-      --applying color
-      nt:SetVertexColor(Abconfig.color.normal.r, Abconfig.color.normal.g, Abconfig.color.normal.b, 1)
       --setting the textures
       fl:SetTexture(Abconfig.textures.flash)
       --bu:SetHighlightTexture(Abconfig.textures.hover)
       --bu:SetPushedTexture(Abconfig.textures.pushed)
       --bu:SetCheckedTexture(Abconfig.textures.checked)
       bu:SetNormalTexture(Abconfig.textures.normal)
+      if not nt then
+        --fix the non existent texture problem (no clue what is causing this)
+        nt = bu:GetNormalTexture()
+      end
+      if (nt ~= nil) then
+        nt:SetAllPoints(bu)
+        --applying color
+        nt:SetVertexColor(Abconfig.color.normal.r, Abconfig.color.normal.g, Abconfig.color.normal.b, 1)
+      end
       --cut the default border of the icons and make them shiny
       ic:SetTexCoord(0.1,0.9,0.1,0.9)
       ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
@@ -1590,7 +1596,7 @@ local function IconThemeInit()
         ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
         bu:SetNormalTexture(Abconfig.textures.bags)
         --bu:SetHighlightTexture(Abconfig.textures.hover)
-        bu:SetPushedTexture(Abconfig.textures.pushed)
+        --bu:SetPushedTexture(Abconfig.textures.pushed)
         --bu:SetCheckedTexture(Abconfig.textures.checked)
         
         --make sure the normaltexture stays the way we want it
@@ -1642,8 +1648,9 @@ local function IconThemeInit()
         stylePetButton(_G["PetActionButton"..i])
       end
       --stancebar buttons
-      if (GetWoWVersion <= 90500) then
-        for i = 1, NUM_STANCE_SLOTS do
+      local nStance = GetNumShapeshiftForms ()
+      if (nStance ~= nil) then
+        for i = 1, nStance do
           styleStanceButton(_G["StanceButton"..i])
         end
       end
@@ -1662,7 +1669,6 @@ local function IconThemeInit()
           stylePetButton(_G["BT4PetButton"..i])
         end
       end
-
       --hide the hotkeys if needed
       if not dominos and not bartender4 and not Abconfig.hotkeys.show then
         hooksecurefunc("ActionButton_UpdateHotkeys", updateHotkey)
@@ -1714,7 +1720,6 @@ local function IconThemeInit()
     end
 
     --apply castbar texture
-
     local function applycastSkin(b)
       if not b or (b and b.styled) then return end
       -- parent
@@ -1748,7 +1753,6 @@ local function IconThemeInit()
     end
 
     -- setting timer for castbar icons
-
     function UpdateTimer(self, elapsed)
       total = total + elapsed
       if TargetFrameSpellBar.Icon then 

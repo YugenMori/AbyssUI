@@ -279,8 +279,8 @@ L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = true
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = true
 L["|cffead000Repair cost: %.1fg|r"] = true
 L["Not enough gold for repair."] = true
-L["This instance is completed! Want to leave?"..
-" You can also teleport out/in or just close this frame"] = true
+L["This instance is completed! Want to leave?\n"..
+"You can also teleport out/in or just close this frame"] = true
 L["Teleport"] = true
 L["|cfff2dc7fAbyssUI Command List|r"] = true
 L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = true

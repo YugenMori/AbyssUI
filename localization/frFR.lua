@@ -316,9 +316,9 @@ L["Wait!\nThis will clean all your skills/spells from Actions Bars."] = "Attendr
 L["|cfff07100Repair cost paid by Guild: %.1fg|r"] = "|cfff07100Réparation payée par la Guilde: %.1fg|r"
 L["|cffead000Repair cost: %.1fg|r"] = "|cffead000Valeur de réparation: %.1fg|r"
 L["Not enough gold for repair."] = "Pas d’or à réparer."
-L["This instance is completed! Want to leave?"..
-" You can also teleport out/in or just close this frame"] = "L’instance est terminée! Voulez-vous partir ?"..
-" Vous pouvez également téléporter ou simplement fermer ce cadre"
+L["This instance is completed! Want to leave?\n"..
+"You can also teleport out/in or just close this frame"] = "L’instance est terminée! Voulez-vous partir?\n"..
+"Vous pouvez également téléporter ou simplement fermer ce cadre"
 L["Teleport"] = "Teleport"
 L["|cfff2dc7fAbyssUI Command List|r"] = "|cfff2dc7fAbyssUI Liste des commandes|r"
 L["|cfff2dc7fType /abyssui |r|cffffcc00'command name'|r"] = "|cfff2dc7fType /abyssui |r|cffffcc00'nom de commande'|r"

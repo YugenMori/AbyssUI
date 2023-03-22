@@ -115,31 +115,31 @@ end
 --------------------------------------------------------------
 -- UnitColor
 local function UnitColor(unit)
-    local r, g, b, a
-    --if (not InCombatLockdown()) then
-        --if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
-            -- Turn it Gray
-            --r, g, b, a = 0.5, 0.5, 0.5, 1
-        if (UnitIsPlayer(unit)) then
-            --Try to color it by class.
-            local localizedClass, englishClass = UnitClass(unit)
-            local classColor = RAID_CLASS_COLORS[englishClass]
-            if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-                r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
-            else
-                if (UnitIsFriend("player", unit)) then
-                    r, g, b, a = 0.0, 1.0, 0.0, 1
-                else
-                    r, g, b, a = 1.0, 0.0, 0.0, 1
-                end
-            end
+  local r, g, b, a
+  --if (not InCombatLockdown()) then
+    --if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
+      -- Turn it Gray
+      --r, g, b, a = 0.5, 0.5, 0.5, 1
+    if (UnitIsPlayer(unit)) then
+      --Try to color it by class.
+      local localizedClass, englishClass = UnitClass(unit)
+      local classColor = RAID_CLASS_COLORS[englishClass]
+      if (classColor and not AbyssUIAddonSettings.GreenHealth) then
+        r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
+      else
+        if (UnitIsFriend("player", unit)) then
+          r, g, b, a = 0.0, 1.0, 0.0, 1
         else
-            if (unit ~= nil) then
-                r, g, b, a = UnitSelectionColor(unit)
-            end
+          r, g, b, a = 1.0, 0.0, 0.0, 1
         end
-    --end
-    return r, g, b, a
+      end
+    else
+      if (unit ~= nil) then
+        r, g, b, a = UnitSelectionColor(unit)
+      end
+    end
+  --end
+  return r, g, b, a
 end
 ---------------------------- NewUI Functions ----------------------------------
 local function AbyssUI_TooltipSetUnit() 
@@ -191,6 +191,9 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                 TargetFrame.TargetFrameContainer.FrameTexture,
                 FocusFrame.TargetFrameContainer.FrameTexture,
                 TargetFrameToT.FrameTexture,
+                PlayerFrameAlternateManaBarBorder,
+                PlayerFrameAlternateManaBarLeftBorder,
+                PlayerFrameAlternateManaBarRightBorder,
                 MinimapCompassTexture,
              }) do
                 if AbyssUIAddonSettings ~= nil then
@@ -366,146 +369,150 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-    if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
-        for i, v in pairs({ 
-            ClassTalentFrame.NineSlice.RightEdge,
-            ClassTalentFrame.NineSlice.LeftEdge,
-            ClassTalentFrame.NineSlice.TopEdge,
-            ClassTalentFrame.NineSlice.BottomEdge,
-            ClassTalentFrame.NineSlice.PortraitFrame,
-            ClassTalentFrame.NineSlice.TopRightCorner,
-            ClassTalentFrame.NineSlice.TopLeftCorner,
-            ClassTalentFrame.NineSlice.BottomLeftCorner,
-            ClassTalentFrame.NineSlice.BottomRightCorner,
-         }) do
-            if AbyssUIAddonSettings ~= nil then
-                AbyssUI_ColorizationFrameFunction(v)
-            end
-        end
+  if name == "Blizzard_ClassTalentUI" and GetWoWVersion >= 90500 then
+    for i, v in pairs({ 
+      ClassTalentFrame.NineSlice.RightEdge,
+      ClassTalentFrame.NineSlice.LeftEdge,
+      ClassTalentFrame.NineSlice.TopEdge,
+      ClassTalentFrame.NineSlice.BottomEdge,
+      ClassTalentFrame.NineSlice.PortraitFrame,
+      ClassTalentFrame.NineSlice.TopRightCorner,
+      ClassTalentFrame.NineSlice.TopLeftCorner,
+      ClassTalentFrame.NineSlice.BottomLeftCorner,
+      ClassTalentFrame.NineSlice.BottomRightCorner,
+     }) do
+      if AbyssUIAddonSettings ~= nil then
+        AbyssUI_ColorizationFrameFunction(v)
+      end
     end
+  end
 end)
 ---------------------------- NewUI Health Bar Color ----------------------------------
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
-if (GetWoWVersion >= 90500) then
-        local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
-        local UnitFrames = {
-          PlayerFrame,
-          PetFrame,
-          TargetFrameToT,
-          FocusFrameToT,
-          PartyMemberFrame1,
-          PartyMemberFrame2,
-          PartyMemberFrame3,
-          PartyMemberFrame4,
-        }
-        local UnitFrameRegions = {
-          "healthbar",
-          "myHealPredictionBar",
-          "otherHealPredictionBar",
-          "healAbsorbBar",
-          "totalAbsorbBar",
-          --"manabar",
-          "myManaCostPredictionBar",
-          "spellbar",
-        }
-        local OtherStatusBars = {
-          CastingBarFrame,
-          MirrorTimer1StatusBar,
-          MirrorTimer2StatusBar,
-          MirrorTimer3StatusBar,
-        }
-        if (AbyssUIAddonSettings.FlatHealth == true) then
-            for _, frame in next, UnitFrames do
-            for _, region in next, UnitFrameRegions do
-              local bar = frame[region]
-              if bar and bar.SetStatusBarTexture then
-                bar:SetStatusBarTexture(TEXTURE)
-                bar:GetStatusBarTexture():SetHorizTile(true)
-              elseif bar and bar.SetTexture then
-                bar:SetTexture(TEXTURE)
-                bar:SetHorizTile(true)
-              end
-            end
-            end
-            for _, bar in next, OtherStatusBars do
+  if (GetWoWVersion >= 90500) then
+    local TEXTURE = "Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill"
+    local UnitFrames = {
+      --PlayerFrame,
+      PetFrame,
+      TargetFrameToT,
+      FocusFrameToT,
+      --PartyMemberFrame1,
+      --PartyMemberFrame2,
+      --PartyMemberFrame3,
+      --PartyMemberFrame4,
+    }
+    local UnitFrameRegions = {
+      "healthbar",
+      "myHealPredictionBar",
+      "otherHealPredictionBar",
+      "healAbsorbBar",
+      "totalAbsorbBar",
+      --"manabar",
+      "myManaCostPredictionBar",
+      "spellbar",
+    }
+    local OtherStatusBars = {
+      CastingBarFrame,
+      MirrorTimer1StatusBar,
+      MirrorTimer2StatusBar,
+      MirrorTimer3StatusBar,
+    }
+    if (AbyssUIAddonSettings.FlatHealth == true) then
+      for _, frame in next, UnitFrames do
+        for _, region in next, UnitFrameRegions do
+          local bar = frame[region]
+          if bar and bar.SetStatusBarTexture then
             bar:SetStatusBarTexture(TEXTURE)
             bar:GetStatusBarTexture():SetHorizTile(true)
-            end
+          elseif bar and bar.SetTexture then
+            bar:SetTexture(TEXTURE)
+            bar:SetHorizTile(true)
+          end
         end
+      end
+      for _, bar in next, OtherStatusBars do
+        bar:SetStatusBarTexture(TEXTURE)
+        bar:GetStatusBarTexture():SetHorizTile(true)
+      end
     end
+  end
 end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_TARGET_CHANGED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("PLAYER_LOGIN")
 if (GetWoWVersion > 12400) then
-    f:RegisterEvent("PLAYER_FOCUS_CHANGED")
+  f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 f:SetScript("OnEvent", function(self, event, name)
- if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
-        PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
-        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
-        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
-        PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-        --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
-        --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
-        TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))
-        FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
-    end
+  if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
+    --PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
+    TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
+    FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+    PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+    --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+    --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+    TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))
+    FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
+  end
 end)
 ----------------------------------------------------
--- Keep the color when health changes
-hooksecurefunc("TargetHealthCheck", function()
-    if (GetWoWVersion >= 90500) then
-        PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
-        TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
-        FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
-        PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-        --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
-        --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
-        TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    
-        FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
-    else
-        return nil
-    end
-end)
 -- For the new texture bars
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:RegisterEvent("PLAYER_TARGET_CHANGED")
 f:RegisterEvent("PLAYER_LOGIN")
 if (GetWoWVersion > 12400) then
-    f:RegisterEvent("PLAYER_FOCUS_CHANGED")
+  f:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 f:SetScript("OnEvent", function(self, event, name)
  if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
-        for i, v in pairs({ 
-            TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-            FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-        }) do
-            if AbyssUIAddonSettings ~= nil then
-                v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
-                v:GetStatusBarTexture():SetHorizTile(false)
-            end
-        end
+    for i, v in pairs({ 
+      PlayerFrame.HealthBar,
+      --PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
+      TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+      FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+    }) do
+      if AbyssUIAddonSettings ~= nil and AbyssUIAddonSettings.GreenHealth ~= true then
+        v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
+        v:GetStatusBarTexture():SetHorizTile(false)
+      end
     end
+  end
 end)
 --[[
+-- Keep the color when health changes
 hooksecurefunc("TargetHealthCheck", function()
-    if (GetWoWVersion >= 90500) then
-        for i, v in pairs({ 
-            TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-            FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-        }) do
-            if AbyssUIAddonSettings ~= nil then
-                v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
-                v:GetStatusBarTexture():SetHorizTile(false)
-            end
-        end
-    else
-        return nil
+  if (GetWoWVersion >= 90500) then
+    PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
+    --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
+    --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+    --PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+    --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
+    --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
+    --TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    
+    --FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
+  else
+    return nil
+  end
+end)
+
+hooksecurefunc("TargetHealthCheck", function()
+  if (GetWoWVersion >= 90500) then
+    for i, v in pairs({ 
+      PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
+      --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+      --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+    }) do
+      if AbyssUIAddonSettings ~= nil then
+        v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
+        v:GetStatusBarTexture():SetHorizTile(false)
+      end
     end
+  else
+      return nil
+  end
 end)
 --]]

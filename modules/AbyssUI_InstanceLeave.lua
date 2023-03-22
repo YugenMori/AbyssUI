@@ -70,11 +70,11 @@ local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
 end
 local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
 local _G = _G 
-local leaveString 		= _G["LEAVE_VEHICLE"]
---local teleportString	= _G["QUESTS_LABEL"]
-local closeString 		= _G["CLOSE"]
-local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
-local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
+local leaveString 				= _G["LEAVE_VEHICLE"]
+--local teleportString		= _G["QUESTS_LABEL"]
+local closeString 				= _G["CLOSE"]
+local dialogFrameTexture 	= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
+--local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
 --------------------------------------------------------------
 -- ApplyFonts
 local function AbyssUI_ApplyFonts(self)
@@ -88,16 +88,16 @@ local AbyssUI_InstanceLeave_DynamicFrame = CreateFrame("Frame", "$parentAbyssUI_
 AbyssUI_InstanceLeave_DynamicFrame:SetClampedToScreen(true)
 AbyssUI_InstanceLeave_DynamicFrame:SetMovable(true)
 AbyssUI_InstanceLeave_DynamicFrame:EnableMouse(true)
-AbyssUI_InstanceLeave_DynamicFrame:SetWidth(420)
-AbyssUI_InstanceLeave_DynamicFrame:SetHeight(120)
+AbyssUI_InstanceLeave_DynamicFrame:SetWidth(480)
+AbyssUI_InstanceLeave_DynamicFrame:SetHeight(200)
 AbyssUI_InstanceLeave_DynamicFrame:RegisterForDrag("LeftButton")
 AbyssUI_InstanceLeave_DynamicFrame:SetFrameLevel(300)
 AbyssUI_InstanceLeave_DynamicFrame:SetFrameStrata("HIGH")
 AbyssUI_InstanceLeave_DynamicFrame:SetPoint("CENTER", 0, -140)
 AbyssUI_InstanceLeave_DynamicFrame.text = AbyssUI_InstanceLeave_DynamicFrame.text or AbyssUI_InstanceLeave_DynamicFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_InstanceLeave_DynamicFrame.text:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
-AbyssUI_InstanceLeave_DynamicFrame.text:SetText(L["This instance is completed! Want to leave?"..
-" You can also teleport out/in or just close this frame"])
+AbyssUI_InstanceLeave_DynamicFrame.text:SetText(L["This instance is completed! Want to leave?\n"..
+"You can also teleport out/in or just close this frame"])
 AbyssUI_InstanceLeave_DynamicFrame.text:SetFont(globalFont, 16)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetTextColor(248/255, 248/255, 248/255)
 AbyssUI_InstanceLeave_DynamicFrame.text:SetShadowColor(0, 0, 0)
@@ -107,19 +107,20 @@ AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStart", AbyssUI_InstanceLeav
 AbyssUI_InstanceLeave_DynamicFrame:SetScript("OnDragStop", AbyssUI_InstanceLeave_DynamicFrame.StopMovingOrSizing)
 
 -- Border --
+--[[
 local LeaveBorder = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
-LeaveBorder:SetTexture(dialogFrameTextureBorder)
+LeaveBorder:SetTexture(dialogFrameTexture)
 LeaveBorder:SetPoint("TOPLEFT", -3, 3)
 LeaveBorder:SetPoint("BOTTOMRIGHT", 3, -3)
 
 local BorderBody = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTextureBorder)
+BorderBody:SetTexture(dialogFrameTexture)
 BorderBody:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-
+--]]
 -- Texture --
-local Texture = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTextureBorder)
+local Texture = AbyssUI_InstanceLeave_DynamicFrame:CreateTexture(nil, "ARTWORK")
+Texture:SetTexture(dialogFrameTexture)
 Texture:SetAllPoints(AbyssUI_InstanceLeave_DynamicFrame)
 AbyssUI_InstanceLeave_DynamicFrame.texture = Texture
 
@@ -130,7 +131,7 @@ f:SetScript("OnEvent", function()
 	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 	FrameButton:SetHeight(24)
 	FrameButton:SetWidth(100)
-	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", -150, 10)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", -150, 15)
 	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
@@ -172,11 +173,10 @@ f:SetScript("OnEvent", function()
 		end
 	end)
 
-
 	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 	FrameButton:SetHeight(24)
 	FrameButton:SetWidth(100)
-	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 0, 10)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 0, 15)
 	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)
@@ -201,11 +201,10 @@ f:SetScript("OnEvent", function()
 		end
 	end)
 
-
 	local FrameButton = CreateFrame("Button","$parentFrameButton", AbyssUI_InstanceLeave_DynamicFrame, "UIPanelButtonTemplate")
 	FrameButton:SetHeight(24)
 	FrameButton:SetWidth(100)
-	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 150, 10)
+	FrameButton:SetPoint("BOTTOM", AbyssUI_InstanceLeave_DynamicFrame, "BOTTOM", 150, 15)
 	FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 	--FrameButton.text:SetFont(globalFont, 14)
 	FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, 0)

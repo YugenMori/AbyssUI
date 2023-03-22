@@ -183,7 +183,6 @@ local function colour(statusbar, unit)
 			_, class = UnitClass(unit)
 			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
 			statusbar:SetStatusBarColor(c.r, c.g, c.b, c.a)
-			--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
 		else 
 			return nil
 		end
