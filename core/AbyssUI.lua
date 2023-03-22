@@ -1589,19 +1589,21 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- RaidBrowserFrame
-					for i, v in pairs({
-				RaidBrowserFrame.NineSlice.TopEdge,
-				RaidBrowserFrame.NineSlice.RightEdge,
-				RaidBrowserFrame.NineSlice.BottomEdge,
-				RaidBrowserFrame.NineSlice.LeftEdge,
-				RaidBrowserFrame.NineSlice.TopRightCorner,
-				RaidBrowserFrame.NineSlice.TopLeftCorner,
-				RaidBrowserFrame.NineSlice.BottomLeftCorner,
-			RaidBrowserFrame.NineSlice.BottomRightCorner, }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				else
-					return nil
+			if (GetWoWVersion < 100100) then
+				for i, v in pairs({
+					RaidBrowserFrame.NineSlice.TopEdge,
+					RaidBrowserFrame.NineSlice.RightEdge,
+					RaidBrowserFrame.NineSlice.BottomEdge,
+					RaidBrowserFrame.NineSlice.LeftEdge,
+					RaidBrowserFrame.NineSlice.TopRightCorner,
+					RaidBrowserFrame.NineSlice.TopLeftCorner,
+					RaidBrowserFrame.NineSlice.BottomLeftCorner,
+				RaidBrowserFrame.NineSlice.BottomRightCorner, }) do
+					if AbyssUIAddonSettings ~= nil then
+						AbyssUI_ColorizationFrameFunction(v)
+					else
+						return nil
+					end
 				end
 			end
 			-- RatingMenuFrame

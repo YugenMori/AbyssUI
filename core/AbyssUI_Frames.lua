@@ -227,7 +227,7 @@ f:SetScript("OnEvent", function()
 		end
 	FrameButtonConfirm:SetScript("OnClick", function()
 	  AbyssUI_EditBoxPatreon_Frame:Hide()
-    AbyssUI_EditBox:SetText("ko-fi.com/whiteravenstudio")
+    AbyssUI_EditBox:SetText("ko-fi.com/yugensan")
     AbyssUI_EditBox_Frame:Show()
 	end)
 end)

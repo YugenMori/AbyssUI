@@ -965,7 +965,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
 			print(L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"])
-     	print(L["|cfff2dc7fBuy me a coffee!|r"].." -> ko-fi.com/whiteravenstudio")
+     	print(L["|cfff2dc7fBuy me a coffee!|r"].." -> ko-fi.com/yugensan")
 			print(L["Type |cffffcc00/abyssui|r for a list of commands"])
 		end
 	end)

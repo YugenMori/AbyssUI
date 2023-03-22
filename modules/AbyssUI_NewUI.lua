@@ -448,7 +448,7 @@ if (GetWoWVersion > 12400) then
 end
 f:SetScript("OnEvent", function(self, event, name)
   if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
-    --PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
+    PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
     TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
     FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
     PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
@@ -471,7 +471,7 @@ f:SetScript("OnEvent", function(self, event, name)
  if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
     for i, v in pairs({ 
       PlayerFrame.HealthBar,
-      --PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
+      PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
       TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
       FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
     }) do
