@@ -323,6 +323,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                 ProfessionsFrame.NineSlice.TopLeftCorner,
                 ProfessionsFrame.NineSlice.BottomLeftCorner,
                 ProfessionsFrame.NineSlice.BottomRightCorner,
+                ProfessionsFrame.CraftingPage.RankBar.Border,
              }) do
                 if AbyssUIAddonSettings ~= nil then
                     AbyssUI_ColorizationFrameFunction(v)

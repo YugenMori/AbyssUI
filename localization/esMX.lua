@@ -441,3 +441,7 @@ L["All unitframe health bars will fill in reverse"] = "Todas las barras de salud
 L["Hide MainActionBar"] = "Ocultar barra de acción"
 L["Hides the MainActionBar"] = "Oculta la barra de acción principal"
 L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"] = "|cfff2dc7f¿Disfrutas de AbyssUI? |r¡Recomendar a un amigo!"
+L["Thank you for choosing Default|cff0d75d4UI|r!"] = "¡Gracias por elegir Predeterminado|cff0d75d4UI|r!"
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, click on the screen or just reload the UI /reload."] = "Guardemos las variables y preparemos la interfaz para el primer uso.\n"
+.."Para hacer esto, haga clic en la pantalla o simplemente vuelva a cargar la interfaz de usuario /reload"

@@ -393,3 +393,6 @@ L["All unitframe health bars will fill in reverse"] = true
 L["Hide MainActionBar"] = true
 L["Hides the MainActionBar"] = true
 L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"] = true
+L["Thank you for choosing Default|cff0d75d4UI|r!"] = true
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, click on the screen or just reload the UI /reload."] = true

@@ -1,6 +1,6 @@
 -- Author: Yugen
 --
--- Shadowlands + Burning Crusade Classic + Classic
+-- Supports any version of wow
 --
 -- Dark Minimalist UI for World of Warcraft
 --------------------------------------------------------------

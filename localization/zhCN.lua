@@ -439,3 +439,7 @@ L["All unitframe health bars will fill in reverse"] = "所有单位框架的生�
 L["Hide MainActionBar"] = "隐藏主操作栏"
 L["Hides the MainActionBar"] = "隐藏主操作栏"
 L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"] = "|cfff2dc7f喜欢 AbyssUI 吗？ |r推荐给朋友！"
+L["Thank you for choosing Default|cff0d75d4UI|r!"] = "感谢您选择 Default|cff0d75d4UI|r！"
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, click on the screen or just reload the UI /reload."] = "让我们保存变量并为首次使用准备界面。\n"
+.."为此，请单击屏幕或重新加载 UI /reload。"

@@ -439,3 +439,7 @@ L["All unitframe health bars will fill in reverse"] = "모든 유닛프레임 �
 L["Hide MainActionBar"] = "메인 액션바 숨기기"
 L["Hides the MainActionBar"] = "메인 액션바를 숨깁니다"
 L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"] = "|cfff2dc7fAbyssUI를 즐기고 계신가요? |r친구에게 추천!"
+L["Thank you for choosing Default|cff0d75d4UI|r!"] = "Default|cff0d75d4UI|r를 선택해 주셔서 감사합니다!"
+L["Let's save the variables and prepare the interface for the first use.\n"
+.."To do this, click on the screen or just reload the UI /reload."] = "변수를 저장하고 처음 사용할 인터페이스를 준비합시다.\n"
+.."이렇게 하려면 화면을 클릭하거나 UI를 다시 로드/reload하십시오."

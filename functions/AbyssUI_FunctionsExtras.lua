@@ -616,12 +616,14 @@ local function MinimapBehaviours()
 		MiniMapInstanceDifficulty:SetParent(Minimap)
 		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, -22)
 		DropDownList1:SetClampedToScreen(true)
-
-		--Frame Level
+		-- Frame Level
 		MiniMapMailFrame:SetFrameLevel(10)
 		MiniMapInstanceDifficulty:SetFrameLevel(10)
-		GarrisonLandingPageMinimapButton:SetFrameLevel(10)
-
+		if (GetWoWVersion > 90500) then
+			ExpansionLandingPageMinimapButton:SetFrameLevel(10)
+		else 
+			GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+		end
 		-- extra align
 		QueueStatusMinimapButton:SetSize(20, 20)
 		QueueStatusMinimapButton:ClearAllPoints()
@@ -701,8 +703,13 @@ local function MinimapBehaviours()
 			MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton, "TOP", 9, -8)
 			MinimapZoneText:SetFont(globalFont, 14, "THINOUTLINE")
 			-- garrison icon
-			GarrisonLandingPageMinimapButton:ClearAllPoints()
-			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
+			if (GetWoWVersion > 90500) then
+				ExpansionLandingPageMinimapButton:ClearAllPoints()
+				ExpansionLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
+			else 
+				GarrisonLandingPageMinimapButton:ClearAllPoints()
+				GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, -15)
+			end
 			-- mail icon
 			MiniMapMailFrame:ClearAllPoints()
 			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, -20, -15)
@@ -715,9 +722,15 @@ local function MinimapBehaviours()
 			MinimapZoneTextButton:Hide()
 			MinimapBackdrop:SetFrameLevel(1)
 			-- Garrison Icon
-			GarrisonLandingPageMinimapButton:ClearAllPoints()
-			GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
-			GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+			if (GetWoWVersion > 90500) then
+				ExpansionLandingPageMinimapButton:ClearAllPoints()
+				ExpansionLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
+				ExpansionLandingPageMinimapButton:SetFrameLevel(10)
+			else 
+				GarrisonLandingPageMinimapButton:ClearAllPoints()
+				GarrisonLandingPageMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, 0)
+				GarrisonLandingPageMinimapButton:SetFrameLevel(10)
+			end
 			-- mail icon
 			MiniMapMailFrame:ClearAllPoints()
 			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
