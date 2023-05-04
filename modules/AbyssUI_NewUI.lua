@@ -324,6 +324,23 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                 ProfessionsFrame.NineSlice.BottomLeftCorner,
                 ProfessionsFrame.NineSlice.BottomRightCorner,
                 ProfessionsFrame.CraftingPage.RankBar.Border,
+                ProfessionsFrame.CraftingPage.SchematicForm.OutputIcon.IconBorder,
+                DropDownList1MenuBackdrop.NineSlice.TopEdge,
+                DropDownList1MenuBackdrop.NineSlice.RightEdge,
+                DropDownList1MenuBackdrop.NineSlice.BottomEdge,
+                DropDownList1MenuBackdrop.NineSlice.LeftEdge,
+                DropDownList1MenuBackdrop.NineSlice.TopRightCorner,
+                DropDownList1MenuBackdrop.NineSlice.TopLeftCorner,
+                DropDownList1MenuBackdrop.NineSlice.BottomLeftCorner,
+                DropDownList1MenuBackdrop.NineSlice.BottomRightCorner,
+                DropDownList2MenuBackdrop.NineSlice.TopEdge,
+                DropDownList2MenuBackdrop.NineSlice.RightEdge,
+                DropDownList2MenuBackdrop.NineSlice.BottomEdge,
+                DropDownList2MenuBackdrop.NineSlice.LeftEdge,
+                DropDownList2MenuBackdrop.NineSlice.TopRightCorner,
+                DropDownList2MenuBackdrop.NineSlice.TopLeftCorner,
+                DropDownList2MenuBackdrop.NineSlice.BottomLeftCorner,
+            DropDownList2MenuBackdrop.NineSlice.BottomRightCorner,
              }) do
                 if AbyssUIAddonSettings ~= nil then
                     AbyssUI_ColorizationFrameFunction(v)

@@ -1330,7 +1330,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				DropDownList2Backdrop.TopRightCorner,
 				DropDownList2Backdrop.TopLeftCorner,
 				DropDownList2Backdrop.BottomLeftCorner,
-			DropDownList2Backdrop.BottomRightCorner, }) do
+				DropDownList2Backdrop.BottomRightCorner, }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 				else
