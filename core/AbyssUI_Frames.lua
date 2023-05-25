@@ -415,7 +415,7 @@ ExtraInfo_Faction1:SetWidth(64)
 ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
-if (GetWoWVersion ~= 30401) then
+if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402) then
 	local t = ExtraInfo_Faction1:CreateTexture(nil, "BACKGROUND")
 		if (englishFaction == "Horde") then
 			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")

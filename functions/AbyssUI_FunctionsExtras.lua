@@ -830,8 +830,9 @@ end
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
 SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
 SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
+local sexy  = IsAddOnLoaded("SexyMap")
 	-- minimap default position - you can move it ingame by holding down ALT!
-	if (AbyssUIAddonSettings.SquareMinimap == true and AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true) then
+	if (AbyssUIAddonSettings.SquareMinimap == true and AbyssUIAddonSettings.DisableNewMinimap ~= true and AbyssUIAddonSettings.HideMinimap ~= true and sexy ~= true) then
 		local position = "TOPRIGHT"     	
 		local position_x = -11          		
 		local position_y = -5     

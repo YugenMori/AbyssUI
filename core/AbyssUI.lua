@@ -1541,6 +1541,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- LootHistoryFrame
+			--[[
 			for i, v in pairs({
 				LootHistoryFrame.Divider,
 				LootHistoryFrame.BorderRight,
@@ -1556,6 +1557,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end
+			--]]
 			-- ModelPreviewFrame
 			for i, v in pairs({
 				ModelPreviewFrame.NineSlice.TopEdge,

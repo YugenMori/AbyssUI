@@ -333,8 +333,8 @@ end
 -- Tooltip
 -- Tooltip Background and borders
 if (GetWoWVersion <= 90500) then
-	if (GetWoWVersion ~= 30401) then
-		local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil, 1)
+	if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402) then
+		local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil)
 		TooltipBackground:SetPoint("TOPLEFT", 3, -3)
 		TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
 		TooltipBackground:SetColorTexture(0.02, 0.02, 0.02)
@@ -530,7 +530,7 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
         end
     	end
 		end
-	elseif (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion >= 90500) then
+	elseif (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion > 90500) then
     local bag, slot
     for bag = 0, 4 do
       for slot = 0, C_Container.GetContainerNumSlots(bag) do
@@ -955,7 +955,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		if (GetWoWVersion > 30401) then
+		if (GetWoWVersion > 30402) then
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end

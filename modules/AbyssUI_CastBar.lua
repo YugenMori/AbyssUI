@@ -111,7 +111,7 @@ local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (AbyssUIAddonSettings.NewCastBar ~= true and GetWoWVersion <= 90500) then
-		if (GetWoWVersion ~= 30401) then
+		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402) then
 			CastingBarFrame.Border:Hide()
 			PetCastingBarFrame.Border:Hide()
 			MirrorTimer1Border:Hide()
