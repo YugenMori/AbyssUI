@@ -93,25 +93,27 @@ end
 -- Cast bars
 local function CheckCastBarText()
 	if (not CastingBarFrame.Border:IsShown() and GetWoWVersion <= 90500) then
-		local c = CastingBarFrame
-		c.Icon:Show()
-		c.Icon:SetWidth(21)
-		c.Icon:SetHeight(21)
-		c.Icon:ClearAllPoints()
-		c.Icon:SetPoint("LEFT", c, "LEFT", -1, 0)
-		c.Text = c:CreateFontString(nil)
-		c.Text:SetFont(globalFont, 12)
-		c.Text:SetShadowColor(0, 0, 0)
-		c.Text:SetShadowOffset(1, -1)
-		c.Text:ClearAllPoints()
-		c.Text:SetPoint("TOP", c, "TOP", 0, 15)
+		if (GetWoWVersion ~= 11404) then
+			local c = CastingBarFrame
+			c.Icon:Show()
+			c.Icon:SetWidth(21)
+			c.Icon:SetHeight(21)
+			c.Icon:ClearAllPoints()
+			c.Icon:SetPoint("LEFT", c, "LEFT", -1, 0)
+			c.Text = c:CreateFontString(nil)
+			c.Text:SetFont(globalFont, 12)
+			c.Text:SetShadowColor(0, 0, 0)
+			c.Text:SetShadowOffset(1, -1)
+			c.Text:ClearAllPoints()
+			c.Text:SetPoint("TOP", c, "TOP", 0, 15)
+		end
 	end
 end
 local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (AbyssUIAddonSettings.NewCastBar ~= true and GetWoWVersion <= 90500) then
-		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402) then
+		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
 			CastingBarFrame.Border:Hide()
 			PetCastingBarFrame.Border:Hide()
 			MirrorTimer1Border:Hide()
@@ -152,36 +154,38 @@ local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (GetWoWVersion <= 90500) then
-		local c = CastingBarFrame
-		c.timer = c:CreateFontString(nil)
-		c.timer:SetFont(globalFont, 12)
-		c.timer:SetShadowColor(0, 0, 0)
-		c.timer:SetShadowOffset(1, -1)
-		if (AbyssUIAddonSettings.NewCastBar == true) then
-			c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
-		else
-			c.timer:SetPoint("RIGHT", c, "RIGHT", 0, 0)
-		end
-		c.update = .1
-		c:HookScript("OnUpdate", function(self, elapsed)
-			if (AbyssUIAddonSettings.HideCastTimer ~= true) then
-	    	if not self.timer then return end
-		    	if self.update and self.update < elapsed then
-		        if self.casting then
-		            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
-		        elseif self.channeling then
-		            self.timer:SetText(format("%.1f", max(self.value, 0)))
-		        else
-		            self.timer:SetText("")
-		        end
-		        self.update = .1
-		    else
-		        self.update = self.update - elapsed
-		    end
+		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
+			local c = CastingBarFrame
+			c.timer = c:CreateFontString(nil)
+			c.timer:SetFont(globalFont, 12)
+			c.timer:SetShadowColor(0, 0, 0)
+			c.timer:SetShadowOffset(1, -1)
+			if (AbyssUIAddonSettings.NewCastBar == true) then
+				c.timer:SetPoint("TOP", c, "BOTTOM", 0, 0)
 			else
-				return nil
+				c.timer:SetPoint("RIGHT", c, "RIGHT", 0, 0)
 			end
-		end)
+			c.update = .1
+			c:HookScript("OnUpdate", function(self, elapsed)
+				if (AbyssUIAddonSettings.HideCastTimer ~= true) then
+		    	if not self.timer then return end
+			    	if self.update and self.update < elapsed then
+			        if self.casting then
+			            self.timer:SetText(format("%2.1f/%1.1f", max(self.maxValue - self.value, 0), self.maxValue))
+			        elseif self.channeling then
+			            self.timer:SetText(format("%.1f", max(self.value, 0)))
+			        else
+			            self.timer:SetText("")
+			        end
+			        self.update = .1
+			    else
+			        self.update = self.update - elapsed
+			    end
+				else
+					return nil
+				end
+			end)
+		end
 	end
 end)
 -- TimerTracker fixes

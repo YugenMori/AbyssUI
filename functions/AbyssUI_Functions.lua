@@ -333,7 +333,7 @@ end
 -- Tooltip
 -- Tooltip Background and borders
 if (GetWoWVersion <= 90500) then
-	if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402) then
+	if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
 		local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil)
 		TooltipBackground:SetPoint("TOPLEFT", 3, -3)
 		TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
