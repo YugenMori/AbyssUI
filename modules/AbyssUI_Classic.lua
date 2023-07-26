@@ -1364,7 +1364,7 @@ f:SetScript("OnEvent", function(self, event, name)
 		  "spellbar",
 		}
 		local OtherStatusBars = {
-		  CastingBarFrame,
+		  --CastingBarFrame,
 		  MirrorTimer1StatusBar,
 		  MirrorTimer2StatusBar,
 		  MirrorTimer3StatusBar,

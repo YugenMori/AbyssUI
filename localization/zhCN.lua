@@ -443,3 +443,5 @@ L["Thank you for choosing Default|cff0d75d4UI|r!"] = "感谢您选择 Default|cf
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, click on the screen or just reload the UI /reload."] = "让我们保存变量并为首次使用准备界面。\n"
 .."为此，请单击屏幕或重新加载 UI /reload。"
+L["Disable Tooltip Health"] = "禁用工具提示健康栏"
+L["Disable the tooltip healthBar from mouse hover functions"] = "通过鼠标悬停功能禁用工具提示健康栏"

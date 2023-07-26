@@ -443,3 +443,5 @@ L["Thank you for choosing Default|cff0d75d4UI|r!"] = "Grazie per aver scelto Def
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, click on the screen or just reload the UI /reload."] = "Salviamo le variabili e prepariamo l'interfaccia per il primo utilizzo.\n"
 .."Per fare ciò, fai clic sullo schermo o semplicemente ricarica l'interfaccia utente /reload."
+L["Disable Tooltip Health"] = "Disabilita salute descrizione"
+L["Disable the tooltip healthBar from mouse hover functions"] = "Disabilita la barra della salute del tooltip dalle funzioni al passaggio del mouse"

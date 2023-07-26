@@ -443,3 +443,5 @@ L["Thank you for choosing Default|cff0d75d4UI|r!"] = "Default|cff0d75d4UI|r를 �
 L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, click on the screen or just reload the UI /reload."] = "변수를 저장하고 처음 사용할 인터페이스를 준비합시다.\n"
 .."이렇게 하려면 화면을 클릭하거나 UI를 다시 로드/reload하십시오."
+L["Disable Tooltip Health"] = "도구 설명 상태 비활성화"
+L["Disable the tooltip healthBar from mouse hover functions"] = "마우스 가리키기 기능에서 툴팁 상태 표시줄 비활성화"

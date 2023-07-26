@@ -93,7 +93,7 @@ end
 -- Cast bars
 local function CheckCastBarText()
 	if (not CastingBarFrame.Border:IsShown() and GetWoWVersion <= 90500) then
-		if (GetWoWVersion ~= 11404) then
+		if (GetWoWVersion >= 30600) then
 			local c = CastingBarFrame
 			c.Icon:Show()
 			c.Icon:SetWidth(21)
@@ -113,7 +113,7 @@ local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (AbyssUIAddonSettings.NewCastBar ~= true and GetWoWVersion <= 90500) then
-		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
+		if (GetWoWVersion >= 30600) then
 			CastingBarFrame.Border:Hide()
 			PetCastingBarFrame.Border:Hide()
 			MirrorTimer1Border:Hide()
@@ -154,7 +154,7 @@ local f = CreateFrame("Frame", nil)
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event)
 	if (GetWoWVersion <= 90500) then
-		if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
+		if (GetWoWVersion >= 30600) then
 			local c = CastingBarFrame
 			c.timer = c:CreateFontString(nil)
 			c.timer:SetFont(globalFont, 12)

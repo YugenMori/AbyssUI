@@ -1,9 +1,9 @@
 -- Author: Yugen
 -- This is a fork from the addon "ColoredInventoryItems" that someone asked me 
--- to fix it and implement in my UI. Please check the original project (abandoned) and give the orignal author some credits.
--- Classic
+-- to fix it and implement in my UI. Please check the original project (abandoned as far from the date of this implementation) 
+-- and give the orignal author some credits.
 --
--- Hope you like my addOn ^^
+-- Classic
 --
 -- Functions for AbyssUI
 ----------------------------------------------------

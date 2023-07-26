@@ -345,14 +345,19 @@ end
 GameTooltip:HookScript("OnUpdate", function(self, elapsed)
 	local _, unit = self:GetUnit()
 	if unit == nil then return end
-	if UnitIsPlayer(unit) then
-		local _, class = UnitClass(unit)
-		local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-		if color then
-			GameTooltipStatusBar:SetStatusBarColor(color.r, color.g, color.b)
-		end		
+	if (AbyssUIAddonSettings ~= nil and AbyssUIAddonSettings.DisableTooltipHealth ~= true) then
+		GameTooltipStatusBar:SetAlpha(1)
+		if UnitIsPlayer(unit) then
+			local _, class = UnitClass(unit)
+			local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+			if color then
+				GameTooltipStatusBar:SetStatusBarColor(color.r, color.g, color.b)
+			end		
+		else
+			GameTooltipStatusBar:SetStatusBarColor(UnitColor(unit))
+		end
 	else
-		GameTooltipStatusBar:SetStatusBarColor(UnitColor(unit))
+		GameTooltipStatusBar:SetAlpha(0)
 	end
 end)
 ----------------------------------------------------

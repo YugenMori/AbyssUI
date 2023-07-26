@@ -167,7 +167,7 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- EditBox
-local AbyssUI_EditBox= CreateFrame("EditBox", "AbyssUI_EditBox", AbyssUI_EditBox_Frame)
+local AbyssUI_EditBox = CreateFrame("EditBox", "$parentAbyssUI_EditBox", AbyssUI_EditBox_Frame)
 AbyssUI_EditBox:SetFont(globalFont, 14, "THINOUTLINE")
 AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
 AbyssUI_EditBox:SetMultiLine(true)
