@@ -543,8 +543,8 @@ local function InitSettings()
         FrameButton.text:SetShadowOffset(1, -1)
       end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("offline")
-        AbyssUI_EditBox_Frame:Show()
+        AbyssUI_EditBoxPatreon:SetText("offline")
+        AbyssUI_EditBoxPatreon_Frame:Show()
     end)
   end)
   -- Chat Commands
@@ -578,11 +578,11 @@ local function InitSettings()
       print(L["/abyssui |cffffcc00more|r ~for more commands"])
     end)
   end)
-  -- Donate
+  -- Kofi
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
-    local FrameButton = CreateFrame("Button","$parentExtraPaypalButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    local FrameButton = CreateFrame("Button","$parentExtraKofiButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
     FrameButton:SetHeight(30)
     FrameButton:SetWidth(140)
     FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -300)
@@ -599,8 +599,8 @@ local function InitSettings()
       FrameButton.text:SetShadowOffset(1, -1)
     end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("ko-fi.com/yugensan")
-        AbyssUI_EditBox_Frame:Show()
+        AbyssUI_EditBoxPatreon:SetText("ko-fi.com/yugensan")
+        AbyssUI_EditBoxPatreon_Frame:Show()
     end)
   end)
   -- Donators
@@ -683,8 +683,8 @@ local function InitSettings()
         FrameButton.text:SetShadowOffset(1, -1)
       end
     FrameButton:SetScript("OnClick", function()
-        AbyssUI_EditBox:SetText("https://github.com/YugenMori/AbyssUI")
-        AbyssUI_EditBox_Frame:Show()
+        AbyssUI_EditBoxPatreon:SetText("https://github.com/YugenMori/AbyssUI")
+        AbyssUI_EditBoxPatreon_Frame:Show()
     end)
   end)
   ----------------------------- AbyssUI Info Panel -------------------------------
@@ -3189,13 +3189,18 @@ local function Stylization()
   UnitFrameImproved_Dragonflight:SetScript("OnClick", function(self)
     if AbyssUIAddonSettings.DKAllyPortrait     ~= true and 
       AbyssUIAddonSettings.DKHordePortrait     ~= true and
-      AbyssUIAddonSettings.DemonHunterPortrait ~= true then
+      AbyssUIAddonSettings.DemonHunterPortrait ~= true and
+      AbyssUIAddonSettings.UnitFrameImproved   == true then
       AbyssUIAddonSettings.Dragonflight = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
-      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
-      UnitFrameImproved_Dragonflight:SetChecked(nil)
-    end
+      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
+        UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
+      else
+        UIErrorsFrame:AddMessage("You need to check UnitFrameImproved for this to work!", 1.0, 0.1, 0.1, 1.0)
+      end
+        UnitFrameImproved_Dragonflight:SetChecked(nil)
+      end
   end)
   -- Elite Portrait --
   local ElitePortrait_CheckButton = CreateFrame("CheckButton", "$parentElitePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")

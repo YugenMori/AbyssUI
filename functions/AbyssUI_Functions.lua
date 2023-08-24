@@ -831,6 +831,8 @@ AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
     if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	--PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
     	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Elite-Normal")
+    elseif (AbyssUIAddonSettings.ElitePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+    	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Normal")
 	else
 		return nil
 	end
