@@ -518,9 +518,11 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					FocusFrameTextureFrameHealthBarText,
 					FocusFrameTextureFrameManaBarText,
 					}) do
-					v:SetFont(globalFont, 12)
+					v:SetFont(globalFont, 12, "THINOUTLINE")
 					v:SetShadowColor(0, 0, 0)
-					v:SetShadowOffset(1, -1)					
+					v:SetShadowOffset(1, -1)
+					PetFrameHealthBarText:SetFont(globalFont, 8, "THINOUTLINE")
+					PetFrameManaBarText:SetFont(globalFont, 8, "THINOUTLINE")
 				end
 				DragonflightUnitNameNumbers()
 			end

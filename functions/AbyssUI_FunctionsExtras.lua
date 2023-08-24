@@ -1398,6 +1398,8 @@ AbyssUI_PlayerClassicName:SetScript("OnEvent", function()
 			v:SetVertexColor(248/255, 248/255, 248/255)
 			v:SetShadowColor(0, 0, 0)
 			v:SetShadowOffset(1, -0.8)
+			PetFrameHealthBarText:SetFont(globalFont, 8, "THINOUTLINE")
+			PetFrameManaBarText:SetFont(globalFont, 8, "THINOUTLINE")
 		end
 	else
 		return nil

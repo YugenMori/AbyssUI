@@ -506,8 +506,8 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
 	if (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion <= 90500) then
     local bag, slot
     for bag = 0, 4 do
-      for slot = 0, GetContainerNumSlots(bag) do
-        local link = GetContainerItemLink(bag, slot)
+      for slot = 0, C_Container.GetContainerNumSlots(bag) do
+        local link = C_Container.GetContainerItemLink(bag, slot)
         if link and (select(3, GetItemInfo(link)) == 0) then
         	UseContainerItem(bag, slot)
         end
@@ -829,7 +829,8 @@ local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrai
 AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
     if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
-    	PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
+    	--PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
+    	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Elite-Normal")
 	else
 		return nil
 	end

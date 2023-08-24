@@ -1282,6 +1282,28 @@ f:SetScript("OnEvent", function(self, event, name)
   	end
 	end
 end)
+local function TargetFramePortraitChecker()
+local classification = UnitClassification("target")
+	if (classification == "normal") then
+		TargetFrameTextureFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\targetingframe\\UI-TargetingFrame")
+	elseif (classification == "elite") then
+		TargetFrameTextureFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\targetingframe\\UI-TargetingFrame-Elite")
+	else
+		return nil
+	end
+end
+--[[
+local function TargetFrameNewPortraitChecker()
+local classification = UnitClassification("target")
+	if (classification == "normal") then
+		TargetFrame.TargetFrameContainer.FrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\targetingframe\\UI-TargetingFrame")
+	elseif (classification == "elite") then
+		TargetFrame.TargetFrameContainer.BossPortraitFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\targetingframe\\UI-TargetingFrame-Elite")
+	else
+		return nil
+	end
+end
+--]]
 -- Target Mob(Enemy) Health Bar Color
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -1289,6 +1311,7 @@ local function eventHandler(self, event, ...)
 	if ( AbyssUIAddonSettings.UnitFrameImproved ~= true ) then
 		if GetWoWVersion <= 30600 then
 			if ( event == "PLAYER_TARGET_CHANGED" ) then
+				TargetFramePortraitChecker()
 				if ( UnitReaction("player", "target") ~= nil ) then
 					local target = UnitReaction("player", "target")
 					local utarget = UnitIsPlayer("target")
