@@ -51,7 +51,6 @@ local function AbyssUI_ColorizationFrameFunction(...)
 		v:SetVertexColor(.4, .4, .4)
 	end
 end
-
 --
 local BasicFrames = CreateFrame("Frame")
 BasicFrames:RegisterEvent("ADDON_LOADED")
@@ -957,6 +956,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 			if (GetWoWVersion <= 90500) then
 				for i, v in pairs({	
 					CastingBarFrame.Border,
+					MirrorTimer1Border,
 					TargetFrameSpellBar.Border,
 				TargetFrameSpellBar.BorderShield, }) do
 					if AbyssUIAddonSettings ~= nil then

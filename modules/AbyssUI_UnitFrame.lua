@@ -35,39 +35,46 @@ f:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- Fontfication
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if (locale == "zhCN") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "zhTW") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "ruRU") then
-		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
-		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif (locale == "koKR") then
-		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
-		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
-		locale == "esES" or locale == "esMX" or locale == "ptBR") then
-		globalFont	= mediaFolder.."global.ttf"
-		subFont 	= mediaFolder.."npcfont.ttf"
-		damageFont 	= mediaFolder.."damagefont.ttf"
-	else
-		globalFont	= fontName
-		subFont 	= fontName
-		damageFont 	= fontName
-	end
-	return globalFont, subFont, damageFont
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
+    globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
+    globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    locale == "esES" or locale == "esMX" or locale == "ptBR") then
+    globalFont  = mediaFolder.."global.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
+    damageFont  = mediaFolder.."damagefont.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
+  else
+    globalFont  = fontName
+    subFont   = fontName
+    damageFont  = fontName
+    oldglobalFont = fontName
+  end
+  return globalFont, subFont, damageFont, oldglobalFont
 end
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- declarations
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
 	if (GetWoWVersion <= 90500) then
@@ -202,33 +209,23 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
 		        end
 		        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
-		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
-		          	if (AbyssUIAddonSettings.Dragonflight == true) then
-			          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
-		          		DragonflightUnitPlayerFrameStyle()
-		          	else
-		            	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
-		          	end
-	  	        elseif (AbyssUIAddonSettings.DKAllyPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true) then
+		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
+	  	        elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
-		          elseif (AbyssUIAddonSettings.DKHordePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          elseif (AbyssUIAddonSettings.DKHordePortrait == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
-		          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true) then
+		          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
 		         		PlayerFrameTexture:SetVertexColor(1, 1, 1)
-		         	elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
+		         	elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
 		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
 								DragonflightUnitPlayerFrameStyle()
-							elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.ElitePortrait == true) then
-		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrame-Elite")
+							elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait == true) then
+		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
 								DragonflightUnitPlayerFrameStyle()
-		          else 
-		          	if (AbyssUIAddonSettings.Dragonflight == true) then
-		          		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
-		          		DragonflightUnitPlayerFrameStyle()
-		          	else
-		            	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
-		          	end
+		          else
+		           PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
 		          end
 		          if (AbyssUIAddonSettings.DKHordePortrait == true) then
 	          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
@@ -240,10 +237,13 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		          	PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
 		        	end
 		        else
-		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.Dragonflight ~= true) then
+		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true) then
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
-		          elseif (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved == true and AbyssUIAddonSettings.Dragonflight == true)then
+		          elseif (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight == true) then
 		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
+		          	DragonflightUnitPlayerFrameStyle()
+		          elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
+		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
 		          	DragonflightUnitPlayerFrameStyle()
 		          else
 		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
@@ -452,7 +452,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
 					FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
 					}) do
-					v:SetFont(globalFont, 12)
+					v:SetFont(globalFont, 11)
 					v:SetShadowColor(0, 0, 0)
 					v:SetShadowOffset(1, -1)
 				end
@@ -480,8 +480,8 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						--v:ClearAllPoints()
 						DragonflightUnitNameText()
 						if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
-							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 45, 23)
-							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -45, 23)
+							PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 50, 23)
+							TargetFrameTextureFrameName:SetPoint("CENTER", TargetFrame, "CENTER", -50, 23)
 						elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
 							--PlayerName:SetPoint("CENTER", PlayerFrame, "CENTER", 0, 14)
 							--TargetFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("TOPLEFT", TargetFrame.TargetFrameContent.TargetFrameContentMain.ReputationColor, "TOPRIGHT", -100, -1)
@@ -496,7 +496,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						end
 						if (GetWoWVersion >= 20502) then
 							if (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion <= 90500) then
-								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -45, 23)
+								FocusFrameTextureFrameName:SetPoint("CENTER", FocusFrame, "CENTER", -50, 23)
 							elseif (AbyssUIAddonSettings.Dragonflight == true and GetWoWVersion >= 90500) then
 								--FocusFrame.TargetFrameContent.TargetFrameContentMain.Name:SetPoint("TOPLEFT", FocusFrame.TargetFrameContent.TargetFrameContentMain.ReputationColor, "TOPRIGHT", -100, -1)
 							else
@@ -518,11 +518,21 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 					FocusFrameTextureFrameHealthBarText,
 					FocusFrameTextureFrameManaBarText,
 					}) do
-					v:SetFont(globalFont, 12, "THINOUTLINE")
+					v:SetFont(globalFont, 11)
 					v:SetShadowColor(0, 0, 0)
 					v:SetShadowOffset(1, -1)
-					PetFrameHealthBarText:SetFont(globalFont, 8, "THINOUTLINE")
-					PetFrameManaBarText:SetFont(globalFont, 8, "THINOUTLINE")
+					PetFrameHealthBarText:SetFont(globalFont, 8)
+					PetFrameManaBarText:SetFont(globalFont, 8)
+				end
+				if (GetWoWVersion <= 90500) then
+					for i, v in pairs ({
+						TargetFrameTextureFrame.HealthBarText,
+						TargetFrameTextureFrame.ManaBarText,
+					}) do
+					v:SetFont(globalFont, 11)
+					v:SetShadowColor(0, 0, 0)
+					v:SetShadowOffset(1, -1)
+					end
 				end
 				DragonflightUnitNameNumbers()
 			end
@@ -583,7 +593,12 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 						self.borderTexture:SetTexture(texture)
 					else
 						if (not (classification == "minus")) then
-							self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
+							if (AbyssUIAddonSettings.Dragonflight == true) then
+								self.borderTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-TargetingFrame")
+								DragonflightUnitTargetFrameStyle()
+							else
+								self.borderTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
+							end
 						end
 					end
 					self.nameBackground:SetAlpha(0)
@@ -629,12 +644,22 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		end
 		-- ToTStyle
 		local function UnitFramesImproved_Style_TargetOfTargetFrame()
-			--if not InCombatLockdown () then
-				--TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-				--if (GetWoWVersion >= 20502) then
-					--FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
-				--end
-			--end
+			if not InCombatLockdown () then
+				if (GetWoWVersion >= 20500 and 
+						GetWoWVersion <= 90500 and 
+						AbyssUIAddonSettings.UnitFrameImproved == true
+					) then
+					if (AbyssUIAddonSettings.Dragonflight == true) then
+						FocusFrameHealthBar:SetWidth(115)
+						FocusFrameHealthBar:SetHeight(20)
+						FocusFrameHealthBar:SetPoint("TOPLEFT", FocusFrame,"TOPLEFT", 5, -32)
+					else
+						FocusFrameHealthBar:SetWidth(119)
+						FocusFrameHealthBar:SetHeight(30)
+						FocusFrameHealthBar:SetPoint("TOPLEFT", FocusFrame,"TOPLEFT", 5, -22)
+					end
+				end
+			end
 		end
 		--StatusBarTextString
 		local function CreateStatusBarText(name, parentName, parent, point, x, y)

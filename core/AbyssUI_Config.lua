@@ -31,40 +31,46 @@ f:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- Fontfication
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-  if (locale == "zhCN") then
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "zhTW") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "ruRU") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
-    subFont     = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
-  elseif (locale == "koKR") then
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
-    subFont     = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
-  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
-    subFont     = mediaFolder.."npcfont.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
     damageFont  = mediaFolder.."damagefont.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
   else
     globalFont  = fontName
-    subFont     = fontName
+    subFont   = fontName
     damageFont  = fontName
+    oldglobalFont = fontName
   end
-  return globalFont, subFont, damageFont
+  return globalFont, subFont, damageFont, oldglobalFont
 end
 -- declarations
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
   if (GetWoWVersion <= 90500) then
@@ -170,12 +176,12 @@ local function InitSettings()
     AbyssUI_Config.childpanel8.parent = AbyssUI_Config.panel.name
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
   end
-  --]]
   --
   AbyssUI_Config.childpanel9 = CreateFrame("Frame", "$parentConfigChild_Patreon", AbyssUI_Config.panel)
   AbyssUI_Config.childpanel9.name = "|cfff2dc7f"..L["Donators"].."|r"
   AbyssUI_Config.childpanel9.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel9)
+   --]]
   --
   AbyssUI_Config.childpanel10 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
   AbyssUI_Config.childpanel10.name = L["Thanks & Translations"]
@@ -272,7 +278,7 @@ local function InitSettings()
   Frame:SetText(L["Player Portrait"])
   -- Panel 04.01 (Themes)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -50)
+  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -30, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -280,13 +286,13 @@ local function InitSettings()
   Frame:SetText(L["- Portrait Art"])
   -- Panel 4.02 (Themes)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel4, "TOPRIGHT", -65, -50)
+  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel4, "TOPRIGHT", -100, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- UnitFrame Art"])
-    -- Panel 04.03 (Themes)
+  -- Panel 04.03 (Themes)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
   Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -320)
   Frame:SetWidth(200)
@@ -313,7 +319,7 @@ local function InitSettings()
   Frame:SetText(L["- Preset Colors"])
   -- Panel 05.02 (Colorization)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel5)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel5, "TOPRIGHT", -55, -50)
+  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel5, "TOPRIGHT", -100, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -338,7 +344,7 @@ local function InitSettings()
   Frame:SetText(L["- General"])
   -- Panel 06.02 (Extra)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel062", AbyssUI_Config.childpanel6)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel6, "TOPRIGHT", -90, -50)
+  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel6, "TOPRIGHT", -130, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -365,7 +371,7 @@ local function InitSettings()
     Frame:SetAllPoints()
     Frame:SetText(L["Scale & Frame Size"])
   end
-  --]]
+
   -- Panel 09 (Patreon)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel09", AbyssUI_Config.childpanel9)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel9, "TOP", 0, -20)
@@ -375,6 +381,7 @@ local function InitSettings()
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["Donators"])
+  --]]
   -- Panel 10 (Thanks)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel10", AbyssUI_Config.childpanel10)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel10, "TOP", 0, -20)
@@ -1127,7 +1134,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- Hide FPS/MS Frame --
   local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
   FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
-  FPSMSFrame_CheckButton.Text:SetText(L["Hide FPS/MS Frame"])
+  FPSMSFrame_CheckButton.Text:SetText("|cff0d75d4"..L["Hide FPS/MS Frame"].."|r")
   FPSMSFrame_CheckButton.tooltip = L["Hide the fps/ms frame (bottomleft)"]
   FPSMSFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideFPSMSFrame)
   addonTable.FPSMSFrame = FPSMSFrame_CheckButton
@@ -1139,7 +1146,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- YouDied LevelUp Frame --
   local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
   YouDiedLevelUpFrame_CheckButton:SetPoint("TOPLEFT", 10, -230)
-  YouDiedLevelUpFrame_CheckButton.Text:SetText(L["Hide YouDied/LevelUp Frame"])
+  YouDiedLevelUpFrame_CheckButton.Text:SetText("|cff0d75d4"..L["Hide YouDied/LevelUp Frame"].."|r")
   YouDiedLevelUpFrame_CheckButton.tooltip = L["Hide the 'You Died' and 'Level Up' frame when you"..
   " die/level in the game"]
   YouDiedLevelUpFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideYouDiedLevelUpFrame)
@@ -1476,7 +1483,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- Hide Cast Timer
   local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
   HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
-  HideCastTimer_CheckButton.Text:SetText(L["Hide CastBar Timer"])
+  HideCastTimer_CheckButton.Text:SetText("|cff0d75d4"..L["Hide CastBar Timer"].."|r")
   local Frame = CreateFrame("Frame", nil, HideCastTimer_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -1504,11 +1511,13 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- OnClick Function
   HideGroupFrame_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideGroupFrame = self:GetChecked()
+    if (GetWoWVersion <= 90500) then
       if (AbyssUIAddonSettings.HideGroupFrame == true) then
         PlayerFrameGroupIndicator:SetAlpha(0)
       else
         PlayerFrameGroupIndicator:SetAlpha(1)
       end
+    end
   end)
   -- After Login/Reload
   HideGroupFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1537,9 +1546,17 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
     if (GetWoWVersion > 30600) then
       AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
       if (AbyssUIAddonSettings.HideConvenantFrame == true) then
-        GarrisonLandingPageMinimapButton:Hide()
+        if (GetWoWVersion <= 90500) then
+          GarrisonLandingPageMinimapButton:Hide()
+        else
+          ExpansionLandingPageMinimapButton:Hide()
+        end
       else
-        GarrisonLandingPageMinimapButton:Show()
+        if (GetWoWVersion <= 90500) then
+          GarrisonLandingPageMinimapButton:Show()
+        else
+          ExpansionLandingPageMinimapButton:Show()
+        end
       end
     else
       UIErrorsFrame:AddMessage(L["Not available in this version of WoW!"], 1.0, 0.1, 0.1, 1.0)
@@ -1553,7 +1570,11 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
       if (GetWoWVersion > 30600) then
         if (AbyssUIAddonSettings.HideConvenantFrame == true) then
           C_Timer.After(1, function()
-            GarrisonLandingPageMinimapButton:Hide(0)
+            if (GetWoWVersion <= 90500) then
+              GarrisonLandingPageMinimapButton:Hide(0)
+            else
+              ExpansionLandingPageMinimapButton:Hide(0)
+            end
           end)
         end
       end
@@ -1821,8 +1842,8 @@ local function Miscellaneous()
   AbyssUI_BetterFonts_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
       if (AbyssUIAddonSettings.ExtraFunctionBetterFonts == true) then
-         ChatFrame1:SetFont("Fonts\\MORPHEUS.TTF", 13)
-         ChatFrame1.editBox.header:SetFont("Fonts\\MORPHEUS.TTF",13)
+         ChatFrame1:SetFont(oldglobalFont, 13, "THINOUTLINE")
+         ChatFrame1.editBox.header:SetFont(oldglobalFont, 13, "THINOUTLINE")
       else 
         return nil
       end
@@ -1902,7 +1923,7 @@ local function Miscellaneous()
   -- Disable ChatBubble --
   local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ChatBubbleChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -170)
-  AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText(L["Disable ChatBubble Changes"])
+  AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("|cff0d75d4"..L["Disable ChatBubble Changes"].."|r")
   local Frame = CreateFrame("Frame", nil, AbyssUI_ChatBubbleChanges_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -1974,7 +1995,7 @@ local function Miscellaneous()
   -- Disable New Minimap --
   local DisableNewMinimap_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   DisableNewMinimap_CheckButton:SetPoint("TOPLEFT", 400, -230)
-  DisableNewMinimap_CheckButton.Text:SetText(L["Disable New Minimap"])
+  DisableNewMinimap_CheckButton.Text:SetText("|cff0d75d4"..L["Disable New Minimap"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableNewMinimap_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -1997,7 +2018,7 @@ local function Miscellaneous()
   -- Disable UnitFrame Smoke --
   local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 400, -260)
-  DisableUnitFrameSmoke_CheckButton.Text:SetText(L["Disable Smoke Texture"])
+  DisableUnitFrameSmoke_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Smoke Texture"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableUnitFrameSmoke_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -2032,7 +2053,7 @@ local function Miscellaneous()
   -- Disable New CastBar --
   local AbyssUI_NewCastBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NewCastBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   AbyssUI_NewCastBar_CheckButton:SetPoint("TOPLEFT", 400, -320)
-  AbyssUI_NewCastBar_CheckButton.Text:SetText(L["Disable New CastBar"])
+  AbyssUI_NewCastBar_CheckButton.Text:SetText("|cff0d75d4"..L["Disable New CastBar"].."|r")
   local Frame = CreateFrame("Frame", nil, AbyssUI_NewCastBar_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -2081,7 +2102,7 @@ local function Miscellaneous()
   -- Disable Tooltip Healthbar --
   local DisableTooltipHealth_CheckButton = CreateFrame("CheckButton", "$parentDisableTooltipHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   DisableTooltipHealth_CheckButton:SetPoint("TOPLEFT", 400, -410)
-  DisableTooltipHealth_CheckButton.Text:SetText(L["Disable Tooltip Health"])
+  DisableTooltipHealth_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Tooltip Health"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableTooltipHealth_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -2089,9 +2110,23 @@ local function Miscellaneous()
   DisableTooltipHealth_CheckButton.Text:SetAllPoints(Frame)
   DisableTooltipHealth_CheckButton.tooltip = L["Disable the tooltip healthBar from mouse hover functions"]
   DisableTooltipHealth_CheckButton:SetChecked(AbyssUIAddonSettings.DisableTooltipHealth)
+  addonTable.DisableTooltipHealth = DisableTooltipHealth_CheckButton
   -- OnClick Function
   DisableTooltipHealth_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.DisableTooltipHealth = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
+  -- Disable character name color --
+  local AbyssUI_CharacterText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_CharacterText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUI_CharacterText_CheckButton:SetPoint("TOPLEFT", 400, -440)
+  AbyssUI_CharacterText_CheckButton.Text:SetText("|cff0d75d4".."Default CharacterNameText".."|r")
+  AbyssUI_CharacterText_CheckButton.tooltip = "Disable the character name colorization"..
+  "back to the default font color"
+  AbyssUI_CharacterText_CheckButton:SetChecked(AbyssUIAddonSettings.DisableCharacterText)
+  addonTable.DisableCharacterText = AbyssUI_CharacterText_CheckButton
+  -- OnClick Function
+  AbyssUI_CharacterText_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.DisableCharacterText = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
 end
@@ -2806,6 +2841,7 @@ end
 --]]
 --End
 ----------------------------------- Patreon  -----------------------------------
+--[[
 local function Patreon()
   local PSINFOPatreon_CheckButton = CreateFrame("Frame","$parentPSINFOPatreon_CheckButton", AbyssUI_Config.childpanel9)
   PSINFOPatreon_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel9, "BOTTOMLEFT", 20, -5)
@@ -2905,6 +2941,7 @@ local function Patreon()
   PatreonGoldTextPatrons:SetText("|cffffd700".."MrAddict".."|r")
   PatreonGoldTextPatrons:SetFont(globalFont, 14)
 end
+--]]
 ----------------------------------- Thanks & Translations  -----------------------------------
 local function ThanksTraslations()
   local PSINFOThanks_CheckButton = CreateFrame("Frame","$parentPSINFOThanks_CheckButton", AbyssUI_Config.childpanel10)
@@ -3342,7 +3379,8 @@ local function Stylization()
       AbyssUIClassCircles01_CheckButton:SetChecked(nil)
     end
   end)
-  -- Icon Border --
+----------------------------------- Icons  -----------------------------------
+-- Icon Border --
   -- Gloss
   local GlossIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlossIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   GlossIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -350)
@@ -3356,12 +3394,14 @@ local function Stylization()
   GlossIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.GlossIconBorder)
   -- OnClick Function
   GlossIconBorder_CheckButton:SetScript("OnClick", function(self)
-   if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
-      AbyssUIAddonSettings.GlassIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+   if AbyssUIAddonSettings.CrispIconBorder     ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
       AbyssUIAddonSettings.GlossIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3382,12 +3422,14 @@ local function Stylization()
   CrispIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.CrispIconBorder)
   -- OnClick Function
   CrispIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.GlossIconBorder   ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and
-      AbyssUIAddonSettings.GlassIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and  
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+    if AbyssUIAddonSettings.GlossIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and  
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
       AbyssUIAddonSettings.CrispIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3408,12 +3450,14 @@ local function Stylization()
   OriginalIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.OriginalIconBorder)
   -- OnClick Function
   OriginalIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
-      AbyssUIAddonSettings.GlossIconBorder    ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
-      AbyssUIAddonSettings.GlassIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and 
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
       AbyssUIAddonSettings.OriginalIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3434,12 +3478,14 @@ local function Stylization()
   SquareIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.SquareIconBorder)
   -- OnClick Function
   SquareIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.GlossIconBorder    ~= true and 
-      AbyssUIAddonSettings.GlassIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and 
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and 
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
       AbyssUIAddonSettings.SquareIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3460,12 +3506,14 @@ local function Stylization()
   ThinIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.ThinIconBorder)
   -- OnClick Function
   ThinIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
-      AbyssUIAddonSettings.GlassIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and 
-      AbyssUIAddonSettings.GlossIconBorder    ~= true then 
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true then 
       AbyssUIAddonSettings.ThinIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3486,12 +3534,14 @@ local function Stylization()
   GlassIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.GlassIconBorder)
   -- OnClick Function
   GlassIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder   ~= true and 
-      AbyssUIAddonSettings.GlossIconBorder    ~= true and
-      AbyssUIAddonSettings.OldIconBorder      ~= true and 
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
       AbyssUIAddonSettings.GlassIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -3499,32 +3549,92 @@ local function Stylization()
       GlassIconBorder_CheckButton:SetChecked(nil)
     end
   end)
-  -- Old Theme
-  local OldIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOldIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  OldIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -380)
-  OldIconBorder_CheckButton.Text:SetText("Classic")
-  local Frame = CreateFrame("Frame", nil, OldIconBorder_CheckButton)
+  -- Classic Theme
+  local ClassicIconBorder_CheckButton = CreateFrame("CheckButton", "$parentClassicIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  ClassicIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -380)
+  ClassicIconBorder_CheckButton.Text:SetText("Classic")
+  local Frame = CreateFrame("Frame", nil, ClassicIconBorder_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
   Frame:SetPoint("LEFT", 25, 0)
-  OldIconBorder_CheckButton.Text:SetAllPoints(Frame)
-  OldIconBorder_CheckButton.tooltip = "Classic"
-  OldIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.OldIconBorder)
+  ClassicIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  ClassicIconBorder_CheckButton.tooltip = "Classic"
+  ClassicIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.ClassicIconBorder)
   -- OnClick Function
-  OldIconBorder_CheckButton:SetScript("OnClick", function(self)
+  ClassicIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true and
+      AbyssUIAddonSettings.ThinIconBorder      ~= true then 
+      AbyssUIAddonSettings.ClassicIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
+      ClassicIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Default Theme
+  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  DefaultIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -410)
+  DefaultIconBorder_CheckButton.Text:SetText("Default (Blizzard)")
+  local Frame = CreateFrame("Frame", nil, DefaultIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  DefaultIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  DefaultIconBorder_CheckButton.tooltip = "Default (Blizzard)"
+  DefaultIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.DefaultIconBorder)
+  -- OnClick Function
+  DefaultIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder      ~= true and 
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true then
+      AbyssUIAddonSettings.DefaultIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
+      DefaultIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Oldschool Theme
+  local OldSchoolIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOldSchoolIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  OldSchoolIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -440)
+  OldSchoolIconBorder_CheckButton.Text:SetText("|cff0d75d4Old School|r")
+  local Frame = CreateFrame("Frame", nil, OldSchoolIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  OldSchoolIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  OldSchoolIconBorder_CheckButton.tooltip = "Old School"
+  OldSchoolIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.OldSchoolIconBorder)
+  addonTable.OldSchoolIconBorder = OldSchoolIconBorder_CheckButton
+  -- OnClick Function
+  OldSchoolIconBorder_CheckButton:SetScript("OnClick", function(self)
     if AbyssUIAddonSettings.CrispIconBorder   ~= true and 
       AbyssUIAddonSettings.OriginalIconBorder ~= true and 
       AbyssUIAddonSettings.SquareIconBorder   ~= true and 
       AbyssUIAddonSettings.GlossIconBorder    ~= true and
       AbyssUIAddonSettings.GlassIconBorder    ~= true and 
-      AbyssUIAddonSettings.ThinIconBorder     ~= true then 
-      AbyssUIAddonSettings.OldIconBorder = self:GetChecked()
+      AbyssUIAddonSettings.ThinIconBorder     ~= true and 
+      AbyssUIAddonSettings.ClassicIconBorder  ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder  ~= true then
+      AbyssUIAddonSettings.OldSchoolIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
       UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
-      OldIconBorder_CheckButton:SetChecked(nil)
+      OldSchoolIconBorder_CheckButton:SetChecked(nil)
     end
   end)
+  -- End
   -- AbyssUIClassCircles02_CheckButton
   local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles02_CheckButton:SetPoint("TOPLEFT", 10, -110)
@@ -4588,7 +4698,7 @@ f:SetScript("OnEvent", function(self, event, ...)
   Miscellaneous()
   TweaksExtra()
   ClassicBCC()
-  Patreon()
+  --Patreon()
   ThanksTraslations()
   FAQ()
   Stylization()

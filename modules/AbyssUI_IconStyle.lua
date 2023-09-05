@@ -4,53 +4,59 @@
 --
 -- Icon Style Module
 --
--- This modules is inpired in LortiUI, so many users of AbyssUI have requested this section to be implemented, so I did,
+-- This module is inpired in LortiUI, so many users of AbyssUI have requested this section to be implemented, so I did,
 -- this module is basically a revamp of LortiUI with modifications to better fit AbyssUI. Thanks to the creator of LortiUI for this amazing
 -- code compilation and to make AbyssUI even better, please check his work!
 -- Also check suicidalkatt icons pack at wowinterface, mostly icon borders are inspired in his work.
 --------------------------------------------------------------
+-- Init - Tables - Saves
 local addon, ns = ...
 local Abconfig = CreateFrame("Frame")
 local GetWoWVersion = ((select(4, GetBuildInfo())))
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- Fontfication
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-  if (locale == "zhCN") then
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "zhTW") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont     = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "ruRU") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
-    subFont     = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
-  elseif (locale == "koKR") then
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
-    subFont     = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
-  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
-    globalFont  = mediaFolder.."global.ttf"
-    subFont     = mediaFolder.."npcfont.ttf"
-    damageFont  = mediaFolder.."damagefont.ttf"
+    globalFont  = mediaFolder.."global.tff"
+    subFont   = mediaFolder.."damagefont_classic.ttf"
+    damageFont  = mediaFolder.."damagefont_classic.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
   else
     globalFont  = fontName
-    subFont     = fontName
+    subFont   = fontName
     damageFont  = fontName
+    oldglobalFont = fontName
   end
-  return globalFont, subFont, damageFont
+  return globalFont, subFont, damageFont, oldglobalFont
 end
--- declarations
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
-
-local function GlossTheme() 
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
+local function GlossTheme()
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss",
-    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -125,7 +131,7 @@ local function GlossTheme()
       size              = 28,
     },
     icon = {
-      padding           = -2,
+      padding           = -1,
     },
     border = {
       texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss",
@@ -135,7 +141,7 @@ local function GlossTheme()
     background = {
       show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
-      color             = { r = 0, g = 0, b = 0, a = 0.9},
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
       classcolored      = false,
       inset             = 6,
       padding           = 4,
@@ -201,7 +207,7 @@ end
 local function ClassColor() 
   Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classcolor",
-    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classcolor",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -331,7 +337,7 @@ local function ClassColor()
     background = {
       show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
-      color             = { r = 0, g = 0, b = 0, a = 0.9},
+      color             = { r = 0.3, g = 0.3, b = 0.3, a = 0.8},
       classcolored      = true,
       inset             = 6,
       padding           = 4,
@@ -435,9 +441,9 @@ local function CrispTheme()
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
-      color             = { r = 0, g = 0, b = 0, a = 0.9},
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
       classcolored      = false,
       inset             = 6,
       padding           = 4,
@@ -480,9 +486,9 @@ local function CrispTheme()
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
-      color             = { r = 0, g = 0, b = 0, a = 0.9},
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
       classcolored      = false,
       inset             = 6,
       padding           = 4,
@@ -586,7 +592,7 @@ local function OriginalTheme()
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -631,7 +637,7 @@ local function OriginalTheme()
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -654,7 +660,7 @@ end
 local function SquareTheme() 
 Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square",
-    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -737,7 +743,7 @@ Abconfig.textures = {
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
@@ -1084,7 +1090,7 @@ local function GlassTheme()
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
+      show              = true,   --show backdrop
       edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.8},
       classcolored      = false,
@@ -1104,10 +1110,10 @@ local function GlassTheme()
   }
 end
 
-local function OldTheme() 
+local function ClassicTheme() 
     Abconfig.textures = {
     normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
-    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
     flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
     hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
     pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
@@ -1185,17 +1191,17 @@ local function OldTheme()
       padding           = -2,
     },
     border = {
-      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic",
       color             = { r = 0.5, g = 0.5, b = 0.5, },
       classcolored      = false,
     },
     background = {
-      show              = false,   --show backdrop
-      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
-      color             = { r = 0.5, g = 0.5, b = 0.5, a = 0.9},
+      show              = true,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
       classcolored      = false,
-      inset             = 6,
-      padding           = 4,
+      inset             = 4,
+      padding           = 2,
     },
     duration = {
       font              = globalFont,
@@ -1230,13 +1236,164 @@ local function OldTheme()
       padding           = -2,
     },
     border = {
-      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic",
+      color             = { r = 1, g = 1, b = 1, },
+      classcolored      = false,
+    },
+    background = {
+      show              = true,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+      color             = { r = 0, g = 0, b = 0, a = 0.8},
+      classcolored      = false,
+      inset             = 4,
+      padding           = 2,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+end
+
+local function OldSchoolTheme() 
+    Abconfig.textures = {
+    normal            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool",
+    bags              = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool",
+    flash             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\flash",
+    hover             = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\hover",
+    pushed            = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\pushed",
+    checked           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\checked",
+    equipped          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss_grey",
+    buttonback        = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background",
+    buttonbackflat    = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\button_background_flat",
+    outer_shadow      = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+  }
+
+  Abconfig.background = {
+    showbg            = true,   --show a background image?
+    showshadow        = false, --show an outer shadow?
+    useflatbackground = false,  --true uses plain flat color instead
+    backgroundcolor   = { r = 0.2, g = 0.2, b = 0.2, a = 0.3 },
+    shadowcolor       = { r = 0, g = 0, b = 0, a = 0.9 },
+    classcolored      = false,
+    inset             = 5,
+  }
+
+  Abconfig.color = {
+    normal            = { r = 0.5, g = 0.5, b = 0.5, },
+    equipped          = { r = 0.3, g = 0.5, b = 0.3, },
+    classcolored      = false,
+  }
+
+  Abconfig.hotkeys = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    pos2             = { a1 = "TOPLEFT", x = 0, y = 0 }, --important! two points are needed to make the hotkeyname be inside of the button
+  }
+
+  Abconfig.macroname = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMLEFT", x = 0, y = 0 },
+    pos2             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 }, --important! two points are needed to make the macroname be inside of the button
+  }
+
+  Abconfig.itemcount = {
+    show             = true,
+    fontsize         = 12,
+    pos1             = { a1 = "BOTTOMRIGHT", x = 0, y = 0 },
+  }
+
+  Abconfig.cooldown = {
+    spacing          = 0,
+  }
+
+  Abconfig.font = globalFont
+
+  --adjust the oneletter abbrev?
+  Abconfig.adjustOneletterAbbrev = true
+
+  --scale of the consolidated tooltip
+  Abconfig.consolidatedTooltipScale = 1.2
+
+  --combine buff and debuff frame - should buffs and debuffs be displayed in one single frame?
+  --if you disable this it is intended that you unlock the buff and debuffs and move them apart!
+  Abconfig.combineBuffsAndDebuffs = false
+
+  -- buff frame settings
+  Abconfig.buffFrame = {
+    pos                 = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -35, y = 0 },
+    gap                 = 40, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 13,
+    colSpacing          = 10,
+    buttonsPerRow       = 12,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -1,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool",
       color             = { r = 0.5, g = 0.5, b = 0.5, },
       classcolored      = false,
     },
     background = {
       show              = false,   --show backdrop
-      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original",
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
+      color             = { r = 0.2, g = 0.2, b = 0.2, a = 0.9},
+      classcolored      = false,
+      inset             = 4,
+      padding           = 2,
+    },
+    duration = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "BOTTOM", x = 3, y = -10 },
+    },
+    count = {
+      font              = globalFont,
+      size              = 11,
+      pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    },
+  }
+
+  -- debuff frame settings
+  Abconfig.debuffFrame = {
+    pos = {
+      a1 = "TOPRIGHT",
+      af = "Minimap",
+      a2 = "TOPLEFT",
+      x = -35,
+      y = -85
+    },
+    gap                 = 20, --gap between buff and debuff rows
+    userplaced          = true, --want to place the bar somewhere else?
+    rowSpacing          = 13,
+    colSpacing          = 10,
+    buttonsPerRow       = 10,
+    button = {
+      size              = 28,
+    },
+    icon = {
+      padding           = -1,
+    },
+    border = {
+      texture           = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool",
+      color             = { r = 1, g = 1, b = 1, },
+      classcolored      = false,
+    },
+    background = {
+      show              = false,   --show backdrop
+      edgeFile          = "Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\outer_shadow",
       color             = { r = 0, g = 0, b = 0, a = 0.9},
       classcolored      = false,
       inset             = 6,
@@ -1258,9 +1415,15 @@ end
 -- Textures and borders
 -- action bars settings
 local function IconThemeInit()
-    if (AbyssUIAddonSettings.GlossIconBorder ~= true and AbyssUIAddonSettings.CrispIconBorder ~= true and
-      AbyssUIAddonSettings.OriginalIconBorder ~= true and AbyssUIAddonSettings.SquareIconBorder ~= true and
-      AbyssUIAddonSettings.ThinIconBorder ~= true and AbyssUIAddonSettings.GlassIconBorder ~= true and AbyssUIAddonSettings.OldIconBorder ~= true) then
+  if (AbyssUIAddonSettings.DefaultIconBorder ~= true) then
+    if (AbyssUIAddonSettings.GlossIconBorder   ~= true and 
+      AbyssUIAddonSettings.CrispIconBorder     ~= true and
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and
+      AbyssUIAddonSettings.ThinIconBorder      ~= true and 
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and 
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true) then
       GlossTheme()
     end
     if AbyssUIAddonSettings.GlossIconBorder then 
@@ -1287,12 +1450,18 @@ local function IconThemeInit()
       GlassTheme()
       --if Abconfig.background.showshadow then edgefile = Abconfig.textures.glass end
     end
-    if AbyssUIAddonSettings.OldIconBorder then
-      OldTheme()
+    if AbyssUIAddonSettings.ClassicIconBorder then
+      ClassicTheme()
       --if Abconfig.background.showshadow then edgefile = Abconfig.textures.crisp end
     end
-
-
+    if AbyssUIAddonSettings.OldSchoolIconBorder then
+      OldSchoolTheme()
+      --if Abconfig.background.showshadow then edgefile = Abconfig.textures.crisp end
+    end
+  end
+end
+local function IconBackInit()
+  if (AbyssUIAddonSettings.DefaultIconBorder ~= true) then
     ns.Abconfig = Abconfig
     -- Action Bar
     --get the config values
@@ -1412,7 +1581,7 @@ local function IconThemeInit()
         nt = bu:GetNormalTexture()
       end
       --cut the default border of the icons and make them shiny
-      ic:SetTexCoord(0.1,0.9,0.1,0.9)
+      ic:SetTexCoord(0.1, 0.9,0.1,0.9)
       ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
       ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
       --adjust the cooldown frame
@@ -1579,14 +1748,18 @@ local function IconThemeInit()
 
     -- style bags
     local function styleBag(bu)
-      if (GetWoWVersion <= 90500) then
+      if (GetWoWVersion <= 90500 ) then
         if not bu or (bu and bu.rabs_styled) then return end
         local name = bu:GetName()
         local ic  = _G[name.."IconTexture"]
         local nt  = _G[name.."NormalTexture"]
-        nt:SetTexCoord(0,1,0,1)
+        nt:SetTexCoord(0, 1, 0, 1)
         nt:SetDrawLayer("BACKGROUND", -7)
-        nt:SetVertexColor(0.4, 0.35, 0.35)
+        if (AbyssUIAddonSettings.OldSchoolIconBorder == true) then
+          nt:SetVertexColor(0.3, 0.3, 0.3)
+        else
+          nt:SetVertexColor(0.4, 0.35, 0.35)
+        end
         nt:SetAllPoints(bu)
         local bo = bu.IconBorder
         bo:Hide()
@@ -1697,11 +1870,31 @@ local function IconThemeInit()
       b.icon = icon
       --border
       local border = _G[name.."Border"] or b:CreateTexture(name.."Border", "BACKGROUND", nil, -7)
-      border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss")
+        if (AbyssUIAddonSettings.GlossIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss")
+        elseif (AbyssUIAddonSettings.CrispIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classcolor")
+        elseif (AbyssUIAddonSettings.CrispIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp")
+        elseif (AbyssUIAddonSettings.OriginalIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original")
+        elseif (AbyssUIAddonSettings.SquareIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square")
+        elseif (AbyssUIAddonSettings.ThinIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\thin")
+        elseif (AbyssUIAddonSettings.GlassIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass")
+        elseif (AbyssUIAddonSettings.ClassicIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic")
+        elseif (AbyssUIAddonSettings.OldSchoolIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool")
+        else
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic")
+        end
       border:SetTexCoord(0, 1, 0, 1)
       border:SetDrawLayer("BACKGROUND",- 7)
       if b.buff then
-        border:SetVertexColor(0.4, 0.35, 0.35)
+        border:SetVertexColor(0.5, 0.5, 0.5)
       end
       border:ClearAllPoints()
       border:SetPoint("TOPLEFT", b, "TOPLEFT", -1, 1)
@@ -1709,8 +1902,8 @@ local function IconThemeInit()
       b.border = border
       --shadow
       local back = CreateFrame("Frame", nil, b, BackdropTemplateMixin and "BackdropTemplate")
-      back:SetPoint("TOPLEFT", b, "TOPLEFT", -4, 4)
-      back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 4, -4)
+      back:SetPoint("TOPLEFT", b, "TOPLEFT", -2, 2)
+      back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 2, -2)
       back:SetFrameLevel(b:GetFrameLevel() - 1)
       back:SetBackdrop(backdrop)
       back:SetBackdropBorderColor(0, 0, 0, 0.9)
@@ -1732,18 +1925,38 @@ local function IconThemeInit()
       b:SetTexCoord(0.1, 0.9, 0.1, 0.9)
       --border
       local border = frame:CreateTexture(nil, "BACKGROUND")
-      border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square")
+        if (AbyssUIAddonSettings.GlossIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\gloss")
+        elseif (AbyssUIAddonSettings.CrispIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classcolor")
+        elseif (AbyssUIAddonSettings.CrispIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\crisp")
+        elseif (AbyssUIAddonSettings.OriginalIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\original")
+        elseif (AbyssUIAddonSettings.SquareIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\square")
+        elseif (AbyssUIAddonSettings.ThinIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\thin")
+        elseif (AbyssUIAddonSettings.GlassIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\glass")
+        elseif (AbyssUIAddonSettings.ClassicIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic")
+        elseif (AbyssUIAddonSettings.OldSchoolIconBorder) then
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\oldschool")
+        else
+          border:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\iconstyle\\classic")
+        end
       border:SetTexCoord(0, 1, 0, 1)
       border:SetDrawLayer("BACKGROUND",- 7)
-      border:SetVertexColor(0.4, 0.35, 0.35)
+      border:SetVertexColor(0.5, 0.5, 0.5)
       border:ClearAllPoints()
       border:SetPoint("TOPLEFT", b, "TOPLEFT", -1, 1)
       border:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 1, -1)
       b.border = border
       --shadow
       local back = CreateFrame("Frame", nil, b.parent, BackdropTemplateMixin and "BackdropTemplate")
-      back:SetPoint("TOPLEFT", b, "TOPLEFT", -4, 4)
-      back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 4, -4)
+      back:SetPoint("TOPLEFT", b, "TOPLEFT", -2, 2)
+      back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 2, -2)
       back:SetFrameLevel(frame:GetFrameLevel() - 1)
       back:SetBackdrop(backdrop)
       back:SetBackdropBorderColor(0, 0, 0, 0.9)
@@ -1782,7 +1995,36 @@ local function IconThemeInit()
         end
       end)
     end
-    
+    --[[
+    local function MyHookFunction(self)
+      -- Your custom code here
+      --print("My hook function was called before Update")
+      
+      -- Call the original Update function
+      self:UpdateAuras()
+      
+      -- Your custom code here
+      for i = 1, MAX_TARGET_BUFFS do
+        b = _G["TargetFrameBuff"..i]
+        applySkin(b)
+      end
+      for i = 1, MAX_TARGET_DEBUFFS do
+        b = _G["TargetFrameDebuff"..i]
+        applySkin(b)
+      end
+      for i = 1, MAX_TARGET_BUFFS do
+        b = _G["FocusFrameBuff"..i]
+        applySkin(b)
+      end
+      for i = 1, MAX_TARGET_DEBUFFS do
+        b = _G["FocusFrameDebuff"..i]
+        applySkin(b)
+      end
+    end
+    -- Hook the Update method of AuraFrameMixin
+    hooksecurefunc(TargetFrameMixin, "Update", MyHookFunction)
+    end
+    --]]
     total = 0
     cf = CreateFrame("Frame")
     cf:SetScript("OnUpdate", UpdateTimer)
@@ -2068,27 +2310,27 @@ local function IconThemeInit()
     applySkin(TempEnchant1)
     applySkin(TempEnchant2)
     applySkin(TempEnchant3)
-
     --position the temp enchant buttons
-  if (GetWoWVersion <= 90500) then
-    TempEnchant1:ClearAllPoints()
-    TempEnchant1:SetPoint("TOPRIGHT", rBFS_BuffDragFrame, "TOPRIGHT", 0, 0) --button will be repositioned later in case temp enchant and consolidated buffs are both available
-    TempEnchant2:ClearAllPoints()
-    TempEnchant2:SetPoint("TOPRIGHT", TempEnchant1, "TOPLEFT", -Abconfig.buffFrame.colSpacing, 0)
-    TempEnchant3:ClearAllPoints()
-    TempEnchant3:SetPoint("TOPRIGHT", TempEnchant2, "TOPLEFT", -Abconfig.buffFrame.colSpacing, 0)
+    if (GetWoWVersion <= 90500) then
+      TempEnchant1:ClearAllPoints()
+      TempEnchant1:SetPoint("TOPRIGHT", rBFS_BuffDragFrame, "TOPRIGHT", 0, 0) --button will be repositioned later in case temp enchant and consolidated buffs are both available
+      TempEnchant2:ClearAllPoints()
+      TempEnchant2:SetPoint("TOPRIGHT", TempEnchant1, "TOPLEFT", -Abconfig.buffFrame.colSpacing, 0)
+      TempEnchant3:ClearAllPoints()
+      TempEnchant3:SetPoint("TOPRIGHT", TempEnchant2, "TOPLEFT", -Abconfig.buffFrame.colSpacing, 0)
 
-    --consolidated buff stuff
-    --ConsolidatedBuffs:SetScript("OnLoad", nil) --do not  mess the icon anymore
-    --applySkin(ConsolidatedBuffs)
-    --position the consolidate buff button
-    --ConsolidatedBuffs:ClearAllPoints()
-    --ConsolidatedBuffs:SetPoint("TOPRIGHT", rBFS_BuffDragFrame, "TOPRIGHT", 0, 0)
-    --ConsolidatedBuffsTooltip:SetScale(Abconfig.consolidatedTooltipScale)
+      --consolidated buff stuff
+      --ConsolidatedBuffs:SetScript("OnLoad", nil) --do not  mess the icon anymore
+      --applySkin(ConsolidatedBuffs)
+      --position the consolidate buff button
+      --ConsolidatedBuffs:ClearAllPoints()
+      --ConsolidatedBuffs:SetPoint("TOPRIGHT", rBFS_BuffDragFrame, "TOPRIGHT", 0, 0)
+      --ConsolidatedBuffsTooltip:SetScale(Abconfig.consolidatedTooltipScale)
 
-    --hook Blizzard functions
-    hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", updateAllBuffAnchors)
-    hooksecurefunc("DebuffButton_UpdateAnchors", updateDebuffAnchors)
+      --hook Blizzard functions
+      hooksecurefunc("BuffFrame_UpdateAllBuffAnchors", updateAllBuffAnchors)
+      hooksecurefunc("DebuffButton_UpdateAnchors", updateDebuffAnchors)
+    end
   end
 end
 -- Init
@@ -2100,4 +2342,5 @@ f:SetScript("OnEvent", function(self, event, ...)
     AbyssUIAddonSettings = {}
   end
   IconThemeInit()
+  IconBackInit()
 end)

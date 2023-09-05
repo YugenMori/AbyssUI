@@ -36,39 +36,46 @@ f:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- Fontfication
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if (locale == "zhCN") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "zhTW") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "ruRU") then
-		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
-		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif (locale == "koKR") then
-		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
-		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
-		locale == "esES" or locale == "esMX" or locale == "ptBR") then
-		globalFont	= mediaFolder.."global.ttf"
-		subFont 	= mediaFolder.."npcfont.ttf"
-		damageFont 	= mediaFolder.."damagefont.ttf"
-	else
-		globalFont	= fontName
-		subFont 	= fontName
-		damageFont 	= fontName
-	end
-	return globalFont, subFont, damageFont
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
+    globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
+    globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    locale == "esES" or locale == "esMX" or locale == "ptBR") then
+    globalFont  = mediaFolder.."global.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
+    damageFont  = mediaFolder.."damagefont.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
+  else
+    globalFont  = fontName
+    subFont   = fontName
+    damageFont  = fontName
+    oldglobalFont = fontName
+  end
+  return globalFont, subFont, damageFont, oldglobalFont
 end
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- declarations
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local function AbyssUI_ColorizationFrameFunction(...)
 	local v = ...
 	if AbyssUIAddonSettings.UIVertexColorFrames01 == true then
@@ -176,6 +183,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				MainMenuXPBarTexture1,
 				MainMenuXPBarTexture2,
 				MainMenuXPBarTexture3,
+				MainMenuBarTextureExtender,
 				ReputationWatchBar.StatusBar.WatchBarTexture0,
 				ReputationWatchBar.StatusBar.WatchBarTexture1,
 				ReputationWatchBar.StatusBar.WatchBarTexture2,
@@ -494,6 +502,17 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- StanceBar
+			for i, v in pairs({ 
+				StanceBarLeft,
+				StanceBarMiddle,
+			StanceBarRight, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				else
+					return nil
 				end
 			end
 			-- MailFrame
@@ -1267,7 +1286,10 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "AbyssUI" then
+	if not AbyssUIAddonSettings then
+    AbyssUIAddonSettings = {}
+  end
+	if name == "AbyssUI" and AbyssUIAddonSettings.DisableCharacterText ~= true then
 		local localizedClass, englishClass = UnitClass("player")
     local classColor = RAID_CLASS_COLORS[englishClass]
     if (classColor) then
@@ -1275,6 +1297,7 @@ f:SetScript("OnEvent", function(self, event, name)
     end
     if GetWoWVersion <= 30600 then
     	CharacterNameText:SetVertexColor(r, g, b)
+    	CharacterLevelText:SetVertexColor(r, g, b)
     else
     	if GetWoWVersion > 40000 then
     		CharacterFrameTitleText:SetVertexColor(r, g, b)

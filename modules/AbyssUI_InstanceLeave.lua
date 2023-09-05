@@ -36,39 +36,47 @@ f:SetScript("OnEvent", function(self, event, ...)
       COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
   end
 end)
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- Fontfication
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-  if (locale == "zhCN") then
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   	= mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "zhTW") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
     globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-    subFont   	= mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
     damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
-  elseif (locale == "ruRU") then
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
     globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
-    subFont   	= mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
     damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
-  elseif (locale == "koKR") then
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
     globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
-    subFont   	= mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
     damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
-  elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
     locale == "esES" or locale == "esMX" or locale == "ptBR") then
     globalFont  = mediaFolder.."global.ttf"
-    subFont   	= mediaFolder.."npcfont.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
     damageFont  = mediaFolder.."damagefont.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
   else
     globalFont  = fontName
-    subFont   	= fontName
+    subFont   = fontName
     damageFont  = fontName
+    oldglobalFont = fontName
   end
-  return globalFont, subFont, damageFont
+  return globalFont, subFont, damageFont, oldglobalFont
 end
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- declarations
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local _G = _G 
 local leaveString 				= _G["LEAVE_VEHICLE"]
 --local teleportString		= _G["QUESTS_LABEL"]

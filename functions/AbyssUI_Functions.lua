@@ -37,39 +37,46 @@ f:SetScript("OnEvent", function(self, event, ...)
   end
 end)
 -- Fontfication
-local function AbyssUI_Fontification(globalFont, subFont, damageFont)
+local function AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 local locale = GetLocale()
 local fontName, fontHeight, fontFlags = MinimapZoneText:GetFont()
-local mediaFolder = "Interface\\AddOns\\AbyssUI\\textures\\font\\"
-	if (locale == "zhCN") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "zhTW") then
-		globalFont	= mediaFolder.."zhCN-TW\\senty.ttf"
-		subFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-		damageFont 	= mediaFolder.."zhCN-TW\\senty.ttf"
-	elseif (locale == "ruRU") then
-		globalFont	= mediaFolder.."ruRU\\dejavu.ttf"
-		subFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-		damageFont 	= mediaFolder.."ruRU\\dejavu.ttf"
-	elseif (locale == "koKR") then
-		globalFont	= mediaFolder.."koKR\\dxlbab.ttf"
-		subFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-		damageFont 	= mediaFolder.."koKR\\dxlbab.ttf"
-	elseif (locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
-		locale == "esES" or locale == "esMX" or locale == "ptBR") then
-		globalFont	= mediaFolder.."global.ttf"
-		subFont 	= mediaFolder.."npcfont.ttf"
-		damageFont 	= mediaFolder.."damagefont.ttf"
-	else
-		globalFont	= fontName
-		subFont 	= fontName
-		damageFont 	= fontName
-	end
-	return globalFont, subFont, damageFont
+local mediaFolder = "Interface\\AddOns\\AbyssUI\\Textures\\font\\"
+  if ( locale == "zhCN") then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "zhTW" ) then
+    globalFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    subFont   = mediaFolder.."zhCN-TW\\senty.ttf"
+    damageFont  = mediaFolder.."zhCN-TW\\senty.ttf"
+    oldglobalFont = mediaFolder.."zhCN-TW\\senty.ttf"
+  elseif ( locale == "ruRU" ) then
+    globalFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    subFont   = mediaFolder.."ruRU\\dejavu.ttf"
+    damageFont  = mediaFolder.."ruRU\\dejavu.ttf"
+    oldglobalFont = mediaFolder.."ruRU\\dejavu.ttf"
+  elseif ( locale == "koKR" ) then
+    globalFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    subFont   = mediaFolder.."koKR\\dxlbab.ttf"
+    damageFont  = mediaFolder.."koKR\\dxlbab.ttf"
+    oldglobalFont = mediaFolder.."koKR\\dxlbab.ttf"
+  elseif ( locale == "frFR" or locale == "deDE" or locale == "enGB" or locale == "enUS" or locale == "itIT" or
+    locale == "esES" or locale == "esMX" or locale == "ptBR") then
+    globalFont  = mediaFolder.."global.ttf"
+    subFont   = mediaFolder.."npcfont.ttf"
+    damageFont  = mediaFolder.."damagefont.ttf"
+    oldglobalFont = mediaFolder .. "damagefont_classic.ttf"
+  else
+    globalFont  = fontName
+    subFont   = fontName
+    damageFont  = fontName
+    oldglobalFont = fontName
+  end
+  return globalFont, subFont, damageFont, oldglobalFont
 end
-local globalFont, subFont, damageFont = AbyssUI_Fontification(globalFont, subFont, damageFont)
+-- declarations
+local globalFont, subFont, damageFont, oldglobalFont = AbyssUI_Fontification(globalFont, subFont, damageFont, oldglobalFont)
 -- RegionList
 local function AbyssUI_RegionListSize(self, width, height)
 	if (GetWoWVersion <= 90500) then
@@ -333,7 +340,7 @@ end
 -- Tooltip
 -- Tooltip Background and borders
 if (GetWoWVersion <= 90500) then
-	if (GetWoWVersion ~= 30401 and GetWoWVersion ~= 30402 and GetWoWVersion ~= 11404) then
+	if (GetWoWVersion >= 40500) then
 		local TooltipBackground = GameTooltip:CreateTexture(nil, "LOW", nil)
 		TooltipBackground:SetPoint("TOPLEFT", 3, -3)
 		TooltipBackground:SetPoint("BOTTOMRIGHT", -3, 3)
@@ -509,7 +516,7 @@ AbyssUI_AutoSell:SetScript("OnEvent", function()
       for slot = 0, C_Container.GetContainerNumSlots(bag) do
         local link = C_Container.GetContainerItemLink(bag, slot)
         if link and (select(3, GetItemInfo(link)) == 0) then
-        	UseContainerItem(bag, slot)
+        	C_Container.UseContainerItem(bag, slot)
         end
       end
     end
@@ -963,7 +970,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 		else
 			print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
 		end
-		if (GetWoWVersion > 30402) then
+		if (GetWoWVersion >= 40500) then
 			local HonorLevel = UnitHonorLevel("player")
 			print("|cfff2dc7f"..L["Honor Level"]..": |r|cffffcc00"..HonorLevel.."|r")
 		end
