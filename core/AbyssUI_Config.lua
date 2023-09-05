@@ -1842,8 +1842,8 @@ local function Miscellaneous()
   AbyssUI_BetterFonts_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
       if (AbyssUIAddonSettings.ExtraFunctionBetterFonts == true) then
-         ChatFrame1:SetFont(oldglobalFont, 13, "THINOUTLINE")
-         ChatFrame1.editBox.header:SetFont(oldglobalFont, 13, "THINOUTLINE")
+        ChatFrame1:SetFont(oldglobalFont, 13, "THINOUTLINE")
+        ChatFrame1.editBox.header:SetFont(oldglobalFont, 13, "THINOUTLINE")
       else 
         return nil
       end
