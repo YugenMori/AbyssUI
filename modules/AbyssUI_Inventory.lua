@@ -192,7 +192,6 @@ function addon:updateContainerSlot(containerId, slotId, slotFrameName, show)
 
     if (itemId and show == 1) then
         local quality = GetItemQuality(itemId);
-
         -- green or better item, or quest item
         if (quality and quality > LE_ITEM_QUALITY_POOR) then 
             local r, g, b = GetQualityColor(quality);

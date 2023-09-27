@@ -510,72 +510,30 @@ end)
 local AbyssUI_AutoSell = CreateFrame("Frame", "$parentAbyssUI_AutoSell", nil)
 AbyssUI_AutoSell:RegisterEvent("MERCHANT_SHOW")
 AbyssUI_AutoSell:SetScript("OnEvent", function()
-	if (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion <= 90500) then
-    local bag, slot
-    for bag = 0, 4 do
-      for slot = 0, C_Container.GetContainerNumSlots(bag) do
-        local link = C_Container.GetContainerItemLink(bag, slot)
-        if link and (select(3, GetItemInfo(link)) == 0) then
-        	C_Container.UseContainerItem(bag, slot)
-        end
-      end
-    end
-    if(CanMerchantRepair()) then
-	    local cost = GetRepairAllCost()
-      if cost > 0 then
-        local money = GetMoney()
-        if IsInGuild() then
-          local guildMoney = GetGuildBankWithdrawMoney()
-          if guildMoney > GetGuildBankMoney() then
-            guildMoney = GetGuildBankMoney()
-          end
-          if guildMoney > cost and CanGuildBankRepair() then
-            RepairAllItems(1)
-            print(format(L["|cfff07100Repair cost paid by Guild: %.1fg|r"], cost * 0.0001))
-          return end
-        end
-        if money > cost then
-        	RepairAllItems()
-        	print(format(L["|cffead000Repair cost: %.1fg|r"], cost * 0.0001))
-        else
-        	print(L["Not enough gold for repair."])
-        end
-    	end
+	if ( AbyssUIAddonSettings.ExtraFunctionSellGray == true ) then
+		local bag, slot
+		for bag = 0, 4 do
+	    	for slot = 0, C_Container.GetContainerNumSlots(bag) do
+	        	local link = C_Container.GetContainerItemLink(bag, slot)
+	       		if link and (select(3, GetItemInfo(link)) == 0) then
+	            	C_Container.UseContainerItem(bag, slot)
+	        	end
+	    	end
 		end
-	elseif (AbyssUIAddonSettings.ExtraFunctionSellGray == true and GetWoWVersion > 90500) then
-    local bag, slot
-    for bag = 0, 4 do
-      for slot = 0, C_Container.GetContainerNumSlots(bag) do
-        local link = C_Container.GetContainerItemLink(bag, slot)
-        if link and (select(3, GetItemInfo(link)) == 0) then
-          C_Container.UseContainerItem(bag, slot)
-        end
-      end
-    end
-    if(CanMerchantRepair()) then
-	    local cost = GetRepairAllCost()
-      if cost > 0 then
-        local money = GetMoney()
-        if IsInGuild() then
-          local guildMoney = GetGuildBankWithdrawMoney()
-          if guildMoney > GetGuildBankMoney() then
-            guildMoney = GetGuildBankMoney()
-          end
-          if guildMoney > cost and CanGuildBankRepair() then
-            RepairAllItems(1)
-            print(format(L["|cfff07100Repair cost paid by Guild: %.1fg|r"], cost * 0.0001))
-          return end
-        end
-        if money > cost then
-        	RepairAllItems()
-        	print(format(L["|cffead000Repair cost: %.1fg|r"], cost * 0.0001))
-        else
-        	print(L["Not enough gold for repair."])
-        end
-    	end
+	end
+	if ( AbyssUIAddonSettings.ExtraFunctionRepair == true ) then
+	    if( CanMerchantRepair() ) then
+	        local cost = GetRepairAllCost()
+	        if cost > 0 then
+	            local money = GetMoney()
+	            if money > cost then
+	            	RepairAllItems()
+	            	print(format("|cffead000Repair cost: %.1fg|r", cost * 0.0001))
+	            else
+	            	print("Not enough gold for repair.")
+	            end
+	    	end
 		end
-	else 
-		return nil
 	end
 end)
 ----------------------------------------------------

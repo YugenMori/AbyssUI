@@ -785,6 +785,19 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
+-- PVPFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { PVEFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
 -- HonorFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1252,7 +1265,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
+	if GetWoWVersion <= 20600 and GetWoWVersion >= 12000 then
     local ChildRegions = { LFGListingFrame:GetRegions(), LFGBrowseFrame:GetRegions(), }
     local fs = {}
     for k, v in pairs(ChildRegions) do

@@ -681,7 +681,7 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				
 				-- Hook PlayerFrame functions
 				if (GetWoWVersion <= 90500) then
-		      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
+		      		hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
 					hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
 					hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
 				end

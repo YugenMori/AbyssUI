@@ -1168,26 +1168,30 @@ f:SetScript("OnEvent", function()
 			addonTable.InspectTarget,
 			addonTable.ConfirmPopUps,
 			addonTable.AutoSellGray,
+			addonTable.AutoRepair,
 			addonTable.DisableHealingSpam,
 			addonTable.TooltipOnCursor,
 			addonTable.UnitFrameImproved,
 			addonTable.ElitePortrait,
 			addonTable.FlatHealth,
+			addonTable.AbyssIconBorder,
 		} do
 			v:SetChecked(true)
 		end
 		-- Get
-		AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
-		AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
-		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
-		AbyssUIAddonSettings.ElitePortrait 						         = addonTable.ElitePortrait:GetChecked()
-		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
+		AbyssUIAddonSettings.HideUnitImprovedFaction 			    = addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideGroupFrame					        = addonTable.HideGroupFrame:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   	= addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   	= addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   	= addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionRepair					= addonTable.AutoRepair:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 	= addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
+		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.ElitePortrait 						    = addonTable.ElitePortrait:GetChecked()
+		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
+		AbyssUIAddonSettings.AbyssIconBorder						= addonTable.AbyssIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		FrameButtonRecommended.Glow:Finish()
 		ReloadUI()
@@ -1226,28 +1230,32 @@ f:SetScript("OnEvent", function()
 			addonTable.InspectTarget,
 			addonTable.ConfirmPopUps,
 			addonTable.AutoSellGray,
+			addonTable.AutoRepair,
 			addonTable.DisableHealingSpam,
 			addonTable.TooltipOnCursor,
 			addonTable.SquareMinimap,
 			addonTable.UnitFrameImproved,
 			addonTable.Dragonflight,
 			addonTable.FlatHealth,
+			addonTable.AbyssIconBorder,
 		} do
 			v:SetChecked(true)
 		end
 		-- Get
-		AbyssUIAddonSettings.HideUnitImprovedFaction 			     = addonTable.HideUnitImprovedFaction:GetChecked()
-		AbyssUIAddonSettings.HideGroupFrame					           = addonTable.HideGroupFrame:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   = addonTable.InstanceLeave:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   = addonTable.InspectTarget:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   = addonTable.ConfirmPopUps:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionSellGray 				     = addonTable.AutoSellGray:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 = addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.TooltipOnCursor 					         = addonTable.TooltipOnCursor:GetChecked()
-		AbyssUIAddonSettings.SquareMinimap 				      	 		 = addonTable.SquareMinimap:GetChecked()
-		AbyssUIAddonSettings.UnitFrameImproved 				      	 = addonTable.UnitFrameImproved:GetChecked()
-		AbyssUIAddonSettings.Dragonflight 				      			 = addonTable.Dragonflight:GetChecked()
-		AbyssUIAddonSettings.FlatHealth 						         	 = addonTable.FlatHealth:GetChecked()
+		AbyssUIAddonSettings.HideUnitImprovedFaction 			   	= addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideGroupFrame					       	= addonTable.HideGroupFrame:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   	= addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   	= addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   	= addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionRepair					= addonTable.AutoRepair:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 					= addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam		= addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
+		AbyssUIAddonSettings.SquareMinimap 				      	 	= addonTable.SquareMinimap:GetChecked()
+		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
+		AbyssUIAddonSettings.Dragonflight 				      		= addonTable.Dragonflight:GetChecked()
+		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
+		AbyssUIAddonSettings.AbyssIconBorder						= addonTable.AbyssIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)
@@ -1289,6 +1297,7 @@ f:SetScript("OnEvent", function()
 			addonTable.InspectTarget,
 			addonTable.ConfirmPopUps,
 			addonTable.AutoSellGray,
+			addonTable.AutoRepair,
 			addonTable.ChatBubbleChanges,
 			addonTable.DisableHealingSpam,
 			addonTable.DisableNewMinimap,
@@ -1296,27 +1305,28 @@ f:SetScript("OnEvent", function()
 			addonTable.NewCastBar,
 			addonTable.DisableTooltipHealth,
 			addonTable.DisableCharacterText,
-			addonTable.OldSchoolIconBorder,
+			addonTable.AbyssIconBorder,
 		} do
 			v:SetChecked(true)
 		end
 		-- Get
-		AbyssUIAddonSettings.HideFPSMSFrame 					        = addonTable.FPSMSFrame:GetChecked()
-		AbyssUIAddonSettings.HideYouDiedLevelUpFrame 		    	= addonTable.YouDiedLevelUpFrame:GetChecked()
-		AbyssUIAddonSettings.HideUnitImprovedFaction 		    	= addonTable.HideUnitImprovedFaction:GetChecked()
-		AbyssUIAddonSettings.HideCastTimer					        	= addonTable.HideCastTimer:GetChecked()
+		AbyssUIAddonSettings.HideFPSMSFrame 					= addonTable.FPSMSFrame:GetChecked()
+		AbyssUIAddonSettings.HideYouDiedLevelUpFrame 		    = addonTable.YouDiedLevelUpFrame:GetChecked()
+		AbyssUIAddonSettings.HideUnitImprovedFaction 		    = addonTable.HideUnitImprovedFaction:GetChecked()
+		AbyssUIAddonSettings.HideCastTimer					    = addonTable.HideCastTimer:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionInstanceLeave    		= addonTable.InstanceLeave:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionInspectTarget 	  	= addonTable.InspectTarget:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 	  	= addonTable.ConfirmPopUps:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 				= addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionRepair				= addonTable.AutoRepair:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges 	= addonTable.ChatBubbleChanges:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.DisableNewMinimap				      	= addonTable.DisableNewMinimap:GetChecked()
+		AbyssUIAddonSettings.DisableNewMinimap				    = addonTable.DisableNewMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
-	 	AbyssUIAddonSettings.NewCastBar												= addonTable.NewCastBar:GetChecked()
-	 	AbyssUIAddonSettings.DisableTooltipHealth 						= addonTable.DisableTooltipHealth:GetChecked()
-	 	AbyssUIAddonSettings.DisableCharacterText							= addonTable.DisableCharacterText:GetChecked()
-	 	AbyssUIAddonSettings.OldSchoolIconBorder							= addonTable.OldSchoolIconBorder:GetChecked()
+	 	AbyssUIAddonSettings.NewCastBar							= addonTable.NewCastBar:GetChecked()
+	 	AbyssUIAddonSettings.DisableTooltipHealth 				= addonTable.DisableTooltipHealth:GetChecked()
+	 	AbyssUIAddonSettings.DisableCharacterText				= addonTable.DisableCharacterText:GetChecked()
+		AbyssUIAddonSettings.AbyssIconBorder					= addonTable.AbyssIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)

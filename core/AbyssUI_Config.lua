@@ -1768,12 +1768,22 @@ local function Miscellaneous()
       end
     end
   end)
-  -- Auto Repair/Sell Gray --
+  -- Auto Repair--
+  local AbyssUIAutoRepair_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoRepair_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUIAutoRepair_CheckButton:SetPoint("TOPLEFT", 10, -170)
+  AbyssUIAutoRepair_CheckButton.Text:SetText("|cfff2dc7fAuto Repair|r")
+  AbyssUIAutoRepair_CheckButton.tooltip = "When you open a Merchant shop auto repair items"
+  AbyssUIAutoRepair_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionRepair)
+  addonTable.AutoRepair = AbyssUIAutoRepair_CheckButton
+  -- OnClick Function
+  AbyssUIAutoRepair_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionRepair = self:GetChecked()
+  end)
+  -- Auto Sell Gray --
   local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 10, -170)
-  AbyssUIAutoSellGray_CheckButton.Text:SetText(L["|cfff2dc7fAuto Repair/Sell Gray Items|r"])
-  AbyssUIAutoSellGray_CheckButton.tooltip = L["When you open a Merchant shop, auto sell gray"..
-  " and repair items"]
+  AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 10, -200)
+  AbyssUIAutoSellGray_CheckButton.Text:SetText("|cfff2dc7fAuto Sell Gray Items|r")
+  AbyssUIAutoSellGray_CheckButton.tooltip = "When you open a Merchant shop, auto sell gray"
   AbyssUIAutoSellGray_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionSellGray)
   addonTable.AutoSellGray = AbyssUIAutoSellGray_CheckButton
   -- OnClick Function
@@ -1782,7 +1792,7 @@ local function Miscellaneous()
   end)
   -- Auto Gamma Day/Night
   local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 10, -200)
+  AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUIAutoGamma_CheckButton.Text:SetText(L["Auto Gamma"])
   AbyssUIAutoGamma_CheckButton.tooltip = L["Automatically change the gamma when is day to"..
   " 1.2 (brighter) and to 1.0 (default) at night based on the local time"]
@@ -1817,7 +1827,7 @@ local function Miscellaneous()
   end)
   -- American Clock Style --
   local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -230)
+  AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUI_AmericanClock_CheckButton.Text:SetText(L["Non-Military Date/Time"])
   AbyssUI_AmericanClock_CheckButton.tooltip = L["Change the date format of the whole UI to"..
   " Non-Military format"]
@@ -1828,7 +1838,7 @@ local function Miscellaneous()
   end)
   -- Better Fonts --
   local AbyssUI_BetterFonts_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterFonts_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_BetterFonts_CheckButton:SetPoint("TOPLEFT", 10, -260)
+  AbyssUI_BetterFonts_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUI_BetterFonts_CheckButton.Text:SetText(L["RPG chat fonts"])
   AbyssUI_BetterFonts_CheckButton.tooltip = L["Change the chat fonts to a RPG look-alike style"]
   AbyssUI_BetterFonts_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionBetterFonts)
@@ -1851,7 +1861,7 @@ local function Miscellaneous()
   end)
   -- Screenshot when you level up --
   local AbyssUI_ScreenshotLevelUp_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ScreenshotLevelUp_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_ScreenshotLevelUp_CheckButton:SetPoint("TOPLEFT", 10, -290)
+  AbyssUI_ScreenshotLevelUp_CheckButton:SetPoint("TOPLEFT", 10, -320)
   AbyssUI_ScreenshotLevelUp_CheckButton.Text:SetText(L["Auto Screenshot"])
   AbyssUI_ScreenshotLevelUp_CheckButton.tooltip = L["Automatically takes a screenshot when you level up"]
   AbyssUI_ScreenshotLevelUp_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp)
@@ -1861,7 +1871,7 @@ local function Miscellaneous()
   end)
   -- Always show clock --
   local AbyssUI_ShowClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_ShowClock_CheckButton:SetPoint("TOPLEFT", 10, -320)
+  AbyssUI_ShowClock_CheckButton:SetPoint("TOPLEFT", 10, -350)
   AbyssUI_ShowClock_CheckButton.Text:SetText(L["Show Minimap Clock"])
   AbyssUI_ShowClock_CheckButton.tooltip = L["This will always show the minimap clock, instead of showing on hover"]
   AbyssUI_ShowClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionMinimapClock)
@@ -3608,7 +3618,7 @@ local function Stylization()
   -- Oldschool Theme
   local OldSchoolIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOldSchoolIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   OldSchoolIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -440)
-  OldSchoolIconBorder_CheckButton.Text:SetText("|cff0d75d4Old School|r")
+  OldSchoolIconBorder_CheckButton.Text:SetText("Old School")
   local Frame = CreateFrame("Frame", nil, OldSchoolIconBorder_CheckButton)
   Frame:SetWidth(180)
   Frame:SetHeight(40)
@@ -3632,6 +3642,36 @@ local function Stylization()
     else
       UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
       OldSchoolIconBorder_CheckButton:SetChecked(nil)
+    end
+  end)
+  -- Abyss Theme
+  local AbyssIconBorder_CheckButton = CreateFrame("CheckButton", "$parentAbyssIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  AbyssIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -470)
+  AbyssIconBorder_CheckButton.Text:SetText("|cff0d75d4".."AbyssUI Classic".."|r")
+  local Frame = CreateFrame("Frame", nil, AbyssIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  AbyssIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  AbyssIconBorder_CheckButton.tooltip = "AbyssUI Classic icon borders, a Blizzard Default enchanced theme"
+  AbyssIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssIconBorder)
+  addonTable.AbyssIconBorder = AbyssIconBorder_CheckButton
+  -- OnClick Function
+  AbyssIconBorder_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
+      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
+      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
+      AbyssUIAddonSettings.GlossIconBorder     ~= true and
+      AbyssUIAddonSettings.GlassIconBorder     ~= true and 
+      AbyssUIAddonSettings.ThinIconBorder      ~= true and 
+      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
+      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
+      AbyssUIAddonSettings.DefaultIconBorder   ~= true then
+      AbyssUIAddonSettings.AbyssIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
+      AbyssIconBorder_CheckButton:SetChecked(nil)
     end
   end)
   -- End
