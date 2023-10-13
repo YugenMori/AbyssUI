@@ -201,57 +201,59 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 	      if (AbyssUIAddonSettings.UnitFrameImproved == true) then
 	      	if (GetWoWVersion <= 90500) then
 		        if not InCombatLockdown() then 
-		          PlayerFrameHealthBar.lockColor = true
-		          PlayerFrameHealthBar.capNumericDisplay = true
-		          PlayerFrameHealthBar:SetWidth(119)
-		          PlayerFrameHealthBar:SetHeight(30)
-		          PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
-		          PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
+					PlayerFrameHealthBar.lockColor = true
+					PlayerFrameHealthBar.capNumericDisplay = true
+					PlayerFrameHealthBar:SetWidth(119)
+					PlayerFrameHealthBar:SetHeight(30)
+					PlayerFrameHealthBar:SetPoint("TOPLEFT", 106, -22)
+					PlayerFrameHealthBarText:SetPoint("CENTER", 50, 6)
 		        end
 		        if (AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture ~= true) then
-		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true) then
-		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
-	  	        elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
-		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
-		          elseif (AbyssUIAddonSettings.DKHordePortrait == true) then
-		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
-		          elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
-		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
+					if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true and AbyssUIAddonSettings.RarePortrait ~= true) then
+		            	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Elite")
+					elseif (AbyssUIAddonSettings.RarePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true and AbyssUIAddonSettings.ElitePortrait ~= true) then
+						PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame-Rare")
+	  	        	elseif (AbyssUIAddonSettings.DKAllyPortrait == true) then
+		          		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Alliance")
+		          	elseif (AbyssUIAddonSettings.DKHordePortrait == true) then
+		          		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-PlayerFrame-Deathknight-Horde")
+		          	elseif (AbyssUIAddonSettings.DemonHunterPortrait == true) then
+		          		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\UI-TargetingFrame-DemonHunter")
 		         		PlayerFrameTexture:SetVertexColor(1, 1, 1)
 		         	elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
 		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
-								DragonflightUnitPlayerFrameStyle()
-							elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait == true) then
+						DragonflightUnitPlayerFrameStyle()
+					elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait == true) then
 		         		PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
-								DragonflightUnitPlayerFrameStyle()
-		          else
-		           PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
-		          end
-		          if (AbyssUIAddonSettings.DKHordePortrait == true) then
-	          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
-		          	PlayerFrameHealthBar:SetWidth(105)
-		          else
-		          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
-		          end
-		          if (GetWoWVersion <= 90500) then
-		          	PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-		        	end
+						DragonflightUnitPlayerFrameStyle()
+		          	else
+		           		PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-TargetingFrame")
+		          	end
+					if (AbyssUIAddonSettings.DKHordePortrait == true) then
+						PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\improved\\UI-Player-StatusDKH")
+						PlayerFrameHealthBar:SetWidth(105)
+					else
+						PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\UI-Player-Status")
+					end
+					if (GetWoWVersion <= 90500) then
+						PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+					end
 		        else
-		          if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true) then
-		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
-		          elseif (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight == true) then
-		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
-		          	DragonflightUnitPlayerFrameStyle()
-		          elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
-		          	PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
-		          	DragonflightUnitPlayerFrameStyle()
-		          else
-		            PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
-		          end
-		          if (GetWoWVersion <= 90500) then
-		          	PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
-		          	PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-		        	end
+					if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight ~= true) then
+						PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Elite")
+					elseif (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.Dragonflight == true) then
+						PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge-Elite")
+						DragonflightUnitPlayerFrameStyle()
+					elseif (AbyssUIAddonSettings.Dragonflight == true and AbyssUIAddonSettings.ElitePortrait ~= true) then
+						PlayerFrameTexture:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\improved\\Dragonflight-UI-PlayerFrameLarge")
+						DragonflightUnitPlayerFrameStyle()
+					else
+						PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame")
+					end
+		          	if (GetWoWVersion <= 90500) then
+		          		PlayerStatusTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-Player-Status")
+		          		PlayerFrameHealthBar:SetStatusBarColor(UnitColor("player"))
+					end
 		        end		      	
 		      end		      	
 	      else

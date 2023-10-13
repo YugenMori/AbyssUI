@@ -1304,6 +1304,7 @@ f:SetScript("OnEvent", function()
 			addonTable.DisableUnitFrameSmoke,
 			addonTable.NewCastBar,
 			addonTable.DisableTooltipHealth,
+			addonTable.RarePortrait,
 			addonTable.DisableCharacterText,
 			addonTable.AbyssIconBorder,
 		} do
@@ -1325,6 +1326,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
 	 	AbyssUIAddonSettings.NewCastBar							= addonTable.NewCastBar:GetChecked()
 	 	AbyssUIAddonSettings.DisableTooltipHealth 				= addonTable.DisableTooltipHealth:GetChecked()
+		AbyssUIAddonSettings.RarePortrait 						= addonTable.RarePortrait:GetChecked()
 	 	AbyssUIAddonSettings.DisableCharacterText				= addonTable.DisableCharacterText:GetChecked()
 		AbyssUIAddonSettings.AbyssIconBorder					= addonTable.AbyssIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()

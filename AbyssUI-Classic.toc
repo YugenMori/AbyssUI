@@ -1,6 +1,6 @@
 ## Interface: 11404
 ## Title: Abyss|cff0d75d4UI|r
-## Version: 10.1.7.1_Classic_Dragonflight
+## Version: 10.1.7.3_Classic_Dragonflight
 ## Author: Yugen
 ## Notes-deDE: Minimalistische Benutzeroberfläche für World of Warcraft
 ## Notes-enGB: Minimalist UI for World of Warcraft

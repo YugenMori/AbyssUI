@@ -546,6 +546,18 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
+			-- CastBarBorder
+			for i, v in pairs({	
+				CastingBarFrame.Border,
+				MirrorTimer1Border,
+				TargetFrameSpellBar.Border,
+			TargetFrameSpellBar.BorderShield, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				else
+					return nil
+				end
+			end	
 			-- TradeFrame
 			for i, v in pairs({ 
 				TradeFrameTopBorder,

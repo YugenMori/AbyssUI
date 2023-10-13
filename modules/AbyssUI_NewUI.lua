@@ -320,41 +320,6 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                     AbyssUI_ColorizationFrameFunction(v)
                 end
             end
-            --[[
-            -- ProfessionsFrame
-            for i, v in pairs({ 
-                ProfessionsFrame.NineSlice.TopEdge,
-                ProfessionsFrame.NineSlice.RightEdge,
-                ProfessionsFrame.NineSlice.BottomEdge,
-                ProfessionsFrame.NineSlice.LeftEdge,
-                ProfessionsFrame.NineSlice.TopRightCorner,
-                ProfessionsFrame.NineSlice.TopLeftCorner,
-                ProfessionsFrame.NineSlice.BottomLeftCorner,
-                ProfessionsFrame.NineSlice.BottomRightCorner,
-                ProfessionsFrame.CraftingPage.RankBar.Border,
-                ProfessionsFrame.CraftingPage.SchematicForm.OutputIcon.IconBorder,
-                DropDownList1MenuBackdrop.NineSlice.TopEdge,
-                DropDownList1MenuBackdrop.NineSlice.RightEdge,
-                DropDownList1MenuBackdrop.NineSlice.BottomEdge,
-                DropDownList1MenuBackdrop.NineSlice.LeftEdge,
-                DropDownList1MenuBackdrop.NineSlice.TopRightCorner,
-                DropDownList1MenuBackdrop.NineSlice.TopLeftCorner,
-                DropDownList1MenuBackdrop.NineSlice.BottomLeftCorner,
-                DropDownList1MenuBackdrop.NineSlice.BottomRightCorner,
-                DropDownList2MenuBackdrop.NineSlice.TopEdge,
-                DropDownList2MenuBackdrop.NineSlice.RightEdge,
-                DropDownList2MenuBackdrop.NineSlice.BottomEdge,
-                DropDownList2MenuBackdrop.NineSlice.LeftEdge,
-                DropDownList2MenuBackdrop.NineSlice.TopRightCorner,
-                DropDownList2MenuBackdrop.NineSlice.TopLeftCorner,
-                DropDownList2MenuBackdrop.NineSlice.BottomLeftCorner,
-            DropDownList2MenuBackdrop.NineSlice.BottomRightCorner,
-             }) do
-                if AbyssUIAddonSettings ~= nil then
-                    AbyssUI_ColorizationFrameFunction(v)
-                end
-            end
-            --]]
             -- Bags
             for i, v in pairs({ 
                 ContainerFrame1.NineSlice,
@@ -548,37 +513,3 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end)
---[[
--- Keep the color when health changes
-hooksecurefunc("TargetHealthCheck", function()
-  if (GetWoWVersion >= 90500) then
-    PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
-    --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
-    --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
-    --PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
-    --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
-    --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
-    --TargetFrameToT.HealthBar:SetStatusBarColor(UnitColor("targettarget"))    
-    --FocusFrameToT.HealthBar:SetStatusBarColor(UnitColor("focustarget"))
-  else
-    return nil
-  end
-end)
-
-hooksecurefunc("TargetHealthCheck", function()
-  if (GetWoWVersion >= 90500) then
-    for i, v in pairs({ 
-      PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
-      --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-      --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-    }) do
-      if AbyssUIAddonSettings ~= nil then
-        v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")
-        v:GetStatusBarTexture():SetHorizTile(false)
-      end
-    end
-  else
-      return nil
-  end
-end)
---]]

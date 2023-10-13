@@ -952,20 +952,6 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end	
-			-- CastBarBorder
-			if (GetWoWVersion <= 90500) then
-				for i, v in pairs({	
-					CastingBarFrame.Border,
-					MirrorTimer1Border,
-					TargetFrameSpellBar.Border,
-				TargetFrameSpellBar.BorderShield, }) do
-					if AbyssUIAddonSettings ~= nil then
-						AbyssUI_ColorizationFrameFunction(v)
-					else
-						return nil
-					end
-				end	
-			end
 			-- GameMenu
 			for i, v in pairs({	
 				GameMenuFrame.Border.TopEdge,

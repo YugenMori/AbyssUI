@@ -793,10 +793,23 @@ end)
 local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrait', nil)
 AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
 AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
-    if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+    if (AbyssUIAddonSettings.ElitePortrait == true and AbyssUIAddonSettings.RarePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	--PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
     	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Elite-Normal")
-    elseif (AbyssUIAddonSettings.ElitePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+    elseif (AbyssUIAddonSettings.ElitePortrait ~= true and AbyssUIAddonSettings.RarePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+    	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Normal")
+	else
+		return nil
+	end
+end)
+-- Rare Portrait
+local AbyssUI_ElitePortrait = CreateFrame("Button", '$parentAbyssUI_ElitePortrait', nil)
+AbyssUI_ElitePortrait:RegisterEvent("PLAYER_ENTERING_WORLD")
+AbyssUI_ElitePortrait:SetScript("OnEvent", function(self, event, ...)
+    if (AbyssUIAddonSettings.RarePortrait == true and AbyssUIAddonSettings.ElitePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+    	--PlayerFrameTexture:SetTexture("Interface\\TargetingFrame\\UI-TargetingFrame-Elite")
+    	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Rare-Normal")
+    elseif (AbyssUIAddonSettings.RarePortrait ~= true and AbyssUIAddonSettings.ElitePortrait ~= true and AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
     	PlayerFrameTexture:SetTexture("Interface\\Addons\\AbyssUI\\textures\\backup\\UI-TargetingFrame-Normal")
 	else
 		return nil
