@@ -2075,10 +2075,11 @@ local function IconBackInit()
           
           --make sure the normaltexture stays the way we want it
           hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
-            if texture and texture ~= Abconfig.textures.bags then
+            if texture ~= Abconfig.textures.bags then
               self:SetNormalTexture(Abconfig.textures.bags)
             end
           end)
+          
           bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")
           bu.Back:SetPoint("TOPLEFT", bu, "TOPLEFT", -4, 4)
           bu.Back:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", 4, -4)
