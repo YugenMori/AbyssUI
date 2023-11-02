@@ -465,7 +465,7 @@ L["Rare Portrait"] = "Ritratto raro"
 L["Add a rare texture to the player portrait"] = "Aggiungi una texture rara al ritratto del giocatore"
 L["Remove the class color background behind"
 .." the player names to default values (Transparent Name needs to be unchecked)"] = "Rimuovi lo sfondo colorato della classe dietro"
-.." i nomi dei giocatori ai valori predefiniti (il nome trasparente deve essere deselezionato)
+.." i nomi dei giocatori ai valori predefiniti (il nome trasparente deve essere deselezionato)"
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "Questa opzione ti riporterà al"..
   " Stile minimappa predefinito Blizzard (rotondo). *È necessario riavviare il gioco per poter ricaricare le texture rotonde"

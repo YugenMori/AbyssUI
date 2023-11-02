@@ -465,7 +465,7 @@ L["Rare Portrait"] = "희귀한 초상화"
 L["Add a rare texture to the player portrait"] = "플레이어 초상화에 희귀한 질감을 추가하세요"
 L["Remove the class color background behind"
 .." the player names to default values (Transparent Name needs to be unchecked)"] = "뒤에 있는 클래스 색상 배경을 제거하세요."
-.." 플레이어 이름을 기본값으로 설정합니다(투명한 이름을 선택 취소해야 함).
+.." 플레이어 이름을 기본값으로 설정합니다(투명한 이름을 선택 취소해야 함)."
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "이 옵션을 사용하면 "..
   " 블리자드 기본 미니맵 스타일(라운드). *라운드 텍스처를 다시 로드하려면 게임을 다시 시작해야 합니다."

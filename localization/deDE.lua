@@ -466,6 +466,6 @@ L["Remove the class color background behind"
 L["Disable Square Minimap"] = "Quadrat-Minikarte deaktivieren"
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "Mit dieser Option gelangen Sie zurück zu"..
-  " Blizzards Standard-Minikartenstil (rund). *Sie müssen das Spiel neu starten, damit runde Texturen neu geladen werden können.“
+  " Blizzards Standard-Minikartenstil (rund). *Sie müssen das Spiel neu starten, damit runde Texturen neu geladen werden können."
 L["Rare Portrait"] = "Seltenes Porträt"
 L["Add a rare texture to the player portrait"] = "Fügen Sie dem Spielerporträt eine seltene Textur hinzu"
