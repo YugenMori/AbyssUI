@@ -1935,9 +1935,11 @@ local function IconBackInit()
           nt:SetVertexColor(Abconfig.color.normal.r, Abconfig.color.normal.g, Abconfig.color.normal.b, 1)
         end
         hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
-          --make sure the normaltexture stays the way we want it
+          if self.settingTexture then return end
           if texture ~= Abconfig.textures.normal then
+            self.settingTexture = true
             self:SetNormalTexture(Abconfig.textures.normal)
+            self.settingTexture = false
           end
         end)
         --cut the default border of the icons and make them shiny
@@ -2039,8 +2041,11 @@ local function IconBackInit()
           
           --make sure the normaltexture stays the way we want it
           hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
+            if self.settingTexture then return end
             if texture ~= Abconfig.textures.bags then
+              self.settingTexture = true
               self:SetNormalTexture(Abconfig.textures.bags)
+              self.settingTexture = false
             end
           end)
           bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")
@@ -2051,7 +2056,7 @@ local function IconBackInit()
           bu.Back:SetBackdropBorderColor(0, 0, 0, 0.9)
         end
       end
-
+      
       -- style bags
       local function styleOtherBag(bu)
         if (GetWoWVersion <= 90500) then
@@ -2075,10 +2080,13 @@ local function IconBackInit()
           
           --make sure the normaltexture stays the way we want it
           hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
+            if self.settingTexture then return end
             if texture ~= Abconfig.textures.bags then
+              self.settingTexture = true
               self:SetNormalTexture(Abconfig.textures.bags)
+              self.settingTexture = false
             end
-          end)                   
+          end)                  
           bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")
           bu.Back:SetPoint("TOPLEFT", bu, "TOPLEFT", -4, 4)
           bu.Back:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", 4, -4)
