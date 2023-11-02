@@ -234,8 +234,6 @@ f:SetScript("OnEvent", function()
 		end
 	FrameButtonConfirm:SetScript("OnClick", function()
 	  AbyssUI_EditBoxPatreon_Frame:Hide()
-    AbyssUI_EditBox:SetText("ko-fi.com/yugensan")
-    AbyssUI_EditBox_Frame:Show()
 	end)
 end)
 ----------------------------------------------------
@@ -299,12 +297,6 @@ ModelFrame_Model1:SetUnit("player")
 ModelFrame_Model1:SetAlpha(1)
 ModelFrame_Model1:SetAllPoints(AbyssUI_ModelFrameAFKMode)
 ModelFrame_Model1:SetCustomCamera(1)
---local x, y, z = ModelFrame_Model1:GetCameraPosition()
---[[
-local AnimationsSequence = { 5, 60, 67, 96, }
-local Animations = #AnimationsSequence
-ModelFrame_Model1:SetAnimation(AnimationsSequence[random(1, Animations)])
---]]
 ----------------------------------------------------
 -- PlayerInfoAFKMode
 -- Name

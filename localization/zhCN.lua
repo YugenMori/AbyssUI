@@ -3,7 +3,7 @@ if not L then return end
 -- Simplified
 --翻译：Wallrained (I have no idea if it's correcly, so any error please report to me)
 --例子
---L [“英文文本”] = “您的翻译”
+--L ["英文文本"] = "您的翻译"
 --------------------------------------------------------------
 -- Config
 L["Info Panel"] = "链接板"
@@ -433,7 +433,6 @@ L["Show Cloak"] = "展示斗篷"
 L["Always show cloak"] = "总是露出斗篷"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f 我的 Patreon，它与我所有的项目有关，所以请记住这一点。您将同时帮助很多项目！确认获取链接|r"
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7f捐款 将作为排名出现在‘捐助者’标签中。非常感谢，确认获取链接|r"
-L["Dragonflight UnitFrame"] = true
 L["Reverse HealthBar Fill"] = "反向健康栏填充"
 L["All unitframe health bars will fill in reverse"] = "所有单位框架的生命值条将反向填充"
 L["Hide MainActionBar"] = "隐藏主操作栏"
@@ -445,3 +444,28 @@ L["Let's save the variables and prepare the interface for the first use.\n"
 .."为此，请单击屏幕或重新加载 UI /reload。"
 L["Disable Tooltip Health"] = "禁用工具提示健康栏"
 L["Disable the tooltip healthBar from mouse hover functions"] = "通过鼠标悬停功能禁用工具提示健康栏"
+L["Dragonflight UnitFrame"] = true
+L["Supporters:"] = "支持者："
+L["Auto Repair"] = "自动修理"
+L["Auto Sell Gray Items"] = "自动出售灰色物品"
+L["When you open a Merchant shop, auto sell gray"] = "当你开一家商店时，汽车会卖灰色"
+L["When you open a Merchant shop auto repair items"] = "当你开一家汽车修理品商店时"
+L["Default Character NameText"] = "默认字符名称文本"
+L["Disable the character name colorization back to the default font color"] = "禁用角色名称着色恢复为默认字体颜色"
+L["AbyssUI Classic icon borders, a Blizzard Default enchanced theme"] = "AbyssUI 经典图标边框，暴雪默认增强主题"
+L["Icons"] = "图标”
+L["- Icons"] = "- 图标"
+L["Shaman Pink"] = "萨满粉红"
+L["Keep the color pink for Shaman health bars (portrait and tooltip)"] = "萨满血条保持粉红色（肖像和工具提示）"
+L["Disable Guild Tooltip"] = "禁用公会工具提示"
+L["Remove the guild name from tooltips"] = "从工具提示中删除公会名称"
+L["Default Background"] = "默认背景"
+L["Disable Square Minimap"] = "禁用方形小地图"
+L["Rare Portrait"] = "罕见的肖像"
+L["Add a rare texture to the player portrait"] = "为玩家肖像添加罕见的纹理"
+L["Remove the class color background behind"
+.." the player names to default values (Transparent Name needs to be unchecked)"] = "去掉后面的类颜色背景"
+.." 将玩家名称设置为默认值（透明名称需要取消选中）"
+L["This option will get you back to the"..
+  " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "此选项将使您返回到"..
+  "暴雪默认小地图样式（圆形）。*您需要重新启动游戏才能重新加载圆形纹理"

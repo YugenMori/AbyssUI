@@ -398,3 +398,25 @@ L["Let's save the variables and prepare the interface for the first use.\n"
 .."To do this, click on the screen or just reload the UI /reload."] = true
 L["Disable Tooltip Health"] = true
 L["Disable the tooltip healthBar from mouse hover functions"] = true
+L["Supporters:"] = true
+L["Auto Repair"] = true
+L["Auto Sell Gray Items"] = true
+L["When you open a Merchant shop, auto sell gray"] = true
+L["When you open a Merchant shop auto repair items"] = true
+L["Default Character NameText"] = true
+L["Disable the character name colorization back to the default font color"] = true
+L["AbyssUI Classic icon borders, a Blizzard Default enchanced theme"] = true
+L["Icons"] = true
+L["- Icons"] = true
+L["Shaman Pink"] = true
+L["Keep the color pink for Shaman health bars (portrait and tooltip)"] = true
+L["Disable Guild Tooltip"] = true
+L["Remove the guild name from tooltips"] = true
+L["Default Background"] = true
+L["Remove the class color background behind"
+.." the player names to default values (Transparent Name needs to be unchecked)"] = true
+L["Disable Square Minimap"] = true
+L["This option will get you back to the"..
+  " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = true
+L["Rare Portrait"] = true
+L["Add a rare texture to the player portrait"] = true

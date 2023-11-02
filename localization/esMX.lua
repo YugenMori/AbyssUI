@@ -435,7 +435,6 @@ L["Show Cloak"] = "Mostrar capa"
 L["Always show cloak"] = "Mostrar siempre manto"
 L["|cfff2dc7fMy Patreon, it's related to all my projects, so keep this in mind. You will be helping a lot of projects at once! Confirm to get the link|r"] = "|cfff2dc7f Mi Patreon, está relacionado con todos mis proyectos, así que ten esto en cuenta. ¡Ayudarás a muchos proyectos a la vez! Confirma para obtener el enlace|r"  
 L["|cfff2dc7fDonations will appear in the 'Donators' tab as a rank. Thank you very much, confirm to get the link|r"] = "|cfff2dc7fLas donaciones aparecerán en la pestaña 'Donantes' como una clasificación. Muchas gracias, confirme para obtener el enlace|r"
-L["Dragonflight UnitFrame"] = true
 L["Reverse HealthBar Fill"] = "Relleno de barra de salud inversa"
 L["All unitframe health bars will fill in reverse"] = "Todas las barras de salud de unitframe se llenarán al revés"
 L["Hide MainActionBar"] = "Ocultar barra de acción"
@@ -447,3 +446,28 @@ L["Let's save the variables and prepare the interface for the first use.\n"
 .."Para hacer esto, haga clic en la pantalla o simplemente vuelva a cargar la interfaz de usuario /reload"
 L["Disable Tooltip Health"] = "Deshabilitar la barra de salud"
 L["Disable the tooltip healthBar from mouse hover functions"] = "Deshabilitar la barra de salud de información sobre herramientas de las funciones de desplazamiento del mouse"
+L["Dragonflight UnitFrame"] = true
+L["Supporters:"] = "Partidarios:"
+L["Auto Repair"] = "Reparación automática"
+L["Auto Sell Gray Items"] = "Venta automática de artículos grises"
+L["When you open a Merchant shop, auto sell gray"] = "Cuando abres una tienda de comerciantes, la venta automática es gris"
+L["When you open a Merchant shop auto repair items"] = "Cuando abres una tienda de artículos de reparación de automóviles comerciante"
+L["Default Character NameText"] = "Texto de nombre de personaje predeterminado"
+L["Disable the character name colorization back to the default font color"] = "Deshabilite la coloración del nombre del personaje para volver al color de fuente predeterminado"
+L["AbyssUI Classic icon borders, a Blizzard Default enchanced theme"] = "Bordes de íconos de AbyssUI Classic, un tema mejorado por defecto de Blizzard"
+L["Icons"] = true
+L["- Icons"] = true
+L["Shaman Pink"] = true
+L["Keep the color pink for Shaman health bars (portrait and tooltip)"] = true
+L["Disable Guild Tooltip"] = true
+L["Remove the guild name from tooltips"] = true
+L["Default Background"] = true
+L["Disable Square Minimap"] = true
+L["Rare Portrait"] = true
+L["Add a rare texture to the player portrait"] = true
+L["Remove the class color background behind"
+.." the player names to default values (Transparent Name needs to be unchecked)"] = "Eliminar el color de fondo de la clase detrás"
+.." los nombres de los jugadores a los valores predeterminados (el nombre transparente debe estar desmarcado)
+L["This option will get you back to the"..
+  " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "Esta opción le llevará de vuelta al"..
+  "Estilo de minimapa predeterminado de Blizzard (redondo). *Debes reiniciar el juego para poder volver a cargar las texturas redondas"
