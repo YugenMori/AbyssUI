@@ -469,3 +469,5 @@ L["Remove the class color background behind"
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "此選項將使您返回到"..
   "暴雪預設小地圖樣式（圓形）。*您需要重新啟動遊戲才能重新加載圓形紋理"
+L["Members"] = "會員"
+L["Total of hours played: "] = "總玩時數："

@@ -469,3 +469,5 @@ L["Remove the class color background behind"
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "Esta opção o levará de volta ao "..
   "Estilo de minimapa padrão da Blizzard (redondo). *Você precisa reiniciar o jogo para que as texturas da rodada possam ser recarregadas"
+L["Members"] = "Membros"
+L["Total of hours played: "] = "Total de horas jogadas: "

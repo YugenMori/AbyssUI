@@ -515,6 +515,23 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end
+			-- LootFrame
+				for i, v in pairs({ LootFrameTopBorder,
+				LootFrameTopRightCorner,
+				LootFrameRightBorder,
+				LootFrameBotRightCorner,
+				LootFrameBtnCornerRight,
+				LootFrameBottomBorder,
+				LootFrameBotLeftCorner,
+				LootFrameBtnCornerLeft,
+				LootFrameLeftBorder,
+				LootFramePortraitFrame,	}) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				else
+					return nil
+				end
+			end
 			-- MailFrame
 			for i, v in pairs({ 
 				MailFrameTopBorder,
@@ -745,6 +762,29 @@ f:SetScript("OnEvent", function(self, event, name)
     end
 	end
 end)
+-- CollectionsJournal
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Collections" then
+		for i, v in pairs({ CollectionsJournalTopBorder,
+			CollectionsJournalTopRightCorner,
+			CollectionsJournalRightBorder,
+			CollectionsJournalBotRightCorner,
+			CollectionsJournalBtnCornerRight,
+			CollectionsJournalBottomBorder,
+			CollectionsJournalBotLeftCorner,
+			CollectionsJournalBtnCornerLeft,
+			CollectionsJournalLeftBorder,
+			CollectionsJournalPortraitFrame, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
 -- PaperDollFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -752,6 +792,19 @@ f:SetScript("OnEvent", function(self)
 	if GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { PaperDollFrame:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- CharacterAmmoSlot
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if GetWoWVersion <= 30600 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { CharacterAmmoSlot:GetRegions() }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
@@ -791,13 +844,29 @@ f:SetScript("OnEvent", function(self)
 	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
     self:UnregisterAllEvents()
     local ChildRegions = { PVPFrame:GetRegions() }
+	local ChildRegions2 = {	PVPParentFrameTab1Left,
+	PVPParentFrameTab1Middle,
+	PVPParentFrameTab1Right,
+	PVPParentFrameTab1LeftDisabled,
+	PVPParentFrameTab1MiddleDisabled,
+	PVPParentFrameTab1RightDisabled,
+	PVPParentFrameTab2Left,
+	PVPParentFrameTab2Middle,
+	PVPParentFrameTab2Right,
+	PVPParentFrameTab2LeftDisabled,
+	PVPParentFrameTab2MiddleDisabled,
+	PVPParentFrameTab2RightDisabled, }
     local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
+		for k, v in pairs(ChildRegions) do
+			AbyssUI_ColorizationFrameFunction(v)
+		end
+		for k , v in pairs(ChildRegions2) do 
+			AbyssUI_ColorizationFrameFunction(v)
+		end	
+		PVPFramePortrait:SetVertexColor(1, 1, 1)
   end
 end)
--- PVPFrame
+-- PVEFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
@@ -852,91 +921,6 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
--- QuestLogFrame
---[[
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 30600 then
-		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
-	    self:UnregisterAllEvents()
-	    local ChildRegions = { QuestLogFrame:GetRegions(), QuestFrameDetailPanel:GetRegions() }
-	    local fs = {}
-	    for k, v in pairs(ChildRegions) do
-	    	AbyssUI_ColorizationFrameFunction(v)
-	    end
-	    for i, v in pairs({ 
-	    	QuestLogQuestTitle,
-	    	QuestLogObjective1,
-	    	QuestLogObjective2,
-	    	QuestLogObjectivesText,
-	    	QuestLogDescriptionTitle,
-	    	QuestLogQuestDescription,
-	    }) do
-	    	v:SetVertexColor(219/255, 222/255, 231/255)
-	    end
-	  end
-  end
-end)
---]]
---[[
--- QuestFrame
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 30600 and GetWoWVersion >= 12000 then
-		if (AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame ~= true) then
-	    self:UnregisterAllEvents()
-	    local ChildRegions = { 
-	    	QuestFrame:GetRegions(), 
-	    	QuestLogDetailFrame:GetRegions(),
-	  		QuestFrameProgressPanel:GetRegions(),
-	  		QuestFrameRewardPanel:GetRegions()
-	  	}
-	    local ScrollRegions = { 
-	    	QuestDetailScrollFrame:GetRegions(),
-	     	QuestDetailScrollChildFrame:GetRegions(), 
-	    	QuestLogDetailScrollFrame:GetRegions(), 
-	     	QuestLogDetailScrollChildFrame:GetRegions(), 
-	     	QuestRewardScrollFrame:GetRegions(), 
-	     	QuestRewardScrollChildFrame:GetRegions(), 
-	   		QuestInfoRewardsFrame:GetRegions(),
-	   		QuestProgressTitleText,
-	   		QuestProgressText,
-	   		QuestInfoRewardText,
-	    }
-	    local fs = {}
-	    for k, v in pairs(ChildRegions) do
-	    	AbyssUI_ColorizationFrameFunction(v)
-	    end
-	    for k, v in pairs(ScrollRegions) do
-	    	v:SetVertexColor(219/255, 222/255, 231/255)
-	    end
-  	end
-  end
-end)
---]]
---[[
--- GossipFrameGreetingPanel
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 30600 then
-    self:UnregisterAllEvents()
-    local ChildRegions = { GossipFrameGreetingPanel:GetRegions() }
-    local ScrollRegions = { 
-    	GossipGreetingScrollFrame:GetRegions(), 
-     	GossipGreetingScrollChildFrame:GetRegions(),  }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-    for k, v in pairs(ScrollRegions) do
-    	v:SetVertexColor(219/255, 222/255, 231/255)
-    end
-  end
-end)
---]]
 -- BankFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -999,14 +983,18 @@ f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
 	if GetWoWVersion <= 30600 then
 		if (not leatrix) then
-	    self:UnregisterAllEvents()
-	    local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
-	    local fs = {}
-	    for k, v in pairs(ChildRegions) do
-	    	AbyssUI_ColorizationFrameFunction(v)
-	    end
-	  end
-  end
+			self:UnregisterAllEvents()
+			local ChildRegions = { WorldMapFrame.BorderFrame:GetRegions() }
+			local ChildRegions2 = { WorldMapFrame.MiniBorderFrame:GetRegions() }
+			local fs = {}
+			for k, v in pairs(ChildRegions) do
+				AbyssUI_ColorizationFrameFunction(v)
+			end
+			for k, v in pairs(ChildRegions2) do
+				AbyssUI_ColorizationFrameFunction(v)
+			end
+	 	end
+  	end
 end)
 -- LFGParentFrame
 local f = CreateFrame("Frame")
@@ -1152,10 +1140,40 @@ f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TalentUI" and GetWoWVersion <= 30600 then
     self:UnregisterAllEvents()
     local ChildRegions = { PlayerTalentFrame:GetRegions() }
+	local ChildRegions2 = {PlayerTalentFrameTab1Left,
+	PlayerTalentFrameTab1Middle,
+	PlayerTalentFrameTab1Right,
+	PlayerTalentFrameTab1LeftDisabled,
+	PlayerTalentFrameTab1MiddleDisabled,
+	PlayerTalentFrameTab1RightDisabled,
+	PlayerTalentFrameTab2Left,
+	PlayerTalentFrameTab2Middle,
+	PlayerTalentFrameTab2Right,
+	PlayerTalentFrameTab2LeftDisabled,
+	PlayerTalentFrameTab2MiddleDisabled,
+	PlayerTalentFrameTab2RightDisabled,
+	PlayerTalentFrameTab3Left,
+	PlayerTalentFrameTab3Middle,
+	PlayerTalentFrameTab3Right,
+	PlayerTalentFrameTab3LeftDisabled,
+	PlayerTalentFrameTab3MiddleDisabled,
+	PlayerTalentFrameTab3RightDisabled,
+	PlayerTalentFrameTab4Left,
+	PlayerTalentFrameTab4Middle,
+	PlayerTalentFrameTab4Right,
+	PlayerTalentFrameTab4LeftDisabled,
+	PlayerTalentFrameTab4MiddleDisabled,
+	PlayerTalentFrameTab4RightDisabled,
+	PlayerTalentFramePointsBarBackground,
+ }
     local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
+		for k, v in pairs(ChildRegions) do
+			AbyssUI_ColorizationFrameFunction(v)
+		end
+		for k , v in pairs(ChildRegions2) do 
+			AbyssUI_ColorizationFrameFunction(v)
+		end	
+		PlayerTalentFramePortrait:SetVertexColor(1, 1, 1)
 	end
 end)
 --[[

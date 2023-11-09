@@ -469,3 +469,5 @@ L["This option will get you back to the"..
   " Blizzards Standard-Minikartenstil (rund). *Sie müssen das Spiel neu starten, damit runde Texturen neu geladen werden können."
 L["Rare Portrait"] = "Seltenes Porträt"
 L["Add a rare texture to the player portrait"] = "Fügen Sie dem Spielerporträt eine seltene Textur hinzu"
+L["Members"] = "Mitglieder"
+L["Total of hours played: "] = "Gespielte Stunden insgesamt: "

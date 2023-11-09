@@ -109,11 +109,8 @@ end
 --------------------------------------------------------------
 --------------------------------------------------------------
 local _G = _G
---local moveString     						= _G["BINDING_NAME_MOVEFORWARD"]
---local confirmString   					= _G["OKAY"]
---local recommendedString 				= _G["RECOMMENDED"]
-local cancelString    					= _G["CANCEL"]
-local dialogFrameTexture 				= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
+local cancelString    			= _G["CANCEL"]
+local dialogFrameTexture 		= "Interface\\Addons\\AbyssUI\\textures\\extra\\dialogFrameTexture"
 local dialogFrameTextureBorder 	= "Interface\\DialogFrame\\UI-DialogBox-Background"
 ----------------------------------------------------
 ----------------------------------------------------
@@ -174,77 +171,15 @@ f:SetScript("OnEvent", function()
 end)
 ----------------------------------------------------
 -- EditBox
-local AbyssUI_EditBox = CreateFrame("EditBox", "$parentAbyssUI_EditBox", AbyssUI_EditBox_Frame)
-AbyssUI_EditBox:SetFont(globalFont, 14, "THINOUTLINE")
-AbyssUI_EditBox:SetPoint("CENTER", 0, 0)
+local AbyssUI_EditBox = CreateFrame("EditBox", "AbyssUI_EditBox", AbyssUI_EditBox_Frame)
 AbyssUI_EditBox:SetMultiLine(true)
-AbyssUI_EditBox:SetHeight(24)
+AbyssUI_EditBox:SetAutoFocus(false)
+AbyssUI_EditBox:SetFontObject(ChatFontNormal)
 AbyssUI_EditBox:SetWidth(450)
-----------------------------------------------------
--- AbyssUI_EditBoxPatreon_Frame
-local AbyssUI_EditBoxPatreon_Frame = CreateFrame("Frame", "AbyssUI_EditBoxPatreon_Frame", AbyssUI_Config.childpanel1)
-AbyssUI_EditBoxPatreon_Frame:Hide()
-AbyssUI_EditBoxPatreon_Frame:SetWidth(500)
-AbyssUI_EditBoxPatreon_Frame:SetHeight(128)
-AbyssUI_EditBoxPatreon_Frame:SetPoint("CENTER", AbyssUI_Config.childpanel1, "CENTER", 0, 0)
-AbyssUI_EditBoxPatreon_Frame:EnableMouse(true)
-AbyssUI_EditBoxPatreon_Frame:SetClampedToScreen(true)
-AbyssUI_EditBoxPatreon_Frame:SetMovable(true)
-AbyssUI_EditBoxPatreon_Frame:RegisterForDrag("LeftButton")
-AbyssUI_EditBoxPatreon_Frame:SetScript("OnDragStart", AbyssUI_EditBoxPatreon_Frame.StartMoving)
-AbyssUI_EditBoxPatreon_Frame:SetScript("OnDragStop", function(self)
-  self:StopMovingOrSizing()
-end)
-AbyssUI_EditBoxPatreon_Frame:SetFrameStrata("Dialog")
-----------------------------------------------------
-local Border = AbyssUI_EditBoxPatreon_Frame:CreateTexture(nil, "BACKGROUND")
-Border:SetTexture(dialogFrameTextureBorder)
-Border:SetPoint("TOPLEFT", -3, 3)
-Border:SetPoint("BOTTOMRIGHT", 3, -3)
---Border:SetVertexColor(0.2, 0.2, 0.2, 0.6)
-----------------------------------------------------
-local BorderBody = AbyssUI_EditBoxPatreon_Frame:CreateTexture(nil, "ARTWORK")
-BorderBody:SetTexture(dialogFrameTextureBorder)
-BorderBody:SetAllPoints(AbyssUI_EditBoxPatreon_Frame)
-BorderBody:SetVertexColor(0.34, 0.34, 0.34, 0.7)
-----------------------------------------------------
-local Texture = AbyssUI_EditBoxPatreon_Frame:CreateTexture(nil, "BACKGROUND")
-Texture:SetTexture(dialogFrameTextureBorder)
-Texture:SetAllPoints(AbyssUI_EditBoxPatreon_Frame)
-AbyssUI_EditBoxPatreon_Frame.texture = Texture
-----------------------------------------------------
-local f = CreateFrame("Frame", nil)
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function() 
-	local FrameButtonConfirm = CreateFrame("Button","$parentFrameButtonConfirm", AbyssUI_EditBoxPatreon_Frame, "UIPanelButtonTemplate")
-	FrameButtonConfirm:SetHeight(24)
-	FrameButtonConfirm:SetWidth(100)
-	FrameButtonConfirm:SetPoint("BOTTOM", AbyssUI_EditBoxPatreon_Frame, "BOTTOM", 0, 0)
-	FrameButtonConfirm.text = FrameButtonConfirm.text or FrameButtonConfirm:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-	--FrameButtonConfirm.text:SetFont(globalFont, 14)
-	FrameButtonConfirm.text:SetPoint("CENTER", FrameButtonConfirm, "CENTER", 0, 0)
-	FrameButtonConfirm.text:SetText(L["Confirm"])
-		if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
-			AbyssUI_ApplyFonts(FrameButtonConfirm.text)
-		else
-			FrameButtonConfirm.text:SetFont(globalFont, 14)
-			FrameButtonConfirm.text:SetTextColor(248/255, 248/255, 248/255)
-			FrameButtonConfirm.text:SetShadowColor(0, 0, 0)
-			FrameButtonConfirm.text:SetShadowOffset(1, -1)
-		end
-	FrameButtonConfirm:SetScript("OnClick", function()
-	  AbyssUI_EditBoxPatreon_Frame:Hide()
-	end)
-end)
-----------------------------------------------------
--- EditBox
-local AbyssUI_EditBoxPatreon= CreateFrame("EditBox", "AbyssUI_EditBoxPatreon", AbyssUI_EditBoxPatreon_Frame)
-AbyssUI_EditBoxPatreon:SetFont(globalFont, 14, "THINOUTLINE")
-AbyssUI_EditBoxPatreon:SetPoint("CENTER", 0, 0)
-AbyssUI_EditBoxPatreon:SetMultiLine(true)
-AbyssUI_EditBoxPatreon:SetHeight(24)
-AbyssUI_EditBoxPatreon:SetWidth(450)
-----------------------------------------------------
+AbyssUI_EditBox:SetHeight(100)
+AbyssUI_EditBox:SetPoint("CENTER")
+AbyssUI_EditBox:SetText("Default Text")
+AbyssUI_EditBox:Show()
 ----------------------------------------------------
 -- AbyssUI_AFKCameraFrame
 local AbyssUI_AFKCameraFrame = CreateFrame("Frame", "AbyssUI_AFKCameraFrame", WorldFrame)
@@ -1162,6 +1097,7 @@ f:SetScript("OnEvent", function()
 			addonTable.AutoSellGray,
 			addonTable.AutoRepair,
 			addonTable.DisableHealingSpam,
+			addonTable.DisableSquareMinimap,
 			addonTable.TooltipOnCursor,
 			addonTable.UnitFrameImproved,
 			addonTable.ElitePortrait,
@@ -1179,6 +1115,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionRepair					= addonTable.AutoRepair:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 	= addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.DisableSquareMinimap				= addonTable.DisableSquareMinimap:GetChecked()
 		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						    = addonTable.ElitePortrait:GetChecked()
@@ -1225,7 +1162,6 @@ f:SetScript("OnEvent", function()
 			addonTable.AutoRepair,
 			addonTable.DisableHealingSpam,
 			addonTable.TooltipOnCursor,
-			addonTable.SquareMinimap,
 			addonTable.UnitFrameImproved,
 			addonTable.Dragonflight,
 			addonTable.FlatHealth,
@@ -1243,7 +1179,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionSellGray 					= addonTable.AutoSellGray:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam		= addonTable.DisableHealingSpam:GetChecked()
 		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
-		AbyssUIAddonSettings.SquareMinimap 				      	 	= addonTable.SquareMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.Dragonflight 				      		= addonTable.Dragonflight:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
@@ -1292,7 +1227,7 @@ f:SetScript("OnEvent", function()
 			addonTable.AutoRepair,
 			addonTable.ChatBubbleChanges,
 			addonTable.DisableHealingSpam,
-			addonTable.DisableNewMinimap,
+			addonTable.DisableSquareMinimap,
 			addonTable.DisableUnitFrameSmoke,
 			addonTable.NewCastBar,
 			addonTable.DisableTooltipHealth,
@@ -1314,10 +1249,10 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionRepair				= addonTable.AutoRepair:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges 	= addonTable.ChatBubbleChanges:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.DisableNewMinimap				    = addonTable.DisableNewMinimap:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImprovedDefaultTexture 	= addonTable.DisableUnitFrameSmoke:GetChecked()
 	 	AbyssUIAddonSettings.NewCastBar							= addonTable.NewCastBar:GetChecked()
 	 	AbyssUIAddonSettings.DisableTooltipHealth 				= addonTable.DisableTooltipHealth:GetChecked()
+		AbyssUIAddonSettings.DisableSquareMinimap				= addonTable.DisableSquareMinimap:GetChecked()
 		AbyssUIAddonSettings.RarePortrait 						= addonTable.RarePortrait:GetChecked()
 	 	AbyssUIAddonSettings.DisableCharacterText				= addonTable.DisableCharacterText:GetChecked()
 		AbyssUIAddonSettings.AbyssIconBorder					= addonTable.AbyssIconBorder:GetChecked()

@@ -243,6 +243,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
             for i, v in pairs({ 
                 MainMenuBar.EndCaps.RightEndCap,
                 MainMenuBar.EndCaps.LeftEndCap,
+                MainStatusTrackingBarContainer.BarFrameTexture,
                 MainMenuBar.BorderArt,
                 ActionButton1NormalTexture,
                 ActionButton2NormalTexture,

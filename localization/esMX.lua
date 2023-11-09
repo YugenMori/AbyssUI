@@ -455,19 +455,21 @@ L["When you open a Merchant shop auto repair items"] = "Cuando abres una tienda 
 L["Default Character NameText"] = "Texto de nombre de personaje predeterminado"
 L["Disable the character name colorization back to the default font color"] = "Deshabilite la coloración del nombre del personaje para volver al color de fuente predeterminado"
 L["AbyssUI Classic icon borders, a Blizzard Default enchanced theme"] = "Bordes de íconos de AbyssUI Classic, un tema mejorado por defecto de Blizzard"
-L["Icons"] = true
-L["- Icons"] = true
-L["Shaman Pink"] = true
-L["Keep the color pink for Shaman health bars (portrait and tooltip)"] = true
-L["Disable Guild Tooltip"] = true
-L["Remove the guild name from tooltips"] = true
-L["Default Background"] = true
-L["Disable Square Minimap"] = true
-L["Rare Portrait"] = true
-L["Add a rare texture to the player portrait"] = true
+L["Icons"] = "Iconos"
+L["- Icons"] = "- Iconos"
+L["Shaman Pink"] = "Chamán rosa"
+L["Keep the color pink for Shaman health bars (portrait and tooltip)"] = "Mantén el color rosa para las barras de salud de los chamanes (retrato y descripción emergente)"
+L["Disable Guild Tooltip"] = "Desactivar información sobre herramientas del gremio"
+L["Remove the guild name from tooltips"] = "Eliminar el nombre del gremio de la información sobre herramientas"
+L["Default Background"] = "Fondo predeterminado"
+L["Disable Square Minimap"] = "Desactivar minimapa cuadrado"
+L["Rare Portrait"] = "Retrato raro"
+L["Add a rare texture to the player portrait"] = "Agrega una textura poco común al retrato del jugador"
 L["Remove the class color background behind"
 .." the player names to default values (Transparent Name needs to be unchecked)"] = "Eliminar el color de fondo de la clase detrás"
 .." los nombres de los jugadores a los valores predeterminados (el nombre transparente debe estar desmarcado)"
 L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = "Esta opción le llevará de vuelta al"..
   "Estilo de minimapa predeterminado de Blizzard (redondo). *Debes reiniciar el juego para poder volver a cargar las texturas redondas"
+L["Members"] = "Miembros"
+L["Total of hours played: "] = "Total de horas jugadas: "

@@ -420,3 +420,5 @@ L["This option will get you back to the"..
   " Blizzard default minimap style (round). *You need to restart the game so round textures can be re-loaded"] = true
 L["Rare Portrait"] = true
 L["Add a rare texture to the player portrait"] = true
+L["Members"] = true
+L["Total of hours played: "] = true
