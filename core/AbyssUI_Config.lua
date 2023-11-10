@@ -165,7 +165,7 @@ local function InitSettings()
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
   --
   AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel7.name = "Classic & BCC"
+  AbyssUI_Config.childpanel7.name = "Classic"
   AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
   InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
   --
@@ -2758,10 +2758,12 @@ local function Stylization()
   addonTable.Dragonflight = UnitFrameImproved_Dragonflight
   -- OnClick Function
   UnitFrameImproved_Dragonflight:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.DKAllyPortrait     ~= true and 
-      AbyssUIAddonSettings.DKHordePortrait     ~= true and
-      AbyssUIAddonSettings.DemonHunterPortrait ~= true and
-      AbyssUIAddonSettings.UnitFrameImproved   == true then
+    if  AbyssUIAddonSettings.DKAllyPortrait     ~= true and 
+      AbyssUIAddonSettings.DKHordePortrait      ~= true and
+      AbyssUIAddonSettings.ElitePortrait        ~= true and
+      AbyssUIAddonSettings.RarePortrait         ~= true and
+      AbyssUIAddonSettings.DemonHunterPortrait  ~= true and
+      AbyssUIAddonSettings.UnitFrameImproved    == true then
       AbyssUIAddonSettings.Dragonflight = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else

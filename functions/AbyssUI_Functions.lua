@@ -400,27 +400,25 @@ end
 local UnitColor
 local function UnitColor(unit)
 	local r, g, b, a
-	--if (not InCombatLockdown()) then
-		if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
-			--Color it gray
-			r, g, b, a = 0.5, 0.5, 0.5, 1
-		elseif (UnitIsPlayer(unit)) then
-			--Try to color it by class.
-			local localizedClass, englishClass = UnitClass(unit)
-			local classColor = RAID_CLASS_COLORS[englishClass]
-			if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-				r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
-			else
-				if (UnitIsFriend("player", unit)) then
-					r, g, b, a = 0.0, 1.0, 0.0, 1
-				else
-					r, g, b, a = 1.0, 0.0, 0.0, 1
-				end
-			end
+	if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then
+		--Color it gray
+		r, g, b, a = 0.5, 0.5, 0.5, 1
+	elseif (UnitIsPlayer(unit)) then
+		--Try to color it by class.
+		local localizedClass, englishClass = UnitClass(unit)
+		local classColor = RAID_CLASS_COLORS[englishClass]
+		if (classColor and not AbyssUIAddonSettings.GreenHealth) then
+			r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
 		else
-			r, g, b, a = UnitSelectionColor(unit)
+			if (UnitIsFriend("player", unit)) then
+				r, g, b, a = 0.0, 1.0, 0.0, 1
+			else
+				r, g, b, a = 1.0, 0.0, 0.0, 1
+			end
 		end
-	--end
+	else	
+		r, g, b, a = UnitSelectionColor(unit)
+	end
 	return r, g, b, a
 end
 -- Tooltip
@@ -626,7 +624,7 @@ end)
 -- Target Mob(Enemy) Health Bar Color
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion > 12400) then
+if (GetWoWVersion > 20000) then
 	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 local function eventHandler(self, event, ...)
@@ -634,19 +632,20 @@ local function eventHandler(self, event, ...)
 		if (GetWoWVersion <= 90500) then
 			if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
 				TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-				if (GetWoWVersion > 12400) then
+				if (GetWoWVersion > 20000) then
 					FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
 				end
 			else
 				return nil
 			end
 			TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
-			if (GetWoWVersion > 12400) then
+			if (GetWoWVersion > 20000) then
 				FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 			end
 		end	
 	end
 end
+
 frame:SetScript("OnEvent", eventHandler)
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground, }) do
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
@@ -658,7 +657,7 @@ hooksecurefunc("HealthBar_OnValueChanged", function()
 	if (AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
 		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
 		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
-		if (GetWoWVersion > 12400) then		
+		if (GetWoWVersion > 20000) then		
 			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
 			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 		end
@@ -1005,6 +1004,36 @@ local function nonMilitaryClock(time)
 	return time
 end
 -- Extra functions
+local function squareminimapExtras()
+	-- WatchFrame
+	if (GetWoWVersion >= 20000) then
+		WatchFrame:SetScript("OnUpdate", function()
+			if MultiBarRight:IsShown() and MultiBarLeft:IsShown() then
+				WatchFrame:ClearAllPoints()
+				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -100, -50)
+			elseif MultiBarRight:IsShown() then
+				WatchFrame:ClearAllPoints()
+				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -50, -50)
+			else
+				WatchFrame:ClearAllPoints()
+				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -25, -50)
+			end
+		end)
+	else
+		QuestWatchFrame:SetScript("OnUpdate", function()
+			if MultiBarRight:IsShown() and MultiBarLeft:IsShown() then
+				QuestWatchFrame:ClearAllPoints()
+				QuestWatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -100, -50)
+			elseif MultiBarRight:IsShown() then
+				QuestWatchFrame:ClearAllPoints()
+				QuestWatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -50, -50)
+			else
+				QuestWatchFrame:ClearAllPoints()
+				QuestWatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -25, -50)
+			end
+		end)
+	end
+end
 -- Square minimap
 local SquareMinimap_ = CreateFrame("CheckButton", "$parentSquareMinimap_", UIParent, "ChatConfigCheckButtonTemplate")
 SquareMinimap_:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1087,9 +1116,13 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		MinimapZoomOut:Hide()	
 		GameTimeFrame:Hide()		
 		--MiniMapTracking:Hide()
-		MiniMapTrackingButtonBorder:Hide()
-		MiniMapTrackingBackground:Hide()
-		MiniMapTrackingIconOverlay:Hide()
+		if (GetWoWVersion >= 20000) then
+			MiniMapTrackingBackground:Hide()		
+			MiniMapTrackingButtonBorder:Hide()		
+			MiniMapTrackingIconOverlay:Hide()
+			MiniMapTracking:ClearAllPoints()
+			MiniMapTracking:SetPoint("TOPRIGHT", Minimap, -5, -5)
+		end
 		MiniMapMailBorder:Hide()	
 		--MiniMapVoiceChatFrame:Hide()
 		--MinimapZoneTextButton:Hide()	
@@ -1115,25 +1148,11 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		--MiniMapMailFrame:ClearAllPoints()
 		--MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
 		--MiniMapMailFrame:SetFrameLevel(10)
-		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetPoint("TOPRIGHT", Minimap, -5, -5)
 		MiniMapMailIcon:SetTexture(mailicon)
 		MiniMapWorldMapButton:Hide()
 		DropDownList1:SetClampedToScreen(true)	
 		
-		-- WatchFrame
-		WatchFrame:SetScript("OnUpdate", function()
-			if MultiBarRight:IsShown() and MultiBarLeft:IsShown() then
-				WatchFrame:ClearAllPoints()
-				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -100, -50)
-			elseif MultiBarRight:IsShown() then
-				WatchFrame:ClearAllPoints()
-				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -50, -50)
-			else
-				WatchFrame:ClearAllPoints()
-				WatchFrame:SetPoint("TOPRIGHT", MinimapCluster, "BOTTOMRIGHT", -25, -50)
-			end
-		end)
+		squareminimapExtras()
 
 		-- mousewheel zoom --
 		Minimap:EnableMouseWheel(true)
@@ -1148,10 +1167,14 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		-- options/dropdown
 		Minimap:SetScript('OnMouseUp', function(self, button)
 			Minimap:StopMovingOrSizing()
-			if (button == 'RightButton') then
-				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
-			elseif (button == 'MiddleButton') then
-				ToggleCalendar()
+			if (GetWoWVersion >= 20000) then
+				if (button == 'RightButton') then
+					ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, self, - (Minimap:GetWidth() * 0.7), -3)
+				elseif (button == 'MiddleButton') then
+					ToggleCalendar()
+				else
+					Minimap_OnClick(self)
+				end
 			else
 				Minimap_OnClick(self)
 			end
