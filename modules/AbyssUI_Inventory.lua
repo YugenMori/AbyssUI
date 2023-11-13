@@ -416,7 +416,7 @@ function addon:createBorder(name, parent, width, height, x, y)
 
     border:SetTexture("Interface\\Buttons\\UI-ActionButton-Border");
     border:SetBlendMode('ADD');
-    border:SetAlpha( ciiConfig.intensity);
+    border:SetAlpha(ciiConfig.intensity);
     border:SetHeight(height);
     border:SetWidth(width);
     border:SetPoint('CENTER', parent, 'CENTER', x, y);

@@ -1115,7 +1115,7 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.ExtraFunctionSellGray 				    = addonTable.AutoSellGray:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionRepair					= addonTable.AutoRepair:GetChecked()
 		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	 	= addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.DisableSquareMinimap				= addonTable.DisableSquareMinimap:GetChecked()
+		AbyssUIAddonSettings.DisableSquareMinimap					= addonTable.DisableSquareMinimap:GetChecked()
 		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						    = addonTable.ElitePortrait:GetChecked()
@@ -1165,7 +1165,6 @@ f:SetScript("OnEvent", function()
 			addonTable.UnitFrameImproved,
 			addonTable.Dragonflight,
 			addonTable.FlatHealth,
-			addonTable.AbyssIconBorder,
 		} do
 			v:SetChecked(true)
 		end
@@ -1182,7 +1181,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.Dragonflight 				      		= addonTable.Dragonflight:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
-		AbyssUIAddonSettings.AbyssIconBorder						= addonTable.AbyssIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)

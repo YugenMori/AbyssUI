@@ -2044,10 +2044,10 @@ local function IconBackInit()
             if self.settingTexture then return end
             if texture ~= Abconfig.textures.bags then
               self.settingTexture = true
-              self:SetNormalTexture(Abconfig.textures.bags)
+              self:SetNormalTexture(texture)
               self.settingTexture = false
             end
-          end)
+          end)  
           bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")
           bu.Back:SetPoint("TOPLEFT", bu, "TOPLEFT", -4, 4)
           bu.Back:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", 4, -4)
@@ -2059,7 +2059,7 @@ local function IconBackInit()
       
       -- style bags
       local function styleOtherBag(bu)
-        if (GetWoWVersion <= 90500) then
+        if (GetWoWVersion <= 30000) then
           if not bu or (bu and bu.rabs_styled) then return end
           local name = bu:GetName()
           local ic  = _G[name.."IconTexture"]
@@ -2083,10 +2083,10 @@ local function IconBackInit()
             if self.settingTexture then return end
             if texture ~= Abconfig.textures.bags then
               self.settingTexture = true
-              self:SetNormalTexture(Abconfig.textures.bags)
+              self:SetNormalTexture(texture)
               self.settingTexture = false
             end
-          end)                  
+          end)      
           bu.Back = CreateFrame("Frame", nil, bu, BackdropTemplateMixin and "BackdropTemplate")
           bu.Back:SetPoint("TOPLEFT", bu, "TOPLEFT", -4, 4)
           bu.Back:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", 4, -4)
