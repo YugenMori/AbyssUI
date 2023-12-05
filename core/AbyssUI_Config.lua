@@ -1682,17 +1682,6 @@ local function Miscellaneous()
   AbyssUI_ScreenshotLevelUp_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.ExtraFunctionScreenshotLevelUp = self:GetChecked()
   end)
-  -- Always show clock --
-  local AbyssUI_ShowClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_ShowClock_CheckButton:SetPoint("TOPLEFT", 10, -350)
-  AbyssUI_ShowClock_CheckButton.Text:SetText(L["Show Minimap Clock"])
-  AbyssUI_ShowClock_CheckButton.tooltip = L["This will always show the minimap clock, instead of showing on hover"]
-  AbyssUI_ShowClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionMinimapClock)
-  -- OnClick Function
-  AbyssUI_ShowClock_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.ExtraFunctionMinimapClock = self:GetChecked()
-    AbyssUI_ReloadFrame:Show()
-  end)
   --- Frames ---
   -- Transparent Background Name --
   local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
@@ -1883,9 +1872,20 @@ local function Miscellaneous()
     AbyssUIAddonSettings.GreenHealth = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
+  -- Player Green Healthbar --
+  local AbyssUI_PlayerHealthGreen_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_PlayerHealthGreen_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  AbyssUI_PlayerHealthGreen_CheckButton:SetPoint("TOPLEFT", 400, -350)
+  AbyssUI_PlayerHealthGreen_CheckButton.Text:SetText("Player HealthBar")
+  AbyssUI_PlayerHealthGreen_CheckButton.tooltip = "Player unitframe health bars will be green (default)"
+  AbyssUI_PlayerHealthGreen_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen)
+  -- OnClick Function
+  AbyssUI_PlayerHealthGreen_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
+  end)
   -- ReverseHealthFill --
   local ReverseHealthFill_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  ReverseHealthFill_CheckButton:SetPoint("TOPLEFT", 400, -350)
+  ReverseHealthFill_CheckButton:SetPoint("TOPLEFT", 400, -380)
   ReverseHealthFill_CheckButton.Text:SetText(L["Reverse HealthBar Fill"])
   local Frame = CreateFrame("Frame", nil, ReverseHealthFill_CheckButton)
   Frame:SetWidth(180)
@@ -1901,7 +1901,7 @@ local function Miscellaneous()
   end)
   -- Disable Tooltip Healthbar --
   local DisableTooltipHealth_CheckButton = CreateFrame("CheckButton", "$parentDisableTooltipHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  DisableTooltipHealth_CheckButton:SetPoint("TOPLEFT", 400, -380)
+  DisableTooltipHealth_CheckButton:SetPoint("TOPLEFT", 400, -410)
   DisableTooltipHealth_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Tooltip Health"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableTooltipHealth_CheckButton)
   Frame:SetWidth(180)
@@ -1918,7 +1918,7 @@ local function Miscellaneous()
   end)
   -- Disable character name color --
   local AbyssUI_CharacterText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_CharacterText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_CharacterText_CheckButton:SetPoint("TOPLEFT", 400, -410)
+  AbyssUI_CharacterText_CheckButton:SetPoint("TOPLEFT", 400, -440)
   AbyssUI_CharacterText_CheckButton.Text:SetText("|cff0d75d4"..L["Default Character NameText"].."|r")
   AbyssUI_CharacterText_CheckButton.tooltip = L["Disable the character name colorization back to the default font color"]
   AbyssUI_CharacterText_CheckButton:SetChecked(AbyssUIAddonSettings.DisableCharacterText)
@@ -2235,6 +2235,17 @@ local function TweaksExtra()
   -- OnClick Function
   AbyssUI_HideInCombat_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.ExtraFunctionHideInCombat = self:GetChecked()
+  end)
+  -- Always show clock --
+  local AbyssUI_ShowClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowClock_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  AbyssUI_ShowClock_CheckButton:SetPoint("TOPLEFT", 400, -290)
+  AbyssUI_ShowClock_CheckButton.Text:SetText(L["Show Minimap Clock"])
+  AbyssUI_ShowClock_CheckButton.tooltip = L["This will always show the minimap clock, instead of showing on hover"]
+  AbyssUI_ShowClock_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionMinimapClock)
+  -- OnClick Function
+  AbyssUI_ShowClock_CheckButton:SetScript("OnClick", function(self)
+    AbyssUIAddonSettings.ExtraFunctionMinimapClock = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
   end)
 end
 -- End
@@ -3202,6 +3213,7 @@ local function Stylization()
       OldSchoolIconBorder_CheckButton:SetChecked(nil)
     end
   end)
+  --[[
   -- Abyss Theme
   local AbyssIconBorder_CheckButton = CreateFrame("CheckButton", "$parentAbyssIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -470)
@@ -3232,6 +3244,7 @@ local function Stylization()
       AbyssIconBorder_CheckButton:SetChecked(nil)
     end
   end)
+  --]]
   -- End
   -- AbyssUIClassCircles02_CheckButton
   local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")

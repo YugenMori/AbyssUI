@@ -1936,12 +1936,12 @@ local function IconBackInit()
         end
         hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
           if self.settingTexture then return end
-          if texture ~= Abconfig.textures.normal then
+          if texture ~= Abconfig.textures.bags then
             self.settingTexture = true
-            self:SetNormalTexture(Abconfig.textures.normal)
+            self:SetNormalTexture(texture)
             self.settingTexture = false
           end
-        end)
+        end)  
         --cut the default border of the icons and make them shiny
         if (AbyssUIAddonSettings.OldSchoolIconBorder == true) then
           ic:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -2059,7 +2059,7 @@ local function IconBackInit()
       
       -- style bags
       local function styleOtherBag(bu)
-        if (GetWoWVersion <= 30000) then
+        if (GetWoWVersion <= 10000) then
           if not bu or (bu and bu.rabs_styled) then return end
           local name = bu:GetName()
           local ic  = _G[name.."IconTexture"]
@@ -2626,6 +2626,7 @@ local function IconBackInit()
     end
   end
 end
+--[[
 -- Default Icons
 local function styleDefaultActionButton(bu)
   if not bu or (bu and bu.rabs_styled) then
@@ -3096,7 +3097,7 @@ local function DefaultInit()
   end
   --End
 end
-
+--]]
 -- Init
 local f = CreateFrame("Frame")
 f:SetSize(50, 50)
@@ -3107,5 +3108,5 @@ f:SetScript("OnEvent", function(self, event, ...)
   end
   IconThemeInit()
   IconBackInit()
-  DefaultInit()
+  --DefaultInit()
 end)

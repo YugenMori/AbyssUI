@@ -109,76 +109,83 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		-- UnitColor
 		--local isConnected = C_PlayerInfo.IsConnected(unit)
 		local function UnitColor(unit)
-			local r, g, b, a
-			--if (not InCombatLockdown()) then
-				--if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
-					-- Turn it Gray
-					--r, g, b, a = 0.5, 0.5, 0.5, 1
-				if (UnitIsPlayer(unit)) then
-					--Try to color it by class.
-					local localizedClass, englishClass = UnitClass(unit)
-					local classColor = RAID_CLASS_COLORS[englishClass]
-					if (classColor and not AbyssUIAddonSettings.GreenHealth) then
-						r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
-					else
-						if (UnitIsFriend("player", unit)) then
-							r, g, b, a = 0.0, 1.0, 0.0, 1
+			if (AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen == true) then
+				PlayerFrameHealthBar:SetStatusBarColor(1/255, 255/255, 1/255, 1)
+			end
+			if (AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true) then
+				local r, g, b, a
+				--if (not InCombatLockdown()) then
+					--if ((not UnitIsPlayer(unit)) and ((not UnitIsConnected(unit)) or (UnitIsDeadOrGhost(unit)))) then -- removed "and ((not UnitIsConnected(unit))" since it's different in dragonflight
+						-- Turn it Gray
+						--r, g, b, a = 0.5, 0.5, 0.5, 1
+					if (UnitIsPlayer(unit)) then
+						--Try to color it by class.
+						local localizedClass, englishClass = UnitClass(unit)
+						local classColor = RAID_CLASS_COLORS[englishClass]
+						if (classColor and not AbyssUIAddonSettings.GreenHealth) then
+							r, g, b, a = classColor.r, classColor.g, classColor.b, classColor.a
 						else
-							r, g, b, a = 1.0, 0.0, 0.0, 1
+							if (UnitIsFriend("player", unit)) then
+								r, g, b, a = 0.0, 1.0, 0.0, 1
+							else
+								r, g, b, a = 1.0, 0.0, 0.0, 1
+							end
+						end
+					else
+						if (unit ~= nil) then
+							r, g, b, a = UnitSelectionColor(unit)
 						end
 					end
-				else
-					if (unit ~= nil) then
-						r, g, b, a = UnitSelectionColor(unit)
-					end
-				end
-			--end
-			return r, g, b, a
+				--end
+				return r, g, b, a
+			end
 		end
 		-- Unit StatusBar Colorization
 		local function UnitStatusBarColor(self)
-			if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
-				-- Gray if npc is tapped by other player
-				self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
-			else
-				-- Standard by class etc if not
-				if (UnitIsPlayer(self.unit)) then
-					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
-						local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-						if (healthPercentage == 0) then return end
-						if healthPercentage == 100 then
-							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-						elseif healthPercentage < 100 and healthPercentage > 21 then
-							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-						elseif healthPercentage < 21 then
-							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
-						end				
-					end	
+			if (AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true) then
+				if ((not UnitPlayerControlled(self.unit)) and (UnitIsTapDenied(self.unit) or not UnitIsConnected(self.unit))) then
+					-- Gray if npc is tapped by other player
+					--self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
 				else
-					-- Change Color By health
-					if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
-						local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
-						if (healthPercentage == 0) then return end
-						if healthPercentage == 100 then
-							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-						elseif healthPercentage < 100 and healthPercentage > 21 then
-							self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
-						elseif healthPercentage < 21 then
-							self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
-						end				
+					-- Standard by class etc if not
+					if (UnitIsPlayer(self.unit)) then
+						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
+							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
+							if (healthPercentage == 0) then return end
+							if healthPercentage == 100 then
+								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+							elseif healthPercentage < 100 and healthPercentage > 21 then
+								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+							elseif healthPercentage < 21 then
+								self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
+							end				
+						end	
+					else
+						-- Change Color By health
+						if ((UnitHealth(self.unit) > 0) and UnitIsConnected(self.unit) and not AbyssUIAddonSettings.GreenHealth) then
+							local healthPercentage = ceil(((UnitHealth(self.unit) / UnitHealthMax(self.unit)) * 1000) /10)
+							if (healthPercentage == 0) then return end
+							if healthPercentage == 100 then
+								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+							elseif healthPercentage < 100 and healthPercentage > 21 then
+								self.healthbar:SetStatusBarColor(UnitColor(self.healthbar.unit))
+							elseif healthPercentage < 21 then
+								self.healthbar:SetStatusBarColor(255/255, 255/255, 255/255, 1)
+							end				
+						end
+					end
+					--
+					if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
+						self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
 					end
 				end
-				--
-				if (UnitPlayerControlled(self.unit) and not UnitIsConnected(self.unit) and UnitIsTapDenied(self.unit)) then
-					self.healthbar:SetStatusBarColor(0.5, 0.5, 0.5, 1)
-				end
-				--
-				if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
-					if (not UnitIsUnconscious(self.unit)) then
-						if (self.healthbar.TextString) then
-							self.healthbar.TextString:SetAlpha(0)
-							self.healthbar.forceHideText = true
-						end
+			end
+			--
+			if ((UnitHealth(self.unit) <= 0) and UnitIsConnected(self.unit)) then
+				if (not UnitIsUnconscious(self.unit)) then
+					if (self.healthbar.TextString) then
+						self.healthbar.TextString:SetAlpha(0)
+						self.healthbar.forceHideText = true
 					end
 				end
 			end

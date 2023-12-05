@@ -270,15 +270,63 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
 end)
 -- Class HP Colours
 local function colour(statusbar, unit)
-	local _, class, c
-	if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
-		if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true and not AbyssUIAddonSettings.GreenHealth) then
-			_, class = UnitClass(unit)
-			c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-			statusbar:SetStatusBarColor(c.r, c.g, c.b, c.a)
-		else 
-			return nil
+    local _, class, c
+    if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
+        _, class = UnitClass(unit)
+        if class == "SHAMAN" then
+            -- Change the color to Shaman color
+            c = RAID_CLASS_COLORS[class]
+            statusbar:SetStatusBarColor(c.r, c.g, c.b)
+        elseif AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true and not AbyssUIAddonSettings.GreenHealth and not AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen then
+            c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+            statusbar:SetStatusBarColor(c.r, c.g, c.b)
+        end
+    end
+end
+
+hooksecurefunc("UnitFrameHealthBar_Update", colour)
+hooksecurefunc("HealthBar_OnValueChanged", function(self)
+    colour(self, self.unit)
+end)
+
+----------------------------------------------------
+-- Class HP Colours
+local function colour(statusbar, unit)
+	if(AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen ~= true) then
+		if (AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen ~= true) then
+			if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
+				if (GetWoWVersion <= 90500) then
+					if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+						local _, class = UnitClass(unit)
+						c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+						local bg = PlayerFrame:CreateTexture()
+						bg:SetPoint("TOPLEFT", PlayerFrameBackground)
+						bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
+						bg:SetTexture(TargetFrameNameBackground:GetTexture())
+						if (class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+							bg:SetVertexColor(0/255, 112/255, 222/255)
+						else
+							bg:SetVertexColor(c.r,c.g,c.b)
+						end
+						PlayerFrame.bg = true
+					end
+				end
+			end
+			local _, class, c
+			if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
+				_, class = UnitClass(unit)
+				c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
+				statusbar:SetStatusBarColor(c.r, c.g, c.b)
+				if ( class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+					statusbar:SetStatusBarColor(0/255, 112/255, 222/255)
+				else 
+					statusbar:SetStatusBarColor(c.r, c.g, c.b)
+				end
+				--PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
+			end
 		end
+	else 
+		return nil
 	end
 end
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
@@ -290,57 +338,39 @@ end)
 local frame = CreateFrame("Frame", "$parentFrame", nil)
 frame:RegisterEvent("GROUP_ROSTER_UPDATE")
 frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-if (GetWoWVersion > 12400) then
-	frame:RegisterEvent("PLAYER_FOCUS_CHANGED")
-end
 frame:RegisterEvent("UNIT_FACTION")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 local function eventHandler(self, event, ...)
-	--Thanks to Tz for the player background update
-	if (AbyssUIAddonSettings ~= nil) then
-		if (AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
-			if (AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true) then
-				if (GetWoWVersion <= 90500) then
-					if (PlayerFrame:IsShown() and not PlayerFrame.bg and AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-						c = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-						local bg = PlayerFrame:CreateTexture()
-						bg:SetPoint("TOPLEFT", PlayerFrameBackground)
-						bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22)
-						bg:SetTexture(TargetFrameNameBackground:GetTexture())
-						bg:SetVertexColor(c.r,c.g,c.b)
-						PlayerFrame.bg = true
+	if (GetWoWVersion < 90000) then
+		--Thanks to Tz for the player background
+		if ( AbyssUIAddonSettings.ExtraFunctionTransparentName ~= true) then
+			if ( AbyssUIAddonSettings.ExtraFunctionHideBackgroundClassColor ~= true ) then
+				if UnitIsPlayer("target") then
+					local _, class2 = UnitClass("target")
+					c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
+					TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
+					if ( class2 == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true ) then
+						TargetFrameNameBackground:SetVertexColor(0/255, 112/255, 222/255)
+					else 
+						TargetFrameNameBackground:SetVertexColor(c.r,c.g,c.b)
 					end
-					if UnitIsPlayer("target") then
-						c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-						TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-					end
-					if UnitIsPlayer("focus") and GetWoWVersion > 12400 then
-						c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-						FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-					end
+				else
+					return nil
 				end
 			else
 				return nil
 			end
 		else
 			-- Remove background
-			if (GetWoWVersion <= 90500) then
-				TargetFrameNameBackground:SetAlpha(0.5)
-				TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-				if (GetWoWVersion > 12400) then
-					FocusFrameNameBackground:SetAlpha(0.5)
-					FocusFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
-				end
-			end
+			TargetFrameNameBackground:SetAlpha(0.5)
+			TargetFrameNameBackground:SetVertexColor(0/255, 0/255, 0/255)
 		end
 	end
 end
 
 frame:SetScript("OnEvent", eventHandler)
-if (GetWoWVersion <= 90500) then
-	for _, BarTextures in pairs({ PlayerFrameNameBackground, TargetFrameNameBackground, FocusFrameNameBackground, }) do
-		BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
-	end
+for _, BarTextures in pairs({TargetFrameNameBackground}) do
+	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 ----------------------------------------------------
 -- Minimap Tweaks
@@ -630,15 +660,30 @@ end
 local function eventHandler(self, event, ...)
 	if (event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED") then
 		if (GetWoWVersion <= 90500) then
+			_, class = UnitClass("Target")
 			if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
-				TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-				if (GetWoWVersion > 20000) then
-					FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+				if (UnitAffectingCombat("target") and not UnitPlayerControlled("target")) then
+					TargetFrameHealthBar:SetStatusBarColor(255/255, 10/255, 10/255)
+				elseif (AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen == true and UnitPlayerControlled("target")) then
+					TargetFrameHealthBar:SetStatusBarColor(10/255, 255/255, 10/255)
+				elseif (AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen == true) then
+					TargetFrameHealthBar:SetStatusBarColor(10/255, 255/255, 10/255)
+				else
+					if (class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+						TargetFrameHealthBar:SetStatusBarColor(0/255, 112/255, 222/255)
+					else			
+						TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
+					end
+					if (GetWoWVersion > 20000) then
+						FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+					end
 				end
-			else
-				return nil
 			end
-			TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+			if (class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+				TargetFrameToTHealthBar:SetStatusBarColor(0/255, 112/255, 222/255)
+			else
+				TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+			end
 			if (GetWoWVersion > 20000) then
 				FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
 			end
@@ -651,20 +696,42 @@ for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackgroun
 	BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
 end
 
+
 ----------------------------------------------------
 -- Keep the color when health changes
 hooksecurefunc("HealthBar_OnValueChanged", function()
-	if (AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
-		TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
-		TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))	
-		if (GetWoWVersion > 20000) then		
-			FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))	
-			FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
-		end
-	else
-		return nil
-	end
+    if (AbyssUIAddonSettings.UnitFrameImproved ~= true and GetWoWVersion <= 90500) then
+        _, class = UnitClass("Target")
+        local healthPercentage = ceil(((UnitHealth("target") / UnitHealthMax("target")) * 1000) /10)
+        if (AbyssUIAddonSettings.UnitFrameImproved ~= true) then
+            if (UnitAffectingCombat("target") and not UnitPlayerControlled("target")) then
+                TargetFrameHealthBar:SetStatusBarColor(255/255, 10/255, 10/255)
+            elseif (AbyssUIAddonSettings.ExtraFunctionPlayerHealthGreen == true and UnitPlayerControlled("target")) then
+                TargetFrameHealthBar:SetStatusBarColor(10/255, 255/255, 10/255)
+            elseif (AbyssUIAddonSettings.ExtraFunctionFriendlyHealthGreen == true) then
+                TargetFrameHealthBar:SetStatusBarColor(10/255, 255/255, 10/255)
+            else
+                if (class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+                    TargetFrameHealthBar:SetStatusBarColor(0/255, 112/255, 222/255)
+                else            
+                    TargetFrameHealthBar:SetStatusBarColor(UnitColor("target"))
+                end
+                if (GetWoWVersion > 20000) then
+                    FocusFrameHealthBar:SetStatusBarColor(UnitColor("focus"))
+                end
+            end
+        end
+        if (class == "SHAMAN" and AbyssUIAddonSettings.ExtraFunctionShamanPink ~= true) then
+            TargetFrameToTHealthBar:SetStatusBarColor(0/255, 112/255, 222/255)
+        else
+            TargetFrameToTHealthBar:SetStatusBarColor(UnitColor("targettarget"))
+        end
+        if (GetWoWVersion > 20000) then
+            FocusFrameToTHealthBar:SetStatusBarColor(UnitColor("focustarget"))
+        end
+    end    
 end)
+
 ----------------------------------------------------
 -- UI Scale Elements (On Load)
 local ScaleElements = CreateFrame("Frame", "$parentScaleElements", nil)
@@ -1077,37 +1144,27 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]			
 		
 		Minimap:SetSize(182*scale, 182*scale)
-		Minimap:SetMaskTexture(mediaFolder.."rectanglenew")
+		Minimap:SetMaskTexture(mediaFolder.."rectangle")
 		Minimap:SetHitRectInsets(0, 0, scale, scale)
 		Minimap:ClearAllPoints()
 		Minimap:SetPoint(position, UIParent, position_x, position_y)
 		Minimap:SetScale(scale)
-		Minimap:SetFrameLevel(6)		
+		Minimap:SetFrameLevel(6)
+		if (GetWoWVersion < 30000) then
+			MiniMapTrackingFrame:SetFrameLevel(10)
+		end		
 
-		BorderFrame = CreateFrame("Frame", nil, self, BackdropTemplateMixin and "BackdropTemplate")
-		BorderFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, (scale))
-		BorderFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 0, (scale))
-		BorderFrame:SetBackdrop(backdrop)
-		if not classColoredBorder then
-			BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
-		else
-			if ( AbyssUIAddonSettings.UIVertexColorFramesColorPicker ~= true ) then
-				if ( AbyssUIAddonSettings.KeepUnitDark == true and AbyssUIAddonSettings.UIVertexColorFrames02 ~= true ) then
-					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
-				elseif ( AbyssUIAddonSettings.UIVertexColorFrames02 == true and AbyssUIAddonSettings.KeepUnitDark ~= true ) then
-					BorderFrame:SetBackdropBorderColor(unpack(brdcolor))				
-				else
-					local r, g, b = AbyssUI_RBGColorizationFrameFunction(BorderFrame)
-					BorderFrame:SetBackdropBorderColor(r, g, b)
-				end
-			else
-				local character = UnitName("player").."-"..GetRealmName()
-				BorderFrame:SetBackdropBorderColor(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-			end
-		end	
-		BorderFrame:SetBackdropColor(unpack(backdropcolor))
-		BorderFrame:SetFrameLevel(2)
-		
+		-- New Border
+		local frame = Minimap -- replace this with your frame
+		local frameborder = CreateFrame("Frame", nil, frame)
+		frameborder:SetAllPoints(frame)
+		frameborder:SetFrameStrata("LOW")
+		frameborder:SetFrameLevel(8)
+	
+		frameborder.texture = frameborder:CreateTexture(nil, "BACKGROUND")
+		frameborder.texture:SetAllPoints(frameborder)
+		frameborder.texture:SetTexture("Interface\\AddOns\\AbyssUI\\Textures\\minimap\\abyssminimapborder")
+		AbyssUI_ColorizationFrameFunction(frameborder.texture)
 		-- hide some stuff --
 		--MinimapBackdrop:Hide()
 		MinimapBorder:Hide()
