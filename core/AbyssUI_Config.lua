@@ -293,6 +293,7 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["- UnitFrame Art"])
   -- Panel 04.03 (Themes)
+  --[[
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
   Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -320)
   Frame:SetWidth(200)
@@ -300,6 +301,7 @@ local function InitSettings()
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText("- Icon Border")
+  --]]
   -- Panel 05 (Colorization)
   local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel5)
   Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", 0, -20)
@@ -1749,26 +1751,6 @@ local function Miscellaneous()
     AbyssUIAddonSettings.ExtraFunctionChatBubbleChanges = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
-  -- Disable Damage Font --
-  --[[
-  local AbyssUI_DamageFont_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DamageFont_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
-  AbyssUI_DamageFont_CheckButton:SetPoint("TOPLEFT", 400, -200)
-  AbyssUI_DamageFont_CheckButton.Text:SetText(L["Disable Damage Font (*)"])
-  local Frame = CreateFrame("Frame", nil, AbyssUI_DamageFont_CheckButton)
-  Frame:SetWidth(180)
-  Frame:SetHeight(40)
-  Frame:SetPoint("LEFT", 25, 0)
-  AbyssUI_DamageFont_CheckButton.Text:SetAllPoints(Frame)
-  AbyssUI_DamageFont_CheckButton.tooltip = L["This option will remove any change to the damage font text."..
-  "\n*You need to restart the game so the font can be reloaded. You can change it to any font, "..
-  "go to Textures->font and replace the file keeping the same name"]
-  AbyssUI_DamageFont_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDamageFont)
-  -- OnClick Function
-  AbyssUI_DamageFont_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.ExtraFunctionDamageFont = self:GetChecked()
-    AbyssUI_ReloadFrame:Show()
-  end)
-  --]]
   -- Disable healing spam over player --
   local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
   AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 400, -200)
@@ -2959,6 +2941,7 @@ local function Stylization()
   end)
 ----------------------------------- Icons  -----------------------------------
 -- Icon Border --
+if GetWoWVersion < 10000 then
   -- Gloss
   local GlossIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlossIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   GlossIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -350)
@@ -3213,39 +3196,7 @@ local function Stylization()
       OldSchoolIconBorder_CheckButton:SetChecked(nil)
     end
   end)
-  --[[
-  -- Abyss Theme
-  local AbyssIconBorder_CheckButton = CreateFrame("CheckButton", "$parentAbyssIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
-  AbyssIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -470)
-  AbyssIconBorder_CheckButton.Text:SetText("|cff0d75d4".."AbyssUI Classic".."|r")
-  local Frame = CreateFrame("Frame", nil, AbyssIconBorder_CheckButton)
-  Frame:SetWidth(180)
-  Frame:SetHeight(40)
-  Frame:SetPoint("LEFT", 25, 0)
-  AbyssIconBorder_CheckButton.Text:SetAllPoints(Frame)
-  AbyssIconBorder_CheckButton.tooltip = L["AbyssUI Classic icon borders, a Blizzard Default enchanced theme"]
-  AbyssIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.AbyssIconBorder)
-  addonTable.AbyssIconBorder = AbyssIconBorder_CheckButton
-  -- OnClick Function
-  AbyssIconBorder_CheckButton:SetScript("OnClick", function(self)
-    if AbyssUIAddonSettings.CrispIconBorder    ~= true and 
-      AbyssUIAddonSettings.OriginalIconBorder  ~= true and 
-      AbyssUIAddonSettings.SquareIconBorder    ~= true and 
-      AbyssUIAddonSettings.GlossIconBorder     ~= true and
-      AbyssUIAddonSettings.GlassIconBorder     ~= true and 
-      AbyssUIAddonSettings.ThinIconBorder      ~= true and 
-      AbyssUIAddonSettings.ClassicIconBorder   ~= true and
-      AbyssUIAddonSettings.OldSchoolIconBorder ~= true and
-      AbyssUIAddonSettings.DefaultIconBorder   ~= true then
-      AbyssUIAddonSettings.AbyssIconBorder = self:GetChecked()
-      AbyssUI_ReloadFrame:Show()
-    else
-      UIErrorsFrame:AddMessage(L["You need to select just one of those options so they don't overlap"], 1.0, 0.1, 0.1, 1.0)
-      AbyssIconBorder_CheckButton:SetChecked(nil)
-    end
-  end)
-  --]]
-  -- End
+end
   -- AbyssUIClassCircles02_CheckButton
   local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles02_CheckButton:SetPoint("TOPLEFT", 10, -110)

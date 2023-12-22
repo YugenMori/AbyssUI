@@ -1102,7 +1102,6 @@ f:SetScript("OnEvent", function()
 			addonTable.UnitFrameImproved,
 			addonTable.ElitePortrait,
 			addonTable.FlatHealth,
-			addonTable.OldSchoolIconBorder,
 		} do
 			v:SetChecked(true)
 		end
@@ -1120,7 +1119,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.ElitePortrait 						    = addonTable.ElitePortrait:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
-		AbyssUIAddonSettings.OldSchoolIconBorder					= addonTable.OldSchoolIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		FrameButtonRecommended.Glow:Finish()
 		ReloadUI()
@@ -1231,7 +1229,6 @@ f:SetScript("OnEvent", function()
 			addonTable.DisableTooltipHealth,
 			addonTable.RarePortrait,
 			addonTable.DisableCharacterText,
-			addonTable.OldSchoolIconBorder,
 		} do
 			v:SetChecked(true)
 		end
@@ -1253,7 +1250,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.DisableSquareMinimap				= addonTable.DisableSquareMinimap:GetChecked()
 		AbyssUIAddonSettings.RarePortrait 						= addonTable.RarePortrait:GetChecked()
 	 	AbyssUIAddonSettings.DisableCharacterText				= addonTable.DisableCharacterText:GetChecked()
-		AbyssUIAddonSettings.OldSchoolIconBorder				= addonTable.OldSchoolIconBorder:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)

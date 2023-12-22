@@ -195,6 +195,7 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
             -- General
             for i, v in pairs({ 
                 PlayerFrame.PlayerFrameContainer.FrameTexture,
+                PlayerFrame.PlayerFrameContainer.AlternatePowerFrameTexture,
                 TargetFrame.TargetFrameContainer.FrameTexture,
                 FocusFrame.TargetFrameContainer.FrameTexture,
                 TargetFrameToT.FrameTexture,
@@ -377,6 +378,32 @@ f:SetScript("OnEvent", function(self, event, name)
       if AbyssUIAddonSettings ~= nil then
         AbyssUI_ColorizationFrameFunction(v)
       end
+    end
+  end
+end)
+-- CharacterMainHandSlot
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if GetWoWVersion >= 100000 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { CharacterMainHandSlot:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
+    end
+  end
+end)
+-- CharacterSecondaryHandSlot
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self)
+	if GetWoWVersion >= 100000 then
+    self:UnregisterAllEvents()
+    local ChildRegions = { CharacterSecondaryHandSlot:GetRegions() }
+    local fs = {}
+    for k, v in pairs(ChildRegions) do
+    	AbyssUI_ColorizationFrameFunction(v)
     end
   end
 end)
