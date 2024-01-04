@@ -594,6 +594,22 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
+			-- SettingsPanel
+			for i, v in pairs({ 
+				SettingsPanel.NineSlice.BottomEdge,
+				SettingsPanel.NineSlice.BottomLeftCorner,
+				SettingsPanel.NineSlice.BottomRightCorner,
+				SettingsPanel.NineSlice.Center,
+				SettingsPanel.NineSlice.LeftEdge,
+				SettingsPanel.NineSlice.RightEdge,
+				SettingsPanel.NineSlice.TopEdge,
+				SettingsPanel.NineSlice.TopLeftCorner,
+				SettingsPanel.NineSlice.TopRightCorner,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
 		-- End
 		else
 			return nil
@@ -1176,94 +1192,6 @@ f:SetScript("OnEvent", function(self, event, name)
 		PlayerTalentFramePortrait:SetVertexColor(1, 1, 1)
 	end
 end)
---[[
-local function ChatHiderFunc()
-	-- Chat Hide Frame (needs to be here so the hide chat buttons works on this too)
-	-- Thanks to Syncrow for part of this 
-	local ChatHideFrame = CreateFrame("Button", "$parentChatHideFrame", UIParent)
-	ChatHideFrame:SetSize(30, 30)
-	ChatHideFrame.t = ChatHideFrame:CreateTexture(nil, "BORDER")
-	ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-	ChatHideFrame.t:SetAllPoints(ChatHideFrame)
-	ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM", 0, -35)
-	if ( AbyssUIAddonSettings.FadeUI ~= true ) then
-	  ChatHideFrame:Show()
-	else
-	  ChatHideFrame:Hide()
-	end
-
-	local ChatHide = false
-	ChatHideFrame:SetScript("OnMouseDown", function(self, Button)
-	  if ChatHide == false then
-	    if Button == "LeftButton" then
-	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Down.blp")
-	    end
-	  elseif ChatHide == true then
-	    if Button == "LeftButton" then
-	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Down.blp")
-	    end
-	  end
-	end)
-
-	ChatHideFrame:SetScript("OnMouseUp", function(self, Button)
-	  if ChatHide == false then
-	    if Button == "LeftButton" then
-	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-	    end
-	  elseif ChatHide == true then
-	    if Button == "LeftButton" then
-	      ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
-	    end
-	  end
-	end)
-
-	ChatHideFrame:SetScript("OnClick", function(self, Button)
-	  if ChatHide == false then
-	    ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Maximize-Up.blp")
-	    GeneralDockManager:Hide()
-	    ChatFrameMenuButton:Hide()
-	    ChatFrameChannelButton:Hide()
-	    ChatFrame1EditBox:Hide()
-	    if GetWoWVersion > 30600 then
-	  		QuickJoinToastButton:Hide()
-				ChatFrameToggleVoiceDeafenButton.Icon:Hide()
-	    	ChatFrameToggleVoiceMuteButton.Icon:Hide()
-	    end
-
-	    for i = 1, NUM_CHAT_WINDOWS do
-	      _G["ChatFrame"..i..""]:SetAlpha(0)
-	      _G["ChatFrame"..i.."ButtonFrame"]:Hide()
-	      _G["ChatFrame"..i.."EditBox"]:SetAlpha(0)
-	    end
-	    ChatHide = true
-	  elseif ChatHide == true then
-	    ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
-	    GeneralDockManager:Show()
-	    ChatFrameMenuButton:Show()
-	    ChatFrameChannelButton:Show()
-	    ChatFrame1EditBox:Show()
-	    if GetWoWVersion > 30600 then
-	  		QuickJoinToastButton:Show()
-				ChatFrameToggleVoiceDeafenButton.Icon:Show()
-	    	ChatFrameToggleVoiceMuteButton.Icon:Show()
-	    end
-
-	    for i = 1 , NUM_CHAT_WINDOWS do
-	      _G["ChatFrame"..i..""]:SetAlpha(1)
-	      _G["ChatFrame"..i.."ButtonFrame"]:Show()
-	      _G["ChatFrame"..i.."EditBox"]:SetAlpha(1)
-	    end
-	    ChatHide = false
-	  end
-	end)
-end
-
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	ChatHiderFunc()
-end)
---]]
 ---------------------------- LichKing Classic Modules ----------------------------------
 -- GlyphFrame
 local f = CreateFrame("Frame")
@@ -1309,21 +1237,6 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
---[[
--- GameTimeFrame
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 30600 and GetWoWVersion >= 30000  then
-    self:UnregisterAllEvents()
-    local ChildRegions = { GameTimeFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-  end
-end)
---]]
 ---------------------------- Classic Era Modules ----------------------------------
 -- Character Name Class Color
 local f = CreateFrame("Frame")

@@ -2229,6 +2229,22 @@ local function TweaksExtra()
     AbyssUIAddonSettings.ExtraFunctionMinimapClock = self:GetChecked()
     AbyssUI_ReloadFrame:Show()
   end)
+  -- Default Icon Border --
+  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  DefaultIconBorder_CheckButton:SetPoint("TOPLEFT", 400, -320)
+  DefaultIconBorder_CheckButton.Text:SetText("Default Icon Border")
+  local Frame = CreateFrame("Frame", nil, DefaultIconBorder_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  DefaultIconBorder_CheckButton.Text:SetAllPoints(Frame)
+  DefaultIconBorder_CheckButton.tooltip = "Default Icon Borders"
+  DefaultIconBorder_CheckButton:SetChecked(AbyssUIAddonSettings.DefaultIconBorder)
+  -- OnClick Function
+  DefaultIconBorder_CheckButton:SetScript("OnClick", function(self)
+      AbyssUIAddonSettings.DefaultIconBorder = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+  end)
 end
 -- End
 ----------------------------------- Classic & BCC -----------------------------------

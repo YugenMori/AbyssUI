@@ -1731,37 +1731,6 @@ local function IconBackInit()
     if fbg then fbg:Hide() end  --floating background
     bo:SetTexture(nil)
 
-    --hotkey
-    --if (AbyssUIAddonSettings.OldSchoolIconBorder ~= true) then
-      --ho:SetFont(Abconfig.font, Abconfig.hotkeys.fontsize, "OUTLINE")
-      --ho:ClearAllPoints()
-      --ho:SetPoint(Abconfig.hotkeys.pos1.a1, bu, Abconfig.hotkeys.pos1.x, Abconfig.hotkeys.pos1.y)
-      --ho:SetPoint(Abconfig.hotkeys.pos2.a1, bu, Abconfig.hotkeys.pos2.x, Abconfig.hotkeys.pos2.y)
-      --if not dominos and not bartender4 and not Abconfig.hotkeys.show then
-        --ho:Hide()
-      --end  
-    --end
-    --macro name
-    --if (AbyssUIAddonSettings.OldSchoolIconBorder ~= true) then
-      --na:SetFont(Abconfig.font, Abconfig.macroname.fontsize, "OUTLINE")
-      --na:ClearAllPoints()
-      --na:SetPoint(Abconfig.macroname.pos1.a1, bu, Abconfig.macroname.pos1.x, Abconfig.macroname.pos1.y)
-      --na:SetPoint(Abconfig.macroname.pos2.a1, bu, Abconfig.macroname.pos2.x, Abconfig.macroname.pos2.y)
-
-      --if not dominos and not bartender4 and not Abconfig.macroname.show then
-        --na:Hide()
-      --end
-    --end
-    --item stack count
-    --if (AbyssUIAddonSettings.OldSchoolIconBorder ~= true) then
-      --co:SetFont(Abconfig.font, Abconfig.itemcount.fontsize, "OUTLINE")
-      --co:ClearAllPoints()
-      --co:SetPoint(Abconfig.itemcount.pos1.a1, bu, Abconfig.itemcount.pos1.x, Abconfig.itemcount.pos1.y)
-
-      --if not dominos and not bartender4 and not Abconfig.itemcount.show then
-        --co:Hide()
-      --end
-    --end
     --applying the textures
     fl:SetTexture(Abconfig.textures.flash)
     bu:SetNormalTexture(Abconfig.textures.normal)
@@ -1770,13 +1739,14 @@ local function IconBackInit()
       nt = bu:GetNormalTexture()
     end
     --cut the default border of the icons and make them shiny
-    ic:SetTexCoord(0.05, 0.9, 0.05, 0.9)
+    --ic:SetTexCoord(0.05, 0.9, 0.05, 1)
+    ic:SetTexCoord(0.04, 1, 0.04, 1)
     ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
-    ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
+    ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -1, 1)
+
+    --hotkey
+    ho:SetPoint("TOPRIGHT", bu, "TOPRIGHT", 0, -3)
     
-    --adjust the cooldown frame
-    --cd:SetPoint("TOPLEFT", bu, "TOPLEFT", Abconfig.cooldown.spacing, -Abconfig.cooldown.spacing)
-    --cd:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -Abconfig.cooldown.spacing, Abconfig.cooldown.spacing)
     --apply the normaltexture
     if action and IsEquippedAction(action) then
       --bu:SetNormalTexture(Abconfig.textures.equipped)
@@ -1975,16 +1945,18 @@ local function IconBackInit()
   end)
   
   local function init()
-  local dominos = IsAddOnLoaded("Dominos")
-  local bartender4 = IsAddOnLoaded("Bartender4")
-  --style the actionbar buttons
-  for i = 1, NUM_ACTIONBAR_BUTTONS do
-    styleActionButton(_G["ActionButton"..i])
-    styleActionButton(_G["MultiBarBottomLeftButton"..i])
-    styleActionButton(_G["MultiBarBottomRightButton"..i])
-    styleActionButton(_G["MultiBarRightButton"..i])
-    styleActionButton(_G["MultiBarLeftButton"..i])
-  end
+    local dominos = IsAddOnLoaded("Dominos")
+    local bartender4 = IsAddOnLoaded("Bartender4")
+    --style the actionbar buttons
+    if (AbyssUIAddonSettings.DefaultIconBorder ~= true) then
+      for i = 1, NUM_ACTIONBAR_BUTTONS do
+        styleActionButton(_G["ActionButton"..i])
+        styleActionButton(_G["MultiBarBottomLeftButton"..i])
+        styleActionButton(_G["MultiBarBottomRightButton"..i])
+        styleActionButton(_G["MultiBarRightButton"..i])
+        styleActionButton(_G["MultiBarLeftButton"..i])
+      end
+    end
     -- actionbutton
     for i = 1, 6 do
       styleActionButton(_G["OverrideActionBarButton"..i])
