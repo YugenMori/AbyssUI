@@ -149,42 +149,54 @@ local function UnitColor(unit)
   return r, g, b, a
 end
 ---------------------------- NewUI Functions ----------------------------------
-local function AbyssUI_TooltipSetUnit() 
+local function AbyssUI_TooltipSetUnit()
+  if AbyssUIAddonSettings.DefaultTooltipColor ~= true then
     -- OnTooltipSetUnit
     local _, unit = GameTooltip:GetUnit()
     if  UnitIsPlayer(unit) then
-        local _, class = UnitClass(unit)
-        local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
-        if (color ~= nil) then
-            local text  = GameTooltipTextLeft1:GetText()
-            local text2 = GameTooltipTextLeft2:GetText()
-            local text3 = GameTooltipTextLeft3:GetText()
-            local text4 = GameTooltipTextLeft4:GetText()
-            local englishFaction, localizedFaction = UnitFactionGroup(unit)
-            if (text ~= nil and text2 ~= nil) then
-                GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
-                GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
-            end
-            if (text ~= nil and text2 ~= nil and text3 ~= nil) then
-                GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
-            end
-            if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-                GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
-            end
-            if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
-                local text5 = GameTooltipTextLeft5:GetText()
-                if (text5 ~= nil) then
-                    GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
-                end
-            end
+      local _, class = UnitClass(unit)
+      local color = class and (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class]
+      if (color ~= nil) then
+        local text  = GameTooltipTextLeft1:GetText()
+        local text2 = GameTooltipTextLeft2:GetText()
+        local text3 = GameTooltipTextLeft3:GetText()
+        local text4 = GameTooltipTextLeft4:GetText()
+        local englishFaction, localizedFaction = UnitFactionGroup(unit)
+        if (text ~= nil and text2 ~= nil) then
+          GameTooltipTextLeft1:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text:match("|cff\x\x\x\x\x\x(.+)|r") or text)
+          GameTooltipTextLeft2:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text2:match("|cff\x\x\x\x\x\x(.+)|r") or text2)
         end
+        if (text ~= nil and text2 ~= nil and text3 ~= nil) then
+          GameTooltipTextLeft3:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text3:match("|cff\x\x\x\x\x\x(.+)|r") or text3)
+        end
+        if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+          GameTooltipTextLeft4:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text4:match("|cff\x\x\x\x\x\x(.+)|r") or text4)
+        end
+        if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil) then
+          local text5 = GameTooltipTextLeft5:GetText()
+          if (text5 ~= nil) then
+            GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
+          end
+        end
+        if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil and text5 ~= nil) then
+          local text6 = GameTooltipTextLeft6:GetText()
+          if (text6 ~= nil) then
+            GameTooltipTextLeft6:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text6:match("|cff\x\x\x\x\x\x(.+)|r") or text6)
+          end
+        end
+      end
     end
+  end
 end
 -- Tooltip Class Color and extras 
 if (GetWoWVersion >= 90500) then
-    GameTooltip:HookScript("OnUpdate", function(self, elapsed)
-        AbyssUI_TooltipSetUnit()
-    end)
+  GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+    -- Call AbyssUI_TooltipSetUnit() every 0.5 seconds
+    if not self.lastUpdate or self.lastUpdate < GetTime() - 0.1 then
+      AbyssUI_TooltipSetUnit()
+      self.lastUpdate = GetTime()
+    end
+  end)
 end
 ---------------------------- NewUI Frames ----------------------------------
 local ClassicFrames = CreateFrame("Frame")

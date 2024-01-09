@@ -2245,6 +2245,22 @@ local function TweaksExtra()
       AbyssUIAddonSettings.DefaultIconBorder = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
   end)
+  -- Default Tooltip Color  --
+  local DefaultTooltipColor_CheckButton = CreateFrame("CheckButton", "$parentDefaultTooltipColor_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  DefaultTooltipColor_CheckButton:SetPoint("TOPLEFT", 400, -350)
+  DefaultTooltipColor_CheckButton.Text:SetText("Default Tooltip Color")
+  local Frame = CreateFrame("Frame", nil, DefaultTooltipColor_CheckButton)
+  Frame:SetWidth(180)
+  Frame:SetHeight(40)
+  Frame:SetPoint("LEFT", 25, 0)
+  DefaultTooltipColor_CheckButton.Text:SetAllPoints(Frame)
+  DefaultTooltipColor_CheckButton.tooltip = "Default tooltip colourization (no class colors)"
+  DefaultTooltipColor_CheckButton:SetChecked(AbyssUIAddonSettings.DefaultTooltipColor)
+  -- OnClick Function
+  DefaultTooltipColor_CheckButton:SetScript("OnClick", function(self)
+      AbyssUIAddonSettings.DefaultTooltipColor = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+  end)
 end
 -- End
 ----------------------------------- Classic & BCC -----------------------------------

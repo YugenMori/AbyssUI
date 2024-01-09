@@ -392,8 +392,8 @@ if (GetWoWVersion <= 90500) then
 end
 ----------------------------------------------------
 -- Tooltip Class Color and extras 
-if (GetWoWVersion <= 90500) then
-	GameTooltip:HookScript("OnTooltipSetUnit", function(self, elapsed)
+local function AbyssUI_TooltipSetUnit()
+	if AbyssUIAddonSettings.DefaultTooltipColor ~= true then
 		-- OnTooltipSetUnit
 		local _, unit = GameTooltip:GetUnit()
 		if  UnitIsPlayer(unit) then
@@ -421,7 +421,22 @@ if (GetWoWVersion <= 90500) then
 						GameTooltipTextLeft5:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text5:match("|cff\x\x\x\x\x\x(.+)|r") or text5)
 					end
 				end
+				if (text ~= nil and text2 ~= nil and text3 ~= nil and text4 ~= nil and text5 ~= nil) then
+					local text6 = GameTooltipTextLeft6:GetText()
+					if (text6 ~= nil) then
+						GameTooltipTextLeft6:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, text6:match("|cff\x\x\x\x\x\x(.+)|r") or text6)
+					end
+				end
 			end
+		end
+	end
+end
+if (GetWoWVersion <= 90500) then
+	GameTooltip:HookScript("OnUpdate", function(self, elapsed)
+	-- Call AbyssUI_TooltipSetUnit() every 0.5 seconds
+		if not self.lastUpdate or self.lastUpdate < GetTime() - 0.1 then
+			AbyssUI_TooltipSetUnit()
+			self.lastUpdate = GetTime()
 		end
 	end)
 end
