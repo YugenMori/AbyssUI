@@ -33,7 +33,7 @@ f:SetScript("OnEvent", function(self, event, ...)
       COLOR_MY_UI[character] = {}
   end
   if not COLOR_MY_UI[character].Color then
-      COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1 }
+      COLOR_MY_UI[character].Color = { r = 1, g = 1, b = 1}
   end
 end)
 -- Fontfication
@@ -772,18 +772,30 @@ local function ColorPicker_Changed(self)
     local r, g, b = ColorPickerFrame:GetColorRGB()
     local color = { r = r, g = g, b = b }
     COLOR_MY_UI[character].Color = color
+	--ColorPickerFrame:SetColorRGB(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
 end
 -- Global Color Function
 function AbyssUI_ShowColorPicker()
 	if ColorPickerFrame:IsShown() then return end
-	ColorPickerFrame.previousValues = COLOR_MY_UI[character].Color
-	ColorPickerFrame.cancelFunc = ColorPicker_Cancelled
-	ColorPickerFrame.opacityFunc = ColorPicker_Changed
-	ColorPickerFrame.func = ColorPicker_Changed
-	ColorPickerFrame:SetColorRGB(COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b)
-	ColorPickerFrame:ClearAllPoints()
-	ColorPickerFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", GetCursorPosition())
-	ColorPickerFrame:Show()
+	if GetWoWVersion >= 100000 then
+		ColorPickerFrame.previousValues = COLOR_MY_UI[character].Color
+		ColorPickerFrame.cancelFunc = ColorPicker_Cancelled
+		ColorPickerFrame.opacityFunc = ColorPicker_Changed
+		ColorPickerFrame.func = ColorPicker_Changed
+		ColorPickerFrame.swatchFunc = ColorPicker_Changed
+		ColorPickerFrame:ClearAllPoints()
+		ColorPickerFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", GetCursorPosition())
+		ShowUIPanel(ColorPickerFrame)
+	else
+		ColorPickerFrame.previousValues = COLOR_MY_UI[character].Color
+		ColorPickerFrame.cancelFunc = ColorPicker_Cancelled
+		ColorPickerFrame.opacityFunc = ColorPicker_Changed
+		ColorPickerFrame.func = ColorPicker_Changed
+		ColorPickerFrame:SetColorRGB( COLOR_MY_UI[character].Color.r, COLOR_MY_UI[character].Color.g, COLOR_MY_UI[character].Color.b )
+		ColorPickerFrame:ClearAllPoints()
+		ColorPickerFrame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", GetCursorPosition())
+		ColorPickerFrame:Show()
+	end
 end
 -- Color Save
 local f = CreateFrame("Frame")
