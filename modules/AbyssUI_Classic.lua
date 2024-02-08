@@ -1325,3 +1325,35 @@ f:SetScript("OnEvent", function(self, event, name)
 		end
 	end
 end)
+-- Daily
+local AbyssUIDailyInfo = CreateFrame("Frame")
+AbyssUIDailyInfo:RegisterEvent("PLAYER_LOGIN")
+AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
+	if (GetWoWVersion < 100000) then
+		local nonMilitaryHour = date("%H")
+		local nonMilitaryMinutes = date("%M |cffffcc00%m/%d/%y|r" )
+		C_Timer.After(3, function()
+			print(L["Thank you for choosing Abyss|cff0d75d4UI|r!"])
+			print(L["The improved World of Warcraft user interface."])
+		end)
+		C_Timer.After(4, function()
+			local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+			print(L["|cfff2dc7fAbyssUI Daily Info|r"])
+			if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
+				print("|cfff2dc7f"..L["Current Time"].."|r " .. (nonMilitaryClock(tonumber(nonMilitaryHour))..":"..nonMilitaryMinutes))
+			else
+				print("|cfff2dc7f"..L["Current Time"].."|r " .. date("%H:%M |cffffcc00%d/%m/%y|r "))
+			end
+			print(L["|cfff2dc7fWoW Version"]..": |r|cffffcc00" .. select(1, GetBuildInfo()) .."|r".." ".."("..(GetWoWVersion)..")")
+			print(L["|cfff2dc7fAbyssUI Version"]..": |r|cffffcc00" .. AddonVersion .. "|r")
+			if (AbyssUIProfile ~= nil) then 
+				local name, elapsed = UnitName("player"), time() - AbyssUIProfile
+				print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
+				print(L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"])
+				print(L["|cfff2dc7fBuy me a coffee!|r"].." -> ko-fi.com/yugensan")
+				print("|cfff2dc7f"..L["Supporters:"].."|r".." Addict, CampeonBlack, Digitaljdr, Ikonick")
+				print(L["Type |cffffcc00/abyssui|r for a list of commands"])
+			end
+		end)
+	end
+end)
