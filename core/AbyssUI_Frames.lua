@@ -788,15 +788,16 @@ AbyssUI_AFKCamera:SetScript("OnEvent", function(self, event, ...)
 			AbyssUI_AFKCameraFrame:SetScript("OnMouseDown", function (self, button)
 			    if (button == 'LeftButton') then 
 			    	AbyssUI_AFKCameraFrame:Hide()
-					UIParent:SetAlpha(1)
-					if AbyssUIAddonSettings.HideMinimap ~= true then
-						MinimapCluster:Show()
-					end
+						UIParent:SetAlpha(1)
+						if AbyssUIAddonSettings.HideMinimap ~= true then
+							MinimapCluster:Show()
+						end
+						if UnitIsAFK("player") then
+      				SendChatMessage("", "AFK")
+      			end
 			    end
 			end)
 		end
-	else
-		return nil
 	end
 end)
 --------------------------------------------
