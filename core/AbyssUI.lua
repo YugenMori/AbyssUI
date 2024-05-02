@@ -162,7 +162,7 @@ SetAlphaFrames:SetScript("OnEvent", function(self, event, addon)
 				 }) do
 				v:SetAlpha(0)
 			end
-			if (GetWoWVersion > 30600) then
+			if (GetWoWVersion > 50600) then
 				for i, v in pairs({
 					RecruitAFriendFrame.RecruitList.ScrollFrameInset.NineSlice.BottomLeftCorner,
 					RecruitAFriendFrame.RecruitList.ScrollFrameInset.NineSlice.BottomRightCorner,
@@ -224,7 +224,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				return nil
 			end
 		end
-		if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
+		if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
 			for i, v in pairs({ 
 				MainMenuBarArtFrame.LeftEndCap,
 				MainMenuBarArtFrame.RightEndCap,
@@ -247,7 +247,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 		end		
 		----------------------------------------------------------------------
 		-- Character
-		if (GetWoWVersion > 30600) then
+		if (GetWoWVersion > 50600) then
 			for i, v in pairs({	
 				CharacterFrame.NineSlice.RightEdge,
 				CharacterFrame.NineSlice.LeftEdge,
@@ -1821,7 +1821,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_TalentUI" and GetWoWVersion > 30600 then
+	if name == "Blizzard_TalentUI" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			PlayerTalentFrame.NineSlice.TopEdge,
 			PlayerTalentFrame.NineSlice.RightEdge,
@@ -1868,7 +1868,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_Collections" and GetWoWVersion > 30600 then
+	if name == "Blizzard_Collections" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			CollectionsJournal.NineSlice.TopEdge,
 			CollectionsJournal.NineSlice.TopRightCorner,
@@ -1950,7 +1950,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_EncounterJournal" and GetWoWVersion > 30600 then
+	if name == "Blizzard_EncounterJournal" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			EncounterJournal.NineSlice.TopEdge,
 			EncounterJournal.NineSlice.RightEdge,
@@ -1978,7 +1978,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_Communities" and GetWoWVersion > 30600 then
+	if name == "Blizzard_Communities" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			CommunitiesFrame.NineSlice.TopEdge,
 			CommunitiesFrame.NineSlice.RightEdge,
@@ -2069,7 +2069,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_MacroUI" and GetWoWVersion > 30600 then
+	if name == "Blizzard_MacroUI" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			MacroFrame.NineSlice.TopEdge,
 			MacroFrame.NineSlice.RightEdge,
@@ -2306,7 +2306,7 @@ end)
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
-	if name == "Blizzard_Collections" and GetWoWVersion > 30600 then
+	if name == "Blizzard_Collections" and GetWoWVersion > 50600 then
 		for i, v in pairs({ 
 			WardrobeFrame.NineSlice.TopEdge,
 			WardrobeFrame.NineSlice.RightEdge,
@@ -2608,7 +2608,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
 	if name == "Blizzard_TimeManager" then
-		if (GetWoWVersion > 30600) then
+		if (GetWoWVersion > 50600) then
 			for i, v in pairs({ 
 				TimeManagerFrame.NineSlice.TopEdge,
 				TimeManagerFrame.NineSlice.RightEdge,

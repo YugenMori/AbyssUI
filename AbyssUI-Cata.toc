@@ -1,4 +1,4 @@
-## Interface: 100207
+## Interface: 40400
 ## Title: Abyss|cff0d75d4UI|r
 ## Version: 10.2.7.2_Classic_Dragonflight
 ## Author: Yugen
@@ -59,7 +59,7 @@ functions\AbyssUI_FunctionsExtras.lua
 modules\AbyssUI_Cam.lua
 modules\AbyssUI_CastBar.lua
 modules\AbyssUI_Classic.lua
-#modules\AbyssUI_IconStyle.lua
+modules\AbyssUI_IconStyle.lua
 modules\AbyssUI_InstanceLeave.lua
 modules\AbyssUI_Inventory.lua
 modules\AbyssUI_MoveFrames.lua

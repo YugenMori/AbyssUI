@@ -1220,6 +1220,9 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		end
 		--MiniMapMailFrame:ClearAllPoints()
 		--MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, 1, -20)
+		if GetWoWVersion <= 90500 then
+			MiniMapMailFrame:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, -25)
+		end
 		--MiniMapMailFrame:SetFrameLevel(10)
 		MiniMapMailIcon:SetTexture(mailicon)
 		MiniMapWorldMapButton:Hide()
@@ -1355,7 +1358,7 @@ local function RemoveAnchor()
 
 -- NamePlate Style
 --  Move nametag
-if (GetWoWVersion > 30600) then
+if (GetWoWVersion > 50600) then
 	hooksecurefunc("DefaultCompactNamePlateFrameAnchorInternal", function(frame)
 		if (not frame:IsForbidden() and AbyssUIAddonSettings.ExtraFunctionNameplateChanges ~= true) then
 			frame.name:ClearAllPoints()

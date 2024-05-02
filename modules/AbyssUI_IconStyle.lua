@@ -1844,15 +1844,15 @@ local function IconBackInit()
       end
     end)  
     --cut the default border of the icons and make them shiny
-    --if (AbyssUIAddonSettings.OldSchoolIconBorder == true) then
-      --ic:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-      --ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
-      --ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
-    --else
-      --ic:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-      --ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 1, -1)
-      --ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -1, 1)
-    --end
+    if (AbyssUIAddonSettings.OldSchoolIconBorder == true) then
+      ic:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+      ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
+      ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
+    else
+      ic:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+      ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 1, -1)
+      ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -1, 1)
+    end
     --shadows+background
     if not bu.bg then applyBackground(bu) end
     bu.rabs_styled = true

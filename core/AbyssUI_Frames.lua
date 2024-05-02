@@ -199,8 +199,8 @@ AbyssUIBorder:SetVertexColor(0.9, 0.9, 0.9, 0.9)
 AbyssUI_AFKCameraFrame.text = AbyssUI_AFKCameraFrame.text or AbyssUI_AFKCameraFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
-AbyssUI_AFKCameraFrame.text:SetJustifyH("BOTTOM")
-AbyssUI_AFKCameraFrame.text:SetJustifyV("BOTTOM")
+AbyssUI_AFKCameraFrame.text:ClearAllPoints()
+AbyssUI_AFKCameraFrame.text:SetPoint("BOTTOM", -300)
 AbyssUI_AFKCameraFrame.text:SetWidth(GetScreenWidth()/4)
 AbyssUI_AFKCameraFrame.text:SetHeight(GetScreenHeight()/2)
 AbyssUI_AFKCameraFrame.text:SetText(L["Move"])
@@ -219,10 +219,10 @@ AbyssUI_AFKCamera:RegisterEvent("PLAYER_ENTERING_WORLD")
 -- Model1
 local AbyssUI_ModelFrameAFKMode = CreateFrame("Frame", "$parentAbyssUI_ModelFrameAFKMode", AbyssUI_AFKCameraFrame)
 AbyssUI_ModelFrameAFKMode:SetPoint("BOTTOMRIGHT", 5, 5)
-if (GetWoWVersion <= 90500) then
+if (GetWoWVersion <= 30500) then
 	AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelFrame:GetWidth()*2)
 	AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelFrame:GetHeight()*2)
-elseif (GetWoWVersion >= 90500) then
+elseif (GetWoWVersion >= 40000) then
 	AbyssUI_ModelFrameAFKMode:SetWidth(CharacterModelScene:GetWidth()*2)
 	AbyssUI_ModelFrameAFKMode:SetHeight(CharacterModelScene:GetHeight()*2)
 end
@@ -271,7 +271,7 @@ PlayerInfo_Class1.text:SetPoint("BOTTOMLEFT", 5, 90)
 PlayerInfo_Class1.text:SetText(playerClass)
 -- Current Specialization
 local PlayerInfo_CurrentSpec1 = CreateFrame("Frame", "$parentPlayerInfo_CurrentSpec1", AbyssUI_AFKCameraFrame)
-if (GetWoWVersion > 30600) then
+if (GetWoWVersion > 50600) then
 	local currentSpec = GetSpecialization()
 	local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
 	PlayerInfo_CurrentSpec1:SetAllPoints(AbyssUI_AFKCameraFrame)
@@ -286,7 +286,7 @@ local level = UnitLevel("player")
 PlayerInfo_Level1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Level1:SetScale(3)
 PlayerInfo_Level1.text = PlayerInfo_Level1.text or PlayerInfo_Level1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-if (GetWoWVersion > 30600) then 
+if (GetWoWVersion > 50600) then 
 	PlayerInfo_Level1.text:SetPoint("BOTTOMLEFT", 5, 70)
 else
 	PlayerInfo_Level1.text:SetPoint("BOTTOMLEFT", 5, 80)
@@ -297,7 +297,7 @@ local PlayerInfo_Honor1 = CreateFrame("Frame", "$parentPlayerInfo_Honor1", Abyss
 PlayerInfo_Honor1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Honor1:SetScale(3)
 PlayerInfo_Honor1.text = PlayerInfo_Honor1.text or PlayerInfo_Honor1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-if (GetWoWVersion > 30600) then
+if (GetWoWVersion > 50600) then
 	PlayerInfo_Honor1.text:SetPoint("BOTTOMLEFT", 5, 60)
 	local HonorLevel = UnitHonorLevel("player")
 	PlayerInfo_Honor1.text:SetText(L["Honor: "]..HonorLevel)
@@ -309,7 +309,11 @@ if (GetWoWVersion > 30600) then
 	PlayerInfo_ILevel1:SetAllPoints(AbyssUI_AFKCameraFrame)
 	PlayerInfo_ILevel1:SetScale(3)
 	PlayerInfo_ILevel1.text = PlayerInfo_ILevel1.text or PlayerInfo_ILevel1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-	PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
+	if (GetWoWVersion > 50600) then
+		PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 50)
+	else
+		PlayerInfo_ILevel1.text:SetPoint("BOTTOMLEFT", 5, 70)
+	end
 	PlayerInfo_ILevel1.text:SetText(L["Item Level: "]..floor(overall + 0.5))
 end
 -- Zone
@@ -318,10 +322,10 @@ local zoneName = GetZoneText()
 PlayerInfo_CurrentZone1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_CurrentZone1:SetScale(3)
 PlayerInfo_CurrentZone1.text = PlayerInfo_CurrentZone1.text or PlayerInfo_CurrentZone1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-if (GetWoWVersion > 30600) then
+if (GetWoWVersion > 50600) then
 	PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 40)
 else
-	PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 70)
+	PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 60)
 end
 PlayerInfo_CurrentZone1.text:SetText(zoneName)
 -- Guild Info
@@ -330,10 +334,10 @@ local guildName, guildRankName, guildRankIndex = GetGuildInfo("player")
 PlayerInfo_Guild1:SetAllPoints(AbyssUI_AFKCameraFrame)
 PlayerInfo_Guild1:SetScale(3)
 PlayerInfo_Guild1.text = PlayerInfo_Guild1.text or PlayerInfo_Guild1:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
-if (GetWoWVersion > 30600) then
+if (GetWoWVersion > 50600) then
 	PlayerInfo_Guild1.text:SetPoint("BOTTOMLEFT", 5, 30)
 else
-	PlayerInfo_Guild1.text:SetPoint("BOTTOMLEFT", 5, 60)
+	PlayerInfo_Guild1.text:SetPoint("BOTTOMLEFT", 5, 50)
 end
 PlayerInfo_Guild1.text:SetText(guildName)
 -- CLock
@@ -349,7 +353,7 @@ ExtraInfo_Faction1:SetWidth(64)
 ExtraInfo_Faction1:SetHeight(64)
 ExtraInfo_Faction1:SetPoint("TOPLEFT", 5, -5)
 ExtraInfo_Faction1:SetScale(3)
-if (GetWoWVersion >= 40500) then
+if (GetWoWVersion >= 50500) then
 	local t = ExtraInfo_Faction1:CreateTexture(nil, "BACKGROUND")
 		if (englishFaction == "Horde") then
 			t:SetTexture("Interface\\AddOns\\AbyssUI\\textures\\extra\\Horde-Logo")
@@ -386,6 +390,8 @@ if (englishClass == "EVOKER") then
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(51/255, 147/255, 127/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(51/255, 147/255, 127/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(51/255, 147/255, 127/255)
 		end
@@ -405,6 +411,8 @@ elseif (englishClass == "DEATHKNIGHT") then
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(196/255, 30/255, 59/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(196/255, 30/255, 59/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(196/255, 30/255, 59/255)
 		end
@@ -424,6 +432,8 @@ elseif (englishClass == "DEMONHUNTER") then
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(163/255, 48/255, 201/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(163/255, 48/255, 201/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(163/255, 48/255, 201/255)
 		end
@@ -443,6 +453,8 @@ elseif (englishClass == "DRUID") then
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(255/255, 125/255, 10/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(255/255, 125/255, 10/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 125/255, 10/255)
 		end
@@ -455,15 +467,15 @@ elseif (englishClass == "HUNTER") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(171/255, 212/255, 115/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(171/255, 212/255, 115/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(171/255, 212/255, 115/255)
 		end
@@ -476,15 +488,15 @@ elseif (englishClass == "MAGE") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(105/255, 204/255, 240/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(105/255, 204/255, 240/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(105/255, 204/255, 240/255)
 		end
@@ -497,15 +509,15 @@ elseif (englishClass == "MONK") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(0/255, 255/255, 150/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(0/255, 255/255, 150/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(0/255, 255/255, 150/255)
 		end
@@ -518,15 +530,15 @@ elseif (englishClass == "PALADIN") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(245/255, 140/255, 186/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(245/255, 140/255, 186/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(245/255, 140/255, 186/255)			
 		end
@@ -539,15 +551,15 @@ elseif (englishClass == "PRIEST") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(255/255, 255/255, 255/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(255/255, 255/255, 255/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 255/255, 255/255)			
 		end
@@ -560,15 +572,15 @@ elseif (englishClass == "ROGUE") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(255/255, 245/255, 105/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(255/255, 245/255, 105/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(255/255, 245/255, 105/255)
 		end
@@ -581,15 +593,15 @@ elseif (englishClass == "SHAMAN") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(0/255, 112/255, 222/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(0/255, 112/255, 222/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(0/255, 112/255, 222/255)
 		end
@@ -602,15 +614,15 @@ elseif (englishClass == "WARLOCK") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(148/255, 130/255, 201/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(148/255, 130/255, 201/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(148/255, 130/255, 201/255)			
 		end
@@ -623,15 +635,15 @@ elseif (englishClass == "WARRIOR") then
 		PlayerInfo_Level1, 
 		PlayerInfo_Race1, 
 		PlayerInfo_Class1,
-		PlayerInfo_Honor1,
 		PlayerInfo_ILevel1,
-		PlayerInfo_CurrentSpec1,
 		PlayerInfo_CurrentZone1,
 		PlayerInfo_Guild1,
 		ExtraInfo_Clock1,
 	PlayerInfo_GoldAmount1 }) do
 		if (GetWoWVersion > 30600) then 
 			v.text:SetVertexColor(199/255, 156/255, 110/255)
+		end
+		if (GetWoWVersion > 50600) then
 			PlayerInfo_Honor1.text:SetVertexColor(199/255, 156/255, 110/255)
 			PlayerInfo_CurrentSpec1.text:SetVertexColor(199/255, 156/255, 110/255)	
 		end
@@ -700,7 +712,7 @@ local function AbyssUI_UpdateAFKCameraData()
 	else
 		ExtraInfo_Clock1.text:SetText(dataTime)
 	end
-	if (GetWoWVersion > 30600) then
+	if (GetWoWVersion > 50600) then
 		local HonorLevel = UnitHonorLevel("player")
 		local overall, equipped = GetAverageItemLevel()
 		local currentSpec = GetSpecialization()
@@ -814,8 +826,7 @@ AbyssUI_YouDiedFrame:SetPoint("CENTER", "UIParent", "CENTER", 0, 0)
 AbyssUI_YouDiedFrame.text = AbyssUI_YouDiedFrame.text or AbyssUI_YouDiedFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUI_YouDiedFrame.text:SetScale(8*2)
 AbyssUI_YouDiedFrame.text:SetAllPoints(true)
-AbyssUI_YouDiedFrame.text:SetJustifyH("CENTER")
-AbyssUI_YouDiedFrame.text:SetJustifyV("CENTER")
+AbyssUI_YouDiedFrame.text:SetPoint("CENTER")
 AbyssUI_YouDiedFrame.text:SetText(strupper(L["|cff8b0000YOU DIED|r"]))
 AbyssUI_YouDiedFrame.text:SetWidth(GetScreenWidth())
 AbyssUI_YouDiedFrame.text:SetHeight(GetScreenHeight()/4)
@@ -936,8 +947,7 @@ AbyssUIFirstFrame:SetFrameStrata("HIGH")
 AbyssUIFirstFrame.text = AbyssUIFirstFrame.text or AbyssUIFirstFrame:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 AbyssUIFirstFrame.text:SetScale(5)
 AbyssUIFirstFrame.text:SetAllPoints(true)
-AbyssUIFirstFrame.text:SetJustifyH("CENTER")
-AbyssUIFirstFrame.text:SetJustifyV("CENTER")
+AbyssUIFirstFrame.text:SetPoint("CENTER")
 AbyssUIFirstFrame.text:SetText(L["Thank you for choosing Abyss|cff0d75d4UI|r!"])
 ----------------------------------------------------
 local Subtittle = CreateFrame("Frame", "$parentSubtittle", AbyssUIFirstFrame)
@@ -949,8 +959,7 @@ Subtittle:SetFrameStrata("HIGH")
 Subtittle.text = Subtittle.text or Subtittle:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
 Subtittle.text:SetScale(3)
 Subtittle.text:SetAllPoints(true)
-Subtittle.text:SetJustifyH("CENTER")
-Subtittle.text:SetJustifyV("CENTER")
+Subtittle.text:SetPoint("CENTER")
 Subtittle.text:SetText(L["The improved World of Warcraft user interface."])
 ----------------------------------------------------
 local AbyssUIBorder = AbyssUIFirstFrame:CreateTexture(nil, "BACKGROUND")
@@ -1169,17 +1178,17 @@ f:SetScript("OnEvent", function()
 		end
 		-- Get
 		AbyssUIAddonSettings.HideUnitImprovedFaction 			   	= addonTable.HideUnitImprovedFaction:GetChecked()
-		AbyssUIAddonSettings.HideGroupFrame					       	= addonTable.HideGroupFrame:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		   	= addonTable.InstanceLeave:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		   	= addonTable.InspectTarget:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		   	= addonTable.ConfirmPopUps:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionRepair					= addonTable.AutoRepair:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionSellGray 					= addonTable.AutoSellGray:GetChecked()
-		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam		= addonTable.DisableHealingSpam:GetChecked()
-		AbyssUIAddonSettings.TooltipOnCursor 					    = addonTable.TooltipOnCursor:GetChecked()
+		AbyssUIAddonSettings.HideGroupFrame					       		= addonTable.HideGroupFrame:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInstanceLeave 		  = addonTable.InstanceLeave:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionInspectTarget 		  = addonTable.InspectTarget:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionConfirmPopUps 		  = addonTable.ConfirmPopUps:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionRepair							= addonTable.AutoRepair:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionSellGray 						= addonTable.AutoSellGray:GetChecked()
+		AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam	= addonTable.DisableHealingSpam:GetChecked()
+		AbyssUIAddonSettings.TooltipOnCursor 					    		= addonTable.TooltipOnCursor:GetChecked()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
-		AbyssUIAddonSettings.Dragonflight 				      		= addonTable.Dragonflight:GetChecked()
-		AbyssUIAddonSettings.FlatHealth 						    = addonTable.FlatHealth:GetChecked()
+		AbyssUIAddonSettings.Dragonflight 				      			= addonTable.Dragonflight:GetChecked()
+		AbyssUIAddonSettings.FlatHealth 						    			= addonTable.FlatHealth:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)
@@ -1291,8 +1300,7 @@ AbyssUI_ReloadFrame:SetFrameStrata("Dialog")
 AbyssUI_ReloadFrame.text = AbyssUI_ReloadFrame.text or AbyssUI_ReloadFrame:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
 AbyssUI_ReloadFrame.text:SetScale(1.5)
 AbyssUI_ReloadFrame.text:SetAllPoints(true)
-AbyssUI_ReloadFrame.text:SetJustifyH("CENTER")
-AbyssUI_ReloadFrame.text:SetJustifyV("CENTER")
+AbyssUI_ReloadFrame.text:SetPoint("CENTER")
 AbyssUI_ReloadFrame.text:SetText(L["A reload is necessary so this configuration can be save!\n"..
 "Click the |cffffcc00'confirm'|r button to Reload.\nYou still can make changes (do before you confirm)."])
 ----------------------------------------------------
@@ -1419,8 +1427,7 @@ AbyssUI_ActionBarCleaner:SetFrameStrata("Dialog")
 AbyssUI_ActionBarCleaner.text = AbyssUI_ActionBarCleaner.text or AbyssUI_ActionBarCleaner:CreateFontString(nil,"ARTWORK","QuestMapRewardsFont")
 AbyssUI_ActionBarCleaner.text:SetScale(1.5)
 AbyssUI_ActionBarCleaner.text:SetAllPoints(true)
-AbyssUI_ActionBarCleaner.text:SetJustifyH("CENTER")
-AbyssUI_ActionBarCleaner.text:SetJustifyV("CENTER")
+AbyssUI_ActionBarCleaner.text:SetPoint("CENTER")
 AbyssUI_ActionBarCleaner.text:SetText(L["Wait!\nThis will clean all your skills/spells from Actions Bars."])
 ----------------------------------------------------
 local Border = AbyssUI_ActionBarCleaner:CreateTexture(nil, "BACKGROUND")

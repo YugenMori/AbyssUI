@@ -8,8 +8,6 @@
 local addonName, addonTable = ...
 local GetWoWVersion = ((select(4, GetBuildInfo())))
 local L = LibStub("AceLocale-3.0"):GetLocale("AbyssUI")
---local texturepackCheck    = "1.0.1.7"
---local texturepackDate     = "26/11/20"
 local f = CreateFrame("Frame", "AbyssUI_Config", UIParent)
 f:SetSize(50, 50)
 f:RegisterEvent("PLAYER_LOGIN")
@@ -753,7 +751,7 @@ local function HideElementsInit()
   end
   -- OnClick Function
   MicroMenu_CheckButton:SetScript("OnClick", function(self)
-  if (GetWoWVersion > 30600) then
+  if (GetWoWVersion > 50600) then
     AbyssUIAddonSettings.HideMicroMenu = self:GetChecked()
     if AbyssUIAddonSettings.HideMicroMenu == true then
       AbyssUI_HideMicroMenu_Function()
@@ -768,7 +766,7 @@ local function HideElementsInit()
   -- After Login/Reload
   MicroMenu_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   MicroMenu_CheckButton:SetScript("OnEvent", function(self, event, ...)
-    if (GetWoWVersion > 30600) then
+    if (GetWoWVersion > 50600) then
       if (event == "PLAYER_ENTERING_WORLD") then
         if AbyssUIAddonSettings.HideMicroMenu == true then
           AbyssUI_HideMicroMenu_Function()
@@ -787,7 +785,7 @@ local function HideElementsInit()
   -- OnClick Function
   Gryphons_CheckButton:SetScript("OnClick", function(self)
   AbyssUIAddonSettings.HideGryphons = self:GetChecked()
-if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
+if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.HideGryphons == true then
           MainMenuBarArtFrame.RightEndCap:Hide()
           MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -830,7 +828,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   Gryphons_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   Gryphons_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
+      if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.HideGryphons == true then
           MainMenuBarArtFrame.RightEndCap:Hide()
           MainMenuBarArtFrame.LeftEndCap:Hide()
@@ -901,7 +899,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- OnClick Function
   ObjTracker_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideObjectiveTracker = self:GetChecked()
-    if (GetWoWVersion > 30600) then
+    if (GetWoWVersion > 50600) then
         if AbyssUIAddonSettings.HideObjectiveTracker == true then
           ObjectiveTrackerFrame:Hide()
         else
@@ -925,7 +923,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   ObjTracker_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ObjTracker_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 30600) then
+      if (GetWoWVersion > 50600) then
         if AbyssUIAddonSettings.HideObjectiveTracker == true then
           ObjectiveTrackerFrame:Hide()
         else
@@ -1063,8 +1061,13 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   -- OnClick Function
   HideStanceBar_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideStanceBar = self:GetChecked()
+    AbyssUI_ReloadFrame:Show()
      if (AbyssUIAddonSettings.HideStanceBar == true) then
-       StanceBar:SetAlpha(0)
+      if GetWoWVersion >= 40000 and GetWoWVersion <= 90500 then
+        StanceBarFrame:SetAlpha(0)
+      else
+        StanceBar:SetAlpha(0)
+      end
      else
        return nil
      end
@@ -1075,7 +1078,11 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
     if (event == "PLAYER_ENTERING_WORLD") then
       if AbyssUIAddonSettings.HideStanceBar == true then
         C_Timer.After(0.5, function()
-          StanceBar:SetAlpha(0)
+          if GetWoWVersion >= 40000 and GetWoWVersion <= 90500 then
+            StanceBarFrame:SetAlpha(0)
+          else
+            StanceBar:SetAlpha(0)
+          end
         end)
       end
     end
@@ -1168,7 +1175,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   HideChatButtons_CheckButton:SetScript("OnClick", function(self)
     AbyssUIAddonSettings.HideChatButtons = self:GetChecked()
     if (AbyssUIAddonSettings.HideChatButtons == true) then
-      if (GetWoWVersion > 30600) then
+      if (GetWoWVersion > 50600) then
         QuickJoinToastButton:Hide()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
         ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1179,7 +1186,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
       ChatFrame1ButtonFrame:SetAlpha(0)
       AbyssUI_ChatHideFrame:Hide()
     else 
-      if (GetWoWVersion > 30600) then
+      if (GetWoWVersion > 50600) then
         QuickJoinToastButton:Show()
         ChatFrameToggleVoiceDeafenButton:SetAlpha(1)
         ChatFrameToggleVoiceMuteButton:SetAlpha(1)
@@ -1202,7 +1209,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
           ChatFrameChannelButton:Hide()
           ChatFrame1ButtonFrame:SetAlpha(0)
           AbyssUI_ChatHideFrame:Hide()
-          if (GetWoWVersion > 30600) then
+          if (GetWoWVersion > 50600) then
             QuickJoinToastButton:Hide()
             ChatFrameToggleVoiceDeafenButton:SetAlpha(0)
             ChatFrameToggleVoiceMuteButton:SetAlpha(0)
@@ -1358,7 +1365,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   HideConvenantFrame_CheckButton:SetChecked(AbyssUIAddonSettings.HideConvenantFrame)
   -- OnClick Function
   HideConvenantFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion > 30600) then
+    if (GetWoWVersion > 50600) then
       AbyssUIAddonSettings.HideConvenantFrame = self:GetChecked()
       if (AbyssUIAddonSettings.HideConvenantFrame == true) then
         if (GetWoWVersion <= 90500) then
@@ -1382,7 +1389,7 @@ if (GetWoWVersion >= 30600 and GetWoWVersion <= 90500) then
   HideConvenantFrame_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideConvenantFrame_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
-      if (GetWoWVersion > 30600) then
+      if (GetWoWVersion > 50600) then
         if (AbyssUIAddonSettings.HideConvenantFrame == true) then
           C_Timer.After(1, function()
             if (GetWoWVersion <= 90500) then
@@ -1766,23 +1773,26 @@ local function Miscellaneous()
   addonTable.DisableHealingSpam = AbyssUI_DisableHealingSpam_CheckButton
   -- OnClick Function
   AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnClick", function(self)
-    AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = self:GetChecked()
-    PlayerHitIndicator:SetText(nil)
-    PlayerHitIndicator.SetText = function() end
+    if GetWoWVersion < 90500 then
+      AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam = self:GetChecked()
+      PlayerHitIndicator:SetText(nil)
+      PlayerHitIndicator.SetText = function() end
 
-    PetHitIndicator:SetText(nil)
-    PetHitIndicator.SetText = function() end
+      PetHitIndicator:SetText(nil)
+      PetHitIndicator.SetText = function() end
+    end
   end)
   -- After Login/Reload
   AbyssUI_DisableHealingSpam_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   AbyssUI_DisableHealingSpam_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if (event == "PLAYER_ENTERING_WORLD") then
       if (AbyssUIAddonSettings.ExtraFunctionDisableHealingSpam == true) then
-        PlayerHitIndicator:SetText(nil)
-        PlayerHitIndicator.SetText = function() end
-
-        PetHitIndicator:SetText(nil)
-        PetHitIndicator.SetText = function() end
+        if GetWoWVersion < 90500 then
+          PlayerHitIndicator:SetText(nil)
+          PlayerHitIndicator.SetText = function() end
+          PetHitIndicator:SetText(nil)
+          PetHitIndicator.SetText = function() end
+        end
       end
     end
   end)
@@ -2283,7 +2293,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:SetChecked(AbyssUIAddonSettings.HideHelm)
   -- OnClick Function
   HideHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.HideHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2295,7 +2305,7 @@ local function ClassicBCC()
   HideHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.HideHelm == true then
           ShowHelm(false)
         end
@@ -2310,7 +2320,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:SetChecked(AbyssUIAddonSettings.HideCloak)
   -- OnClick Function
   HideCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.HideCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2322,7 +2332,7 @@ local function ClassicBCC()
   HideCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   HideCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.HideCloak == true then
           ShowCloak(false)
         end
@@ -2337,7 +2347,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:SetChecked(AbyssUIAddonSettings.ShowHelm)
   -- OnClick Function
   ShowHelm_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.ShowHelm = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2349,7 +2359,7 @@ local function ClassicBCC()
   ShowHelm_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowHelm_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.ShowHelm == true then
           ShowHelm(true)
         end
@@ -2364,7 +2374,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:SetChecked(AbyssUIAddonSettings.ShowCloak)
   -- OnClick Function
   ShowCloak_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.ShowCloak = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2376,7 +2386,7 @@ local function ClassicBCC()
   ShowCloak_CheckButton:RegisterEvent("PLAYER_ENTERING_WORLD")
   ShowCloak_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         if AbyssUIAddonSettings.ShowCloak == true then
           ShowCloak(true)
         end
@@ -2393,7 +2403,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         AbyssUIAddonSettings.ExtraFunctionBetterWorldMap = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2407,7 +2417,7 @@ local function ClassicBCC()
   AbyssUI_BetterWorldMap_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+        if (GetWoWVersion <= 90500) then
           if ( AbyssUIAddonSettings.ExtraFunctionBetterWorldMap == true ) then
             WorldMapFrame.BlackoutFrame:Hide()
             WorldMapFrame.BlackoutFrame:EnableMouse(false)
@@ -2429,7 +2439,7 @@ local function ClassicBCC()
   -- OnClick Function
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnClick", function(self)
     if (not leatrix) then
-      if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+      if (GetWoWVersion <= 90500) then
         AbyssUIAddonSettings.ExtraFunctionWorldMapFade = self:GetChecked()
         AbyssUI_ReloadFrame:Show()
       else
@@ -2443,7 +2453,7 @@ local function ClassicBCC()
   AbyssUI_WorldMapFade_CheckButton:SetScript("OnEvent", function(self, event, ...)
     if ( event == "PLAYER_ENTERING_WORLD" ) then
       if (not leatrix) then
-        if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+        if (GetWoWVersion <= 90500) then
           if ( AbyssUIAddonSettings.ExtraFunctionWorldMapFade == true ) then
             PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, .60, 1.0, .60)
           end
@@ -2460,7 +2470,7 @@ local function ClassicBCC()
   AbyssUI_DefaultNameplate_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDefaultNameplate)
   -- OnClick Function
   AbyssUI_DefaultNameplate_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.ExtraFunctionDefaultNameplate = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2481,7 +2491,7 @@ local function ClassicBCC()
   DisableQuestFrame_CheckButton:SetChecked(AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame)
   -- OnClick Function
   DisableQuestFrame_CheckButton:SetScript("OnClick", function(self)
-    if (GetWoWVersion == 20502 or GetWoWVersion <= 12400) then
+    if (GetWoWVersion <= 90500) then
       AbyssUIAddonSettings.ExtraFunctionDisableQuestFrame = self:GetChecked()
       AbyssUI_ReloadFrame:Show()
     else
@@ -2526,8 +2536,8 @@ local function ThanksTraslations()
   Frame1:SetHeight(40)
   Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame1:SetAllPoints()
-  Frame1:SetJustifyV("LEFT")
-  Frame1:SetJustifyH("LEFT")
+  Frame1:ClearAllPoints()
+  Frame1:SetPoint("LEFT")
   Frame1:SetText(L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."])
   local Frame2 = CreateFrame("Frame","$parentFrame2Thanks", AbyssUI_Config.childpanel10)
   Frame2:SetPoint("TOPLEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -100)
@@ -2535,8 +2545,8 @@ local function ThanksTraslations()
   Frame2:SetHeight(40)
   Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame2:SetAllPoints()
-  Frame2:SetJustifyV("LEFT")
-  Frame2:SetJustifyH("LEFT")
+  Frame2:ClearAllPoints()
+  Frame2:SetPoint("LEFT")
   Frame2:SetText(L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
   " UnitFrame for AbyssUI."])
     local Frame3 = CreateFrame("Frame","$parentFrame3Thanks", AbyssUI_Config.childpanel10)
@@ -2545,8 +2555,8 @@ local function ThanksTraslations()
   Frame3:SetHeight(40)
   Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame3:SetAllPoints()
-  Frame3:SetJustifyV("LEFT")
-  Frame3:SetJustifyH("LEFT")
+  Frame3:ClearAllPoints()
+  Frame3:SetPoint("LEFT")
   Frame3:SetText(L["|cfff2dc7fLortUI|r for better icon borders and shadows."])
   -- Translations
   local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel10)
@@ -2563,8 +2573,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (United States): |r"]..L["Default"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2573,8 +2583,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Mexico): |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2583,8 +2593,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fPortuguese: |r"].."Yūgen")
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2593,8 +2603,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fGerman: |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2603,8 +2613,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (Great Britain): |r"]..L["Default"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2613,8 +2623,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("LEFT")
-  Frame:SetJustifyH("LEFT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Spain): |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2623,8 +2633,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fFrench: |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2633,8 +2643,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fItalian: |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2643,8 +2653,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fRussian: |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2653,8 +2663,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fKorean: |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2663,8 +2673,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fChinese (Traditional): |r"]..L["Need Translator"])
   --
   local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
@@ -2673,8 +2683,8 @@ local function ThanksTraslations()
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetJustifyV("RIGHT")
-  Frame:SetJustifyH("RIGHT")
+  Frame:ClearAllPoints()
+  Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fChinese (Simplified): |r"].."Wallrained")
 end
 ----------------------------------- FAQ  -----------------------------------
@@ -2703,8 +2713,7 @@ local function FAQ()
   Frame1:SetHeight(80)
   Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame1:SetAllPoints()
-  Frame1:SetJustifyV("LEFT")
-  Frame1:SetJustifyH("LEFT")
+  Frame1:SetPoint("LEFT")
   Frame1:SetText(L["- How to change fonts or go back to Bliizard default?\n"..
   "A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."])
   local Frame2 = CreateFrame("Frame","$parentFrame2FAQ", AbyssUI_Config.childpanel11)
@@ -2713,8 +2722,7 @@ local function FAQ()
   Frame2:SetHeight(80)
   Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame2:SetAllPoints()
-  Frame2:SetJustifyV("LEFT")
-  Frame2:SetJustifyH("LEFT")
+  Frame2:SetPoint("LEFT")
   Frame2:SetText(L["- Do you plan to add save profiles to the UI?\n"..
   "A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."])
   local Frame3 = CreateFrame("Frame","$parentFrame3FAQ", AbyssUI_Config.childpanel11)
@@ -2723,8 +2731,7 @@ local function FAQ()
   Frame3:SetHeight(80)
   Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame3:SetAllPoints()
-  Frame3:SetJustifyV("LEFT")
-  Frame3:SetJustifyH("LEFT")
+  Frame3:SetPoint("LEFT")
   Frame3:SetText(L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
   "A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."])
   local Frame4 = CreateFrame("Frame","$parentFrame4FAQ", AbyssUI_Config.childpanel11)
@@ -2733,8 +2740,7 @@ local function FAQ()
   Frame4:SetHeight(80)
   Frame4 = Frame4:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame4:SetAllPoints()
-  Frame4:SetJustifyV("LEFT")
-  Frame4:SetJustifyH("LEFT")
+  Frame4:SetPoint("LEFT")
   Frame4:SetText(L["- How to make interface looks like in the video?\n"..
   "A: The white buttons was another project that was discontinued due to the lack of time and the amount of work that was needed to make it work under different conditions. It may still work, but no support or upcoming updates are planned."])
 end
