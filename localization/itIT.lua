@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   " Stile minimappa predefinito Blizzard (rotondo). *È necessario riavviare il gioco per poter ricaricare le texture rotonde"
 L["Members"] = "Membri"
 L["Total of hours played: "] = "Totale ore giocate: "
+L["Hide RunePower"] = "Nascondi RunePower"

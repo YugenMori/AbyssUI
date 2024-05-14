@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   "暴雪預設小地圖樣式（圓形）。*您需要重新啟動遊戲才能重新加載圓形紋理"
 L["Members"] = "會員"
 L["Total of hours played: "] = "總玩時數："
+L["Hide RunePower"] = "隱藏符文能量"

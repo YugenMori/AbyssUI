@@ -200,7 +200,7 @@ AbyssUI_AFKCameraFrame.text = AbyssUI_AFKCameraFrame.text or AbyssUI_AFKCameraFr
 AbyssUI_AFKCameraFrame.text:SetScale(3)
 AbyssUI_AFKCameraFrame.text:SetAllPoints(true)
 AbyssUI_AFKCameraFrame.text:ClearAllPoints()
-AbyssUI_AFKCameraFrame.text:SetPoint("BOTTOM", -300)
+AbyssUI_AFKCameraFrame.text:SetPoint("BOTTOM", 0, -200)
 AbyssUI_AFKCameraFrame.text:SetWidth(GetScreenWidth()/4)
 AbyssUI_AFKCameraFrame.text:SetHeight(GetScreenHeight()/2)
 AbyssUI_AFKCameraFrame.text:SetText(L["Move"])
@@ -325,7 +325,11 @@ PlayerInfo_CurrentZone1.text = PlayerInfo_CurrentZone1.text or PlayerInfo_Curren
 if (GetWoWVersion > 50600) then
 	PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 40)
 else
-	PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 60)
+	if (GetWoWVersion < 30000) then
+		PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 70)
+	else
+		PlayerInfo_CurrentZone1.text:SetPoint("BOTTOMLEFT", 5, 60)
+	end
 end
 PlayerInfo_CurrentZone1.text:SetText(zoneName)
 -- Guild Info

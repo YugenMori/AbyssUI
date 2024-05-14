@@ -422,3 +422,4 @@ L["Rare Portrait"] = true
 L["Add a rare texture to the player portrait"] = true
 L["Members"] = true
 L["Total of hours played: "] = true
+L["Hide RunePower"] = true

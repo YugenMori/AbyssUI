@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   "暴雪默认小地图样式（圆形）。*您需要重新启动游戏才能重新加载圆形纹理"
 L["Members"] = "会员"
 L["Total of hours played: "] = "总玩时数："
+L["Hide RunePower"] = "隐藏符文能量"

@@ -473,3 +473,4 @@ L["This option will get you back to the"..
   "Estilo de minimapa predeterminado de Blizzard (redondo). *Debes reiniciar el juego para poder volver a cargar las texturas redondas"
 L["Members"] = "Miembros"
 L["Total of hours played: "] = "Total de horas jugadas: "
+L["Hide RunePower"] = "Ocultar RunePower"

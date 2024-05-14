@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   " 블리자드 기본 미니맵 스타일(라운드). *라운드 텍스처를 다시 로드하려면 게임을 다시 시작해야 합니다."
 L["Members"] = "회원"
 L["Total of hours played: "] = "총 플레이 시간: "
+L["Hide RunePower"] = "룬파워 숨기기"

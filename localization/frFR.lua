@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   " Style de mini-carte par défaut de Blizzard (rond). *Vous devez redémarrer le jeu pour que les textures rondes puissent être rechargées."
 L["Members"] = "Membres"
 L["Total of hours played: "] = "Total des heures jouées: "
+L["Hide RunePower"] = "Cacher RunePower"

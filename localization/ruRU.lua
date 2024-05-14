@@ -471,3 +471,4 @@ L["This option will get you back to the"..
   "Стиль мини-карты Blizzard по умолчанию (круглый). *Вам необходимо перезапустить игру, чтобы можно было перезагрузить круглые текстуры"
 L["Members"] = "Члены"
 L["Total of hours played: "] = "Общее количество сыгранных часов: "
+L["Hide RunePower"] = "Скрыть RunePower"
