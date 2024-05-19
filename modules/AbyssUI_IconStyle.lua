@@ -1973,7 +1973,9 @@ local function IconBackInit()
     styleLeaveButton(rABS_LeaveVehicleButton)
     --petbar buttons
     for i = 1, NUM_PET_ACTION_SLOTS do
-      stylePetButton(_G["PetActionButton"..i])
+      if (GetWoWVersion > 100000) then
+        stylePetButton(_G["PetActionButton"..i])
+      end
     end
     --stancebar buttons
     local nStance = GetNumShapeshiftForms ()

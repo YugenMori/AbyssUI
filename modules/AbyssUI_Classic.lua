@@ -184,6 +184,8 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 				MainMenuXPBarTexture2,
 				MainMenuXPBarTexture3,
 				MainMenuBarTextureExtender,
+				SlidingActionBarTexture0,
+				SlidingActionBarTexture1,
 				ReputationWatchBar.StatusBar.WatchBarTexture0,
 				ReputationWatchBar.StatusBar.WatchBarTexture1,
 				ReputationWatchBar.StatusBar.WatchBarTexture2,
