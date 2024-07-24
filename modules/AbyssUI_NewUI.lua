@@ -419,6 +419,29 @@ f:SetScript("OnEvent", function(self)
     end
   end
 end)
+-- PlayerSpellsFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_PlayerSpells" and GetWoWVersion >= 10500 then
+    for i, v in pairs({ 
+                PlayerSpellsFrame.NineSlice.TopEdge,
+                PlayerSpellsFrame.NineSlice.RightEdge,
+                PlayerSpellsFrame.NineSlice.LeftEdge,
+                PlayerSpellsFrame.NineSlice.TopEdge,
+                PlayerSpellsFrame.NineSlice.BottomEdge,
+                PlayerSpellsFrame.NineSlice.PortraitFrame,
+                PlayerSpellsFrame.NineSlice.TopRightCorner,
+                PlayerSpellsFrame.NineSlice.TopLeftCorner,
+                PlayerSpellsFrame.NineSlice.BottomLeftCorner,
+                PlayerSpellsFrame.NineSlice.BottomRightCorner,
+     }) do
+      if AbyssUIAddonSettings ~= nil then
+        AbyssUI_ColorizationFrameFunction(v)
+      end
+    end
+  end
+end)
 -- ProfessionsFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
@@ -519,9 +542,9 @@ if (GetWoWVersion > 12400) then
 end
 f:SetScript("OnEvent", function(self, event, name)
   if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
-    PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar:SetStatusBarColor(UnitColor("player"))
-    TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("target"))
-    FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar:SetStatusBarColor(UnitColor("focus"))
+    PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarsContainer.HealthBar:SetStatusBarColor(UnitColor("player"))
+    TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar:SetStatusBarColor(UnitColor("target"))
+    FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar:SetStatusBarColor(UnitColor("focus"))
     PetFrameHealthBar:SetStatusBarColor(UnitColor("player"))
     --TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("target"))
     --FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.HealthBarTexture:SetColorTexture(UnitColor("focus"))
@@ -542,9 +565,9 @@ f:SetScript("OnEvent", function(self, event, name)
  if ((event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_FOCUS_CHANGED" or event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LOGIN") and GetWoWVersion >= 90500) then
     for i, v in pairs({ 
       PlayerFrame.HealthBar,
-      PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar,
-      TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
-      FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar,
+      PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarsContainer.HealthBar,
+      TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar,
+      FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar,
     }) do
       if AbyssUIAddonSettings ~= nil and AbyssUIAddonSettings.GreenHealth ~= true then
         v:SetStatusBarTexture("Interface\\AddOns\\AbyssUI\\textures\\Raid-Bar-Hp-Fill")

@@ -122,74 +122,96 @@ local applyString       = _G["APPLY"]
 --------------------------------------------------------------
 local function InitSettings()
   AbyssUI_Config.panel = CreateFrame("Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
-  -- Register in the Interface Addon Options GUI
-  -- Set the name for the Category for the Options Panel1
   AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
+  
   -- Add the panel to the Interface Options
-  InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
-  --Child Panels
-  --[[
-  if (GetWoWVersion <= 90500) then
-    AbyssUI_Config.childpanel1 = CreateFrame("Frame", "$parentConfigChild_InfoPanel", AbyssUI_Config.panel)
-    AbyssUI_Config.childpanel1.name = L["Info Panel"]
-    AbyssUI_Config.childpanel1.parent = AbyssUI_Config.panel.name
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel1)
+  if InterfaceOptions_AddCategory then
+    InterfaceOptions_AddCategory(AbyssUI_Config.panel, addonName)
+  else
+    local category = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.panel, AbyssUI_Config.panel.name)
+    Settings.RegisterAddOnCategory(category)
   end
-  --]]
-  --
-  AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_HideElements", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel2.name = L["Hide Elements"]
+  -- Create your child panels
+  AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel2.name = "|cff0d75d4"..L["Hide Elements"].."|r"
   AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
+  else
+    local childCategory2, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel2, AbyssUI_Config.childpanel2.name)
+    Settings.RegisterAddOnCategory(childCategory2)
+  end
   --
   AbyssUI_Config.childpanel3 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel3.name = L["Miscellaneous"]
+  AbyssUI_Config.childpanel3.name = "|cff0d75d4"..L["Miscellaneous"].."|r"
   AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
-  --
-  AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel4.name = L["Art & Themes"]
-  AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
-  --
-  AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Colorization", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel5.name = L["Colorization"]
-  AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
-  --
-  AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel6.name = L["Tweaks & Extra"]
-  AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
-  --
-  AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel7.name = "Classic"
-  AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
-  --
-  --[[
-  if (GetWoWVersion <= 90500) then
-    AbyssUI_Config.childpanel8 = CreateFrame("Frame", "$parentConfigChild_Scale", AbyssUI_Config.panel)
-    AbyssUI_Config.childpanel8.name = L["Scale & Frame Size"]
-    AbyssUI_Config.childpanel8.parent = AbyssUI_Config.panel.name
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel8)
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
+  else
+    local childCategory3, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel3, AbyssUI_Config.childpanel3.name)
+    Settings.RegisterAddOnCategory(childCategory3)
   end
   --
-  AbyssUI_Config.childpanel9 = CreateFrame("Frame", "$parentConfigChild_Patreon", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel9.name = "|cfff2dc7f"..L["Donators"].."|r"
-  AbyssUI_Config.childpanel9.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel9)
-   --]]
+  AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel4.name = "|cff0d75d4"..L["Art & Themes"].."|r"
+  AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
+  else
+    local childCategory4, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel4, AbyssUI_Config.childpanel4.name)
+    Settings.RegisterAddOnCategory(childCategory4)
+  end
+  --
+  AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Colorization", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel5.name = "|cff0d75d4"..L["Colorization"].."|r"
+  AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
+  else
+    local childCategory5, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel5, AbyssUI_Config.childpanel5.name)
+    Settings.RegisterAddOnCategory(childCategory5)
+  end
+  --
+  AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel6.name = "|cff0d75d4"..L["Tweaks & Extra"].."|r"
+  AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
+  else
+    local childCategory6, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel6, AbyssUI_Config.childpanel6.name)
+    Settings.RegisterAddOnCategory(childCategory6)
+  end
+  --
+  AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
+  AbyssUI_Config.childpanel7.name = "|cff0d75d4".."Classic".."|r"
+  AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
+  else
+    local childCategory7, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel7, AbyssUI_Config.childpanel7.name)
+    Settings.RegisterAddOnCategory(childCategory7)
+  end
   --
   AbyssUI_Config.childpanel10 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel10.name = L["Thanks & Translations"]
+  AbyssUI_Config.childpanel10.name = "|cff0d75d4"..L["Thanks & Translations"].."|r"
   AbyssUI_Config.childpanel10.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel10)
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel10)
+  else
+    local childCategory10, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel10, AbyssUI_Config.childpanel10.name)
+    Settings.RegisterAddOnCategory(childCategory10)
+  end
     --
   AbyssUI_Config.childpanel11 = CreateFrame("Frame", "$parentConfigChild_FAQ", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel11.name = "FAQ"
+  AbyssUI_Config.childpanel11.name = "|cff0d75d4".."FAQ".."|r"
   AbyssUI_Config.childpanel11.parent = AbyssUI_Config.panel.name
-  InterfaceOptions_AddCategory(AbyssUI_Config.childpanel11)
+  if (GetWoWVersion < 110000) then
+    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel11)
+  else
+    local childCategory11, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel11, AbyssUI_Config.childpanel11.name)
+    Settings.RegisterAddOnCategory(childCategory11)
+  end
+  --
   --------------------------------------------------------------
   -- Title
   local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.panel)

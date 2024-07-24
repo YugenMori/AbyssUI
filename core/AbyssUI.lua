@@ -301,17 +301,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				TokenFramePopup.Border.TopRightCorner,
 				TokenFramePopup.Border.TopLeftCorner,
 				TokenFramePopup.Border.BottomLeftCorner,
-				TokenFramePopup.Border.BottomRightCorner,
-				ReputationDetailFrame.Border.TopEdge,
-				ReputationDetailFrame.Border.RightEdge,
-				ReputationDetailFrame.Border.BottomEdge,
-				ReputationDetailFrame.Border.LeftEdge,
-				ReputationDetailFrame.Border.TopRightCorner,
-				ReputationDetailFrame.Border.TopLeftCorner,
-				ReputationDetailFrame.Border.BottomLeftCorner,
-				ReputationDetailFrame.Border.BottomRightCorner,
-				ReputationDetailCorner,
-			ReputationDetailDivider, }) do
+				TokenFramePopup.Border.BottomRightCorner, }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
 					for i, v in pairs({
@@ -329,6 +319,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- SpellBook
+			--[[
 			for i, v in pairs({ 
 				SpellBookFrame.NineSlice.TopEdge,
 				SpellBookFrame.NineSlice.RightEdge,
@@ -364,6 +355,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end
+			--]]
 			-- PvE/Pvp
 			for i, v in pairs({ 
 				PVEFrame.NineSlice.TopEdge,
@@ -1678,6 +1670,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 				end
 			end
 			-- WardrobeOutfitFrame
+			--[[
 			for i, v in pairs({
 				WardrobeOutfitFrame.Border.TopEdge,
 				WardrobeOutfitFrame.Border.RightEdge,
@@ -1693,6 +1686,7 @@ NewFrames:SetScript("OnEvent", function(self, event, addon)
 					return nil
 				end
 			end
+			--]]
 			-- QuestSessionManager.CheckStopDialog
 			for i, v in pairs({
 				QuestSessionManager.CheckStopDialog.Border.TopEdge,
