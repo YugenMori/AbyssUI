@@ -133,7 +133,7 @@ local function InitSettings()
   end
   -- Create your child panels
   AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel2.name = "|cff0d75d4"..L["Hide Elements"].."|r"
+  AbyssUI_Config.childpanel2.name = "¦- ".."|cff0d75d4"..L["Hide Elements"].."|r"
   AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
@@ -143,7 +143,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel3 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel3.name = "|cff0d75d4"..L["Miscellaneous"].."|r"
+  AbyssUI_Config.childpanel3.name = "¦- ".."|cff0d75d4"..L["Miscellaneous"].."|r"
   AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
@@ -153,7 +153,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel4.name = "|cff0d75d4"..L["Art & Themes"].."|r"
+  AbyssUI_Config.childpanel4.name = "¦- ".."|cff0d75d4"..L["Art & Themes"].."|r"
   AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
@@ -163,7 +163,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Colorization", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel5.name = "|cff0d75d4"..L["Colorization"].."|r"
+  AbyssUI_Config.childpanel5.name = "¦- ".."|cff0d75d4"..L["Colorization"].."|r"
   AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
@@ -173,7 +173,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel6.name = "|cff0d75d4"..L["Tweaks & Extra"].."|r"
+  AbyssUI_Config.childpanel6.name = "¦- ".."|cff0d75d4"..L["Tweaks & Extra"].."|r"
   AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
@@ -183,7 +183,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel7.name = "|cff0d75d4".."Classic".."|r"
+  AbyssUI_Config.childpanel7.name = "¦- ".."|cff0d75d4".."Classic".."|r"
   AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
@@ -193,7 +193,7 @@ local function InitSettings()
   end
   --
   AbyssUI_Config.childpanel10 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel10.name = "|cff0d75d4"..L["Thanks & Translations"].."|r"
+  AbyssUI_Config.childpanel10.name = "¦- ".."|cff0d75d4"..L["Thanks & Translations"].."|r"
   AbyssUI_Config.childpanel10.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel10)
@@ -203,7 +203,7 @@ local function InitSettings()
   end
     --
   AbyssUI_Config.childpanel11 = CreateFrame("Frame", "$parentConfigChild_FAQ", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel11.name = "|cff0d75d4".."FAQ".."|r"
+  AbyssUI_Config.childpanel11.name = "¦- ".."|cff0d75d4".."FAQ".."|r"
   AbyssUI_Config.childpanel11.parent = AbyssUI_Config.panel.name
   if (GetWoWVersion < 110000) then
     InterfaceOptions_AddCategory(AbyssUI_Config.childpanel11)

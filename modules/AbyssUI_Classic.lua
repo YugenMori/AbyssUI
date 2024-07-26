@@ -618,6 +618,228 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 		end
 	end		
 end)
+---------------------------- Cata Stuff  ----------------------------------
+local ClassicFrames = CreateFrame("Frame")
+ClassicFrames:RegisterEvent("ADDON_LOADED")
+ClassicFrames:SetScript("OnEvent", function(self, event, addon)
+	if (addon == "AbyssUI") then
+		if GetWoWVersion >= 40000 then
+			-- General
+			for i, v in pairs({ 
+					GameMenuFrame.PortraitFrame,
+					GameMenuFrame.TopBorder,
+					GameMenuFrame.TopLeftCorner,
+					GameMenuFrame.TopRightCorner,
+					GameMenuFrame.BotLeftCorner,
+					GameMenuFrame.BotRightCorner,
+					GameMenuFrame.LeftBorder,
+					GameMenuFrame.RightBorder,
+					GameMenuFrame.BottomBorder,
+					GameMenuFrame.ButtonBottomBorder,
+					GameMenuFrame.BtnCornerLeft,
+					GameMenuFrame.BtnCornerRight,
+					GameMenuFrame.LeftEdge,
+					GameMenuFrame.RightEdge,
+					GameMenuFrame.BottomLeftCorner,
+					GameMenuFrame.BottomRightCorner,
+					GameMenuFrame.BottomEdge,
+					GameMenuFrameHeader, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- SpellBookFrame
+			for i, v in pairs({ 
+					SpellBookFramePortraitFrame,
+					SpellBookFrameTopBorder,
+					SpellBookFrameTopLeftCorner,
+					SpellBookFrameTopRightCorner,
+					SpellBookFrameBotLeftCorner,
+					SpellBookFrameBotRightCorner,
+					SpellBookFrameLeftBorder,
+					SpellBookFrameRightBorder,
+					SpellBookFrameBottomBorder,
+					SpellBookFrameButtonBottomBorder,
+					SpellBookFrameBtnCornerLeft,
+					SpellBookFrameBtnCornerRight, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- PVPFrame
+			for i, v in pairs({ 
+					PVPFramePortraitFrame,
+					PVPFrameTopBorder,
+					PVPFrameTopLeftCorner,
+					PVPFrameTopRightCorner,
+					PVPFrameBotLeftCorner,
+					PVPFrameBotRightCorner,
+					PVPFrameLeftBorder,
+					PVPFrameRightBorder,
+					PVPFrameBottomBorder,
+					PVPFrameButtonBottomBorder,
+					PVPFrameBtnCornerLeft,
+					PVPFrameBtnCornerRight, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- CharacterFrame
+			for i, v in pairs({ 
+					CharacterFramePortraitFrame,
+					CharacterFrameTopBorder,
+					CharacterFrameTopLeftCorner,
+					CharacterFrameTopRightCorner,
+					CharacterFrameBotLeftCorner,
+					CharacterFrameBotRightCorner,
+					CharacterFrameLeftBorder,
+					CharacterFrameRightBorder,
+					CharacterFrameBottomBorder,
+					CharacterFrameButtonBottomBorder,
+					CharacterFrameBtnCornerLeft,
+					CharacterFrameBtnCornerRight, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- PVEFrame
+			for i, v in pairs({ 
+					PVEFramePortraitFrame,
+					PVEFrameTopBorder,
+					PVEFrameTopLeftCorner,
+					PVEFrameTopRightCorner,
+					PVEFrameBotLeftCorner,
+					PVEFrameBotRightCorner,
+					PVEFrameLeftBorder,
+					PVEFrameRightBorder,
+					PVEFrameBottomBorder,
+					PVEFrameButtonBottomBorder,
+					PVEFrameBtnCornerLeft,
+					PVEFrameBtnCornerRight, }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame1
+			for i, v in pairs({ 
+				ContainerFrame1Background1Slot,
+				ContainerFrame1BackgroundBottom,
+				ContainerFrame1BackgroundMiddle1,
+				ContainerFrame1BackgroundMiddle2,
+				ContainerFrame1BackgroundTop,
+				ContainerFrame1BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame2
+			for i, v in pairs({ 
+				ContainerFrame2Background1Slot,
+				ContainerFrame2BackgroundBottom,
+				ContainerFrame2BackgroundMiddle1,
+				ContainerFrame2BackgroundMiddle2,
+				ContainerFrame2BackgroundTop,
+				ContainerFrame2BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame3
+			for i, v in pairs({ 
+				ContainerFrame3Background1Slot,
+				ContainerFrame3BackgroundBottom,
+				ContainerFrame3BackgroundMiddle1,
+				ContainerFrame3BackgroundMiddle2,
+				ContainerFrame3BackgroundTop,
+				ContainerFrame3BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame4
+			for i, v in pairs({ 
+				ContainerFrame4Background1Slot,
+				ContainerFrame4BackgroundBottom,
+				ContainerFrame4BackgroundMiddle1,
+				ContainerFrame4BackgroundMiddle2,
+				ContainerFrame4BackgroundTop,
+				ContainerFrame4BackgroundPortrait,
+			 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+			-- ContainerFrame5
+			for i, v in pairs({ 
+				ContainerFrame5Background1Slot,
+				ContainerFrame5BackgroundBottom,
+				ContainerFrame5BackgroundMiddle1,
+				ContainerFrame5BackgroundMiddle2,
+				ContainerFrame5BackgroundTop,
+				ContainerFrame5BackgroundPortrait,
+		 	 }) do
+				if AbyssUIAddonSettings ~= nil then
+					AbyssUI_ColorizationFrameFunction(v)
+				end
+			end
+		--End
+		else
+			return nil
+		end
+	end		
+end)
+---------------------------- Classic Functions ----------------------------------
+-- PlayerTalentFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_TalentUI" and GetWoWVersion >= 40000 then
+		for i, v in pairs({ 
+				PlayerTalentFramePortraitFrame,
+				PlayerTalentFrameTopBorder,
+				PlayerTalentFrameTopLeftCorner,
+				PlayerTalentFrameTopRightCorner,
+				PlayerTalentFrameBotLeftCorner,
+				PlayerTalentFrameBotRightCorner,
+				PlayerTalentFrameLeftBorder,
+				PlayerTalentFrameRightBorder,
+				PlayerTalentFrameBottomBorder,
+				PlayerTalentFrameButtonBottomBorder,
+				PlayerTalentFrameBtnCornerLeft,
+				PlayerTalentFrameBtnCornerRight, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			end
+		end
+	end
+end)
+-- EncounterJournal
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Collections" and GetWoWVersion >= 40000 then
+		for i, v in pairs({ 
+				EncounterJournalPortraitFrame,
+				EncounterJournalTopBorder,
+				EncounterJournalTopLeftCorner,
+				EncounterJournalTopRightCorner,
+				EncounterJournalBotLeftCorner,
+				EncounterJournalBotRightCorner,
+				EncounterJournalLeftBorder,
+				EncounterJournalRightBorder,
+				EncounterJournalBottomBorder,
+				EncounterJournalButtonBottomBorder,
+				EncounterJournalBtnCornerLeft,
+				EncounterJournalBtnCornerRight, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			end
+		end
+	end
+end)
 ---------------------------- Classic Functions ----------------------------------
 -- KeyBindingFrame
 local f = CreateFrame("Frame")
@@ -635,6 +857,32 @@ f:SetScript("OnEvent", function(self, event, name)
 			KeyBindingFrame.TopLeftCorner,
 			KeyBindingFrame.TopRightCorner,
 			KeyBindingFrameHeader, }) do
+			if AbyssUIAddonSettings ~= nil then
+				AbyssUI_ColorizationFrameFunction(v)
+			else
+				return nil
+			end
+		end
+	end
+end)
+-- CommunitiesFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+	if name == "Blizzard_Communities" and GetWoWVersion <= 50600 then
+		for i, v in pairs({
+				CommunitiesFramePortraitFrame,
+				CommunitiesFrameTopBorder,
+				CommunitiesFrameTopLeftCorner,
+				CommunitiesFrameTopRightCorner,
+				CommunitiesFrameBotLeftCorner,
+				CommunitiesFrameBotRightCorner,
+				CommunitiesFrameLeftBorder,
+				CommunitiesFrameRightBorder,
+				CommunitiesFrameBottomBorder,
+				CommunitiesFrameButtonBottomBorder,
+				CommunitiesFrameBtnCornerLeft,
+				CommunitiesFrameBtnCornerRight, }) do
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)
 			else

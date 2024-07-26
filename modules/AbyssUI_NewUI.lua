@@ -355,6 +355,21 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
                     AbyssUI_ColorizationFrameFunction(v)
                 end
             end
+            -- CommunitiesFrame
+            for i, v in pairs({ 
+                  CommunitiesFrame.NineSlice.RightEdge,
+                  CommunitiesFrame.NineSlice.LeftEdge,
+                  CommunitiesFrame.NineSlice.TopEdge,
+                  CommunitiesFrame.NineSlice.BottomEdge,
+                  CommunitiesFrame.NineSlice.PortraitFrame,
+                  CommunitiesFrame.NineSlice.TopRightCorner,
+                  CommunitiesFrame.NineSlice.TopLeftCorner,
+                  CommunitiesFrame.NineSlice.BottomLeftCorner,
+                  CommunitiesFrame.NineSlice.BottomRightCorner, }) do
+                if AbyssUIAddonSettings ~= nil then
+                    AbyssUI_ColorizationFrameFunction(v)
+                end
+            end
             -- StatusTrackingBarManager
             for i, v in pairs({ 
                 StatusTrackingBarManager.BottomBarFrameTexture,
@@ -442,7 +457,49 @@ f:SetScript("OnEvent", function(self, event, name)
     end
   end
 end)
--- ProfessionsFrame
+-- StoreFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_StoreUI" and GetWoWVersion >= 90500 then
+    for i, v in pairs({ 
+        StoreFrame.NineSlice.RightEdge,
+        StoreFrame.NineSlice.LeftEdge,
+        StoreFrame.NineSlice.TopEdge,
+        StoreFrame.NineSlice.BottomEdge,
+        StoreFrame.NineSlice.PortraitFrame,
+        StoreFrame.NineSlice.TopRightCorner,
+        StoreFrame.NineSlice.TopLeftCorner,
+        StoreFrame.NineSlice.BottomLeftCorner,
+        StoreFrame.NineSlice.BottomRightCorner, }) do
+      if AbyssUIAddonSettings ~= nil then
+        AbyssUI_ColorizationFrameFunction(v)
+      end
+    end
+  end
+end)
+-- ProfessionsBookFrame
+local f = CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
+f:SetScript("OnEvent", function(self, event, name)
+  if name == "Blizzard_ProfessionsBook" and GetWoWVersion >= 90500 then
+    for i, v in pairs({ 
+        ProfessionsBookFrame.NineSlice.TopEdge,
+        ProfessionsBookFrame.NineSlice.RightEdge,
+        ProfessionsBookFrame.NineSlice.BottomEdge,
+        ProfessionsBookFrame.NineSlice.LeftEdge,
+        ProfessionsBookFrame.NineSlice.TopRightCorner,
+        ProfessionsBookFrame.NineSlice.TopLeftCorner,
+        ProfessionsBookFrame.NineSlice.BottomLeftCorner,
+        ProfessionsBookFrame.NineSlice.BottomRightCorner,
+     }) do
+      if AbyssUIAddonSettings ~= nil then
+        AbyssUI_ColorizationFrameFunction(v)
+      end
+    end
+  end
+end)
+-- ProfessionFrame
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, name)
@@ -473,8 +530,7 @@ f:SetScript("OnEvent", function(self, event, name)
         DropDownList2MenuBackdrop.NineSlice.TopRightCorner,
         DropDownList2MenuBackdrop.NineSlice.TopLeftCorner,
         DropDownList2MenuBackdrop.NineSlice.BottomLeftCorner,
-    DropDownList2MenuBackdrop.NineSlice.BottomRightCorner,
-     }) do
+    DropDownList2MenuBackdrop.NineSlice.BottomRightCorner, }) do
       if AbyssUIAddonSettings ~= nil then
         AbyssUI_ColorizationFrameFunction(v)
       end
