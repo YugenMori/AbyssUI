@@ -454,20 +454,20 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		local function DragonflightUnitNameNumbers()
 			if (GetWoWVersion >= 90500) then
 				for i, v in pairs ({
-					PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarArea.HealthBar.TextString,
+					PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.HealthBarsContainer.HealthBar.TextString,
 					PlayerFrame.PlayerFrameContent.PlayerFrameContentMain.ManaBarArea.ManaBar.ManaBarText,
-					TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
+					TargetFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar.TextString,
 					TargetFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
-					FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString,
+					FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar.TextString,
 					FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText,
 					}) do
 					v:SetFont(globalFont, 11)
 					v:SetShadowColor(0, 0, 0)
 					v:SetShadowOffset(1, -1)
 				end
-				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString:ClearAllPoints()
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar.TextString:ClearAllPoints()
 				FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText:ClearAllPoints()
-				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -20, 2)
+				FocusFrame.TargetFrameContent.TargetFrameContentMain.HealthBarsContainer.HealthBar.TextString:SetPoint("CENTER", FocusFrame, "CENTER", -20, 2)
 				FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar.ManaBarText:SetPoint("CENTER", FocusFrame.TargetFrameContent.TargetFrameContentMain.ManaBar, "CENTER", 10, 0)
 			end
 		end

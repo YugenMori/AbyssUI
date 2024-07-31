@@ -1300,7 +1300,9 @@ TooltipOnCursor:RegisterEvent("PLAYER_ENTERING_WORLD")
 TooltipOnCursor:SetScript("OnEvent", function()
 	if (AbyssUIAddonSettings.TooltipOnCursor == true) then
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
-			if GetMouseFocus() ~= WorldFrame then return end
+			if GetWoWVersion <= 90000 then
+				if GetMouseFocus() ~= WorldFrame then return end
+			end
 			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
 			cursorSetPoint(tooltip)
 			-- tooltip.default = 1
@@ -1606,8 +1608,8 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 			local name, elapsed = UnitName("player"), time() - AbyssUIProfile
 			print(L["|cfff2dc7fTime since last login: |r"] .. name .. L[" you were gone for |cffffcc00"] .. SecondsToTime(elapsed) .. "|r")
 			print(L["|cfff2dc7fEnjoying AbyssUI? |rRecommend to a friend!"])
-     		print(L["|cfff2dc7fBuy me a coffee!|r"].." -> ko-fi.com/yugensan")
-			print("|cfff2dc7f"..L["Supporters:"].."|r".." Addict, CampeonBlack, Digitaljdr, Ikonick")
+     	print(L["|cfff2dc7fBuy me a coffee!|r"].." -> ko-fi.com/yugensan")
+			print("|cfff2dc7f"..L["Supporters:"].."|r".." Addict, CampeonBlack, Digitaljdr, Ikonick, Si1ence")
 			print(L["Type |cffffcc00/abyssui|r for a list of commands"])
 		end
 	end)
