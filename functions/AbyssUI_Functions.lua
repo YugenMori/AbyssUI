@@ -1586,7 +1586,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 		print(L["The improved World of Warcraft user interface."])
 	end)
 	C_Timer.After(4, function()
-		local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+		local AddonVersion = C_AddOns.GetAddOnMetadata("AbyssUI", "Version")
 		print(L["|cfff2dc7fAbyssUI Daily Info|r"])
 		if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
 			print("|cfff2dc7f"..fichaString..": |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))

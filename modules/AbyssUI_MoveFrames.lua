@@ -27,7 +27,7 @@ end
 local function AbyssUIDailyInfo_Slash()
 C_WowTokenPublic.UpdateMarketPrice()
     local HonorLevel = UnitHonorLevel("player")
-    local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+    local AddonVersion = C_AddOns.GetAddOnMetadata("AbyssUI", "Version")
     print(L["|cfff2dc7fAbyssUI Daily Info|r"])
     if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
         print(L["|cfff2dc7fToken Price: |r"] .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))

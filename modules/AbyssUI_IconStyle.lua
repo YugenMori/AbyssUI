@@ -1670,9 +1670,9 @@ local function IconBackInit()
     },
   }
   local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-  local dominos = IsAddOnLoaded("Dominos")
-  local bartender4 = IsAddOnLoaded("Bartender4")
-  if IsAddOnLoaded("Masque") and (dominos or bartender4) then return end
+  local dominos = C_AddOns.IsAddOnLoaded("Dominos")
+  local bartender4 = C_AddOns.IsAddOnLoaded("Bartender4")
+  if C_AddOns.IsAddOnLoaded("Masque") and (dominos or bartender4) then return end
   local function applyBackground(bu)
     if not bu or (bu and bu.bg) then return end
     --shadows+background
@@ -1945,8 +1945,8 @@ local function IconBackInit()
   end)
   
   local function init()
-    local dominos = IsAddOnLoaded("Dominos")
-    local bartender4 = IsAddOnLoaded("Bartender4")
+    local dominos = C_AddOns.IsAddOnLoaded("Dominos")
+    local bartender4 = C_AddOns.IsAddOnLoaded("Bartender4")
     --style the actionbar buttons
     if (AbyssUIAddonSettings.DefaultIconBorder ~= true) then
       for i = 1, NUM_ACTIONBAR_BUTTONS do
@@ -2601,9 +2601,9 @@ local function DefaultInit()
       },
     }
     local classcolor = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-    local dominos = IsAddOnLoaded("Dominos")
-    local bartender4 = IsAddOnLoaded("Bartender4")
-    if IsAddOnLoaded("Masque") and (dominos or bartender4) then return end
+    local dominos = C_AddOns.IsAddOnLoaded("Dominos")
+    local bartender4 = C_AddOns.IsAddOnLoaded("Bartender4")
+    if C_AddOns.IsAddOnLoaded("Masque") and (dominos or bartender4) then return end
     --style the actionbar buttons
     for i = 1, NUM_ACTIONBAR_BUTTONS do
       styleDefaultActionButton(_G["ActionButton"..i])

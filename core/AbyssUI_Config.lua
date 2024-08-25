@@ -121,6 +121,9 @@ local colorColorString  = _G["COLOR"]
 local applyString       = _G["APPLY"]
 --------------------------------------------------------------
 local function InitSettings()
+  local _G = _G
+  local advancedOptions     = _G["ADVANCED_OPTIONS"]
+
   AbyssUI_Config.panel = CreateFrame("Frame", "$parentAbyssUI_Config", InterfaceOptionsFramePanelContainer)
   AbyssUI_Config.panel.name = "Abyss|cff0d75d4UI|r"
   
@@ -131,87 +134,199 @@ local function InitSettings()
     local category = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.panel, AbyssUI_Config.panel.name)
     Settings.RegisterAddOnCategory(category)
   end
-  -- Create your child panels
-  AbyssUI_Config.childpanel2 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel2.name = "¦- ".."|cff0d75d4"..L["Hide Elements"].."|r"
-  AbyssUI_Config.childpanel2.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel2)
-  else
-    local childCategory2, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel2, AbyssUI_Config.childpanel2.name)
-    Settings.RegisterAddOnCategory(childCategory2)
-  end
-  --
-  AbyssUI_Config.childpanel3 = CreateFrame("Frame", "$parentConfigChild_Miscellaneous", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel3.name = "¦- ".."|cff0d75d4"..L["Miscellaneous"].."|r"
-  AbyssUI_Config.childpanel3.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel3)
-  else
-    local childCategory3, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel3, AbyssUI_Config.childpanel3.name)
-    Settings.RegisterAddOnCategory(childCategory3)
-  end
-  --
-  AbyssUI_Config.childpanel4 = CreateFrame("Frame", "$parentConfigChild_Themes", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel4.name = "¦- ".."|cff0d75d4"..L["Art & Themes"].."|r"
-  AbyssUI_Config.childpanel4.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel4)
-  else
-    local childCategory4, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel4, AbyssUI_Config.childpanel4.name)
-    Settings.RegisterAddOnCategory(childCategory4)
-  end
-  --
-  AbyssUI_Config.childpanel5 = CreateFrame("Frame", "$parentConfigChild_Colorization", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel5.name = "¦- ".."|cff0d75d4"..L["Colorization"].."|r"
-  AbyssUI_Config.childpanel5.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel5)
-  else
-    local childCategory5, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel5, AbyssUI_Config.childpanel5.name)
-    Settings.RegisterAddOnCategory(childCategory5)
-  end
-  --
-  AbyssUI_Config.childpanel6 = CreateFrame("Frame", "$parentConfigChild_Extras", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel6.name = "¦- ".."|cff0d75d4"..L["Tweaks & Extra"].."|r"
-  AbyssUI_Config.childpanel6.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel6)
-  else
-    local childCategory6, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel6, AbyssUI_Config.childpanel6.name)
-    Settings.RegisterAddOnCategory(childCategory6)
-  end
-  --
-  AbyssUI_Config.childpanel7 = CreateFrame("Frame", "$parentConfigChild_Classic", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel7.name = "¦- ".."|cff0d75d4".."Classic".."|r"
-  AbyssUI_Config.childpanel7.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel7)
-  else
-    local childCategory7, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel7, AbyssUI_Config.childpanel7.name)
-    Settings.RegisterAddOnCategory(childCategory7)
-  end
-  --
-  AbyssUI_Config.childpanel10 = CreateFrame("Frame", "$parentConfigChild_Thanks&Translations", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel10.name = "¦- ".."|cff0d75d4"..L["Thanks & Translations"].."|r"
-  AbyssUI_Config.childpanel10.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel10)
-  else
-    local childCategory10, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel10, AbyssUI_Config.childpanel10.name)
-    Settings.RegisterAddOnCategory(childCategory10)
-  end
-    --
-  AbyssUI_Config.childpanel11 = CreateFrame("Frame", "$parentConfigChild_FAQ", AbyssUI_Config.panel)
-  AbyssUI_Config.childpanel11.name = "¦- ".."|cff0d75d4".."FAQ".."|r"
-  AbyssUI_Config.childpanel11.parent = AbyssUI_Config.panel.name
-  if (GetWoWVersion < 110000) then
-    InterfaceOptions_AddCategory(AbyssUI_Config.childpanel11)
-  else
-    local childCategory11, layoutChild = Settings.RegisterCanvasLayoutCategory(AbyssUI_Config.childpanel11, AbyssUI_Config.childpanel11.name)
-    Settings.RegisterAddOnCategory(childCategory11)
-  end
-  --
+
+  -- Optionframe HideElements
+  optionsFrame_AbyssUIHideElements = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIHideElements", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIHideElements:SetSize(700, 600)  -- Width, Height
+  optionsFrame_AbyssUIHideElements:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIHideElements:SetMovable(true)
+  optionsFrame_AbyssUIHideElements:EnableMouse(true)
+  optionsFrame_AbyssUIHideElements:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIHideElements:SetScript("OnDragStart", optionsFrame_AbyssUIHideElements.StartMoving)
+  optionsFrame_AbyssUIHideElements:SetScript("OnDragStop", optionsFrame_AbyssUIHideElements.StopMovingOrSizing)
+  optionsFrame_AbyssUIHideElements:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIHideElements:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIHideElements:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIHideElements:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIHideElements, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIHideElements, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Miscellaneous
+  optionsFrame_AbyssUIMiscellaneous = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIMiscellaneous", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIMiscellaneous:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUIMiscellaneous:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIMiscellaneous:SetMovable(true)
+  optionsFrame_AbyssUIMiscellaneous:EnableMouse(true)
+  optionsFrame_AbyssUIMiscellaneous:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIMiscellaneous:SetScript("OnDragStart", optionsFrame_AbyssUIMiscellaneous.StartMoving)
+  optionsFrame_AbyssUIMiscellaneous:SetScript("OnDragStop", optionsFrame_AbyssUIMiscellaneous.StopMovingOrSizing)
+  optionsFrame_AbyssUIMiscellaneous:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIMiscellaneous:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIMiscellaneous:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIMiscellaneous:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIMiscellaneous, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIMiscellaneous, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Art & Themes
+  optionsFrame_AbyssUIThemes = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIThemes", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIThemes:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUIThemes:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIThemes:SetMovable(true)
+  optionsFrame_AbyssUIThemes:EnableMouse(true)
+  optionsFrame_AbyssUIThemes:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIThemes:SetScript("OnDragStart", optionsFrame_AbyssUIThemes.StartMoving)
+  optionsFrame_AbyssUIThemes:SetScript("OnDragStop", optionsFrame_AbyssUIThemes.StopMovingOrSizing)
+  optionsFrame_AbyssUIThemes:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIThemes:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIThemes:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIThemes:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIThemes, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIThemes, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Colorization
+  optionsFrame_AbyssUIColorization = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIColorization", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIColorization:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUIColorization:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIColorization:SetMovable(true)
+  optionsFrame_AbyssUIColorization:EnableMouse(true)
+  optionsFrame_AbyssUIColorization:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIColorization:SetScript("OnDragStart", optionsFrame_AbyssUIColorization.StartMoving)
+  optionsFrame_AbyssUIColorization:SetScript("OnDragStop", optionsFrame_AbyssUIColorization.StopMovingOrSizing)
+  optionsFrame_AbyssUIColorization:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIColorization:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIColorization:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIColorization:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIColorization, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIColorization, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Tweaks
+  optionsFrame_AbyssUITweaks = CreateFrame("Frame", "$parentoptionsFrame_AbyssUITweaks", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUITweaks:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUITweaks:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUITweaks:SetMovable(true)
+  optionsFrame_AbyssUITweaks:EnableMouse(true)
+  optionsFrame_AbyssUITweaks:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUITweaks:SetScript("OnDragStart", optionsFrame_AbyssUITweaks.StartMoving)
+  optionsFrame_AbyssUITweaks:SetScript("OnDragStop", optionsFrame_AbyssUITweaks.StopMovingOrSizing)
+  optionsFrame_AbyssUITweaks:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUITweaks:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUITweaks:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUITweaks:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUITweaks, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUITweaks, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Classic
+  optionsFrame_AbyssUIClassic = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIClassic", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIClassic:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUIClassic:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIClassic:SetMovable(true)
+  optionsFrame_AbyssUIClassic:EnableMouse(true)
+  optionsFrame_AbyssUIClassic:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIClassic:SetScript("OnDragStart", optionsFrame_AbyssUIClassic.StartMoving)
+  optionsFrame_AbyssUIClassic:SetScript("OnDragStop", optionsFrame_AbyssUIClassic.StopMovingOrSizing)
+  optionsFrame_AbyssUIClassic:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIClassic:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIClassic:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIClassic:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIClassic, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIClassic, "TOPRIGHT", 0, 0)
+
+  -- Optionframe Thanks
+  optionsFrame_AbyssUIThanks = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIThanks", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIThanks:SetSize(680, 600)  -- Width, Height
+  optionsFrame_AbyssUIThanks:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIThanks:SetMovable(true)
+  optionsFrame_AbyssUIThanks:EnableMouse(true)
+  optionsFrame_AbyssUIThanks:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIThanks:SetScript("OnDragStart", optionsFrame_AbyssUIThanks.StartMoving)
+  optionsFrame_AbyssUIThanks:SetScript("OnDragStop", optionsFrame_AbyssUIThanks.StopMovingOrSizing)
+  optionsFrame_AbyssUIThanks:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIThanks:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIThanks:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIThanks:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIThanks, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIThanks, "TOPRIGHT", 0, 0)
+
+  -- Optionframe FAQ
+  optionsFrame_AbyssUIFAQ = CreateFrame("Frame", "$parentoptionsFrame_AbyssUIFAQ", UIParent, "BackdropTemplate")
+  optionsFrame_AbyssUIFAQ:SetSize(650, 600)  -- Width, Height
+  optionsFrame_AbyssUIFAQ:SetPoint("CENTER")  -- Position in the center of the screen
+  optionsFrame_AbyssUIFAQ:SetMovable(true)
+  optionsFrame_AbyssUIFAQ:EnableMouse(true)
+  optionsFrame_AbyssUIFAQ:RegisterForDrag("LeftButton")
+  optionsFrame_AbyssUIFAQ:SetScript("OnDragStart", optionsFrame_AbyssUIFAQ.StartMoving)
+  optionsFrame_AbyssUIFAQ:SetScript("OnDragStop", optionsFrame_AbyssUIFAQ.StopMovingOrSizing)
+  optionsFrame_AbyssUIFAQ:SetFrameStrata("DIALOG")  -- Set to higher frame strata
+  -- Set the backdrop
+  optionsFrame_AbyssUIFAQ:SetBackdrop({
+      bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+      edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+      tile = true, tileSize = 32, edgeSize = 32,
+      insets = { left = 11, right = 12, top = 12, bottom = 11 }
+  })
+  -- Set the backdrop color
+  optionsFrame_AbyssUIFAQ:SetBackdropColor(0, 0, 0, 1)
+  optionsFrame_AbyssUIFAQ:Hide()
+
+  local closeButton = CreateFrame("Button", nil, optionsFrame_AbyssUIFAQ, "UIPanelCloseButton")
+  closeButton:SetPoint("TOPRIGHT", optionsFrame_AbyssUIFAQ, "TOPRIGHT", 0, 0)
+
   --------------------------------------------------------------
   -- Title
   local Frame = CreateFrame("Frame","$parentFrameButtonTitle", AbyssUI_Config.panel)
@@ -238,6 +353,17 @@ local function InitSettings()
   "Options that have a different text color are based on your choice in the setup."..
   " Those options are set by default if you choose recommended settings.\n"..
   "Check the options by clicking in the (+) button on the left."])
+  -- Option Text
+  local Frame = CreateFrame("Frame","$parentFrameOptionTitle", AbyssUI_Config.panel)
+  Frame:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -0, -300)
+  Frame:SetHeight(30)
+  Frame:SetWidth(140)
+  Frame:SetScale(1.2)
+  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  Frame:SetPoint("CENTER")
+  Frame:SetAllPoints()
+  Frame:SetText(advancedOptions)
+
   -- Panel 01 (Info Panel)
   --[[
   if (GetWoWVersion <= 90500) then
@@ -253,8 +379,8 @@ local function InitSettings()
   end
   --]]
   -- Panel 02 (HideElements)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", AbyssUI_Config.childpanel2)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel2, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel02", optionsFrame_AbyssUIHideElements)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIHideElements, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -263,8 +389,8 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Hide Elements"])
   -- Panel 03 (Miscellaneous)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", AbyssUI_Config.childpanel3)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel3, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel03", optionsFrame_AbyssUIMiscellaneous)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIMiscellaneous, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -272,24 +398,24 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Miscellaneous"])
   -- Panel 03.01 (Miscellaneous)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel3)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel3, "TOPLEFT", -65, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", optionsFrame_AbyssUIMiscellaneous)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIMiscellaneous, "TOPLEFT", -65, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- General"])
   -- Panel 03.01 (Miscellaneous)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel3)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel3, "TOPRIGHT", -130, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", optionsFrame_AbyssUIMiscellaneous)
+  Frame:SetPoint("TOPRIGHT", optionsFrame_AbyssUIMiscellaneous, "TOPRIGHT", -130, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Frames"])
   -- Panel 04 (Themes)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel04", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel4, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel04", optionsFrame_AbyssUIThemes)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIThemes, "TOP", 0, -20)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -297,16 +423,16 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Player Portrait"])
   -- Panel 04.01 (Themes)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -30, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", optionsFrame_AbyssUIThemes)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIThemes, "TOPLEFT", -30, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Portrait Art"])
   -- Panel 4.02 (Themes)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel4, "TOPRIGHT", -100, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", optionsFrame_AbyssUIThemes)
+  Frame:SetPoint("TOPRIGHT", optionsFrame_AbyssUIThemes, "TOPRIGHT", -100, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -314,8 +440,8 @@ local function InitSettings()
   Frame:SetText(L["- UnitFrame Art"])
   -- Panel 04.03 (Themes)
   --[[
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", AbyssUI_Config.childpanel4)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel4, "TOPLEFT", -40, -320)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel041", optionsFrame_AbyssUIThemes)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIThemes, "TOPLEFT", -40, -320)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -323,8 +449,8 @@ local function InitSettings()
   Frame:SetText("- Icon Border")
   --]]
   -- Panel 05 (Colorization)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", AbyssUI_Config.childpanel5)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel5, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel05", optionsFrame_AbyssUIColorization)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIColorization, "TOP", 0, -20)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -332,24 +458,24 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Frame Colorization"])
   -- Panel 05.01 (Colorization)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel051", AbyssUI_Config.childpanel5)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel5, "TOPLEFT", -15, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel051", optionsFrame_AbyssUIColorization)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIColorization, "TOPLEFT", -15, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Preset Colors"])
   -- Panel 05.02 (Colorization)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", AbyssUI_Config.childpanel5)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel5, "TOPRIGHT", -100, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel052", optionsFrame_AbyssUIColorization)
+  Frame:SetPoint("TOPRIGHT", optionsFrame_AbyssUIColorization, "TOPRIGHT", -100, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Choose a Color"])
   -- Panel 06 (Extra)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel06", AbyssUI_Config.childpanel6)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel6, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel06", optionsFrame_AbyssUITweaks)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUITweaks, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -357,56 +483,33 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Tweaks & Extra"])
   -- Panel 06.01 (Extra)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel061", AbyssUI_Config.childpanel6)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel6, "TOPLEFT", -60, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel061", optionsFrame_AbyssUITweaks)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUITweaks, "TOPLEFT", -60, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- General"])
   -- Panel 06.02 (Extra)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel062", AbyssUI_Config.childpanel6)
-  Frame:SetPoint("TOPRIGHT", AbyssUI_Config.childpanel6, "TOPRIGHT", -130, -50)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel062", optionsFrame_AbyssUITweaks)
+  Frame:SetPoint("TOPRIGHT", optionsFrame_AbyssUITweaks, "TOPRIGHT", -130, -50)
   Frame:SetWidth(200)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["- Frames"])
   -- Panel 07 (Classic)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel07", AbyssUI_Config.childpanel7)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel7, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel07", optionsFrame_AbyssUIClassic)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIClassic, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
-  Frame:SetText("Classic & BCC")
-  -- Panel 08 (Scale)
-  --[[
-  if (GetWoWVersion <= 90500) then
-    local Frame = CreateFrame("Frame","$parentFrameButtonPanel08", AbyssUI_Config.childpanel8)
-    Frame:SetPoint("CENTER", AbyssUI_Config.childpanel8, "TOP", 0, -20)
-    Frame:SetWidth(600)
-    Frame:SetHeight(40)
-    Frame:SetScale(1.5)
-    Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    Frame:SetAllPoints()
-    Frame:SetText(L["Scale & Frame Size"])
-  end
-
-  -- Panel 09 (Patreon)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel09", AbyssUI_Config.childpanel9)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel9, "TOP", 0, -20)
-  Frame:SetWidth(600)
-  Frame:SetHeight(40)
-  Frame:SetScale(1.5)
-  Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  Frame:SetAllPoints()
-  Frame:SetText(L["Donators"])
-  --]]
+  Frame:SetText("Classic")
   -- Panel 10 (Thanks)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel10", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel10, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel10", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIThanks, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -414,8 +517,8 @@ local function InitSettings()
   Frame:SetAllPoints()
   Frame:SetText(L["Thanks & Translations"])
   -- Panel 11 (Faq)
-  local Frame = CreateFrame("Frame","$parentFrameButtonPanel11", AbyssUI_Config.childpanel11)
-  Frame:SetPoint("CENTER", AbyssUI_Config.childpanel11, "TOP", 0, -20)
+  local Frame = CreateFrame("Frame","$parentFrameButtonPanel11", optionsFrame_AbyssUIFAQ)
+  Frame:SetPoint("CENTER", optionsFrame_AbyssUIFAQ, "TOP", 0, -20)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame:SetScale(1.5)
@@ -504,7 +607,7 @@ local function InitSettings()
     FrameButton:SetScript("OnClick", function()
     C_WowTokenPublic.UpdateMarketPrice()
       C_Timer.After(0.5, function()
-        local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+        local AddonVersion = C_AddOns.GetAddOnMetadata("AbyssUI", "Version")
         print(L["|cfff2dc7fAbyssUI Daily Info|r"])
         if C_WowTokenPublic.GetCurrentMarketPrice() ~= nil then
           print("|cfff2dc7f"..fichaString..": |r" .. GetMoneyString(C_WowTokenPublic.GetCurrentMarketPrice()))
@@ -709,22 +812,215 @@ local function InitSettings()
         AbyssUI_EditBox:SetText("https://github.com/YugenMori/AbyssUI")
         AbyssUI_EditBox_Frame:Show()
     end)
-  end)  
+  end)
+  -- OptionsFrames  
+  -- HideElements
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -400)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Hide Elements"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIHideElements:Show()
+    end)
+  end)
+  -- Miscellaneous
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -400)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Miscellaneous"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIMiscellaneous:Show()
+    end)
+  end)
+  -- Themes
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -400)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Art & Themes"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIThemes:Show()
+    end)
+  end)
+  -- Colorization
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -450)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Colorization"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIColorization:Show()
+    end)
+  end)
+  -- Tweaks
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 0, -450)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Tweaks & Extra"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUITweaks:Show()
+    end)
+  end)
+  -- Classic
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -450)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText("Classic")
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIClassic:Show()
+    end)
+  end)
+  -- Thanks
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", -200, -500)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText(L["Thanks & Translations"])
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIThanks:Show()
+    end)
+  end)
+  -- FAQ
+  local f = CreateFrame("Frame", nil)
+  f:RegisterEvent("PLAYER_ENTERING_WORLD")
+  f:SetScript("OnEvent", function() 
+    local FrameButton = CreateFrame("Button","$parentExtraHideElementsButton", AbyssUI_Config.panel, "UIPanelButtonTemplate")
+    FrameButton:SetHeight(30)
+    FrameButton:SetWidth(160)
+    FrameButton:SetPoint("CENTER", AbyssUI_Config.panel, "TOP", 200, -500)
+    FrameButton.text = FrameButton.text or FrameButton:CreateFontString(nil, "ARTWORK", "QuestMapRewardsFont")
+    --FrameButton.text:SetFont(globalFont, 14)
+    FrameButton.text:SetPoint("CENTER", FrameButton, "CENTER", 0, -1)
+    FrameButton.text:SetText("FAQ")
+    if (AbyssUIAddonSettings.FontsValue == true and AbyssUIAddonSettings.ExtraFunctionDisableFontWhiteText ~= true) then
+      AbyssUI_ApplyFonts(FrameButton.text)
+    else
+      FrameButton.text:SetFont(globalFont, 12)
+      FrameButton.text:SetTextColor(248/255, 248/255, 248/255)
+      FrameButton.text:SetShadowColor(0, 0, 0)
+      FrameButton.text:SetShadowOffset(1, -1)
+    end
+    FrameButton:SetScript("OnClick", function()
+      optionsFrame_AbyssUIFAQ:Show()
+    end)
+  end)
 end
 -- End
 ------------------------------- Hide Elements ---------------------------------
 local function HideElementsInit()
-  local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", AbyssUI_Config.childpanel2)
-  PSINFOHide_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel2, "BOTTOMLEFT", 10, 20)
+  local PSINFOHide_CheckButton = CreateFrame("Frame","$parentPSINFOHide_CheckButton", optionsFrame_AbyssUIHideElements)
+  PSINFOHide_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUIHideElements, "BOTTOMLEFT", 10, 20)
   PSINFOHide_CheckButton:SetHeight(40)
-  PSINFOHide_CheckButton:SetWidth(600)
+  PSINFOHide_CheckButton:SetWidth(680)
   PSINFOHide_CheckButton = PSINFOHide_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   PSINFOHide_CheckButton:SetPoint("LEFT")
   PSINFOHide_CheckButton:SetAllPoints()
   PSINFOHide_CheckButton:SetText(L["The symbol (*) in some options means that there is important information/instructions to be read. "..
-    "Options with a different color are recommended settings (based on your choice in the setup)."])
+"Options with a different color are recommended settings (based on your choice in the setup)."])
   -- MicroMenu/Bags --
-  local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local MicroMenu_CheckButton = CreateFrame("CheckButton", "$parentMicroMenu_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   MicroMenu_CheckButton:SetPoint("TOPLEFT", 10, -80)
   MicroMenu_CheckButton.Text:SetText(L["Hide MicroMenu"])
   MicroMenu_CheckButton.tooltip = L["Hide the ActionBar MicroMenu (Bags Bar)"]
@@ -799,7 +1095,7 @@ local function HideElementsInit()
     end
   end)
   -- Gryphons Option --
-  local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local Gryphons_CheckButton = CreateFrame("CheckButton", "$parentGryphons_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   Gryphons_CheckButton:SetPoint("TOPLEFT", 10, -110)
   Gryphons_CheckButton.Text:SetText(L["Hide Gryphons"])
   Gryphons_CheckButton.tooltip = L["Hide the ActionBar Gryphons"]
@@ -891,7 +1187,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Minimap
-  local Minimap_CheckButton = CreateFrame("CheckButton", "$parentMinimap_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local Minimap_CheckButton = CreateFrame("CheckButton", "$parentMinimap_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   Minimap_CheckButton:SetPoint("TOPLEFT", 10, -140)
   Minimap_CheckButton.Text:SetText(L["Hide Minimap"])
   Minimap_CheckButton.tooltip = L["Hide the Game Minimap"]
@@ -913,7 +1209,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Objective Tracker --
-  local ObjTracker_CheckButton = CreateFrame("CheckButton", "$parentObjTracker_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local ObjTracker_CheckButton = CreateFrame("CheckButton", "$parentObjTracker_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   ObjTracker_CheckButton:SetPoint("TOPLEFT", 10, -170)
   ObjTracker_CheckButton.Text:SetText(L["Hide Objective Tracker"])
   ObjTracker_CheckButton.tooltip = L["Hide the Objective Tracker (Quest Frame)"]
@@ -967,7 +1263,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide FPS/MS Frame --
-  local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local FPSMSFrame_CheckButton = CreateFrame("CheckButton", "$parentFPSMSFrame_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   FPSMSFrame_CheckButton:SetPoint("TOPLEFT", 10, -200)
   FPSMSFrame_CheckButton.Text:SetText("|cff0d75d4"..L["Hide FPS/MS Frame"].."|r")
   FPSMSFrame_CheckButton.tooltip = L["Hide the fps/ms frame (bottomleft)"]
@@ -979,7 +1275,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     AbyssUI_ReloadFrame:Show()
   end)
   -- YouDied LevelUp Frame --
-  local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local YouDiedLevelUpFrame_CheckButton = CreateFrame("CheckButton", "$parentYouDiedLevelUpFrame_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   YouDiedLevelUpFrame_CheckButton:SetPoint("TOPLEFT", 10, -230)
   YouDiedLevelUpFrame_CheckButton.Text:SetText("|cff0d75d4"..L["Hide YouDied/LevelUp Frame"].."|r")
   YouDiedLevelUpFrame_CheckButton.tooltip = L["Hide the 'You Died' and 'Level Up' frame when you"..
@@ -991,7 +1287,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
   AbyssUIAddonSettings.HideYouDiedLevelUpFrame = self:GetChecked()
   end)
   -- Hide Macro Labels --
-  local HideMacroLabels_CheckButton = CreateFrame("CheckButton", "$parentHideMacroLabels_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideMacroLabels_CheckButton = CreateFrame("CheckButton", "$parentHideMacroLabels_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideMacroLabels_CheckButton:SetPoint("TOPLEFT", 10, -260)
   HideMacroLabels_CheckButton.Text:SetText(L["Hide Macro Labels"])
   HideMacroLabels_CheckButton.tooltip = L["Hide Macro Labels from Action Bar"]
@@ -1033,7 +1329,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide Hotkeys --
-  local HideHotkeysLabels_CheckButton = CreateFrame("CheckButton", "$parentHideHotkeysLabels_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideHotkeysLabels_CheckButton = CreateFrame("CheckButton", "$parentHideHotkeysLabels_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideHotkeysLabels_CheckButton:SetPoint("TOPLEFT", 10, -290)
   HideHotkeysLabels_CheckButton.Text:SetText(L["Hide Hotkeys Labels"])
   HideHotkeysLabels_CheckButton.tooltip = L["Hide Hotkeys Labels from Action Bar"]
@@ -1075,7 +1371,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide StanceBar
-  local HideStanceBar_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideStanceBar_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideStanceBar_CheckButton:SetPoint("TOPLEFT", 10, -320)
   HideStanceBar_CheckButton.Text:SetText(L["Hide Stance Bar"])
   HideStanceBar_CheckButton.tooltip = L["Hide the Stance Bar (Druid forms, Rogue stealth, etc)"]
@@ -1117,7 +1413,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
   AbyssUI_ChatHideFrame.t:SetTexture("Interface\\CHATFRAME\\UI-ChatIcon-Minimize-Up.blp")
   AbyssUI_ChatHideFrame.t:SetAllPoints(AbyssUI_ChatHideFrame)
   AbyssUI_ChatHideFrame:SetPoint("BOTTOM","ChatFrame1ButtonFrame","BOTTOM", 0, -35)
-  local glass = IsAddOnLoaded("Glass")
+  local glass = C_AddOns.IsAddOnLoaded("Glass")
   if (AbyssUIAddonSettings.FadeUI ~= true and glass ~= true) then
     AbyssUI_ChatHideFrame:Show()
   else
@@ -1188,7 +1484,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide Chat Buttons
-  local HideChatButtons_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideChatButtons_CheckButton = CreateFrame("CheckButton", "$parentHideStanceBar_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideChatButtons_CheckButton:SetPoint("TOPLEFT", 10, -350)
   HideChatButtons_CheckButton.Text:SetText(L["Hide Chat Buttons"])
   HideChatButtons_CheckButton.tooltip = L["Hide the Chat buttons (voice, social, etc)"]
@@ -1241,7 +1537,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- AFKCammeraFrame --
-  local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local AFKCammeraFrame_CheckButton = CreateFrame("CheckButton", "$parentAFKCammeraFrame_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   AFKCammeraFrame_CheckButton:SetPoint("TOPLEFT", 10, -380)
   AFKCammeraFrame_CheckButton.Text:SetText(L["Hide AFK Frame"])
   AFKCammeraFrame_CheckButton.tooltip = L["Hide the AFKMode when you are AFK"]
@@ -1251,7 +1547,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
   AbyssUIAddonSettings.AFKCammeraFrame = self:GetChecked()
   end)
   -- Faction/PvP/Prestige icon --
-  local FactionPvpIcon_CheckButton = CreateFrame("CheckButton", "$parentFactionPvpIcon_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local FactionPvpIcon_CheckButton = CreateFrame("CheckButton", "$parentFactionPvpIcon_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   FactionPvpIcon_CheckButton:SetPoint("TOPLEFT", 10, -410)
   FactionPvpIcon_CheckButton.Text:SetText(L["Hide Faction/PvP/Prestige icon"])
   FactionPvpIcon_CheckButton.tooltip = L["Hide the player frame Faction/PvP/Prestige icon"]
@@ -1313,7 +1609,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide UnitImproved Faction Icons
-  local HideUnitImprovedFaction_CheckButton = CreateFrame("CheckButton", "$parentHideUnitImprovedFaction_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideUnitImprovedFaction_CheckButton = CreateFrame("CheckButton", "$parentHideUnitImprovedFaction_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideUnitImprovedFaction_CheckButton:SetPoint("TOPLEFT", 10, -440)
   HideUnitImprovedFaction_CheckButton.Text:SetText(L["|cfff2dc7fHide UnitImproved Faction Icon|r"])
   HideUnitImprovedFaction_CheckButton.tooltip = L["Hide the Faction Icon (Ally/Horde) on players frames"]
@@ -1325,7 +1621,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
   end)
   -- 2nd Collum
   -- Hide Cast Timer
-  local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideCastTimer_CheckButton = CreateFrame("CheckButton", "$parentHideCastTimer_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideCastTimer_CheckButton:SetPoint("TOPRIGHT", -200, -80)
   HideCastTimer_CheckButton.Text:SetText("|cff0d75d4"..L["Hide CastBar Timer"].."|r")
   local Frame = CreateFrame("Frame", nil, HideCastTimer_CheckButton)
@@ -1341,7 +1637,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     AbyssUIAddonSettings.HideCastTimer = self:GetChecked()
   end)
   -- Hide Group Frame
-  local HideGroupFrame_CheckButton = CreateFrame("CheckButton", "$parentHideGroupFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideGroupFrame_CheckButton = CreateFrame("CheckButton", "$parentHideGroupFrame_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideGroupFrame_CheckButton:SetPoint("TOPRIGHT", -200, -110)
   HideGroupFrame_CheckButton.Text:SetText(L["|cfff2dc7fHide GroupFrame|r"])
   local Frame = CreateFrame("Frame", nil, HideGroupFrame_CheckButton)
@@ -1375,7 +1671,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide Covenant Frame
-  local HideConvenantFrame_CheckButton = CreateFrame("CheckButton", "$parentHideConvenantFrame_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideConvenantFrame_CheckButton = CreateFrame("CheckButton", "$parentHideConvenantFrame_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideConvenantFrame_CheckButton:SetPoint("TOPRIGHT", -200, -140)
   HideConvenantFrame_CheckButton.Text:SetText(L["Hide Covenant Frame"])
   local Frame = CreateFrame("Frame", nil, HideConvenantFrame_CheckButton)
@@ -1425,7 +1721,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide Minimap Zone Text
-  local HideMinimapZoneText_CheckButton = CreateFrame("CheckButton", "$parentHideMinimapZoneText_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideMinimapZoneText_CheckButton = CreateFrame("CheckButton", "$parentHideMinimapZoneText_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideMinimapZoneText_CheckButton:SetPoint("TOPRIGHT", -200, -170)
   HideMinimapZoneText_CheckButton.Text:SetText(L["Hide Minimap Zone Text"])
   local Frame = CreateFrame("Frame", nil, HideMinimapZoneText_CheckButton)
@@ -1456,7 +1752,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide MainActionBar
-  local HideMainActionBar_CheckButton = CreateFrame("CheckButton", "$parentHideHideMainActionBar_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideMainActionBar_CheckButton = CreateFrame("CheckButton", "$parentHideHideMainActionBar_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideMainActionBar_CheckButton:SetPoint("TOPRIGHT", -200, -200)
   HideMainActionBar_CheckButton.Text:SetText(L["Hide MainActionBar"])
   local Frame = CreateFrame("Frame", nil, HideMainActionBar_CheckButton)
@@ -1497,7 +1793,7 @@ if (GetWoWVersion >= 50600 and GetWoWVersion <= 90500) then
     end
   end)
   -- Hide RunePower
-  local HideRunePower_CheckButton = CreateFrame("CheckButton", "$parentHideRunePower_CheckButton", AbyssUI_Config.childpanel2, "ChatConfigCheckButtonTemplate")
+  local HideRunePower_CheckButton = CreateFrame("CheckButton", "$parentHideRunePower_CheckButton", optionsFrame_AbyssUIHideElements, "ChatConfigCheckButtonTemplate")
   HideRunePower_CheckButton:SetPoint("TOPRIGHT", -200, -230)
   HideRunePower_CheckButton.Text:SetText(L["Hide RunePower"])
   local Frame = CreateFrame("Frame", nil, HideRunePower_CheckButton)
@@ -1583,8 +1879,8 @@ end
 -- End
 ------------------------------- Miscellaneous -------------------------------
 local function Miscellaneous()
-  local PSINFOMisce_CheckButton = CreateFrame("Frame","$parentPSINFOMisce_CheckButton", AbyssUI_Config.childpanel3)
-  PSINFOMisce_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel3, "BOTTOMLEFT", 10, 20)
+  local PSINFOMisce_CheckButton = CreateFrame("Frame","$parentPSINFOMisce_CheckButton", optionsFrame_AbyssUIMiscellaneous)
+  PSINFOMisce_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUIMiscellaneous, "BOTTOMLEFT", 10, 20)
   PSINFOMisce_CheckButton:SetHeight(40)
   PSINFOMisce_CheckButton:SetWidth(600)
   PSINFOMisce_CheckButton = PSINFOMisce_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -1594,7 +1890,7 @@ local function Miscellaneous()
   "Options with a different color are recommended settings (based on your choice in the setup)."])
   --- General ---
   -- Camera Pitch Function Option 50%
-  local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local CameraSmooth50_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth50_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   CameraSmooth50_CheckButton:SetPoint("TOPLEFT", 10, -80)
   CameraSmooth50_CheckButton.Text:SetText(L["Smooth Camera (50% Slower)"])
   CameraSmooth50_CheckButton.tooltip = L["Makes the Camera turns in a more smooth way"]
@@ -1628,7 +1924,7 @@ local function Miscellaneous()
     end
   end)
   -- Camera Pitch Function Option 70%
-  local CameraSmooth70_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth70_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local CameraSmooth70_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth70_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   CameraSmooth70_CheckButton:SetPoint("TOPLEFT", 10, -110)
   CameraSmooth70_CheckButton.Text:SetText(L["Smooth Camera (70% Slower)"])
   CameraSmooth70_CheckButton.tooltip = L["Makes the Camera turns in a more smooth way"]
@@ -1662,7 +1958,7 @@ local function Miscellaneous()
     end
   end)
   -- Camera Pitch Function Option 90%
-  local CameraSmooth90_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth90_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local CameraSmooth90_CheckButton = CreateFrame("CheckButton", "$parentCameraSmooth90_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   CameraSmooth90_CheckButton:SetPoint("TOPLEFT", 10, -140)
   CameraSmooth90_CheckButton.Text:SetText(L["Smooth Camera (90% Slower)"])
   CameraSmooth90_CheckButton.tooltip = L["Makes the Camera turns in a more smooth way"]
@@ -1696,7 +1992,7 @@ local function Miscellaneous()
     end
   end)
   -- Auto Repair--
-  local AbyssUIAutoRepair_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoRepair_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUIAutoRepair_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoRepair_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUIAutoRepair_CheckButton:SetPoint("TOPLEFT", 10, -170)
   AbyssUIAutoRepair_CheckButton.Text:SetText("|cfff2dc7f"..L["Auto Repair"].."|r")
   AbyssUIAutoRepair_CheckButton.tooltip = L["When you open a Merchant shop auto repair items"]
@@ -1707,7 +2003,7 @@ local function Miscellaneous()
     AbyssUIAddonSettings.ExtraFunctionRepair = self:GetChecked()
   end)
   -- Auto Sell Gray --
-  local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUIAutoSellGray_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoSellGray_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUIAutoSellGray_CheckButton:SetPoint("TOPLEFT", 10, -200)
   AbyssUIAutoSellGray_CheckButton.Text:SetText("|cfff2dc7f"..L["Auto Sell Gray Items"].."|r")
   AbyssUIAutoSellGray_CheckButton.tooltip = L["When you open a Merchant shop, auto sell gray"]
@@ -1718,7 +2014,7 @@ local function Miscellaneous()
     AbyssUIAddonSettings.ExtraFunctionSellGray = self:GetChecked()
   end)
   -- Auto Gamma Day/Night
-  local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUIAutoGamma_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAutoGamma_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUIAutoGamma_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUIAutoGamma_CheckButton.Text:SetText(L["Auto Gamma"])
   AbyssUIAutoGamma_CheckButton.tooltip = L["Automatically change the gamma when is day to"..
@@ -1753,7 +2049,7 @@ local function Miscellaneous()
     end
   end)
   -- American Clock Style --
-  local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_AmericanClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_AmericanClock_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_AmericanClock_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUI_AmericanClock_CheckButton.Text:SetText(L["Non-Military Date/Time"])
   AbyssUI_AmericanClock_CheckButton.tooltip = L["Change the date format of the whole UI to"..
@@ -1764,7 +2060,7 @@ local function Miscellaneous()
     AbyssUIAddonSettings.ExtraFunctionAmericanClock = self:GetChecked()
   end)
   -- Better Fonts --
-  local AbyssUI_BetterFonts_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterFonts_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_BetterFonts_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterFonts_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_BetterFonts_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUI_BetterFonts_CheckButton.Text:SetText(L["RPG chat fonts"])
   AbyssUI_BetterFonts_CheckButton.tooltip = L["Change the chat fonts to a RPG look-alike style"]
@@ -1787,7 +2083,7 @@ local function Miscellaneous()
     end
   end)
   -- Screenshot when you level up --
-  local AbyssUI_ScreenshotLevelUp_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ScreenshotLevelUp_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_ScreenshotLevelUp_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ScreenshotLevelUp_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_ScreenshotLevelUp_CheckButton:SetPoint("TOPLEFT", 10, -320)
   AbyssUI_ScreenshotLevelUp_CheckButton.Text:SetText(L["Auto Screenshot"])
   AbyssUI_ScreenshotLevelUp_CheckButton.tooltip = L["Automatically takes a screenshot when you level up"]
@@ -1798,7 +2094,7 @@ local function Miscellaneous()
   end)
   --- Frames ---
   -- Transparent Background Name --
-  local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_TransparentName_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_TransparentName_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_TransparentName_CheckButton:SetPoint("TOPLEFT", 400, -80)
   AbyssUI_TransparentName_CheckButton.Text:SetText(L["Transparent Name BKGD"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_TransparentName_CheckButton)
@@ -1814,7 +2110,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Remove Background class color --
-  local AbyssUI_HideBackgroundClassColor_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideBackgroundClassColor_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_HideBackgroundClassColor_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideBackgroundClassColor_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_HideBackgroundClassColor_CheckButton:SetPoint("TOPLEFT", 400, -110)
   AbyssUI_HideBackgroundClassColor_CheckButton.Text:SetText(L["Default Class Background"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_HideBackgroundClassColor_CheckButton)
@@ -1831,7 +2127,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable Nameplate Changes --
-  local AbyssUI_NameplateChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NameplateChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_NameplateChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NameplateChanges_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_NameplateChanges_CheckButton:SetPoint("TOPLEFT", 400, -140)
   AbyssUI_NameplateChanges_CheckButton.Text:SetText(L["Disable Nameplate Changes"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_NameplateChanges_CheckButton)
@@ -1847,7 +2143,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable ChatBubble --
-  local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ChatBubbleChanges_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_ChatBubbleChanges_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ChatBubbleChanges_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_ChatBubbleChanges_CheckButton:SetPoint("TOPLEFT", 400, -170)
   AbyssUI_ChatBubbleChanges_CheckButton.Text:SetText("|cff0d75d4"..L["Disable ChatBubble Changes"].."|r")
   local Frame = CreateFrame("Frame", nil, AbyssUI_ChatBubbleChanges_CheckButton)
@@ -1864,7 +2160,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable healing spam over player --
-  local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_DisableHealingSpam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DisableHealingSpam_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_DisableHealingSpam_CheckButton:SetPoint("TOPLEFT", 400, -200)
   AbyssUI_DisableHealingSpam_CheckButton.Text:SetText(L["|cfff2dc7fDisable Portrait Text Spam|r"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_DisableHealingSpam_CheckButton)
@@ -1902,7 +2198,7 @@ local function Miscellaneous()
     end
   end)
   -- Disable UnitFrame Smoke --
-  local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local DisableUnitFrameSmoke_CheckButton = CreateFrame("CheckButton", "$parentDisableUnitFrameSmoke_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   DisableUnitFrameSmoke_CheckButton:SetPoint("TOPLEFT", 400, -230)
   DisableUnitFrameSmoke_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Smoke Texture"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableUnitFrameSmoke_CheckButton)
@@ -1920,7 +2216,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable font white text --
-  local AbyssUI_FontWhiteText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_FontWhiteText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_FontWhiteText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_FontWhiteText_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_FontWhiteText_CheckButton:SetPoint("TOPLEFT", 400, -260)
   AbyssUI_FontWhiteText_CheckButton.Text:SetText(L["Disable Button Color Text"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_FontWhiteText_CheckButton)
@@ -1937,7 +2233,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable New CastBar --
-  local AbyssUI_NewCastBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NewCastBar_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_NewCastBar_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_NewCastBar_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_NewCastBar_CheckButton:SetPoint("TOPLEFT", 400, -290)
   AbyssUI_NewCastBar_CheckButton.Text:SetText("|cff0d75d4"..L["Disable New CastBar"].."|r")
   local Frame = CreateFrame("Frame", nil, AbyssUI_NewCastBar_CheckButton)
@@ -1954,7 +2250,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Green Health --
-  local GreenHealth_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local GreenHealth_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   GreenHealth_CheckButton:SetPoint("TOPLEFT", 400, -320)
   GreenHealth_CheckButton.Text:SetText(L["Green Health Bars"])
   local Frame = CreateFrame("Frame", nil, GreenHealth_CheckButton)
@@ -1970,7 +2266,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Player Green Healthbar --
-  local AbyssUI_PlayerHealthGreen_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_PlayerHealthGreen_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_PlayerHealthGreen_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_PlayerHealthGreen_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_PlayerHealthGreen_CheckButton:SetPoint("TOPLEFT", 400, -350)
   AbyssUI_PlayerHealthGreen_CheckButton.Text:SetText("Player HealthBar")
   AbyssUI_PlayerHealthGreen_CheckButton.tooltip = "Player unitframe health bars will be green (default)"
@@ -1981,7 +2277,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- ReverseHealthFill --
-  local ReverseHealthFill_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local ReverseHealthFill_CheckButton = CreateFrame("CheckButton", "$parentGreenHealth_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   ReverseHealthFill_CheckButton:SetPoint("TOPLEFT", 400, -380)
   ReverseHealthFill_CheckButton.Text:SetText(L["Reverse HealthBar Fill"])
   local Frame = CreateFrame("Frame", nil, ReverseHealthFill_CheckButton)
@@ -1997,7 +2293,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable Tooltip Healthbar --
-  local DisableTooltipHealth_CheckButton = CreateFrame("CheckButton", "$parentDisableTooltipHealth_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local DisableTooltipHealth_CheckButton = CreateFrame("CheckButton", "$parentDisableTooltipHealth_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   DisableTooltipHealth_CheckButton:SetPoint("TOPLEFT", 400, -410)
   DisableTooltipHealth_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Tooltip Health"].."|r")
   local Frame = CreateFrame("Frame", nil, DisableTooltipHealth_CheckButton)
@@ -2014,7 +2310,7 @@ local function Miscellaneous()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Disable character name color --
-  local AbyssUI_CharacterText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_CharacterText_CheckButton", AbyssUI_Config.childpanel3, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_CharacterText_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_CharacterText_CheckButton", optionsFrame_AbyssUIMiscellaneous, "ChatConfigCheckButtonTemplate")
   AbyssUI_CharacterText_CheckButton:SetPoint("TOPLEFT", 400, -440)
   AbyssUI_CharacterText_CheckButton.Text:SetText("|cff0d75d4"..L["Default Character NameText"].."|r")
   AbyssUI_CharacterText_CheckButton.tooltip = L["Disable the character name colorization back to the default font color"]
@@ -2030,8 +2326,8 @@ end
 ----------------------------------- Tweaks & Extra  -----------------------------------
 local function TweaksExtra()
   -- Read tooltip--
-  local PSINFOTweaks_CheckButton = CreateFrame("Frame","$parentPSINFOTweaks_CheckButton", AbyssUI_Config.childpanel6)
-  PSINFOTweaks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel6, "BOTTOMLEFT", 10, 20)
+  local PSINFOTweaks_CheckButton = CreateFrame("Frame","$parentPSINFOTweaks_CheckButton", optionsFrame_AbyssUITweaks)
+  PSINFOTweaks_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUITweaks, "BOTTOMLEFT", 10, 20)
   PSINFOTweaks_CheckButton:SetHeight(40)
   PSINFOTweaks_CheckButton:SetWidth(600)
   PSINFOTweaks_CheckButton = PSINFOTweaks_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2041,7 +2337,7 @@ local function TweaksExtra()
     "Options with a different color are recommended settings (based on your choice in the setup)."])
   --- Global ---
   -- Disable Kill Announcer --
-  local KillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentKillAnnouncer_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local KillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentKillAnnouncer_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   KillAnnouncer_CheckButton:SetPoint("TOPLEFT", 10, -80)
   KillAnnouncer_CheckButton.Text:SetText(L["Disable Kill Announcer"])
   KillAnnouncer_CheckButton.tooltip = L["Disable the Kill Announcer frame that show up when you kill someone"]
@@ -2052,7 +2348,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Silence Kill Announcer --
-  local SilenceKillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentSilenceKillAnnouncer_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local SilenceKillAnnouncer_CheckButton = CreateFrame("CheckButton", "$parentSilenceKillAnnouncer_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   SilenceKillAnnouncer_CheckButton:SetPoint("TOPLEFT", 10, -110)
   SilenceKillAnnouncer_CheckButton.Text:SetText(L["Silence Kill Announcer"])
   SilenceKillAnnouncer_CheckButton.tooltip = L["Remove boss/kill sounds from the Kill Announcer frame"]
@@ -2062,7 +2358,7 @@ local function TweaksExtra()
     AbyssUIAddonSettings.SilenceKillAnnouncer = self:GetChecked()
   end)
   -- TooltipOnCursor --
-  local TooltipOnCursor_CheckButton = CreateFrame("CheckButton", "$parentTooltipOnCursor_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local TooltipOnCursor_CheckButton = CreateFrame("CheckButton", "$parentTooltipOnCursor_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   TooltipOnCursor_CheckButton:SetPoint("TOPLEFT", 10, -140)
   TooltipOnCursor_CheckButton.Text:SetText(L["|cfff2dc7fTooltip on Cursor|r"])
   TooltipOnCursor_CheckButton.tooltip = L["Tooltips will appear close to the mouse cursor position"]
@@ -2074,7 +2370,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Inspect Target
-  local InspectTarget_CheckButton = CreateFrame("CheckButton", "$parentInspectTarget_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local InspectTarget_CheckButton = CreateFrame("CheckButton", "$parentInspectTarget_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   InspectTarget_CheckButton:SetPoint("TOPLEFT", 10, -170)
   InspectTarget_CheckButton.Text:SetText(L["|cfff2dc7fInspect Target (Shift + ')|r"])
   InspectTarget_CheckButton.tooltip = L["When you have a target or your mouse is over someone character,"..
@@ -2086,7 +2382,7 @@ local function TweaksExtra()
       AbyssUIAddonSettings.ExtraFunctionInspectTarget = self:GetChecked()
   end)
   -- Ctrl + ' to confirm  --
-  local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_ConfirmPopUps_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ConfirmPopUps_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUI_ConfirmPopUps_CheckButton:SetPoint("TOPLEFT", 10, -200)
   AbyssUI_ConfirmPopUps_CheckButton.Text:SetText(L["|cfff2dc7fConfirm Pop-Ups (Ctrl + ')|r"])
   AbyssUI_ConfirmPopUps_CheckButton.tooltip = L["When this is active you can confirm almost"..
@@ -2098,7 +2394,7 @@ local function TweaksExtra()
     AbyssUIAddonSettings.ExtraFunctionConfirmPopUps = self:GetChecked()
   end)
   -- First Person --
-  local FirstPerson_CheckButton = CreateFrame("CheckButton", "$parentFirstPerson_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local FirstPerson_CheckButton = CreateFrame("CheckButton", "$parentFirstPerson_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   FirstPerson_CheckButton:SetPoint("TOPLEFT", 10, -230)
   FirstPerson_CheckButton.Text:SetText(L["First Person View"])
   FirstPerson_CheckButton.tooltip = L["Change the camera view to a 'First Person' experience"]
@@ -2109,7 +2405,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Spell on KeyUp
-  local ActionButtonKeyUP_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local ActionButtonKeyUP_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   ActionButtonKeyUP_CheckButton:SetPoint("TOPLEFT", 10, -260)
   ActionButtonKeyUP_CheckButton.Text:SetText(L["ActionButton on KeyUp"])
   ActionButtonKeyUP_CheckButton.tooltip = L["With this option spells can be cast just when the"..
@@ -2136,7 +2432,7 @@ local function TweaksExtra()
     end
   end)
   -- Action Cam --
-  local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUIActionCam_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIActionCam_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUIActionCam_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUIActionCam_CheckButton.Text:SetText(L["Combat Cursor Mode"])
   AbyssUIActionCam_CheckButton.tooltip = L["Makes the camera turns with your mouse when in"..
@@ -2160,7 +2456,7 @@ local function TweaksExtra()
     end
   end)
   -- Show Titles --
-  local AbyssUIShowTitles_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUIShowTitles_CheckButton = CreateFrame("CheckButton", "$parentActionButtonKeyUP_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUIShowTitles_CheckButton:SetPoint("TOPLEFT", 10, -320)
   AbyssUIShowTitles_CheckButton.Text:SetText(L["Always Show Titles"])
   AbyssUIShowTitles_CheckButton.tooltip = L["Always show people titles on their names"]
@@ -2185,7 +2481,7 @@ local function TweaksExtra()
   end)
   --- Frames ---
   -- Disable Square Minimap --
-  local DisableSquareMinimap_CheckButton = CreateFrame("CheckButton", "$parentSquareMinimap_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local DisableSquareMinimap_CheckButton = CreateFrame("CheckButton", "$parentSquareMinimap_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   DisableSquareMinimap_CheckButton:SetPoint("TOPLEFT", 400, -80)
   DisableSquareMinimap_CheckButton.Text:SetText("|cff0d75d4"..L["Disable Square Minimap"].."|r")
   DisableSquareMinimap_CheckButton.tooltip = L["This option will get you back to the"..
@@ -2198,7 +2494,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Keep UnitFrame Dark --
-  local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local KeepUnitDark_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitDark_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   KeepUnitDark_CheckButton:SetPoint("TOPLEFT", 400, -110)
   KeepUnitDark_CheckButton.Text:SetText(L["Keep UnitFrame Dark"])
   local Frame = CreateFrame("Frame", nil, KeepUnitDark_CheckButton)
@@ -2231,7 +2527,7 @@ local function TweaksExtra()
     end
   end)
   -- Keep UnitFrame Blizzard Like --
-  local KeepUnitBlizzard_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitBlizzard_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local KeepUnitBlizzard_CheckButton = CreateFrame("CheckButton", "$parentKeepUnitBlizzard_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   KeepUnitBlizzard_CheckButton:SetPoint("TOPLEFT", 400, -140)
   KeepUnitBlizzard_CheckButton.Text:SetText(L["Keep UnitFrame Blizzard Like"])
   local Frame = CreateFrame("Frame", nil, KeepUnitBlizzard_CheckButton)
@@ -2264,7 +2560,7 @@ local function TweaksExtra()
     end
   end)
   -- Instance Leave --
-  local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_InstanceLeave_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_InstanceLeave_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUI_InstanceLeave_CheckButton:SetPoint("TOPLEFT", 400, -170)
   AbyssUI_InstanceLeave_CheckButton.Text:SetText(L["|cfff2dc7fInstance Leave Frame|r"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_InstanceLeave_CheckButton)
@@ -2281,7 +2577,7 @@ local function TweaksExtra()
     AbyssUIAddonSettings.ExtraFunctionInstanceLeave = self:GetChecked()
   end)
   -- Fade UI --
-  local FadeUI_CheckButton = CreateFrame("CheckButton", "$parentFadeUI_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local FadeUI_CheckButton = CreateFrame("CheckButton", "$parentFadeUI_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   FadeUI_CheckButton:SetPoint("TOPLEFT", 400, -200)
   FadeUI_CheckButton.Text:SetText(L["Minimalist UI"])
   local Frame = CreateFrame("Frame", nil, FadeUI_CheckButton)
@@ -2302,7 +2598,7 @@ local function TweaksExtra()
     end
   end)
   -- Minimal ActionBar --
-  local MinimalActionBar_CheckButton = CreateFrame("CheckButton", "$parentMinimalActionBar_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local MinimalActionBar_CheckButton = CreateFrame("CheckButton", "$parentMinimalActionBar_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   MinimalActionBar_CheckButton:SetPoint("TOPLEFT", 400, -230)
   MinimalActionBar_CheckButton.Text:SetText(L["Minimal ActionBar"])
   local Frame = CreateFrame("Frame", nil, MinimalActionBar_CheckButton)
@@ -2318,7 +2614,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Hide in Combat --
-  local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideInCombat_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_HideInCombat_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_HideInCombat_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUI_HideInCombat_CheckButton:SetPoint("TOPLEFT", 400, -260)
   AbyssUI_HideInCombat_CheckButton.Text:SetText(L["Dynamic Quest Tracker"])
   local Frame = CreateFrame("Frame", nil, AbyssUI_HideInCombat_CheckButton)
@@ -2334,7 +2630,7 @@ local function TweaksExtra()
     AbyssUIAddonSettings.ExtraFunctionHideInCombat = self:GetChecked()
   end)
   -- Always show clock --
-  local AbyssUI_ShowClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowClock_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_ShowClock_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_ShowClock_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   AbyssUI_ShowClock_CheckButton:SetPoint("TOPLEFT", 400, -290)
   AbyssUI_ShowClock_CheckButton.Text:SetText(L["Show Minimap Clock"])
   AbyssUI_ShowClock_CheckButton.tooltip = L["This will always show the minimap clock, instead of showing on hover"]
@@ -2345,7 +2641,7 @@ local function TweaksExtra()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Default Icon Border --
-  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   DefaultIconBorder_CheckButton:SetPoint("TOPLEFT", 400, -320)
   DefaultIconBorder_CheckButton.Text:SetText("Default Icon Border")
   local Frame = CreateFrame("Frame", nil, DefaultIconBorder_CheckButton)
@@ -2361,7 +2657,7 @@ local function TweaksExtra()
       AbyssUI_ReloadFrame:Show()
   end)
   -- Default Tooltip Color  --
-  local DefaultTooltipColor_CheckButton = CreateFrame("CheckButton", "$parentDefaultTooltipColor_CheckButton", AbyssUI_Config.childpanel6, "ChatConfigCheckButtonTemplate")
+  local DefaultTooltipColor_CheckButton = CreateFrame("CheckButton", "$parentDefaultTooltipColor_CheckButton", optionsFrame_AbyssUITweaks, "ChatConfigCheckButtonTemplate")
   DefaultTooltipColor_CheckButton:SetPoint("TOPLEFT", 400, -350)
   DefaultTooltipColor_CheckButton.Text:SetText("Default Tooltip Color")
   local Frame = CreateFrame("Frame", nil, DefaultTooltipColor_CheckButton)
@@ -2380,7 +2676,7 @@ end
 -- End
 ----------------------------------- Classic & BCC -----------------------------------
 local function ClassicBCC()
-  local InfoPanelSubText = CreateFrame("Frame", "$parentInfoPanelSubText", AbyssUI_Config.childpanel7)
+  local InfoPanelSubText = CreateFrame("Frame", "$parentInfoPanelSubText", optionsFrame_AbyssUIClassic)
   InfoPanelSubText:SetPoint("TOPLEFT", 20, -40)
   InfoPanelSubText:SetHeight(60)
   InfoPanelSubText:SetWidth(600)
@@ -2391,7 +2687,7 @@ local function ClassicBCC()
   InfoPanelSubText:SetText(L["In this tab of the addon settings, you will find options directed to the version of WoW Classic."..
   " Many of them are exclusive and can only be used in Burning Crusade and similar client versions."])
   -- Hide Helm --
-  local HideHelm_CheckButton = CreateFrame("CheckButton", "$parentHideHelm_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local HideHelm_CheckButton = CreateFrame("CheckButton", "$parentHideHelm_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   HideHelm_CheckButton:SetPoint("TOPLEFT", 10, -110)
   HideHelm_CheckButton.Text:SetText(L["Hide Helm"])
   HideHelm_CheckButton.tooltip = L["Hide the player helm"]
@@ -2418,7 +2714,7 @@ local function ClassicBCC()
     end
   end)
   -- Hide Cloak --
-  local HideCloak_CheckButton = CreateFrame("CheckButton", "$parentHideCloak_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local HideCloak_CheckButton = CreateFrame("CheckButton", "$parentHideCloak_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   HideCloak_CheckButton:SetPoint("TOPLEFT", 10, -140)
   HideCloak_CheckButton.Text:SetText(L["Hide Cloak"])
   HideCloak_CheckButton.tooltip = L["Hide the player cloak"]
@@ -2445,7 +2741,7 @@ local function ClassicBCC()
     end
   end)
   -- Show Helm --
-  local ShowHelm_CheckButton = CreateFrame("CheckButton", "$parentShowHelm_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local ShowHelm_CheckButton = CreateFrame("CheckButton", "$parentShowHelm_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   ShowHelm_CheckButton:SetPoint("TOPLEFT", 10, -170)
   ShowHelm_CheckButton.Text:SetText(L["Show Helm"])
   ShowHelm_CheckButton.tooltip = L["Always show helm"]
@@ -2472,7 +2768,7 @@ local function ClassicBCC()
     end
   end)
   -- Show Cloak --
-  local ShowCloak_CheckButton = CreateFrame("CheckButton", "$parentShowCloak_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local ShowCloak_CheckButton = CreateFrame("CheckButton", "$parentShowCloak_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   ShowCloak_CheckButton:SetPoint("TOPLEFT", 10, -200)
   ShowCloak_CheckButton.Text:SetText(L["Show Cloak"])
   ShowCloak_CheckButton.tooltip = L["Always show cloak"]
@@ -2499,8 +2795,8 @@ local function ClassicBCC()
     end
   end)
   -- Better WorldMap --
-  local leatrix = IsAddOnLoaded("Leatrix_Maps")
-  local AbyssUI_BetterWorldMap_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterWorldMap_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local leatrix = C_AddOns.IsAddOnLoaded("Leatrix_Maps")
+  local AbyssUI_BetterWorldMap_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_BetterWorldMap_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   AbyssUI_BetterWorldMap_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUI_BetterWorldMap_CheckButton.Text:SetText(L["Better World Map"])
   AbyssUI_BetterWorldMap_CheckButton.tooltip = L["Makes the worldmap minimalist/clean"]
@@ -2536,7 +2832,7 @@ local function ClassicBCC()
   end)
   -- WorldMap Fader --
   -- Thanks to Ketho for the fader
-  local AbyssUI_WorldMapFade_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_WorldMapFade_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_WorldMapFade_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_WorldMapFade_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   AbyssUI_WorldMapFade_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUI_WorldMapFade_CheckButton.Text:SetText(L["World Map Fader"])
   AbyssUI_WorldMapFade_CheckButton.tooltip = L["Makes the worldmap fade while you move"]
@@ -2567,7 +2863,7 @@ local function ClassicBCC()
     end
   end)
   -- Default Nameplate Range --
-  local AbyssUI_DefaultNameplate_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DefaultNameplate_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local AbyssUI_DefaultNameplate_CheckButton = CreateFrame("CheckButton", "$parentAbyssUI_DefaultNameplate_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   AbyssUI_DefaultNameplate_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUI_DefaultNameplate_CheckButton.Text:SetText(L["Default Nameplate Range"])
   AbyssUI_DefaultNameplate_CheckButton.tooltip = L["Disable the double range of"..
@@ -2584,7 +2880,7 @@ local function ClassicBCC()
     end
   end)
   -- Disable QuestFrame Border
-  local DisableQuestFrame_CheckButton = CreateFrame("CheckButton", "$parentDisableQuestFrame_CheckButton", AbyssUI_Config.childpanel7, "ChatConfigCheckButtonTemplate")
+  local DisableQuestFrame_CheckButton = CreateFrame("CheckButton", "$parentDisableQuestFrame_CheckButton", optionsFrame_AbyssUIClassic, "ChatConfigCheckButtonTemplate")
   DisableQuestFrame_CheckButton:SetPoint("TOPLEFT", 10, -320)
   DisableQuestFrame_CheckButton.Text:SetText(L["Default QuestFrame"])
   local Frame = CreateFrame("Frame", nil, DisableQuestFrame_CheckButton)
@@ -2604,22 +2900,11 @@ local function ClassicBCC()
       DisableQuestFrame_CheckButton:SetChecked(nil)
     end
   end)
-  -- 2nd Collum
-  -- Read tooltip --
-  local PSINFOScale_CheckButton = CreateFrame("Frame", "$parentPSINFOScale_CheckButton", AbyssUI_Config.childpanel7)
-  PSINFOScale_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel7, "BOTTOMLEFT", 10, 20)
-  PSINFOScale_CheckButton:SetWidth(600)
-  PSINFOScale_CheckButton:SetHeight(40)
-  PSINFOScale_CheckButton:SetScale(1)
-  PSINFOScale_CheckButton = PSINFOScale_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-  PSINFOScale_CheckButton:SetPoint("LEFT")
-  PSINFOScale_CheckButton:SetAllPoints()
-  PSINFOScale_CheckButton:SetText(L["|cffb62a25In development, more features will be added soon, so be patient.|r"])
-  end
+end
 ----------------------------------- Thanks & Translations  -----------------------------------
 local function ThanksTraslations()
-  local PSINFOThanks_CheckButton = CreateFrame("Frame","$parentPSINFOThanks_CheckButton", AbyssUI_Config.childpanel10)
-  PSINFOThanks_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel10, "BOTTOMLEFT", 10, 20)
+  local PSINFOThanks_CheckButton = CreateFrame("Frame","$parentPSINFOThanks_CheckButton", optionsFrame_AbyssUIThanks)
+  PSINFOThanks_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUIThanks, "BOTTOMLEFT", 10, 20)
   PSINFOThanks_CheckButton:SetHeight(80)
   PSINFOThanks_CheckButton:SetWidth(600)
   PSINFOThanks_CheckButton = PSINFOThanks_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2628,15 +2913,15 @@ local function ThanksTraslations()
   PSINFOThanks_CheckButton:SetText(L["Feel free to help translate AbyssUI to your own language, if you want to help, go to AbyssUI Github page, "..
   "there's a folder named 'localization', find the language you know better and help to improve it. Thank you soo much for this."])
   -- Special Thanks
-  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 0, -60)
+  local Frame = CreateFrame("Frame","$parentFrameThanks", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 0, -60)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["|cff0d75d4Special Thanks|r"])
-  local Frame1 = CreateFrame("Frame","$parentFrame1Thanks", AbyssUI_Config.childpanel10)
-  Frame1:SetPoint("TOPLEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -80)
+  local Frame1 = CreateFrame("Frame","$parentFrame1Thanks", optionsFrame_AbyssUIThanks)
+  Frame1:SetPoint("TOPLEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -80)
   Frame1:SetWidth(600)
   Frame1:SetHeight(40)
   Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2644,8 +2929,8 @@ local function ThanksTraslations()
   Frame1:ClearAllPoints()
   Frame1:SetPoint("LEFT")
   Frame1:SetText(L["|cfff2dc7fFizzlemizz|r for helping me with programming questions."])
-  local Frame2 = CreateFrame("Frame","$parentFrame2Thanks", AbyssUI_Config.childpanel10)
-  Frame2:SetPoint("TOPLEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -100)
+  local Frame2 = CreateFrame("Frame","$parentFrame2Thanks", optionsFrame_AbyssUIThanks)
+  Frame2:SetPoint("TOPLEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -100)
   Frame2:SetWidth(600)
   Frame2:SetHeight(40)
   Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2654,8 +2939,8 @@ local function ThanksTraslations()
   Frame2:SetPoint("LEFT")
   Frame2:SetText(L["|cfff2dc7fKawF|r for UnitFrame Improved, so I could create a really nice"..
   " UnitFrame for AbyssUI."])
-    local Frame3 = CreateFrame("Frame","$parentFrame3Thanks", AbyssUI_Config.childpanel10)
-  Frame3:SetPoint("TOPLEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -120)
+    local Frame3 = CreateFrame("Frame","$parentFrame3Thanks", optionsFrame_AbyssUIThanks)
+  Frame3:SetPoint("TOPLEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -120)
   Frame3:SetWidth(600)
   Frame3:SetHeight(40)
   Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2664,16 +2949,16 @@ local function ThanksTraslations()
   Frame3:SetPoint("LEFT")
   Frame3:SetText(L["|cfff2dc7fLortUI|r for better icon borders and shadows."])
   -- Translations
-  local Frame = CreateFrame("Frame","$parentFrameThanks", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 0, -200)
+  local Frame = CreateFrame("Frame","$parentFrameThanks", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 0, -200)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["|cff0d75d4Translators|r"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -230)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -230)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2682,8 +2967,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (United States): |r"]..L["Default"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -260)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -260)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2692,8 +2977,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Mexico): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -290)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -290)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2702,8 +2987,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fPortuguese: |r"].."Yūgen")
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -320)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -320)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2712,8 +2997,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fGerman: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -350)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -350)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2722,8 +3007,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fEnglish (Great Britain): |r"]..L["Default"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", 10, -380)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", 10, -380)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2732,8 +3017,8 @@ local function ThanksTraslations()
   Frame:SetPoint("LEFT")
   Frame:SetText(L["|cfff2dc7fSpanish (Spain): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -230)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -230)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2742,8 +3027,8 @@ local function ThanksTraslations()
   Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fFrench: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -260)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -260)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2752,8 +3037,8 @@ local function ThanksTraslations()
   Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fItalian: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -290)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -290)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2762,8 +3047,8 @@ local function ThanksTraslations()
   Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fRussian: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -320)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -320)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2772,8 +3057,8 @@ local function ThanksTraslations()
   Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fKorean: |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -350)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -350)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2782,8 +3067,8 @@ local function ThanksTraslations()
   Frame:SetPoint("RIGHT")
   Frame:SetText(L["|cfff2dc7fChinese (Traditional): |r"]..L["Need Translator"])
   --
-  local Frame = CreateFrame("Frame","$parentFrameTranslations", AbyssUI_Config.childpanel10)
-  Frame:SetPoint("LEFT", AbyssUI_Config.childpanel10, "TOPLEFT", -10, -380)
+  local Frame = CreateFrame("Frame","$parentFrameTranslations", optionsFrame_AbyssUIThanks)
+  Frame:SetPoint("LEFT", optionsFrame_AbyssUIThanks, "TOPLEFT", -10, -380)
   Frame:SetWidth(600)
   Frame:SetHeight(40)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2795,8 +3080,8 @@ end
 ----------------------------------- FAQ  -----------------------------------
 local function FAQ()
   --
-  local PSINFOFAQ_CheckButton = CreateFrame("Frame","$parentPSINFOFAQ_CheckButton", AbyssUI_Config.childpanel11)
-  PSINFOFAQ_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel11, "BOTTOMLEFT", 10, 20)
+  local PSINFOFAQ_CheckButton = CreateFrame("Frame","$parentPSINFOFAQ_CheckButton", optionsFrame_AbyssUIFAQ)
+  PSINFOFAQ_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUIFAQ, "BOTTOMLEFT", 10, 20)
   PSINFOFAQ_CheckButton:SetHeight(80)
   PSINFOFAQ_CheckButton:SetWidth(600)
   PSINFOFAQ_CheckButton = PSINFOFAQ_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2805,15 +3090,15 @@ local function FAQ()
   PSINFOFAQ_CheckButton:SetText(L["Always check the FAQ before posting. Bug reports have more visibility on our discord channel."])
   --]]
   -- FAQ
-  local Frame = CreateFrame("Frame","$parentFrameFAQ", AbyssUI_Config.childpanel11)
-  Frame:SetPoint("TOPLEFT", AbyssUI_Config.childpanel11, "TOPLEFT", 0, -30)
+  local Frame = CreateFrame("Frame","$parentFrameFAQ", optionsFrame_AbyssUIFAQ)
+  Frame:SetPoint("TOPLEFT", optionsFrame_AbyssUIFAQ, "TOPLEFT", 0, -30)
   Frame:SetWidth(600)
   Frame:SetHeight(80)
   Frame = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   Frame:SetAllPoints()
   Frame:SetText(L["|cff0d75d4Frequently Answered Questions|r"])
-  local Frame1 = CreateFrame("Frame","$parentFrame1FAQ", AbyssUI_Config.childpanel11)
-  Frame1:SetPoint("TOPLEFT", AbyssUI_Config.childpanel11, "TOPLEFT", 10, -80)
+  local Frame1 = CreateFrame("Frame","$parentFrame1FAQ", optionsFrame_AbyssUIFAQ)
+  Frame1:SetPoint("TOPLEFT", optionsFrame_AbyssUIFAQ, "TOPLEFT", 10, -80)
   Frame1:SetWidth(600)
   Frame1:SetHeight(80)
   Frame1 = Frame1:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2821,8 +3106,8 @@ local function FAQ()
   Frame1:SetPoint("LEFT")
   Frame1:SetText(L["- How to change fonts or go back to Bliizard default?\n"..
   "A: Go to AbyssUI folder -> textures -> font and change the fonts keeping their names (you need to restart the game)."])
-  local Frame2 = CreateFrame("Frame","$parentFrame2FAQ", AbyssUI_Config.childpanel11)
-  Frame2:SetPoint("TOPLEFT", AbyssUI_Config.childpanel11, "TOPLEFT", 10, -160)
+  local Frame2 = CreateFrame("Frame","$parentFrame2FAQ", optionsFrame_AbyssUIFAQ)
+  Frame2:SetPoint("TOPLEFT", optionsFrame_AbyssUIFAQ, "TOPLEFT", 10, -160)
   Frame2:SetWidth(600)
   Frame2:SetHeight(80)
   Frame2 = Frame2:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2830,8 +3115,8 @@ local function FAQ()
   Frame2:SetPoint("LEFT")
   Frame2:SetText(L["- Do you plan to add save profiles to the UI?\n"..
   "A: No, at least it's not on my plans right now. At this point, the interface have so many options and I have short time to work on it, so it's not planned."])
-  local Frame3 = CreateFrame("Frame","$parentFrame3FAQ", AbyssUI_Config.childpanel11)
-  Frame3:SetPoint("TOPLEFT", AbyssUI_Config.childpanel11, "TOPLEFT", 10, -240)
+  local Frame3 = CreateFrame("Frame","$parentFrame3FAQ", optionsFrame_AbyssUIFAQ)
+  Frame3:SetPoint("TOPLEFT", optionsFrame_AbyssUIFAQ, "TOPLEFT", 10, -240)
   Frame3:SetWidth(600)
   Frame3:SetHeight(80)
   Frame3 = Frame3:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2839,8 +3124,8 @@ local function FAQ()
   Frame3:SetPoint("LEFT")
   Frame3:SetText(L["- Some texture are looking/acting weird or Texture/Image is not right or cropped?\n"..
   "A: You are probably using a old version of AbyssUI, try a fresh installation, delete the old version and re-download it."])
-  local Frame4 = CreateFrame("Frame","$parentFrame4FAQ", AbyssUI_Config.childpanel11)
-  Frame4:SetPoint("TOPLEFT", AbyssUI_Config.childpanel11, "TOPLEFT", 10, -320)
+  local Frame4 = CreateFrame("Frame","$parentFrame4FAQ", optionsFrame_AbyssUIFAQ)
+  Frame4:SetPoint("TOPLEFT", optionsFrame_AbyssUIFAQ, "TOPLEFT", 10, -320)
   Frame4:SetWidth(600)
   Frame4:SetHeight(80)
   Frame4 = Frame4:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2852,8 +3137,8 @@ end
 ----------------------------- AbyssUI Stylization ------------------------------
 local function Stylization()
   -- Player Portrait Style --
-  local PSINFO_CheckButton = CreateFrame("Frame","$parentPSINFO_CheckButton", AbyssUI_Config.childpanel4)
-  PSINFO_CheckButton:SetPoint("BOTTOMLEFT", AbyssUI_Config.childpanel4, "BOTTOMLEFT", 10, 20)
+  local PSINFO_CheckButton = CreateFrame("Frame","$parentPSINFO_CheckButton", optionsFrame_AbyssUIThemes)
+  PSINFO_CheckButton:SetPoint("BOTTOMLEFT", optionsFrame_AbyssUIThemes, "BOTTOMLEFT", 10, 20)
   PSINFO_CheckButton:SetWidth(600)
   PSINFO_CheckButton:SetHeight(40)
   PSINFO_CheckButton = PSINFO_CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -2863,7 +3148,7 @@ local function Stylization()
   --" You can find a download link in the addon page. You also can find the link in te 'Info Panel' section."])
   -- UnitFrame Themes
   -- UnitFrame Improved --
-  local UnitFrameImproved_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local UnitFrameImproved_CheckButton = CreateFrame("CheckButton", "$parentUnitFrameImproved_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   UnitFrameImproved_CheckButton:SetPoint("TOPLEFT", 400, -80)
   UnitFrameImproved_CheckButton.Text:SetText(L["|cfff2dc7fUnitFrame Improved|r"])
   local Frame = CreateFrame("Frame", nil, UnitFrameImproved_CheckButton)
@@ -2881,7 +3166,7 @@ local function Stylization()
     AbyssUI_ReloadFrame:Show()
   end)
   -- UnitFrame DragonFlight --
-  local UnitFrameImproved_Dragonflight = CreateFrame("CheckButton", "$parentUnitFrameImproved_Dragonflight", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local UnitFrameImproved_Dragonflight = CreateFrame("CheckButton", "$parentUnitFrameImproved_Dragonflight", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   UnitFrameImproved_Dragonflight:SetPoint("TOPLEFT", 400, -110)
   UnitFrameImproved_Dragonflight.Text:SetText("|cfff2dc7fDragonflight UnitFrame|r")
   local Frame = CreateFrame("Frame", nil, UnitFrameImproved_Dragonflight)
@@ -2912,7 +3197,7 @@ local function Stylization()
       end
   end)
   -- Elite Portrait --
-  local ElitePortrait_CheckButton = CreateFrame("CheckButton", "$parentElitePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local ElitePortrait_CheckButton = CreateFrame("CheckButton", "$parentElitePortrait_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   ElitePortrait_CheckButton:SetPoint("TOPLEFT", 400, -140)
   ElitePortrait_CheckButton.Text:SetText(L["|cfff2dc7fElite Portrait|r"])
   local Frame = CreateFrame("Frame", nil, ElitePortrait_CheckButton)
@@ -2938,7 +3223,7 @@ local function Stylization()
     end
   end)
   -- Rare Portrait --
-  local RarePortrait_CheckButton = CreateFrame("CheckButton", "$parentRarePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local RarePortrait_CheckButton = CreateFrame("CheckButton", "$parentRarePortrait_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   RarePortrait_CheckButton:SetPoint("TOPLEFT", 400, -170)
   RarePortrait_CheckButton.Text:SetText("|cfff2dc7f"..L["Rare Portrait"].."|r")
   local Frame = CreateFrame("Frame", nil, RarePortrait_CheckButton)
@@ -2964,7 +3249,7 @@ local function Stylization()
     end
   end)
   -- Flat HealthBar --
-  local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local FlatHealthBar_CheckButton = CreateFrame("CheckButton", "$parentFlatHealthBar_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   FlatHealthBar_CheckButton:SetPoint("TOPLEFT", 400, -200)
   FlatHealthBar_CheckButton.Text:SetText("|cfff2dc7f"..L["Flat HealthBars"].."|r")
   local Frame = CreateFrame("Frame", nil, FlatHealthBar_CheckButton)
@@ -2981,7 +3266,7 @@ local function Stylization()
     AbyssUI_ReloadFrame:Show()
   end)
   -- Dk Ally --
-  local DKAllyPortrait_CheckButton = CreateFrame("CheckButton", "$parentDKAllyPortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local DKAllyPortrait_CheckButton = CreateFrame("CheckButton", "$parentDKAllyPortrait_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   DKAllyPortrait_CheckButton:SetPoint("TOPLEFT", 400, -230)
   DKAllyPortrait_CheckButton.Text:SetText(L["DeathKnight Alliance Portrait"])
   local Frame = CreateFrame("Frame", nil, DKAllyPortrait_CheckButton)
@@ -3005,7 +3290,7 @@ local function Stylization()
     end
   end)
   -- Dk Horde Portrait --
-  local DKHordePortrait_CheckButton = CreateFrame("CheckButton", "$parentDKHordePortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local DKHordePortrait_CheckButton = CreateFrame("CheckButton", "$parentDKHordePortrait_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   DKHordePortrait_CheckButton:SetPoint("TOPLEFT", 400, -260)
   DKHordePortrait_CheckButton.Text:SetText(L["DeathKnight Horde Portrait"])
   local Frame = CreateFrame("Frame", nil, DKHordePortrait_CheckButton)
@@ -3029,7 +3314,7 @@ local function Stylization()
     end
   end)
   -- Demon Hunter Portrait --
-  local DemonHunterPortrait_CheckButton = CreateFrame("CheckButton", "$parentDemonHunterPortrait_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local DemonHunterPortrait_CheckButton = CreateFrame("CheckButton", "$parentDemonHunterPortrait_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   DemonHunterPortrait_CheckButton:SetPoint("TOPLEFT", 400, -290)
   DemonHunterPortrait_CheckButton.Text:SetText(L["Demon Hunter Portrait"])
   local Frame = CreateFrame("Frame", nil, DemonHunterPortrait_CheckButton)
@@ -3053,7 +3338,7 @@ local function Stylization()
     end
   end)
   -- AbyssUIClassCircles01_CheckButton
-  local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
   AbyssUIClassCircles01_CheckButton.Text:SetText(L["Artistic"])
   AbyssUIClassCircles01_CheckButton.tooltip = L["A artistic version of UnitPlayerFrame"]
@@ -3086,7 +3371,7 @@ local function Stylization()
 -- Icon Border --
 if GetWoWVersion < 10000 then
   -- Gloss
-  local GlossIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlossIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local GlossIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlossIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   GlossIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -350)
   GlossIconBorder_CheckButton.Text:SetText(L["Class Color"])
   local Frame = CreateFrame("Frame", nil, GlossIconBorder_CheckButton)
@@ -3115,7 +3400,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Crisp
-  local CrispIconBorder_CheckButton = CreateFrame("CheckButton", "$parentCrispIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local CrispIconBorder_CheckButton = CreateFrame("CheckButton", "$parentCrispIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   CrispIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -380)
   CrispIconBorder_CheckButton.Text:SetText(L["Crisp"])
   local Frame = CreateFrame("Frame", nil, CrispIconBorder_CheckButton)
@@ -3143,7 +3428,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Original
-  local OriginalIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOriginalIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local OriginalIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOriginalIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   OriginalIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -410)
   OriginalIconBorder_CheckButton.Text:SetText(L["Original"])
   local Frame = CreateFrame("Frame", nil, OriginalIconBorder_CheckButton)
@@ -3171,7 +3456,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Square
-  local SquareIconBorder_CheckButton = CreateFrame("CheckButton", "$parentSquareIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local SquareIconBorder_CheckButton = CreateFrame("CheckButton", "$parentSquareIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   SquareIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -440)
   SquareIconBorder_CheckButton.Text:SetText(L["Square"])
   local Frame = CreateFrame("Frame", nil, SquareIconBorder_CheckButton)
@@ -3199,7 +3484,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Thin
-  local ThinIconBorder_CheckButton = CreateFrame("CheckButton", "$parentThinIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local ThinIconBorder_CheckButton = CreateFrame("CheckButton", "$parentThinIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   ThinIconBorder_CheckButton:SetPoint("TOPLEFT", 10, -470)
   ThinIconBorder_CheckButton.Text:SetText(L["Thin"])
   local Frame = CreateFrame("Frame", nil, ThinIconBorder_CheckButton)
@@ -3227,7 +3512,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Glass
-  local GlassIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlassIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local GlassIconBorder_CheckButton = CreateFrame("CheckButton", "$parentGlassIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   GlassIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -350)
   GlassIconBorder_CheckButton.Text:SetText(L["Glass"])
   local Frame = CreateFrame("Frame", nil, GlassIconBorder_CheckButton)
@@ -3255,7 +3540,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Classic Theme
-  local ClassicIconBorder_CheckButton = CreateFrame("CheckButton", "$parentClassicIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local ClassicIconBorder_CheckButton = CreateFrame("CheckButton", "$parentClassicIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   ClassicIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -380)
   ClassicIconBorder_CheckButton.Text:SetText("Classic")
   local Frame = CreateFrame("Frame", nil, ClassicIconBorder_CheckButton)
@@ -3283,7 +3568,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Default Theme
-  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local DefaultIconBorder_CheckButton = CreateFrame("CheckButton", "$parentDefaultIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   DefaultIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -410)
   DefaultIconBorder_CheckButton.Text:SetText("Default (Blizzard)")
   local Frame = CreateFrame("Frame", nil, DefaultIconBorder_CheckButton)
@@ -3311,7 +3596,7 @@ if GetWoWVersion < 10000 then
     end
   end)
   -- Oldschool Theme
-  local OldSchoolIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOldSchoolIconBorder_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local OldSchoolIconBorder_CheckButton = CreateFrame("CheckButton", "$parentOldSchoolIconBorder_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   OldSchoolIconBorder_CheckButton:SetPoint("TOPLEFT", 180, -440)
   OldSchoolIconBorder_CheckButton.Text:SetText("Old School")
   local Frame = CreateFrame("Frame", nil, OldSchoolIconBorder_CheckButton)
@@ -3341,7 +3626,7 @@ if GetWoWVersion < 10000 then
   end)
 end
   -- AbyssUIClassCircles02_CheckButton
-  local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles02_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles02_CheckButton:SetPoint("TOPLEFT", 10, -110)
   AbyssUIClassCircles02_CheckButton.Text:SetText(L["Bright"])
   AbyssUIClassCircles02_CheckButton.tooltip = L["A bright version of UnitPlayerFrame"]
@@ -3371,7 +3656,7 @@ end
     end
   end)
   -- AbyssUIClassCircles03_CheckButton
-  local AbyssUIClassCircles03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles03_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles03_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles03_CheckButton:SetPoint("TOPLEFT", 10, -140)
   AbyssUIClassCircles03_CheckButton.Text:SetText(L["Classic"])
   AbyssUIClassCircles03_CheckButton.tooltip = L["A classic version of UnitPlayerFrame"]
@@ -3401,7 +3686,7 @@ end
     end
   end)
   -- AbyssUIClassCircles04_CheckButton
-  local AbyssUIClassCircles04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles04_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles04_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles04_CheckButton:SetPoint("TOPLEFT", 10, -170)
   AbyssUIClassCircles04_CheckButton.Text:SetText(L["Artistic(V2)"])
   AbyssUIClassCircles04_CheckButton.tooltip = L["Version two of artistic UnitPlayerFrame"]
@@ -3431,7 +3716,7 @@ end
     end
   end)
   -- AbyssUIClassCircles05_CheckButton
-  local AbyssUIClassCircles05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles05_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles05_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles05_CheckButton:SetPoint("TOPLEFT", 180 , -80)
   AbyssUIClassCircles05_CheckButton.Text:SetText(L["Dark"])
   AbyssUIClassCircles05_CheckButton.tooltip = L["Dark version of UnitPlayerFrame"]
@@ -3461,7 +3746,7 @@ end
     end
   end)
   -- AbyssUIClassCircles06_CheckButton
-  local AbyssUIClassCircles06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles06_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles06_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles06_CheckButton:SetPoint("TOPLEFT", 180, -110)
   AbyssUIClassCircles06_CheckButton.Text:SetText(L["DarkGray"])
   AbyssUIClassCircles06_CheckButton.tooltip = L["A dark gray version of UnitPlayerFrame"]
@@ -3491,7 +3776,7 @@ end
     end
   end)
   -- AbyssUIClassCircles07_CheckButton
-  local AbyssUIClassCircles07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles07_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles07_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles07_CheckButton:SetPoint("TOPLEFT", 180, -140)
   AbyssUIClassCircles07_CheckButton.Text:SetText(L["Dark(V2)"])
   AbyssUIClassCircles07_CheckButton.tooltip = L["Version 2 of the dark UnitPlayerFrame"]
@@ -3521,7 +3806,7 @@ end
     end
   end)
   -- AbyssUIClassCircles08_CheckButton
-  local AbyssUIClassCircles08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles08_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles08_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles08_CheckButton:SetPoint("TOPLEFT", 180, -170)
   AbyssUIClassCircles08_CheckButton.Text:SetText(L["GrayScale"])
   AbyssUIClassCircles08_CheckButton.tooltip = L["A grayscale version of UnitPlayerFrame"]
@@ -3551,7 +3836,7 @@ end
     end
   end)
   -- AbyssUIClassCircles09_CheckButton
-  local AbyssUIClassCircles09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles09_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles09_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles09_CheckButton:SetPoint("TOPLEFT", 10, -200)
   AbyssUIClassCircles09_CheckButton.Text:SetText(L["LightGray"])
   AbyssUIClassCircles09_CheckButton.tooltip = L["A light gray version of UnitPlayerFrame"]
@@ -3581,7 +3866,7 @@ end
     end
   end)
   -- AbyssUIClassCircles10_CheckButton
-  local AbyssUIClassCircles10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles10_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles10_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles10_CheckButton:SetPoint("TOPLEFT", 180, -200)
   AbyssUIClassCircles10_CheckButton.Text:SetText(L["MediumGray"])
   AbyssUIClassCircles10_CheckButton.tooltip = L["A medium gray version of UnitPlayerFrame"]
@@ -3611,7 +3896,7 @@ end
     end
   end)
   -- AbyssUIClassCircles11_CheckButton
-  local AbyssUIClassCircles11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles11_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles11_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles11_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUIClassCircles11_CheckButton.Text:SetText(L["MinimalBlue"])
   AbyssUIClassCircles11_CheckButton.tooltip = L["A blue version of UnitPlayerFrame"]
@@ -3641,7 +3926,7 @@ end
     end
   end)
   -- AbyssUIClassCircles12_CheckButton
-  local AbyssUIClassCircles12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles12_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles12_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles12_CheckButton:SetPoint("TOPLEFT", 180, -230)
   AbyssUIClassCircles12_CheckButton.Text:SetText(L["MinimalRed"])
   AbyssUIClassCircles12_CheckButton.tooltip = L["A red version of UnitPlayerFrame"]
@@ -3671,7 +3956,7 @@ end
     end
   end)
   -- AbyssUIClassCircles13_CheckButton
-  local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles13_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles13_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUIClassCircles13_CheckButton.Text:SetText(L["Muted"])
   AbyssUIClassCircles13_CheckButton.tooltip = L["A muted version of UnitPlayerFrame"]
@@ -3701,7 +3986,7 @@ end
     end
   end)
   -- AbyssUIClassCircles14_CheckButton
-  local AbyssUIClassCircles14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles14_CheckButton:SetPoint("TOPLEFT", 180, -260)
   AbyssUIClassCircles14_CheckButton.Text:SetText(L["Psychedelic"])
   AbyssUIClassCircles14_CheckButton.tooltip = L["A psychedelic version of UnitPlayerFrame"]
@@ -3731,7 +4016,7 @@ end
     end
   end)
   -- AbyssUIClassCircles15_CheckButton
-  local AbyssUIClassCircles15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles15_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUIClassCircles15_CheckButton.Text:SetText(L["Retro"])
   AbyssUIClassCircles15_CheckButton.tooltip = L["A retrowave version of UnitPlayerFrame"]
@@ -3761,7 +4046,7 @@ end
     end
   end)
   -- AbyssUIClassCircles16_CheckButton
-  local AbyssUIClassCircles16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", AbyssUI_Config.childpanel4, "ChatConfigCheckButtonTemplate")
+  local AbyssUIClassCircles16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles14_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles16_CheckButton:SetPoint("TOPLEFT", 180, -290)
   AbyssUIClassCircles16_CheckButton.Text:SetText(L["Vibrant"])
   AbyssUIClassCircles16_CheckButton.tooltip = L["A vibrant version of UnitPlayerFrame"]
@@ -3792,7 +4077,7 @@ end
   end)
   -- Frame Colorization --
   -- AbyssUIVertexColorFrames01_CheckButton
-  local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames01_CheckButton:SetPoint("TOPLEFT", 10, -80)
   AbyssUIVertexColorFrames01_CheckButton.Text:SetText(L["|cffc0c0c0Blizzard (Default)|r"])
   AbyssUIVertexColorFrames01_CheckButton.tooltip = L["Blizzard Silver Colorization for Frames"]
@@ -3824,7 +4109,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames02_CheckButton
-  local AbyssUIVertexColorFrames02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames02_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames02_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames02_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames02_CheckButton:SetPoint("TOPLEFT", 10, -110)
   AbyssUIVertexColorFrames02_CheckButton.Text:SetText(L["|cff636363Blackout|r"])
   AbyssUIVertexColorFrames02_CheckButton.tooltip = L["A completely dark colorization"]
@@ -3856,7 +4141,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames03_CheckButton
-  local AbyssUIVertexColorFrames03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames03_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames03_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames03_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames03_CheckButton:SetPoint("TOPLEFT", 10, -140)
   AbyssUIVertexColorFrames03_CheckButton.Text:SetText(L["|cffb62a25Blood|r"])
   AbyssUIVertexColorFrames03_CheckButton.tooltip = L["A dark red colorization"]
@@ -3888,7 +4173,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames04_CheckButton
-  local AbyssUIVertexColorFrames04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames04_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames04_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames04_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames04_CheckButton:SetPoint("TOPLEFT", 10, -170)
   AbyssUIVertexColorFrames04_CheckButton.Text:SetText(L["|cffecc13cGold|r"])
   AbyssUIVertexColorFrames04_CheckButton.tooltip = L["A golden colorization"]
@@ -3920,7 +4205,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames05_CheckButton
-  local AbyssUIVertexColorFrames05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames05_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames05_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames05_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames05_CheckButton:SetPoint("TOPLEFT", 10, -200)
   AbyssUIVertexColorFrames05_CheckButton.Text:SetText(L["|cffc41F3BDeath Knight|r"])
   AbyssUIVertexColorFrames05_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames05)
@@ -3951,7 +4236,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames06_CheckButton
-  local AbyssUIVertexColorFrames06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames06_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames06_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames06_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames06_CheckButton:SetPoint("TOPLEFT", 10, -230)
   AbyssUIVertexColorFrames06_CheckButton.Text:SetText(L["|cffA330C9Demon Hunter|r"])
   AbyssUIVertexColorFrames06_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames06)
@@ -3982,7 +4267,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames07_CheckButton
-  local AbyssUIVertexColorFrames07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames07_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames07_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames07_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames07_CheckButton:SetPoint("TOPLEFT", 10, -260)
   AbyssUIVertexColorFrames07_CheckButton.Text:SetText(L["|cffFF7D0ADruid|r"])
   AbyssUIVertexColorFrames07_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames07)
@@ -4013,7 +4298,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames08_CheckButton
-  local AbyssUIVertexColorFrames08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames08_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames08_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames08_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames08_CheckButton:SetPoint("TOPLEFT", 10, -290)
   AbyssUIVertexColorFrames08_CheckButton.Text:SetText(L["|cffABD473Hunter|r"])
   AbyssUIVertexColorFrames08_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames08)
@@ -4044,7 +4329,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames09_CheckButton
-  local AbyssUIVertexColorFrames09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames09_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames09_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames09_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames09_CheckButton:SetPoint("TOPLEFT", 10, -320)
   AbyssUIVertexColorFrames09_CheckButton.Text:SetText(L["|cff69CCF0Mage|r"])
   AbyssUIVertexColorFrames09_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames09)
@@ -4075,7 +4360,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames10_CheckButton
-  local AbyssUIVertexColorFrames10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames10_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames10_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames10_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames10_CheckButton:SetPoint("TOPLEFT", 10, -350)
   AbyssUIVertexColorFrames10_CheckButton.Text:SetText(L["|cff00FF96Monk|r"])
   AbyssUIVertexColorFrames10_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames10)
@@ -4106,7 +4391,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames11_CheckButton
-  local AbyssUIVertexColorFrames11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames11_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames11_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames11_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames11_CheckButton:SetPoint("TOPLEFT", 10, -380)
   AbyssUIVertexColorFrames11_CheckButton.Text:SetText(L["|cffF58CBAPaladin|r"])
   AbyssUIVertexColorFrames11_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames11)
@@ -4137,7 +4422,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames12_CheckButton
-  local AbyssUIVertexColorFrames12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames12_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames12_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames12_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames12_CheckButton:SetPoint("TOPLEFT", 10, -410)
   AbyssUIVertexColorFrames12_CheckButton.Text:SetText(L["Priest (Shadow)"])
   AbyssUIVertexColorFrames12_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames12)
@@ -4168,7 +4453,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames13_CheckButton
-  local AbyssUIVertexColorFrames13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames13_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames13_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames13_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames13_CheckButton:SetPoint("TOPLEFT", 10, -440)
   AbyssUIVertexColorFrames13_CheckButton.Text:SetText(L["|cffFFF569Rogue|r"])
   AbyssUIVertexColorFrames13_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames13)
@@ -4199,7 +4484,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames14_CheckButton
-  local AbyssUIVertexColorFrames14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames14_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames14_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames14_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames14_CheckButton:SetPoint("TOPLEFT", 10, -470)
   AbyssUIVertexColorFrames14_CheckButton.Text:SetText(L["|cff0070DEShaman|r"])
   AbyssUIVertexColorFrames14_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames14)
@@ -4230,7 +4515,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames15_CheckButton
-  local AbyssUIVertexColorFrames15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames15_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames15_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames15_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames15_CheckButton:SetPoint("TOPLEFT", 10, -500)
   AbyssUIVertexColorFrames15_CheckButton.Text:SetText(L["|cff9482C9Warlock|r"])
   AbyssUIVertexColorFrames15_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames15)
@@ -4261,7 +4546,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames16_CheckButton
-  local AbyssUIVertexColorFrames16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames16_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames16_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames16_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames16_CheckButton:SetPoint("TOPLEFT", 10, -530)
   AbyssUIVertexColorFrames16_CheckButton.Text:SetText(L["|cffC79C6EWarrior|r"])
   AbyssUIVertexColorFrames16_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames16)
@@ -4292,7 +4577,7 @@ end
     end
   end)
   -- AbyssUIVertexColorFrames17_CheckButton
-  local AbyssUIVertexColorFrames17_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames17_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFrames17_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames17_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFrames17_CheckButton:SetPoint("TOPLEFT", 10, -560)
   AbyssUIVertexColorFrames17_CheckButton.Text:SetText("|cff33937FEvoker|r")
   AbyssUIVertexColorFrames17_CheckButton:SetChecked(AbyssUIAddonSettings.UIVertexColorFrames17)
@@ -4326,7 +4611,7 @@ end
   local f = CreateFrame("Frame", nil)
   f:RegisterEvent("PLAYER_ENTERING_WORLD")
   f:SetScript("OnEvent", function() 
-    local AbyssUIVertexColorFramesColorPicker_Button = CreateFrame("Button", "$parentAbyssUIVertexColorFramesColorPicker_Button", AbyssUI_Config.childpanel5, "UIPanelButtonTemplate")
+    local AbyssUIVertexColorFramesColorPicker_Button = CreateFrame("Button", "$parentAbyssUIVertexColorFramesColorPicker_Button", optionsFrame_AbyssUIColorization, "UIPanelButtonTemplate")
     AbyssUIVertexColorFramesColorPicker_Button:SetPoint("TOPLEFT", 400, -80)
     AbyssUIVertexColorFramesColorPicker_Button:SetHeight(30)
     AbyssUIVertexColorFramesColorPicker_Button:SetWidth(120)
@@ -4348,7 +4633,7 @@ end
     end)
   end)
   -- Apply Color
-  local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", AbyssUI_Config.childpanel5, "ChatConfigCheckButtonTemplate")
+  local AbyssUIVertexColorFramesColorPicker_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFramesColorPicker_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
   AbyssUIVertexColorFramesColorPicker_CheckButton:SetPoint("TOPLEFT", 400, -110)
   AbyssUIVertexColorFramesColorPicker_CheckButton.Text:SetText(applyString.." "..colorColorString)
   local character = UnitName("player").."-"..GetRealmName()

@@ -686,11 +686,10 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 		EnableUnitFramesImproved:SetScript("OnEvent", function()
 			C_Timer.After(0.2, function()
 				-- Generic status text hook
-				hooksecurefunc("TextStatusBar_UpdateTextStringWithValues", UnitFramesImproved_TextStatusBar_UpdateTextStringWithValues)
-				
+
 				-- Hook PlayerFrame functions
 				if (GetWoWVersion <= 90500) then
-		      		hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
+		      hooksecurefunc("PlayerFrame_ToPlayerArt", UnitFramesImproved_PlayerFrame_ToPlayerArt)
 					hooksecurefunc("PlayerFrame_ToVehicleArt", UnitFramesImproved_PlayerFrame_ToVehicleArt)
 					hooksecurefunc("PlayerFrame_Update", UnitFrameImproved_PlayerFrameHealthBar)
 				end
@@ -725,9 +724,19 @@ AbyssUI_UnitFrame:SetScript("OnEvent", function(self, event, arg1)
 				UnitFramesImproved_UnitName_Color()
 				UnitFramesImproved_Style_TargetOfTargetFrame()
 
+				-- Define the Mixin
+				TextStatusBarMixin = {}
+
+				function TextStatusBarMixin:UpdateTextStringWithValues()
+				  hooksecurefunc(TextStatusBarMixin, "UpdateTextStringWithValues", UnitFramesImproved_TextStatusBar_UpdateTextStringWithValues)
+				  -- Update the Text Strings
+					PlayerFrame.healthbar:UpdateTextStringWithValues()
+					PlayerFrame.manabar:UpdateTextStringWithValues()
+				end
+
 				-- Update some values
-				TextStatusBar_UpdateTextString(PlayerFrame.healthbar)
-				TextStatusBar_UpdateTextString(PlayerFrame.manabar)
+				--TextStatusBar_UpdateTextString(PlayerFrame.healthbar)
+				--TextStatusBar_UpdateTextString(PlayerFrame.manabar)
 
 				if (not FocusFrame) then
 					TargetFrameHealthBar.TextString = CreateStatusBarText("Text", "TargetFrameHealthBar", TargetFrameTextureFrame, "CENTER", -50, 3)

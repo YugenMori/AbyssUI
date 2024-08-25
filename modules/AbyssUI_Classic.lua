@@ -1287,7 +1287,7 @@ f:SetScript("OnEvent", function(self)
   end
 end)
 -- WorldMapFrame.BorderFrame
-local leatrix = IsAddOnLoaded("Leatrix_Maps")
+local leatrix = C_AddOns.IsAddOnLoaded("Leatrix_Maps")
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self)
@@ -1393,7 +1393,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function(self, event, name)
 	if GetWoWVersion <= 50600 then
-		loaded = IsAddOnLoaded("Blizzard_TimeManager")
+		loaded = C_AddOns.IsAddOnLoaded("Blizzard_TimeManager")
 		if not loaded then
 			LoadAddOn('Blizzard_TimeManager')
 		end
@@ -1680,7 +1680,7 @@ AbyssUIDailyInfo:SetScript("OnEvent", function(self, event, arg1)
 			print(L["The improved World of Warcraft user interface."])
 		end)
 		C_Timer.After(4, function()
-			local AddonVersion = GetAddOnMetadata("AbyssUI", "Version")
+			local AddonVersion = C_AddOns.GetAddOnMetadata("AbyssUI", "Version")
 			print(L["|cfff2dc7fAbyssUI Daily Info|r"])
 			if (AbyssUIAddonSettings.ExtraFunctionAmericanClock == true) then
 				print("|cfff2dc7f"..L["Current Time"].."|r " .. (nonMilitaryClock(tonumber(nonMilitaryHour))..":"..nonMilitaryMinutes))
