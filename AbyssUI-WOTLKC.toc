@@ -1,6 +1,6 @@
 ## Interface: 30403
 ## Title: Abyss|cff0d75d4UI|r
-## Version: 11.0.2.1_Classic_TWW
+## Version: 11.0.2.2_Classic_TWW
 ## Author: Yugen
 ## Notes-deDE: Minimalistische Benutzeroberfläche für World of Warcraft
 ## Notes-enGB: Minimalist UI for World of Warcraft
@@ -65,3 +65,4 @@ modules\AbyssUI_Inventory.lua
 modules\AbyssUI_MoveFrames.lua
 modules\AbyssUI_NewUI.lua
 modules\AbyssUI_UnitFrame.lua
+modules\AbyssUI_AnimatedProfilePicture.lua

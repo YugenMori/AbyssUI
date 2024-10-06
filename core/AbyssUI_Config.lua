@@ -3337,6 +3337,26 @@ local function Stylization()
       DemonHunterPortrait_CheckButton:SetChecked(nil)
     end
   end)
+  -- 3D Portrait
+  local AbyssUIAnimatedProfilePicture_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIAnimatedProfilePicture_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
+  AbyssUIAnimatedProfilePicture_CheckButton:SetPoint("TOPLEFT", 400, -320)
+  AbyssUIAnimatedProfilePicture_CheckButton.Text:SetText("3D Portrait")
+  AbyssUIAnimatedProfilePicture_CheckButton.tooltip = "3D Portrait"
+  AbyssUIAnimatedProfilePicture_CheckButton:SetChecked(AbyssUIAddonSettings.AnimatedProfilePicture)
+  addonTable.AnimatedProfilePicture = AbyssUIAnimatedProfilePicture_CheckButton
+  -- OnClick Function
+  AbyssUIAnimatedProfilePicture_CheckButton:SetScript("OnClick", function(self)
+    if AbyssUIAddonSettings.ElitePortrait  ~= true and 
+      AbyssUIAddonSettings.DragonFlight    ~= true and
+      AbyssUIAddonSettings.DKAllyPortrait  ~= true and 
+      AbyssUIAddonSettings.DKHordePortrait ~= true then
+      AbyssUIAddonSettings.AnimatedProfilePicture = self:GetChecked()
+      AbyssUI_ReloadFrame:Show()
+    else
+      UIErrorsFrame:AddMessage(L["You can only select one UnitFrame portrait art"], 1.0, 0.1, 0.1, 1.0)
+      AbyssUIAnimatedProfilePicture_CheckButton:SetChecked(nil)
+    end
+  end)
   -- AbyssUIClassCircles01_CheckButton
   local AbyssUIClassCircles01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIClassCircles01_CheckButton", optionsFrame_AbyssUIThemes, "ChatConfigCheckButtonTemplate")
   AbyssUIClassCircles01_CheckButton:SetPoint("TOPLEFT", 10, -80)
@@ -4074,7 +4094,7 @@ end
       UIErrorsFrame:AddMessage(L["You need to uncheck any other portrait art to apply a new one"], 1.0, 0.1, 0.1, 1.0)
       AbyssUIClassCircles16_CheckButton:SetChecked(nil)
     end
-  end)
+  end)   
   -- Frame Colorization --
   -- AbyssUIVertexColorFrames01_CheckButton
   local AbyssUIVertexColorFrames01_CheckButton = CreateFrame("CheckButton", "$parentAbyssUIVertexColorFrames01_CheckButton", optionsFrame_AbyssUIColorization, "ChatConfigCheckButtonTemplate")
