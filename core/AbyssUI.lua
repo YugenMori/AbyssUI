@@ -94,7 +94,7 @@ BasicFrames:SetScript("OnEvent", function(self, event, addon)
 			MiniMapBattlefieldBorder,
 		MiniMapMailBorder, }) do
 			if (GetWoWVersion <= 90500) then
-				MiniMapWorldMapButton:SetAlpha(0.3)
+				--MiniMapWorldMapButton:SetAlpha(0.3)
 			end
 			if AbyssUIAddonSettings ~= nil then
 				AbyssUI_ColorizationFrameFunction(v)

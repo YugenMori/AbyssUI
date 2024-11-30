@@ -1177,7 +1177,6 @@ f:SetScript("OnEvent", function()
 			addonTable.UnitFrameImproved,
 			addonTable.Dragonflight,
 			addonTable.FlatHealth,
-			addonTable.AnimatedProfilePicture,
 		} do
 			v:SetChecked(true)
 		end
@@ -1194,7 +1193,6 @@ f:SetScript("OnEvent", function()
 		AbyssUIAddonSettings.UnitFrameImproved 				      	= addonTable.UnitFrameImproved:GetChecked()
 		AbyssUIAddonSettings.Dragonflight 				      			= addonTable.Dragonflight:GetChecked()
 		AbyssUIAddonSettings.FlatHealth 						    			= addonTable.FlatHealth:GetChecked()
-		AbyssUIAddonSettings.AnimatedProfilePicture					  = addonTable.AnimatedProfilePicture:GetChecked()
 		AbyssUISecondFrame:Hide()
 		ReloadUI()
 	end)

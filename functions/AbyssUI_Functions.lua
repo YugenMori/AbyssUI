@@ -1165,10 +1165,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		Minimap:ClearAllPoints()
 		Minimap:SetPoint(position, UIParent, position_x, position_y)
 		Minimap:SetScale(scale)
-		Minimap:SetFrameLevel(6)
-		if (GetWoWVersion < 30000) then
-			MiniMapTrackingFrame:SetFrameLevel(10)
-		end		
+		Minimap:SetFrameLevel(6)	
 
 		-- New Border
 		local frame = Minimap -- replace this with your frame
@@ -1225,7 +1222,7 @@ SquareMinimap_:SetScript("OnEvent", function(self, event, ...)
 		end
 		--MiniMapMailFrame:SetFrameLevel(10)
 		MiniMapMailIcon:SetTexture(mailicon)
-		MiniMapWorldMapButton:Hide()
+		--MiniMapWorldMapButton:Hide()
 		DropDownList1:SetClampedToScreen(true)	
 		
 		squareminimapExtras()
@@ -1300,9 +1297,6 @@ TooltipOnCursor:RegisterEvent("PLAYER_ENTERING_WORLD")
 TooltipOnCursor:SetScript("OnEvent", function()
 	if (AbyssUIAddonSettings.TooltipOnCursor == true) then
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
-			if GetWoWVersion <= 90000 then
-				if GetMouseFocus() ~= WorldFrame then return end
-			end
 			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
 			cursorSetPoint(tooltip)
 			-- tooltip.default = 1

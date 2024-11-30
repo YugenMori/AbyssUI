@@ -65,12 +65,14 @@ end
 
 -- Combat Color Change
 local function UpdateBorderColor(inCombat)
-    if inCombat then
-        APP_borderplayer:SetVertexColor(1, 0, 0)
-        APP_bordertarget:SetVertexColor(1, 0, 0)
-    else
-        APP_borderplayer:SetVertexColor(1, 1, 0)
-        APP_bordertarget:SetVertexColor(1, 1, 0)
+    if AbyssUIAddonSettings.AnimatedProfilePicture == true then
+        if inCombat then
+            APP_borderplayer:SetVertexColor(1, 0, 0)
+            APP_bordertarget:SetVertexColor(1, 0, 0)
+        else
+            APP_borderplayer:SetVertexColor(1, 1, 0)
+            APP_bordertarget:SetVertexColor(1, 1, 0)
+        end
     end
 end    
 

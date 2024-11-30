@@ -233,35 +233,16 @@ ClassicFrames:SetScript("OnEvent", function(self, event, addon)
 					AbyssUI_ColorizationFrameFunction(v)
 				end
 			end
-			-- InterfaceOptionsFrame
+			-- SettingsPanel
 			for i, v in pairs({ 
-				InterfaceOptionsFrame.BottomEdge,
-				InterfaceOptionsFrame.BottomLeftCorner,
-				InterfaceOptionsFrame.BottomRightCorner,
-				InterfaceOptionsFrame.Center,
-				InterfaceOptionsFrame.LeftEdge,
-				InterfaceOptionsFrame.RightEdge,
-				InterfaceOptionsFrame.TopEdge,
-				InterfaceOptionsFrame.TopLeftCorner,
-				InterfaceOptionsFrame.TopRightCorner,
-				InterfaceOptionsFrameHeader,
-			 }) do
-				if AbyssUIAddonSettings ~= nil then
-					AbyssUI_ColorizationFrameFunction(v)
-				end
-			end
-			-- VideoOptionsFrame
-			for i, v in pairs({ 
-				VideoOptionsFrame.BottomEdge,
-				VideoOptionsFrame.BottomLeftCorner,
-				VideoOptionsFrame.BottomRightCorner,
-				VideoOptionsFrame.Center,
-				VideoOptionsFrame.LeftEdge,
-				VideoOptionsFrame.RightEdge,
-				VideoOptionsFrame.TopEdge,
-				VideoOptionsFrame.TopLeftCorner,
-				VideoOptionsFrame.TopRightCorner,
-				VideoOptionsFrameHeader,
+				SettingsPanel.NineSlice.TopEdge,
+				SettingsPanel.NineSlice.RightEdge,
+				SettingsPanel.NineSlice.BottomEdge,
+				SettingsPanel.NineSlice.LeftEdge,
+				SettingsPanel.NineSlice.TopRightCorner,
+				SettingsPanel.NineSlice.TopLeftCorner,
+				SettingsPanel.NineSlice.BottomLeftCorner,
+				SettingsPanel.NineSlice.BottomRightCorner,
 			 }) do
 				if AbyssUIAddonSettings ~= nil then
 					AbyssUI_ColorizationFrameFunction(v)
@@ -1342,32 +1323,6 @@ f:SetScript("OnEvent", function(self)
 	if GetWoWVersion >= 50500 and GetWoWVersion < 90000 then
     self:UnregisterAllEvents()
     local ChildRegions = { ArenaFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-  end
-end)
--- InterfaceOptionsFrame
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 12000 then
-    self:UnregisterAllEvents()
-    local ChildRegions = { InterfaceOptionsFrame:GetRegions() }
-    local fs = {}
-    for k, v in pairs(ChildRegions) do
-    	AbyssUI_ColorizationFrameFunction(v)
-    end
-  end
-end)
--- VideoOptionsFrame
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(self)
-	if GetWoWVersion <= 12000 then
-    self:UnregisterAllEvents()
-    local ChildRegions = { VideoOptionsFrame:GetRegions() }
     local fs = {}
     for k, v in pairs(ChildRegions) do
     	AbyssUI_ColorizationFrameFunction(v)
