@@ -49,9 +49,8 @@ local function AbyssUIMoveFrames_Slash(msg)
     if (msg ~= "") then
         if (msg == "config" or msg == "options" or msg == "op" or msg == "configuration") then
             if (GetWoWVersion <= 90500) then
-                InterfaceOptionsFrame_Show()
-                InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
-                InterfaceOptionsFrame_OpenToCategory("Abyss|cff0d75d4UI|r")
+                SettingsPanel:Show()
+                Settings.OpenToCategory("Abyss|cff0d75d4UI|r")
             else
                 SettingsPanel:Show()
             end
